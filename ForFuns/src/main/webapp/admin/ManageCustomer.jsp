@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function getData(queryParams){
 		
 		$('#grid').datagrid({
-			url: '<%=basePath%>/user.do?method=getUserbypage',
+			url: '<%=basePath%>/user.do?method=getCustomerbypage',
 			queryParams: queryParams,
 			remoteSort:false,
 			nowrap: true, //换行属性
