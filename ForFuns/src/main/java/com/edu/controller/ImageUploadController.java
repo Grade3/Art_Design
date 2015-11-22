@@ -1,6 +1,7 @@
 package com.edu.controller;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,10 +21,14 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.lxh.smart.SmartUpload;
+import org.lxh.smart.SmartUploadException;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ServletConfigAware;
+import org.springframework.web.context.ServletContextAware;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -34,99 +40,50 @@ import com.alibaba.fastjson.JSONObject;
 @Controller
 @Lazy(true)
 @RequestMapping("/imageupload.do")
-public class ImageUploadController {
-	
+public class ImageUploadController implements ServletConfigAware,ServletContextAware{
+	private ServletContext servletContext;  
+    @Override  
+    public void setServletContext(ServletContext arg0) {  
+        this.servletContext = arg0;  
+    }  
+    private ServletConfig servletConfig;  
+    @Override  
+    public void setServletConfig(ServletConfig arg0) {  
+        this.servletConfig = arg0;  
+    }
+    
+    
 	@ResponseBody
 	@RequestMapping(params="method=keuploadimg")
 	public String Jsonuploadimage(HttpServletRequest request, HttpServletResponse response){
-		ServletContext application = request.getSession().getServletContext();
-		String savePath = application.getRealPath("/") + "upload/";
-
-		//文件保存目录URL
+		String filePath = servletContext.getRealPath("/")+"upload";
 		String saveUrl  = request.getContextPath() + "/upload/";
-
-		//定义允许上传的文件扩展名
-		HashMap<String, String> extMap = new HashMap<String, String>();
-		extMap.put("image", "gif,jpg,jpeg,png,bmp");
-		extMap.put("flash", "swf,flv");
-		extMap.put("media", "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
-		extMap.put("file", "doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2");
-
-		//最大文件大小
-		long maxSize = 1000000;
-
-		response.setContentType("text/html; charset=UTF-8");
-
-		//检查目录
-		File uploadDir = new File(savePath);
-		String dirName = "upload";
-		//创建文件夹
-		savePath += dirName + "/";
-		saveUrl += dirName + "/";
-		File saveDirFile = new File(savePath);
-		if (!saveDirFile.exists()) {
-			saveDirFile.mkdirs();
+		System.out.println(filePath);
+		File file = new File(filePath);
+		if(!file.exists()){
+			file.mkdir();
 		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String ymd = sdf.format(new Date());
-		savePath += ymd + "/";
-		saveUrl += ymd + "/";
-		File dirFile = new File(savePath);
-		if (!dirFile.exists()) {
-			dirFile.mkdirs();
-		}
-
-		FileItemFactory factory = new DiskFileItemFactory();
-		ServletFileUpload upload = new ServletFileUpload(factory);
-		upload.setHeaderEncoding("UTF-8");
-		List items = null;
 		try {
-			items = upload.parseRequest(request);
-		} catch (FileUploadException e1) {
-			e1.printStackTrace();
+			SmartUpload smartUpload = new SmartUpload();
+			smartUpload.initialize(servletConfig,request,response);
+			smartUpload.setMaxFileSize(1024*1024*10);
+			smartUpload.setTotalMaxFileSize(1024*1024*100);
+			smartUpload.setAllowedFilesList("txt,jpg,png,gif,doc,xlsx");
+			smartUpload.upload();
+			smartUpload.save(filePath);
+			String filename = smartUpload.getFiles().getFile(0).getFileName();
+			System.out.println(filename);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("error", 0);
+			jsonObject.put("url", saveUrl+filename);
+			return (jsonObject.toJSONString());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		Iterator itr = items.iterator();
-		while (itr.hasNext()) {
-			FileItem item = (FileItem) itr.next();
-			String fileName = item.getName();
-			long fileSize = item.getSize();
-			if (!item.isFormField()) {
-				//检查文件大小
-				if(item.getSize() > maxSize){
-					JSONObject obj = new JSONObject();
-					obj.put("error", 1);
-					obj.put("message", "上传文件大小超过限制。");
-					return obj.toJSONString();
-				}
-				//检查扩展名
-				String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-				if(!Arrays.<String>asList(extMap.get(dirName).split(",")).contains(fileExt)){
-					JSONObject obj = new JSONObject();
-					obj.put("error", 1);
-					obj.put("message", "上传文件扩展名是不允许的扩展名。\n只允许" + extMap.get(dirName) + "格式。");
-					return obj.toJSONString();
-				}
-
-				SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-				String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
-				try{
-					File uploadedFile = new File(savePath, newFileName);
-					item.write(uploadedFile);
-				}catch(Exception e){
-					return ("上传文件失败。");
-					
-				}
-
-				JSONObject obj = new JSONObject();
-				obj.put("error", 0);
-				obj.put("url", saveUrl + newFileName);
-				return obj.toJSONString();
-			}
-		}
-		JSONObject obj = new JSONObject();
-		obj.put("error", 1);
-		obj.put("message", "上传失败");
-		return obj.toJSONString();
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("error", 1);
+		jsonObject.put("message", "上传失败!");
+		return (jsonObject.toJSONString());
 	}
 
 }
