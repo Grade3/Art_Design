@@ -15,8 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.model.RoleFunctionBean;
 
-
-
 /**
  * baseDaoImpl 基础类
  * @author Gy
