@@ -56,9 +56,8 @@ public class ImageUploadController implements ServletConfigAware,ServletContextA
 	@ResponseBody
 	@RequestMapping(params="method=keuploadimg")
 	public String Jsonuploadimage(HttpServletRequest request, HttpServletResponse response){
-		String filePath = servletContext.getRealPath("/")+"upload";
-		String saveUrl  = request.getContextPath() + "/upload/";
-		System.out.println(filePath);
+		String filePath = servletContext.getRealPath("/")+"newsupload/";
+		String saveUrl  = request.getContextPath() + "/newsupload/";
 		File file = new File(filePath);
 		if(!file.exists()){
 			file.mkdir();
@@ -70,12 +69,15 @@ public class ImageUploadController implements ServletConfigAware,ServletContextA
 			smartUpload.setTotalMaxFileSize(1024*1024*100);
 			smartUpload.setAllowedFilesList("txt,jpg,png,gif,doc,xlsx");
 			smartUpload.upload();
-			smartUpload.save(filePath);
+			//smartUpload.save(filePath+);
 			String filename = smartUpload.getFiles().getFile(0).getFileName();
-			System.out.println(filename);
+			String ext = smartUpload.getFiles().getFile(0).getFileExt();
+			org.lxh.smart.File file2 = smartUpload.getFiles().getFile(0);
+			String newfilename = System.currentTimeMillis()+"."+ext;
+			file2.saveAs(filePath+newfilename);
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("error", 0);
-			jsonObject.put("url", saveUrl+filename);
+			jsonObject.put("url", saveUrl+newfilename);
 			return (jsonObject.toJSONString());
 		} catch (Exception e) {
 			e.printStackTrace();
