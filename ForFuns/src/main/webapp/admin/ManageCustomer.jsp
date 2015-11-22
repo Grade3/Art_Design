@@ -52,10 +52,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			]],
 			columns: [[
 				{field:'id',title:'ID',sortable:true,width:80,sortable:true,},
+				{field:'userid',title:'用户ID',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
 				{field:'username',title:'用户名',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
 				{field:'password',title:'密码',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
+				{field:'personnumber',title:'身份证号',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
+				{field:'telphone',title:'手机号',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
+				{field:'realname',title:'真实姓名',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
+				{field:'avator',title:'头像地址',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
+				{field:'isartist',title:'是否艺术家',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
 			]],
