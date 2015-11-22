@@ -34,7 +34,7 @@ KindEditor.ready(function(K) {
                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-               'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+               'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
                'media', 'table', 'hr', 'baidumap', 'pagebreak',
                'anchor', 'link', 'unlink', '|', 'about'
        ],
@@ -51,7 +51,7 @@ function submitForm(){
 </head>
 
 <body bgcolor="#DDF3FF" class = "h2" >
-	<form action="http://www.baidu.com" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;">
+	<form action="" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;">
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
 			<label>是否为首页资讯</label> <select name="n_ishot" id="n_ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
 					<option>是</option>

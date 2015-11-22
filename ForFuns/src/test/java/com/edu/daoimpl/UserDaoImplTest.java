@@ -2,10 +2,13 @@ package com.edu.daoimpl;
 
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 
+
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,6 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.edu.dao.IUserDao;
+import com.edu.model.NewsBean;
 import com.edu.model.UserBean;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -47,7 +51,8 @@ public class UserDaoImplTest {
 	public void testGetAll(){
 		List<UserBean> list  = userDao.getAllEntity(UserBean.class);
 		UserBean userBean = list.get(0);
-		System.out.println(userBean.getRoleBeans());
+		System.out.println(userBean.getNewsBeans().iterator().next().getTitle());
+		
 	}
 	
 	@Test
