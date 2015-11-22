@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>
 KindEditor.ready(function(K) {
 	 K.create('#editor_id', {
-        uploadJson : '<%=basePath%>imageupload.do?method=keuploadimg',
+        uploadJson : '<%=basePath%>FileUploadServlet',
         allowFileManager : false,
         items:[
                'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
@@ -52,23 +52,19 @@ function submitForm(){
 
 <body bgcolor="#DDF3FF" class = "h2" >
 	<form action="http://www.baidu.com" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;">
-		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
+		<fieldset class="simpborder" style="width: 48%;  ">
 			<label>是否为首页资讯</label> <select name="n_ishot" id="n_ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
 					<option>是</option>
 					<option selected="selected">否</option>
 			</select>
 		</fieldset>
-		<fieldset class="simpborder" style="width: 48%; float: left; ">
+		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
 			<label>资讯标题</label>
 			<input type="text">
 		</fieldset>
-		<fieldset class="simpborder" style="width: 48%; float: left;margin-right: 3%;">
+		<fieldset class="simpborder" style="width: 48%; float: left;">
 			<label>作者</label>
 			<input  type="text">
-		</fieldset>
-		<fieldset class="simpborder" style="width: 48%; float: left;">
-			<label>封面图片</label>
-			<input  type="file">
 		</fieldset>
 		<fieldset class="simpborder" style="width: 47%; float: left;margin-right: 3%;padding-left: 12px;">
 			<label>上线时间</label>

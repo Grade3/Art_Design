@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				{field:'password',title:'密码',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
-			]],.0
+			]],
 			toolbar:[
 			   {//添加数据
 				   text:"添加",
