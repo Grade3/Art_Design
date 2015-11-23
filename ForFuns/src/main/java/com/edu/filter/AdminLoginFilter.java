@@ -28,6 +28,10 @@ public class AdminLoginFilter implements Filter{
 		HttpServletResponse Response = (HttpServletResponse) response;
 		String saveUrl  = Request.getContextPath();
 		Cookie[] cookies = Request.getCookies();
+		if(null == cookies){
+			Response.sendRedirect(saveUrl+"/admin/Admin_login.jsp?error=2"); 
+			return;
+		}
 		String token ="";
 		for(Cookie cookie : cookies){
 		    if(cookie.getName().equals("token"))

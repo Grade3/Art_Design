@@ -33,9 +33,9 @@ public class NewsBean {
 	private Integer ishot;
 	private Date timestart;
 	private Date timeout;
-	private Integer stuation;
-	private String suggestion;
-	private Integer isonline;
+	private Integer stuation = 0;
+	private String suggestion ="";
+	private Integer isonline = 0;
 	private UserBean userBean;
 	
 	public NewsBean() {
@@ -186,7 +186,7 @@ public class NewsBean {
 	}
 
 
-	@Column(name="stuation",columnDefinition="INT default 0")
+	@Column(name="stuation")
 	public Integer getStuation() {
 		return stuation;
 	}
@@ -210,7 +210,7 @@ public class NewsBean {
 	}
 
 
-	@Column(name="isonline",columnDefinition="INT default 0")
+	@Column(name="isonline")
 	public Integer getIsonline() {
 		return isonline;
 	}

@@ -1,6 +1,7 @@
 package com.edu.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -21,14 +22,14 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.lxh.smart.SmartUpload;
-import org.lxh.smart.SmartUploadException;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -51,32 +52,30 @@ public class ImageUploadController implements ServletConfigAware,ServletContextA
     public void setServletConfig(ServletConfig arg0) {  
         this.servletConfig = arg0;  
     }
+	
     
-    
-	@ResponseBody
+    @ResponseBody
 	@RequestMapping(params="method=keuploadimg")
-	public String Jsonuploadimage(HttpServletRequest request, HttpServletResponse response){
+	public String Jsonuploadimage(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "imgFile", required = false) MultipartFile file){
 		String filePath = servletContext.getRealPath("/")+"newsupload/";
 		String saveUrl  = request.getContextPath() + "/newsupload/";
-		File file = new File(filePath);
-		if(!file.exists()){
-			file.mkdir();
+		System.out.println(filePath);
+		System.out.println(saveUrl);
+		File filedir = new File(filePath);
+		if(!filedir.exists()){
+			filedir.mkdir();
 		}
 		try {
-			SmartUpload smartUpload = new SmartUpload();
-			smartUpload.initialize(servletConfig,request,response);
-			smartUpload.setMaxFileSize(1024*1024*100);
-			smartUpload.setTotalMaxFileSize(1024*1024*1000);
-			smartUpload.setAllowedFilesList("jpg,png,gif,mp4,avi");
-			smartUpload.upload();
-			String filename = smartUpload.getFiles().getFile(0).getFileName();
-			String ext = smartUpload.getFiles().getFile(0).getFileExt();
-			org.lxh.smart.File file2 = smartUpload.getFiles().getFile(0);
-			String newfilename = System.currentTimeMillis()+"."+ext;
-			file2.saveAs(filePath+newfilename);
+			String ext =file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")); ;
+			String newfilename = System.currentTimeMillis()+ext;
+			String PathAndName = filePath + newfilename;
+			saveUrl = saveUrl+newfilename;
+			File resultFile = new File(PathAndName);
+			file.transferTo(resultFile);
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("error", 0);
-			jsonObject.put("url", saveUrl+newfilename);
+			jsonObject.put("url", saveUrl);
 			return (jsonObject.toJSONString());
 		} catch (Exception e) {
 			e.printStackTrace();

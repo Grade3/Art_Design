@@ -62,12 +62,12 @@
 	<welcome-file-list>
 		<welcome-file>/admin/Admin_login.jsp</welcome-file>
 	</welcome-file-list>
-	<filter>
+	<!-- <filter>
 		<filter-name>AdminLoginFilter</filter-name>
 		<filter-class>com.edu.filter.AdminLoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>AdminLoginFilter</filter-name>
 		<url-pattern>/admin/main.jsp</url-pattern>
-	</filter-mapping> 
+	</filter-mapping>  -->
 </web-app>
