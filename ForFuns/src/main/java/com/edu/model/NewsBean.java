@@ -1,6 +1,15 @@
 package com.edu.model;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +24,9 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.stereotype.Repository;
+
+import com.mysql.jdbc.Field;
 
 
 
@@ -22,6 +34,7 @@ import org.hibernate.annotations.DynamicInsert;
 @Table(name="n_news")
 @DynamicInsert
 @JsonIgnoreProperties(value={"userBean"})
+@Repository
 public class NewsBean {
 	private Integer id;
 	private String title;
@@ -33,7 +46,7 @@ public class NewsBean {
 	private Integer ishot;
 	private Date timestart;
 	private Date timeout;
-	private Integer stuation = 0;
+	private Integer situation = 0;
 	private String suggestion ="";
 	private Integer isonline = 0;
 	private UserBean userBean;
@@ -57,7 +70,7 @@ public class NewsBean {
 
 	public NewsBean(Integer id, String title, String summary, String author,
 			String imgurl, String content, Integer money, Integer ishot,
-			Date timestart, Date timeout, Integer stuation,
+			Date timestart, Date timeout, Integer situation,
 			String suggestion, Integer isonline) {
 		super();
 		this.id = id;
@@ -70,7 +83,7 @@ public class NewsBean {
 		this.ishot = ishot;
 		this.timestart = timestart;
 		this.timeout = timeout;
-		this.stuation = stuation;
+		this.situation = situation;
 		this.suggestion = suggestion;
 		this.isonline = isonline;
 	}
@@ -186,15 +199,15 @@ public class NewsBean {
 	}
 
 
-	@Column(name="stuation")
-	public Integer getStuation() {
-		return stuation;
+	@Column(name="situation")
+	public Integer getSituation() {
+		return situation;
 	}
 
 
 
-	public void setStuation(Integer stuation) {
-		this.stuation = stuation;
+	public void setSituation(Integer situation) {
+		this.situation = situation;
 	}
 
 
@@ -236,5 +249,62 @@ public class NewsBean {
 		this.timestart = timestart;
 		this.timeout = timeout;
 		this.userBean = userBean;
+	}
+	
+	/**
+	 * 获取分页信息 
+	 * @param page
+	 * @param pagesize
+	 * @return
+	 */
+	public Map<String , Object> GetNewsPage(Set<NewsBean> newsSet,int page,int pagesize,Map<String, String> param){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(null==param){
+			Integer total = newsSet.size();
+			int start = (page-1)*pagesize;
+			int end = page*pagesize;
+			if(end>total)
+				end =total ;
+			List<NewsBean> list = new ArrayList<NewsBean>();
+			Iterator<NewsBean> iterator = newsSet.iterator();
+			int count = 0;
+			while(iterator.hasNext()){
+				if(count>=start||count<end)
+					list.add(iterator.next());
+				count++;
+			}
+			map.put("total",total);
+			map.put("rows",list);
+			return map;
+		}else{
+			List<NewsBean> list = new ArrayList<NewsBean>();
+			Iterator<NewsBean> iterator = newsSet.iterator();
+			int count = 0;
+			Set<String> keySet = param.keySet();
+			String selectname = keySet.iterator().next();
+			String condition = param.get(selectname);
+			Class clz = NewsBean.class;
+			Method method  = null;
+			try {
+			  method = clz.getMethod("get"+selectname.substring(0,1).toUpperCase()+selectname.substring(1,selectname.length()));
+			} catch (NoSuchMethodException | SecurityException e) {
+				e.printStackTrace();
+			}
+			while(iterator.hasNext()){
+				NewsBean next = iterator.next();
+				try {
+					Object invoke = method.invoke(next);
+					if(invoke.toString().contains(condition)){
+						count++;
+						list.add(next);
+					}
+				} catch (Exception e){
+					e.printStackTrace();
+				}
+			}
+			map.put("total",count);
+			map.put("rows",list);
+			return map;
+		}
 	}
 }

@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -51,8 +52,15 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public Object getEntitybyId(Class clz,Integer id) throws Exception {
-		String hql = "from "+clz.newInstance().getClass().getName()+" where id="+id;
+	public Object getEntitybyId(Class clz,Integer id){
+		String hql ="";
+		try {
+			hql = "from "+clz.newInstance().getClass().getName()+" where id="+id;
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 		return getSession().createQuery(hql).list().get(0);
 	}
 
@@ -184,7 +192,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 		String hql ="";
 		List<T> list = null;
 		try {
-			hql = "from "+clz.newInstance().getClass().getName()+" where  "+Morename+" = ' "+Morevalue+" '"+selectname+" like '%"+value+"%'";
+			hql = "from "+clz.newInstance().getClass().getName()+" where  "+Morename+" = ' "+Morevalue+" and '"+selectname+" like '%"+value+"%'";
 			System.out.println(hql);
 			Query query = getSession().createQuery(hql);
 			query.setFirstResult((page-1)*pageSize); 
@@ -216,9 +224,17 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 	}
 
 	@Override
-	public T GetBeanByCondition(Class clz, String conditionName,
-		String conditionValue) throws Exception{
-		String hql = "from "+clz.newInstance().getClass().getName()+" where "+conditionName+" ='"+conditionValue+" '";
+	public T GetBeanByCondition(Class clz, String conditionName,String conditionValue,Map<String, String> param) throws Exception{
+		String hql = "from "+clz.newInstance().getClass().getName()+" where "+conditionName+" = '"+conditionValue+"'";
+		if(null!=param){
+			Set<String> keySet = param.keySet();
+			Iterator<String> iterator = keySet.iterator();
+			while(iterator.hasNext()){
+				String next = iterator.next();
+				hql = hql +" and "+ next +"like %"+param.get(next)+"%";
+			}
+		}
+		System.out.println(hql);
 		return (T) getSession().createQuery(hql).list().get(0);
 	}
 

@@ -128,6 +128,6 @@ public interface IBaseService<T>{
 	 * @param conditionValue
 	 * @return
 	 */
-	public T GetBeanByCondition(Class clz,String conditionName,String conditionValue);
+	public T GetBeanByCondition(Class clz,String conditionName,String conditionValue,Map<String, String> param);
 		
 }

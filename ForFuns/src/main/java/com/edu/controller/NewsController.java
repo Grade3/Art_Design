@@ -44,7 +44,23 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	private INewsService newsService;
 	@Resource
 	private  IUserService userService;
+	@Resource
+	private NewsBean mNewsBean;
 	
+	/**
+	 * 添加资讯
+	 * @param title
+	 * @param content
+	 * @param author
+	 * @param timestart
+	 * @param timeout
+	 * @param summary
+	 * @param money
+	 * @param ishot
+	 * @param request
+	 * @param file
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=addnews")
 	public String JsonAddNews (@RequestParam(value="title")String title,
@@ -82,17 +98,34 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	}
 	
 	@ResponseBody
-	@RequestMapping(params="method=getallnews")
+	@RequestMapping(params="method=getpagenews")
 	public Map<String, Object> JsonGetAllNews(@RequestParam(value="userid") String userid,
 			@RequestParam(value = "page") int page,
 			@RequestParam(value = "rows") int pageSize,
-			@RequestParam(value="selectname",defaultValue="id")String selectname,
+			@RequestParam(value="selectname",defaultValue="")String selectname,
 			@RequestParam(value="value",defaultValue="")String value){
-		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "userid", userid);
-		Map<String, Object> map = new HashMap<String, Object>();
-		//map.put("rows", list);
-		//map.put("total", total);
+		Map<String, String> param = null;
+		if(!"".equals(value)){
+			param = new HashMap<String, String>();
+			param.put(selectname, value);
+		}
+		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "username", userid,null);
+		Map<String, Object> map = mNewsBean.GetNewsPage(userBean.getNewsBeans(), page, pageSize,param);
 		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(params="method=deletenews")
+	public String JsonDeleteNews(@RequestParam(value="ids")String ids){
+		String[] id = ids.split(",");
+		int[] temp = new int[id.length];
+		for (int i = 0; i < id.length; i++) {
+			temp[i] = Integer.parseInt(id[i]);
+		}
+		int result = newsService.DeleteBatch(NewsBean.class, temp);
+		if (result == 1)
+			return "true";
+		return "error";
 	}
 	
 }

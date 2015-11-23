@@ -20,7 +20,7 @@ public interface IBaseDao<T> {
 	 * @throws Exception 
 	 */
 	@SuppressWarnings("rawtypes")
-	public Object getEntitybyId(Class clz, Integer id) throws Exception;
+	public Object getEntitybyId(Class clz, Integer id);
 	
 	
 	/**
@@ -160,5 +160,5 @@ public interface IBaseDao<T> {
 	 * @return
 	 * @throws Exception 
 	 */
-	public T GetBeanByCondition(Class clz,String conditionName,String conditionValue) throws Exception;
+	public T GetBeanByCondition(Class clz,String conditionName,String conditionValue,Map<String, String> param) throws Exception;
 }

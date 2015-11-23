@@ -127,9 +127,9 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 
 	@Override
 	public T GetBeanByCondition(Class clz, String conditionName,
-			String conditionValue) {
+			String conditionValue,Map<String, String> param) {
 		try {
-			return (T) baseDao.GetBeanByCondition(clz, conditionName, conditionValue);
+			return (T) baseDao.GetBeanByCondition(clz, conditionName, conditionValue,param);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

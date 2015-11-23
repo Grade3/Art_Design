@@ -34,11 +34,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	//初始化数据函数
 	function getData(queryParams){
-		
 		$('#grid').datagrid({
-			url: '<%=basePath%>/user.do?method=getUserbypage',
+			url: '<%=basePath%>/news.do?method=getpagenews',
 			queryParams: queryParams,
 			remoteSort:false,
+			singleSelect:true,
 			nowrap: true, //换行属性
 			striped: true, //奇数偶数行颜色区分
 			fitColumns:true,
@@ -52,20 +52,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			]],
 			columns: [[
 				{field:'id',title:'ID',sortable:true,width:80,sortable:true,},
-				{field:'username',title:'用户名',sortable:true,width:120,sortable:true,
+				{field:'title',title:'资讯标题',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
-				{field:'password',title:'密码',sortable:true,width:120,sortable:true,
+				{field:'author',title:'作者',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
+				{field:'situation',title:'审核状态',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
+				{field:'suggestion',title:'审核意见',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
 			]],
 			toolbar:[
-			   {//添加数据
-				   text:"添加",
-				   iconCls: "icon-add",
-				   handler: _insertRow,
-				
-			   },'-',{//修改数据s
+			   {//修改数据s
 				   text:"编辑",
 				   iconCls: "icon-edit",
 				   handler: _editRow,
@@ -73,10 +74,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   text: "删除",
 				   iconCls: "icon-remove",
 				   handler: _removeRow,
-			   },'-',{//保存修改
-				   text: "保存",
-				   iconCls: "icon-save",
-				   handler: _saveRows,
 			   },'-',{
 				   text: "搜索",
 				   iconCls: "icon-search",
@@ -90,14 +87,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			],
 			onAfterEdit: function(rowIndex,rowData,changes){
 				doedit = undefined;
-			},
-			onDblClickRow:function(rowIndex, rowData){    
-				if(doedit==undefined)   //如果存在在编辑的行，就不可以再打开第二个行进行编辑
-				{					
-					$('#grid').datagrid('selectRow',rowIndex);
-		        	$('#grid').datagrid('beginEdit',rowIndex);
-		        	doedit=rowIndex;
-				}
 			},
 			onLoadSuccess:function(data){//数据刷新的时候，编辑的坐标设为空
 				doedit = undefined;
@@ -121,7 +110,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	};
 	//-----------------------------还原搜索效果----------------------------
 	function _unsearch(){
-		queryParams={};
+		var token = getCookie("token");
+		var index = token.indexOf("&");
+		var userid = token.substring(0,index);
+		var queryParams;
+		queryParams = {"userid":userid};
 		getData(queryParams);
 	};
 	//------------------------------------插入行数据-----------------------------------
@@ -142,16 +135,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function _editRow(){
 		var row = $('#grid').datagrid('getSelected');
 		if(row){
-			if(doedit!=null){
-				$('#grid').datagrid('endEdit',doedit);
-				$('#grid').datagrid('selectRow',doedit);
-			}
-			if(doedit == undefined){
-				var rowIndex = $('#grid').datagrid('getRowIndex', row);
-				$('#grid').datagrid('beginEdit',rowIndex);
-				doedit = rowIndex;
-				$('#grid').datagrid('unselectAll');
-			}
+			var id = row.id;
+			location.href="http://www.baidu.com";
+		}else{
+			$.messager.alert('警告','您没有选择','error');
 		};
 	};
 	//------------------------------------删除行数据-----------------------------------
@@ -169,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						{
 							ids[i] = rows[i].id;
 						}						
-					$.post("<%=basePath%>user.do?method=deleteUser", {ids: ids.toString()},
+					$.post("<%=basePath%>news.do?method=deletenews", {ids: ids.toString()},
 						function (data, textStatus){
 						
 						if(data == 'true'){
@@ -272,8 +259,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     var doedit = undefined;//用来记录当前编辑的行，如果没有编辑的行则置为undefined
     $(function(){
 		//获取数据的查询参数----过滤数据
+		var token = getCookie("token");
+		var index = token.indexOf("&");
+		var userid = token.substring(0,index);
 		var queryParams;
-		queryParams = {};
+		queryParams = {"userid":userid};
 		getData(queryParams);
 	});
    	
@@ -291,9 +281,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
         //--------------------------------搜索-----------------------------------------
         $('#SelectBtn').click(function(){
+        	var token = getCookie("token");
+    		var index = token.indexOf("&");
+    		var userid = token.substring(0,index);
         	var selectname=  $('#SelectName').val();
     		var value = $('#SearchText').val();
-    		queryParams = {selectname:selectname,value:value};
+    		queryParams = {"selectname":selectname,"value":value,"userid":userid};
     		getData(queryParams);
     	});
       	
