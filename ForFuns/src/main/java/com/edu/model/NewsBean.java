@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.DynamicInsert;
 
 
@@ -20,6 +21,7 @@ import org.hibernate.annotations.DynamicInsert;
 @Entity
 @Table(name="n_news")
 @DynamicInsert
+@JsonIgnoreProperties(value={"userBean"})
 public class NewsBean {
 	private Integer id;
 	private String title;

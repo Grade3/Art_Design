@@ -65,11 +65,10 @@ public class ImageUploadController implements ServletConfigAware,ServletContextA
 		try {
 			SmartUpload smartUpload = new SmartUpload();
 			smartUpload.initialize(servletConfig,request,response);
-			smartUpload.setMaxFileSize(1024*1024*10);
-			smartUpload.setTotalMaxFileSize(1024*1024*100);
-			smartUpload.setAllowedFilesList("jpg,png,gif");
+			smartUpload.setMaxFileSize(1024*1024*100);
+			smartUpload.setTotalMaxFileSize(1024*1024*1000);
+			smartUpload.setAllowedFilesList("jpg,png,gif,mp4,avi");
 			smartUpload.upload();
-			//smartUpload.save(filePath+);
 			String filename = smartUpload.getFiles().getFile(0).getFileName();
 			String ext = smartUpload.getFiles().getFile(0).getFileExt();
 			org.lxh.smart.File file2 = smartUpload.getFiles().getFile(0);

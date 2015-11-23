@@ -1,0 +1,62 @@
+body
+{
+	background-image: url(../image/bg_login.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: "SimSun";
+	font-size: 1.0em;
+	color: #000;
+}
+
+#main_register
+{
+	margin: 0 auto;
+	width: 480px;
+	height: auto;
+	background-color: #fffdf6;
+	border: 2px solid #f1daca;
+	border-radius: 10px;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	margin-top: 30px;
+}
+
+.label_input
+{
+	width: 60%;
+	margin-left: 17%;
+	font-size: 0.8em;
+}
+
+.text_input
+{
+	width: 60%;
+	height: 30px;
+	margin-left: 17%;
+	border: 1px solid #f1daca;
+	background-color: #fffdf6;
+	border-radius: 5px;
+	font-size: 0.8em;
+	padding-left: 6%;
+}
+
+.submit_button
+{
+	width: 66%;
+	height: 45px;
+	margin-left: 17%;
+	background-color: #f67280;
+	border: 1px solid #f1daca;
+	border-radius: 5px;
+	font-size: 0.9em;
+	margin-top: 20px;
+	color: white;
+}
+
+.label_error
+{
+	margin-top: 15px;
+	text-align: center;
+	color: #f67280;
+	font-size: 0.6em;
+}
