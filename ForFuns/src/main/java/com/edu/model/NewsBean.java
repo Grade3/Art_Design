@@ -215,6 +215,21 @@ public class NewsBean {
 	public void setIsonline(Integer isonline) {
 		this.isonline = isonline;
 	}
-	
-	
+
+
+	public NewsBean(String title, String summary, String author, String imgurl,
+			String content, Integer money, Integer ishot, Date timestart,
+			Date timeout,UserBean userBean) {
+		super();
+		this.title = title;
+		this.summary = summary;
+		this.author = author;
+		this.imgurl = imgurl;
+		this.content = content;
+		this.money = money;
+		this.ishot = ishot;
+		this.timestart = timestart;
+		this.timeout = timeout;
+		this.userBean = userBean;
+	}
 }

@@ -43,7 +43,58 @@ KindEditor.ready(function(K) {
 function submitForm(){
 	editor.sync();
 	var html = document.getElementById('editor_id').value;
+	
+	var title = $("#title").val();
+	if(title == null || title ==""){
+		$.messager.alert('警告','请填写标题','error');
+		return ;
+	}
+	var author = $("#author").val();
+	if(author == null || author ==""){
+		$.messager.alert('警告','请填写作者','error');
+		return ;
+	}
+	var file  = $('#file').val();
+	if(file ==null || file ==""){
+		$.messager.alert('警告','请选择资讯封面','error');
+		return ;
+	}
+	var summary = $("#summary").val();
+	if(summary == null || summary ==""){
+		$.messager.alert('警告','请填写概要','error');
+		return ;
+	}
+	
+	
+	var timestart = $('#timestart').datebox('getValue');
+	var timeout = $('#timeout').datebox('getValue');
+	if(timestart>timeout){
+		$.messager.alert('警告','下线时间不能大于上线时间','error');
+		return ;
+	}
+	if(timestart == null || timestart ==""){
+		$.messager.alert('警告','请选择上线时间','error');
+		return ;
+	}
+	
+	if(timeout == null || timeout ==""){
+		$.messager.alert('警告','请选择下线时间','error');
+		return ;
+	}
+	timestart = myformatter(timestart);
+	timeout = myformatter(timeout);
+	$('#timestart').datebox('setValue',timestart);
+	$('#timeout').datebox('setValue',timeout);
+	
+	
 	$('#ff').form('submit');
+}
+//更改datebox的日期格式
+function myformatter(value) {
+	if(value != null && value != ""){
+		var date = new Date(value);
+        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	}
 }
 </script>
 
@@ -53,42 +104,43 @@ function submitForm(){
 </head>
 
 <body bgcolor="#DDF3FF" class = "h2" >
-	<form action="<%=basePath%>news.do?method=addnews" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;">
+	<form action="<%=basePath%>news.do?method=addnews" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;" >
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
 			<label>是否为首页资讯</label> 
-			<select name="ishot" id="n_ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
-					<option>是</option>
-					<option selected="selected">否</option>
+			<select name="ishot" id="ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
+					<option value="1">是</option>
+					<option selected="selected" value="0">否</option>
 			</select>
 		</fieldset>
 		<fieldset class="simpborder" style="width: 48%; float: left; ">
 			<label>资讯标题</label>
-			<input type="text" name="title">
+			<input type="text" name="title" id="title">
 		</fieldset>
-		<fieldset class="simpborder" style="width: 48%; float: left;margin-right: 3%;">
+		<fieldset class="simpborder"  style="width: 48%; float: left;margin-right: 3%;">
 			<label>作者</label>
-			<input  type="text" name="author">
+			<input  type="text" name="author" id="author">
 		</fieldset>
 		<fieldset class="simpborder" style="width: 48%; float: left;">
 			<label>封面图片</label>
-			<input  type="file" name="file">
-		</fieldset>
-		<fieldset class="simpborder" style="width: 47%; float: left;margin-right: 3%;padding-left: 12px;">
-			<label>上线时间</label>
-			<input class="easyui-datebox" name="timestart" required style="width:91%;margin-left: 2%;">
-		</fieldset>
-		<fieldset class="simpborder"  style="width: 47%; float: left;padding-left: 12px;">
-			<label>下线时间</label>
-			<input  class="easyui-datebox" name="timeout" required style="width:91%">
+			<input  type="file" name="file" id="file">
 		</fieldset>
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
 			<label>资讯概要</label>
-			<input type="text" name="summary">
+			<input type="text" name="summary" id="summary">
 		</fieldset>
 		<fieldset class="simpborder" style="width: 48%; float: left;">
 			<label>费用</label>
-			<input type="text" name="money">
+			<input type="text" name="money" id="money">
 		</fieldset>
+		<fieldset class="simpborder" style="width: 47%; float: left;margin-right: 3%;padding-left: 12px;">
+			<label>上线时间</label>
+			<input class="easyui-datebox" name="timestart" id="timestart" style="width:91%;margin-left: 2%;">
+		</fieldset>
+		<fieldset class="simpborder"  style="width: 47%; float: left;padding-left: 12px;">
+			<label>下线时间</label>
+			<input  class="easyui-datebox" name="timeout"id="timeout"  style="width:91%">
+		</fieldset>
+		
 		<br/>
 		<fieldset>
 		<textarea id="editor_id" name="content" style="width:99%;height:400px;"></textarea>

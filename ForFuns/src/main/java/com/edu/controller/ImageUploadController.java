@@ -67,7 +67,7 @@ public class ImageUploadController implements ServletConfigAware,ServletContextA
 			smartUpload.initialize(servletConfig,request,response);
 			smartUpload.setMaxFileSize(1024*1024*10);
 			smartUpload.setTotalMaxFileSize(1024*1024*100);
-			smartUpload.setAllowedFilesList("txt,jpg,png,gif,doc,xlsx");
+			smartUpload.setAllowedFilesList("jpg,png,gif");
 			smartUpload.upload();
 			//smartUpload.save(filePath+);
 			String filename = smartUpload.getFiles().getFile(0).getFileName();

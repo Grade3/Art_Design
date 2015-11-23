@@ -88,4 +88,11 @@ public interface IBaseService<T>{
 	 */
 	public int DeleteBean(Class clz,String tablename,Map<String, String > require);
 	
+	/**
+	 * 通过id获取实体
+	 * 
+	 */
+	public T GetEntityById(Class clz,Integer id);
+	
+	
 }

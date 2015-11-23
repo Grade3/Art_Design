@@ -101,5 +101,10 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 				return 0;
 			}
 	}
+
+	@Override
+	public T GetEntityById(Class clz, Integer id) {
+		return (T) baseDao.getEntitybyId(clz, id);
+	}
 	
 }
