@@ -52,7 +52,8 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getEntitybyId(Class clz,Integer id) {
-		return getSession().load(clz, id);
+		String hql = "from "+clz.getName()+" where id="+id;
+		return getSession().createQuery(hql).list().get(0);
 	}
 
 	public void deleteEntity(Object object){

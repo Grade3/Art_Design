@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script>
 KindEditor.ready(function(K) {
-	 K.create('#editor_id', {
+	 window.editor =K.create('#editor_id', {
         uploadJson : '<%=basePath%>imageupload.do?method=keuploadimg',
         allowFileManager : false,
         items:[
@@ -41,6 +41,8 @@ KindEditor.ready(function(K) {
 	});
 });
 function submitForm(){
+	editor.sync();
+	var html = document.getElementById('editor_id').value;
 	$('#ff').form('submit');
 }
 </script>
@@ -51,40 +53,41 @@ function submitForm(){
 </head>
 
 <body bgcolor="#DDF3FF" class = "h2" >
-	<form action="" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;">
+	<form action="<%=basePath%>news.do?method=addnews" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;">
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
-			<label>是否为首页资讯</label> <select name="n_ishot" id="n_ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
+			<label>是否为首页资讯</label> 
+			<select name="ishot" id="n_ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
 					<option>是</option>
 					<option selected="selected">否</option>
 			</select>
 		</fieldset>
 		<fieldset class="simpborder" style="width: 48%; float: left; ">
 			<label>资讯标题</label>
-			<input type="text">
+			<input type="text" name="title">
 		</fieldset>
 		<fieldset class="simpborder" style="width: 48%; float: left;margin-right: 3%;">
 			<label>作者</label>
-			<input  type="text">
+			<input  type="text" name="author">
 		</fieldset>
 		<fieldset class="simpborder" style="width: 48%; float: left;">
 			<label>封面图片</label>
-			<input  type="file">
+			<input  type="file" name="file">
 		</fieldset>
 		<fieldset class="simpborder" style="width: 47%; float: left;margin-right: 3%;padding-left: 12px;">
 			<label>上线时间</label>
-			<input class="easyui-datebox" required style="width:91%;margin-left: 2%;">
+			<input class="easyui-datebox" name="timestart" required style="width:91%;margin-left: 2%;">
 		</fieldset>
-		<fieldset class="simpborder" style="width: 47%; float: left;padding-left: 12px;">
+		<fieldset class="simpborder"  style="width: 47%; float: left;padding-left: 12px;">
 			<label>下线时间</label>
-			<input  class="easyui-datebox" required style="width:91%">
+			<input  class="easyui-datebox" name="timeout" required style="width:91%">
 		</fieldset>
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
 			<label>资讯概要</label>
-			<input type="text">
+			<input type="text" name="summary">
 		</fieldset>
 		<fieldset class="simpborder" style="width: 48%; float: left;">
 			<label>费用</label>
-			<input type="text">
+			<input type="text" name="money">
 		</fieldset>
 		<br/>
 		<fieldset>
