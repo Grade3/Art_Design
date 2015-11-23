@@ -13,10 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+
 
 
 @Entity
 @Table(name="n_news")
+@DynamicInsert
 public class NewsBean {
 	private Integer id;
 	private String title;
@@ -181,7 +184,7 @@ public class NewsBean {
 	}
 
 
-	@Column(name="stuation")
+	@Column(name="stuation",columnDefinition="INT default 0")
 	public Integer getStuation() {
 		return stuation;
 	}
@@ -205,7 +208,7 @@ public class NewsBean {
 	}
 
 
-	@Column(name="isonline")
+	@Column(name="isonline",columnDefinition="INT default 0")
 	public Integer getIsonline() {
 		return isonline;
 	}

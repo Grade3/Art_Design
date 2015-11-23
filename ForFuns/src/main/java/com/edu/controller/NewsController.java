@@ -1,6 +1,7 @@
 package com.edu.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.model.NewsBean;
 import com.edu.model.UserBean;
@@ -48,35 +50,27 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 			@RequestParam(value="timestart")Date timestart,@RequestParam(value="timeout")Date timeout,
 			@RequestParam(value="summary")String summary,@RequestParam(value="money")Integer money,
 			@RequestParam(value="ishot")Integer ishot,HttpServletRequest request,
-			HttpServletResponse response
+			@RequestParam(value = "file", required = false) MultipartFile file
 	){
 		String filePath = servletContext.getRealPath("/")+"newsupload/";
+		String saveUrl  = request.getContextPath() + "/newsupload/";
 		System.out.println(filePath);
-		File file = new File(filePath);
-		if(!file.exists()){
-			file.mkdir();
+		File filedir = new File(filePath);
+		if(!filedir.exists()){
+			filedir.mkdir();
 		}
+		String ext =file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")); ;
+		String newfilename = System.currentTimeMillis()+ext;
+		String PathAndName = filePath + newfilename;
+		saveUrl = saveUrl+newfilename;
+		File resultFile = new File(PathAndName);
 		try {
-			SmartUpload smartUpload = new SmartUpload();
-			smartUpload.initialize(servletConfig,request,response);
-			smartUpload.setMaxFileSize(1024*1024*10);
-			smartUpload.setTotalMaxFileSize(1024*1024*100);
-			smartUpload.setAllowedFilesList("jpg,png,gif");
-			smartUpload.upload();
-			String filename = smartUpload.getFiles().getFile(0).getFileName();
-			String ext = smartUpload.getFiles().getFile(0).getFileExt();
-			org.lxh.smart.File file2 = smartUpload.getFiles().getFile(0);
-			String newfilename = System.currentTimeMillis()+"."+ext;
-			file2.saveAs(filePath+newfilename);
-		} catch (Exception e) {
-			e.printStackTrace();
+			file.transferTo(resultFile);
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
-		
-		
-		
-		
 		UserBean userBean = userService.GetEntityById(UserBean.class, 1);
-		NewsBean newsBean = new NewsBean(title, summary, author, null, content, money, ishot, timestart, timeout,userBean);
+		NewsBean newsBean = new NewsBean(title, summary, author, saveUrl, content, money, ishot, timestart, timeout,userBean);
 		try{
 			newsService.AddBean(newsBean);
 		}catch(Exception e){

@@ -104,7 +104,7 @@ function myformatter(value) {
 </head>
 
 <body bgcolor="#DDF3FF" class = "h2" >
-	<form action="<%=basePath%>news.do?method=addnews" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;" >
+	<form action="<%=basePath%>news.do?method=addnews" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;" enctype="multipart/form-data">
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
 			<label>是否为首页资讯</label> 
 			<select name="ishot" id="ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
