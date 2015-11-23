@@ -3,6 +3,9 @@ package com.edu.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletConfig;
@@ -76,6 +79,20 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 			return "添加资讯失败";
 		}
 		return "添加资讯成功";
+	}
+	
+	@ResponseBody
+	@RequestMapping(params="method=getallnews")
+	public Map<String, Object> JsonGetAllNews(@RequestParam(value="userid") String userid,
+			@RequestParam(value = "page") int page,
+			@RequestParam(value = "rows") int pageSize,
+			@RequestParam(value="selectname",defaultValue="id")String selectname,
+			@RequestParam(value="value",defaultValue="")String value){
+		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "userid", userid);
+		Map<String, Object> map = new HashMap<String, Object>();
+		//map.put("rows", list);
+		//map.put("total", total);
+		return map;
 	}
 	
 }

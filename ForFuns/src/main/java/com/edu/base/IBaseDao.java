@@ -17,9 +17,10 @@ public interface IBaseDao<T> {
 	 * @param clz 实体类的class
 	 * @param id 
 	 * @return
+	 * @throws Exception 
 	 */
 	@SuppressWarnings("rawtypes")
-	public Object getEntitybyId(Class clz, Integer id);
+	public Object getEntitybyId(Class clz, Integer id) throws Exception;
 	
 	
 	/**
@@ -135,4 +136,29 @@ public interface IBaseDao<T> {
 	 */
 	@SuppressWarnings("rawtypes")
 	public List<T> getPageBeanFilter(Class clz,int page,int pageSize,String selectname,String value);
+
+
+	/**
+	 * 通过id或者其他前置条件获取分页过滤
+	 * @param clz
+	 * @param page
+	 * @param pageSize
+	 * @param selectname
+	 * @param value
+	 * @param Morename
+	 * @param Morevalue
+	 * @return
+	 */
+	public List<T> getPageBeanFilterMore(Class clz, int page, int pageSize,
+			String selectname, String value, String Morename, String Morevalue);
+	
+	/**
+	 * 通过条件获取实体类
+	 * @param clz
+	 * @param conditionName
+	 * @param conditionValue
+	 * @return
+	 * @throws Exception 
+	 */
+	public T GetBeanByCondition(Class clz,String conditionName,String conditionValue) throws Exception;
 }

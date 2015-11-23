@@ -51,8 +51,8 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public Object getEntitybyId(Class clz,Integer id) {
-		String hql = "from "+clz.getName()+" where id="+id;
+	public Object getEntitybyId(Class clz,Integer id) throws Exception {
+		String hql = "from "+clz.newInstance().getClass().getName()+" where id="+id;
 		return getSession().createQuery(hql).list().get(0);
 	}
 
@@ -177,6 +177,24 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 		}
 		return list;
 	}
+	
+	@Override
+	public List<T> getPageBeanFilterMore(Class clz, int page, int pageSize,
+			String selectname, String value,String Morename,String Morevalue) {
+		String hql ="";
+		List<T> list = null;
+		try {
+			hql = "from "+clz.newInstance().getClass().getName()+" where  "+Morename+" = ' "+Morevalue+" '"+selectname+" like '%"+value+"%'";
+			System.out.println(hql);
+			Query query = getSession().createQuery(hql);
+			query.setFirstResult((page-1)*pageSize); 
+			query.setMaxResults(pageSize); 
+			list = query.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -195,6 +213,13 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 			return (Integer) list.get(0);
 		}
 		
+	}
+
+	@Override
+	public T GetBeanByCondition(Class clz, String conditionName,
+		String conditionValue) throws Exception{
+		String hql = "from "+clz.newInstance().getClass().getName()+" where "+conditionName+" ='"+conditionValue+" '";
+		return (T) getSession().createQuery(hql).list().get(0);
 	}
 
 	

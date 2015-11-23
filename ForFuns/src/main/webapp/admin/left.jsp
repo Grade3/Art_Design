@@ -47,10 +47,15 @@
                          <li ><a target="rightFrame" href="./ManagePower.jsp">权限管理</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />资讯管理</a>
+                <li><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />资讯发布</a>
                     <ul class="subul">
                          <li ><a target="rightFrame" href="./AddNews.jsp">发布资讯</a></li>
-                         <li ><a target="rightFrame" href="./ManageNews.jsp">管理资讯</a></li>
+                         <li ><a target="rightFrame" href="./ManageNews.jsp">查看资讯</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />资讯管理</a>
+                    <ul class="subul">
+                         <li ><a target="rightFrame" href="./ManageNews.jsp">审核资讯</a></li>
                     </ul>
                 </li>
                 <li ><a href="#"><img src="<%=basePath%>admin/img/icons/menu/brush.png" alt="" /> Elements</a>

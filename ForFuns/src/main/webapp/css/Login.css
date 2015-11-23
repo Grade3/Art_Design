@@ -1,8 +1,9 @@
+html{min-width:500px;height: 100%;}
 body
 {
 	background-image: url(../image/bg_login.jpg);
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: 100% 100%;
 	font-family: "SimSun";
 	font-size: 1.0em;
 	color: #000;

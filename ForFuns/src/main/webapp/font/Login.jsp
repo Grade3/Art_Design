@@ -6,6 +6,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width,height=device-height, initial-scale=0.5, minimum-scale=0.5,  user-scalable=yes" />     
+	<meta name="apple-mobile-web-app-capable" content="yes" />    
+	<meta name="format-detection" content="telephone=no" />  
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Login</title>
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/Login.css">
