@@ -39,13 +39,7 @@
 
         <div id="sidebar">
             <ul>
-                <li>
-                    <a href="index.html">
-                        <img src="<%=basePath%>admin/img/icons/menu/inbox.png" alt="" />
-                        Dashboard
-                    </a>
-                </li>
-                <li class="current"><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />系统管理</a>
+                <li class="current"><a href="#"><img src="<%=basePath%>admin/img/icons/menu/inbox.png" alt="" />系统管理</a>
                     <ul class="subul">
                          <li class="current"><a target="rightFrame" href="./ManageUser.jsp">用户管理</a></li>
                          <li ><a target="rightFrame" href="./ManageRole.jsp">角色管理</a></li>

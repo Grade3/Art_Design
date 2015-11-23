@@ -3,7 +3,9 @@
  */
 package com.edu.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +65,7 @@ public class UserController {
 				System.out.println(temp);
 				if (parts[0].equals(temp))
 					return "redirect:/admin/main.jsp";
-				return "redirect:/jsp/login.jsp?error=1";
+				return "redirect:/admin/Admin_login.jsp?error=1";
 			}
 		}
 		UserBean user = new UserBean();
@@ -72,12 +74,19 @@ public class UserController {
 		System.out.println(user.toString());
 		boolean loginResult = userService.isExist(user);
 		if (loginResult) {
-			Cookie cookie = new Cookie("token", username + "&"
-					+ MD5Util.convertMD5(username));
+			String temp = null;
+			try {
+				temp = URLEncoder.encode( MD5Util.convertMD5(username), "utf-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			String value = username + "&"+ temp;
+			System.out.println(value);
+			Cookie cookie = new Cookie("token", value);
 			response.addCookie(cookie);
 			return "redirect:/admin/main.jsp";
 		} else {
-			return "redirect:/jsp/login.jsp?error=1";
+			return "redirect:/admin/Admin_login.jsp?error=1";
 		}
 	}
 
