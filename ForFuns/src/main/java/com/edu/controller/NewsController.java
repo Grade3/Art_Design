@@ -150,6 +150,74 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		return map;
 	}
 	
+	
+	
+	/**
+	 * 修改资讯
+	 * @param title
+	 * @param content
+	 * @param author
+	 * @param timestart
+	 * @param timeout
+	 * @param summary
+	 * @param money
+	 * @param ishot
+	 * @param request
+	 * @param file
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=alertnews")
+	public String JsonAlertNews (@RequestParam(value="newsid")Integer newsid,@RequestParam(value="title")String title,
+			@RequestParam(value="content")String content,@RequestParam(value="author")String author,
+			@RequestParam(value="timestart")Date timestart,@RequestParam(value="timeout")Date timeout,
+			@RequestParam(value="summary")String summary,@RequestParam(value="money")Integer money,
+			@RequestParam(value="ishot")Integer ishot,HttpServletRequest request,
+			@RequestParam(value = "file", required = false) MultipartFile file
+	){
+		NewsBean newsBean = newsService.GetEntityById(NewsBean.class, newsid);
+		
+		String filePath = servletContext.getRealPath("/")+"newsupload/";
+		String saveUrl  = request.getContextPath() + "/newsupload/";
+		System.out.println(filePath);
+		File filedir = new File(filePath);
+		if(!filedir.exists()){
+			filedir.mkdir();
+		}
+		
+		if(file.getSize()>0){
+			String ext =file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")); ;
+			String newfilename = System.currentTimeMillis()+ext;
+			String PathAndName = filePath + newfilename;
+			saveUrl = saveUrl+newfilename;
+			File resultFile = new File(PathAndName);
+			newsBean.setImgurl(saveUrl);
+			try {
+				file.transferTo(resultFile);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+		newsBean.setIshot(ishot);
+		newsBean.setTitle(title);
+		newsBean.setAuthor(author);
+		newsBean.setSummary(summary);
+		newsBean.setMoney(money);
+		newsBean.setTimestart(timestart);
+		newsBean.setTimeout(timeout);
+		newsBean.setContent(content);
+		newsBean.setSituation(0);
+		
+		try{
+			newsService.UpdataBean(newsBean);
+		}catch(Exception e){
+			return "0";
+		}
+		return "1";
+	}
+	
+	
+	
 }
 
 

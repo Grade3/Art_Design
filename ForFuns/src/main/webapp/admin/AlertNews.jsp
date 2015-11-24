@@ -55,11 +55,6 @@ function submitForm(){
 		$.messager.alert('警告','请填写作者','error');
 		return ;
 	}
-	var file  = $('#file').val();
-	if(file ==null || file ==""){
-		$.messager.alert('警告','请选择资讯封面','error');
-		return ;
-	}
 	var summary = $("#summary").val();
 	if(summary == null || summary ==""){
 		$.messager.alert('警告','请填写概要','error');
@@ -131,6 +126,7 @@ function GetNewsById(newsid){
 			timeout = myformatter(timeout);
 			$('#timestart').datebox('setValue',timestart);
 			$('#timeout').datebox('setValue',timeout);
+			editor.html(content);
 		},error:function(){
 			$.message.alert('警告','连接服务器失败','error');
 		}
@@ -139,6 +135,7 @@ function GetNewsById(newsid){
 $(document).ready(function(){
 	var newsid = getUrlParam('newsid');
 	GetNewsById(newsid);
+	$('#newsid').val(newsid);
 });
 </script>
 
@@ -148,7 +145,8 @@ $(document).ready(function(){
 </head>
 
 <body bgcolor="#DDF3FF" class = "h2" >
-	<form action="<%=basePath%>news.do?method=addnews" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;" enctype="multipart/form-data">
+	<form action="<%=basePath%>news.do?method=alertnews" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;" enctype="multipart/form-data">
+		<input type="hidden" id="newsid" name="newsid">
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
 			<label>是否为首页资讯</label> 
 			<select name="ishot" id="ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
