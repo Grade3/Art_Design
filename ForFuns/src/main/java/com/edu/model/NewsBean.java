@@ -3,6 +3,8 @@ package com.edu.model;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +24,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.DynamicInsert;
@@ -35,7 +39,7 @@ import com.mysql.jdbc.Field;
 @DynamicInsert
 @JsonIgnoreProperties(value={"userBean"})
 @Repository
-public class NewsBean {
+public class NewsBean implements Comparable{
 	private Integer id;
 	private String title;
 	private String summary;
@@ -257,20 +261,30 @@ public class NewsBean {
 	 * @param pagesize
 	 * @return
 	 */
+	@Transient
 	public Map<String , Object> GetNewsPage(Set<NewsBean> newsSet,int page,int pagesize,Map<String, String> param){
+		//通过treeset由无序转为有序  
+		Iterator<NewsBean> tempIterator = newsSet.iterator();
+		Set<NewsBean> tempSet = new TreeSet<NewsBean>();
+		while(tempIterator.hasNext()){
+			tempSet.add(tempIterator.next());
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(null==param){
-			Integer total = newsSet.size();
+			Integer total = tempSet.size();
 			int start = (page-1)*pagesize;
 			int end = page*pagesize;
 			if(end>total)
 				end =total ;
 			List<NewsBean> list = new ArrayList<NewsBean>();
-			Iterator<NewsBean> iterator = newsSet.iterator();
+			Iterator<NewsBean> iterator = tempSet.iterator();
 			int count = 0;
 			while(iterator.hasNext()){
-				if(count>=start||count<end)
+				if(count>=start&&count<end)
 					list.add(iterator.next());
+				else{
+					iterator.next();
+				}
 				count++;
 			}
 			map.put("total",total);
@@ -278,7 +292,7 @@ public class NewsBean {
 			return map;
 		}else{
 			List<NewsBean> list = new ArrayList<NewsBean>();
-			Iterator<NewsBean> iterator = newsSet.iterator();
+			Iterator<NewsBean> iterator = tempSet.iterator();
 			int count = 0;
 			Set<String> keySet = param.keySet();
 			String selectname = keySet.iterator().next();
@@ -302,9 +316,29 @@ public class NewsBean {
 					e.printStackTrace();
 				}
 			}
+			//分页
+			int start = (page-1)*pagesize;
+			int end = page*pagesize;
+			if(list.size()<end)
+				end = list.size();
+			List<NewsBean> newslist = new ArrayList<NewsBean>();
+			for(int i=start;i<end;i++){
+				newslist.add(list.get(i));
+			}
+			
 			map.put("total",count);
-			map.put("rows",list);
+			map.put("rows",newslist);
 			return map;
 		}
+	}
+
+	/**
+	 * 排序接口
+	 */
+	@Transient
+	@Override
+	public int compareTo(Object o) {
+		NewsBean newsBean = (NewsBean) o;
+		return this.id-newsBean.getId();
 	}
 }

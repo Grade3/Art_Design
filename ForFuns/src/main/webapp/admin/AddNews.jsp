@@ -85,9 +85,15 @@ function submitForm(){
 	timeout = myformatter(timeout);
 	$('#timestart').datebox('setValue',timestart);
 	$('#timeout').datebox('setValue',timeout);
-	
-	
-	$('#ff').form('submit');
+	$('#ff').form('submit',{
+		success:function(data){   
+			if(0==data){
+				$.message.alert('警告','发布失败','error');
+			}else if(1==data){
+				location.href="WatchNews.jsp";
+			}
+		}
+	});
 }
 //更改datebox的日期格式
 function myformatter(value) {

@@ -22,7 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <script>
-	
 	//获取指定名称的cookie的值 
 	function getCookie(objName){
 		var arrStr = document.cookie.split("; "); 
@@ -58,8 +57,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				{field:'author',title:'作者',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
+				{field:'imgurl',title:'封面图片',sortable:true,width:120,sortable:true,
+					formatter:function(value,row,index){return "<img style='width:120px;height:70px;' src='"+row.imgurl+"' />";}
+				},
 				{field:'situation',title:'审核状态',sortable:true,width:120,sortable:true,
-					editor: { type: 'validatebox',options: { required: true}  }
+					formatter:function(value,row,index){
+						if (value == 0 ){
+							return '未审核';
+						} else if(value ==1 ){
+							return '审核通过';
+						}else if(value==2){
+							return '审核不通过';
+						}
+					}
 				},
 				{field:'suggestion',title:'审核意见',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }

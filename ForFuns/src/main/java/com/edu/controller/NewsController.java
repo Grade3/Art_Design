@@ -92,9 +92,9 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		try{
 			newsService.AddBean(newsBean);
 		}catch(Exception e){
-			return "添加资讯失败";
+			return "0";
 		}
-		return "添加资讯成功";
+		return "1";
 	}
 	
 	@ResponseBody
