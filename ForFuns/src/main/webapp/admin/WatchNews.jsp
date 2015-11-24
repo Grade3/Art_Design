@@ -146,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var row = $('#grid').datagrid('getSelected');
 		if(row){
 			var id = row.id;
-			location.href="http://www.baidu.com";
+			location.href="AlertNews.jsp?newsid="+id;
 		}else{
 			$.messager.alert('警告','您没有选择','error');
 		};

@@ -81,8 +81,6 @@ function submitForm(){
 		$.messager.alert('警告','请选择下线时间','error');
 		return ;
 	}
-	timestart = myformatter(timestart);
-	timeout = myformatter(timeout);
 	$('#timestart').datebox('setValue',timestart);
 	$('#timeout').datebox('setValue',timeout);
 	$('#ff').form('submit',{

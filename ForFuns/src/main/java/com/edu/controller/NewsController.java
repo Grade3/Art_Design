@@ -97,6 +97,15 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		return "1";
 	}
 	
+	/**
+	 * 获取分页新闻
+	 * @param userid
+	 * @param page
+	 * @param pageSize
+	 * @param selectname
+	 * @param value
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=getpagenews")
 	public Map<String, Object> JsonGetAllNews(@RequestParam(value="userid") String userid,
@@ -126,6 +135,19 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		if (result == 1)
 			return "true";
 		return "error";
+	}
+	
+	
+	/**
+	 * 通过id获取资讯
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=getnewsbyid")
+	public Map<String,Object> JsonGetNewsById(@RequestParam(value="newsid")Integer newsid){
+		NewsBean newsBean = newsService.GetEntityById(NewsBean.class, newsid);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("news", newsBean);
+		return map;
 	}
 	
 }
