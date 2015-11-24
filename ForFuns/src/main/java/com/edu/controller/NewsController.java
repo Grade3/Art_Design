@@ -88,7 +88,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 			e1.printStackTrace();
 		}
 		UserBean userBean = userService.GetEntityById(UserBean.class, 1);
-		NewsBean newsBean = new NewsBean(title, summary, author, saveUrl, content, money, ishot, timestart, timeout,userBean);
+		NewsBean newsBean = new NewsBean(title, summary, author, saveUrl, content, money, ishot, timestart, timeout,"",userBean);
 		try{
 			newsService.AddBean(newsBean);
 		}catch(Exception e){
@@ -98,7 +98,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	}
 	
 	/**
-	 * 获取分页新闻
+	 * 通过userid获取分页新闻
 	 * @param userid
 	 * @param page
 	 * @param pageSize
@@ -107,8 +107,8 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(params="method=getpagenews")
-	public Map<String, Object> JsonGetAllNews(@RequestParam(value="userid") String userid,
+	@RequestMapping(params="method=getpagenewsbyuserid")
+	public Map<String, Object> JsonGetAllNewsByUserid(@RequestParam(value="userid") String userid,
 			@RequestParam(value = "page") int page,
 			@RequestParam(value = "rows") int pageSize,
 			@RequestParam(value="selectname",defaultValue="")String selectname,
@@ -122,6 +122,32 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		Map<String, Object> map = mNewsBean.GetNewsPage(userBean.getNewsBeans(), page, pageSize,param);
 		return map;
 	}
+	/**
+	 * 获取全部分页新闻
+	 * @param userid
+	 * @param page
+	 * @param pageSize
+	 * @param selectname
+	 * @param value
+	 * @return
+	 */
+	@RequestMapping(params = "method=getNewsBypage")
+	@ResponseBody
+	public Map<String, Object> JsonGetPageNews(
+			@RequestParam(value = "page") int page,
+			@RequestParam(value = "rows") int pageSize,
+			@RequestParam(value="selectname",defaultValue="id")String selectname,
+			@RequestParam(value="value",defaultValue="")String value) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<NewsBean> list = newsService.GetPageBeanFilter(NewsBean.class, page,
+				pageSize,selectname,value);
+		int total = newsService.GetPageBeanFilterTotal(NewsBean.class, page, pageSize, selectname, value);
+		map.put("rows", list);
+		map.put("total", total);
+		return map;
+	}
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(params="method=deletenews")

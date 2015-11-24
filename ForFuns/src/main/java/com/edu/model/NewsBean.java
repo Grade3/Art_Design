@@ -255,6 +255,24 @@ public class NewsBean implements Comparable{
 		this.userBean = userBean;
 	}
 	
+	public NewsBean(String title, String summary, String author, String imgurl,
+			String content, Integer money, Integer ishot, Date timestart,
+			Date timeout, String suggestion, UserBean userBean) {
+		super();
+		this.title = title;
+		this.summary = summary;
+		this.author = author;
+		this.imgurl = imgurl;
+		this.content = content;
+		this.money = money;
+		this.ishot = ishot;
+		this.timestart = timestart;
+		this.timeout = timeout;
+		this.suggestion = suggestion;
+		this.userBean = userBean;
+	}
+
+
 	/**
 	 * 获取分页信息 
 	 * @param page

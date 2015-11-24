@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//初始化数据函数
 	function getData(queryParams){
 		$('#grid').datagrid({
-			url: '<%=basePath%>/news.do?method=getpagenews',
+			url: '<%=basePath%>/news.do?method=getNewsBypage',
 			queryParams: queryParams,
 			remoteSort:false,
 			singleSelect:true,
@@ -57,6 +57,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				},
 				{field:'imgurl',title:'封面图片',sortable:true,width:120,sortable:true,
 					formatter:function(value,row,index){return "<img style='width:120px;height:70px;' src='"+row.imgurl+"' />";}
+				},
+				{field:'isonline',title:'是否上线',sortable:true,width:120,sortable:true,
+					formatter:function(value,row,index){
+						if (value == 0 ){
+							return '下线';
+						} else if(value ==1 ){
+							return '上线';
+						}
+					}
 				},
 				{field:'situation',title:'审核状态',sortable:true,width:120,sortable:true,
 					formatter:function(value,row,index){
@@ -81,11 +90,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   },'-',{//保存修改
 				   text: "不通过",
 				   iconCls: "icon-cancel",
-				   handler: _saveRows,
+				   handler: _unPass,
 			   },'-',{//保存修改
 				   text: "通过",
 				   iconCls: "icon-ok",
-				   handler: _saveRows,
+				   handler: _Pass,
 			   },'-',{
 				   text: "搜索",
 				   iconCls: "icon-search",
@@ -111,7 +120,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			onLoadSuccess:function(data){//数据刷新的时候，编辑的坐标设为空
 				doedit = undefined;
 			},
-			
+			onSelect:function(rowIndex, rowData){
+				if(undefined==doedit){
+					
+				}else{
+					$.messager.alert("操作提示", "请先提交请求！","info"); 
+					//$('#grid').datagrid('selectRow',rowIndex);
+				}
+			},
 		});
 		
 		//分页设置
@@ -128,13 +144,70 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#searchdialog').dialog('close');
 		
 	};
+	//---------------------------通过---------------------------------
+	function _Pass(){
+		var row = $('#grid').datagrid('getSelected');
+		var id = row.id;
+		var suggestion = row.suggestion;
+		$.ajax({
+			type:'post',
+			url :'<%=basePath%>news.do?method=alertsituation',
+			data:{'situation':'1','newsid':id,'suggestion':suggestion},
+			success:function(json){
+				if(json==1){
+					$.messager.alert("操作提示", "操作成功！","info"); 
+					var queryParams;
+					queryParams = {};
+					getData(queryParams);
+				}else{
+					$.messager.alert('警告','操作失败','error');	
+					var queryParams;
+					queryParams = {};
+					getData(queryParams);
+				}
+			},error:function(){
+				$.messager.alert('警告','连接服务器失败','error');	
+			}
+		});
+	}
+	//---------------------------不通过---------------------------------
+	function _unPass(){
+		var temp = doedit;
+		var id = 0;
+		var suggestion = null;
+		var row = 0;
+		if(doedit==undefined){
+			row = $('#grid').datagrid('getSelected');
+		}else{
+			$('#grid').datagrid('endEdit', doedit);
+			row = $('#grid').datagrid('getData').rows[temp];
+		}
+		id = row.id;
+		suggestion = row.suggestion;
+		$.ajax({
+			type:'post',
+			url : '<%=basePath%>/news.do?method=alertsituation',
+			data:{'newsid':id,'situation':2,'suggestion':suggestion},
+			success:function(json){
+				if(json==1){
+					$.messager.alert("操作提示", "操作成功！","info"); 
+					var queryParams;
+					queryParams = {};
+					getData(queryParams);
+				}
+			},error:function(){
+				$.messager.alert('警告','连接服务器失败','error');
+				var queryParams;
+				queryParams = {};
+				getData(queryParams);
+			}
+					
+		});
+	}
 	//-----------------------------还原搜索效果----------------------------
 	function _unsearch(){
-		var token = getCookie("token");
-		var index = token.indexOf("&");
-		var userid = token.substring(0,index);
 		var queryParams;
-		queryParams = {"userid":userid};
+		queryParams = {};
 		getData(queryParams);
 	};
 	//------------------------------------插入行数据-----------------------------------
@@ -249,11 +322,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     var doedit = undefined;//用来记录当前编辑的行，如果没有编辑的行则置为undefined
     $(function(){
 		//获取数据的查询参数----过滤数据
-		var token = getCookie("token");
-		var index = token.indexOf("&");
-		var userid = token.substring(0,index);
 		var queryParams;
-		queryParams = {"userid":userid};
+		queryParams = {};
 		getData(queryParams);
 	});
    	
@@ -271,12 +341,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
         //--------------------------------搜索-----------------------------------------
         $('#SelectBtn').click(function(){
-        	var token = getCookie("token");
-    		var index = token.indexOf("&");
-    		var userid = token.substring(0,index);
         	var selectname=  $('#SelectName').val();
     		var value = $('#SearchText').val();
-    		queryParams = {"selectname":selectname,"value":value,"userid":userid};
+    		queryParams = {"selectname":selectname,"value":value};
     		getData(queryParams);
     	});
       	
