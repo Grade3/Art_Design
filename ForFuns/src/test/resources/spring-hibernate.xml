@@ -72,10 +72,10 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 			</props>
 		</property>
 		<!-- 自动扫描注解方式配置的hibernate类文件 -->
-		<property name="packagesToScan">
-			<list>
+		<property name="packagesToScan" value="com.edu.model">
+			<!-- <list>
 				<value>com.edu.model</value>
-			</list>
+			</list> -->
 		</property>
 	</bean>
 

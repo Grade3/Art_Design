@@ -31,7 +31,18 @@ public class UserBean {
 	private String username;
 	private String password;
 	private Set<RoleBean> roleBeans = new HashSet<RoleBean>();
+	private Set<NewsBean> newsBeans = new HashSet<NewsBean>();
 	
+	@Transient
+	@OneToMany(mappedBy="userBean",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	public Set<NewsBean> getNewsBeans() {
+		return newsBeans;
+	}
+	
+	public void setNewsBeans(Set<NewsBean> newsBeans) {
+		this.newsBeans = newsBeans;
+	}
+
 	@Transient
 	@ManyToMany(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	@JoinTable(name = "ur_userrole",joinColumns ={@JoinColumn(name = "userid", referencedColumnName = "id") },   

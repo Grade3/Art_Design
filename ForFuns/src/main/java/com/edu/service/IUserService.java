@@ -29,4 +29,5 @@ public interface IUserService extends IBaseService<UserBean>{
 	 * @return
 	 */
 	public Map<String , Object> GetUserTree(int page,int pageSize);
+	
 }

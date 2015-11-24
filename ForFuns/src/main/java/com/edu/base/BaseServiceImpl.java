@@ -75,7 +75,20 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 			String selectname, String value) {
 		return baseDao.getPageBeanFilter(clz, page, pageSize, selectname, value);
 	}
-
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public List<T> GetPageBeanFilterMore(Class clz, int page, int pageSize,
+			String selectname, String value,String Morename,String Morevalue) {
+		return baseDao.getPageBeanFilterMore(clz, page, pageSize, selectname, value, Morename, Morevalue);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Override
+	public int GetPageBeanFilterMoreTotal(Class clz, int page, int pageSize,
+			String selectname, String value,String Morename,String Morevalue) {
+		return baseDao.getPageBeanFilterMore(clz, page, pageSize, selectname, value, Morename, Morevalue).size();
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public int GetPageBeanFilterTotal(Class clz, int page, int pageSize,
@@ -100,6 +113,27 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 				e.printStackTrace();
 				return 0;
 			}
+	}
+
+	@Override
+	public T GetEntityById(Class clz, Integer id) {
+		try {
+			return (T) baseDao.getEntitybyId(clz, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public T GetBeanByCondition(Class clz, String conditionName,
+			String conditionValue,Map<String, String> param) {
+		try {
+			return (T) baseDao.GetBeanByCondition(clz, conditionName, conditionValue,param);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

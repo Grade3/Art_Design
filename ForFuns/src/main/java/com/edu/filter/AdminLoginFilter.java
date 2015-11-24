@@ -1,6 +1,7 @@
 package com.edu.filter;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -25,7 +26,12 @@ public class AdminLoginFilter implements Filter{
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest Request = (HttpServletRequest) request;
 		HttpServletResponse Response = (HttpServletResponse) response;
+		String saveUrl  = Request.getContextPath();
 		Cookie[] cookies = Request.getCookies();
+		if(null == cookies){
+			Response.sendRedirect(saveUrl+"/admin/Admin_login.jsp?error=2"); 
+			return;
+		}
 		String token ="";
 		for(Cookie cookie : cookies){
 		    if(cookie.getName().equals("token"))
@@ -33,16 +39,17 @@ public class AdminLoginFilter implements Filter{
 		}
 		if(!"".equals(token)){
 			String[] parts = token.split("\\&");
-			String temp = MD5Util.convertMD5(parts[1]);
+			String value = URLDecoder.decode(parts[1],"utf-8");
+			String temp = MD5Util.convertMD5(value);
 			if(parts[0].equals(temp)){
 				/*Response.sendRedirect("/admin/main.jsp"); */
 				chain.doFilter(request,response);
 			}
 			else{
-				Response.sendRedirect("/forfun/jsp/login.jsp?error=2"); 
+				Response.sendRedirect(saveUrl+"/admin/Admin_login.jsp?error=2"); 
 			}
 		}else{
-			Response.sendRedirect("/forfun/jsp/login.jsp?error=2"); 
+			Response.sendRedirect(saveUrl+"/admin/Admin_login.jsp?error=2"); 
 		}
 	}
 

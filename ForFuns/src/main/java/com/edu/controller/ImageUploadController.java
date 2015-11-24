@@ -1,6 +1,7 @@
 package com.edu.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -21,14 +22,14 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.lxh.smart.SmartUpload;
-import org.lxh.smart.SmartUploadException;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -51,31 +52,30 @@ public class ImageUploadController implements ServletConfigAware,ServletContextA
     public void setServletConfig(ServletConfig arg0) {  
         this.servletConfig = arg0;  
     }
+	
     
-    
-	@ResponseBody
+    @ResponseBody
 	@RequestMapping(params="method=keuploadimg")
-	public String Jsonuploadimage(HttpServletRequest request, HttpServletResponse response){
-		String filePath = servletContext.getRealPath("/")+"upload";
-		String saveUrl  = request.getContextPath() + "/upload/";
+	public String Jsonuploadimage(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "imgFile", required = false) MultipartFile file){
+		String filePath = servletContext.getRealPath("/")+"newsupload/";
+		String saveUrl  = request.getContextPath() + "/newsupload/";
 		System.out.println(filePath);
-		File file = new File(filePath);
-		if(!file.exists()){
-			file.mkdir();
+		System.out.println(saveUrl);
+		File filedir = new File(filePath);
+		if(!filedir.exists()){
+			filedir.mkdir();
 		}
 		try {
-			SmartUpload smartUpload = new SmartUpload();
-			smartUpload.initialize(servletConfig,request,response);
-			smartUpload.setMaxFileSize(1024*1024*10);
-			smartUpload.setTotalMaxFileSize(1024*1024*100);
-			smartUpload.setAllowedFilesList("txt,jpg,png,gif,doc,xlsx");
-			smartUpload.upload();
-			smartUpload.save(filePath);
-			String filename = smartUpload.getFiles().getFile(0).getFileName();
-			System.out.println(filename);
+			String ext =file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")); ;
+			String newfilename = System.currentTimeMillis()+ext;
+			String PathAndName = filePath + newfilename;
+			saveUrl = saveUrl+newfilename;
+			File resultFile = new File(PathAndName);
+			file.transferTo(resultFile);
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("error", 0);
-			jsonObject.put("url", saveUrl+filename);
+			jsonObject.put("url", saveUrl);
 			return (jsonObject.toJSONString());
 		} catch (Exception e) {
 			e.printStackTrace();
