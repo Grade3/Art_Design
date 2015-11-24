@@ -215,7 +215,23 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		}
 		return "1";
 	}
-	
+	@ResponseBody
+	@RequestMapping(params="method=alertsituation")
+	public String JsonAlertSituation(@RequestParam(value="newsid")Integer newsid,@RequestParam(value="situation")Integer situation,@RequestParam(value="suggestion")String suggestion){
+		NewsBean newsBean = newsService.GetEntityById(NewsBean.class, newsid);
+		newsBean.setSituation(situation);
+		if(situation==1)
+			newsBean.setSuggestion("");
+		else {
+			newsBean.setSuggestion(suggestion);
+		}
+		try{
+			newsService.UpdataBean(newsBean);
+		}catch(Exception e){
+			return "0";
+		}
+		return "1";
+	}
 	
 	
 }

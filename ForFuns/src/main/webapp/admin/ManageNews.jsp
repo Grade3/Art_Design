@@ -52,10 +52,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			columns: [[
 				{field:'id',title:'ID',sortable:true,width:80,sortable:true,},
 				{field:'title',title:'资讯标题',sortable:true,width:120,sortable:true,
-					editor: { type: 'validatebox',options: { required: true}  }
 				},
 				{field:'author',title:'作者',sortable:true,width:120,sortable:true,
-					editor: { type: 'validatebox',options: { required: true}  }
 				},
 				{field:'imgurl',title:'封面图片',sortable:true,width:120,sortable:true,
 					formatter:function(value,row,index){return "<img style='width:120px;height:70px;' src='"+row.imgurl+"' />";}
@@ -72,18 +70,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 				},
 				{field:'suggestion',title:'审核意见',sortable:true,width:120,sortable:true,
-					editor: { type: 'validatebox',options: { required: true}  }
+					editor: { type: 'validatebox',options: { }  }
 				},
 			]],
 			toolbar:[
 			   {//修改数据s
-				   text:"编辑",
+				   text:"查看",
 				   iconCls: "icon-edit",
 				   handler: _editRow,
-			   },'-',{//删除数据
-				   text: "删除",
-				   iconCls: "icon-remove",
-				   handler: _removeRow,
+			   },'-',{//保存修改
+				   text: "不通过",
+				   iconCls: "icon-cancel",
+				   handler: _saveRows,
+			   },'-',{//保存修改
+				   text: "通过",
+				   iconCls: "icon-ok",
+				   handler: _saveRows,
 			   },'-',{
 				   text: "搜索",
 				   iconCls: "icon-search",
@@ -97,6 +99,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			],
 			onAfterEdit: function(rowIndex,rowData,changes){
 				doedit = undefined;
+			},
+			onDblClickRow:function(rowIndex, rowData){    
+				if(doedit==undefined)   //如果存在在编辑的行，就不可以再打开第二个行进行编辑
+				{					
+					$('#grid').datagrid('selectRow',rowIndex);
+		        	$('#grid').datagrid('beginEdit',rowIndex);
+		        	doedit=rowIndex;
+				}
 			},
 			onLoadSuccess:function(data){//数据刷新的时候，编辑的坐标设为空
 				doedit = undefined;
@@ -151,38 +161,68 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$.messager.alert('警告','您没有选择','error');
 		};
 	};
-	//------------------------------------删除行数据-----------------------------------
-	function _removeRow(){
-		var rows = $('#grid').datagrid('getSelections');
-		if(rows.length <= 0){
-			$.messager.alert('警告','您没有选择','error');
-		}
-		else if(rows.length >= 1){
-			$.messager.confirm("操作警告", "确定删除后将不可恢复！！", function(data){
-				if(data){
-					//原来代码开始的位置
-					var ids = [];
-					for(var i = 0; i < rows.length; ++i)
-						{
-							ids[i] = rows[i].id;
-						}						
-					$.post("<%=basePath%>news.do?method=deletenews", {ids: ids.toString()},
-						function (data, textStatus){
-						
-						if(data == 'true'){
-							$.messager.alert('提示','删除成功','info');
-							$('#grid').datagrid('reload'); 
-							} 
-							else{
-							$.messager.alert('提示','删除失败','fail');
-							}
-						}, "text");
-					//原来代码结束位置
-				}
-			});
-		}
-	};
 	
+	//------------------------------------保存行数据-----------------------------------
+	function _saveRows(){
+		$.messager.confirm("操作警告", "确定保存后被修改的数据将不可恢复！！", function(data){
+			if(data){
+				$('#grid').datagrid('endEdit', doedit);
+				var inserted = $('#grid').datagrid('getChanges', 'inserted');
+				var updated = $('#grid').datagrid('getChanges', 'updated');
+				var deleted = $('#grid').datagrid('getChanges','deleted');
+				var rows = $('#grid').datagrid('getChanges');
+				var rowstr = JSON.stringify(rows);
+		        var url = '';  
+		        if (inserted.length > 0) {  
+		            url = '<%=basePath%>/user.do?method=addUser';  
+		        }  
+		        if (updated.length > 0) {  
+		        	url = '<%=basePath%>/user.do?method=updateUser';   
+		        }  
+		        
+		        //rowstr = encodeURI(rowstr);
+		       
+		        
+		        $.ajax({
+		        	url: url,
+		        	data: {data:rowstr},
+		        	dataType: 'json',
+		        	success : function(r){
+		        		if(r==1){
+		        			if(updated.length>0){
+		        				$('#grid').datagrid('acceptChanges');
+		            			$.messager.alert('提示', "修改数据成功", 'info');
+		        			}
+		        			if(inserted.length>0){
+		        				$('#grid').datagrid('acceptChanges');
+		            			$.messager.alert('提示', "添加数据成功", 'info');
+		        			}
+		        			
+		        			doedit = undefined;
+		        			$('#grid').datagrid('reload');
+		        		}else{
+		        			/* $('#grid').datagrid('beginEdit',doedit);
+		        			if(updated.length>0){
+		        				$.messager.alert('错误', "修改数据失败", 'error');
+		        			}
+		        			if(inserted.length>0){
+		        				$.messager.alert('错误', "添加数据失败", 'error');
+		        			} */
+		        			$('#grid').datagrid('reload');
+		        			$.messager.alert('错误', "操作失败", 'error');
+		        		}
+		        		$('#grid').datagrid('unselectAll');
+		        	}
+		        	
+		        });
+			}
+			else{
+				//编辑失败后因为刷新了，所以要恢复焦点
+				doedit = undefined;
+				$('#grid').datagrid('reload');
+			}
+		});
+	};
 	 //--------------------------搜索按钮-------------------------
 	function _search(){
 		$('#searchdialog').dialog('open');
