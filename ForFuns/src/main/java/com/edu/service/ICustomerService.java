@@ -24,11 +24,11 @@ public interface ICustomerService extends IBaseService<CustomerBean>
 	 */
 	public void save(CustomerBean customer);
 	
-	/**
+/*	*//**
 	 * 获取树状
 	 * @param page
 	 * @param pageSize
 	 * @return
-	 */
-	public Map<String , Object> GetCustomerTree(int page,int pageSize);
+	 *//*
+	public Map<String , Object> GetCustomerTree(int page,int pageSize);*/
 }

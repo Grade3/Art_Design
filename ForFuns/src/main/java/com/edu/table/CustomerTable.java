@@ -7,7 +7,7 @@ public class CustomerTable
 	public static String USERID="userid";
 	public static String USERNAME = "username";
 	public static String PASSWORD = "password";
-	public static String PERSONNUM = "personnum";
+	public static String PERSONNUMBER = "personnumber";
 	public static String TELPHONE = "telphone";
 	public static String REALNAME = "realname";
 	public static String AVATOR = "avator";

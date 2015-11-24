@@ -117,7 +117,8 @@ public class CustomerController {
 	 */
 	@RequestMapping(params = "method=deleteCustomer")
 	@ResponseBody
-	public String JsonDeleteUser(@RequestParam(value = "ids") String ids) {
+	public String JsonDeleteUser(@RequestParam(value = "ids") String ids) 
+	{
 		String[] id = ids.split(",");
 		int[] temp = new int[id.length];
 		for (int i = 0; i < id.length; i++) {
@@ -143,9 +144,17 @@ public class CustomerController {
 			data = data.substring(1,data.length()-1);
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
-			String username = jsonObject.getString(UserTable.USERNAME);
-			String password = jsonObject.getString(UserTable.PASSWORD);
-			CustomerBean customerBean = new CustomerBean(username, password);
+			String userid = jsonObject.getString(CustomerTable.USERID);
+			String username = jsonObject.getString(CustomerTable.USERNAME);
+			String password = jsonObject.getString(CustomerTable.PASSWORD);
+			String personnumber = jsonObject.getString(CustomerTable.PERSONNUMBER);
+			String telphone = jsonObject.getString(CustomerTable.TELPHONE);
+			String realname = jsonObject.getString(CustomerTable.REALNAME);
+			String avator = jsonObject.getString(CustomerTable.AVATOR);
+			Integer isartist = Integer.parseInt(jsonObject.getString(CustomerTable.ISARTIST)) ;
+			CustomerBean customerBean = new CustomerBean(userid, username,
+					password, personnumber, telphone,
+					realname, avator, isartist);
 			customerService.AddBean(customerBean);
 			return 1;
 		} catch (Exception e) {
@@ -166,9 +175,9 @@ public class CustomerController {
 		data = data.substring(1,data.length()-1);
 		System.out.println(data);
 		JSONObject jsonObject = new JSONObject(data);
-		int id = jsonObject.getInt(UserTable.ID);
-		String username = jsonObject.getString(UserTable.USERNAME);
-		String password = jsonObject.getString(UserTable.PASSWORD);
+		int id = jsonObject.getInt(CustomerTable.ID);
+		String username = jsonObject.getString(CustomerTable.USERNAME);
+		String password = jsonObject.getString(CustomerTable.PASSWORD);
 		CustomerBean userBean = new CustomerBean(id,username, password);
 		customerService.UpdataBean(userBean);
 		return "true";
@@ -188,7 +197,7 @@ public class CustomerController {
 	 * @param page
 	 * @param pageSize
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(params = "method=getCustomerTree")
 	@ResponseBody
 	public Map<String, Object> JsonGetCustomerTree(
@@ -196,7 +205,7 @@ public class CustomerController {
 			@RequestParam(value = "rows") int pageSize) {
 		Map<String, Object> map = customerService.GetCustomerTree(page, pageSize);
 		return map;
-	}
+	}*/
 	
 	/**
 	 * 获取所有的用户

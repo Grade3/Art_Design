@@ -74,6 +74,21 @@ public class CustomerBean
 		this.password = password;
 	}
 
+	public CustomerBean(String userid, String username, String password,
+			String personnumber, String telphone, String realname,
+			String avator, Integer isartist)
+	{
+		super();
+		this.userid = userid;
+		this.username = username;
+		this.password = password;
+		this.personnumber = personnumber;
+		this.telphone = telphone;
+		this.realname = realname;
+		this.avator = avator;
+		this.isartist = isartist;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -84,6 +99,9 @@ public class CustomerBean
 				+ "]";
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	public Integer getId()
 	{
 		return id;
@@ -94,6 +112,7 @@ public class CustomerBean
 		this.id = id;
 	}
 
+	@Column(name = "userid")
 	public String getUserid()
 	{
 		return userid;
@@ -104,6 +123,7 @@ public class CustomerBean
 		this.userid = userid;
 	}
 
+	@Column(name = "username")
 	public String getUsername()
 	{
 		return username;
@@ -114,6 +134,7 @@ public class CustomerBean
 		this.username = username;
 	}
 
+	@Column(name = "password")
 	public String getPassword()
 	{
 		return password;
@@ -124,6 +145,7 @@ public class CustomerBean
 		this.password = password;
 	}
 
+	@Column(name = "personnumber")
 	public String getPersonnumber()
 	{
 		return personnumber;
@@ -134,6 +156,7 @@ public class CustomerBean
 		this.personnumber = personnumber;
 	}
 
+	@Column(name = "telphone")
 	public String getTelphone()
 	{
 		return telphone;
@@ -144,6 +167,7 @@ public class CustomerBean
 		this.telphone = telphone;
 	}
 
+	@Column(name = "realname")
 	public String getRealname()
 	{
 		return realname;
@@ -154,6 +178,7 @@ public class CustomerBean
 		this.realname = realname;
 	}
 
+	@Column(name = "avator")
 	public String getAvator()
 	{
 		return avator;
@@ -164,6 +189,7 @@ public class CustomerBean
 		this.avator = avator;
 	}
 
+	@Column(name = "isartist")
 	public Integer getIsartist()
 	{
 		return isartist;
@@ -173,5 +199,4 @@ public class CustomerBean
 	{
 		this.isartist = isartist;
 	}
-	
 }

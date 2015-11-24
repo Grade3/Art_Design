@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function getData(queryParams){
 		
 		$('#grid').datagrid({
-			url: '<%=basePath%>/user.do?method=getCustomerbypage',
+			url: '<%=basePath%>/customer.do?method=getCustomerbypage',
 			queryParams: queryParams,
 			remoteSort:false,
 			nowrap: true, //换行属性
@@ -187,7 +187,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						{
 							ids[i] = rows[i].id;
 						}						
-					$.post("<%=basePath%>user.do?method=deleteUser", {ids: ids.toString()},
+					$.post("<%=basePath%>customer.do?method=deleteCustomer", {ids: ids.toString()},
 						function (data, textStatus){
 						
 						if(data == 'true'){
@@ -215,10 +215,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var rowstr = JSON.stringify(rows);
 		        var url = '';  
 		        if (inserted.length > 0) {  
-		            url = '<%=basePath%>/user.do?method=addUser';  
+		            url = '<%=basePath%>/customer.do?method=addCustomer';  
 		        }  
 		        if (updated.length > 0) {  
-		        	url = '<%=basePath%>/user.do?method=updateUser';   
+		        	url = '<%=basePath%>/customer.do?method=updateCustomer';   
 		        }  
 		        
 		        //rowstr = encodeURI(rowstr);

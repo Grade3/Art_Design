@@ -19,7 +19,6 @@ import com.edu.dao.ICustomerDao;
 import com.edu.model.FunctionBean;
 import com.edu.model.RoleBean;
 import com.edu.model.CustomerBean;
-import com.edu.model.UserBean;
 import com.edu.service.ICustomerService;
 
 
@@ -32,19 +31,19 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerBean> implement
 	private ICustomerDao customerDao;
 	
 	@Override
-	public boolean isExist(CustomerBean user) 
+	public boolean isExist(CustomerBean customer)
 	{
-		return customerDao.isExist(user);
+		return customerDao.isExist(customer);
 	}
 
 	@Override
-	public void save(CustomerBean user) 
+	public void save(CustomerBean customer) 
 	{
-		customerDao.addEntity(user);
+		customerDao.addEntity(customer);
 
 	}
 
-	@Override
+	/*@Override
 	public Map<String, Object> GetCustomerTree(int page, int pageSize)
 	{
 		List<CustomerBean> list = this.GetPageBean(CustomerBean.class, page, pageSize);
@@ -71,5 +70,5 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerBean> implement
 		map.put("rows", temp);
 		map.put("total", total);
 		return map;
-	}
+	}*/
 }
