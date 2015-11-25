@@ -94,6 +94,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   iconCls: "icon-remove",
 				   handler: _removeRow,
 			   },'-',{
+				   text: "查看",
+				   iconCls: "icon-edit",
+				   handler:_search,
+			   },'-',{
 				   text: "搜索",
 				   iconCls: "icon-search",
 				   handler:_search,
@@ -155,7 +159,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var row = $('#grid').datagrid('getSelected');
 		if(row){
 			var id = row.id;
-			location.href="AlertNews.jsp?newsid="+id;
+			var situation = row.situation;
+			if(situation==1){
+				$.messager.alert('警告','该资讯已通过，无法编辑','error');
+			}else
+				location.href="AlertNews.jsp?newsid="+id;
 		}else{
 			$.messager.alert('警告','您没有选择','error');
 		};
