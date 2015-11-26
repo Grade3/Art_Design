@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Home</title>
+	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="../css/home.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		function a1_f1() {
+            document.getElementById("detail_a1").style.display = "none";
+        }
+        function a1_f2() {
+            document.getElementById("detail_a1").style.display = "block";
+        }
+        function a2_f1() {
+            document.getElementById("detail_a2").style.display = "none";
+        }
+        function a2_f2() {
+            document.getElementById("detail_a2").style.display = "block";
+        }
+        function a3_f1() {
+            document.getElementById("detail_a3").style.display = "none";
+        }
+        function a3_f2() {
+            document.getElementById("detail_a3").style.display = "block";
+        }
+
+        function b1_f1() {
+            document.getElementById("detail_b1").style.display = "none";
+        }
+        function b1_f2() {
+            document.getElementById("detail_b1").style.display = "block";
+        }
+        function b2_f1() {
+            document.getElementById("detail_b2").style.display = "none";
+        }
+        function b2_f2() {
+            document.getElementById("detail_b2").style.display = "block";
+        }
+        function b3_f1() {
+            document.getElementById("detail_b3").style.display = "none";
+        }
+        function b3_f2() {
+            document.getElementById("detail_b3").style.display = "block";
+        }
+
+        function c1_f1() {
+            document.getElementById("detail_c1").style.display = "none";
+        }
+        function c1_f2() {
+            document.getElementById("detail_c1").style.display = "block";
+        }
+        function c2_f1() {
+            document.getElementById("detail_c2").style.display = "none";
+        }
+        function c2_f2() {
+            document.getElementById("detail_c2").style.display = "block";
+        }
+        function c3_f1() {
+            document.getElementById("detail_c3").style.display = "none";
+        }
+        function c3_f2() {
+            document.getElementById("detail_c3").style.display = "block";
+        }
+	</script>
+<link href="../css/qiehuan.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/zzsc.js"></script>
+
+
+</head>
+<body>
+<a href="javascript:;" class="lanrenzhijia_top"></a>
+<script src="../js/lanrenzhijia.js"></script>
+<script>
+$(function(){
+	$(window).scroll(function(){
+		var _top = $(window).scrollTop();
+		if(_top>300){
+			$('.lanrenzhijia_top').fadeIn(600);
+		}else{
+			$('.lanrenzhijia_top').fadeOut(600);
+		}
+	});
+	$(".lanrenzhijia_top").click(function(){
+		$("html,body").animate({scrollTop:0},500);
+	});
+});
+</script>
+
+	<div class="header">
+		<div class="header-top">
+			<div class="container">
+				<div class="statu_bar">
+					<ul class="support">
+						<li ><span ><i class="item_message"> </i>471979617@qq.com</span></li>
+						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
+					</ul>
+					<ul class="support-right">
+						<li ><a href="Login.html" ><i class="item_login"> </i>登陆</a></li>
+						<li ><a href="Register.html" ><i class="item_register"> </i>注册账号</a></li>			
+					</ul>
+				</div>
+			</div>
+			<div class="header-bottom">
+				<div class="container">
+					<div class="logo">
+						<h1><a href="home.html">ArtCustomize</a></h1>
+					</div>
+					<div class="top-nav">
+						<ul class="megamenu skyblue">
+							<li><a href="home.html">首页</a></li>
+							<li><a href="home.html">成品</a></li>
+							<li><a href="home.html">DIY</a></li>
+							<li><a href="home.html">艺术家</a></li>
+							<li><a href="newslist.html">资讯中心</a></li>
+							<li><a href="home.html">联系我们</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="header">
+			<div class="wrap">
+				<div id="slide-holder">
+					<div id="slide-runner">
+						<a href="#" target="_blank"><img id="slide-img-1" src="../img/bg_login.jpg" class="slide" alt="" /></a>
+						<a href="#" target="_blank"><img id="slide-img-2" src="../img/bg_login.jpg" class="slide" alt="" /></a>
+						<a href="#" target="_blank"><img id="slide-img-3" src="../img/bg_login.jpg" class="slide" alt="" /></a>
+						<a href="#" target="_blank"><img id="slide-img-4" src="../img/bg_login.jpg" class="slide" alt="" /></a>
+						<a href="#" target="_blank"><img id="slide-img-5" src="../img/bg_login.jpg" class="slide" alt="" /></a>
+						<a href="#" target="_blank"><img id="slide-img-6" src="../img/bg_login.jpg" class="slide" alt="" /></a>
+						<a href="#" target="_blank"><img id="slide-img-7" src="../img/bg_login.jpg" class="slide" alt="" /></a> 
+						<div id="slide-controls">
+						 <p id="slide-client" class="text"><strong></strong><span></span></p>
+						 <p id="slide-desc" class="text"></p>
+						 <p id="slide-nav"></p>
+						</div>
+					</div>
+			   </div>
+			   <script type="text/javascript">
+			    if(!window.slider) {
+					var slider={};
+				}
+
+				slider.data= [
+			    {
+			        "id":"slide-img-1", // 与slide-runner中的img标签id对应
+			        "client":"标题1",
+			        "desc":"这里修改描述 这里修改描述 这里修改描述" //这里修改描述
+			    },
+			    {
+			        "id":"slide-img-2",
+			        "client":"标题2",
+			        "desc":"add your description here"
+			    },
+			    {
+			        "id":"slide-img-3",
+			        "client":"标题3",
+			        "desc":"add your description here"
+			    },
+			    {
+			        "id":"slide-img-4",
+			        "client":"标题4",
+			        "desc":"add your description here"
+			    },
+			    {
+			        "id":"slide-img-5",
+			        "client":"标题5",
+			        "desc":"add your description here"
+			    },
+			    {
+			        "id":"slide-img-6",
+			        "client":"标题6",
+			        "desc":"add your description here"
+			    },
+			    {
+			        "id":"slide-img-7",
+			        "client":"标题7",
+			        "desc":"add your description here"
+			    }
+				];
+				</script>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="container">
+			<div class="content-top">
+				<div class="col-md-9">
+					<div class="col-top">
+						<div class="col-md-6 black">
+							<a href="Arts.html">
+								<div class="arts">
+									<h3>艺术品成品</br>专区 >></h3>
+								</div>
+								<img src="../img/arts_pic.png" alt="" ></a>
+							</a>
+						</div>
+						<div class="col-md-6 black-in">
+							<a href="DIY.html">
+								<div class="arts diy">
+									<h3>艺术品定制</br>专区 >></h3>
+								</div>
+								<img src="../img/diy_pic.png" alt="" ></a>
+							</a>
+						</div>						
+					</div>
+					<div>
+					<div class="col-top-bottom">
+						<h3 class="news">ArtCostomize艺术品咨询专区</h3>
+						<a href="News.html" class="now-in">进 入</a>
+					</div>
+					</div>
+				</div>
+				<div class="col-md-3 per">
+					<a href="Artist.html">
+						<img class="img-responsive" src="../img/artist.png" >
+						<div class="six">
+							<h4>在线艺术家</br>专区 >></h4>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="sap_tabs">
+				<label class="line"></label>
+				<h2>艺术品成品推荐</h2>
+				<div class="recommend_arts">
+					<div class="col-md-4 Recommend" onmouseout="a1_f1()" onmouseover="a1_f2()">
+						<img src="../img/a1.jpg">
+						<div class="tab_desc" id="detail_a1">
+							<ul class="round-top">
+								<li><a href="#"><i> </i></a></li>
+								<li><a href="#"><i class="round"> </i></a></li>
+							</ul>
+							<div class="agency">
+								<div class="agency-left">
+									<h6 class="arts_name">艺术品名称及描述	</h6>
+									<p class="dollor item_price">竞拍价：￥170.00</p>
+									<p class="dollor item_price">一口价：￥250.00</p>
+									<ul class="social">
+										<li><a href="#"><i class="buy"> </i></a></li>
+										<li><a href="#"><i class="love"> </i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 Recommend" onmouseout="a2_f1()" onmouseover="a2_f2()">
+						<img src="../img/a2.jpg">
+						<div class="tab_desc" id="detail_a2">
+							<ul class="round-top">
+								<li><a href="#"><i> </i></a></li>
+								<li><a href="#"><i class="round"> </i></a></li>
+							</ul>
+							<div class="agency">
+								<div class="agency-left">
+									<h6 class="arts_name">艺术品名称及描述	</h6>
+									<p class="dollor item_price">竞拍价：￥170.00</p>
+									<p class="dollor item_price">一口价：￥250.00</p>
+									<ul class="social">
+										<li><a href="#"><i class="buy"> </i></a></li>
+										<li><a href="#"><i class="love"> </i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 Recommend" onmouseout="a3_f1()" onmouseover="a3_f2()">
+						<img src="../img/a3.jpg">
+						<div class="tab_desc" id="detail_a3">
+							<ul class="round-top">
+								<li><a href="#"><i> </i></a></li>
+								<li><a href="#"><i class="round"> </i></a></li>
+							</ul>
+							<div class="agency">
+								<div class="agency-left">
+									<h6 class="arts_name">艺术品名称及描述	</h6>
+									<p class="dollor item_price">竞拍价：￥170.00</p>
+									<p class="dollor item_price">一口价：￥250.00</p>
+									<ul class="social">
+										<li><a href="#"><i class="buy"> </i></a></li>
+										<li><a href="#"><i class="love"> </i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="sap_tabs">
+				<label class="line"></label>
+				<h2>艺术品定制推荐</h2>
+				<div class="recommend_arts">
+					<div class="col-md-4 Recommend" onmouseout="b1_f1()" onmouseover="b1_f2()">
+						<img src="../img/b1.jpg">
+						<div class="tab_desc" id="detail_b1">
+							<ul class="round-top">
+								<li><a href="#"><i> </i></a></li>
+								<li><a href="#"><i class="round"> </i></a></li>
+							</ul>
+							<div class="agency">
+								<div class="agency-left">
+									<h6 class="arts_name">艺术品名称及描述	</h6>
+									<p class="dollor item_price">竞拍价：￥170.00</p>
+									<p class="dollor item_price">一口价：￥250.00</p>
+									<ul class="social">
+										<li><a href="#"><i class="buy"> </i></a></li>
+										<li><a href="#"><i class="love"> </i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 Recommend" onmouseout="b2_f1()" onmouseover="b2_f2()">
+						<img src="../img/b2.jpg">
+						<div class="tab_desc" id="detail_b2">
+							<ul class="round-top">
+								<li><a href="#"><i> </i></a></li>
+								<li><a href="#"><i class="round"> </i></a></li>
+							</ul>
+							<div class="agency">
+								<div class="agency-left">
+									<h6 class="arts_name">艺术品名称及描述	</h6>
+									<p class="dollor item_price">竞拍价：￥170.00</p>
+									<p class="dollor item_price">一口价：￥250.00</p>
+									<ul class="social">
+										<li><a href="#"><i class="buy"> </i></a></li>
+										<li><a href="#"><i class="love"> </i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 Recommend" onmouseout="b3_f1()" onmouseover="b3_f2()">
+						<img src="../img/b3.jpg">
+						<div class="tab_desc" id="detail_b3">
+							<ul class="round-top">
+								<li><a href="#"><i> </i></a></li>
+								<li><a href="#"><i class="round"> </i></a></li>
+							</ul>
+							<div class="agency">
+								<div class="agency-left">
+									<h6 class="arts_name">艺术品名称及描述	</h6>
+									<p class="dollor item_price">竞拍价：￥170.00</p>
+									<p class="dollor item_price">一口价：￥250.00</p>
+									<ul class="social">
+										<li><a href="#"><i class="buy"> </i></a></li>
+										<li><a href="#"><i class="love"> </i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="sap_tabs">
+				<label class="line"></label>
+				<h2>艺术家推荐</h2>
+				<div class="recommend_arts">
+					<div class="col-md-4 Recommend" onmouseout="c1_f1()" onmouseover="c1_f2()">
+						<img src="../img/c1.jpg">
+						<div class="tab_desc" id="detail_c1">
+							<ul class="round-top">
+								<li><a href="#"><i> </i></a></li>
+								<li><a href="#"><i class="round"> </i></a></li>
+							</ul>
+							<div class="agency">
+								<div class="agency-left">
+									<h6 class="arts_name">艺术品名称及描述	</h6>
+									<p class="dollor item_price">竞拍价：￥170.00</p>
+									<p class="dollor item_price">一口价：￥250.00</p>
+									<ul class="social">
+										<li><a href="#"><i class="buy"> </i></a></li>
+										<li><a href="#"><i class="love"> </i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 Recommend" onmouseout="c2_f1()" onmouseover="c2_f2()">
+						<img src="../img/c2.jpg">
+						<div class="tab_desc" id="detail_c2">
+							<ul class="round-top">
+								<li><a href="#"><i> </i></a></li>
+								<li><a href="#"><i class="round"> </i></a></li>
+							</ul>
+							<div class="agency">
+								<div class="agency-left">
+									<h6 class="arts_name">艺术品名称及描述	</h6>
+									<p class="dollor item_price">竞拍价：￥170.00</p>
+									<p class="dollor item_price">一口价：￥250.00</p>
+									<ul class="social">
+										<li><a href="#"><i class="buy"> </i></a></li>
+										<li><a href="#"><i class="love"> </i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 Recommend" onmouseout="c3_f1()" onmouseover="c3_f2()">
+						<img src="../img/c3.jpg">
+						<div class="tab_desc" id="detail_c3">
+							<ul class="round-top">
+								<li><a href="#"><i> </i></a></li>
+								<li><a href="#"><i class="round"> </i></a></li>
+							</ul>
+							<div class="agency">
+								<div class="agency-left">
+									<h6 class="arts_name">艺术品名称及描述	</h6>
+									<p class="dollor item_price">竞拍价：￥170.00</p>
+									<p class="dollor item_price">一口价：￥250.00</p>
+									<ul class="social">
+										<li><a href="#"><i class="buy"> </i></a></li>
+										<li><a href="#"><i class="love"> </i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="bottom-grid">
+				<img class="img-responsive" src="../img/back1.jpg">
+				<div class="fit">
+					<h6>ART IS A FUNNY WORD</h6>
+					<p>Enjoy yourself in ArtCustomize</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="container footer-div">
+			<div class="col-md-3 footer-left">
+				<img src="../img/Title.png" class="footer_logo">
+			</div>
+			<div class="col-md-5 footer-middle">
+				<h3>关于我们</h3>
+				<span>电话：156-5000-9000</span>
+				<span class="email">邮箱：471979617@qq.com</span>
+				</br>
+				<span>地址：福建省厦门市思明区422号厦门大学</span>
+			</div>
+			<div class="col-md-4 footer-right">
+				<h3>友情链接</h3>
+				<a href="http://www.xmu.edu.cn/">厦门大学</a>
+				<a href="http://software.xmu.edu.cn/View/index.aspx">厦门大学软件学院</a>
+				<a href="http://library.xmu.edu.cn/portal/">厦门大学图书馆</a></br>
+				<a href="http://www.guohecapital.com/">上海国和投资</a>	
+				<a href="http://www.alibabagroup.com/cn/global/home">阿里巴巴集团</a>							
+				<a href="https://www.alitrip.com/?spm=a260k.635.1998396936.35.fAp8L5">阿里旅行</a>
+				<a href="https://www.taobao.com/">淘宝网</a>
+			</div>
+			<div class="col-md-12">
+				<p class="footer-class">Copyright &copy; 2015.Company name All rights reserved.</p>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>
