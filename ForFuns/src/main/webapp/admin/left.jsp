@@ -49,7 +49,8 @@
                 </li>
                 <li class="current"><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />客户管理</a>
                     <ul class="subul">
-                         <li class="current"><a target="rightFrame" href="./ManageCustomer.jsp">客户管理</a></li>
+                         <li ><a target="rightFrame" href="./ManageCustomer.jsp">客户管理</a></li>
+                         <li ><a target="rightFrame" href="./ManageArtist.jsp">艺术家管理</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />资讯发布</a>

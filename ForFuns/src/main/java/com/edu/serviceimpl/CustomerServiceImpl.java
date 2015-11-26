@@ -40,7 +40,6 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerBean> implement
 	public void save(CustomerBean customer) 
 	{
 		customerDao.addEntity(customer);
-
 	}
 
 	/*@Override

@@ -14,7 +14,7 @@ public class CustomerDaoImpl extends BaseDaoImpl<CustomerBean> implements
 		ICustomerDao
 {
 	@Override
-	public boolean isExist(CustomerBean customer) 
+	public boolean isExist(CustomerBean customer)
 	{
 		 String hql = "from CustomerBean where username=? and password=?";
 		 Query query = getSession().createQuery(hql);
