@@ -96,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   },'-',{
 				   text: "查看",
 				   iconCls: "icon-edit",
-				   handler:_search,
+				   handler:_watch,
 			   },'-',{
 				   text: "搜索",
 				   iconCls: "icon-search",
@@ -153,6 +153,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$('#grid').datagrid('beginEdit',index);
 			$('#grid').datagrid('checkRow',index);
 		}
+	};
+	//------------------------------查看数据-----------------------------
+	function _watch(){
+		var row = $('#grid').datagrid('getSelected');
+		if(row){
+			var id = row.id;
+			var temp = "<%=basePath%>font/news.jsp?newsid="+id;
+			window.open(temp);
+		}else{
+			$.messager.alert('警告','您没有选择','error');
+		};
 	};
 	//------------------------------------编辑行数据-----------------------------------
 	function _editRow(){

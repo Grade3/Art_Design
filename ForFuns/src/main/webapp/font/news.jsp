@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <a href="javascript:;" class="lanrenzhijia_top"></a>
 <script src="<%=basePath%>js/lanrenzhijia.js"></script>
+<script type="text/javascript" src="<%=path%>/js/easyUI/jquery-1.4.4.min.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -29,6 +30,46 @@ $(function(){
 	$(".lanrenzhijia_top").click(function(){
 		$("html,body").animate({scrollTop:0},500);
 	});
+});
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}; 
+//更改datebox的日期格式
+function myformatter(value) {
+	//return new Date(parseInt(value)).toLocaleString().replace(/年|月/g, "-")
+	//		.replace(/日/g, " ");
+	var myDate = new Date(parseInt(value));
+	var year = myDate.getFullYear();
+	var month = myDate.getMonth() + 1;
+	var day = myDate.getDate();
+	return year + '-' + month + '-' + day;
+}
+function GetNewsDetail(newsid){
+	$.ajax({
+		type:'post',
+		url:'<%=basePath%>/news.do?method=getnewsbyid',
+		data:{newsid:newsid},
+		success:function(json){
+			var news = json.news;
+			var content = news.content;
+			var title = news.title;
+			var time = news.timestart;
+			time = myformatter(time);
+			var author = news.author;
+			$('#news_content').html(content);
+			$('#news_title').html(title);
+			$('#news_time').html("发布时间："+time);
+			$('#news_author').html("发布人："+author);
+		},error:function(){
+			
+		}
+	});
+}
+$(document).ready(function(){
+	var newsid = getUrlParam("newsid");
+	GetNewsDetail(newsid);
 });
 </script>
 
@@ -74,13 +115,13 @@ $(function(){
 
 	<div class="content">
 		<div class="container">
-			<div class="news_title">
-				<p>资讯标题</p>
+			<div class="news_title" >
+				<p id="news_title">资讯标题</p>
 			</div>
 			<div class="news_author">
-				<span>发布时间：2015/11/25 &nbsp;&nbsp; 8：30</span><span>发布人：孔日天</span>
+				<span id="news_time">发布时间：2015/11/25 &nbsp;&nbsp; 8：30</span><span id="news_author">发布人：孔日天</span>
 			</div>
-			<div class="news_content">
+			<div class="news_content" id="news_content">
 				<p>资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容。</p>
 			</div>
 		</div>

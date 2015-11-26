@@ -112,12 +112,17 @@ function GetNewsById(newsid){
 			var news = json.news;
 			var ishot = news.ishot;
 			var title = news.title;
-			var author = news.title;
+			var author = news.author;
 			var summary = news.summary;
 			var money = news.money;
 			var timestart = news.timestart;
 			var timeout = news.timeout;
 			var content = news.content;
+			if(ishot ==1 ){
+				$('#ishot').find("option").eq(0).attr("selected",true); 
+			}else{
+				$('#ishot').find("option").eq(1).attr("selected",true); 
+			}
 			$('#title').val(title);
 			$('#author').val(author);
 			$('#summary').val(summary);
@@ -151,7 +156,7 @@ $(document).ready(function(){
 			<label>是否为首页资讯</label> 
 			<select name="ishot" id="ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
 					<option value="1">是</option>
-					<option selected="selected" value="0">否</option>
+					<option value="0">否</option>
 			</select>
 		</fieldset>
 		<fieldset class="simpborder" style="width: 48%; float: left; ">
