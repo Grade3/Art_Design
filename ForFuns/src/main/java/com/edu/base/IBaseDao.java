@@ -137,6 +137,15 @@ public interface IBaseDao<T> {
 	@SuppressWarnings("rawtypes")
 	public List<T> getPageBeanFilter(Class clz,int page,int pageSize,String selectname,String value);
 
+	/**
+	 * 过滤分页对应的总数
+	 * @param claz
+	 * @param pagesize
+	 * @param page
+	 * @return
+	 */
+	public int getPageBeanFilterTotal(Class clz, int page, int pageSize,
+			String selectname, String value);
 
 	/**
 	 * 通过id或者其他前置条件获取分页过滤
@@ -161,4 +170,6 @@ public interface IBaseDao<T> {
 	 * @throws Exception 
 	 */
 	public T GetBeanByCondition(Class clz,String conditionName,String conditionValue,Map<String, String> param) throws Exception;
+
+
 }

@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//初始化数据函数
 	function getData(queryParams){
 		$('#grid').datagrid({
-			url: '<%=basePath%>/news.do?method=getpagenews',
+			url: '<%=basePath%>/news.do?method=getpagenewsbyuserid',
 			queryParams: queryParams,
 			remoteSort:false,
 			singleSelect:true,
@@ -60,6 +60,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				{field:'imgurl',title:'封面图片',sortable:true,width:120,sortable:true,
 					formatter:function(value,row,index){return "<img style='width:120px;height:70px;' src='"+row.imgurl+"' />";}
 				},
+				{field:'isonline',title:'是否上线',sortable:true,width:120,sortable:true,
+					formatter:function(value,row,index){
+						if (value == 0 ){
+							return '下线';
+						} else if(value ==1 ){
+							return '上线';
+						}
+					}
+				},
 				{field:'situation',title:'审核状态',sortable:true,width:120,sortable:true,
 					formatter:function(value,row,index){
 						if (value == 0 ){
@@ -84,6 +93,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   text: "删除",
 				   iconCls: "icon-remove",
 				   handler: _removeRow,
+			   },'-',{
+				   text: "查看",
+				   iconCls: "icon-edit",
+				   handler:_watch,
 			   },'-',{
 				   text: "搜索",
 				   iconCls: "icon-search",
@@ -141,12 +154,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$('#grid').datagrid('checkRow',index);
 		}
 	};
+	//------------------------------查看数据-----------------------------
+	function _watch(){
+		var row = $('#grid').datagrid('getSelected');
+		if(row){
+			var id = row.id;
+			var temp = "<%=basePath%>font/news.jsp?newsid="+id;
+			window.open(temp);
+		}else{
+			$.messager.alert('警告','您没有选择','error');
+		};
+	};
 	//------------------------------------编辑行数据-----------------------------------
 	function _editRow(){
 		var row = $('#grid').datagrid('getSelected');
 		if(row){
 			var id = row.id;
-			location.href="AlertNews.jsp?newsid="+id;
+			var situation = row.situation;
+			if(situation==1){
+				$.messager.alert('警告','该资讯已通过，无法编辑','error');
+			}else
+				location.href="AlertNews.jsp?newsid="+id;
 		}else{
 			$.messager.alert('警告','您没有选择','error');
 		};

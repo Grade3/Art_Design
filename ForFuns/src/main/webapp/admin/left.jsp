@@ -47,13 +47,13 @@
                          <li ><a target="rightFrame" href="./ManagePower.jsp">权限管理</a></li>
                     </ul>
                 </li>
-                <li class="current"><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />客户管理</a>
+                <li ><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />客户管理</a>
                     <ul class="subul">
                          <li ><a target="rightFrame" href="./ManageCustomer.jsp">客户管理</a></li>
                          <li ><a target="rightFrame" href="./ManageArtist.jsp">艺术家管理</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />资讯发布</a>
+                <li><a href="#"><img src="<%=basePath%>admin/img/icons/menu/comment.png" alt="" />资讯发布</a>
                     <ul class="subul">
                          <li ><a target="rightFrame" href="./AddNews.jsp">发布资讯</a></li>
                          <li ><a target="rightFrame" href="./WatchNews.jsp">查看资讯</a></li>

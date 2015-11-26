@@ -93,7 +93,7 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 	@Override
 	public int GetPageBeanFilterTotal(Class clz, int page, int pageSize,
 			String selectname, String value) {
-		return baseDao.getPageBeanFilter(clz, page, pageSize, selectname, value).size();
+		return baseDao.getPageBeanFilterTotal(clz, page, pageSize, selectname, value);
 	}
 
 	@Override
