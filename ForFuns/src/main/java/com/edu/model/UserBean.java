@@ -4,7 +4,11 @@
 package com.edu.model;
 
 import java.beans.Transient;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.management.relation.Role;
@@ -109,6 +113,21 @@ public class UserBean {
 		this.password = password;
 	}
 
-	
+	@Transient
+	public List<FunctionBean> GetPowers(){
+		List<FunctionBean> list = new ArrayList<FunctionBean>();
+		for(RoleBean roleBean:this.getRoleBeans()){
+			for(FunctionBean functionBean : roleBean.getFunctionBeans()){
+				list.add(functionBean);
+			}
+		}
+		Collections.sort(list,new Comparator<FunctionBean>() {
+			@Override
+			public int compare(FunctionBean o1, FunctionBean o2) {
+				return o1.getId().compareTo(o2.getId());
+			}
+		});
+		return list;
+	}
 	
 }

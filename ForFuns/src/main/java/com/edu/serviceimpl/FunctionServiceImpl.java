@@ -23,8 +23,14 @@ public class FunctionServiceImpl extends BaseServiceImpl<FunctionBean> implement
 		return functionDao.getAllEntity(FunctionBean.class);
 	}
 
-	/*@Override
-	public List<FunctionBean> GetPageFunction(int page, int pageSize) {
-		return functionDao.getPageEntity(FunctionBean.class,page, pageSize);
-	}*/
+	@Override
+	public List<FunctionBean> GetAllTopMenu() {
+		return functionDao.GetAllTopMenu();
+	}
+
+	@Override
+	public List<FunctionBean> GetAllSecondMenu() {
+		return functionDao.GetAllSecondMenu();
+	}
+
 }

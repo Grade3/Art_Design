@@ -218,7 +218,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        	url = '<%=basePath%>/artist.do?method=updateArtist';   
 		        }  
 		        
-		        //rowstr = encodeURI(rowstr);
+		        rowstr = encodeURI(rowstr);
 		       
 		        
 		        $.ajax({

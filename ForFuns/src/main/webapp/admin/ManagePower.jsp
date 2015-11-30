@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 		
 		$.ajax({
-			url:'<%=basePath%>/function.do?method=getfunction',
+			url:'<%=basePath%>/function.do?method=GetAllSecondMenu',
 			type:'POST',
 			data:{},
 			success:function(data){

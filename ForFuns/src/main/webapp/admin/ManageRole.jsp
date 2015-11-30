@@ -200,7 +200,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        	url = '<%=basePath%>/role.do?method=updateRole';   
 		        }  
 		        
-		        //rowstr = encodeURI(rowstr);
+		        rowstr = encodeURI(rowstr);
 		       
 		        
 		        $.ajax({

@@ -12,6 +12,8 @@
         <title>Your Admin Panel</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
+        <link rel="stylesheet" type="text/css" href="<%=path%>/css/easyUI/themes/bootstrap/easyui.css">
+		<link rel="stylesheet" type="text/css" href="<%=path%>/css/easyUI/themes/icon.css">
         
         <!-- jQuery AND jQueryUI -->
         <script type="text/javascript" src="<%=basePath%>admin/js/libs/jquery/1.6/jquery.min.js"></script>
@@ -21,16 +23,72 @@
         <link type="text/css" rel="stylesheet" href="min/b=CoreAdmin&f=css/reset.css,css/style.css,css/jqueryui/jqueryui.css,js/jwysiwyg/jquery.wysiwyg.old-school.css,js/zoombox/zoombox.css" />
         <script type="text/javascript" src="min/b=CoreAdmin/js&f=cookie/jquery.cookie.js,jwysiwyg/jquery.wysiwyg.js,tooltipsy.min.js,iphone-style-checkboxes.js,excanvas.js,zoombox/zoombox.js,visualize.jQuery.js,jquery.uniform.min.js,main.js"></script>
         -->
-        <link rel="stylesheet" href="<%=basePath%>admin/css/min.css" />
-        <script type="text/javascript" src="<%=basePath%>admin/js/min.js"></script>
         <script type="text/javascript">
+	        function getCookie(objName){//获取指定名称的cookie的值 
+	        	var arrStr = document.cookie.split("; "); 
+	        	for(var i = 0;i < arrStr.length;i ++){ 
+	        		var temp = arrStr[i].split("="); 
+	        		if(temp[0] == objName) return unescape(temp[1]); 
+	        	} 
+	        };
+	        function GetTopMenu(){
+	        	$.ajax({
+	        		type:'post',
+	        		url:'<%=basePath%>function.do?method=GetAllTopMenu',
+	        		async:false,
+	        		data:{},
+	        		success:function(json){
+	        			var topmenu = "";
+	        			for(var i=0;i<json.length;i++){
+	        				if(json[i].istopmenu==1){
+	        					topmenu += "<li  id='topmenu_"+json[i].id+"' ><a  href='#'>"+json[i].functionname+"</a><li/>";
+	        				}
+	        			};
+	        			$('#sidebarul').html(topmenu);
+	        		},error:function(){
+	        			$.messager.alert('警告','连接服务器失败','error');
+	        		},
+	        	});
+	        };
+	        function GetUserPower(username){
+	        	$.ajax({
+	        		type:'post',
+	        		url:'<%=basePath%>user.do?method=getuserpower',
+	        		async:false,
+	        		data:{username:username},
+	        		success:function(json){
+	        			json = json.power;
+	        			var arraytemp = new Array();
+	        			for(var i=0;i<json.length;i++){
+	        				var temp  = json[i].topmenu;
+	        				var id = "#topmenu_"+temp;
+	        				if(arraytemp[temp]==undefined){
+	        					$(id).append("<ul id=topmenuul_"+temp+" class='subul'></ul>");
+	        					arraytemp[temp]=1;
+	        				}
+	        				id = "#topmenuul_"+temp;
+	        				$(id).append("<li ><a target='rightFrame' href="+json[i].functionlink+">"+json[i].functionname+"</a></li>");
+	        			};
+	        		},error:function(){
+	        			$.messager.alert('警告','连接服务器失败','error');
+	        		},
+	        	});
+	        }
         	$(document).ready(function(){
+        		  var username = getCookie("token");
+        		  var index = username.indexOf("&");
+        		  username = username.substring(0,index);
+        		  //GetTopMenu();
+        		  //GetUserPower(username);
         		  $('.subul').find('li').find('a').click(function(){
         				$(this).parent().siblings().removeClass('current');
         				$(this).parent().addClass('current');
-        			});
+        		  });
         	});
+        	
         </script>
+        <link rel="stylesheet" href="<%=basePath%>admin/css/min.css" />
+        <script type="text/javascript" src="<%=basePath%>admin/js/min.js"></script>
     </head>
     <body>
         
@@ -38,12 +96,13 @@
 		<link rel="stylesheet" href="<%=basePath%>admin/content/settings/style.css">
 
         <div id="sidebar">
-            <ul>
+            <ul id="sidebarul">
                 <li class="current"><a href="#"><img src="<%=basePath%>admin/img/icons/menu/inbox.png" alt="" />系统管理</a>
                     <ul class="subul">
                          <li class="current"><a target="rightFrame" href="./ManageUser.jsp">用户管理</a></li>
                          <li ><a target="rightFrame" href="./ManageRole.jsp">角色管理</a></li>
                          <li ><a target="rightFrame" href="./ManageUserRole.jsp">用户角色管理</a></li>
+                         <li ><a target="rightFrame" href="./ManageFunction.jsp">菜单管理</a></li>
                          <li ><a target="rightFrame" href="./ManagePower.jsp">权限管理</a></li>
                     </ul>
                 </li>

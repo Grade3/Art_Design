@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.edu.model.FunctionBean;
 import com.edu.model.RoleBean;
 import com.edu.model.UserBean;
 import com.edu.service.IUserService;
@@ -145,6 +146,11 @@ public class UserController {
 	@ResponseBody
 	public int JsonAddUser(@RequestParam(value="data") String data){
 		try {
+			data = URLDecoder.decode(data,"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		try {
 			//data = URLDecoder.decode(data, "utf-8");
 			data = data.substring(1,data.length()-1);
 			System.out.println(data);
@@ -169,6 +175,11 @@ public class UserController {
 	@RequestMapping(params="method=updateUser")
 	@ResponseBody
 	public String JsonUpdate(@RequestParam(value="data") String data){
+		try {
+			data = URLDecoder.decode(data,"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		data = data.substring(1,data.length()-1);
 		System.out.println(data);
 		JSONObject jsonObject = new JSONObject(data);
@@ -214,6 +225,21 @@ public class UserController {
 		List<UserBean> list = userService.GetAllBean(UserBean.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("users", list);
+		return map;
+	}
+	
+	/**
+	 * 通过username获取对应的权限
+	 * @param username
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=getuserpower")
+	public Map<String,Object> GetUserPower(@RequestParam(value="username")String username){
+		UserBean userBean = userService.GetBeanByCondition(UserBean.class, UserTable.USERNAME, username, null);
+		List<FunctionBean> list = userBean.GetPowers();
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("power", list);
 		return map;
 	}
 }

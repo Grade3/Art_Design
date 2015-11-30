@@ -8,5 +8,16 @@ import com.edu.model.FunctionBean;
 public interface IFunctionService extends IBaseService<FunctionBean>{
 	public List<FunctionBean> GetAllFunction();
 	
-	//public List<FunctionBean> GetPageFunction(int page,int pageSize);
+	
+	/**
+	 * 获取所有的顶部菜单
+	 * @return
+	 */
+	public List<FunctionBean> GetAllTopMenu();
+	
+	/**
+	 * 获取所有的非顶部菜单
+	 * @return
+	 */
+	public List<FunctionBean> GetAllSecondMenu();
 }

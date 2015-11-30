@@ -9,8 +9,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <title>查看列表</title>
-<link rel="stylesheet" type="text/css"
-	href="<%=path%>/css/easyUI/themes/gray/easyui.css">
+<%-- <link rel="stylesheet" type="text/css"
+	href="<%=path%>/css/easyUI/themes/gray/easyui.css"> --%>
+<link rel="stylesheet" type="text/css" href="<%=path%>/css/easyUI/themes/bootstrap/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=path%>/css/easyUI/themes/icon.css">
 <script type="text/javascript" src="<%=path%>/js/easyUI/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="<%=path%>/js/easyUI/jquery.easyui.min.js"></script>
@@ -21,6 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <script>
+	var functions ;
+	var FunChoic = new Array();
+	var TFChoic =[{"value": "0", "text": "否"},{"value": "1", "text": "是"}];
 	//获取指定名称的cookie的值 
 	function getCookie(objName){
 		var arrStr = document.cookie.split("; "); 
@@ -29,17 +33,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(temp[0] == objName) return unescape(temp[1]); 
 		} 
 	};
-	
+	function GetAllFunction(){
+		$.ajax({
+			type:'post',
+			async: false,
+			url:'<%=basePath%>/function.do?method=GetAllTopMenu',
+			data:{},
+			success:function(json){
+				functions = json;
+				FunChoic ="[";
+				if(json.length>0){
+					FunChoic += "{'value': '0', 'text':'无'},";
+					for(var i=0;i<json.length;i++){
+						if(i!=json.length-1)
+							FunChoic += "{'value': '"+json[i].id+"', 'text':'"+json[i].functionname+"'},";
+						else
+							FunChoic += "{'value': '"+json[i].id+"', 'text':'"+json[i].functionname+"'}";
+					}
+					FunChoic+="]";
+					FunChoic =  eval('('+FunChoic+')');
+				}
+			},error:function(){
+				$.messager.alert("警告", "连接服务器失败","error"); 
+			},
+		});
+	}
 	//初始化数据函数
 	function getData(queryParams){
 		
-		
-		
 		$('#grid').datagrid({
-			url: '<%=basePath%>function.do?method=getfunctionbypage',
-			//sortName: 'fx_serialnumber',
-			sortOrder: 'asc',
+			url: '<%=basePath%>/function.do?method=getfunctionbypage',
 			queryParams: queryParams,
+			remoteSort:false,
 			nowrap: true, //换行属性
 			striped: true, //奇数偶数行颜色区分
 			fitColumns:true,
@@ -52,9 +77,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    {field: 'ck', checkbox: true},          
 			]],
 			columns: [[
-				{field:'id',title:'ID',sortable:true,width:80},
-				{field:'functionname',title:'功能名称',sortable:true,width:120,
-					editor: { type: 'validatebox',  }
+				{field:'id',title:'ID',sortable:true,width:80,sortable:true,},
+				{field:'functionname',title:'功能名称',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
+				{field:'functionlink',title:'功能链接',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
+				{field:'istopmenu',title:'是否为顶部菜单',sortable:true,width:120,sortable:true,
+					formatter:function(value,row,index){
+						if(value==0){
+							return '否';
+						}else if(value==1){
+							return '是';
+						}
+					},editor:
+	                {
+	                	type : 'combobox',
+	                	options : {
+	                		valueField: "value", textField: "text"  ,
+	                        data:TFChoic,
+	                        editable:false ,
+	                    }
+	                }
+				},
+				{field:'topmenu',title:'顶部菜单名称',sortable:true,width:120,sortable:true,
+					formatter:function(value,row,index){
+						if(functions.length>0){
+							for(var i=0;i<functions.length;i++){
+								if(value==functions[i].id){
+									var temp = functions[i].functionname;
+									return temp;
+								}
+							}
+							return "无";
+						}
+					},editor:
+	                {
+	                	type : 'combobox',
+	                	options : {
+	                		valueField: "value", textField: "text"  ,
+	                        data:FunChoic,
+	                        editable:false ,
+	                    }
+	                }
 				},
 			]],
 			toolbar:[
@@ -63,10 +129,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   iconCls: "icon-add",
 				   handler: _insertRow,
 				
-			   },'-',{//修改数据s
-				   text:"编辑",
-				   iconCls: "icon-edit",
-				   handler: _editRow,
 			   },'-',{//删除数据
 				   text: "删除",
 				   iconCls: "icon-remove",
@@ -75,27 +137,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   text: "保存",
 				   iconCls: "icon-save",
 				   handler: _saveRows,
-			   },'-',{//------------------------下载模板
-				   text: "搜索",
-				   iconCls: "icon-back",
-				   handler:_search,
-				   //-------------------------------填写下载模板方法名字
-			   },'-',
-			 
+			   },
 			],
 			onAfterEdit: function(rowIndex,rowData,changes){
 				doedit = undefined;
 			},
-			onDblClickRow:function(rowIndex, rowData){
-				
-				if(doedit==undefined)
+			onDblClickRow:function(rowIndex, rowData){    
+				if(doedit==undefined)   //如果存在在编辑的行，就不可以再打开第二个行进行编辑
 				{					
-					serialnumber = rowData.fx_serialnumber;
+					$('#grid').datagrid('selectRow',rowIndex);
 		        	$('#grid').datagrid('beginEdit',rowIndex);
-		        	//这边的rowIndex和行号是不一样的值，0------开始的
 		        	doedit=rowIndex;
 				}
-				
+			},
+			onLoadSuccess:function(data){//数据刷新的时候，编辑的坐标设为空
+				doedit = undefined;
 			},
 			
 		});
@@ -114,19 +170,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#searchdialog').dialog('close');
 		
 	};
-	
-	
-
+	//-----------------------------还原搜索效果----------------------------
+	function _unsearch(){
+		queryParams={};
+		getData(queryParams);
+	};
 	//------------------------------------插入行数据-----------------------------------
 	function _insertRow(){
-		 $('#grid').datagrid('appendRow',{
-			row: {
-				
-			}
-		});
-		var index = $('#grid').datagrid('getRows').length-1;
-		$('#grid').datagrid('beginEdit',index);
-		$('#grid').datagrid('checkRow',index);
+		if(doedit==undefined){
+			 $('#grid').datagrid('appendRow',{
+				row: {
+					
+				}
+			});
+			var index = $('#grid').datagrid('getRows').length-1;
+			doedit = index;
+			$('#grid').datagrid('beginEdit',index);
+			$('#grid').datagrid('checkRow',index);
+		}
 	};
 	//------------------------------------编辑行数据-----------------------------------
 	function _editRow(){
@@ -134,16 +195,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(row){
 			if(doedit!=null){
 				$('#grid').datagrid('endEdit',doedit);
+				$('#grid').datagrid('selectRow',doedit);
 			}
 			if(doedit == undefined){
 				var rowIndex = $('#grid').datagrid('getRowIndex', row);
-				serialnumber = row.fx_serialnumber;
 				$('#grid').datagrid('beginEdit',rowIndex);
 				doedit = rowIndex;
-				
 				$('#grid').datagrid('unselectAll');
 			}
-			
 		};
 	};
 	//------------------------------------删除行数据-----------------------------------
@@ -156,12 +215,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$.messager.confirm("操作警告", "确定删除后将不可恢复！！", function(data){
 				if(data){
 					//原来代码开始的位置
-					var fx_id = [];
+					var ids = [];
 					for(var i = 0; i < rows.length; ++i)
 						{
-							fx_id[i] = rows[i].fx_id;
+							ids[i] = rows[i].id;
 						}						
-					$.post("<%=basePath%>deletefoursix", {seuids: fx_id.toString()},
+					$.post("<%=basePath%>function.do?method=deletefunction", {ids: ids.toString()},
 						function (data, textStatus){
 						
 						if(data == 'true'){
@@ -186,31 +245,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var updated = $('#grid').datagrid('getChanges', 'updated');
 				var deleted = $('#grid').datagrid('getChanges','deleted');
 				var rows = $('#grid').datagrid('getChanges');
+				if(rows[0].istopmenu==1&&rows[0].topmenu!=0){
+					$.messager.alert('提示','顶部菜单不允许拥有顶部菜单','error');
+					return ;
+				}
 				var rowstr = JSON.stringify(rows);
-				
-				if (inserted.length < 1 && updated.length < 1 && deleted.length<1) {  
-		            editRow = undefined;  
-		            $('#grid').datagrid('unselectAll');  
-		            return;  
-		        }  
-
 		        var url = '';  
 		        if (inserted.length > 0) {  
-		            url = '<%=basePath%>addfoursix';  
+		            url = '<%=basePath%>/function.do?method=addfunction';  
 		        }  
 		        if (updated.length > 0) {  
-		        	url = '<%=basePath%>updatefoursix';   
+		        	url = '<%=basePath%>/function.do?method=updatefunction';   
 		        }  
-		        
 		        rowstr = encodeURI(rowstr);
-		        if(!collegeflag){
-		        	college = encodeURI(college);
-					collegeflag=true;	        	
-		        }
+		       
 		        
 		        $.ajax({
+		        	type:'post',
 		        	url: url,
-		        	data: {rowdata:rowstr, serialnumber:serialnumber,fx_college:college},
+		        	data: {data:rowstr},
 		        	dataType: 'json',
 		        	success : function(r){
 		        		if(r==1){
@@ -226,13 +279,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        			doedit = undefined;
 		        			$('#grid').datagrid('reload');
 		        		}else{
-		        			$('#grid').datagrid('beginEdit',doedit);
+		        			/* $('#grid').datagrid('beginEdit',doedit);
 		        			if(updated.length>0){
 		        				$.messager.alert('错误', "修改数据失败", 'error');
 		        			}
 		        			if(inserted.length>0){
 		        				$.messager.alert('错误', "添加数据失败", 'error');
-		        			}
+		        			} */
+		        			$('#grid').datagrid('reload');
+		        			$.messager.alert('错误', "操作失败", 'error');
 		        		}
 		        		$('#grid').datagrid('unselectAll');
 		        	}
@@ -246,22 +301,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		});
 	};
-	
-	
-	//导入
-	function _importdata(){
-		$("#searchDialog").show();
-		$('#ssearchDialog').show();
-		if(!collegeflag){
-			$("#ssearchDialog").attr("action","importfoursix?tableid="+tableid+"&college="+encodeURI(encodeURI(college)));
-	    }
-		else{
-			$("#ssearchDialog").attr("action","importfoursix?tableid="+tableid+"&college="+encodeURI(college));
-		}
-		$("#ttableid").val(tableid);
-	}
-
-	 //搜索按钮
+	 //--------------------------搜索按钮-------------------------
 	function _search(){
 		$('#searchdialog').dialog('open');
 	}
@@ -283,21 +323,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		else return s;
 	}
 	
-	//搜索
-	function doSearch(value,name){
-		alert('You input: ' + value+'('+name+')');
-	}
-	//主要部分！！！
+	//--------------------------------------主体部分！！！-----------------------------
     var doedit = undefined;//用来记录当前编辑的行，如果没有编辑的行则置为undefined
-    var serialnumber =0;
     $(function(){
 		//获取数据的查询参数----过滤数据
+		GetAllFunction();
 		var queryParams;
 		queryParams = {};
 		getData(queryParams);
 	});
    	
-    //为下拉框赋值
+    //--------------------------------为下拉框赋值----------------------------------
     $.fn.datagrid.defaults.view.onAfterRender=function(target){
     	 var columns = $(target).datagrid('options').columns[0];
     	 var str="";
@@ -306,6 +342,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	 }
     	 $('#SelectName').html(str);
     };
+    
+    $(document).ready(function(){
+    	
+        //--------------------------------搜索-----------------------------------------
+        $('#SelectBtn').click(function(){
+        	var selectname=  $('#SelectName').val();
+    		var value = $('#SearchText').val();
+    		queryParams = {selectname:selectname,value:value};
+    		getData(queryParams);
+    	});
+      	
+    });
 </script>
 
 
@@ -313,13 +361,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body bgcolor="#DDF3FF" class = "h2">
 	<table id="grid"></table>
+	
 	<div id="searchdialog" class="easyui-dialog" title="搜索" style="width:400px;height:200px;"
     data-options="iconCls:'icon-save',resizable:true,modal:true">
     	<div id="totalplane" style="margin-top: 55px;padding-left: 60px;">
 	  		<select id="SelectName" class="<a href="http://wuzhuti.cn/tag/easyui/" title="EasyUI">EasyUI</a>-combobox" name="dept" style="width:200px;">  
 			</select>  
-	  		<input class="easyui-textbox" style="width:200px;"><br/>
-	  		<a href="#" id="SelectBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px;height:32px;margin-top: 10px;margin-left: 65px">确定</a>
+	  		<input class="easyui-textbox" style="width:200px;" id="SearchText"><br/>
+	  		<a href="javascript:void(0)" id="SelectBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px;height:32px;margin-top: 10px;margin-left: 65px">确定</a>
   		</div>
 	</div>
 	

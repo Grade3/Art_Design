@@ -1,5 +1,7 @@
 package com.edu.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +94,7 @@ public class RoleController {
 	@ResponseBody
 	public int JsonAddUser(@RequestParam(value="data") String data){
 		try {
-			//data = URLDecoder.decode(data, "utf-8");
+			data = URLDecoder.decode(data, "utf-8");
 			data = data.substring(1,data.length()-1);
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
@@ -116,6 +118,11 @@ public class RoleController {
 	@RequestMapping(params="method=updateRole")
 	@ResponseBody
 	public String JsonUpdate(@RequestParam(value="data") String data){
+		try {
+			data = URLDecoder.decode(data,"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		data = data.substring(1,data.length()-1);
 		System.out.println(data);
 		JSONObject jsonObject = new JSONObject(data);

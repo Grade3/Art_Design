@@ -203,7 +203,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        	url = '<%=basePath%>/user.do?method=updateUser';   
 		        }  
 		        
-		        //rowstr = encodeURI(rowstr);
+		        rowstr = encodeURI(rowstr);
 		       
 		        
 		        $.ajax({
