@@ -123,6 +123,11 @@
                          <li ><a target="rightFrame" href="./ManageNews.jsp">审核资讯</a></li>
                     </ul>
                 </li>
+                <li><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />广告管理</a>
+                    <ul class="subul">
+                         <li ><a target="rightFrame" href="./ManageAdvert.jsp">审核广告</a></li>
+                    </ul>
+                </li>
                 <li ><a href="#"><img src="<%=basePath%>admin/img/icons/menu/brush.png" alt="" /> Elements</a>
                     <ul class="subul">
                          <li class="current"><a href="dashboard.html?p=index">Dashboard</a></li>

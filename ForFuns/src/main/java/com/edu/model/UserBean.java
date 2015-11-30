@@ -36,7 +36,18 @@ public class UserBean {
 	private String password;
 	private Set<RoleBean> roleBeans = new HashSet<RoleBean>();
 	private Set<NewsBean> newsBeans = new HashSet<NewsBean>();
+	private Set<AdvertBean> advertBeans = new HashSet<AdvertBean>();
 	
+	@Transient
+	@OneToMany(mappedBy="userBean",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	public Set<AdvertBean> getAdvertBeans() {
+		return advertBeans;
+	}
+
+	public void setAdvertBeans(Set<AdvertBean> advertBeans) {
+		this.advertBeans = advertBeans;
+	}
+
 	@Transient
 	@OneToMany(mappedBy="userBean",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	public Set<NewsBean> getNewsBeans() {

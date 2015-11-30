@@ -40,10 +40,34 @@ KindEditor.ready(function(K) {
        ],
 	});
 });
+//获取指定名称的cookie的值 
+function getCookie(objName){
+	var arrStr = document.cookie.split("; "); 
+	for(var i = 0;i < arrStr.length;i ++){ 
+	var temp = arrStr[i].split("="); 
+	if(temp[0] == objName) return unescape(temp[1]); 
+	} 
+};
+
+function validate(number){ 
+	var reg = /^\d+$/;
+    if (!number.match(reg)){
+        return false;
+    }else{    
+    	return true;
+    }    
+} ;
 function submitForm(){
 	editor.sync();
 	var html = document.getElementById('editor_id').value;
-	
+	var token = getCookie("token");
+	var index = token.indexOf("&");
+	var userid = token.substring(0,index);
+	if(userid == null || userid ==""){
+		$.messager.alert('警告','请重新登录','error');
+		return ;
+	}
+	$('#userid').val(userid);
 	var title = $("#title").val();
 	if(title == null || title ==""){
 		$.messager.alert('警告','请填写标题','error');
@@ -65,7 +89,15 @@ function submitForm(){
 		return ;
 	}
 	
-	
+	var money = $('#money').val();
+	if(money == null || money == ""){
+		$.messager.alert('警告','费用请填写费用','error');
+		return ;
+	}
+	if(!validate(money)){
+		$.messager.alert('警告','费用请填写数字','error');
+		return ;
+	}
 	var timestart = $('#timestart').datebox('getValue');
 	var timeout = $('#timeout').datebox('getValue');
 	if(timestart>timeout){
@@ -109,6 +141,7 @@ function myformatter(value) {
 
 <body bgcolor="#DDF3FF" class = "h2" >
 	<form action="<%=basePath%>news.do?method=addnews" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;" enctype="multipart/form-data">
+		<input type="hidden" name="userid" id="userid">
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
 			<label>是否为首页资讯</label> 
 			<select name="ishot" id="ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
