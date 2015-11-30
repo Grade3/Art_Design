@@ -27,37 +27,60 @@ $(function(){
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#menu").click(function(){
+  $("#menu-xs").toggle(300);
+  });
+});
+</script>
+
 	<div class="header-top">
-		<div class="container">
-			<div class="statu_bar">
-				<ul class="support">
-					<li ><span ><i class="item_message"> </i>471979617@qq.com</span></li>
-					<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
-				</ul>
-				<ul class="support-right">
-					<li ><a href="Login.html" ><i class="item_login"> </i>登陆</a></li>
-					<li ><a href="Register.html" ><i class="item_register"> </i>注册账号</a></li>			
-				</ul>
-			</div>
-		</div>
-		<div class="header-bottom">
 			<div class="container">
-				<div class="logo">
-					<h1><a href="home.html">ArtCustomize</a></h1>
-				</div>
-				<div class="top-nav">
-					<ul class="megamenu skyblue">
-						<li><a href="home.html">首页</a></li>
-						<li><a href="home.html">成品</a></li>
-						<li><a href="home.html">DIY</a></li>
-						<li><a href="home.html">艺术家</a></li>
-						<li><a href="newslist.html">资讯中心</a></li>
-						<li><a href="home.html">联系我们</a></li>
+				<div class="statu_bar">
+					<ul class="support">
+						<li ><span ><i class="item_message"> </i>471979617@qq.com</span></li>
+						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
+					</ul>
+					<ul class="support-right">
+						<li ><a href="Login.html" ><i class="item_login"> </i>登陆</a></li>
+						<li ><a href="Register.html" ><i class="item_register"> </i>注册账号</a></li>			
 					</ul>
 				</div>
 			</div>
+			<div class="header-bottom">
+				<div class="container">
+					<div class="logo">
+						<h1><a href="home.html">ArtCustomize</a></h1>
+					</div>
+					<div class="top-nav-xs hidden-lg">
+						<div id="menu" onmouseover="fun1();" onmouseout="fun2();">
+							<p>菜  单</p>
+						</div>
+						<div id="menu-xs">
+							<ul>
+								<li><a href="home.html">首页</a></li>
+								<li><a href="home.html">成品</a></li>
+								<li><a href="home.html">DIY</a></li>
+								<li><a href="home.html">艺术家</a></li>
+								<li><a href="newslist.html">资讯中心</a></li>
+								<li><a href="home.html">联系我们</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="top-nav visible-lg">
+						<ul class="megamenu skyblue">
+							<li><a href="home.html">首页</a></li>
+							<li><a href="home.html">成品</a></li>
+							<li><a href="home.html">DIY</a></li>
+							<li><a href="home.html">艺术家</a></li>
+							<li><a href="newslist.html">资讯中心</a></li>
+							<li><a href="home.html">联系我们</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
 
 	<div class="container">
 		<h6 class="location"><a href="home.html">首页</a> <i> </i> <a href="newslist.html">资讯中心</a> <i> </i> 资讯详情</h6>

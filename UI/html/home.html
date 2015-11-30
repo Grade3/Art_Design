@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!--[if It IE 9]>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+
 	<title>Home</title>
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
 	<link href="../css/home.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
@@ -66,6 +72,7 @@
 	</script>
 <link href="../css/qiehuan.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="../js/zzsc.js"></script>
 
 
@@ -89,6 +96,70 @@ $(function(){
 });
 </script>
 
+
+
+<script type="text/javascript">
+
+window.onload=function()
+{
+	var height_img = window.innerWidth/5*2.4;
+	var width_img = window.innerWidth;
+	document.getElementById("slide-img-1").style.height = height_img + 'px';
+	document.getElementById("slide-img-1").style.width = width_img + 'px';
+	document.getElementById("slide-img-2").style.height = height_img + 'px';
+	document.getElementById("slide-img-2").style.width = width_img + 'px';
+	document.getElementById("slide-img-3").style.height = height_img + 'px';
+	document.getElementById("slide-img-3").style.width = width_img + 'px';
+	document.getElementById("slide-img-4").style.height = height_img + 'px';
+	document.getElementById("slide-img-4").style.width = width_img + 'px';
+	document.getElementById("slide-img-5").style.height = height_img + 'px';
+	document.getElementById("slide-img-5").style.width = width_img + 'px';
+	document.getElementById("slide-img-6").style.height = height_img + 'px';
+	document.getElementById("slide-img-6").style.width = width_img + 'px';
+	document.getElementById("slide-img-7").style.height = height_img + 'px';
+	document.getElementById("slide-img-7").style.width = width_img + 'px';
+
+
+	document.getElementById("wrap_id").style.height = height_img + 'px';
+	document.getElementById("slide-holder").style.height = height_img + 'px';
+	document.getElementById("slide-runner").style.height = height_img + 'px';
+}
+
+window.onresize = function() 
+{
+	var height_img = window.innerWidth/5*2.4;
+	var width_img = window.innerWidth;
+	document.getElementById("slide-img-1").style.height = height_img + 'px';
+	document.getElementById("slide-img-1").style.width = width_img + 'px';
+	document.getElementById("slide-img-2").style.height = height_img + 'px';
+	document.getElementById("slide-img-2").style.width = width_img + 'px';
+	document.getElementById("slide-img-3").style.height = height_img + 'px';
+	document.getElementById("slide-img-3").style.width = width_img + 'px';
+	document.getElementById("slide-img-4").style.height = height_img + 'px';
+	document.getElementById("slide-img-4").style.width = width_img + 'px';
+	document.getElementById("slide-img-5").style.height = height_img + 'px';
+	document.getElementById("slide-img-5").style.width = width_img + 'px';
+	document.getElementById("slide-img-6").style.height = height_img + 'px';
+	document.getElementById("slide-img-6").style.width = width_img + 'px';
+	document.getElementById("slide-img-7").style.height = height_img + 'px';
+	document.getElementById("slide-img-7").style.width = width_img + 'px';
+
+	document.getElementById("wrap_id").style.height = height_img + 'px';
+	document.getElementById("slide-holder").style.height = height_img + 'px';
+	document.getElementById("slide-runner").style.height = height_img + 'px';
+}
+
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#menu").click(function(){
+  $("#menu-xs").toggle(300);
+  });
+});
+</script>
+
 	<div class="header">
 		<div class="header-top">
 			<div class="container">
@@ -108,7 +179,22 @@ $(function(){
 					<div class="logo">
 						<h1><a href="home.html">ArtCustomize</a></h1>
 					</div>
-					<div class="top-nav">
+					<div class="top-nav-xs hidden-lg">
+						<div id="menu" onmouseover="fun1();" onmouseout="fun2();">
+							<p>菜  单</p>
+						</div>
+						<div id="menu-xs">
+							<ul>
+								<li><a href="home.html">首页</a></li>
+								<li><a href="home.html">成品</a></li>
+								<li><a href="home.html">DIY</a></li>
+								<li><a href="home.html">艺术家</a></li>
+								<li><a href="newslist.html">资讯中心</a></li>
+								<li><a href="home.html">联系我们</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="top-nav visible-lg">
 						<ul class="megamenu skyblue">
 							<li><a href="home.html">首页</a></li>
 							<li><a href="home.html">成品</a></li>
@@ -122,7 +208,7 @@ $(function(){
 			</div>
 		</div>
 		<div id="header">
-			<div class="wrap">
+			<div class="wrap" id="wrap_id">
 				<div id="slide-holder">
 					<div id="slide-runner">
 						<a href="#" target="_blank"><img id="slide-img-1" src="../img/bg_login.jpg" class="slide" alt="" /></a>
@@ -132,12 +218,13 @@ $(function(){
 						<a href="#" target="_blank"><img id="slide-img-5" src="../img/bg_login.jpg" class="slide" alt="" /></a>
 						<a href="#" target="_blank"><img id="slide-img-6" src="../img/bg_login.jpg" class="slide" alt="" /></a>
 						<a href="#" target="_blank"><img id="slide-img-7" src="../img/bg_login.jpg" class="slide" alt="" /></a> 
-						<div id="slide-controls">
-						 <p id="slide-client" class="text"><strong></strong><span></span></p>
+						
+					</div>
+					<div id="slide-controls">
+						<!--  <p id="slide-client" class="text"><strong></strong><span></span></p> -->
 						 <p id="slide-desc" class="text"></p>
 						 <p id="slide-nav"></p>
 						</div>
-					</div>
 			   </div>
 			   <script type="text/javascript">
 			    if(!window.slider) {
@@ -187,7 +274,7 @@ $(function(){
 	</div>
 	<div class="content">
 		<div class="container">
-			<div class="content-top">
+			<div class="content-top visible-lg">
 				<div class="col-md-9">
 					<div class="col-top">
 						<div class="col-md-6 black">
@@ -195,21 +282,21 @@ $(function(){
 								<div class="arts">
 									<h3>艺术品成品</br>专区 >></h3>
 								</div>
-								<img src="../img/arts_pic.png" alt="" ></a>
+								<img src="../img/arts_pic.png" alt="" style="display: none;"></a>
 							</a>
 						</div>
 						<div class="col-md-6 black-in">
 							<a href="DIY.html">
 								<div class="arts diy">
-									<h3>艺术品定制</br>专区 >></h3>
+									<h3 class="visible-md visible-lg">艺术品定制</br>专区 >></h3>
 								</div>
-								<img src="../img/diy_pic.png" alt="" ></a>
+								<img src="../img/diy_pic.png" alt="" style="display: none;"></a>
 							</a>
 						</div>						
 					</div>
 					<div>
 					<div class="col-top-bottom">
-						<h3 class="news">ArtCostomize艺术品咨询专区</h3>
+						<h3 class="news">ArtCostomize艺术品资讯专区</h3>
 						<a href="News.html" class="now-in">进 入</a>
 					</div>
 					</div>
@@ -218,9 +305,47 @@ $(function(){
 					<a href="Artist.html">
 						<img class="img-responsive" src="../img/artist.png" >
 						<div class="six">
-							<h4>在线艺术家</br>专区 >></h4>
+							<h4>平台艺术家</br>专区 >></h4>
 						</div>
 					</a>
+				</div>
+			</div>
+
+			<div class="content-top visible-md">
+				<div class="col-md-12 col-top-bottom1 arts1">
+					<h3 class="news1">艺术品成品专区</h3>
+					<a href="home.html" class="now-in1">进 入</a>
+				</div>
+				<div class="col-md-12 col-top-bottom1 diy1">
+					<h3 class="news1">艺术品定制专区</h3>
+					<a href="home.html" class="now-in1">进 入</a>
+				</div>
+				<div class="col-md-12 col-top-bottom1 artist1">
+					<h3 class="news1">平台艺术家专区</h3>
+					<a href="home.html" class="now-in1">进 入</a>
+				</div>
+				<div class="col-md-12 col-top-bottom1">
+					<h3 class="news1">艺术品资讯专区</h3>
+					<a href="News.html" class="now-in1">进 入</a>
+				</div>
+			</div>
+
+			<div class="content-top visible-sm visible-xs">
+				<div class="col-md-12 col-top-bottom1 arts1">
+					<h3 class="news2">艺术品成品专区</h3>
+					<a href="home.html" class="now-in2">进 入</a>
+				</div>
+				<div class="col-md-12 col-top-bottom1 diy1">
+					<h3 class="news2">艺术品定制专区</h3>
+					<a href="home.html" class="now-in2">进 入</a>
+				</div>
+				<div class="col-md-12 col-top-bottom1 artist1">
+					<h3 class="news2">平台艺术家专区</h3>
+					<a href="home.html" class="now-in2">进 入</a>
+				</div>
+				<div class="col-md-12 col-top-bottom1">
+					<h3 class="news2">艺术品资讯专区</h3>
+					<a href="News.html" class="now-in2">进 入</a>
 				</div>
 			</div>
 
