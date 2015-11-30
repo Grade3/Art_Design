@@ -12,7 +12,7 @@ import com.edu.dao.IArtistDao;
 import com.edu.model.CustomerBean;
 
 @Lazy(true)
-@Repository("customerDao")
+@Repository("artistDao")
 public class ArtistDaoImpl extends BaseDaoImpl<CustomerBean> implements
 		IArtistDao
 {
@@ -75,6 +75,4 @@ public class ArtistDaoImpl extends BaseDaoImpl<CustomerBean> implements
 		
 		return list;
 	}
-	
-	
 }

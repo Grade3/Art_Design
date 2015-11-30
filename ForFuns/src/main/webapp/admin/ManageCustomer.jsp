@@ -73,9 +73,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				{field:'avator',title:'头像地址',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
-				{field:'isartist',title:'是否艺术家',sortable:true,width:120,sortable:true,
-					editor: { type: 'validatebox',options: { required: true}  }
-				},
 			]],
 			toolbar:[
 			   {//添加数据

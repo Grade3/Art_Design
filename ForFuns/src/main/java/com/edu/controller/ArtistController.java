@@ -30,7 +30,7 @@ import com.edu.table.CustomerTable;
 import com.edu.util.MD5Util;
 
 /**
- * 客户管理controller
+ * 艺术家管理controller
  * 
  * @author kh
  * 

@@ -4,12 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Query;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
 
 import com.edu.base.BaseDaoImpl;
 import com.edu.dao.ICustomerDao;
 import com.edu.model.CustomerBean;
 import com.edu.model.UserBean;
 
+@Lazy(true)
+@Repository("customerDao")
 public class CustomerDaoImpl extends BaseDaoImpl<CustomerBean> implements
 		ICustomerDao
 {
