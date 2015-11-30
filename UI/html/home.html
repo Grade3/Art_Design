@@ -99,11 +99,15 @@ $(function(){
 
 
 <script type="text/javascript">
-
+function GetScreenWidth(){
+	var temp  = $('.header-top').width();
+	return temp;
+}
 window.onload=function()
 {
-	var height_img = window.innerWidth/5*2.4;
-	var width_img = window.innerWidth;
+	var height_img = GetScreenWidth()/5*2.4;
+	var width_img = GetScreenWidth();
+	alert(width_img);
 	document.getElementById("slide-img-1").style.height = height_img + 'px';
 	document.getElementById("slide-img-1").style.width = width_img + 'px';
 	document.getElementById("slide-img-2").style.height = height_img + 'px';
@@ -127,8 +131,8 @@ window.onload=function()
 
 window.onresize = function() 
 {
-	var height_img = window.innerWidth/5*2.4;
-	var width_img = window.innerWidth;
+	var height_img = GetScreenWidth()/5*2.4;
+	var width_img = GetScreenWidth();
 	document.getElementById("slide-img-1").style.height = height_img + 'px';
 	document.getElementById("slide-img-1").style.width = width_img + 'px';
 	document.getElementById("slide-img-2").style.height = height_img + 'px';
@@ -149,6 +153,29 @@ window.onresize = function()
 	document.getElementById("slide-runner").style.height = height_img + 'px';
 }
 
+</script>
+
+<script type="text/javascript">
+var windowwidth =  window.screen.width;
+$(document).ready(function(){
+	
+	$(window).resize(function() {
+		var tempwidth = window.screen.width;
+		var diff = tempwidth - windowwidth;
+		windowwidth = tempwidth;
+		$('#slide-runner').find('a').find('img').each(function(){
+			var left = $(this).css('left');
+			left = left.substring(0,left.length-2);
+			left = parseInt(left);
+			if(left==0){
+				
+			}else{
+				left  += diff;
+			}
+			$(this).css('left',left+"px");
+		})
+	});
+});
 </script>
 
 
