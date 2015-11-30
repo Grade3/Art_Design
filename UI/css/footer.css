@@ -237,6 +237,59 @@ ul.support-right li i.item_register
 	width: 50%;
 }
 
+.top-nav-xs
+{
+	float: right;
+	margin-top: 1em;
+	width: 30%;
+}
+
+#menu
+{
+	width: 100%;
+	padding: 1.2em 2em;
+	/*border: 2px solid #fff;*/
+	background-color: #f67280;
+	text-align: center;
+}
+
+#menu p
+{
+	color: #fff;
+	margin: 0px;
+	font-size: 1.8em;
+}
+
+#menu-xs
+{
+	text-align: center;
+	display: none;
+	padding-top: 1em;
+}
+
+#menu-xs ul
+{
+	list-style: none;
+	padding: 0px;
+}
+
+#menu-xs ul li
+{
+	padding: 0.5em 0;
+}
+
+#menu-xs ul li a
+{
+	color: #000;
+	font-size: 1.6em;
+	text-decoration: none;
+}
+
+#menu-xs ul li a:hover
+{
+	color: #f67280;
+}
+
 .header-bottom 
 {
 	padding: 0.5em 0 1.5em;

@@ -67,7 +67,7 @@ var slider={
   slider.num=d.length;
   var pos=Math.floor(Math.random()*1);//slider.num);
   for(var i=0;i<slider.num;i++){
-   $('#'+d[i].id).css({left:((i-pos)*window.screen.width)});
+   $('#'+d[i].id).css({left:((i-pos)*window.innerWidth)});
    $('#slide-nav').append('<a id="slide-link-'+i+'" href="#" onclick="slider.slide('+i+');return false;" onfocus="this.blur();">'+(i+1)+'</a>');
   }
 
@@ -94,7 +94,7 @@ var slider={
 
   var d=slider.data;
   for(var i=0;i<slider.num;i++)
-   $('#'+d[i].id).stop().animate({left:((i-pos)*window.screen.width)},1000,'swing');
+   $('#'+d[i].id).stop().animate({left:((i-pos)*window.innerWidth)},1000,'swing');
   
   slider.on(pos);
   slider.text(d[pos]);

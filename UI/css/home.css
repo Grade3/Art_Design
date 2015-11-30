@@ -10,7 +10,6 @@ body
 	/*background: url(../img/bg_login.jpg) no-repeat center;*/
 	width: 100%;
 	/*background-size: cover;*/
-	min-height: 750px;
 	display: block;
 }
 
@@ -160,6 +159,13 @@ ul.support-right li i.item_register
 	color: #f67280;
 }
 
+#menu-xs ul li a
+{
+	color: #fff;
+	font-size: 1.6em;
+	text-decoration: none;
+}
+
 .content-top 
 {
 	padding: 1.5em 0;
@@ -229,6 +235,28 @@ a.arts h3
 	box-shadow: 1px 1px 7px #696767;
 }
 
+.col-top-bottom1
+{
+	background: #696767;
+	padding: 4.5em;
+	text-align: center;
+	margin: 1em 0;
+	box-shadow: 1px 1px 7px #696767;
+}
+
+.arts1
+{
+	background: #231a1a;
+}
+.diy1
+{
+	background: #98725e;
+}
+.artist1
+{
+	background: #ac6e6b;
+}
+
 h3.news
 {
 	font-size: 3.2em;
@@ -236,6 +264,24 @@ h3.news
 	color: #fff;
 	float: left;
 	margin-top: -0.5em;
+}
+
+h3.news1
+{
+	font-size: 3.2em;
+	text-shadow: 1px 1px 9px #000;
+	color: #fff;
+	float: left;
+	margin-top: 0.3em;
+}
+
+h3.news2
+{
+	font-size: 3.2em;
+	text-shadow: 1px 1px 9px #000;
+	color: #fff;
+	float: left;
+	margin-top: -0.6em;
 }
 
 a.now-in
@@ -248,11 +294,47 @@ a.now-in
 	border: 2px solid #fff;
 	text-align: center;
 	text-decoration: none;
-	background: #696767;
 	margin-top: -1.1em;
 }
 
+a.now-in1
+{
+	padding: 0.5em 1.5em;
+	display: block;
+	font-size: 2em;
+	color: #FFF;
+	float: right;
+	border: 2px solid #fff;
+	text-align: center;
+	text-decoration: none;
+}
+
+a.now-in2
+{
+	padding: 0.5em 1.5em;
+	display: block;
+	font-size: 2em;
+	color: #FFF;
+	float: right;
+	border: 2px solid #fff;
+	text-align: center;
+	text-decoration: none;
+	margin-top: -1.2em;
+}
+
 a.now-in:hover
+{
+	background: #f67280;
+	border: 2px solid #f67280;
+}
+
+a.now-in1:hover
+{
+	background: #f67280;
+	border: 2px solid #f67280;
+}
+
+a.now-in2:hover
 {
 	background: #f67280;
 	border: 2px solid #f67280;
@@ -305,114 +387,464 @@ label.line
 	margin: 0 auto;
 }
 
-.recommend_arts
-{
-	padding: 0 2.3em;
+@media (max-width: 768px){
+
+	.recommend_arts
+	{
+		padding: 0 2.3em;
+	}
+
+	.Recommend
+	{
+		padding: 0px;
+		margin-bottom: 2em;
+	}
+
+	.Recommend img
+	{
+		width: 100%;
+	}
+
+	.tab_desc 
+	{
+		background: rgba(0, 0, 0, 0.18);
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	    padding: 23em 0;
+	    display: none;
+	}
+
+	ul.round-top 
+	{
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.round-top li
+	{
+		display: inline-block;
+	}
+
+	.round-top li i
+	{
+		background-image: url(../img/detail.png);
+		width: 50px;
+		height: 50px;
+		background-size: cover;
+		display: inline-block;
+		margin-right: 0.5em;
+	}
+
+	.round-top li i.round
+	{
+		background-image: url(../img/links.png);
+		margin-left: 0.5em;
+	}
+
+	.agency 
+	{
+		padding: 20em 0 0;
+	}
+
+	.agency-left
+	{
+		/*background: rgba(0, 0, 0, 0.15);*/
+		padding: 1em 3em;
+	}
+
+	h6.arts_name
+	{
+		color:#fff;
+		font-size: 2.5em;
+		font-weight: 600;
+		margin-top: 0.3em;
+		margin-bottom: 1em;
+	}
+
+	p.dollor
+	{
+		font-size: 1.6em;
+		color: #fff;
+		font-weight: 100;
+		margin-top: 0em;
+		margin-bottom: 0.2em;
+		font-weight: 400;
+	}
+
+	.social 
+	{
+		float: right;
+		margin-top: -4em;
+	}
+
+	.social li
+	{
+		display: inline-block;
+		margin-left: 0.6em;
+	}
+	.social li i.buy
+	{
+		background-image: url(../img/buy.png);
+		width: 40px;
+		height: 40px;
+		display: inline-block;
+	}
+	.social li i.love
+	{
+		background-image: url(../img/love.png);
+		width: 40px;
+		height: 40px;
+		display: inline-block;
+	}
+
 }
 
-.Recommend
-{
-	padding: 0px;
+@media (min-width: 768px){
+
+	.recommend_arts
+	{
+		padding: 0 2.3em;
+	}
+
+	.Recommend
+	{
+		padding: 0px;
+		margin-bottom: 2em;
+	}
+
+	.Recommend img
+	{
+		width: 100%;
+	}
+
+	.tab_desc 
+	{
+		background: rgba(0, 0, 0, 0.18);
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	    padding: 28em 0;
+	    display: none;
+	}
+
+	ul.round-top 
+	{
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.round-top li
+	{
+		display: inline-block;
+		margin: 0 0.5em;
+	}
+
+	.round-top li i
+	{
+		background-image: url(../img/detail.png);
+		background-size: cover;
+		width: 60px;
+		height: 60px;
+		display: inline-block;
+		margin-right: 0.5em;
+	}
+
+	.round-top li i.round
+	{
+		background-image: url(../img/links.png);
+		margin-left: 0.5em;
+	}
+
+	.agency 
+	{
+		padding: 40em 0 0;
+	}
+
+	.agency-left
+	{
+		/*background: rgba(0, 0, 0, 0.15);*/
+		padding: 1em 3em;
+	}
+
+	h6.arts_name
+	{
+		color:#fff;
+		font-size: 2.5em;
+		font-weight: 600;
+		margin-top: 0.3em;
+		margin-bottom: 1em;
+	}
+
+	p.dollor
+	{
+		font-size: 1.6em;
+		color: #fff;
+		font-weight: 100;
+		margin-top: 0em;
+		margin-bottom: 0.2em;
+		font-weight: 400;
+	}
+
+	.social 
+	{
+		float: right;
+		margin-top: -4em;
+	}
+
+	.social li
+	{
+		display: inline-block;
+		margin-left: 0.6em;
+	}
+	.social li i.buy
+	{
+		background-image: url(../img/buy.png);
+		width: 40px;
+		height: 40px;
+		display: inline-block;
+	}
+	.social li i.love
+	{
+		background-image: url(../img/love.png);
+		width: 40px;
+		height: 40px;
+		display: inline-block;
+	}
+
 }
 
-.Recommend img
-{
-	width: 100%;
+@media (min-width: 992px){
+	.recommend_arts
+	{
+		padding: 0 2.3em;
+	}
+
+	.Recommend
+	{
+		padding: 0px;
+	}
+
+	.Recommend img
+	{
+		width: 100%;
+	}
+
+	.tab_desc 
+	{
+		background: rgba(0, 0, 0, 0.18);
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	    padding: 10em 0;
+	    display: none;
+	}
+
+	ul.round-top 
+	{
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.round-top li
+	{
+		display: inline-block;
+	}
+
+	.round-top li i
+	{
+		background-image: url(../img/detail.png);
+		width: 50px;
+		height: 50px;
+		display: inline-block;
+		margin-right: 0.5em;
+	}
+
+	.round-top li i.round
+	{
+		background-image: url(../img/links.png);
+		margin-left: 0.5em;
+	}
+
+	.agency 
+	{
+		padding: 12em 0 0;
+	}
+
+	.agency-left
+	{
+		/*background: rgba(0, 0, 0, 0.15);*/
+		padding: 1em 3em;
+	}
+
+	h6.arts_name
+	{
+		color:#fff;
+		font-size: 2.5em;
+		font-weight: 600;
+		margin-top: 0.3em;
+		margin-bottom: 1em;
+	}
+
+	p.dollor
+	{
+		font-size: 1.6em;
+		color: #fff;
+		font-weight: 100;
+		margin-top: 0em;
+		margin-bottom: 0.2em;
+		font-weight: 400;
+	}
+
+	.social 
+	{
+		float: right;
+		margin-top: -3.3em;
+	}
+
+	.social li
+	{
+		display: inline-block;
+		margin-left: 0.6em;
+	}
+	.social li i.buy
+	{
+		background-image: url(../img/buy.png);
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+	}
+	.social li i.love
+	{
+		background-image: url(../img/love.png);
+		background-size: cover;
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+	}
+
 }
 
-.tab_desc 
-{
-	background: rgba(0, 0, 0, 0.18);
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: 100%;
-    padding: 18em 0;
-    display: none;
+@media (min-width: 1200px){
+
+	.recommend_arts
+	{
+		padding: 0 2.3em;
+	}
+
+	.Recommend
+	{
+		padding: 0px;
+	}
+
+	.Recommend img
+	{
+		width: 100%;
+	}
+
+	.tab_desc 
+	{
+		background: rgba(0, 0, 0, 0.18);
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	    padding: 18em 0;
+	    display: none;
+	}
+
+	ul.round-top 
+	{
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.round-top li
+	{
+		display: inline-block;
+	}
+
+	.round-top li i
+	{
+		background-image: url(../img/detail.png);
+		width: 50px;
+		height: 50px;
+		display: inline-block;
+		margin-right: 0.5em;
+	}
+
+	.round-top li i.round
+	{
+		background-image: url(../img/links.png);
+		margin-left: 0.5em;
+	}
+
+	.agency 
+	{
+		padding: 12em 0 0;
+	}
+
+	.agency-left
+	{
+		/*background: rgba(0, 0, 0, 0.15);*/
+		padding: 1em 3em;
+	}
+
+	h6.arts_name
+	{
+		color:#fff;
+		font-size: 2.5em;
+		font-weight: 600;
+		margin-top: 0.3em;
+		margin-bottom: 1em;
+	}
+
+	p.dollor
+	{
+		font-size: 1.6em;
+		color: #fff;
+		font-weight: 100;
+		margin-top: 0em;
+		margin-bottom: 0.2em;
+		font-weight: 400;
+	}
+
+	.social 
+	{
+		float: right;
+		margin-top: -4em;
+	}
+
+	.social li
+	{
+		display: inline-block;
+		margin-left: 0.6em;
+	}
+	.social li i.buy
+	{
+		background-image: url(../img/buy.png);
+		width: 40px;
+		height: 40px;
+		display: inline-block;
+	}
+	.social li i.love
+	{
+		background-image: url(../img/love.png);
+		width: 40px;
+		height: 40px;
+		display: inline-block;
+	}
+
 }
 
-ul.round-top 
-{
-	text-align: center;
-	margin: 0px;
-	padding: 0px;
-}
-
-.round-top li
-{
-	display: inline-block;
-}
-
-.round-top li i
-{
-	background-image: url(../img/detail.png);
-	width: 50px;
-	height: 50px;
-	display: inline-block;
-	margin-right: 0.5em;
-}
-
-.round-top li i.round
-{
-	background-image: url(../img/links.png);
-	margin-left: 0.5em;
-}
-
-.agency 
-{
-	padding: 12em 0 0;
-}
-
-.agency-left
-{
-	/*background: rgba(0, 0, 0, 0.15);*/
-	padding: 1em 3em;
-}
-
-h6.arts_name
-{
-	color:#fff;
-	font-size: 2.5em;
-	font-weight: 600;
-	margin-top: 0.3em;
-	margin-bottom: 1em;
-}
-
-p.dollor
-{
-	font-size: 1.6em;
-	color: #fff;
-	font-weight: 100;
-	margin-top: 0em;
-	margin-bottom: 0.2em;
-	font-weight: 400;
-}
-
-.social 
-{
-	float: right;
-	margin-top: -4em;
-}
-
-.social li
-{
-	display: inline-block;
-	margin-left: 0.6em;
-}
-.social li i.buy
-{
-	background-image: url(../img/buy.png);
-	width: 40px;
-	height: 40px;
-	display: inline-block;
-}
-.social li i.love
-{
-	background-image: url(../img/love.png);
-	width: 40px;
-	height: 40px;
-	display: inline-block;
-}
 
 .bottom-grid
 {
