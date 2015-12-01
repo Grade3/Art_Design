@@ -1,0 +1,189 @@
+body
+{	
+	font-family: "Microsoft YaHei";
+	font-size: 1.0em;
+	color: #000;
+}
+
+.header-top
+{
+	position: relative;
+}
+
+.content
+{
+	margin-bottom: 65px;
+}
+
+.footer
+{
+	border: 0px;
+}
+
+
+
+
+@media (max-width: 992px){
+
+.bg_pic
+{
+	height: 250px;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+#main_login
+{
+	padding: 0 15%;
+	min-height: 440px;
+	background-color: #f8f8f8;
+}
+
+.bg_pic img
+{
+	width: 100%;
+}
+
+.label_login
+{
+	font-size: 2em;
+	font-weight: normal;
+	margin-top: 1em;
+	padding: 0px;
+}
+
+#inputEmail
+{
+	height: 3em;
+	border: 1px solid #f67280;
+	background-color: #fffdf6;
+	border-radius: 5px;
+	font-size: 2em;
+	padding-left: 6%;
+	margin-bottom: 20px;
+}
+#inputPassword
+{
+	height: 3em;
+	border: 1px solid #f67280;
+	background-color: #fffdf6;
+	border-radius: 5px;
+	font-size: 2em;
+	padding-left: 6%;
+	margin-bottom: 20px;
+}
+
+#btn_login
+{
+	height: 65px;
+	background-color: #f67280;
+	border: 1px solid #f1daca;
+	border-radius: 5px;
+	font-size: 1.8em;
+	color: white;
+	padding: 0 2em;
+}
+
+}
+
+@media (min-width: 992px){
+.content
+{
+	min-height: 400px;
+}
+
+.bg_pic
+{
+	height: 400px;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+	
+#main_login
+{
+	padding: 1em 5em 1em;
+	min-height: 400px;
+	background-color: #f8f8f8;
+}
+
+.label_login
+{
+	font-size: 1.6em;
+	font-weight: normal;
+	margin-top: 0.8em;
+	padding: 0px;
+}
+
+#inputEmail
+{
+	height: 50px;
+	border: 1px solid #f67280;
+	background-color: #fffdf6;
+	border-radius: 5px;
+	font-size: 1.5em;
+	padding-left: 6%;
+	margin-bottom: 20px;
+}
+
+#inputPassword
+{
+	height: 50px;
+	border: 1px solid #f67280;
+	background-color: #fffdf6;
+	border-radius: 5px;
+	font-size: 1.5em;
+	padding-left: 6%;
+	margin-bottom: 20px;
+}
+
+#btn_login
+{
+	height: 55px;
+	background-color: #f67280;
+	border: 1px solid #f1daca;
+	border-radius: 5px;
+	font-size: 1.8em;
+	color: white;
+	padding: 0 2em;
+}
+
+}
+
+
+
+
+
+.input_div
+{
+	padding: 0px;
+}
+
+
+
+#bg_pic
+{
+	margin: 10px 0 10px;
+	width: 100%;
+}
+
+
+
+.label_link
+{
+	font-size: 1.5em;
+	margin-top: 1em;
+	padding: 0px;
+	display: inline-block;
+}
+
+.label_error
+{
+	font-size: 1.5em;
+	margin-top: 1em;
+	padding: 0px;
+	display: inline-block;
+	float: right;
+	color: #f67280;
+}

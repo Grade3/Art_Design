@@ -91,15 +91,15 @@ $(document).ready(function(){
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li ><a href="Login.html" ><i class="item_login"> </i>登陆</a></li>
-						<li ><a href="Register.html" ><i class="item_register"> </i>注册账号</a></li>			
+						<li ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
+						<li ><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>			
 					</ul>
 				</div>
 			</div>
 			<div class="header-bottom">
 				<div class="container">
 					<div class="logo">
-						<h1><a href="home.html">ArtCustomize</a></h1>
+						<h1><a href="home.jsp">ArtCustomize</a></h1>
 					</div>
 					<div class="top-nav-xs hidden-lg">
 						<div id="menu" onmouseover="fun1();" onmouseout="fun2();">
@@ -107,23 +107,23 @@ $(document).ready(function(){
 						</div>
 						<div id="menu-xs">
 							<ul>
-								<li><a href="home.html">首页</a></li>
-								<li><a href="home.html">成品</a></li>
-								<li><a href="home.html">DIY</a></li>
-								<li><a href="home.html">艺术家</a></li>
-								<li><a href="newslist.html">资讯中心</a></li>
-								<li><a href="home.html">联系我们</a></li>
+								<li><a href="home.jsp">首页</a></li>
+								<li><a href="home.jsp">成品</a></li>
+								<li><a href="home.jsp">DIY</a></li>
+								<li><a href="home.jsp">艺术家</a></li>
+								<li><a href="newslist.jsp">资讯中心</a></li>
+								<li><a href="home.jsp">联系我们</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="top-nav visible-lg">
 						<ul class="megamenu skyblue">
-							<li><a href="home.html">首页</a></li>
-							<li><a href="home.html">成品</a></li>
-							<li><a href="home.html">DIY</a></li>
-							<li><a href="home.html">艺术家</a></li>
-							<li><a href="newslist.html">资讯中心</a></li>
-							<li><a href="home.html">联系我们</a></li>
+							<li><a href="home.jsp">首页</a></li>
+							<li><a href="home.jsp">成品</a></li>
+							<li><a href="home.jsp">DIY</a></li>
+							<li><a href="home.jsp">艺术家</a></li>
+							<li><a href="newslist.jsp">资讯中心</a></li>
+							<li><a href="home.jsp">联系我们</a></li>
 						</ul>
 					</div>
 				</div>
@@ -131,7 +131,7 @@ $(document).ready(function(){
 		</div>
 
 	<div class="container">
-		<h6 class="location"><a href="home.html">首页</a> <i> </i> <a href="newslist.html">资讯中心</a> <i> </i> 资讯详情</h6>
+		<h6 class="location"><a href="home.jsp">首页</a> <i> </i> <a href="newslist.jsp">资讯中心</a> <i> </i> 资讯详情</h6>
 	</div>
 	
 	<div class="bar_news">

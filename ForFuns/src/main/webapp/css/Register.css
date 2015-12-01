@@ -1,62 +1,119 @@
 body
-{
-	background-image: url(../image/bg_login.jpg);
-	background-size: cover;
-	background-repeat: no-repeat;
-	font-family: "SimSun";
+{	
+	font-family: "Microsoft YaHei";
 	font-size: 1.0em;
 	color: #000;
 }
 
-#main_register
+.header-top
 {
-	margin: 0 auto;
-	width: 480px;
-	height: auto;
-	background-color: #fffdf6;
-	border: 2px solid #f1daca;
-	border-radius: 10px;
-	padding-top: 30px;
-	padding-bottom: 20px;
-	margin-top: 30px;
+	position: relative;
 }
 
-.label_input
+.content
 {
-	width: 60%;
-	margin-left: 17%;
-	font-size: 0.8em;
+	min-height: 500px;
+	margin-top: 50px;
 }
 
-.text_input
+.bg_pic
 {
-	width: 60%;
-	height: 30px;
-	margin-left: 17%;
-	border: 1px solid #f1daca;
+	height: 400px;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+#main_login
+{
+	padding: 1em 5em 1em;
+	min-height: 400px;
+	background-color: #f8f8f8;
+}
+
+.label_login
+{
+	font-size: 1.6em;
+	font-weight: normal;
+	margin-top: 0.8em;
+	padding: 0px;
+}
+
+
+
+.inputSth
+{
+	height: 50px;
+	border: 1px solid #f67280;
 	background-color: #fffdf6;
 	border-radius: 5px;
-	font-size: 0.8em;
+	font-size: 1.5em;
 	padding-left: 6%;
+	margin-bottom: 20px;
 }
 
-.submit_button
+.input_div
 {
-	width: 66%;
-	height: 45px;
-	margin-left: 17%;
+	padding: 0px;
+}
+
+#bg_pic
+{
+	margin: 10px 0 10px;
+	width: 100%;
+}
+
+#btn_login
+{
+	height: 55px;
 	background-color: #f67280;
 	border: 1px solid #f1daca;
 	border-radius: 5px;
-	font-size: 0.9em;
-	margin-top: 20px;
+	font-size: 1.8em;
 	color: white;
+	padding: 0 2em;
+}
+
+.label_error1
+{
+	font-size: 1.5em;
+	margin-top: 1em;
+	padding: 0px;
+	display: inline-block;
+	color: #f67280;
 }
 
 .label_error
 {
-	margin-top: 15px;
-	text-align: center;
+	font-size: 1.5em;
+	margin-top: 1em;
+	padding: 0px;
+	display: inline-block;
+	float: right;
 	color: #f67280;
-	font-size: 0.6em;
+}
+
+.success
+{
+	margin: 0 auto;
+	height: 55px;
+	background-color: #eeeeee;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.success img
+{
+	margin: 0 auto;
+	padding: 10px 10px 15px 10px;
+	width: 9%;
+}
+
+.success p
+{
+	font-size: 1.8em;
+	height: 55px;
+	margin: 0px;
+	padding: 10px 0;
+	display: inline-block;
 }
