@@ -1,6 +1,6 @@
 html
 {
-	min-width: 500px;
+	/*min-width: 550px;*/
 }
 
 .footer
@@ -126,6 +126,7 @@ span.email
 	color: #f67280;
 }
 
+@media (max-width: 992px){
 .header-top
 {
 	background: #f8f8f8;
@@ -237,10 +238,240 @@ ul.support-right li i.item_register
 	width: 50%;
 }
 
+.top-nav-xs
+{
+	float: right;
+	margin-top: 1em;
+	width: 25%;
+}
+
+#menu
+{
+	width: 100%;
+	padding: 1em 2em;
+	/*border: 2px solid #fff;*/
+	background-color: #f67280;
+	text-align: center;
+}
+
+#menu p
+{
+	color: #fff;
+	margin: 0px;
+	font-size: 1.8em;
+}
+
+#menu-xs
+{
+	background: rgba(0, 0, 0, 0.23);
+	text-align: center;
+	display: none;
+	padding: 1em 0 0.5em;
+}
+
+#menu-xs ul
+{
+	list-style: none;
+	padding: 0px;
+}
+
+#menu-xs ul li
+{
+	padding: 0.5em 0;
+}
+
+#menu-xs ul li a
+{
+	color: #000;
+	font-size: 1.6em;
+	text-decoration: none;
+}
+
+#menu-xs ul li a:hover
+{
+	color: #f67280;
+}
+
 .header-bottom 
 {
 	padding: 0.5em 0 1.5em;
 }
+}
+
+@media (min-width: 992px){
+.header-top
+{
+	background: #f8f8f8;
+	position: absolute;
+	z-index: 1000;
+	width: 100%;
+}
+
+.statu_bar
+{
+	padding: 0.4em 3em 0.5em 0;
+	background: #fff;	
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	height: 70px;
+}
+
+ul.support
+{
+	float: left;
+}
+
+ul.support-right
+{
+	float: right;
+}
+
+ul.support li, ul.support-right li 
+{
+	display: inline-block;
+	margin: 1.5em 0.7em 1.2em;
+}
+
+ul.support li span, ul.support-right li a
+{
+	font-size: 1em;
+	text-decoration: none;
+	color: #000;
+	vertical-align: top;
+	text-decoration: none;
+}
+
+ul.support li a:hover, ul.support-right li a:hover
+{
+	color: #f67280;
+}
+
+ul.support li i.item_message
+{
+	background: url(../image/item_message.png);
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 3px 0 0;
+}
+
+ul.support li i.item_tel
+{
+	background: url(../image/item_tel.png);
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 3px 0 0;
+}
+
+ul.support-right li i.item_login
+{
+	background: url(../image/item_login.png);
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 3px 0 0;
+}
+
+ul.support-right li i.item_register
+{
+	background: url(../image/item_register.png);
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 3px 0 0;
+}
+
+.logo
+{
+	float: left;
+	margin-top: 0.1em;
+}
+
+.logo h1
+{	
+	font-size: 3.5em;
+}
+
+.logo h1 a
+{
+	text-decoration: none;
+	color: #f67280;
+}
+
+.top-nav
+{
+	float: right;
+	margin-top: 2.0em;
+	width: 50%;
+}
+
+.top-nav-xs
+{
+	float: right;
+	margin-top: 1em;
+	width: 30%;
+}
+
+#menu
+{
+	width: 100%;
+	padding: 1.2em 2em;
+	/*border: 2px solid #fff;*/
+	background-color: #f67280;
+	text-align: center;
+}
+
+#menu p
+{
+	color: #fff;
+	margin: 0px;
+	font-size: 1.8em;
+}
+
+#menu-xs
+{
+	background: rgba(0, 0, 0, 0.23);
+	text-align: center;
+	display: none;
+	padding: 1em 0 0.5em;
+
+}
+
+#menu-xs ul
+{
+	list-style: none;
+	padding: 0px;
+}
+
+#menu-xs ul li
+{
+	padding: 0.5em 0;
+}
+
+#menu-xs ul li a
+{
+	color: #000;
+	font-size: 1.6em;
+	text-decoration: none;
+}
+
+#menu-xs ul li a:hover
+{
+	color: #f67280;
+}
+
+.header-bottom 
+{
+	padding: 0.5em 0 1.5em;
+}
+}
+
+
 
 .bar_news
 {
