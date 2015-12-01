@@ -147,6 +147,7 @@ function GetHotNews(){
 	});
 }
 $(document).ready(function(){
+	GetHotNews();
 	var width = $(".carousel-inner").width();
 		var height = $(".carousel-inner").width()/5*2.4;
   		$(".item_pic").width(width);
@@ -166,8 +167,11 @@ $(document).ready(function(){
 		$(".item").height(height);	
   		$(".carousel-inner").height(height);
   		$(".carousel-control").height(height);
+  		
+  		var artist_h = $(".class75").height();
+  		$(".class25").height(artist_h);
   	});
-  	GetHotNews();
+  	
 });
 </script>
 

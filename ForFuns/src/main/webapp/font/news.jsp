@@ -9,6 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Home</title>
 	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/news.css" rel="stylesheet" type="text/css" />
 </head>
@@ -74,6 +75,14 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#menu").click(function(){
+  $("#menu-xs").toggle(300);
+  });
+});
+</script>
+
 	<div class="header-top">
 			<div class="container">
 				<div class="statu_bar">
@@ -134,8 +143,11 @@ $(document).ready(function(){
 			<div class="news_title" >
 				<p id="news_title">资讯标题</p>
 			</div>
-			<div class="news_author">
+			<div class="news_author visible-lg visible-md">
 				<span id="news_time">发布时间：2015/11/25 &nbsp;&nbsp; 8：30</span><span id="news_author">发布人：孔日天</span>
+			</div>
+			<div class="news_author visible-sm visible-xs">
+				<p id="news_time">发布时间：2015/11/25 &nbsp;&nbsp; 8：30</p><p>发布人：孔日天</p>
 			</div>
 			<div class="news_content" id="news_content">
 				<p>资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容资讯内容。</p>
@@ -152,30 +164,13 @@ $(document).ready(function(){
 
 	<div class="footer">
 		<div class="container footer-div">
-			<div class="col-md-3 footer-left">
-				<img src="<%=basePath%>image/Title.png" class="footer_logo">
+			<div class="col-md-12 footer-middle">
+				<p>公司简介：这里是公司简介公司简介公司简介公司简介公司简介公司简介</p>
+				<p>地址：福建省厦门市思明区422号厦门大学</p>
 			</div>
-			<div class="col-md-5 footer-middle">
-				<h3>关于我们</h3>
-				<span>电话：156-5000-9000</span>
-				<span class="email">邮箱：471979617@qq.com</span>
-				</br>
-				<span>地址：福建省厦门市思明区422号厦门大学</span>
-			</div>
-			<div class="col-md-4 footer-right">
-				<h3>友情链接</h3>
-				<a href="#">友情链接1</a>
-				<a href="#">友情链接1</a>
-				<a href="#">友情链接1</a>
-				<a href="#">友情链接1</a></br>
-				<a href="#">友情链接1</a>
-				<a href="#">友情链接1</a>
-				<a href="#">友情链接1</a>
-				<a href="#">友情链接1</a>
-			</div>
-			<div class="col-md-12">
+			<div class="col-md-12 company">
 				<p class="footer-class">Copyright &copy; 2015.Company name All rights reserved.</p>
-			</div>			
+			</div>
 		</div>
 	</div>
 </body>
