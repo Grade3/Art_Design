@@ -17,6 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <a href="javascript:;" class="lanrenzhijia_top"></a>
 <script src="../js/lanrenzhijia.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -34,17 +35,33 @@ $(function(){
 </script>
 <script type="text/javascript">
 //获取上线新闻
-function GetNewsList(){
+function GetNewsList(page,pageSize){
 	$.ajax({
 		type:'post',
 		async:false,
 		url:'<%=basePath%>news.do?method=GetOnlineNews',
-		data:{page:0,pageSize:3},
+		data:{page:page,pageSize:pageSize},
 		success:function(json){
-			if(json.length>0){
-				
+			var list = json.list;
+			var total = json.total;
+			globaltotal = total;
+			if(list.length>0){
+				var body = "";
+				for(var i=0;i<list.length;i++){
+					var imgurl = list[i].imgurl;
+					var title = list[i].title;
+					var summary = list[i].summary;
+					var id= list[i].id;
+					var content = "<div class='col-md-12 blog-in-top'><div><div class='col-md-4 van'><a href='news.jsp?newsid="+id+"'><img src='"+imgurl+"' class='img-responsive news_pic' /></a></div><div class='col-md-8 on-para'><div class='col-on'><h4>"+title+"</h4><span>2015/11/25&nbsp;&nbsp;8:30</span></div><p>"+summary+"</p><a href='news.jsp?newsid="+id+"' class='sed'>Readmore</a></div></div></div>";
+					body += content;
+				}
+				if(page*pageSize <globaltotal){
+					body +="<div class='col-md-12 blog-in-top'><div class='learn_more'><p>查看更多</p></div></div>";
+				}
+				$('#newslist').append(body);
 			}else{
-				
+				var content ="<div class='col-md-12 blog-in-top'><div class='learn_more'><p>没有更多的信息</p></div></div>";
+				$('#newslist').html(content);
 			}
 		},error:function(){
 			
@@ -52,10 +69,18 @@ function GetNewsList(){
 	});
 }
 $(document).ready(function(){
+  var page = 1;
+  var pageSize = 3;
+  var globaltotal = 0;
   $("#menu").click(function(){
   	$("#menu-xs").toggle(300);
   });
-  GetNewsList();
+  GetNewsList(page,pageSize);
+  $('.learn_more').live('click',function(){
+		 page = page +1 ;
+		 GetNewsList(page,pageSize);
+		 $(this).parent().hide();
+  });
 });
 </script>
 
@@ -115,8 +140,8 @@ $(document).ready(function(){
 	</div>
 
 	<div class="content">
-		<div class="container">
-			<div class="col-md-12 blog-in-top">
+		<div class="container" id="newslist">
+			<!-- <div class="col-md-12 blog-in-top">
 				<div>
 					<div class="col-md-4 van">
 						<a href="news.jsp">
@@ -166,12 +191,13 @@ $(document).ready(function(){
 						<a href="news.jsp" class="sed">Readmore</a>
 					</div>
 				</div>
-			</div>
+			</div> 
 			<div class="col-md-12 blog-in-top">
 				<div class="learn_more">
 					<p>查看更多</p>
 				</div>
 			</div>
+			-->
 		</div>
 	</div>
 
