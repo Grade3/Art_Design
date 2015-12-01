@@ -1,7 +1,9 @@
+/**
+ * 
+ */
 package com.edu.daoimpl;
 
-import java.util.List;
-import java.util.Map;
+
 
 import org.hibernate.Query;
 import org.springframework.context.annotation.Lazy;
@@ -10,27 +12,46 @@ import org.springframework.stereotype.Repository;
 import com.edu.base.BaseDaoImpl;
 import com.edu.dao.ICustomerDao;
 import com.edu.model.CustomerBean;
-import com.edu.model.UserBean;
 
 @Lazy(true)
 @Repository("customerDao")
-public class CustomerDaoImpl extends BaseDaoImpl<CustomerBean> implements
-		ICustomerDao
-{
+public class CustomerDaoImpl extends BaseDaoImpl<CustomerBean> implements ICustomerDao {
+
+
 	@Override
-	public boolean isExist(CustomerBean customer)
-	{
-		 String hql = "from CustomerBean where username=? and password=?";
+	public boolean isExist(CustomerBean user) {
+		 String hql = "from CustomerBean where userid=? and password=?";
 		 Query query = getSession().createQuery(hql);
-		 query.setString(0, customer.getUsername());
-		 query.setString(1, customer.getPassword());
-		 if(query.list().size()>=1)
-		 {
+		 query.setString(0, user.getUserid());
+		 query.setString(1, user.getPassword());
+		 if(query.list().size()>=1){
 			 return true;
-		 }
-		 else
-		 {
+		 }else{
 			 return false;
 		 }
 	}
+
+	public int countCustomer() {
+		// TODO Auto-generated method stub
+		 String hql ="select count(id) from CustomerBean as user";
+		 Query query = getSession().createQuery(hql);
+		 return ((Number)query.uniqueResult()).intValue();  
+	}
+
+	@Override
+	public boolean exist(CustomerBean customer) {
+		 String hql = "from CustomerBean where userid=?";
+		 Query query = getSession().createQuery(hql);
+		 query.setString(0, customer.getUserid());
+		 if(query.list().size()>=1){
+			 return true;
+		 }else{
+			 return false;
+		 }
+	}
+
+	
+	
+
+
 }
