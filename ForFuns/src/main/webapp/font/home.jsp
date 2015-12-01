@@ -14,11 +14,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<title>Home</title>
 	
-	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
-	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
-	<link href="../css/home.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/home.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 		function a1_f1() {
             document.getElementById("detail_a1").style.display = "none";
@@ -77,11 +77,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             document.getElementById("detail_c3").style.display = "block";
         }
 	</script>
-<link href="../css/qiehuan.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
-<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
-
+<link href="<%=basePath%>css/qiehuan.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
+<style type="text/css">
+	.item_pic{width:100%;}
+</style>
 </head>
 <body>
 <a href="javascript:;" class="lanrenzhijia_top"></a>
@@ -123,13 +125,16 @@ function GetHotNews(){
 				var body = "";
 				var point = "";
 				for(var i=0;i<json.length;i++){
+					var id = json[i].id;
 					var imgurl = json[i].imgurl;
+					var summary = json[i].summary;
+					var title = json[i].title;
 					if(i==0){
 						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
-						body += "<div class='item active'><img class='item_pic' src='"+imgurl+"' alt='...'><div class='carousel-caption'><h3>这里是标题一</h3><p>这里是资讯描述资讯描述资讯描述资讯描述</p></div></div>";
+						body += "<div class='item active'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...'><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
 					}else{
 						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
-						body += "<div class='item'><img class='item_pic' src='"+imgurl+"' alt='...'><div class='carousel-caption'><h3>这里是标题一</h3><p>这里是资讯描述资讯描述资讯描述资讯描述</p></div></div>";
+						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...'><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
 					}
 					
 				}
@@ -225,21 +230,25 @@ $(document).ready(function(){
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox" id="banner">
     <div class="item active">
-      <img class="item_pic" src="../image/bg_login.jpg" alt="...">
-      <div class="carousel-caption">
-      	<h3>这里是标题一</h3>
-    	<p>这里是资讯描述资讯描述资讯描述资讯描述</p>
-      </div>
+      <a href="http://www.baidu.com">
+	      <img class="item_pic" src="<%=basePath%>image/bg_login.jpg" alt="...">
+	      <div class="carousel-caption">
+	      	<h3>这里是标题一</h3>
+	    	<p>这里是资讯描述资讯描述资讯描述资讯描述</p>
+	      </div>
+      </a>
     </div>
     <div class="item">
-      <img class="item_pic" src="../image/bg_login.jpg" alt="...">
-      <div class="carousel-caption">
-      	<h3>这里是标题二</h3>
-    	<p>这里是资讯描述资讯描述资讯描述资讯描述</p>
-      </div>
+    	<a href="http://www.baidu.com">
+	      <img class="item_pic" src="<%=basePath%>image/bg_login.jpg" alt="...">
+	      <div class="carousel-caption">
+	      	<h3>这里是标题二</h3>
+	    	<p>这里是资讯描述资讯描述资讯描述资讯描述</p>
+	      </div>
+	    </a>
     </div>
     <div class="item">
-      <img class="item_pic" src="../image/bg_login.jpg" alt="...">
+      <img class="item_pic" src="<%=basePath%>image/bg_login.jpg" alt="...">
       <div class="carousel-caption">
       	<h3>这里是标题三</h3>
     	<p>这里是资讯描述资讯描述资讯描述资讯描述</p>
@@ -273,7 +282,7 @@ $(document).ready(function(){
 								<div class="arts">
 									<h3>艺术品成品</br>专区 >></h3>
 								</div>
-								<img src="../image/arts_pic.png" alt="" style="display: none;"></a>
+								<img src="<%=basePath%>image/arts_pic.png" alt="" style="display: none;"></a>
 							</a>
 						</div>
 						<div class="col-md-6 black-in">
@@ -281,7 +290,7 @@ $(document).ready(function(){
 								<div class="arts diy">
 									<h3 class="visible-md visible-lg">艺术品定制</br>专区 >></h3>
 								</div>
-								<img src="../image/diy_pic.png" alt="" style="display: none;"></a>
+								<img src="<%=basePath%>image/diy_pic.png" alt="" style="display: none;"></a>
 							</a>
 						</div>						
 					</div>
@@ -294,7 +303,7 @@ $(document).ready(function(){
 				</div>
 				<div class="col-md-3 per">
 					<a href="Artist.html">
-						<img class="img-responsive" src="../image/artist.png" >
+						<img class="img-responsive" src="<%=basePath%>image/artist.png" >
 						<div class="six">
 							<h4>平台艺术家</br>专区 >></h4>
 						</div>
@@ -348,7 +357,7 @@ $(document).ready(function(){
 								<div class="arts3">
 									<h3>艺术品成品</br>专区 >></h3>
 								</div>
-								<img src="../image/arts_pic.png" alt="" style="display: none;"></a>
+								<img src="<%=basePath%>image/arts_pic.png" alt="" style="display: none;"></a>
 							</a>
 						</div>
 						<div class="class50 black1-in">
@@ -356,7 +365,7 @@ $(document).ready(function(){
 								<div class="arts3 diy3">
 									<h3>艺术品定制</br>专区 >></h3>
 								</div>
-								<img src="../image/diy_pic.png" alt="" style="display: none;"></a>
+								<img src="<%=basePath%>image/diy_pic.png" alt="" style="display: none;"></a>
 							</a>
 						</div>						
 					</div>
@@ -369,7 +378,7 @@ $(document).ready(function(){
 				</div>
 				<div class="class25 per">
 					<a href="Artist.html">
-						<img class="img-responsive" src="../image/artist.png" >
+						<img class="img-responsive" src="<%=basePath%>image/artist.png" >
 						<div class="six3">
 							<h4>艺术家</br>专区 >></h4>
 						</div>
@@ -382,7 +391,7 @@ $(document).ready(function(){
 				<h2>艺术品成品推荐</h2>
 				<div class="recommend_arts">
 					<div class="col-md-4 Recommend" onmouseout="a1_f1()" onmouseover="a1_f2()">
-						<img src="../image/a1.jpg">
+						<img src="<%=basePath%>image/a1.jpg">
 						<div class="tab_desc" id="detail_a1">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -403,7 +412,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="a2_f1()" onmouseover="a2_f2()">
-						<img src="../image/a2.jpg">
+						<img src="<%=basePath%>image/a2.jpg">
 						<div class="tab_desc" id="detail_a2">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -424,7 +433,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="a3_f1()" onmouseover="a3_f2()">
-						<img src="../image/a3.jpg">
+						<img src="<%=basePath%>image/a3.jpg">
 						<div class="tab_desc" id="detail_a3">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -451,7 +460,7 @@ $(document).ready(function(){
 				<h2>艺术品定制推荐</h2>
 				<div class="recommend_arts">
 					<div class="col-md-4 Recommend" onmouseout="b1_f1()" onmouseover="b1_f2()">
-						<img src="../image/b1.jpg">
+						<img src="<%=basePath%>image/b1.jpg">
 						<div class="tab_desc" id="detail_b1">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -472,7 +481,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="b2_f1()" onmouseover="b2_f2()">
-						<img src="../image/b2.jpg">
+						<img src="<%=basePath%>image/b2.jpg">
 						<div class="tab_desc" id="detail_b2">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -493,7 +502,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="b3_f1()" onmouseover="b3_f2()">
-						<img src="../image/b3.jpg">
+						<img src="<%=basePath%>image/b3.jpg">
 						<div class="tab_desc" id="detail_b3">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -520,7 +529,7 @@ $(document).ready(function(){
 				<h2>艺术家推荐</h2>
 				<div class="recommend_arts">
 					<div class="col-md-4 Recommend" onmouseout="c1_f1()" onmouseover="c1_f2()">
-						<img src="../image/c1.jpg">
+						<img src="<%=basePath%>image/c1.jpg">
 						<div class="tab_desc" id="detail_c1">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -541,7 +550,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="c2_f1()" onmouseover="c2_f2()">
-						<img src="../image/c2.jpg">
+						<img src="<%=basePath%>image/c2.jpg">
 						<div class="tab_desc" id="detail_c2">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -562,7 +571,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="c3_f1()" onmouseover="c3_f2()">
-						<img src="../image/c3.jpg">
+						<img src="<%=basePath%>image/c3.jpg">
 						<div class="tab_desc" id="detail_c3">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -587,7 +596,7 @@ $(document).ready(function(){
 
 		<div class="container">
 			<div class="bottom-grid">
-				<img class="img-responsive" src="../image/back1.jpg">
+				<img class="img-responsive" src="<%=basePath%>image/back1.jpg">
 				<div class="fit">
 					<h6>ART IS A FUNNY WORD</h6>
 					<p>Enjoy yourself in ArtCustomize</p>
@@ -598,30 +607,13 @@ $(document).ready(function(){
 
 	<div class="footer">
 		<div class="container footer-div">
-			<div class="col-md-3 footer-left">
-				<img src="../image/Title.png" class="footer_logo">
+			<div class="col-md-12 footer-middle">
+				<p>公司简介：这里是公司简介公司简介公司简介公司简介公司简介公司简介</p>
+				<p>地址：福建省厦门市思明区422号厦门大学</p>
 			</div>
-			<div class="col-md-5 footer-middle">
-				<h3>关于我们</h3>
-				<span>电话：156-5000-9000</span>
-				<span class="email">邮箱：471979617@qq.com</span>
-				</br>
-				<span>地址：福建省厦门市思明区422号厦门大学</span>
-			</div>
-			<div class="col-md-4 footer-right">
-				<h3>友情链接</h3>
-				<a href="http://www.xmu.edu.cn/">厦门大学</a>
-				<a href="http://software.xmu.edu.cn/View/index.aspx">厦门大学软件学院</a>
-				<a href="http://library.xmu.edu.cn/portal/">厦门大学图书馆</a></br>
-				<a href="http://www.guohecapital.com/">上海国和投资</a>	
-				<a href="http://www.alibabagroup.com/cn/global/home">阿里巴巴集团</a>							
-				<a href="https://www.alitrip.com/?spm=a260k.635.1998396936.35.fAp8L5">阿里旅行</a>
-				<a href="https://www.taobao.com/">淘宝网</a>
-			</div>
-			<div class="col-md-12">
+			<div class="col-md-12 company">
 				<p class="footer-class">Copyright &copy; 2015.Company name All rights reserved.</p>
 			</div>
-			
 		</div>
 	</div>
 </body>

@@ -60,7 +60,7 @@
 	</listener>
 
 	<welcome-file-list>
-		<welcome-file>/admin/Admin_login.jsp</welcome-file>
+		<welcome-file>/font/home.jsp</welcome-file>
 	</welcome-file-list>
 	<filter>
 		<filter-name>AdminLoginFilter</filter-name>

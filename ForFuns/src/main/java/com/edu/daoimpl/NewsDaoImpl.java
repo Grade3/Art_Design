@@ -18,4 +18,10 @@ public class NewsDaoImpl extends BaseDaoImpl<NewsBean> implements INewsDao{
 		return getSession().createQuery(hql).list();
 	}
 
+	@Override
+	public List<NewsBean> GetOnlineNews() {
+		String hql ="from NewsBean where "+NewsTable.ISONLINE+" = 1";
+		return getSession().createQuery(hql).list();
+	}
+
 }

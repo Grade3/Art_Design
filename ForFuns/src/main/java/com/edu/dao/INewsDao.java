@@ -12,4 +12,10 @@ public interface INewsDao extends IBaseDao<NewsBean>{
 	 * @return
 	 */
 	public List<NewsBean> GetHotNews();
+	
+	/**
+	 * 获取在线新闻
+	 * @return
+	 */
+	public List<NewsBean> GetOnlineNews();
 }

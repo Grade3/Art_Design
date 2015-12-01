@@ -21,12 +21,14 @@ public class NewsServiceImpl extends BaseServiceImpl<NewsBean> implements INewsS
 	
 	@Override
 	public List<NewsBean> GetHotNews() {
-		Map<String, String> require = new HashMap<String, String>();
 		List<NewsBean> list = null;
-		require.put(NewsTable.ISHOT, "1");
-		require.put(NewsTable.ISONLINE, "1");
 		list = (List<NewsBean>) newsDao.GetHotNews();
 		return list;
+	}
+
+	@Override
+	public List<NewsBean> GetOnlineNews() {
+		return newsDao.GetOnlineNews();
 	}
 
 }

@@ -25,6 +25,7 @@ import com.edu.model.NewsBean;
 import com.edu.model.UserBean;
 import com.edu.service.INewsService;
 import com.edu.service.IUserService;
+import com.edu.table.NewsTable;
 
 @Controller
 @RequestMapping("/news.do")
@@ -267,6 +268,16 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	@RequestMapping(params="method=GetHotNew")
 	public List<NewsBean> JsonGetHotNew(){
 		return newsService.GetHotNews();
+	}
+	
+	/**
+	 * 获取上线新闻
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=GetOnlineNews")
+	public List<NewsBean> JsonGetOnlineNews(@RequestParam(value="page")Integer page,@RequestParam(value="pageSize")Integer pageSize){
+		return newsService.GetPageBeanFilter(NewsBean.class,page,pageSize, NewsTable.ISONLINE, 1+"");
 	}
 	
 }

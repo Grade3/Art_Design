@@ -7,7 +7,7 @@ body
 
 .header
 {
-	/*background: url(../image/bg_login.jpg) no-repeat center;*/
+	/*background: url(../img/bg_login.jpg) no-repeat center;*/
 	width: 100%;
 	/*background-size: cover;*/
 	display: block;
@@ -19,6 +19,16 @@ body
 	position: absolute;
 	z-index: 1000;
 	width: 100%;
+}
+
+.carousel-caption h3
+{
+	font-size: 2.8em;
+}
+
+.carousel-caption p
+{
+	font-size: 1.7em;
 }
 
 @media (max-width: 992px){
@@ -63,7 +73,7 @@ ul.support li a:hover, ul.support-right li a:hover
 
 ul.support li i.item_message
 {
-	background: url(../image/item_message.png);
+	background: url(../img/item_message.png);
 	width: 22px;
 	height: 22px;
 	display: inline-block;
@@ -73,7 +83,7 @@ ul.support li i.item_message
 
 ul.support li i.item_tel
 {
-	background: url(../image/item_tel.png);
+	background: url(../img/item_tel.png);
 	width: 22px;
 	height: 22px;
 	display: inline-block;
@@ -83,7 +93,7 @@ ul.support li i.item_tel
 
 ul.support-right li i.item_login
 {
-	background: url(../image/item_login.png);
+	background: url(../img/item_login.png);
 	width: 22px;
 	height: 22px;
 	display: inline-block;
@@ -93,7 +103,7 @@ ul.support-right li i.item_login
 
 ul.support-right li i.item_register
 {
-	background: url(../image/item_register.png);
+	background: url(../img/item_register.png);
 	width: 22px;
 	height: 22px;
 	display: inline-block;
@@ -177,7 +187,7 @@ ul.support li a:hover, ul.support-right li a:hover
 
 ul.support li i.item_message
 {
-	background: url(../image/item_message.png);
+	background: url(../img/item_message.png);
 	width: 22px;
 	height: 22px;
 	display: inline-block;
@@ -187,7 +197,7 @@ ul.support li i.item_message
 
 ul.support li i.item_tel
 {
-	background: url(../image/item_tel.png);
+	background: url(../img/item_tel.png);
 	width: 22px;
 	height: 22px;
 	display: inline-block;
@@ -197,7 +207,7 @@ ul.support li i.item_tel
 
 ul.support-right li i.item_login
 {
-	background: url(../image/item_login.png);
+	background: url(../img/item_login.png);
 	width: 22px;
 	height: 22px;
 	display: inline-block;
@@ -207,7 +217,7 @@ ul.support-right li i.item_login
 
 ul.support-right li i.item_register
 {
-	background: url(../image/item_register.png);
+	background: url(../img/item_register.png);
 	width: 22px;
 	height: 22px;
 	display: inline-block;
@@ -629,7 +639,7 @@ label.line
 
 	.round-top li i
 	{
-		background-image: url(../image/detail.png);
+		background-image: url(../img/detail.png);
 		width: 50px;
 		height: 50px;
 		background-size: cover;
@@ -639,7 +649,7 @@ label.line
 
 	.round-top li i.round
 	{
-		background-image: url(../image/links.png);
+		background-image: url(../img/links.png);
 		margin-left: 0.5em;
 	}
 
@@ -686,14 +696,14 @@ label.line
 	}
 	.social li i.buy
 	{
-		background-image: url(../image/buy.png);
+		background-image: url(../img/buy.png);
 		width: 40px;
 		height: 40px;
 		display: inline-block;
 	}
 	.social li i.love
 	{
-		background-image: url(../image/love.png);
+		background-image: url(../img/love.png);
 		width: 40px;
 		height: 40px;
 		display: inline-block;
@@ -745,7 +755,7 @@ label.line
 
 	.round-top li i
 	{
-		background-image: url(../image/detail.png);
+		background-image: url(../img/detail.png);
 		background-size: cover;
 		width: 60px;
 		height: 60px;
@@ -755,7 +765,7 @@ label.line
 
 	.round-top li i.round
 	{
-		background-image: url(../image/links.png);
+		background-image: url(../img/links.png);
 		margin-left: 0.5em;
 	}
 
@@ -802,14 +812,14 @@ label.line
 	}
 	.social li i.buy
 	{
-		background-image: url(../image/buy.png);
+		background-image: url(../img/buy.png);
 		width: 40px;
 		height: 40px;
 		display: inline-block;
 	}
 	.social li i.love
 	{
-		background-image: url(../image/love.png);
+		background-image: url(../img/love.png);
 		width: 40px;
 		height: 40px;
 		display: inline-block;
@@ -858,7 +868,7 @@ label.line
 
 	.round-top li i
 	{
-		background-image: url(../image/detail.png);
+		background-image: url(../img/detail.png);
 		width: 50px;
 		height: 50px;
 		display: inline-block;
@@ -867,7 +877,7 @@ label.line
 
 	.round-top li i.round
 	{
-		background-image: url(../image/links.png);
+		background-image: url(../img/links.png);
 		margin-left: 0.5em;
 	}
 
@@ -914,7 +924,7 @@ label.line
 	}
 	.social li i.buy
 	{
-		background-image: url(../image/buy.png);
+		background-image: url(../img/buy.png);
 		background-size: cover;
 		width: 30px;
 		height: 30px;
@@ -922,7 +932,7 @@ label.line
 	}
 	.social li i.love
 	{
-		background-image: url(../image/love.png);
+		background-image: url(../img/love.png);
 		background-size: cover;
 		width: 30px;
 		height: 30px;
@@ -973,7 +983,7 @@ label.line
 
 	.round-top li i
 	{
-		background-image: url(../image/detail.png);
+		background-image: url(../img/detail.png);
 		width: 50px;
 		height: 50px;
 		display: inline-block;
@@ -982,7 +992,7 @@ label.line
 
 	.round-top li i.round
 	{
-		background-image: url(../image/links.png);
+		background-image: url(../img/links.png);
 		margin-left: 0.5em;
 	}
 
@@ -1029,14 +1039,14 @@ label.line
 	}
 	.social li i.buy
 	{
-		background-image: url(../image/buy.png);
+		background-image: url(../img/buy.png);
 		width: 40px;
 		height: 40px;
 		display: inline-block;
 	}
 	.social li i.love
 	{
-		background-image: url(../image/love.png);
+		background-image: url(../img/love.png);
 		width: 40px;
 		height: 40px;
 		display: inline-block;

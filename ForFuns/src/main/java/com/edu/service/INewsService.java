@@ -12,4 +12,10 @@ public interface INewsService extends IBaseService<NewsBean>{
 	 * @return
 	 */
 	public List<NewsBean> GetHotNews();
+	
+	/**
+	 * 获取上线新闻
+	 * @return
+	 */
+	public List<NewsBean> GetOnlineNews();
 }
