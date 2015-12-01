@@ -1,0 +1,119 @@
+body
+{	
+	font-family: "Microsoft YaHei";
+	font-size: 1.0em;
+	color: #000;
+}
+
+.header-top
+{
+	position: relative;
+}
+
+.content
+{
+	min-height: 500px;
+	margin-top: 50px;
+}
+
+.bg_pic
+{
+	height: 400px;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+#main_login
+{
+	padding: 1em 5em 1em;
+	min-height: 400px;
+	background-color: #f8f8f8;
+}
+
+.label_login
+{
+	font-size: 1.6em;
+	font-weight: normal;
+	margin-top: 0.8em;
+	padding: 0px;
+}
+
+
+
+.inputSth
+{
+	height: 50px;
+	border: 1px solid #f67280;
+	background-color: #fffdf6;
+	border-radius: 5px;
+	font-size: 1.5em;
+	padding-left: 6%;
+	margin-bottom: 20px;
+}
+
+.input_div
+{
+	padding: 0px;
+}
+
+#bg_pic
+{
+	margin: 10px 0 10px;
+	width: 100%;
+}
+
+#btn_login
+{
+	height: 55px;
+	background-color: #f67280;
+	border: 1px solid #f1daca;
+	border-radius: 5px;
+	font-size: 1.8em;
+	color: white;
+	padding: 0 2em;
+}
+
+.label_error1
+{
+	font-size: 1.5em;
+	margin-top: 1em;
+	padding: 0px;
+	display: inline-block;
+	color: #f67280;
+}
+
+.label_error
+{
+	font-size: 1.5em;
+	margin-top: 1em;
+	padding: 0px;
+	display: inline-block;
+	float: right;
+	color: #f67280;
+}
+
+.success
+{
+	margin: 0 auto;
+	height: 55px;
+	background-color: #eeeeee;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.success img
+{
+	margin: 0 auto;
+	padding: 10px 10px 15px 10px;
+	width: 9%;
+}
+
+.success p
+{
+	font-size: 1.8em;
+	height: 55px;
+	margin: 0px;
+	padding: 10px 0;
+	display: inline-block;
+}

@@ -1,0 +1,58 @@
+body
+{
+	background: #fff;
+	font-family: "Microsoft YaHei";
+	font-size: 1.0em;
+}
+
+.header-top
+{
+	position: relative;
+}
+
+.content
+{
+	min-height: 500px;
+}
+
+.news_title
+{
+	text-align: center;
+	margin-top: 50px;
+}
+
+.news_title p
+{
+	margin: 0px;
+	font-size: 3em;
+}
+
+.news_author
+{
+	text-align: center;
+	margin-top: 15px;
+}
+
+.news_author span
+{
+	font-size: 1.3em;
+	margin: 0 2em;
+}
+
+.news_author p
+{
+	font-size: 1.3em;
+	margin: 0 2em;
+}
+
+.news_content
+{
+	width: 100%;
+	margin-top: 35px;
+}
+
+.news_content p
+{
+	margin: 0px;
+	font-size: 1.7em;
+}

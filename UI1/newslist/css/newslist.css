@@ -1,0 +1,127 @@
+body
+{
+	background: #fff;
+	font-family: "Microsoft YaHei";
+	font-size: 1.0em;
+}
+
+.header-top
+{
+	position: relative;
+}
+
+.content
+{
+	min-height: 500px;
+	margin-top: 50px;
+}
+
+
+
+@media (max-width: 992px){
+.blog-in-top
+{
+	margin: 1em 0 4em;
+	border-bottom: 1px solid #eeeeee;
+	padding: 0 0 4em 0;
+}
+
+.van
+{
+	padding: 0;
+}
+
+.news_pic
+{
+	width: 100%;
+}
+
+a.sed
+{
+    background: none;
+    border: 2px solid #000;
+    color: #000;
+    padding: 0.3em 0.7em;
+    font-size: 1.5em;
+    text-align: center;
+    text-decoration: none;
+    float: right;
+}
+}
+
+@media (min-width: 992px){
+.blog-in-top
+{
+	margin: 1em 0 2em;
+	border-bottom: 1px solid #eeeeee;
+	padding: 0 0 1em 0;
+}
+
+.van
+{
+	padding: 0 3em 0 0;
+}
+
+.news_pic
+{
+	height: 185px;
+}
+
+a.sed
+{
+    background: none;
+    border: 2px solid #000;
+    color: #000;
+    padding: 0.3em 0.7em;
+    font-size: 1.1em;
+    text-align: center;
+    text-decoration: none;
+    float: right;
+}
+}
+
+
+
+.on-para
+{
+	padding: 1em 0em;
+}
+
+.on-para p
+{
+	font-size: 1.7em;
+	margin: 0.6em 0;
+}
+
+a.sed:hover
+{
+    background: #ff5d56;
+    border: 2px solid #ff5d56;
+    color: #fff;
+}
+
+.col-on h4
+{
+	font-size: 3em;
+}
+
+.col-on span
+{
+	font-size: 1.3em;
+}
+
+.learn_more
+{
+	background-color: #eeeeee;
+	text-align: center;
+	padding: 1.5em 0;
+	margin: 2em 0 0;
+	cursor: pointer;
+}
+
+.learn_more p
+{
+	font-size: 1.7em;
+	margin: 0px;
+	color: #7d7d7d;
+}
