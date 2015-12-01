@@ -21,6 +21,121 @@ body
 	width: 100%;
 }
 
+@media (max-width: 992px){
+.statu_bar
+{
+	padding: 0em 3em 0em 0;
+	background: rgba(225, 225, 225, 0.68);	
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	height: 50px;
+}
+
+ul.support
+{
+	float: left;
+}
+
+ul.support-right
+{
+	float: right;
+}
+
+ul.support li, ul.support-right li 
+{
+	display: inline-block;
+	margin: 1em 0.7em 0em;
+}
+
+ul.support li span, ul.support-right li a
+{
+	font-size: 1em;
+	text-decoration: none;
+	color: #000;
+	vertical-align: top;
+	text-decoration: none;
+}
+
+ul.support li a:hover, ul.support-right li a:hover
+{
+	color: #f67280;
+}
+
+ul.support li i.item_message
+{
+	background: url(../img/item_message.png);
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 3px 0 0;
+}
+
+ul.support li i.item_tel
+{
+	background: url(../img/item_tel.png);
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 3px 0 0;
+}
+
+ul.support-right li i.item_login
+{
+	background: url(../img/item_login.png);
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 3px 0 0;
+}
+
+ul.support-right li i.item_register
+{
+	background: url(../img/item_register.png);
+	width: 22px;
+	height: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 3px 0 0;
+}
+
+.logo
+{
+	float: left;
+	margin-top: 0.1em;
+	margin-left: 0.5em;
+}
+
+.logo h1
+{	
+	font-size: 3em;
+	margin-top: 0.6em;
+}
+
+.logo h1 a
+{
+	text-decoration: none;
+	color: #f67280;
+}
+
+.top-nav
+{
+	float: right;
+	margin-top: 2.0em;
+	width: 50%;
+}
+
+.header-bottom 
+{
+	padding: 0.3em 0 1em;
+}
+}
+
+
+@media (min-width: 992px){
+
 .statu_bar
 {
 	padding: 0.4em 3em 0.5em 0;
@@ -129,6 +244,8 @@ ul.support-right li i.item_register
 	padding: 1em 0 2.0em;
 }
 
+}
+
 .megamenu
 {
 	margin-bottom: 0px;
@@ -176,6 +293,16 @@ ul.support-right li i.item_register
 	text-decoration: none !important;
 }
 
+.black a, .black1-in a
+{
+	text-decoration: none !important;
+}
+
+.black1-in
+{
+	margin-left: 1%;
+}
+
 .arts
 {
 	background: #231a1a;
@@ -193,7 +320,7 @@ ul.support-right li i.item_register
 {
 	font-size: 3.2em;
 	text-shadow: 1px 1px 9px #000;
-	color: #e1dcdc;
+	color: #fff;
 	line-height: 1.3em;
 }
 
@@ -207,18 +334,52 @@ a.arts h3
 	color:#fff;
 }
 
-.black img
+
+
+
+.arts3
 {
-	position: absolute;
-	bottom: -29px;
-	left: 0;
+	background: #231a1a;
+	padding: 0.5em 0 1em;
+	text-align: center;
+	box-shadow: 1px 1px 7px #C4C3C3;
 }
 
-.black-in img
+.diy3
 {
-	position: absolute;
-	bottom: -29px;
-  	right: 0;
+	background: #98725e;
+}
+
+.arts3 h3
+{
+	font-size: 2.5em;
+	text-shadow: 1px 1px 9px #000;
+	color: #fff;
+	line-height: 1.3em;
+}
+
+a.arts3 h3
+{
+	text-decoration: none;
+}
+
+
+.class75
+{
+	width: 73%;
+	float: left;
+}
+
+.class50
+{
+	width: 49%;
+	display: inline-block;
+}
+.class25
+{
+	width: 25%;
+	float: right;
+	overflow: hidden;
 }
 
 .content-top 
@@ -244,6 +405,15 @@ a.arts h3
 	box-shadow: 1px 1px 7px #696767;
 }
 
+.col-top-bottom3
+{
+	background: #696767;
+	padding: 4.5em;
+	text-align: center;
+	margin: 1em 0 0;
+	box-shadow: 1px 1px 7px #696767;
+}
+
 .arts1
 {
 	background: #231a1a;
@@ -252,6 +422,7 @@ a.arts h3
 {
 	background: #98725e;
 }
+
 .artist1
 {
 	background: #ac6e6b;
@@ -284,6 +455,15 @@ h3.news2
 	margin-top: -0.6em;
 }
 
+h3.news3
+{
+	font-size: 2.5em;
+	text-shadow: 1px 1px 9px #000;
+	color: #fff;
+	float: left;
+	margin-top: -0.6em;
+}
+
 a.now-in
 {
 	padding: 0.5em 1.5em;
@@ -294,7 +474,7 @@ a.now-in
 	border: 2px solid #fff;
 	text-align: center;
 	text-decoration: none;
-	margin-top: -1.1em;
+	margin-top: -1.3em;
 }
 
 a.now-in1
@@ -359,6 +539,25 @@ a.now-in2:hover
 .six h4
 {
 	font-size: 3.2em;
+	color: #fff;
+	line-height: 1.3em;
+	text-shadow: 1px 1px 9px #000;
+}
+
+.six3
+{
+	position: absolute;
+	top: 0;
+	background: rgba(255, 93, 86, 0.38);
+	padding: 8em 1em 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+.six3 h4
+{
+	font-size: 2.5em;
 	color: #fff;
 	line-height: 1.3em;
 	text-shadow: 1px 1px 9px #000;
