@@ -111,6 +111,36 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
+
+function GetHotNews(){
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'<%=basePath%>news.do?method=GetHotNew',
+		data:{},
+		success:function(json){
+			if(json.length>0){
+				var body = "";
+				var point = "";
+				for(var i=0;i<json.length;i++){
+					var imgurl = json[i].imgurl;
+					if(i==0){
+						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
+						body += "<div class='item active'><img class='item_pic' src='"+imgurl+"' alt='...'><div class='carousel-caption'><h3>这里是标题一</h3><p>这里是资讯描述资讯描述资讯描述资讯描述</p></div></div>";
+					}else{
+						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
+						body += "<div class='item'><img class='item_pic' src='"+imgurl+"' alt='...'><div class='carousel-caption'><h3>这里是标题一</h3><p>这里是资讯描述资讯描述资讯描述资讯描述</p></div></div>";
+					}
+					
+				}
+				$('#banner').html(body);
+				$('#bannerpoint').html(point);
+			}
+		},error:function(){
+				
+		}
+	});
+}
 $(document).ready(function(){
 	var width = $(".carousel-inner").width();
 		var height = $(".carousel-inner").width()/5*2.4;
@@ -132,7 +162,7 @@ $(document).ready(function(){
   		$(".carousel-inner").height(height);
   		$(".carousel-control").height(height);
   	});
-  
+  	GetHotNews();
 });
 </script>
 
@@ -186,14 +216,14 @@ $(document).ready(function(){
 		<div>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
-  <ol class="carousel-indicators">
+  <ol class="carousel-indicators" id="bannerpoint">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
+  <div class="carousel-inner" role="listbox" id="banner">
     <div class="item active">
       <img class="item_pic" src="../image/bg_login.jpg" alt="...">
       <div class="carousel-caption">

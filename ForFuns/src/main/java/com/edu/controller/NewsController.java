@@ -259,6 +259,15 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		return "1";
 	}
 	
+	/**
+	 * 获取热点新闻
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=GetHotNew")
+	public List<NewsBean> JsonGetHotNew(){
+		return newsService.GetHotNews();
+	}
 	
 }
 
