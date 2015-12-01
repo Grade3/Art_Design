@@ -8,4 +8,6 @@ import com.edu.model.CustomerBean;
 public interface ICustomerDao extends IBaseDao<CustomerBean>
 {
 	public boolean isExist(CustomerBean customer);
+	public boolean exist(CustomerBean customer);
+	public int countCustomer();
 }
