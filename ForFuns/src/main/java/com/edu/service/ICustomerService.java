@@ -19,6 +19,20 @@ public interface ICustomerService extends IBaseService<CustomerBean>
 	public boolean isExist(CustomerBean customer);
 	
 	/**
+	 * 判断用户是否存在,仅用于注册时的重复判断
+	 * @param customer
+	 * @return
+	 */
+	public boolean exist(CustomerBean customer);
+	
+	/**
+	 * 判断数据库中用户数量
+	 * @param customer
+	 * @return
+	 */
+	public int countCustomer();
+	
+	/**
 	 * 保存实体
 	 * @param customer
 	 */
