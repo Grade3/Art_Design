@@ -147,6 +147,7 @@ public class CustomerController {
 			user.setPersonnumber(personnumber);
 			user.setRealname(realname);
 			user.setTelphone(telphone);
+			user.setIsartist(0);
 			System.out.println(user.toString());
 			customerService.AddBean(user);
 
