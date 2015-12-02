@@ -151,8 +151,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var suggestion = row.suggestion;
 		$.ajax({
 			type:'post',
-			url :'<%=basePath%>news.do?method=alertsituation',
-			data:{'situation':'1','newsid':id,'suggestion':suggestion},
+			url :'<%=basePath%>advert.do?method=AlertSituation',
+			data:{'situation':'1','advertid':id,'suggestion':suggestion},
 			success:function(json){
 				if(json==1){
 					$.messager.alert("操作提示", "操作成功！","info"); 
@@ -197,8 +197,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		suggestion = row.suggestion;
 		$.ajax({
 			type:'post',
-			url : '<%=basePath%>/news.do?method=alertsituation',
-			data:{'newsid':id,'situation':2,'suggestion':suggestion},
+			url : '<%=basePath%>/advert.do?method=AlertSituation',
+			data:{'advertid':id,'situation':2,'suggestion':suggestion},
 			success:function(json){
 				if(json==1){
 					$.messager.alert("操作提示", "操作成功！","info"); 
