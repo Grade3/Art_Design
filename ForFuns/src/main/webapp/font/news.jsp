@@ -18,7 +18,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <a href="javascript:;" class="lanrenzhijia_top"></a>
 <script src="<%=basePath%>js/lanrenzhijia.js"></script>
 <script type="text/javascript" src="<%=path%>/js/easyUI/jquery-1.4.4.min.js"></script>
+<style type="text/css">
+	*{font-style: normal;}
+</style>
 <script>
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}; 
+//获取cookie
+function getCookie(objName){//获取指定名称的cookie的值 
+	var arrStr = document.cookie.split("; "); 
+	for(var i = 0;i < arrStr.length;i ++){ 
+		var temp = arrStr[i].split("="); 
+		if(temp[0] == objName) return unescape(temp[1]); 
+	} 
+};
+//检测用户是否已登录
+function CheckUser(){
+	var useridtoken = getCookie("useridtoken");
+	var index = useridtoken.indexOf("&");
+	var id =  useridtoken.substring(0,index);
+	$.ajax({
+		type:'post',
+		url:'<%=basePath%>customer.do?method=GetCustomerName',
+		data:{customerid:id},
+		success:function(json){
+			$('#registeraction').hide();
+			$('#loginaction').hide();
+			$('#usernameaction').show();
+			$('loginoutaction').show();
+			$('#username').html("<i class='item_login'/>"+json);
+		},error:function(){
+			
+		}
+	});
+}
 $(function(){
 	$(window).scroll(function(){
 		var _top = $(window).scrollTop();
@@ -32,11 +68,7 @@ $(function(){
 		$("html,body").animate({scrollTop:0},500);
 	});
 });
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    if (r != null) return unescape(r[2]); return null; //返回参数值
-}; 
+
 //更改datebox的日期格式
 function myformatter(value) {
 	//return new Date(parseInt(value)).toLocaleString().replace(/年|月/g, "-")
@@ -70,6 +102,9 @@ function GetNewsDetail(newsid){
 	});
 }
 $(document).ready(function(){
+	$('#usernameaction').hide();
+	$('loginoutaction').hide();
+	CheckUser();
 	var newsid = getUrlParam("newsid");
 	GetNewsDetail(newsid);
 });
@@ -91,8 +126,10 @@ $(document).ready(function(){
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li ><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>			
+						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
+						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
+						<li id="usernameaction"><a href="javascrip:void(0);" id="username"><i class="item_login"/>登陆</a></li>
+						<li id="loginoutaction"><a href="Login.jsp" ><i class="item_register"> </i>退出</a></li>			
 					</ul>
 				</div>
 			</div>

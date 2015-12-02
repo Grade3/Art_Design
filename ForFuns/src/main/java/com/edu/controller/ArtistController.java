@@ -161,7 +161,7 @@ public class ArtistController
 	{
 		try
 		{
-			// data = URLDecoder.decode(data, "utf-8");
+			data = URLDecoder.decode(data, "utf-8");
 			data = data.substring(1, data.length() - 1);
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
@@ -195,28 +195,37 @@ public class ArtistController
 	@ResponseBody
 	public String JsonUpdate(@RequestParam(value = "data") String data)
 	{
-		data = data.substring(1, data.length() - 1);
-		System.out.println(data);
-		JSONObject jsonObject = new JSONObject(data);
-		int id = jsonObject.getInt(CustomerTable.ID);
-		String userid = jsonObject.getString(CustomerTable.USERID);
-		String username = jsonObject.getString(CustomerTable.USERNAME);
-		String password = jsonObject.getString(CustomerTable.PASSWORD);
-		String personnumber = jsonObject.getString(CustomerTable.PERSONNUMBER);
-		String telphone = jsonObject.getString(CustomerTable.TELPHONE);
-		String realname = jsonObject.getString(CustomerTable.REALNAME);
-		String avator = jsonObject.getString(CustomerTable.AVATOR);
-		CustomerBean userBean = new CustomerBean(id, userid, username,
-				password, personnumber, telphone, realname, avator, 1);
-		artistService.UpdataBean(userBean);
-		return "true";
+		try
+		{
+			data = URLDecoder.decode(data, "utf-8");
+			data = data.substring(1, data.length() - 1);
+			System.out.println(data);
+			JSONObject jsonObject = new JSONObject(data);
+			int id = jsonObject.getInt(CustomerTable.ID);
+			CustomerBean customerBean = artistService.GetEntityById(CustomerBean.class, id);
+			String userid = jsonObject.getString(CustomerTable.USERID);
+			customerBean.setUserid(userid);
+			String username = jsonObject.getString(CustomerTable.USERNAME);
+			customerBean.setUsername(username);
+			String password = jsonObject.getString(CustomerTable.PASSWORD);
+			customerBean.setPassword(password);
+			String personnumber = jsonObject.getString(CustomerTable.PERSONNUMBER);
+			customerBean.setPersonnumber(personnumber);
+			String telphone = jsonObject.getString(CustomerTable.TELPHONE);
+			customerBean.setTelphone(telphone);
+			String realname = jsonObject.getString(CustomerTable.REALNAME);
+			customerBean.setRealname(realname);
+			String avator = jsonObject.getString(CustomerTable.AVATOR);
+			customerBean.setAvator(avator);
+			artistService.UpdataBean(customerBean);
+			return "true";
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return "error";
 	}
 
-	// [{\"id\":1,\"name\":\"C\",\"size\":\"\",\"date\":\"02/19/2010\",\"children\":[{\"id\":2,\"name\":\"Program
-	// Files\",\"size\":\"120
-	// MB\",\"date\":\"03/20/2010\",\"children\":[{\"id\":21,\"name\":\"Java\",\"size\":\"\",\"date\":\"01/13/2010\",\"state\":\"closed\",\"children\":[{\"id\":211,\"name\":\"java.exe\",\"size\":\"142
-	// KB\",\"date\":\"01/13/2010\"},{\"id\":212,\"name\":\"jawt.dll\",\"size\":\"5
-	// KB\",\"date\":\"01/13/2010\"}]}]}]}]
 	@RequestMapping(params = "method=gettest")
 	@ResponseBody
 	public String JsonGetTree()

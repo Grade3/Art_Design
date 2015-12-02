@@ -185,7 +185,7 @@ public class CustomerController {
 	@ResponseBody
 	public int JsonAddUser(@RequestParam(value = "data") String data) {
 		try {
-			// data = URLDecoder.decode(data, "utf-8");
+			data = URLDecoder.decode(data, "utf-8");
 			data = data.substring(1, data.length() - 1);
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
@@ -196,7 +196,7 @@ public class CustomerController {
 			String telphone = jsonObject.getString(CustomerTable.TELPHONE);
 			String realname = jsonObject.getString(CustomerTable.REALNAME);
 			String avator = jsonObject.getString(CustomerTable.AVATOR);
-			Integer isartist = Integer.parseInt(jsonObject.getString(CustomerTable.ISARTIST));
+			Integer isartist = 0;
 			CustomerBean customerBean = new CustomerBean(userid, username, password, personnumber, telphone, realname,
 					avator, isartist);
 			customerService.AddBean(customerBean);
@@ -217,29 +217,35 @@ public class CustomerController {
 	@RequestMapping(params = "method=updateCustomer")
 	@ResponseBody
 	public String JsonUpdate(@RequestParam(value = "data") String data) {
-		data = data.substring(1, data.length() - 1);
-		System.out.println(data);
-		JSONObject jsonObject = new JSONObject(data);
-		int id = jsonObject.getInt(CustomerTable.ID);
-		String userid = jsonObject.getString(CustomerTable.USERID);
-		String username = jsonObject.getString(CustomerTable.USERNAME);
-		String password = jsonObject.getString(CustomerTable.PASSWORD);
-		String personnumber = jsonObject.getString(CustomerTable.PERSONNUMBER);
-		String telphone = jsonObject.getString(CustomerTable.TELPHONE);
-		String realname = jsonObject.getString(CustomerTable.REALNAME);
-		String avator = jsonObject.getString(CustomerTable.AVATOR);
-		Integer isartist = Integer.parseInt(jsonObject.getString(CustomerTable.ISARTIST));
-		CustomerBean userBean = new CustomerBean(id, userid, username, password, personnumber, telphone, realname,
-				avator, isartist);
-		customerService.UpdataBean(userBean);
-		return "true";
+		try {
+			data = URLDecoder.decode(data, "utf-8");
+			data = data.substring(1, data.length() - 1);
+			System.out.println(data);
+			JSONObject jsonObject = new JSONObject(data);
+			int id = jsonObject.getInt(CustomerTable.ID);
+			CustomerBean customerBean = customerService.GetEntityById(CustomerBean.class, id);
+			String userid = jsonObject.getString(CustomerTable.USERID);
+			customerBean.setUserid(userid);
+			String username = jsonObject.getString(CustomerTable.USERNAME);
+			customerBean.setUsername(username);
+			String password = jsonObject.getString(CustomerTable.PASSWORD);
+			customerBean.setPassword(password);
+			String personnumber = jsonObject.getString(CustomerTable.PERSONNUMBER);
+			customerBean.setPersonnumber(personnumber);
+			String telphone = jsonObject.getString(CustomerTable.TELPHONE);
+			customerBean.setTelphone(telphone);
+			String realname = jsonObject.getString(CustomerTable.REALNAME);
+			customerBean.setRealname(realname);
+			String avator = jsonObject.getString(CustomerTable.AVATOR);
+			customerBean.setAvator(avator);
+			customerService.UpdataBean(customerBean);
+			return "true";
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "error";
 	}
 
-	// [{\"id\":1,\"name\":\"C\",\"size\":\"\",\"date\":\"02/19/2010\",\"children\":[{\"id\":2,\"name\":\"Program
-	// Files\",\"size\":\"120
-	// MB\",\"date\":\"03/20/2010\",\"children\":[{\"id\":21,\"name\":\"Java\",\"size\":\"\",\"date\":\"01/13/2010\",\"state\":\"closed\",\"children\":[{\"id\":211,\"name\":\"java.exe\",\"size\":\"142
-	// KB\",\"date\":\"01/13/2010\"},{\"id\":212,\"name\":\"jawt.dll\",\"size\":\"5
-	// KB\",\"date\":\"01/13/2010\"}]}]}]}]
 	@RequestMapping(params = "method=gettest")
 	@ResponseBody
 	public String JsonGetTree() {
@@ -270,5 +276,28 @@ public class CustomerController {
 	@RequestMapping(params="method=GetCustomerName")
 	public String JsonGetUserName(@RequestParam(value="customerid")Integer customerid){
 		return customerService.GetEntityById(CustomerBean.class, customerid).getUsername();
+	}
+	
+	/**
+	 * 获取分页列表
+	 * 
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	@RequestMapping(params = "method=getCustomerbypage")
+	@ResponseBody
+	public Map<String, Object> JsonGetPageCustomer(
+			@RequestParam(value = "page") int page,
+			@RequestParam(value = "rows") int pageSize,
+			@RequestParam(value="selectname",defaultValue="id")String selectname,
+			@RequestParam(value="value",defaultValue="")String value) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<CustomerBean> list = customerService.GetPageBeanFilter(CustomerBean.class, page,
+				pageSize,selectname,value);
+		int total = customerService.GetPageBeanFilterTotal(CustomerBean.class, page, pageSize, selectname, value);
+		map.put("rows", list);
+		map.put("total", total);
+		return map;
 	}
 }

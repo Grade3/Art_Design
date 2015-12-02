@@ -83,6 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <style type="text/css">
 	.item_pic{width:100%;}
+	*{font-style: normal;}
 </style>
 </head>
 <body>
@@ -428,7 +429,7 @@ $(document).ready(function(){
 				<h2>艺术品成品推荐</h2>
 				<div class="recommend_arts">
 					<div class="col-md-4 Recommend" onmouseout="a1_f1()" onmouseover="a1_f2()">
-						<img src="<%=basePath%>image/a1.jpg">
+						<img src="<%=basePath%>image/a11.jpg">
 						<div class="tab_desc" id="detail_a1">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -449,7 +450,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="a2_f1()" onmouseover="a2_f2()">
-						<img src="<%=basePath%>image/a2.jpg">
+						<img src="<%=basePath%>image/a22.jpg">
 						<div class="tab_desc" id="detail_a2">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -470,7 +471,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="a3_f1()" onmouseover="a3_f2()">
-						<img src="<%=basePath%>image/a3.jpg">
+						<img src="<%=basePath%>image/a33.jpg">
 						<div class="tab_desc" id="detail_a3">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -497,7 +498,7 @@ $(document).ready(function(){
 				<h2>艺术品定制推荐</h2>
 				<div class="recommend_arts">
 					<div class="col-md-4 Recommend" onmouseout="b1_f1()" onmouseover="b1_f2()">
-						<img src="<%=basePath%>image/b1.jpg">
+						<img src="<%=basePath%>image/b11.jpg">
 						<div class="tab_desc" id="detail_b1">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -518,7 +519,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="b2_f1()" onmouseover="b2_f2()">
-						<img src="<%=basePath%>image/b2.jpg">
+						<img src="<%=basePath%>image/b22.jpg">
 						<div class="tab_desc" id="detail_b2">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -539,7 +540,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="b3_f1()" onmouseover="b3_f2()">
-						<img src="<%=basePath%>image/b3.jpg">
+						<img src="<%=basePath%>image/b33.jpg">
 						<div class="tab_desc" id="detail_b3">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -566,7 +567,7 @@ $(document).ready(function(){
 				<h2>艺术家推荐</h2>
 				<div class="recommend_arts">
 					<div class="col-md-4 Recommend" onmouseout="c1_f1()" onmouseover="c1_f2()">
-						<img src="<%=basePath%>image/c1.jpg">
+						<img src="<%=basePath%>image/c11.jpg">
 						<div class="tab_desc" id="detail_c1">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -587,7 +588,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="c2_f1()" onmouseover="c2_f2()">
-						<img src="<%=basePath%>image/c2.jpg">
+						<img src="<%=basePath%>image/c22.jpg">
 						<div class="tab_desc" id="detail_c2">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
@@ -608,7 +609,7 @@ $(document).ready(function(){
 					</div>
 
 					<div class="col-md-4 Recommend" onmouseout="c3_f1()" onmouseover="c3_f2()">
-						<img src="<%=basePath%>image/c3.jpg">
+						<img src="<%=basePath%>image/c33.jpg">
 						<div class="tab_desc" id="detail_c3">
 							<ul class="round-top">
 								<li><a href="#"><i> </i></a></li>
