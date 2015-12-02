@@ -77,8 +77,8 @@ function submitForm(){
 		$.messager.alert('警告','请选择下线时间','error');
 		return ;
 	}
-	$('#timestart').datebox('setValue',timestart);
-	$('#timeout').datebox('setValue',timeout);
+	//$('#timestart').datebox('setValue',timestart);
+	//$('#timeout').datebox('setValue',timeout);
 	$('#ff').form('submit',{
 		success:function(data){   
 			if(0==data){
@@ -93,7 +93,8 @@ function submitForm(){
 function myformatter(value) {
 	if(value != null && value != ""){
 		var date = new Date(value);
-        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+        //return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+		return (date.getMonth() + 1) +"/"+ date.getDate()+"/"+date.getFullYear() ;
 	}
 }
 //获取链接数据
@@ -185,7 +186,7 @@ $(document).ready(function(){
 		</fieldset>
 		<fieldset class="simpborder"  style="width: 47%; float: left;padding-left: 12px;">
 			<label>下线时间</label>
-			<input  class="easyui-datebox" name="timeout"id="timeout"  style="width:91%">
+			<input  class="easyui-datebox" name="timeout" id="timeout"  style="width:91%">
 		</fieldset>
 		
 		<br/>

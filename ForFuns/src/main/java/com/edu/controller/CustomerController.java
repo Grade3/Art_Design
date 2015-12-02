@@ -57,7 +57,7 @@ public class CustomerController {
 	@RequestMapping(params = "method=login")
 	public String login(@RequestParam(value = "userid", required = false) String userid,
 			@RequestParam(value = "password", required = false) String password, HttpServletRequest request,
-			HttpServletResponse response, @CookieValue(value = "token", required = false) String token) {
+			HttpServletResponse response, @CookieValue(value = "useridtoken", required = false) String token) {
 		if (null != token) {
 			if (null == userid) {
 				System.out.println(token);
@@ -66,7 +66,7 @@ public class CustomerController {
 				String temp = MD5Util.convertMD5(parts[1]);
 				System.out.println(temp);
 				if (parts[0].equals(temp))
-					return "redirect:/font/news.jsp";
+					return "redirect:/font/home.jsp";
 				return "redirect:/font/Login.jsp?error=1";
 			}
 		}
@@ -84,9 +84,9 @@ public class CustomerController {
 			}
 			String value = userid + "&" + temp;
 			System.out.println(value);
-			Cookie cookie = new Cookie("token", value);
+			Cookie cookie = new Cookie("useridtoken", value);
 			response.addCookie(cookie);
-			return "redirect:/font/news.jsp";
+			return "redirect:/font/home.jsp";
 		} else {
 			return "redirect:/font/Login.jsp?error=1";
 		}
@@ -258,5 +258,17 @@ public class CustomerController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customers", list);
 		return map;
+	}
+	
+	
+	/**
+	 * 通过id获取username
+	 * @param username
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=GetCustomerName")
+	public String JsonGetUserName(@RequestParam(value="customerid")Integer customerid){
+		return customerService.GetEntityById(CustomerBean.class, customerid).getUsername();
 	}
 }

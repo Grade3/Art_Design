@@ -242,4 +242,6 @@ public class UserController {
 		map.put("power", list);
 		return map;
 	}
+	
+	
 }

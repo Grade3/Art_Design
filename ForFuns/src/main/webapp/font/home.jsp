@@ -113,7 +113,35 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-
+//获取cookie
+function getCookie(objName){//获取指定名称的cookie的值 
+	var arrStr = document.cookie.split("; "); 
+	for(var i = 0;i < arrStr.length;i ++){ 
+		var temp = arrStr[i].split("="); 
+		if(temp[0] == objName) return unescape(temp[1]); 
+	} 
+};
+//检测用户是否已登录
+function CheckUser(){
+	var useridtoken = getCookie("useridtoken");
+	var index = useridtoken.indexOf("&");
+	var id =  useridtoken.substring(0,index);
+	$.ajax({
+		type:'post',
+		url:'<%=basePath%>customer.do?method=GetCustomerName',
+		data:{customerid:id},
+		success:function(json){
+			$('#registeraction').hide();
+			$('#loginaction').hide();
+			$('#usernameaction').show();
+			$('loginoutaction').show();
+			$('#username').html("<i class='item_login'/>"+json);
+		},error:function(){
+			
+		}
+	});
+}
+//获取热点新闻
 function GetHotNews(){
 	$.ajax({
 		type:'post',
@@ -147,6 +175,9 @@ function GetHotNews(){
 	});
 }
 $(document).ready(function(){
+	$('#usernameaction').hide();
+	$('loginoutaction').hide();
+	CheckUser();
 	GetHotNews();
 	var width = $(".carousel-inner").width();
 		var height = $(".carousel-inner").width()/5*2.4;
@@ -184,8 +215,10 @@ $(document).ready(function(){
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li ><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>			
+						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
+						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
+						<li id="usernameaction"><a href="javascrip:void(0);" id="username"><i class="item_login"/>登陆</a></li>
+						<li id="loginoutaction"><a href="Login.jsp" ><i class="item_register"> </i>退出</a></li>			
 					</ul>
 				</div>
 			</div>
