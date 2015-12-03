@@ -56,9 +56,10 @@ $(function(){
 
 <script type="text/javascript">
 $(document).ready(function(){
-  $("#menu").click(function(){
-  $("#menu-xs").toggle(300);
-  });
+	  $("#menu").click(function(){
+	  $("#menu-xs").toggle(300);
+	  });
+	  $('#errormessage').hide();
 });
 </script>
 

@@ -138,7 +138,7 @@ function CheckUser(){
 			$('#registeraction').hide();
 			$('#loginaction').hide();
 			$('#usernameaction').show();
-			$('loginoutaction').show();
+			$('#loginoutaction').show();
 			$('#username').html("<i class='item_login'/>"+json);
 		},error:function(){
 			
@@ -180,7 +180,7 @@ function GetHotNews(){
 }
 $(document).ready(function(){
 	$('#usernameaction').hide();
-	$('loginoutaction').hide();
+	$('#loginoutaction').hide();
 	CheckUser();
 	GetHotNews();
 	var width = $(".carousel-inner").width();

@@ -159,7 +159,7 @@ public class CustomerController {
 			}
 			String value = userid + "&" + temp;
 			System.out.println(value);
-			Cookie cookie = new Cookie("token", value);
+			Cookie cookie = new Cookie("useridtoken", value);
 			response.addCookie(cookie);
 			return "redirect:/font/Login.jsp";
 		}
@@ -274,8 +274,8 @@ public class CustomerController {
 	 */
 	@ResponseBody
 	@RequestMapping(params="method=GetCustomerName")
-	public String JsonGetUserName(@RequestParam(value="customerid")Integer customerid){
-		return customerService.GetEntityById(CustomerBean.class, customerid).getUsername();
+	public String JsonGetUserName(@RequestParam(value="customerid")String customerid){
+		return customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, customerid, null).getUsername();
 	}
 	
 	/**

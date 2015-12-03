@@ -62,7 +62,7 @@ function CheckUser(){
 			$('#registeraction').hide();
 			$('#loginaction').hide();
 			$('#usernameaction').show();
-			$('loginoutaction').show();
+			$('#loginoutaction').show();
 			$('#username').html("<i class='item_login'/>"+json);
 		},error:function(){
 			
@@ -104,7 +104,7 @@ function GetNewsList(page,pageSize){
 }
 $(document).ready(function(){
   $('#usernameaction').hide();
-  $('loginoutaction').hide();
+  $('#loginoutaction').hide();
   CheckUser();
   var page = 1;
   var pageSize = 3;
