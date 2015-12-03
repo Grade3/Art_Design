@@ -114,13 +114,13 @@ $(document).ready(function(){
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label label_login">密码</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" name="password" class="form-control inputSth" placeholder="请输入密码">
+						<input type="password" name="password" class="form-control inputSth" placeholder="请输入密码">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label label_login">确认密码</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" name="confirm_password" class="form-control inputSth" placeholder="请再次输入密码">
+						<input type="password" name="confirm_password" class="form-control inputSth" placeholder="请再次输入密码">
 					</div>
 				</div>
 				<div class="form-group">

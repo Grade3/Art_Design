@@ -278,8 +278,10 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	@RequestMapping(params="method=GetOnlineNews")
 	public Map<String, Object> JsonGetOnlineNews(@RequestParam(value="page")Integer page,@RequestParam(value="pageSize")Integer pageSize){
 		Map<String , Object> map = new HashMap<String, Object>();
-		List<NewsBean> list = newsService.GetPageBeanFilter(NewsBean.class,page,pageSize, NewsTable.ISONLINE, 1+"");
-		int total = newsService.GetPageBeanFilterTotal(NewsBean.class, page, pageSize,NewsTable.ISONLINE, 1+"");
+		//List<NewsBean> list = newsService.GetPageBeanFilter(NewsBean.class,page,pageSize, NewsTable.ISONLINE, 1+"");
+		//int total = newsService.GetPageBeanFilterTotal(NewsBean.class, page, pageSize,NewsTable.ISONLINE, 1+"");
+		List<NewsBean> list = newsService.GetPageBeanFilterMore(NewsBean.class, page, pageSize, NewsTable.ISONLINE, 1+"", NewsTable.SITUATION, 1+"");
+		int total = newsService.GetPageBeanFilterMoreTotal(NewsBean.class, page, pageSize, NewsTable.ISONLINE, 1+"", NewsTable.SITUATION, 1+"");
 		map.put("list", list);
 		map.put("total", total);
 		return map;

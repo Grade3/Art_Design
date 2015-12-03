@@ -208,7 +208,7 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 		String hql ="";
 		List<T> list = null;
 		try {
-			hql = "from "+clz.newInstance().getClass().getName()+" where  "+Morename+" = ' "+Morevalue+" and '"+selectname+" like '%"+value+"%'";
+			hql = "from "+clz.newInstance().getClass().getName()+" where  "+Morename+" = ' "+Morevalue+"' and "+selectname+" like '%"+value+"%'";
 			System.out.println(hql);
 			Query query = getSession().createQuery(hql);
 			query.setFirstResult((page-1)*pageSize); 

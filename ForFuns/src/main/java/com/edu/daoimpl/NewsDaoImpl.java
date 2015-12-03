@@ -14,7 +14,7 @@ public class NewsDaoImpl extends BaseDaoImpl<NewsBean> implements INewsDao{
 
 	@Override
 	public List<NewsBean> GetHotNews() {
-		String hql ="from NewsBean where "+NewsTable.ISHOT+" = 1 and "+NewsTable.ISONLINE+" = 1 order by money desc";
+		String hql ="from NewsBean where "+NewsTable.ISHOT+" = 1 and "+NewsTable.ISONLINE+" = 1 and "+NewsTable.SITUATION+"=1  order by money desc";
 		return getSession().createQuery(hql).list();
 	}
 

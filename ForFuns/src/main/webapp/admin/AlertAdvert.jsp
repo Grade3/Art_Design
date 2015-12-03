@@ -190,7 +190,7 @@ $(document).ready(function(){
 		</fieldset>
 		
 		<br/>
-		<fieldset>
+		<fieldset style="width:99%;">
 		<textarea id="editor_id" name="content" style="width:99%;height:400px;"></textarea>
 		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" id="formsubmit">保存修改</a>
 		</fieldset>
