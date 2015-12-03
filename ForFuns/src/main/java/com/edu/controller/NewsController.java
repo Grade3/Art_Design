@@ -64,7 +64,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	 */
 	@ResponseBody
 	@RequestMapping(params="method=addnews")
-	public String JsonAddNews (@RequestParam(value="title")String title,
+	public String JsonAddNews (@RequestParam(value="userid")String userid,@RequestParam(value="title")String title,
 			@RequestParam(value="content")String content,@RequestParam(value="author")String author,
 			@RequestParam(value="timestart")Date timestart,@RequestParam(value="timeout")Date timeout,
 			@RequestParam(value="summary")String summary,@RequestParam(value="money")Integer money,
@@ -88,7 +88,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		UserBean userBean = userService.GetEntityById(UserBean.class, 1);
+		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "username", userid,null);
 		NewsBean newsBean = new NewsBean(title, summary, author, saveUrl, content, money, ishot, timestart, timeout,"",userBean);
 		try{
 			newsService.AddBean(newsBean);
@@ -99,7 +99,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	}
 	
 	/**
-	 * 通过userid获取分页新闻
+	 * 通过userid获取分页资讯
 	 * @param userid
 	 * @param page
 	 * @param pageSize
@@ -124,7 +124,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		return map;
 	}
 	/**
-	 * 获取全部分页新闻
+	 * 获取全部分页资讯
 	 * @param userid
 	 * @param page
 	 * @param pageSize
@@ -261,7 +261,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	}
 	
 	/**
-	 * 获取热点新闻
+	 * 获取热点资讯
 	 * @return
 	 */
 	@ResponseBody
@@ -271,7 +271,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	}
 	
 	/**
-	 * 获取上线新闻
+	 * 获取上线资讯
 	 * @return
 	 */
 	@ResponseBody

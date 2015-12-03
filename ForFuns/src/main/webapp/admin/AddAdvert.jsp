@@ -142,15 +142,14 @@ function myformatter(value) {
 <body bgcolor="#DDF3FF" class = "h2" >
 	<form action="<%=basePath%>advert.do?method=AddAdvert" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;" enctype="multipart/form-data">
 		<input type="hidden" name="userid" id="userid">
-		<!--
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
-			<label>是否为首页资讯</label> 
-			<select name="ishot" id="ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
-					<option value="1">是</option>
-					<option selected="selected" value="0">否</option>
+			<label>栏位选择</label> 
+			<select name="position" id="ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
+					<option value="0">艺术品成品推荐</option>
+					<option  value="1">艺术品定制推荐</option>
+					<option value="2">艺术家推荐</option>
 			</select>
 		</fieldset>
-		-->
 		<fieldset class="simpborder" style="width: 48%; float: left; ">
 			<label>广告标题</label>
 			<input type="text" name="title" id="title">

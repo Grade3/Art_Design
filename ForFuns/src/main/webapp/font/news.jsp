@@ -38,6 +38,9 @@ function getCookie(objName){//获取指定名称的cookie的值
 //检测用户是否已登录
 function CheckUser(){
 	var useridtoken = getCookie("useridtoken");
+	if(null==useridtoken || "" == useridtoken){
+		return ;
+	}
 	var index = useridtoken.indexOf("&");
 	var id =  useridtoken.substring(0,index);
 	$.ajax({

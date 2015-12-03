@@ -69,8 +69,8 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 			@RequestParam(value="postion")Integer postion,HttpServletRequest request,
 			@RequestParam(value = "file", required = false) MultipartFile file
 	){
-		String filePath = servletContext.getRealPath("/")+"newsupload/";
-		String saveUrl  = request.getContextPath() + "/newsupload/";
+		String filePath = servletContext.getRealPath("/")+"advertupload/";
+		String saveUrl  = request.getContextPath() + "/advertupload/";
 		System.out.println(filePath);
 		File filedir = new File(filePath);
 		if(!filedir.exists()){
@@ -202,8 +202,8 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	){
 		AdvertBean advertBean = advertService.GetEntityById(AdvertBean.class, advertid);
 		
-		String filePath = servletContext.getRealPath("/")+"newsupload/";
-		String saveUrl  = request.getContextPath() + "/newsupload/";
+		String filePath = servletContext.getRealPath("/")+"advertupload/";
+		String saveUrl  = request.getContextPath() + "/advertupload/";
 		System.out.println(filePath);
 		File filedir = new File(filePath);
 		if(!filedir.exists()){

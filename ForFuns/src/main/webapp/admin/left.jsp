@@ -123,6 +123,12 @@
                          <li ><a target="rightFrame" href="./ManageNews.jsp">审核资讯</a></li>
                     </ul>
                 </li>
+                <li><a href="#"><img src="<%=basePath%>admin/img/icons/menu/comment.png" alt="" />广告发布</a>
+                    <ul class="subul">
+                         <li ><a target="rightFrame" href="./AddAdvert.jsp">发布广告</a></li>
+                         <li ><a target="rightFrame" href="./WatchAdvert.jsp">查看广告</a></li>
+                    </ul>
+                </li>
                 <li><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />广告管理</a>
                     <ul class="subul">
                          <li ><a target="rightFrame" href="./ManageAdvert.jsp">审核广告</a></li>
