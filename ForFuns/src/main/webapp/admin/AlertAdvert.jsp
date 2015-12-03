@@ -84,7 +84,7 @@ function submitForm(){
 			if(0==data){
 				$.message.alert('警告','发布失败','error');
 			}else if(1==data){
-				location.href="WatchNews.jsp";
+				location.href="WatchAdvert.jsp";
 			}
 		}
 	});
@@ -103,21 +103,20 @@ function getUrlParam(name) {
     if (r != null) return unescape(r[2]); return null; //返回参数值
 }; 
 //通过id获取资讯详情 
-function GetNewsById(newsid){
+function GetAdvertById(advertid){
 	$.ajax({
 		type:'post',
-		url:'<%=basePath%>news.do?method=getnewsbyid',
-		data:{newsid:newsid},
+		url:'<%=basePath%>advert.do?method=GetAdvertByid',
+		data:{advertid:advertid},
 		success:function(json){
-			var news = json.news;
-			var ishot = news.ishot;
-			var title = news.title;
-			var author = news.author;
-			var summary = news.summary;
-			var money = news.money;
-			var timestart = news.timestart;
-			var timeout = news.timeout;
-			var content = news.content;
+			var advert = json.advert;
+			var title = advert.title;
+			var author = advert.author;
+			var summary = advert.summary;
+			var money = advert.money;
+			var timestart = advert.timestart;
+			var timeout = advert.timeout;
+			var content = advert.content;
 			if(ishot ==1 ){
 				$('#ishot').find("option").eq(0).attr("selected",true); 
 			}else{
@@ -138,9 +137,9 @@ function GetNewsById(newsid){
 	});
 }
 $(document).ready(function(){
-	var newsid = getUrlParam('newsid');
-	GetNewsById(newsid);
-	$('#newsid').val(newsid);
+	var advertid = getUrlParam('advertid');
+	GetNewsById(advertid);
+	$('#advertid').val(advertid);
 });
 </script>
 
@@ -150,8 +149,8 @@ $(document).ready(function(){
 </head>
 
 <body bgcolor="#DDF3FF" class = "h2" >
-	<form action="<%=basePath%>news.do?method=alertnews" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;" enctype="multipart/form-data">
-		<input type="hidden" id="newsid" name="newsid">
+	<form action="<%=basePath%>advert.do?method=AlertAdvert" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;" enctype="multipart/form-data">
+		<input type="hidden" id="advertid" name="advertid">
 		<!--
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
 			<label>是否为首页资讯</label> 

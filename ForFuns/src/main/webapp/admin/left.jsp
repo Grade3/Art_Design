@@ -128,6 +128,7 @@
                          <li ><a target="rightFrame" href="./ManageAdvert.jsp">审核广告</a></li>
                     </ul>
                 </li>
+                <!--
                 <li ><a href="#"><img src="<%=basePath%>admin/img/icons/menu/brush.png" alt="" /> Elements</a>
                     <ul class="subul">
                          <li class="current"><a href="dashboard.html?p=index">Dashboard</a></li>
@@ -170,6 +171,7 @@
                 </li>
                 <li class="nosubmenu"><a href="#"><img src="<%=basePath%>admin/img/icons/menu/lab.png" alt="" /> This button is useless</a></li>
                 <li class="nosubmenu"><a href="modal.html" class="zoombox w450 h700"><img src="<%=basePath%>admin/img/icons/menu/comment.png" alt="" /> Modal box</a></li>
+            -->
             </ul>
 
 
