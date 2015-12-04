@@ -23,6 +23,7 @@ public class AspectAdvice  {
 		return sessionFactory;
 	}
 
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
