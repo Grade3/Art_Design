@@ -117,10 +117,12 @@ function GetAdvertById(advertid){
 			var timestart = advert.timestart;
 			var timeout = advert.timeout;
 			var content = advert.content;
-			if(ishot ==1 ){
-				$('#ishot').find("option").eq(0).attr("selected",true); 
+			if(position == 1){
+				$('#position').find("option").eq(0).attr("selected",true); 
+			}else if(position == 2){
+				$('#position').find("option").eq(1).attr("selected",true); 
 			}else{
-				$('#ishot').find("option").eq(1).attr("selected",true); 
+				$('#position').find("option").eq(2).attr("selected",true);
 			}
 			$('#title').val(title);
 			$('#author').val(author);
@@ -138,7 +140,7 @@ function GetAdvertById(advertid){
 }
 $(document).ready(function(){
 	var advertid = getUrlParam('advertid');
-	GetNewsById(advertid);
+	GetAdvertById(advertid);
 	$('#advertid').val(advertid);
 });
 </script>
@@ -151,15 +153,14 @@ $(document).ready(function(){
 <body bgcolor="#DDF3FF" class = "h2" >
 	<form action="<%=basePath%>advert.do?method=AlertAdvert" id="ff" method="post" style="height: 98%;margin-left: 2%;margin-top: 2%;" enctype="multipart/form-data">
 		<input type="hidden" id="advertid" name="advertid">
-		<!--
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
-			<label>是否为首页资讯</label> 
-			<select name="ishot" id="ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
-					<option value="1">是</option>
-					<option value="0">否</option>
+			<label>栏位选择</label> 
+			<select name="position" id="position" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
+					<option value="0">艺术品成品推荐</option>
+					<option  value="1">艺术品定制推荐</option>
+					<option value="2">艺术家推荐</option>
 			</select>
 		</fieldset>
-		-->
 		<fieldset class="simpborder" style="width: 48%; float: left; ">
 			<label>广告标题</label>
 			<input type="text" name="title" id="title">

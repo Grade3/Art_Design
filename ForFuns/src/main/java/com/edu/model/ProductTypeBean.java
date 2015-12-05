@@ -17,6 +17,12 @@ import javax.persistence.Table;
 public class ProductTypeBean{
 	private Integer id;
 	private String name;
+	
+	public ProductTypeBean(String name) {
+		super();
+		this.name = name;
+	}
+	
 	public ProductTypeBean(Integer id, String name) {
 		super();
 		this.id = id;

@@ -66,7 +66,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 			@RequestParam(value="content")String content,@RequestParam(value="author")String author,
 			@RequestParam(value="timestart")Date timestart,@RequestParam(value="timeout")Date timeout,
 			@RequestParam(value="summary")String summary,@RequestParam(value="money")Integer money,
-			@RequestParam(value="postion")Integer postion,HttpServletRequest request,
+			@RequestParam(value="position")Integer position,HttpServletRequest request,
 			@RequestParam(value = "file", required = false) MultipartFile file
 	){
 		String filePath = servletContext.getRealPath("/")+"advertupload/";
@@ -87,7 +87,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 			e1.printStackTrace();
 		}
 		UserBean userBean = userService.GetEntityById(UserBean.class, 1);
-		AdvertBean advertBean = new AdvertBean(title, summary, author, saveUrl, content, money, postion, timestart, timeout,"",userBean);
+		AdvertBean advertBean = new AdvertBean(title, summary, author, saveUrl, content, money, position, timestart, timeout,"",userBean);
 		try{
 			advertService.AddBean(advertBean);
 		}catch(Exception e){
@@ -193,7 +193,8 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	 */
 	@ResponseBody
 	@RequestMapping(params="method=AlertAdvert")
-	public String JsonAlertAdvert (@RequestParam(value="advertid")Integer advertid,@RequestParam(value="title")String title,
+	public String JsonAlertAdvert (@RequestParam(value="advertid")Integer advertid,
+			@RequestParam(value="title")String title,
 			@RequestParam(value="content")String content,@RequestParam(value="author")String author,
 			@RequestParam(value="timestart")Date timestart,@RequestParam(value="timeout")Date timeout,
 			@RequestParam(value="summary")String summary,@RequestParam(value="money")Integer money,

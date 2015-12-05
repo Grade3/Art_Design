@@ -175,7 +175,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var row = $('#grid').datagrid('getSelected');
 		if(row){
 			var id = row.id;
-			var temp = "<%=basePath%>font/news.jsp?newsid="+id;
+			var temp = "<%=basePath%>font/advert.jsp?advertid="+id;
 			window.open(temp);
 		}else{
 			$.messager.alert('警告','您没有选择','error');

@@ -120,6 +120,7 @@ function submitForm(){
 			if(0==data){
 				$.message.alert('警告','发布失败','error');
 			}else if(1==data){
+				alert("1")
 				location.href="WatchAdvert.jsp";
 			}
 		}
@@ -144,7 +145,7 @@ function myformatter(value) {
 		<input type="hidden" name="userid" id="userid">
 		<fieldset class="simpborder" style="width: 48%; float: left; margin-right: 3%;">
 			<label>栏位选择</label> 
-			<select name="position" id="ishot" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
+			<select name="position" id="position" onchange="addFile(this.options[this.options.selectedIndex].value)" style="width: 92%;" >
 					<option value="0">艺术品成品推荐</option>
 					<option  value="1">艺术品定制推荐</option>
 					<option value="2">艺术家推荐</option>

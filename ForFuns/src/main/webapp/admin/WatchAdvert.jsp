@@ -159,7 +159,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var row = $('#grid').datagrid('getSelected');
 		if(row){
 			var id = row.id;
-			var temp = "<%=basePath%>font/advert.jsp?newsid="+id;
+			var temp = "<%=basePath%>font/news.jsp?advertid="+id;
 			window.open(temp);
 		}else{
 			$.messager.alert('警告','您没有选择','error');
@@ -174,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(situation==1){
 				$.messager.alert('警告','该广告已通过，无法编辑','error');
 			}else
-				location.href="AlertAdvert.jsp?newsid="+id;
+				location.href="AlertAdvert.jsp?advertid="+id;
 		}else{
 			$.messager.alert('警告','您没有选择','error');
 		};
