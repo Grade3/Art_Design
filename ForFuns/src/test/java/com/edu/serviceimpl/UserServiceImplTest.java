@@ -20,9 +20,9 @@ public class UserServiceImplTest {
 	@Test
 	public void testSave() {
 		UserBean user = new UserBean();
-		user.setId(2);
 		user.setUsername("428");
 		userService.save(user);
+	
 	}
 	
 	/*@Autowired

@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function getData(queryParams){
 		
 		$('#grid').datagrid({
-			url: '<%=basePath%>/user.do?method=getUserbypage',
+			url: '<%=basePath%>/product.do?method=getProductbypage',
 			queryParams: queryParams,
 			remoteSort:false,
 			nowrap: true, //换行属性
@@ -52,19 +52,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			]],
 			columns: [[
 				{field:'id',title:'ID',sortable:true,width:80,sortable:true,},
-				{field:'username',title:'用户名',sortable:true,width:120,sortable:true,
-					editor: { type: 'validatebox',options: { required: true}  }
+				{field:'name',title:'商品名称',sortable:true,width:120,sortable:true,
 				},
-				{field:'password',title:'密码',sortable:true,width:120,sortable:true,
-					editor: { type: 'validatebox',options: { required: true}  }
+				{field:'authorname',title:'作者',sortable:true,width:120,sortable:true,
+				},
+				{field:'imgurl',title:'封面图片',sortable:true,width:120,sortable:true,
+					formatter:function(value,row,index){return "<img style='width:120px;height:70px;' src='"+row.imgurl+"' />";}
+				},
+				{field:'typename',title:'分类',sortable:true,width:120,sortable:true,
+				},
+				{field:'methodname',title:'出售方式',sortable:true,width:120,sortable:true,
+				},
+				{field:'situation',title:'状态',sortable:true,width:120,sortable:true,
+					formatter:function(value,row,index){
+						if(value==0){
+							return "未上架";
+						}else if(value==1){
+							return "上架中";
+						}else if(value==2){
+							return "已下架";
+						}else if(value==3){
+							return "已出售";
+						}
+					}
 				},
 			]],
 			toolbar:[
-			   {//添加数据
-				   text:"添加",
-				   iconCls: "icon-add",
-				   handler: _insertRow,
-				
+			   {//保存修改
+				   text: "查看",
+				   iconCls: "icon-ok",
+				   handler: _saveRows,
 			   },'-',{//修改数据s
 				   text:"编辑",
 				   iconCls: "icon-edit",
@@ -73,10 +90,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   text: "删除",
 				   iconCls: "icon-remove",
 				   handler: _removeRow,
-			   },'-',{//保存修改
-				   text: "保存",
-				   iconCls: "icon-save",
-				   handler: _saveRows,
 			   },'-',{
 				   text: "搜索",
 				   iconCls: "icon-search",
@@ -252,7 +265,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	
 	//更改datebox的日期格式
-	function myformatter(value, row, index) {
+	function myformatter(value) {
 		//return new Date(parseInt(value)).toLocaleString().replace(/年|月/g, "-")
 		//		.replace(/日/g, " ");
 		var myDate = new Date(parseInt(value));

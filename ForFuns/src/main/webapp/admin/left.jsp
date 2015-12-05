@@ -134,6 +134,11 @@
                          <li ><a target="rightFrame" href="./ManageAdvert.jsp">审核广告</a></li>
                     </ul>
                 </li>
+                <li><a href="#"><img src="<%=basePath%>admin/img/icons/menu/brush.png" alt="" />商品管理</a>
+                    <ul class="subul">
+                         <li ><a target="rightFrame" href="./ManageProduct.jsp">商品管理</a></li>
+                    </ul>
+                </li>
                 <!--
                 <li ><a href="#"><img src="<%=basePath%>admin/img/icons/menu/brush.png" alt="" /> Elements</a>
                     <ul class="subul">

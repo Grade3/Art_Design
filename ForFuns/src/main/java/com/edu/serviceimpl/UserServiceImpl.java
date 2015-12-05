@@ -39,7 +39,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean> implements IUserS
 	@Override
 	public void save(UserBean user) {
 		userDao.addEntity(user);
-		
 		/*int i=1/0;
 		userDao.addEntity(user);*/
 	}
