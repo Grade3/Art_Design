@@ -1,5 +1,6 @@
 package com.edu.model;
 
+import java.beans.Transient;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -32,13 +34,23 @@ public class ProductBean {
 	private String imgone;//图片1地址
 	private String imgtwo;//图片2地址
 	private String imgthree;//图片3地址
-	private Integer position;//状态  0：未上架   1：上架中  2：已下架  3：已出售
+	private Integer situation;//状态  0：未上架   1：上架中  2：已下架  3：已出售
 	private ArtistBean artistBean;
 	private ProductTypeBean productTypeBean;
+	private ProductSellBean productSellBean;
+	@Transient
+	@OneToOne( cascade = CascadeType.ALL, mappedBy = "productBean")
+	public ProductSellBean getProductSellBean() {
+		return productSellBean;
+	}
+	public void setProductSellBean(ProductSellBean productSellBean) {
+		this.productSellBean = productSellBean;
+	}
 	public ProductBean(Integer id, String name, String imgurl, Integer money,
 			Date timestart, Date timeout, String content, String imgone,
-			String imgtwo, String imgthree, Integer position,
-			ArtistBean artistBean, ProductTypeBean productTypeBean) {
+			String imgtwo, String imgthree, Integer situation,
+			ArtistBean artistBean, ProductTypeBean productTypeBean,
+			ProductSellBean productSellBean) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -50,9 +62,10 @@ public class ProductBean {
 		this.imgone = imgone;
 		this.imgtwo = imgtwo;
 		this.imgthree = imgthree;
-		this.position = position;
+		this.situation = situation;
 		this.artistBean = artistBean;
 		this.productTypeBean = productTypeBean;
+		this.productSellBean = productSellBean;
 	}
 	public ProductBean() {
 		super();
@@ -129,12 +142,12 @@ public class ProductBean {
 	public void setImgthree(String imgthree) {
 		this.imgthree = imgthree;
 	}
-	@Column(name = "position")
-	public Integer getPosition() {
-		return position;
+	@Column(name = "situation")
+	public Integer getSituation() {
+		return situation;
 	}
-	public void setPosition(Integer position) {
-		this.position = position;
+	public void setSituation(Integer situation) {
+		this.situation = situation;
 	}
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="artistid")

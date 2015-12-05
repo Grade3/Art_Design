@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-12-04 22:11:22
+Date: 2015-12-05 09:00:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -167,6 +167,26 @@ CREATE TABLE `pm_productmoney` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `ps_productsell`
+-- ----------------------------
+DROP TABLE IF EXISTS `ps_productsell`;
+CREATE TABLE `ps_productsell` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `productid` int(11) DEFAULT NULL,
+  `sellmethodid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_b767vrittw9fd943i9hig7yij` (`sellmethodid`),
+  KEY `FK_em1wxfqchkn2yluip1xc4krfb` (`productid`),
+  CONSTRAINT `FK_b767vrittw9fd943i9hig7yij` FOREIGN KEY (`sellmethodid`) REFERENCES `sm_sellmethod` (`id`),
+  CONSTRAINT `FK_em1wxfqchkn2yluip1xc4krfb` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ps_productsell
+-- ----------------------------
+INSERT INTO `ps_productsell` VALUES ('1', '1', '1');
+
+-- ----------------------------
 -- Table structure for `pt_producttype`
 -- ----------------------------
 DROP TABLE IF EXISTS `pt_producttype`;
@@ -174,11 +194,12 @@ CREATE TABLE `pt_producttype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pt_producttype
 -- ----------------------------
+INSERT INTO `pt_producttype` VALUES ('1', '字画');
 
 -- ----------------------------
 -- Table structure for `p_product`
@@ -190,24 +211,25 @@ CREATE TABLE `p_product` (
   `imgurl` varchar(255) DEFAULT NULL,
   `artistid` int(11) NOT NULL,
   `money` int(11) DEFAULT NULL,
-  `timestart` time DEFAULT NULL,
-  `timeout` time DEFAULT NULL,
+  `timestart` date DEFAULT NULL,
+  `timeout` date DEFAULT NULL,
   `typeid` int(11) DEFAULT NULL,
   `content` text,
   `imgone` varchar(255) DEFAULT NULL,
   `imgtwo` varchar(255) DEFAULT NULL,
   `imgthree` varchar(255) DEFAULT NULL,
-  `position` int(11) DEFAULT NULL,
+  `situation` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_3a2286hejr4r95bofseli5r42` (`artistid`),
   KEY `FK_b3oo9oqhednel04ew5ix08gxa` (`typeid`),
   CONSTRAINT `FK_3a2286hejr4r95bofseli5r42` FOREIGN KEY (`artistid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_b3oo9oqhednel04ew5ix08gxa` FOREIGN KEY (`typeid`) REFERENCES `pt_producttype` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of p_product
 -- ----------------------------
+INSERT INTO `p_product` VALUES ('1', 'kh', '1', '1', '1', '2015-12-05', '2015-12-29', '1', '1', '1', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for `rf_rolefunction`
@@ -258,11 +280,12 @@ CREATE TABLE `sm_sellmethod` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sm_sellmethod
 -- ----------------------------
+INSERT INTO `sm_sellmethod` VALUES ('1', '一口价');
 
 -- ----------------------------
 -- Table structure for `ur_userrole`
