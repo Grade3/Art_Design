@@ -156,10 +156,13 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 		for (int i = 0; i < id.length; i++) {
 			temp[i] = Integer.parseInt(id[i]);
 		}
-		int result = advertService.DeleteBatch(AdvertBean.class, temp);
-		if (result == 1)
+		try {
+			advertService.DeleteBatch(AdvertBean.class, temp);
 			return "true";
-		return "error";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
 	}
 	
 	

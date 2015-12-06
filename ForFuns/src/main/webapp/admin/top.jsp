@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
  <head>
+ <link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
         <title>Your Admin Panel</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 

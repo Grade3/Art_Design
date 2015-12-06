@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edu.model.CustomerBean;
+import com.edu.model.NewsBean;
 import com.edu.model.ProductBean;
 import com.edu.model.ProductSellBean;
 import com.edu.model.ProductTypeBean;
@@ -29,6 +30,7 @@ import com.edu.service.ICustomerService;
 import com.edu.service.IProductService;
 import com.edu.service.IProductTypeService;
 import com.edu.service.ISellMethodService;
+import com.edu.table.NewsTable;
 import com.edu.viewentity.ProductVO;
 
 
@@ -136,4 +138,22 @@ public class ProductController {
 		}
 		return "0";
 	}
+	
+	
+	/**
+	 * 获取分类广告
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=GetOnlineProduct")
+	public Map<String, Object> JsonGetOnlineNews(@RequestParam(value="page")Integer page,@RequestParam(value="pageSize")Integer pageSize,@RequestParam(value="typeid")Integer typeid){
+		Map<String , Object> map = new HashMap<String, Object>();
+		List<ProductBean> list = productService.getOnlineProduct(page, pageSize, typeid);
+		int total = productService.getOnlineProductTotal(typeid);
+		List<ProductVO> productVOs = ProductVO.ChangeListProductToProductVo(list);
+		map.put("list", productVOs);
+		map.put("total", total);
+		return map;
+	}
+	
 }

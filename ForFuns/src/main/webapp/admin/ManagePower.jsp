@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 <title>查看列表</title>
 <link rel="stylesheet" type="text/css"
 	href="<%=path%>/css/easyUI/themes/gray/easyui.css">

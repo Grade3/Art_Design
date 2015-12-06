@@ -78,10 +78,14 @@ public class RoleController {
 		for (int i = 0; i < id.length; i++) {
 			temp[i] = Integer.parseInt(id[i]);
 		}
-		int result = roleService.DeleteBatch(RoleBean.class, temp);
-		if (result == 1)
+		try {
+			roleService.DeleteBatch(RoleBean.class, temp);
 			return "true";
-		return "error";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		
 	}
 	
 	

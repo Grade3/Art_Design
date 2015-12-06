@@ -35,14 +35,9 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public int DeleteBatch(Class clz, int[] ids) {
-		try {
-			baseDao.deleteBatch(clz, ids);
-			return 1;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 0;
-		}
+	public int DeleteBatch(Class clz, int[] ids) throws Exception {
+		baseDao.deleteBatch(clz, ids);
+		return 1;
 	}
 
 	@Override

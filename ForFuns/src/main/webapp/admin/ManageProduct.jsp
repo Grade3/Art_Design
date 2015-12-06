@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 <title>查看列表</title>
 <%-- <link rel="stylesheet" type="text/css"
 	href="<%=path%>/css/easyUI/themes/gray/easyui.css"> --%>
@@ -33,6 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(temp[0] == objName) return unescape(temp[1]); 
 		} 
 	};
+	//获取商品类型
 	function GetAllType(){
 		$.ajax({
 			type:'post',
@@ -57,6 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			},
 		});
 	};
+	//获取出售方式
 	function GetAllSell(){
 		$.ajax({
 			type:'post',

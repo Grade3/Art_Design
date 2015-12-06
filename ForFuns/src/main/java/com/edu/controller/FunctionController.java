@@ -122,10 +122,13 @@ public class FunctionController {
 		for (int i = 0; i < id.length; i++) {
 			temp[i] = Integer.parseInt(id[i]);
 		}
-		int result = functionService.DeleteBatch(FunctionBean.class, temp);
-		if (result == 1)
+		try {
+			functionService.DeleteBatch(FunctionBean.class, temp);
 			return "true";
-		return "error";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
 	}
 	
 	
