@@ -135,5 +135,14 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 		}
 		return null;
 	}
+
+	public IBaseDao getBaseDao() {
+		return baseDao;
+	}
+
+	public void setBaseDao(IBaseDao baseDao) {
+		this.baseDao = baseDao;
+	}
+	
 	
 }

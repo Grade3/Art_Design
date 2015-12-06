@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 
 /**
  * 商品出售方式表
@@ -20,10 +22,11 @@ import javax.persistence.Table;
  */
 @Table(name="ps_productsell")
 @Entity
+@JsonIgnoreProperties(value="productBean")
 public class ProductSellBean {
 	private Integer id;
 	private ProductBean productBean;
-
+	
 	private SellMethodBean sellMethodBean;
 	public ProductSellBean(Integer id, ProductBean productBean,
 			SellMethodBean sellMethodBean) {
@@ -44,7 +47,7 @@ public class ProductSellBean {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	@OneToOne  
+	@OneToOne(fetch=FetchType.LAZY)  
     @JoinColumn(name="productid") 
 	public ProductBean getProductBean() {
 		return productBean;

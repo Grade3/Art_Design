@@ -12,7 +12,7 @@ public class GetConfigData {
 	public static String getDatabyKey(String key){
 		String data="";
 		try {
-			prop.load(GetConfigData.class.getClassLoader().getResourceAsStream("Config.properties"));
+			prop.load(GetConfigData.class.getClassLoader().getResourceAsStream("methodconfig.properties"));
 			data = prop.getProperty(key);
 		} catch (IOException e) {
 			e.printStackTrace();

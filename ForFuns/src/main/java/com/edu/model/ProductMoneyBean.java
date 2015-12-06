@@ -1,5 +1,7 @@
 package com.edu.model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,13 +25,24 @@ public class ProductMoneyBean{
 	private ProductBean productBean;
 	private CustomerBean customerBean;
 	private Integer money;
+	private Date currenttime;
+	
+	public ProductMoneyBean(ProductBean productBean, CustomerBean customerBean,
+			Integer money, Date currenttime) {
+		super();
+		this.productBean = productBean;
+		this.customerBean = customerBean;
+		this.money = money;
+		this.currenttime = currenttime;
+	}
 	public ProductMoneyBean(Integer id, ProductBean productBean,
-			CustomerBean customerBean, Integer money) {
+			CustomerBean customerBean, Integer money, Date currenttime) {
 		super();
 		this.id = id;
 		this.productBean = productBean;
 		this.customerBean = customerBean;
 		this.money = money;
+		this.currenttime = currenttime;
 	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -65,6 +78,13 @@ public class ProductMoneyBean{
 	}
 	public ProductMoneyBean() {
 		super();
+	}
+	@Column(name="currenttime")
+	public Date getCurrenttime() {
+		return currenttime;
+	}
+	public void setCurrenttime(Date currenttime) {
+		this.currenttime = currenttime;
 	}
 	
 }
