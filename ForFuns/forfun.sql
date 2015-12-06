@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-12-06 10:01:17
+Date: 2015-12-06 22:31:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,12 +37,13 @@ CREATE TABLE `a_advert` (
   PRIMARY KEY (`id`),
   KEY `ADVERUSERID` (`userid`),
   CONSTRAINT `ADVERUSERID` FOREIGN KEY (`userid`) REFERENCES `u_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of a_advert
 -- ----------------------------
-INSERT INTO `a_advert` VALUES ('1', '1', '1', '1', '1', '1', '1', '1', '1', '2015-11-11', '2015-11-26', '1', '1', '1');
+INSERT INTO `a_advert` VALUES ('1', '1', '1', '1', '1', '1', '1', '1', '1', '2015-11-11', '2015-11-26', '2', '1', '');
+INSERT INTO `a_advert` VALUES ('2', '1', '12', '123', '123', '/forfun/advertupload/1449368191704.jpg', '1231312', '13', '0', '2015-12-06', '2015-12-31', '0', '0', '');
 
 -- ----------------------------
 -- Table structure for `c_customer`
@@ -161,7 +162,7 @@ CREATE TABLE `pm_productmoney` (
   KEY `FK_ner8fgw1gx6osl7b6i6fxvxei` (`productid`),
   CONSTRAINT `FK_medowh6ptfyd3ag6j59viq9np` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_ner8fgw1gx6osl7b6i6fxvxei` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pm_productmoney
@@ -185,7 +186,7 @@ CREATE TABLE `ps_productsell` (
 -- ----------------------------
 -- Records of ps_productsell
 -- ----------------------------
-INSERT INTO `ps_productsell` VALUES ('1', '1', '1');
+INSERT INTO `ps_productsell` VALUES ('1', '1', '2');
 INSERT INTO `ps_productsell` VALUES ('2', '2', '1');
 
 -- ----------------------------
@@ -231,7 +232,7 @@ CREATE TABLE `p_product` (
 -- ----------------------------
 -- Records of p_product
 -- ----------------------------
-INSERT INTO `p_product` VALUES ('1', 'kh', '1', '1', '1', '2015-12-05', '2015-12-29', '1', '1', '1', '1', '1', '1');
+INSERT INTO `p_product` VALUES ('1', 'kh', '1', '1', '1', '2015-12-06', '2015-12-29', '1', '1', '1', '1', '1', '1');
 INSERT INTO `p_product` VALUES ('2', 'lxn', '1', '1', '1', '2015-12-05', '2015-12-29', '1', '1', '1', '1', '1', '0');
 
 -- ----------------------------
@@ -283,12 +284,13 @@ CREATE TABLE `sm_sellmethod` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sm_sellmethod
 -- ----------------------------
 INSERT INTO `sm_sellmethod` VALUES ('1', '一口价');
+INSERT INTO `sm_sellmethod` VALUES ('2', '拍卖');
 
 -- ----------------------------
 -- Table structure for `ur_userrole`
