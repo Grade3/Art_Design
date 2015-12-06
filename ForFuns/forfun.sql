@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-12-05 09:00:05
+Date: 2015-12-06 10:01:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -155,12 +155,13 @@ CREATE TABLE `pm_productmoney` (
   `productid` int(11) DEFAULT NULL,
   `customerid` int(11) DEFAULT NULL,
   `money` int(11) DEFAULT NULL,
+  `currenttime` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_medowh6ptfyd3ag6j59viq9np` (`customerid`),
   KEY `FK_ner8fgw1gx6osl7b6i6fxvxei` (`productid`),
   CONSTRAINT `FK_medowh6ptfyd3ag6j59viq9np` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_ner8fgw1gx6osl7b6i6fxvxei` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pm_productmoney
@@ -179,12 +180,13 @@ CREATE TABLE `ps_productsell` (
   KEY `FK_em1wxfqchkn2yluip1xc4krfb` (`productid`),
   CONSTRAINT `FK_b767vrittw9fd943i9hig7yij` FOREIGN KEY (`sellmethodid`) REFERENCES `sm_sellmethod` (`id`),
   CONSTRAINT `FK_em1wxfqchkn2yluip1xc4krfb` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ps_productsell
 -- ----------------------------
 INSERT INTO `ps_productsell` VALUES ('1', '1', '1');
+INSERT INTO `ps_productsell` VALUES ('2', '2', '1');
 
 -- ----------------------------
 -- Table structure for `pt_producttype`
@@ -224,12 +226,13 @@ CREATE TABLE `p_product` (
   KEY `FK_b3oo9oqhednel04ew5ix08gxa` (`typeid`),
   CONSTRAINT `FK_3a2286hejr4r95bofseli5r42` FOREIGN KEY (`artistid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_b3oo9oqhednel04ew5ix08gxa` FOREIGN KEY (`typeid`) REFERENCES `pt_producttype` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of p_product
 -- ----------------------------
 INSERT INTO `p_product` VALUES ('1', 'kh', '1', '1', '1', '2015-12-05', '2015-12-29', '1', '1', '1', '1', '1', '1');
+INSERT INTO `p_product` VALUES ('2', 'lxn', '1', '1', '1', '2015-12-05', '2015-12-29', '1', '1', '1', '1', '1', '0');
 
 -- ----------------------------
 -- Table structure for `rf_rolefunction`
@@ -317,7 +320,7 @@ CREATE TABLE `u_user` (
   `username` varchar(30) DEFAULT NULL,
   `password` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of u_user
@@ -329,7 +332,6 @@ INSERT INTO `u_user` VALUES ('4', '111', '111');
 INSERT INTO `u_user` VALUES ('5', '21', '21');
 INSERT INTO `u_user` VALUES ('55', '1231', '23424');
 INSERT INTO `u_user` VALUES ('56', '1231', '123131');
-INSERT INTO `u_user` VALUES ('57', 'æµè¯', '23');
 
 -- ----------------------------
 -- Procedure structure for `TimeOut`
