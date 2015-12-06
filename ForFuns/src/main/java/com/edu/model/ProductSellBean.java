@@ -26,8 +26,9 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 public class ProductSellBean {
 	private Integer id;
 	private ProductBean productBean;
-	
 	private SellMethodBean sellMethodBean;
+	
+	
 	public ProductSellBean(Integer id, ProductBean productBean,
 			SellMethodBean sellMethodBean) {
 		super();

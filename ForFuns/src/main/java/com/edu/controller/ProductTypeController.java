@@ -121,7 +121,6 @@ public class ProductTypeController
 		return "true";
 	}
 
-	//[{\"id\":1,\"name\":\"C\",\"size\":\"\",\"date\":\"02/19/2010\",\"children\":[{\"id\":2,\"name\":\"Program Files\",\"size\":\"120 MB\",\"date\":\"03/20/2010\",\"children\":[{\"id\":21,\"name\":\"Java\",\"size\":\"\",\"date\":\"01/13/2010\",\"state\":\"closed\",\"children\":[{\"id\":211,\"name\":\"java.exe\",\"size\":\"142 KB\",\"date\":\"01/13/2010\"},{\"id\":212,\"name\":\"jawt.dll\",\"size\":\"5 KB\",\"date\":\"01/13/2010\"}]}]}]}]
 	@RequestMapping(params="method=gettest")
 	@ResponseBody
 	public String JsonGetTree(){
@@ -129,7 +128,7 @@ public class ProductTypeController
 	}
 
 	/**
-	 * 获取所有的用户
+	 * 获取所有的类型
 	 * @return
 	 */
 	@ResponseBody

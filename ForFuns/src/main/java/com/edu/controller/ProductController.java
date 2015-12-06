@@ -1,5 +1,9 @@
 package com.edu.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +11,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.naming.spi.DirStateFactory.Result;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +21,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edu.model.CustomerBean;
 import com.edu.model.ProductBean;
+import com.edu.model.ProductSellBean;
+import com.edu.model.ProductTypeBean;
+import com.edu.model.SellMethodBean;
 import com.edu.proxy.ProductProxy;
 import com.edu.service.ICustomerService;
 import com.edu.service.IProductService;
+import com.edu.service.IProductTypeService;
+import com.edu.service.ISellMethodService;
 import com.edu.viewentity.ProductVO;
 
 
@@ -31,8 +41,13 @@ public class ProductController {
 	
 	@Autowired
 	private ICustomerService customerService;
-	@Resource
+	@Autowired
 	private ProductProxy productProxy;
+	
+	@Autowired
+	private ISellMethodService sellMethodService;
+	@Autowired
+	private IProductTypeService productTypeService;
 	
 	/**
 	 * 获取分页列表
@@ -84,6 +99,41 @@ public class ProductController {
 		return map;
 	}
 	
-	
-	
+	/*@RequestMapping(params="method=AlertProduct")
+	public String JsonAlertProduct(@RequestParam(value="name")String productname,@RequestParam(value="typename")Integer typeid,
+			@RequestParam(value="methodname")Integer methodid,@RequestParam(value="situation")Integer situation,
+			@RequestParam(value="timestart")Date timestart,@RequestParam(value="timeout")Date timeout){
+		return "";
+	}*/
+	@ResponseBody
+	@RequestMapping(params="method=AlertProduct")
+	public String JsoonAlertProduct(@RequestParam(value="data")String data){
+		try {
+			data = URLDecoder.decode(data,"utf-8");
+			data = data.substring(1,data.length()-1);
+			System.out.println(data);
+			JSONObject jsonObject = new JSONObject(data);
+			Integer id = jsonObject.getInt("id");
+			ProductBean productBean = productService.GetEntityById(ProductBean.class, id);
+			String name = jsonObject.getString("name");
+			productBean.setName(name);
+			Integer typeid = jsonObject.getInt("typeid");
+			Integer methodid = jsonObject.getInt("methodid");
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+			Date timestart = sdf.parse(jsonObject.getString("timestart"));
+			productBean.setTimestart(timestart);
+			Date timeout = sdf.parse(jsonObject.getString("timeout"));
+			productBean.setTimeout(timeout);
+			SellMethodBean sellMethodBean = sellMethodService.GetEntityById(SellMethodBean.class, methodid);
+			productBean.getProductSellBean().setSellMethodBean(sellMethodBean);
+			//System.out.println(productBean.getProductSellBean().getSellMethodBean().getName());
+			ProductTypeBean productTypeBean = productTypeService.GetEntityById(ProductTypeBean.class, typeid);
+			productBean.setProductTypeBean(productTypeBean);
+			productService.UpdataBean(productBean);
+			return "1";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "0";
+	}
 }
