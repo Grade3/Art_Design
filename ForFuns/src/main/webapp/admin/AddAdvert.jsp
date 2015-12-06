@@ -120,7 +120,7 @@ function submitForm(){
 			if(0==data){
 				$.message.alert('警告','发布失败','error');
 			}else if(1==data){
-				alert("1")
+				alert("1");
 				location.href="WatchAdvert.jsp";
 			}
 		}
