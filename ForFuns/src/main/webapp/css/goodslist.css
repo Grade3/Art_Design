@@ -166,4 +166,20 @@ ul.sub li:hover
 
 }
 
+.learn_more
+{
+	background-color: #eeeeee;
+	text-align: center;
+	padding: 1.5em 0;
+	margin: 2em 0 0;
+	cursor: pointer;
+}
+
+.learn_more p
+{
+	font-size: 1.7em;
+	margin: 0px;
+	color: #7d7d7d;
+}
+
 

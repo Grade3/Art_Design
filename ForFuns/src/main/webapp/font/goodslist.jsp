@@ -15,12 +15,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="../css/goodslist.css">
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
-<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 </head>
 <body>
 
 <a href="javascript:;" class="lanrenzhijia_top"></a>
 <script src="../js/lanrenzhijia.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -45,20 +45,7 @@ $(document).ready(function(){
 });
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	var width = $(".good_item").width();
-	var height = width/2.5*3;
-  	$(".good_item").height(height);
 
-  	$(window).resize(function() {
-  		var width = $(".good_item").width();
-		var height = width/2.5*3;
-  		$(".good_item").height(height);
-  	});
-  
-});
-</script>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -110,14 +97,21 @@ function GetAllOnlineProduct(typeid,page,pageSize){
 					if(i%2==0){
 						tempbody +="<div class='col-md-6 goods_two'>";
 					}
-					tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp'><img src='../image/bg_login1.jpg' class='good_item'></a>"
-							 +"<div class='good_name'><p>商品名称</p><p>艺术家</p><p class='price'>￥99.0</p><a href='goodsdetail.jsp' class='readmore'>详情</a></div></div>";
-					if(i%2==0){
+					tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp'><img src='"+imgurl+"' class='good_item'></a>"
+							 +"<div class='good_name'><p>"+name+"</p><p>"+authorname+"</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp' class='readmore'>详情</a></div></div>";
+					if(i%2==1){
 						tempbody +="</div>";
 					}
 					body+=tempbody;
 				}
+				if(page*pageSize <globaltotal){
+					body +="<div class='col-xs-12 learn_more'><p>查看更多</p></div>";
+				}
 				$('#goodlist').append(body);
+				var width = $(".good_item").width();
+				var height = width/2.5*3;
+			  	$(".good_item").height(height);
+
 			}else{
 				
 			}
@@ -129,12 +123,29 @@ $(document).ready(function(){
 	var globaltotal = 0;
 	var typeid = 1;
 	var page = 1 ;
-	var pageSize = 1;
+	var pageSize = 12;
 	GetAllOnlineProduct(typeid,page,pageSize);
 	GetAllType();
+	$('.learn_more').live('click',function(){
+		 page = page +1 ;
+		 GetAllOnlineProduct(typeid,page,pageSize);
+		 $(this).hide();
+  	});
+	
+	
+  	$(window).resize(function() {
+  		var width = $(".good_item").width();
+		var height = width/2.5*3;
+  		$(".good_item").height(height);
+  	});
 });
 </script>
-
+<!-- <script type="text/javascript">
+$(document).ready(function(){
+	
+  
+});
+</script> -->
 
 	<div class="header-top">
 			<div class="container">
@@ -232,7 +243,7 @@ $(document).ready(function(){
 			<div class="col-lg-10 good_four" id="goodlist">
 			
 
-				<div class="col-md-6 goods_two">
+				<!-- <div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
 						<a href="goodsdetail.jsp"><img src="../image/bg_login1.jpg" class="good_item"></a>
 						<div class="good_name">
@@ -353,7 +364,12 @@ $(document).ready(function(){
 							<a href="goodsdetail.jsp" class="readmore">详情</a>
 						</div>
 					</div>
-				</div>
+				</div> -->
+				
+				<!-- <div class="col-xs-12 learn_more">
+					<p>查看更多</p>
+				</div> -->
+				
 			</div>
 			
 		</div>
