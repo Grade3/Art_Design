@@ -88,30 +88,51 @@ function GetAllType(){
 		},
 	});
 };
-$(document).ready(function(){
-	GetAllType();
-});
-//获取相应类型的商品
-function GetAllType(){
+function GetAllOnlineProduct(typeid,page,pageSize){
 	$.ajax({
 		type:'post',
-		url:'<%=basePath%>/productType.do?method=GetOnlineProduct',
-		data:{},
+		asycn:false,
+		url:'<%=basePath%>/product.do?method=GetOnlineProduct',
+		data:{typeid:typeid,page:page,pageSize:pageSize},
 		success:function(json){
-			json = json.list;
-			if(json.length>0){
+			var products = json.list;
+			var total = json.total;
+			globaltotal = total;
+			if(products.length>0){
 				var body = "";
-				for(var i=0;i<json.length;i++){
+				var tempbody ="";
+				for(var i=0;i<products.length;i++){
+					tempbody ="";
+					var imgurl = products[i].imgurl;
+					var name = products[i].name;
+					var money = products[i].initmoney;
+					var authorname = products[i].authorname;
+					if(i%2==0){
+						tempbody +="<div class='col-md-6 goods_two'>";
+					}
+					tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp'><img src='../image/bg_login1.jpg' class='good_item'></a>"
+							 +"<div class='good_name'><p>商品名称</p><p>艺术家</p><p class='price'>￥99.0</p><a href='goodsdetail.jsp' class='readmore'>详情</a></div></div>";
+					if(i%2==0){
+						tempbody +="</div>";
+					}
+					body+=tempbody;
 				}
+				$('#goodlist').append(body);
+			}else{
+				
 			}
 		},error:function(){
 		},
 	});
 };
 $(document).ready(function(){
+	var globaltotal = 0;
+	var typeid = 1;
+	var page = 1 ;
+	var pageSize = 1;
+	GetAllOnlineProduct(typeid,page,pageSize);
 	GetAllType();
 });
-
 </script>
 
 
@@ -208,7 +229,8 @@ $(document).ready(function(){
 				</div>
 			</div>
 
-			<div class="col-lg-10 good_four">
+			<div class="col-lg-10 good_four" id="goodlist">
+			
 
 				<div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">

@@ -273,7 +273,7 @@ public class CustomerController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(params="method=GetCustomerName")
+	@RequestMapping(params="method=GetCustomerName",produces="text/html;charset=UTF-8")
 	public String JsonGetUserName(@RequestParam(value="customerid")String customerid){
 		return customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, customerid, null).getUsername();
 	}

@@ -141,7 +141,7 @@ public class ProductController {
 	
 	
 	/**
-	 * 获取分类广告
+	 * 获取对应分配商品
 	 * @return
 	 */
 	@ResponseBody
