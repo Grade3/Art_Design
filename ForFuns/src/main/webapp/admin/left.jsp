@@ -137,6 +137,7 @@
                 <li><a href="#"><img src="<%=basePath%>admin/img/icons/menu/brush.png" alt="" />商品管理</a>
                     <ul class="subul">
                          <li ><a target="rightFrame" href="./ManageProduct.jsp">商品管理</a></li>
+                         <li ><a target="rightFrame" href="./ManageProductType.jsp">商品类别管理</a></li>
                     </ul>
                 </li>
                 <!--
