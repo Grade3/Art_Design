@@ -19,7 +19,7 @@ public interface IProductDao extends IBaseDao<ProductBean>{
 	 * @param pageSize
 	 * @return
 	 */
-	public List<ProductBean> GetOnlineProduct(int page,int pageSize,int typeid);
+	public List<ProductBean> GetOnlineProduct(int page,int pageSize,int typeid,int methodi);
 	
 	/**
 	 * 获取上线商品数量

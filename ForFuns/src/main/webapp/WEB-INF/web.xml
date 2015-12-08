@@ -70,4 +70,12 @@
 		<filter-name>AdminLoginFilter</filter-name>
 		<url-pattern>/admin/main.jsp</url-pattern>
 	</filter-mapping>  
+	<!-- <error-page>
+    	<error-code>404</error-code>
+   	 	<location>/font/home.jsp</location>
+  	</error-page>
+  	<error-page>
+    	<error-code>400</error-code>
+   	 	<location>/font/home.jsp</location>
+  	</error-page> -->
 </web-app>

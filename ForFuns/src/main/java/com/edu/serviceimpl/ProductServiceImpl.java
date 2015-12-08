@@ -20,8 +20,8 @@ public class ProductServiceImpl extends BaseServiceImpl<ProductBean> implements 
 	private IProductDao productDao;
 	
 	@Override
-	public List<ProductBean> getOnlineProduct(int page, int pageSize,int typeid) {
-		return productDao.GetOnlineProduct(page, pageSize, typeid);
+	public List<ProductBean> getOnlineProduct(int page, int pageSize,int typeid,int methodid) {
+		return productDao.GetOnlineProduct(page, pageSize, typeid,methodid);
 	}
 
 	@Override

@@ -22,6 +22,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="../js/lanrenzhijia.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}; 
+//获取cookie
+function getCookie(objName){//获取指定名称的cookie的值 
+	var arrStr = document.cookie.split("; "); 
+	for(var i = 0;i < arrStr.length;i ++){ 
+		var temp = arrStr[i].split("="); 
+		if(temp[0] == objName) return unescape(temp[1]); 
+	} 
+};
+
+//通过id获取商品详情 
+function getProductById(id){
+	$.ajax({
+		type:'post',
+		url:'<%=basePath%>/product.do?method=GetProductById',
+		data:{productid:id},
+		success:function(json){
+			var product = json.product;
+			var id = product.id;
+			var name= product.name;
+			var imgurl = product.imgurl;
+			var authorname = product.authorname;
+			var content = product.content;
+			var imgone = product.imgone;
+			var imgtwo = product.imgtwo;
+			var imgthree = prodcut.imgthree;
+			var situation = product.situation;
+			var methodid = prodcut.methodid;
+		},error:function(){
+			
+		}
+	});
+}
+$(document).ready(function(){
+	var productid = getUrlParam("productid");
+	getProductById(productid);
+});
+</script>
+<script>
 $(function(){
 	$(window).scroll(function(){
 		var _top = $(window).scrollTop();

@@ -80,7 +80,7 @@ function GetAllOnlineProduct(typeid,page,pageSize){
 		type:'post',
 		asycn:false,
 		url:'<%=basePath%>/product.do?method=GetOnlineProduct',
-		data:{typeid:typeid,page:page,pageSize:pageSize},
+		data:{typeid:typeid,page:page,pageSize:pageSize,methodid:1},
 		success:function(json){
 			var products = json.list;
 			var total = json.total;
@@ -90,6 +90,7 @@ function GetAllOnlineProduct(typeid,page,pageSize){
 				var tempbody ="";
 				for(var i=0;i<products.length;i++){
 					tempbody ="";
+					var id = products[i].id;
 					var imgurl = products[i].imgurl;
 					var name = products[i].name;
 					var money = products[i].initmoney;
@@ -98,7 +99,7 @@ function GetAllOnlineProduct(typeid,page,pageSize){
 						tempbody +="<div class='col-md-6 goods_two'>";
 					}
 					tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp'><img src='"+imgurl+"' class='good_item'></a>"
-							 +"<div class='good_name'><p>"+name+"</p><p>"+authorname+"</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp' class='readmore'>详情</a></div></div>";
+							 +"<div class='good_name'><p>"+name+"</p><p>"+authorname+"</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore'>详情</a></div></div>";
 					if(i%2==1){
 						tempbody +="</div>";
 					}

@@ -14,7 +14,7 @@ public interface IProductService extends IBaseService<ProductBean>{
 	 * @param pageSize
 	 * @return
 	 */
-	public List<ProductBean> getOnlineProduct(int page,int pageSize,int typeid);
+	public List<ProductBean> getOnlineProduct(int page,int pageSize,int typeid,int methodid);
 	
 	
 	/**

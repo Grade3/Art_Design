@@ -22,13 +22,15 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 	}
 
 	@Override
-	public List<ProductBean> GetOnlineProduct(int page, int pageSize,int typeid) {
+	public List<ProductBean> GetOnlineProduct(int page, int pageSize,int typeid,int methodid) {
 		String hql ="";
 		List<ProductBean> list = null;
 		try {
-			hql = "from "+ProductBean.class.newInstance().getClass().getName()+" where  current_date() >= timestart and current_date()<=timeout  and typeid="+typeid;
+			hql = "from "+ProductBean.class.newInstance().getClass().getName()+" temp where temp.productSellBean.sellMethodBean.id = ? and  current_date() >= timestart and current_date()<=timeout  and typeid=?";
 			System.out.println(hql);
 			Query query = getSession().createQuery(hql);
+			query.setInteger(0, methodid);
+			query.setInteger(1, typeid);
 			query.setFirstResult((page-1)*pageSize); 
 			query.setMaxResults(pageSize); 
 			list = query.list();

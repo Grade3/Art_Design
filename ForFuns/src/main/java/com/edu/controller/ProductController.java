@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -141,19 +142,34 @@ public class ProductController {
 	
 	
 	/**
-	 * 获取对应分配商品
+	 * 获取对应分类商品
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(params="method=GetOnlineProduct")
-	public Map<String, Object> JsonGetOnlineNews(@RequestParam(value="page")Integer page,@RequestParam(value="pageSize")Integer pageSize,@RequestParam(value="typeid")Integer typeid){
+	public Map<String, Object> JsonGetOnlineNews(@RequestParam(value="page")Integer page,@RequestParam(value="pageSize")Integer pageSize,
+			@RequestParam(value="typeid")Integer typeid,@RequestParam(value="methodid")Integer methodid){
 		Map<String , Object> map = new HashMap<String, Object>();
-		List<ProductBean> list = productService.getOnlineProduct(page, pageSize, typeid);
+		List<ProductBean> list = productService.getOnlineProduct(page, pageSize, typeid,methodid);
 		int total = productService.getOnlineProductTotal(typeid);
 		List<ProductVO> productVOs = ProductVO.ChangeListProductToProductVo(list);
 		map.put("list", productVOs);
 		map.put("total", total);
 		return map;
 	}
-	
+
+	/**
+	 * 根据id获取商品
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=GetProductById")
+	public Map<String, Object> JsonGetProductById(@RequestParam(value="productid")Integer id){
+		Map<String , Object> map = new HashMap<String, Object>();
+		ProductBean productBean = productService.GetEntityById(ProductBean.class, id);
+		ProductVO productVO = new ProductVO(productBean);
+		map.put("product",productVO);
+		return map;
+	}
 }
