@@ -14,7 +14,7 @@ import com.edu.model.ProductBean;
 public class ProductVO {
 	private Integer id;
 	private String name;
-	private String imgurl;
+	private String imgurl;//封面图片
 	private Integer initmoney;
 	private Integer authorid;
 	private String authorname;

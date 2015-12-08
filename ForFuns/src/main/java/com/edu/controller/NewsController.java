@@ -158,10 +158,14 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		for (int i = 0; i < id.length; i++) {
 			temp[i] = Integer.parseInt(id[i]);
 		}
-		int result = newsService.DeleteBatch(NewsBean.class, temp);
-		if (result == 1)
+		try {
+			newsService.DeleteBatch(NewsBean.class, temp);
 			return "true";
-		return "error";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		
 	}
 	
 	

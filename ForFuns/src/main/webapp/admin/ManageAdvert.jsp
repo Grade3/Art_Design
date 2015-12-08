@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 <title>查看列表</title>
 <%-- <link rel="stylesheet" type="text/css"
 	href="<%=path%>/css/easyUI/themes/gray/easyui.css"> --%>
@@ -57,6 +57,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				},
 				{field:'imgurl',title:'封面图片',sortable:true,width:120,sortable:true,
 					formatter:function(value,row,index){return "<img style='width:120px;height:70px;' src='"+row.imgurl+"' />";}
+				},
+				{field:'position',title:'栏位',sortable:true,width:120,sortable:true,
+					formatter:function(value,row,index){
+						if (value == 0 ){
+							return '艺术品成品推荐';
+						} else if(value ==1 ){
+							return '艺术品定制推荐';
+						} else if(value ==2 ){
+							return '艺术家推荐';
+						}
+					}
 				},
 				{field:'isonline',title:'是否上线',sortable:true,width:120,sortable:true,
 					formatter:function(value,row,index){

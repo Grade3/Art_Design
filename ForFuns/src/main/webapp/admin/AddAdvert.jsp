@@ -7,10 +7,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 <title>查看列表</title>
 <%-- <link rel="stylesheet" type="text/css"
 	href="<%=path%>/css/easyUI/themes/gray/easyui.css"> --%>
+	
 <link rel="stylesheet" type="text/css" href="<%=path%>/css/easyUI/themes/bootstrap/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=path%>/css/easyUI/themes/icon.css">
 <script type="text/javascript" src="<%=path%>/js/easyUI/jquery-1.4.4.min.js"></script>
@@ -120,7 +121,7 @@ function submitForm(){
 			if(0==data){
 				$.message.alert('警告','发布失败','error');
 			}else if(1==data){
-				alert("1")
+				alert("1");
 				location.href="WatchAdvert.jsp";
 			}
 		}

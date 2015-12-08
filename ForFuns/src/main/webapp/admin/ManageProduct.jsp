@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
+<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 <title>查看列表</title>
 <%-- <link rel="stylesheet" type="text/css"
 	href="<%=path%>/css/easyUI/themes/gray/easyui.css"> --%>
@@ -22,7 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <script>
-	
+	var TypeChoic = new Array();
+	var SellChoic = new Array();
+	var SituationChoic =[{"value": "0", "text": "未上架"},{"value": "1", "text": "上架中"},{"value": "2", "text": "已下架"},{"value": "3", "text": "已出售"}];
 	//获取指定名称的cookie的值 
 	function getCookie(objName){
 		var arrStr = document.cookie.split("; "); 
@@ -31,10 +33,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(temp[0] == objName) return unescape(temp[1]); 
 		} 
 	};
-	
+	//获取商品类型
+	function GetAllType(){
+		$.ajax({
+			type:'post',
+			async: false,
+			url:'<%=basePath%>/productType.do?method=getAllProductType',
+			data:{},
+			success:function(json){
+				json = json.productTypes;
+				TypeChoic ="[";
+				if(json.length>0){
+					for(var i=0;i<json.length;i++){
+						if(i!=json.length-1)
+							TypeChoic += "{'value': '"+json[i].id+"', 'text':'"+json[i].name+"'},";
+						else
+							TypeChoic += "{'value': '"+json[i].id+"', 'text':'"+json[i].name+"'}";
+					}
+					TypeChoic+="]";
+					TypeChoic =  eval('('+TypeChoic+')');
+				}
+			},error:function(){
+				$.messager.alert("警告", "连接服务器失败","error"); 
+			},
+		});
+	};
+	//获取出售方式
+	function GetAllSell(){
+		$.ajax({
+			type:'post',
+			async: false,
+			url:'<%=basePath%>sellmethod.do?method=GetAllSellMethod',
+			data:{},
+			success:function(json){
+				SellChoic ="[";
+				if(json.length>0){
+					for(var i=0;i<json.length;i++){
+						if(i!=json.length-1)
+							SellChoic += "{'value': '"+json[i].id+"', 'text':'"+json[i].name+"'},";
+						else
+							SellChoic += "{'value': '"+json[i].id+"', 'text':'"+json[i].name+"'}";
+					}
+					SellChoic+="]";
+					SellChoic =  eval('('+SellChoic+')');
+				}
+			},error:function(){
+				$.messager.alert("警告", "连接服务器失败","error"); 
+			},
+		});
+	}
 	//初始化数据函数
 	function getData(queryParams){
-		
 		$('#grid').datagrid({
 			url: '<%=basePath%>/product.do?method=getProductbypage',
 			queryParams: queryParams,
@@ -53,6 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			columns: [[
 				{field:'id',title:'ID',sortable:true,width:80,sortable:true,},
 				{field:'name',title:'商品名称',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
 				},
 				{field:'authorname',title:'作者',sortable:true,width:120,sortable:true,
 				},
@@ -60,8 +110,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					formatter:function(value,row,index){return "<img style='width:120px;height:70px;' src='"+row.imgurl+"' />";}
 				},
 				{field:'typename',title:'分类',sortable:true,width:120,sortable:true,
+					editor:
+	                {
+	                	type : 'combobox',
+	                	options : {
+	                		valueField: "value", textField: "text"  ,
+	                        data:TypeChoic,
+	                        editable:false ,
+	                    }
+	                }
 				},
-				{field:'methodname',title:'出售方式',sortable:true,width:120,sortable:true,
+				{field:'methodid',title:'出售方式',sortable:true,width:120,sortable:true,
+					formatter:function(value,row,index){
+						for(var i=0;i<SellChoic.length;i++){
+							if(SellChoic[i].value==value){
+								return SellChoic[i].text;
+							}
+						}
+					},
+					editor:
+	                {
+	                	type : 'combobox',
+	                	options : {
+	                		valueField: "value", textField: "text"  ,
+	                        data:SellChoic,
+	                        editable:false ,
+	                    }
+	                }
 				},
 				{field:'situation',title:'状态',sortable:true,width:120,sortable:true,
 					formatter:function(value,row,index){
@@ -74,7 +149,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						}else if(value==3){
 							return "已出售";
 						}
-					}
+					},
+					editor:
+	                {
+	                	type : 'combobox',
+	                	options : {
+	                		valueField: "value", textField: "text"  ,
+	                        data:SituationChoic,
+	                        editable:false ,
+	                    }
+	                }
+				},
+				{field:'timestart',title:'上架时间',sortable:true,width:120,sortable:true,
+					formatter:function(value,row,index){
+						return myformatter(value);
+					},
+					editor:
+	                {
+	                	type : 'datebox',
+	                	options: { required: true} 
+	                }
+				},
+				{field:'timeout',title:'下架时间',sortable:true,width:120,sortable:true,
+					formatter:function(value,row,index){
+						return myformatter(value);
+					},
+					editor:
+	                {
+	                	type : 'datebox',
+	                	options: { required: true} 
+	                }
 				},
 			]],
 			toolbar:[
@@ -82,10 +186,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   text: "查看",
 				   iconCls: "icon-ok",
 				   handler: _saveRows,
-			   },'-',{//修改数据s
-				   text:"编辑",
-				   iconCls: "icon-edit",
-				   handler: _editRow,
+			   },'-',{//保存修改
+				   text: "保存",
+				   iconCls: "icon-save",
+				   handler: _saveRows,
 			   },'-',{//删除数据
 				   text: "删除",
 				   iconCls: "icon-remove",
@@ -108,9 +212,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				if(doedit==undefined)   //如果存在在编辑的行，就不可以再打开第二个行进行编辑
 				{					
 					$('#grid').datagrid('selectRow',rowIndex);
+					doedit=rowIndex;
 		        	$('#grid').datagrid('beginEdit',rowIndex);
-		        	doedit=rowIndex;
 				}
+			},
+			onBeforeEdit:function(rowIndex, rowData){
+				var timestart = rowData.timestart;
+				var timeout = rowData.timeout;
+				timestart = myformatter(timestart);
+				timeout = myformatter(timeout);
+				$('#grid').datagrid('updateRow',{
+					index: rowIndex,
+					row: {
+						timestart:timestart,
+						timeout:timeout
+					}
+				});
 			},
 			onLoadSuccess:function(data){//数据刷新的时候，编辑的坐标设为空
 				doedit = undefined;
@@ -207,13 +324,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var updated = $('#grid').datagrid('getChanges', 'updated');
 				var deleted = $('#grid').datagrid('getChanges','deleted');
 				var rows = $('#grid').datagrid('getChanges');
+				if(rows==""||rows==null)
+					return ;
+				if(rows[0].timestart==""||rows[0].timestart==null){
+					$.messager.alert('提示','上架时间不能为空','error');
+					return;
+				}
+				
+				if(rows[0].timeout==""||rows[0].timeout==null){
+					$.messager.alert('提示','上架时间不能为空','error');
+					return;
+				}
 				var rowstr = JSON.stringify(rows);
 		        var url = '';  
-		        if (inserted.length > 0) {  
-		            url = '<%=basePath%>/user.do?method=addUser';  
-		        }  
 		        if (updated.length > 0) {  
-		        	url = '<%=basePath%>/user.do?method=updateUser';   
+		        	url = '<%=basePath%>/product.do?method=AlertProduct';   
 		        }  
 		        
 		        rowstr = encodeURI(rowstr);
@@ -265,26 +390,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	
 	//更改datebox的日期格式
+	//更改datebox的日期格式
 	function myformatter(value) {
-		//return new Date(parseInt(value)).toLocaleString().replace(/年|月/g, "-")
-		//		.replace(/日/g, " ");
-		var myDate = new Date(parseInt(value));
-		var year = myDate.getFullYear();
-		var month = myDate.getMonth() + 1;
-		var day = myDate.getDate();
-		return year + '-' + month + '-' + day;
-	}
-	function myparser(s) {
-		var ss = (s.split('/'));
-		if(ss.length > 1)
-			return ss[2] + "-" + ss[0] + "-" + ss[1];
-		else return s;
+		if(value != null && value != ""){
+			var date = new Date(value);
+	        //return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+			return (date.getMonth() + 1) +"/"+ date.getDate()+"/"+date.getFullYear() ;
+		}
 	}
 	
 	//--------------------------------------主体部分！！！-----------------------------
     var doedit = undefined;//用来记录当前编辑的行，如果没有编辑的行则置为undefined
     $(function(){
 		//获取数据的查询参数----过滤数据
+		GetAllType();
+		GetAllSell();
 		var queryParams;
 		queryParams = {};
 		getData(queryParams);

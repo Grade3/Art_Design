@@ -54,9 +54,10 @@ public interface IBaseService<T>{
 	 * 批量删除
 	 * @param clz
 	 * @param ids
+	 * @throws Exception 
 	 */
 	@SuppressWarnings("rawtypes")
-	public int DeleteBatch(Class clz,int[] ids);
+	public int DeleteBatch(Class clz,int[] ids) throws Exception;
 	
 	
 	/**

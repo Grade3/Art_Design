@@ -14,6 +14,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login</title>
 <link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/login1.css">

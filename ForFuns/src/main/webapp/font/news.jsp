@@ -7,6 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 	<title>Home</title>
 	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
