@@ -67,7 +67,7 @@ function GetAllType(){
 			if(json.length>0){
 				var body = "";
 				for(var i=0;i<json.length;i++){
-					body+= "<li>"+json[i].name+"</li>";
+					body+= "<li id='typeid_"+json[i].id+"'>"+json[i].name+"</li>";
 				}
 				$('#typeul').html(body);
 			}
@@ -113,7 +113,9 @@ function GetAllOnlineProduct(typeid,page,pageSize){
 			  	$(".good_item").height(height);
 
 			}else{
-				
+				var none = "";
+				none +="<div class='col-xs-12 none'><p>暂无此类商品</p></div>";
+				$('#goodlist').html(none);
 			}
 		},error:function(){
 		},
@@ -126,13 +128,19 @@ $(document).ready(function(){
 	var pageSize = 12;
 	GetAllOnlineProduct(typeid,page,pageSize);
 	GetAllType();
+	//查看更多点击事件
 	$('.learn_more').live('click',function(){
 		 page = page +1 ;
 		 GetAllOnlineProduct(typeid,page,pageSize);
 		 $(this).hide();
   	});
-	
-	
+	//切换分类  
+	$('#typeul').find('li').live('click',function(){
+		$('#goodlist').html("");
+		var id = $(this).attr('id');
+		typeid = id.substring(7,id.length);
+		GetAllOnlineProduct(typeid,page,pageSize);
+	});
   	$(window).resize(function() {
   		var width = $(".good_item").width();
 		var height = width/2.5*3;
