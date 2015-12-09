@@ -1,0 +1,149 @@
+body
+{	
+	font-family: "Microsoft YaHei";
+	font-size: 1.0em;
+	color: #000;
+}
+
+.header-top
+{
+	position: relative;
+}
+
+.content
+{
+	min-height: 500px;
+	margin-top: 50px;
+}
+
+.goods1
+{
+	padding: 1em 0 1em 1em;
+	border: 1px solid #eeeeee;
+}
+
+@media (max-width: 992px){
+.name
+{
+	padding: 0 1em;
+}
+
+.name1
+{
+	font-size: 2em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid #eeeeee;
+	margin-bottom: 1em;
+}
+
+.name2
+{
+	font-size: 1.7em;
+}
+
+.name2 a
+{
+	text-decoration: none;
+}
+}
+
+@media (min-width: 992px){
+.name
+{
+	padding: 1em 1em;
+}
+
+.name1
+{
+	font-size: 2em;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid #eeeeee;
+	margin-bottom: 0.5em;
+}
+
+.name2
+{
+	font-size: 1.7em;
+}
+
+.name2 a
+{
+	text-decoration: none;
+}
+}
+
+@media (min-width: 1200px){
+.name
+{
+	padding: 1em 1em;
+}
+
+.name1
+{
+	font-size: 2em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid #eeeeee;
+	margin-bottom: 1em;
+}
+
+.name2
+{
+	font-size: 1.7em;
+}
+
+.name2 a
+{
+	text-decoration: none;
+}
+}
+
+
+
+p.title_person
+{
+	font-size: 2em;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid #333333;
+	margin-bottom: 1em;
+}
+
+p.title_person1
+{
+	font-size: 2em;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid #333333;
+	margin-bottom: 1em;
+	margin-top: 2em;
+}
+
+.label0
+{
+	margin-top: 1em;
+}
+
+p.label1
+{
+	font-size: 1.7em;
+}
+
+.label2
+{
+	font-size: 1.7em;
+}
+
+.buy
+{
+	padding: 5em 0 2em;
+	text-align: center;
+}
+
+.buy a
+{
+	background: #ff5d56;
+	border: 2px solid #ff5d56;
+	color: #fff;
+    padding: 0.7em 1.2em;
+    font-size: 2em;
+    text-decoration: none;
+}
+

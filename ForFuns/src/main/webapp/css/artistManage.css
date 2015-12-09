@@ -1,0 +1,201 @@
+body
+{	
+	font-family: "Microsoft YaHei";
+	font-size: 1.0em;
+	color: #000;
+}
+
+.header-top
+{
+	position: relative;
+}
+
+.content
+{
+	min-height: 500px;
+	margin-top: 50px;
+}
+
+.user_info
+{
+	text-align: center;
+}
+
+.userpic
+{
+	width: 15%;
+	border-radius: 100%;
+	border: 5px solid #eeeeee;
+}
+
+.username
+{
+	font-size: 2em;
+	margin-top: 0.7em;
+}
+
+.person_btn
+{
+	margin-top: 2em;
+}
+
+.beartist
+{
+	background: none;
+    border: 2px solid #000;
+    color: #000;
+    padding: 0.3em 1.2em;
+    font-size: 1.5em;
+    text-align: center;
+    text-decoration: none;
+	float: left;
+}
+
+.beartist:hover
+{
+	background: #ff5d56;
+    border: 2px solid #ff5d56;
+    color: #fff;
+}
+
+.modify
+{
+	background: none;
+    border: 2px solid #000;
+    color: #000;
+    padding: 0.3em 1.2em;
+    font-size: 1.5em;
+    text-align: center;
+    text-decoration: none;
+	float: right;
+}
+
+.modify:hover
+{
+	background: #ff5d56;
+    border: 2px solid #ff5d56;
+    color: #fff;
+}
+
+
+.good_item
+{
+	width: 100%;
+}
+
+.good_name p
+{
+	margin: 0.2em 0 0.1em;
+}
+
+p.name
+{
+	font-size: 2em;
+	margin-bottom: 0.5em;
+}
+
+p.price
+{
+	font-size: 2.3em;
+	margin-bottom: 1em;	
+}
+
+a.readmore
+{
+    background: none;
+    border: 2px solid #000;
+    color: #000;
+    padding: 0.3em 0.7em;
+    font-size: 1.5em;
+    text-align: center;
+    text-decoration: none;
+    margin-right: 0.5em;
+}
+
+a.readmore:hover
+{
+    background: #ff5d56;
+    border: 2px solid #ff5d56;
+    color: #fff;
+}
+
+@media (min-width: 992px){
+.goods_two
+{
+	padding: 0.5em;
+	margin-bottom: 1em;
+}
+
+.goods
+{
+	padding-top: 1em;
+	padding-bottom: 1em;
+	border: 1px solid #eeeeee;
+}
+
+.pic
+{
+	border-right: 0;
+}
+
+.detail
+{
+	border-left: 0;
+	padding-left: 0;
+}
+}
+
+@media (max-width: 992px){
+.goods_two
+{
+	padding: 0.5em;
+	margin-bottom: 1em;
+	border: 1px solid #eeeeee;
+}
+
+.goods
+{
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
+.pic
+{
+}
+
+.detail
+{
+	padding-left: 0;
+}
+}
+
+.pic1
+{}
+
+
+
+.learn_more
+{
+	background-color: #eeeeee;
+	text-align: center;
+	padding: 1.5em 0;
+	margin: 2em 0 0;
+	cursor: pointer;
+}
+
+.learn_more p
+{
+	font-size: 1.7em;
+	margin: 0px;
+	color: #7d7d7d;
+}
+
+.artwork
+{
+	margin-top: 3em;
+}
+
+p.other
+{
+	font-size: 1.5em;
+}
