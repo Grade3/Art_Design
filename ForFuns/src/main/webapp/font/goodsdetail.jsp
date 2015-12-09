@@ -35,7 +35,13 @@ function getCookie(objName){//获取指定名称的cookie的值
 		if(temp[0] == objName) return unescape(temp[1]); 
 	} 
 };
-
+//更改datebox的日期格式
+function myformatter(value) {
+	if(value != null && value != ""){
+		var date = new Date(value);
+        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	}
+}
 //通过id获取商品详情 
 function getProductById(id){
 	$.ajax({
@@ -45,15 +51,30 @@ function getProductById(id){
 		success:function(json){
 			var product = json.product;
 			var id = product.id;
+			var money = "￥"+product.initmoney;
 			var name= product.name;
 			var imgurl = product.imgurl;
 			var authorname = product.authorname;
 			var content = product.content;
 			var imgone = product.imgone;
 			var imgtwo = product.imgtwo;
-			var imgthree = prodcut.imgthree;
+			var imgthree = product.imgthree;
 			var situation = product.situation;
-			var methodid = prodcut.methodid;
+			var methodid = product.methodid;
+			var typename = product.typename;
+			var timestart = myformatter(product.timestart);
+			var timeout = myformatter(product.timeout);
+			$('#imgurl').attr("src",imgurl);
+			$('#imgone').attr("src",imgone);
+			$('#imgtwo').attr("src",imgthree);
+			$('#imgthree').attr("src",imgurl);
+			$('#timestart').html(timestart);
+			$('#timeout').html(timeout);
+			$('#name').html(name);
+			$('#money').html(money);
+			$('#typename').html(typename);
+			$('#authorname').html(authorname);
+			$('#content').html(content);
 		},error:function(){
 			
 		}
@@ -150,7 +171,7 @@ $(document).ready(function(){
 			<div class="header-bottom">
 				<div class="container">
 					<div class="logo">
-						<h1><a href="home.html">ArtCustomize</a></h1>
+						<h1><a href="home.jsp">ArtCustomize</a></h1>
 					</div>
 					<div class="top-nav-xs hidden-lg">
 						<div id="menu" onmouseover="fun1();" onmouseout="fun2();">
@@ -158,23 +179,23 @@ $(document).ready(function(){
 						</div>
 						<div id="menu-xs">
 							<ul>
-								<li><a href="home.html">首页</a></li>
-								<li><a href="home.html">成品</a></li>
-								<li><a href="home.html">DIY</a></li>
-								<li><a href="home.html">艺术家</a></li>
-								<li><a href="newslist.html">资讯中心</a></li>
-								<li><a href="home.html">联系我们</a></li>
+								<li><a href="home.jsp">首页</a></li>
+								<li><a href="home.jsp">成品</a></li>
+								<li><a href="home.jsp">DIY</a></li>
+								<li><a href="home.jsp">艺术家</a></li>
+								<li><a href="newslist.jsp">资讯中心</a></li>
+								<li><a href="home.jsp">联系我们</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="top-nav visible-lg">
 						<ul class="megamenu skyblue">
-							<li><a href="home.html">首页</a></li>
-							<li><a href="home.html">成品</a></li>
-							<li><a href="home.html">DIY</a></li>
-							<li><a href="home.html">艺术家</a></li>
-							<li><a href="newslist.html">资讯中心</a></li>
-							<li><a href="home.html">联系我们</a></li>
+							<li><a href="home.jsp">首页</a></li>
+							<li><a href="home.jsp">成品</a></li>
+							<li><a href="home.jsp">DIY</a></li>
+							<li><a href="home.jsp">艺术家</a></li>
+							<li><a href="newslist.jsp">资讯中心</a></li>
+							<li><a href="home.jsp">联系我们</a></li>
 						</ul>
 					</div>
 				</div>
@@ -182,7 +203,7 @@ $(document).ready(function(){
 		</div>
 
 	<div class="container">
-		<h6 class="location"><a href="home.html">首页</a> <i> </i> <a href="goodslist.html">艺术品列表</a> <i> </i> 艺术品详情 </h6>
+		<h6 class="location"><a href="home.jsp">首页</a> <i> </i> <a href="goodslist.html">艺术品列表</a> <i> </i> 艺术品详情 </h6>
 	</div>
 
 
@@ -196,23 +217,23 @@ $(document).ready(function(){
 			<div class="col-xs-12">
 				<div class="col-md-6 good_show">
 					<div class="col-xs-12 good_item">
-						<img src="../image/good.jpg" class="pic">
+						<img src="../image/good.jpg" class="pic" id="imgurl">
 					</div>
 					<div class="col-xs-4 good_pic">
-						<img src="../image/good.jpg" class="pic1">
+						<img src="../image/good.jpg" class="pic1" id="imgone">
 					</div>
 					<div class="col-xs-4 good_pic">
-						<img src="../image/bl.jpg" class="pic2">
+						<img src="../image/bl.jpg" class="pic2" id="imgtwo">
 					</div>
 					<div class="col-xs-4 good_pic">
-						<img src="../image/bl2.jpg" class="pic3">
+						<img src="../image/bl2.jpg" class="pic3" id="imgthree">
 					</div>
 				</div>
 				<div class="col-md-6 good_detail">
-					<p class="good_name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</p>
+					<p class="good_name" id="name"><!-- 商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称 --></p>
 					<div class="row price">
 						<p class="col-xs-3 good_price1">一口价</p>
-						<p class="col-xs-9 good_price">￥98.00</p>
+						<p class="col-xs-9 good_price" id="money"><!-- ￥98.00 --></p>
 					</div>
 					<div class="row trans">
 						<p class="col-xs-3 good_other">配送</p>
@@ -220,19 +241,19 @@ $(document).ready(function(){
 					</div>
 					<div class="row other">
 						<p class="col-xs-3 good_other">艺术品分类</p>
-						<p class="col-xs-9 good_other">分类6</p>
+						<p class="col-xs-9 good_other" id="typename"><!-- 分类6 --></p>
 					</div>
 					<div class="row">
 						<p class="col-xs-3 good_other">上架时间</p>
-						<p class="col-xs-9 good_other">2015-12-7 8:00</p>
+						<p class="col-xs-9 good_other" id="timestart"><!-- 2015-12-7 8:00 --></p>
 					</div>
 					<div class="row">
 						<p class="col-xs-3 good_other">下架时间</p>
-						<p class="col-xs-9 good_other">2015-12-31 23:59</p>
+						<p class="col-xs-9 good_other" id="timeout"><!-- 2015-12-31 23:59 --></p>
 					</div>
 					<div class="row artist">
 						<p class="col-xs-3 good_other">艺术家</p>
-						<p class="col-xs-9 good_artist">艺术家名称</p>
+						<p class="col-xs-9 good_artist" id="authorname"><!-- 艺术家名称 --></p>
 						<a href="artist.html" class="col-xs-4 readmore" target="_blank">进入艺术家主页</a>
 					</div>
 					<div class="row buy">
@@ -246,7 +267,7 @@ $(document).ready(function(){
 					<p>图文详情</p>
 					<label class="line"></label>
 				</div>
-				<p class="des_p">这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述</p>
+				<p class="des_p" id="content">这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述</p>
 			</div>
 		</div>
 	</div>
