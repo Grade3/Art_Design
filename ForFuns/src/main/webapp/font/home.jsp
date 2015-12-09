@@ -77,7 +77,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             document.getElementById("detail_c3").style.display = "block";
         }
 	</script>
-<link href="<%=basePath%>css/qiehuan.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
@@ -163,10 +162,10 @@ function GetHotNews(){
 					var title = json[i].title;
 					if(i==0){
 						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
-						body += "<div class='item active'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...'><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
+						body += "<div class='item active'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
 					}else{
 						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
-						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...'><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
+						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
 					}
 					
 				}

@@ -36,10 +36,12 @@ $(function(){
 </script>
 
 <script type="text/javascript">
+
 $(document).ready(function(){
   $("#menu").click(function(){
-  $("#menu-xs").toggle(300);
+ 	 $("#menu-xs").toggle(300);
   });
+  
 });
 </script>
 
@@ -109,7 +111,7 @@ $(document).ready(function(){
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label label_login">用户名</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" name="userid" class="form-control inputSth" placeholder="请输入用户名">
+						<input type="text" name="userid" id="userid" class="form-control inputSth" placeholder="请输入用户名">
 					</div>
 				</div>
 				<div class="form-group">
@@ -214,7 +216,7 @@ $(document).ready(function(){
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10 input_div">
-						<button type="submit" class="btn btn-default col-sm-12" id="btn_login">注册</button>
+						<button type="submit" class="btn btn-default col-sm-12" id="btn_login" onclick="" >注册</button>
 					</div>
 				</div>
 				<div class="form-group">
