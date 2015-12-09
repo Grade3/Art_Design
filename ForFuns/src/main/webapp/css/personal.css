@@ -1,0 +1,129 @@
+body
+{	
+	font-family: "Microsoft YaHei";
+	font-size: 1.0em;
+	color: #000;
+}
+
+.header-top
+{
+	position: relative;
+}
+
+.content
+{
+	min-height: 500px;
+	margin-top: 50px;
+}
+
+.user_info
+{
+	text-align: center;
+}
+
+.userpic
+{
+	width: 15%;
+	border-radius: 100%;
+	border: 5px solid #eeeeee;
+}
+
+.username
+{
+	font-size: 2em;
+	margin-top: 0.7em;
+}
+
+.person_btn
+{
+	margin-top: 2em;
+}
+
+a.readmore
+{
+    /*background: #ff5d56;
+    border: 2px solid #ff5d56;
+    color: #fff;*/
+    background: none;
+    border: 2px solid #000;
+    color: #000;
+    padding: 0.3em 1.2em;
+    font-size: 1.5em;
+    text-align: center;
+    text-decoration: none;
+}
+
+a.readmore:hover
+{
+    /*background: none;
+    border: 2px solid #000;
+    color: #000;*/
+    background: #ff5d56;
+    border: 2px solid #ff5d56;
+    color: #fff;
+}
+
+.beartist
+{
+	float: left;
+}
+
+.modify
+{
+	float: right;
+}
+
+.person_info
+{
+	padding: 3em 10% 0em;
+}
+
+.info_div
+{
+	padding: 2em;
+}
+
+.info1
+{
+	margin: 0;
+}
+
+.info
+{
+	margin: 0;
+	background: #f8f8f8;
+	padding-top: 1em;
+}
+
+.info2
+{
+	margin: 0;
+	background: #f8f8f8;
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
+.info p
+{
+	font-size: 1.7em;
+	margin: 0;
+}
+
+.info p a
+{
+	text-decoration: none;
+}
+
+p.title_person
+{
+	font-size: 2em;
+	padding-bottom: 0.5em;
+	border-bottom: 1px solid #333333;
+	margin-bottom: 1em;
+}
+
+
+.buy_info
+{
+	padding: 0em 10% 0em;
+}

@@ -1,0 +1,106 @@
+body
+{	
+	font-family: "Microsoft YaHei";
+	font-size: 1.0em;
+	color: #000;
+}
+
+.header-top
+{
+	position: relative;
+}
+
+.content
+{
+	min-height: 500px;
+	margin-top: 50px;
+}
+
+.user_info
+{
+	text-align: center;
+}
+
+.userpic
+{
+	width: 15%;
+	border-radius: 100%;
+	border: 5px solid #eeeeee;
+}
+
+.picture
+{
+	font-size: 2em;
+	margin-top: 0.7em;
+}
+
+.picture a
+{
+	text-decoration: none;
+}
+
+.success_btn
+{
+	padding: 2em;
+	margin-top: 1em;
+}
+
+.success_btn input
+{
+	background: #ff5d56;
+    border: 2px solid #ff5d56;
+    color: #fff;
+    padding: 0.7em 1.2em;
+    font-size: 1.7em;
+    text-align: center;
+    text-decoration: none;
+}
+
+.person_info
+{
+	padding: 1em 10% 0em;
+}
+
+.info_div
+{
+	padding: 2em;
+}
+
+.info1
+{
+	margin: 0;
+}
+
+.info
+{
+	margin: 0;
+	background: #f8f8f8;
+	padding-top: 2em;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+.info2
+{
+	margin: 0;
+	background: #f8f8f8;
+	padding-top: 2em;
+	padding-bottom: 2.5em;
+}
+
+.info p
+{
+	font-size: 1.7em;
+	margin: 0;
+	padding-left: 0;
+	padding-top: 0.5em;
+}
+
+.info input
+{
+	font-size: 1.7em;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+}
+
+
