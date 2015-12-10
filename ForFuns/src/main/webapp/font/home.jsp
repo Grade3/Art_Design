@@ -79,7 +79,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <style type="text/css">
 	.item_pic{width:100%;}
 	*{font-style: normal;}
@@ -88,6 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <a href="javascript:;" class="lanrenzhijia_top"></a>
 <script src="../js/lanrenzhijia.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -206,6 +206,18 @@ $(document).ready(function(){
   		$(".class25").height(artist_h);
   	});
   	
+  	
+  	$('#username').live('click',function(){
+  		var useridtoken = getCookie("useridtoken");
+  		var useridtoken = getCookie("useridtoken");
+  		if(null==useridtoken || "" == useridtoken){
+  			return ;
+  		}
+  		var index = useridtoken.indexOf("&");
+  		var id =  useridtoken.substring(0,index);
+  		var address = "<%=basePath%>font/personal.jsp?id=";
+  		location.href=address+id;
+  	});
 });
 </script>
 
@@ -220,7 +232,7 @@ $(document).ready(function(){
 					<ul class="support-right">
 						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
 						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
-						<li id="usernameaction"><a href="javascrip:void(0);" id="username"><i class="item_login"/>登陆</a></li>
+						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
 						<li id="loginoutaction"><a href="Login.jsp" ><i class="item_register"> </i>退出</a></li>			
 					</ul>
 				</div>
