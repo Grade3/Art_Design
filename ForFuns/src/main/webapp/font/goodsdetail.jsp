@@ -75,6 +75,10 @@ function getProductById(id){
 			$('#typename').html(typename);
 			$('#authorname').html(authorname);
 			$('#content').html(content);
+			if(situation==1){
+				var tempcontent = "<div class='row buy'><a href='buy.html' class='col-xs-12 readmore'>现在购买</a></div>";
+				$('#gooddetail').append(tempcontent);
+			}
 		},error:function(){
 			
 		}
@@ -135,20 +139,19 @@ $(document).ready(function(){
 <script type="text/javascript">
 $(document).ready(function(){
 
-	var src1 = "../image/good.jpg";
-	var src2 = "../image/bl.jpg";
-	var src3 = "../image/bl2.jpg";
-
 
   	$(".pic1").click(function() {
+  		var src1 = $(this).attr("id");
   		$(".pic").attr("src",src1);
   	});
 
   	$(".pic2").click(function() {
+  		var src2 = $(this).attr("id");
   		$(".pic").attr("src",src2);
   	});
 
   	$(".pic3").click(function() {
+  		var src3 = $(this).attr("id");
   		$(".pic").attr("src",src3);
   	});
   
@@ -229,7 +232,7 @@ $(document).ready(function(){
 						<img src="../image/bl2.jpg" class="pic3" id="imgthree">
 					</div>
 				</div>
-				<div class="col-md-6 good_detail">
+				<div class="col-md-6 good_detail" id="gooddetail">
 					<p class="good_name" id="name"><!-- 商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称 --></p>
 					<div class="row price">
 						<p class="col-xs-3 good_price1">一口价</p>
@@ -256,9 +259,9 @@ $(document).ready(function(){
 						<p class="col-xs-9 good_artist" id="authorname"><!-- 艺术家名称 --></p>
 						<a href="artist.html" class="col-xs-4 readmore" target="_blank">进入艺术家主页</a>
 					</div>
-					<div class="row buy">
+					<!-- <div class="row buy">
 						<a href="buy.html" class="col-xs-12 readmore">现在购买</a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 

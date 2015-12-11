@@ -12,63 +12,89 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="../css/payfor.css">
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.js"></script>
+	<script src="../js/lanrenzhijia.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript">
+		function getUrlParam(name) {
+		    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+		    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+		    if (r != null) return unescape(r[2]); return null; //返回参数值
+		}; 
+		$(function(){
+			$(window).scroll(function(){
+				var _top = $(window).scrollTop();
+				if(_top>300){
+					$('.lanrenzhijia_top').fadeIn(600);
+				}else{
+					$('.lanrenzhijia_top').fadeOut(600);
+				}
+			});
+			$(".lanrenzhijia_top").click(function(){
+				$("html,body").animate({scrollTop:0},500);
+			});
+		});
+		//通过id获取商品详情 
+		function getProductById(id){
+			$.ajax({
+				type:'post',
+				url:'<%=basePath%>/product.do?method=GetProductById',
+				data:{productid:id},
+				success:function(json){
+					var product = json.product;
+					var id = product.id;
+					var money = "￥"+product.initmoney;
+					var name= product.name;
+					var imgurl = product.imgurl;
+					var authorname = product.authorname;
+					var content = product.content;
+					var imgone = product.imgone;
+					var imgtwo = product.imgtwo;
+					var imgthree = product.imgthree;
+					var situation = product.situation;
+					var methodid = product.methodid;
+					var typename = product.typename;
+					var timestart = myformatter(product.timestart);
+					var timeout = myformatter(product.timeout);
+					if(situation==1){
+						
+					}else{
+						alert("error");
+					}
+				},error:function(){
+					
+				}
+			});
+		}
+		$(document).ready(function(){
+			var productid = getUrlParam("productid");
+			if(productid==null){
+				//location.href="404.jsp";
+			}
+			getProductById(productid);
+				
+			$("#menu").click(function(){
+			 $("#menu-xs").toggle(300);
+			});
+			var width = $(".good_item").width();
+			var height = width/4*3;
+			$(".good_item").height(height);
+
+			$(window).resize(function() {
+			  	var width = $(".good_item").width();
+				var height = width/4*3;
+			  	$(".good_item").height(height);
+			});
+			$(".sub").show();
+			$(".box_active a").click(function(){
+				$(".sub").slideToggle("slow");
+			});
+		});
+	</script>
 </head>
 <body>
-
-<a href="javascript:;" class="lanrenzhijia_top"></a>
-<script src="../js/lanrenzhijia.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
-<script>
-$(function(){
-	$(window).scroll(function(){
-		var _top = $(window).scrollTop();
-		if(_top>300){
-			$('.lanrenzhijia_top').fadeIn(600);
-		}else{
-			$('.lanrenzhijia_top').fadeOut(600);
-		}
-	});
-	$(".lanrenzhijia_top").click(function(){
-		$("html,body").animate({scrollTop:0},500);
-	});
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-  $("#menu").click(function(){
-  $("#menu-xs").toggle(300);
-  });
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	var width = $(".good_item").width();
-	var height = width/4*3;
-  	$(".good_item").height(height);
-
-  	$(window).resize(function() {
-  		var width = $(".good_item").width();
-		var height = width/4*3;
-  		$(".good_item").height(height);
-  	});
-  
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	$(".sub").show();
-	$(".box_active a").click(function(){
-		$(".sub").slideToggle("slow");
-	})
-});
-</script>
-
-
+	<a href="javascript:;" class="lanrenzhijia_top"></a>
 	<div class="header-top">
 			<div class="container">
 				<div class="statu_bar">
@@ -137,15 +163,15 @@ $(document).ready(function(){
 					<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item col-xs-3"></a>
 					<div class="col-xs-3 name">
 						<p class="name1 visible-lg visible-md">商品名称</p>
-						<p class="name2"><a href="goodsdetail.html" target="_blank">商品名称商品名称商品名称商品名称</a></p>
+						<p class="name2"><a href="goodsdetail.html" target="_blank" id="productname">商品名称商品名称商品名称商品名称</a></p>
 					</div>				
 					<div class="col-xs-3 name">
 						<p class="name1 visible-lg visible-md">价格</p>
-						<p class="name2">￥99.00</p>
+						<p class="name2" id="money">￥99.00</p>
 					</div>
 					<div class="col-xs-3 name">
 						<p class="name1 visible-lg visible-md">艺术家</p>
-						<p class="name2"><a href="artistHome.html" target="_blank">艺术家艺术家艺术家</a></p>
+						<p class="name2"><a href="artistHome.html" target="_blank" id="authorname">艺术家艺术家艺术家</a></p>
 					</div>
 				</div>
 
