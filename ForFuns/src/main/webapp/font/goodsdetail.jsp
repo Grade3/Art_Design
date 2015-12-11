@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="../js/lanrenzhijia.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
+//获取url链接
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数
@@ -76,8 +77,18 @@ function getProductById(id){
 			$('#authorname').html(authorname);
 			$('#content').html(content);
 			if(situation==1){
+				
 				var tempcontent = "<div class='row buy'><a href='buy.html' class='col-xs-12 readmore'>现在购买</a></div>";
 				$('#gooddetail').append(tempcontent);
+			}
+			if(situation==0){
+				$('#situation').html("未上架");
+			}else if(situation==1){
+				$('#situation').html("已上架");
+			}else if(situation==2){
+				$('#situation').html("已下架");
+			}else if(situation==3){
+				$('#situation').html("已出售");
 			}
 		},error:function(){
 			
@@ -253,6 +264,10 @@ $(document).ready(function(){
 					<div class="row">
 						<p class="col-xs-3 good_other">下架时间</p>
 						<p class="col-xs-9 good_other" id="timeout"><!-- 2015-12-31 23:59 --></p>
+					</div>
+					<div class="row">
+						<p class="col-xs-3 good_other">状态</p>
+						<p class="col-xs-9 good_other" id="situation"></p>
 					</div>
 					<div class="row artist">
 						<p class="col-xs-3 good_other">艺术家</p>

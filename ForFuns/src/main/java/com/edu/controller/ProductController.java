@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,10 +29,12 @@ import com.edu.model.ProductTypeBean;
 import com.edu.model.SellMethodBean;
 import com.edu.proxy.ProductProxy;
 import com.edu.service.ICustomerService;
+import com.edu.service.IOrderService;
 import com.edu.service.IProductService;
 import com.edu.service.IProductTypeService;
 import com.edu.service.ISellMethodService;
 import com.edu.table.NewsTable;
+import com.edu.util.CheckTokenTool;
 import com.edu.viewentity.ProductVO;
 
 
@@ -52,6 +55,8 @@ public class ProductController {
 	@Autowired
 	private IProductTypeService productTypeService;
 	
+	@Autowired
+	private IOrderService orderService;
 	/**
 	 * 获取分页列表
 	 * 
@@ -171,5 +176,25 @@ public class ProductController {
 		ProductVO productVO = new ProductVO(productBean);
 		map.put("product",productVO);
 		return map;
+	}
+	
+	/**
+	 * 通过口令判断是否是有订单
+	 * @param id
+	 * @param useridtoken
+	 * @return
+	 */
+	@RequestMapping(params="method=AddOrder")
+	public String AddOrder(@RequestParam(value="productid")Integer id,@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
+			@RequestParam(value="address")String address,@RequestParam(value="telephone")String telephone){
+		if("".equals(useridtoken))//未登陆
+			return "redirect:/font/Login.jsp?error=2";
+		boolean flag = CheckTokenTool.CheckToken(useridtoken);
+		if(!flag)
+			return "redirect:/font/Login.jsp?error=2";
+		String userid = CheckTokenTool.GetUserid(useridtoken);
+		//customerService.get  通过userid获取id
+		orderService.AddOrder(id, customerid, address, telephone)
+		return "";
 	}
 }

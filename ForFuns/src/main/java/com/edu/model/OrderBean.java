@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table(name="o_order")
@@ -61,12 +64,16 @@ public class OrderBean {
 	public void setCurrent(Date current) {
 		this.current = current;
 	}
+	@OneToOne(fetch=FetchType.LAZY)  
+    @JoinColumn(name="productid") 
 	public ProductBean getProductBean() {
 		return productBean;
 	}
 	public void setProductBean(ProductBean productBean) {
 		this.productBean = productBean;
 	}
+	@OneToOne(fetch=FetchType.LAZY)  
+    @JoinColumn(name="customerid") 
 	public CustomerBean getCustomerBean() {
 		return customerBean;
 	}
