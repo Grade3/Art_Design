@@ -176,6 +176,32 @@ public class CustomerController {
 	}
 
 	/**
+	 * 注册功能
+	 * 
+	 * @param userid
+	 * @param password
+	 * @param confirm_password
+	 * @param username
+	 * @param realname
+	 * @param telphone
+	 * @param personnumber
+	 * @return
+	 */
+	@RequestMapping(params = "method=checkUserid")
+	public Boolean isExist(@RequestParam(value = "userid", required = false) String userid)
+	{
+		CustomerBean user = new CustomerBean();
+
+		user.setUserid(userid);
+		if(customerService.exist(user))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * 添加用户
 	 * 
 	 * @param rowstr
