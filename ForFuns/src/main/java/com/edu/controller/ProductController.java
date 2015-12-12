@@ -194,7 +194,7 @@ public class ProductController {
 			return "redirect:/font/Login.jsp?error=2";
 		String userid = CheckTokenTool.GetUserid(useridtoken);
 		//customerService.get  通过userid获取id
-		orderService.AddOrder(id, customerid, address, telephone)
+		//orderService.AddOrder(id, customerid, address, telephone)
 		return "";
 	}
 }
