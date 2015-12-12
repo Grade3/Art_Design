@@ -31,6 +31,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$("html,body").animate({scrollTop:0},500);
 			});
 		});
+		//查询是否存在该订单，不存在则继续操作，存在的话核对用户名，如果不是该用户的订单则跳转
+		function checkOrder(productid){
+			$.ajax({
+				type:'post',
+				asycn:false,
+				url:'<%=basePath%>/product.do?method=checkOrder',
+				data:{productid:productid},
+				success:function(json){
+					alert(json);
+				},error:function(){
+					
+				}
+			});
+		}
 		//通过id获取商品详情 
 		function getProductById(id){
 			$.ajax({
@@ -57,11 +71,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					$('#productname').attr('href','goodsdetail.jsp?productid='+id);
 					$('#money').html(money);
 					$('#authorname').html(authorname);
-					if(situation==1){
-						
-					}else{
-						alert("error");
-					}
 				},error:function(){
 					
 				}
@@ -72,6 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(productid==null){
 				//location.href="404.jsp";
 			}
+			checkOrder(productid);
 			getProductById(productid);
 				
 			$("#menu").click(function(){

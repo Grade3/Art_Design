@@ -1,5 +1,7 @@
 package com.edu.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +46,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderBean> implements IOrd
 			return 2;//属于该用户的订单
 		}
 		return 0;//添加失败
+	}
+
+	@Override
+	public OrderBean getOrderByProductId(Integer productid) throws Exception {
+		OrderBean orderBean = orderDao.GetBeanByCondition(OrderBean.class, OrderTable.PRODUCTID, productid+"", null);
+		return orderBean;
 	}
 	
 }

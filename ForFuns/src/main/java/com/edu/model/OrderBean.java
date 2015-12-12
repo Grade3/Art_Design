@@ -19,6 +19,7 @@ public class OrderBean {
 	private String telephone;
 	private String address;
 	private Date current;
+	private Integer ispay;
 	private ProductBean productBean;
 	private CustomerBean customerBean;
 	public OrderBean(Integer id, String telephone, String address,
@@ -31,6 +32,20 @@ public class OrderBean {
 		this.productBean = productBean;
 		this.customerBean = customerBean;
 	}
+	
+	public OrderBean(Integer id, String telephone, String address,
+			Date current, Integer ispay, ProductBean productBean,
+			CustomerBean customerBean) {
+		super();
+		this.id = id;
+		this.telephone = telephone;
+		this.address = address;
+		this.current = current;
+		this.ispay = ispay;
+		this.productBean = productBean;
+		this.customerBean = customerBean;
+	}
+
 	public OrderBean() {
 		super();
 	}
@@ -72,13 +87,20 @@ public class OrderBean {
 	public void setProductBean(ProductBean productBean) {
 		this.productBean = productBean;
 	}
-	@OneToOne(fetch=FetchType.LAZY)  
+	@OneToOne(fetch=FetchType.EAGER)  
     @JoinColumn(name="customerid") 
 	public CustomerBean getCustomerBean() {
 		return customerBean;
 	}
 	public void setCustomerBean(CustomerBean customerBean) {
 		this.customerBean = customerBean;
+	}
+	@Column(name="ispay")
+	public Integer getIspay() {
+		return ispay;
+	}
+	public void setIspay(Integer ispay) {
+		this.ispay = ispay;
 	}
 	
 }

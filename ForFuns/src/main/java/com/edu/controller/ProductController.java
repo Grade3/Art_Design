@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edu.model.CustomerBean;
 import com.edu.model.NewsBean;
+import com.edu.model.OrderBean;
 import com.edu.model.ProductBean;
 import com.edu.model.ProductSellBean;
 import com.edu.model.ProductTypeBean;
@@ -219,5 +220,39 @@ public class ProductController {
 			return "/font/payfot.jsp";
 		}
 		return "http://www.baidu.com";
+	}
+	/**
+	 * 检测用户是否存在相应的订单。
+	 * @param id
+	 * @param useridtoken
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=checkOrder")
+	public String jsonCheckOrder(@RequestParam(value="productid")Integer id,@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
+		if("".equals(useridtoken)||null==useridtoken)//未登陆
+			return "0";
+		boolean flag = CheckTokenTool.CheckToken(useridtoken);
+		if(!flag)
+			return "0";//未登录
+		String userid = CheckTokenTool.GetUserid(useridtoken);
+		CustomerBean customerBean = null;
+		try {
+			customerBean =  customerService.getCustomerByUserId(userid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		OrderBean orderBean = null;
+		try {
+			orderBean  = orderService.getOrderByProductId(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(null==orderBean)
+			return "1";//不存在这个订单
+		if(!userid.equals(orderBean.getCustomerBean().getUserid())){
+			return "3";//订单与用户不符合
+		}
+		return "2";//订单与用户相符
 	}
 }
