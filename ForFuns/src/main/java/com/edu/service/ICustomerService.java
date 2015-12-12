@@ -5,9 +5,13 @@ package com.edu.service;
 
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.edu.base.IBaseService;
 import com.edu.model.CustomerBean;
 import com.edu.model.UserBean;
+import com.edu.table.CustomerTable;
 
 public interface ICustomerService extends IBaseService<CustomerBean>
 {
@@ -45,4 +49,11 @@ public interface ICustomerService extends IBaseService<CustomerBean>
 	 * @return
 	 *//*
 	public Map<String , Object> GetCustomerTree(int page,int pageSize);*/
+	/**
+	 * 通过userid获取用户
+	 * @param userid
+	 * @return
+	 * @throws Exception 
+	 */
+	public CustomerBean getCustomerByUserId(String userid) throws Exception;
 }

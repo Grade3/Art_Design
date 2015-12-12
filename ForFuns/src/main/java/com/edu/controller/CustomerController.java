@@ -300,4 +300,5 @@ public class CustomerController {
 		map.put("total", total);
 		return map;
 	}
+	
 }

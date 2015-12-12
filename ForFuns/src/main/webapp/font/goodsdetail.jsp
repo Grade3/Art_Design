@@ -13,8 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="../css/goodsdetail.css">
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 </head>
 <body>
 
@@ -22,27 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="../js/lanrenzhijia.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
-//获取url链接
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    if (r != null) return unescape(r[2]); return null; //返回参数值
-}; 
-//获取cookie
-function getCookie(objName){//获取指定名称的cookie的值 
-	var arrStr = document.cookie.split("; "); 
-	for(var i = 0;i < arrStr.length;i ++){ 
-		var temp = arrStr[i].split("="); 
-		if(temp[0] == objName) return unescape(temp[1]); 
-	} 
-};
-//更改datebox的日期格式
-function myformatter(value) {
-	if(value != null && value != ""){
-		var date = new Date(value);
-        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-	}
-}
+
 //通过id获取商品详情 
 function getProductById(id){
 	$.ajax({
@@ -77,14 +58,13 @@ function getProductById(id){
 			$('#authorname').html(authorname);
 			$('#content').html(content);
 			if(situation==1){
-				
-				var tempcontent = "<div class='row buy'><a href='buy.html' class='col-xs-12 readmore'>现在购买</a></div>";
+				var tempcontent = "<div class='row buy'><a href='payfor.jsp?productid="+id+"' class='col-xs-12 readmore'>现在购买</a></div>";
 				$('#gooddetail').append(tempcontent);
 			}
 			if(situation==0){
 				$('#situation').html("未上架");
 			}else if(situation==1){
-				$('#situation').html("已上架");
+				$('#situation').html("上架中");
 			}else if(situation==2){
 				$('#situation').html("已下架");
 			}else if(situation==3){
@@ -97,6 +77,9 @@ function getProductById(id){
 }
 $(document).ready(function(){
 	var productid = getUrlParam("productid");
+	if(null==productid){
+		//location.href="404.html";
+	}
 	getProductById(productid);
 });
 </script>

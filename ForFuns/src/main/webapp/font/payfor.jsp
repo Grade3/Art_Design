@@ -16,12 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<script src="../js/lanrenzhijia.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 	<script type="text/javascript">
-		function getUrlParam(name) {
-		    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-		    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-		    if (r != null) return unescape(r[2]); return null; //返回参数值
-		}; 
 		$(function(){
 			$(window).scroll(function(){
 				var _top = $(window).scrollTop();
@@ -57,6 +53,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					var typename = product.typename;
 					var timestart = myformatter(product.timestart);
 					var timeout = myformatter(product.timeout);
+					$('#productname').html(name);
+					$('#productname').attr('href','goodsdetail.jsp?productid='+id);
+					$('#money').html(money);
+					$('#authorname').html(authorname);
 					if(situation==1){
 						
 					}else{
@@ -163,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item col-xs-3"></a>
 					<div class="col-xs-3 name">
 						<p class="name1 visible-lg visible-md">商品名称</p>
-						<p class="name2"><a href="goodsdetail.html" target="_blank" id="productname">商品名称商品名称商品名称商品名称</a></p>
+						<p class="name2"><a href="#" target="_blank" id="productname">商品名称商品名称商品名称商品名称</a></p>
 					</div>				
 					<div class="col-xs-3 name">
 						<p class="name1 visible-lg visible-md">价格</p>
@@ -190,10 +190,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>					
 				</div>
 				<div class="col-xs-12 row buy visible-lg visible-md">
-					<a href="#.html" class="col-xs-offset-3 col-xs-6 readmore">现在购买</a>
+					<a href="#.html" class="col-xs-offset-3 col-xs-6 readmore">提交订单</a>
 				</div>
 				<div class="col-xs-12 row buy visible-sm visible-xs">
-					<a href="#" class="col-xs-12 readmore">现在购买</a>
+					<a href="#" class="col-xs-12 readmore">提交订单</a>
 				</div>
 			</div>
 			

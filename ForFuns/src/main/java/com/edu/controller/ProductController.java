@@ -193,8 +193,31 @@ public class ProductController {
 		if(!flag)
 			return "redirect:/font/Login.jsp?error=2";
 		String userid = CheckTokenTool.GetUserid(useridtoken);
-		//customerService.get  通过userid获取id
-		//orderService.AddOrder(id, customerid, address, telephone)
-		return "";
+		CustomerBean customerBean = null;
+		try {
+			customerBean =  customerService.getCustomerByUserId(userid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int respons = 0;
+		try {
+			respons =  orderService.AddOrder(id, customerBean.getId(), address, telephone);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//return 3;//添加成功
+		//return 1;//不属于该用户的订单
+		//return 2;//属于该用户的订单
+		//return 0;//添加失败
+		if(respons==0){
+			return "http://www.baidu.com";
+		}else if(respons==1){
+			return "http://www.bilibili.com/";
+		}else if(respons==2){
+			return "/font/payfot.jsp";
+		}else if(respons==3){
+			return "/font/payfot.jsp";
+		}
+		return "http://www.baidu.com";
 	}
 }
