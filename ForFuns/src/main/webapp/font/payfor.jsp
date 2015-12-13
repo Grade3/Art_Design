@@ -31,6 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$("html,body").animate({scrollTop:0},500);
 			});
 		});
+		
 		//查询是否存在该订单，不存在则继续操作，存在的话核对用户名，如果不是该用户的订单则跳转
 		function checkOrder(productid){
 			$.ajax({
@@ -40,6 +41,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				data:{productid:productid},
 				success:function(json){
 					alert(json);
+					if(json==0){
+						window.open("Login.jsp");
+					}else if(json==3){
+						
+					}else if(json==2){
+						
+					}
 				},error:function(){
 					
 				}
@@ -67,6 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					var typename = product.typename;
 					var timestart = myformatter(product.timestart);
 					var timeout = myformatter(product.timeout);
+					$('#productid').val(id);
 					$('#productname').html(name);
 					$('#productname').attr('href','goodsdetail.jsp?productid='+id);
 					$('#money').html(money);
@@ -79,11 +88,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(document).ready(function(){
 			var productid = getUrlParam("productid");
 			if(productid==null){
-				//location.href="404.jsp";
+				location.href="404.jsp";
 			}
 			checkOrder(productid);
 			getProductById(productid);
-				
+			CheckUser();
 			$("#menu").click(function(){
 			 $("#menu-xs").toggle(300);
 			});
@@ -100,8 +109,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$(".box_active a").click(function(){
 				$(".sub").slideToggle("slow");
 			});
+			$('.readmore').click(function(){
+				$('#orderform').submit();
+			});
 		});
 	</script>
+	<style type="text/css">
+		*{font-style: normal;}
+	</style>
 </head>
 <body>
 	<a href="javascript:;" class="lanrenzhijia_top"></a>
@@ -113,9 +128,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li ><a href="Login.html" ><i class="item_login"> </i>登陆</a></li>
-						<li ><a href="Register.html" ><i class="item_register"> </i>注册账号</a></li>			
-					</ul>
+						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
+						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
+						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
+						<li id="loginoutaction"><a href="<%=basePath %>>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			</ul>
 				</div>
 			</div>
 			<div class="header-bottom">
@@ -153,12 +169,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 
 	<div class="container">
-		<h6 class="location"><a href="home.html">首页</a> <i> </i> 现在购买 </h6>
+		<h6 class="location"><a href="home.html">首页</a> <i> </i> 提交订单 </h6>
 	</div>
 
 
 	<div class="bar_news">
-		<h2>现在购买</h2>
+		<h2>提交订单</h2>
 	</div>
 
 
@@ -184,27 +200,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<p class="name2"><a href="artistHome.html" target="_blank" id="authorname">艺术家艺术家艺术家</a></p>
 					</div>
 				</div>
-
-				<div class="row info1">
-					<p class="col-xs-3 title_person1">送货信息</p>
-				</div>
-
-				<div class="col-xs-12 row goods1">
-					<div class="col-xs-12 row">
-						<p class="col-xs-3 label1">联系电话</p>
-						<input class="col-xs-offset-1 col-xs-8 label2" type="text"/>
+				<form action="<%=basePath%>product.do?method=AddOrder" method="post" id="orderform">
+					<div class="row info1">
+						<p class="col-xs-3 title_person1">送货信息</p>
 					</div>
-					<div class="col-xs-12 row label0">
-						<p class="col-xs-3 label1">收货地址</p>
-						<input class="col-xs-offset-1 col-xs-8 label2" type="text"/>
-					</div>					
-				</div>
-				<div class="col-xs-12 row buy visible-lg visible-md">
-					<a href="#.html" class="col-xs-offset-3 col-xs-6 readmore">提交订单</a>
-				</div>
-				<div class="col-xs-12 row buy visible-sm visible-xs">
-					<a href="#" class="col-xs-12 readmore">提交订单</a>
-				</div>
+	
+					<div class="col-xs-12 row goods1">
+						<input type="hidden" name="productid" id="productid">
+						<div class="col-xs-12 row">
+							<p class="col-xs-3 label1">联系电话</p>
+							<input class="col-xs-offset-1 col-xs-8 label2" type="text" name="telephone" id="telephone"/>
+						</div>
+						<div class="col-xs-12 row label0">
+							<p class="col-xs-3 label1">收货地址</p>
+							<input class="col-xs-offset-1 col-xs-8 label2" type="text" name="address" id="address"/>
+						</div>					
+					</div>
+					<div class="col-xs-12 row buy visible-lg visible-md">
+						<a href="#" class="col-xs-offset-3 col-xs-6 readmore">提交订单</a>
+					</div>
+					<div class="col-xs-12 row buy visible-sm visible-xs">
+						<a href="#" class="col-xs-12 readmore">提交订单</a>
+					</div>
+				</form>
 			</div>
 			
 		</div>

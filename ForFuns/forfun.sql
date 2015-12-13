@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-12-06 22:31:33
+Date: 2015-12-13 22:23:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -148,6 +148,31 @@ INSERT INTO `n_news` VALUES ('28', '1', '12', '12', '12', '/forfun/newsupload/14
 INSERT INTO `n_news` VALUES ('29', '1', '121', '1231', '21313', '/forfun/newsupload/1449060110342.jpg', '13123', '1231321', '0', '2015-12-18', '2015-12-30', '0', '', '0');
 
 -- ----------------------------
+-- Table structure for `o_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `o_order`;
+CREATE TABLE `o_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `productid` int(11) DEFAULT NULL,
+  `customerid` int(11) DEFAULT NULL,
+  `telephone` varchar(20) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `current` date DEFAULT NULL,
+  `ispay` int(2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_6k0uxsm9w1hjnp1muvkrkfef9` (`customerid`),
+  KEY `FK_t89xec3n0adjmtyfww6eow4wc` (`productid`),
+  CONSTRAINT `FK_6k0uxsm9w1hjnp1muvkrkfef9` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`),
+  CONSTRAINT `FK_t89xec3n0adjmtyfww6eow4wc` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of o_order
+-- ----------------------------
+INSERT INTO `o_order` VALUES ('1', '2', '2', '123', '56', '2015-12-12', '0');
+INSERT INTO `o_order` VALUES ('4', '3', '1', '23', '23', null, '1');
+
+-- ----------------------------
 -- Table structure for `pm_productmoney`
 -- ----------------------------
 DROP TABLE IF EXISTS `pm_productmoney`;
@@ -181,13 +206,14 @@ CREATE TABLE `ps_productsell` (
   KEY `FK_em1wxfqchkn2yluip1xc4krfb` (`productid`),
   CONSTRAINT `FK_b767vrittw9fd943i9hig7yij` FOREIGN KEY (`sellmethodid`) REFERENCES `sm_sellmethod` (`id`),
   CONSTRAINT `FK_em1wxfqchkn2yluip1xc4krfb` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ps_productsell
 -- ----------------------------
 INSERT INTO `ps_productsell` VALUES ('1', '1', '2');
 INSERT INTO `ps_productsell` VALUES ('2', '2', '1');
+INSERT INTO `ps_productsell` VALUES ('3', '3', '1');
 
 -- ----------------------------
 -- Table structure for `pt_producttype`
@@ -197,12 +223,13 @@ CREATE TABLE `pt_producttype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pt_producttype
 -- ----------------------------
 INSERT INTO `pt_producttype` VALUES ('1', '字画');
+INSERT INTO `pt_producttype` VALUES ('2', '古董');
 
 -- ----------------------------
 -- Table structure for `p_product`
@@ -227,13 +254,14 @@ CREATE TABLE `p_product` (
   KEY `FK_b3oo9oqhednel04ew5ix08gxa` (`typeid`),
   CONSTRAINT `FK_3a2286hejr4r95bofseli5r42` FOREIGN KEY (`artistid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_b3oo9oqhednel04ew5ix08gxa` FOREIGN KEY (`typeid`) REFERENCES `pt_producttype` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of p_product
 -- ----------------------------
 INSERT INTO `p_product` VALUES ('1', 'kh', '1', '1', '1', '2015-12-06', '2015-12-29', '1', '1', '1', '1', '1', '1');
-INSERT INTO `p_product` VALUES ('2', 'lxn', '1', '1', '1', '2015-12-05', '2015-12-29', '1', '1', '1', '1', '1', '0');
+INSERT INTO `p_product` VALUES ('2', 'lxn', '1', '1', '1', '2015-12-05', '2015-12-29', '1', '1', '1', '1', '1', '1');
+INSERT INTO `p_product` VALUES ('3', 'gy', '1', '1', '1', '2015-12-13', '2015-12-31', '1', '1', '1', '1', '1', '3');
 
 -- ----------------------------
 -- Table structure for `rf_rolefunction`
@@ -354,5 +382,12 @@ DELIMITER ;
 DROP EVENT IF EXISTS `TimeOutEvent`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` EVENT `TimeOutEvent` ON SCHEDULE EVERY 1 SECOND STARTS '2015-11-27 21:43:51' ON COMPLETION NOT PRESERVE ENABLE DO CALL TimeOut
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `ALERTSTUATION`;
+DELIMITER ;;
+CREATE TRIGGER `ALERTSTUATION` AFTER INSERT ON `o_order` FOR EACH ROW begin
+update p_product pp set situation=3 where pp.id = new.productid;
+end
 ;;
 DELIMITER ;

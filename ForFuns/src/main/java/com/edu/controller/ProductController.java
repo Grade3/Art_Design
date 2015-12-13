@@ -35,6 +35,7 @@ import com.edu.service.IProductService;
 import com.edu.service.IProductTypeService;
 import com.edu.service.ISellMethodService;
 import com.edu.table.NewsTable;
+import com.edu.table.OrderTable;
 import com.edu.util.CheckTokenTool;
 import com.edu.viewentity.ProductVO;
 
@@ -99,7 +100,7 @@ public class ProductController {
 		productProxy.Init(productBean);
 		int result = 0;
 		try{
-			result = productProxy.BuyProduct(customerBean,money);
+			result = productProxy.BuyProduct(customerBean,money,null);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -195,14 +196,21 @@ public class ProductController {
 			return "redirect:/font/Login.jsp?error=2";
 		String userid = CheckTokenTool.GetUserid(useridtoken);
 		CustomerBean customerBean = null;
+		ProductBean productBean = null;
+		Map<String, Object> params = new HashMap<String, Object>();
 		try {
 			customerBean =  customerService.getCustomerByUserId(userid);
+			productBean = productService.GetEntityById(ProductBean.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		int respons = 0;
 		try {
-			respons =  orderService.AddOrder(id, customerBean.getId(), address, telephone);
+			params.put(OrderTable.TELEPHONE, telephone);
+			params.put(OrderTable.ADDRESS, address);
+			productProxy.Init(productBean);
+			respons =productProxy.BuyProduct(customerBean, productBean.getMoney(),params);
+			//respons =  orderService.AddOrder(id, customerBean.getId(), address, telephone);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -211,15 +219,15 @@ public class ProductController {
 		//return 2;//属于该用户的订单
 		//return 0;//添加失败
 		if(respons==0){
-			return "http://www.baidu.com";
+			return "redirect:http://www.baidu.com";
 		}else if(respons==1){
-			return "http://www.bilibili.com/";
+			return "redirect:http://www.bilibili.com/";
 		}else if(respons==2){
-			return "/font/payfot.jsp";
+			return "redirect:/font/goodsdetail.jsp?productid="+id;
 		}else if(respons==3){
-			return "/font/payfot.jsp";
+			return "redirect:/font/goodsdetail.jsp?productid="+id;
 		}
-		return "http://www.baidu.com";
+		return "redirect:http://www.baidu.com";
 	}
 	/**
 	 * 检测用户是否存在相应的订单。

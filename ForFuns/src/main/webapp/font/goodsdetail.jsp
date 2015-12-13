@@ -58,7 +58,7 @@ function getProductById(id){
 			$('#authorname').html(authorname);
 			$('#content').html(content);
 			if(situation==1){
-				var tempcontent = "<div class='row buy'><a href='payfor.jsp?productid="+id+"' class='col-xs-12 readmore'>现在购买</a></div>";
+				var tempcontent = "<div class='row buy'><a target='_blank' href='payfor.jsp?productid="+id+"' class='col-xs-12 readmore'>现在购买</a></div>";
 				$('#gooddetail').append(tempcontent);
 			}
 			if(situation==0){

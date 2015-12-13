@@ -19,3 +19,26 @@ function myformatter(value) {
         return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 	}
 }
+//检测用户是否已登录
+function CheckUser(){
+	var useridtoken = getCookie("useridtoken");
+	if(null==useridtoken || "" == useridtoken){
+		return ;
+	}
+	var index = useridtoken.indexOf("&");
+	var id =  useridtoken.substring(0,index);
+	$.ajax({
+		type:'post',
+		url:'../customer.do?method=GetCustomerName',
+		data:{customerid:id},
+		success:function(json){
+			$('#registeraction').hide();
+			$('#loginaction').hide();
+			$('#usernameaction').show();
+			$('#loginoutaction').show();
+			$('#username').html("<i class='item_login'/>"+json);
+		},error:function(){
+			
+		}
+	});
+}
