@@ -120,7 +120,8 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 			param.put(selectname, value);
 		}
 		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "username", userid,null);
-		Map<String, Object> map = mNewsBean.GetNewsPage(userBean.getNewsBeans(), page, pageSize,param);
+		//Map<String, Object> map = mNewsBean.GetNewsPage(userBean.getNewsBeans(), page, pageSize,param);
+		Map<String, Object> map = null;
 		return map;
 	}
 	/**

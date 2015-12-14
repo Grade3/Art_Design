@@ -2,21 +2,21 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50151
+Source Server Version : 50621
 Source Host           : localhost:3306
 Source Database       : forfun
 
 Target Server Type    : MYSQL
-Target Server Version : 50151
+Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-12-14 21:21:55
+Date: 2015-12-14 23:33:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for a_advert
+-- Table structure for `a_advert`
 -- ----------------------------
 DROP TABLE IF EXISTS `a_advert`;
 CREATE TABLE `a_advert` (
@@ -46,7 +46,7 @@ INSERT INTO `a_advert` VALUES ('1', '1', '1', '1', '1', '1', '1', '1', '1', '201
 INSERT INTO `a_advert` VALUES ('2', '1', '12', '123', '123', '/forfun/advertupload/1449368191704.jpg', '1231312', '13', '0', '2015-12-06', '2015-12-31', '0', '0', '');
 
 -- ----------------------------
--- Table structure for c_customer
+-- Table structure for `c_customer`
 -- ----------------------------
 DROP TABLE IF EXISTS `c_customer`;
 CREATE TABLE `c_customer` (
@@ -70,7 +70,7 @@ INSERT INTO `c_customer` VALUES ('2', '2', '1233', '12', '12', '12', '12', '323'
 INSERT INTO `c_customer` VALUES ('3', '12212', '12', '213', '213', '13', '131', '121', '1');
 
 -- ----------------------------
--- Table structure for f_function
+-- Table structure for `f_function`
 -- ----------------------------
 DROP TABLE IF EXISTS `f_function`;
 CREATE TABLE `f_function` (
@@ -101,7 +101,29 @@ INSERT INTO `f_function` VALUES ('13', '资讯管理', '', '1', null);
 INSERT INTO `f_function` VALUES ('14', '审核资讯', './ManageNews.jsp', '0', '11');
 
 -- ----------------------------
--- Table structure for n_news
+-- Table structure for `m_message`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_message`;
+CREATE TABLE `m_message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fromid` int(11) DEFAULT NULL,
+  `toid` int(11) DEFAULT NULL,
+  `message` text,
+  `current` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_fdblrv579vjxw47ivyxi57orl` (`fromid`),
+  KEY `FK_e355tkrguo7feiycq7xognthk` (`toid`),
+  CONSTRAINT `FK_e355tkrguo7feiycq7xognthk` FOREIGN KEY (`toid`) REFERENCES `c_customer` (`id`),
+  CONSTRAINT `FK_fdblrv579vjxw47ivyxi57orl` FOREIGN KEY (`fromid`) REFERENCES `c_customer` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of m_message
+-- ----------------------------
+INSERT INTO `m_message` VALUES ('1', '1', '2', '{\"sendid\":\"1\",\"receiverid\":\"2\",\"content\":\"\",\"flag\":\"0\"}', '2015-12-14 23:31:20');
+
+-- ----------------------------
+-- Table structure for `n_news`
 -- ----------------------------
 DROP TABLE IF EXISTS `n_news`;
 CREATE TABLE `n_news` (
@@ -148,7 +170,7 @@ INSERT INTO `n_news` VALUES ('28', '1', '12', '12', '12', '/forfun/newsupload/14
 INSERT INTO `n_news` VALUES ('29', '1', '121', '1231', '21313', '/forfun/newsupload/1449060110342.jpg', '13123', '1231321', '0', '2015-12-18', '2015-12-30', '0', '', '0');
 
 -- ----------------------------
--- Table structure for o_order
+-- Table structure for `o_order`
 -- ----------------------------
 DROP TABLE IF EXISTS `o_order`;
 CREATE TABLE `o_order` (
@@ -173,7 +195,7 @@ INSERT INTO `o_order` VALUES ('1', '2', '2', '123', '56', '2015-12-12', '0');
 INSERT INTO `o_order` VALUES ('4', '3', '1', '23', '23', null, '1');
 
 -- ----------------------------
--- Table structure for pm_productmoney
+-- Table structure for `pm_productmoney`
 -- ----------------------------
 DROP TABLE IF EXISTS `pm_productmoney`;
 CREATE TABLE `pm_productmoney` (
@@ -194,7 +216,7 @@ CREATE TABLE `pm_productmoney` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for ps_productsell
+-- Table structure for `ps_productsell`
 -- ----------------------------
 DROP TABLE IF EXISTS `ps_productsell`;
 CREATE TABLE `ps_productsell` (
@@ -217,7 +239,7 @@ INSERT INTO `ps_productsell` VALUES ('3', '3', '1');
 INSERT INTO `ps_productsell` VALUES ('4', '4', '1');
 
 -- ----------------------------
--- Table structure for pt_producttype
+-- Table structure for `pt_producttype`
 -- ----------------------------
 DROP TABLE IF EXISTS `pt_producttype`;
 CREATE TABLE `pt_producttype` (
@@ -233,7 +255,7 @@ INSERT INTO `pt_producttype` VALUES ('1', '字画');
 INSERT INTO `pt_producttype` VALUES ('2', '古董');
 
 -- ----------------------------
--- Table structure for p_product
+-- Table structure for `p_product`
 -- ----------------------------
 DROP TABLE IF EXISTS `p_product`;
 CREATE TABLE `p_product` (
@@ -266,7 +288,7 @@ INSERT INTO `p_product` VALUES ('3', 'gy', '1', '1', '1', '2015-12-13', '2015-12
 INSERT INTO `p_product` VALUES ('4', 'wlx', '1', '1', '1', '2015-12-07', '2015-12-31', '1', '1', '1', '1', '1', '1');
 
 -- ----------------------------
--- Table structure for rf_rolefunction
+-- Table structure for `rf_rolefunction`
 -- ----------------------------
 DROP TABLE IF EXISTS `rf_rolefunction`;
 CREATE TABLE `rf_rolefunction` (
@@ -291,7 +313,7 @@ INSERT INTO `rf_rolefunction` VALUES ('5', '5', '1');
 INSERT INTO `rf_rolefunction` VALUES ('6', '6', '1');
 
 -- ----------------------------
--- Table structure for r_role
+-- Table structure for `r_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `r_role`;
 CREATE TABLE `r_role` (
@@ -307,7 +329,7 @@ INSERT INTO `r_role` VALUES ('1', 'admin');
 INSERT INTO `r_role` VALUES ('2', 'Christy');
 
 -- ----------------------------
--- Table structure for sm_sellmethod
+-- Table structure for `sm_sellmethod`
 -- ----------------------------
 DROP TABLE IF EXISTS `sm_sellmethod`;
 CREATE TABLE `sm_sellmethod` (
@@ -323,7 +345,7 @@ INSERT INTO `sm_sellmethod` VALUES ('1', '一口价');
 INSERT INTO `sm_sellmethod` VALUES ('2', '拍卖');
 
 -- ----------------------------
--- Table structure for ur_userrole
+-- Table structure for `ur_userrole`
 -- ----------------------------
 DROP TABLE IF EXISTS `ur_userrole`;
 CREATE TABLE `ur_userrole` (
@@ -344,7 +366,7 @@ INSERT INTO `ur_userrole` VALUES ('1', '1', '1');
 INSERT INTO `ur_userrole` VALUES ('3', '1', '2');
 
 -- ----------------------------
--- Table structure for u_user
+-- Table structure for `u_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `u_user`;
 CREATE TABLE `u_user` (
@@ -366,7 +388,7 @@ INSERT INTO `u_user` VALUES ('55', '1231', '23424');
 INSERT INTO `u_user` VALUES ('56', '1231', '123131');
 
 -- ----------------------------
--- Procedure structure for TimeOut
+-- Procedure structure for `TimeOut`
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `TimeOut`;
 DELIMITER ;;
@@ -380,12 +402,11 @@ END
 DELIMITER ;
 
 -- ----------------------------
--- Event structure for TimeOutEvent
+-- Event structure for `TimeOutEvent`
 -- ----------------------------
 DROP EVENT IF EXISTS `TimeOutEvent`;
 DELIMITER ;;
-CREATE EVENT `TimeOutEvent` ON SCHEDULE EVERY 1 SECOND STARTS '2015-11-27 21:43:51' ON COMPLETION NOT PRESERVE ENABLE DO CALL TimeOut
-;
+CREATE DEFINER=`root`@`localhost` EVENT `TimeOutEvent` ON SCHEDULE EVERY 1 SECOND STARTS '2015-11-27 21:43:51' ON COMPLETION NOT PRESERVE ENABLE DO CALL TimeOut
 ;;
 DELIMITER ;
 DROP TRIGGER IF EXISTS `ALERTSTUATION`;

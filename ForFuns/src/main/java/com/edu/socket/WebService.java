@@ -1,8 +1,16 @@
 package com.edu.socket;
 import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
  
+
+
+
+
+
+
+
 
 
 import javax.websocket.OnClose;
@@ -12,16 +20,29 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.socket.server.standard.SpringConfigurator;
+
+import com.edu.model.CustomerBean;
+import com.edu.model.MessageBean;
+import com.edu.service.ICustomerService;
+import com.edu.service.IMessageService;
 import com.edu.util.FastJsonTool;
  
 //该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
-@ServerEndpoint("/websocket")
-public class MyWebSocket {
+@ServerEndpoint(value= "/websocket",configurator=SpringConfigurator.class)
+public class WebService {
+	
+	@Autowired
+	private IMessageService messageService;
+	@Autowired
+	private ICustomerService customerService;
+	
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。若要实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识
     //private static CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
-    private static ConcurrentHashMap<String, MyWebSocket> webSocketSet = new ConcurrentHashMap<String, MyWebSocket>();
+    private static ConcurrentHashMap<String, WebService> webSocketSet = new ConcurrentHashMap<String, WebService>();
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
      
@@ -56,7 +77,17 @@ public class MyWebSocket {
     public void onMessage(String message, Session session) {
         System.out.println("来自客户端的消息:" + message);
         MyMessage myMessage = FastJsonTool.getObject(message, MyMessage.class);
-        if("0".equals(myMessage.getFlag())){
+        MessageBean messageBean = new MessageBean();
+        Integer fromid = Integer.parseInt(myMessage.getSendid());
+        Integer toid = Integer.parseInt(myMessage.getReceiverid());
+        CustomerBean fromBean = customerService.GetEntityById(CustomerBean.class, fromid);
+        CustomerBean toBean = customerService.GetEntityById(CustomerBean.class, toid);
+        messageBean.setFromCustomerBean(fromBean);
+        messageBean.setToCustomerBean(toBean);
+        messageBean.setMessage(message);
+        messageBean.setCurrent(new Date());
+        messageService.AddBean(messageBean);
+       /* if("0".equals(myMessage.getFlag())){
         	webSocketSet.put(myMessage.getSendid(), this);
         	System.out.println("hashmap.size:" + webSocketSet.size());
         }else if("1".equals(myMessage.getFlag())){
@@ -64,12 +95,12 @@ public class MyWebSocket {
         	System.out.println("hashmap.size:" + webSocketSet.size());
         }else if("2".equals(myMessage.getFlag())){
         	try {
-        		MyWebSocket item = webSocketSet.get(myMessage.getReceiverid());
+        		WebService item = webSocketSet.get(myMessage.getReceiverid());
 				item.sendMessage(myMessage.getContent());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-        }
+        }*/
     }
      
     /**
@@ -98,10 +129,10 @@ public class MyWebSocket {
     }
  
     public static synchronized void addOnlineCount() {
-        MyWebSocket.onlineCount++;
+        WebService.onlineCount++;
     }
      
     public static synchronized void subOnlineCount() {
-        MyWebSocket.onlineCount--;
+        WebService.onlineCount--;
     }
 }

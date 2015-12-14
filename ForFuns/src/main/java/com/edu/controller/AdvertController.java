@@ -118,7 +118,8 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 			param.put(selectname, value);
 		}
 		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "username", userid,null);
-		Map<String, Object> map = mAdvertBean.GetAdvertPage(userBean.getAdvertBeans(), page, pageSize,param);
+		//Map<String, Object> map = mAdvertBean.GetAdvertPage(userBean.getAdvertBeans(), page, pageSize,param);
+		Map<String, Object> map = null;
 		return map;
 	}
 	/**

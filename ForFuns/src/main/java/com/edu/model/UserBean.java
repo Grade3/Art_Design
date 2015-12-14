@@ -35,10 +35,10 @@ public class UserBean {
 	private String username;
 	private String password;
 	private Set<RoleBean> roleBeans = new HashSet<RoleBean>();
-	private Set<NewsBean> newsBeans = new HashSet<NewsBean>();
-	private Set<AdvertBean> advertBeans = new HashSet<AdvertBean>();
+	//private Set<NewsBean> newsBeans = new HashSet<NewsBean>();
+	//private Set<AdvertBean> advertBeans = new HashSet<AdvertBean>();
 	
-	@Transient
+	/*@Transient
 	@OneToMany(mappedBy="userBean",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	public Set<AdvertBean> getAdvertBeans() {
 		return advertBeans;
@@ -47,8 +47,8 @@ public class UserBean {
 	public void setAdvertBeans(Set<AdvertBean> advertBeans) {
 		this.advertBeans = advertBeans;
 	}
-
-	@Transient
+*/
+	/*@Transient
 	@OneToMany(mappedBy="userBean",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	public Set<NewsBean> getNewsBeans() {
 		return newsBeans;
@@ -57,7 +57,7 @@ public class UserBean {
 	public void setNewsBeans(Set<NewsBean> newsBeans) {
 		this.newsBeans = newsBeans;
 	}
-
+*/
 	@Transient
 	@ManyToMany(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	@JoinTable(name = "ur_userrole",joinColumns ={@JoinColumn(name = "userid", referencedColumnName = "id") },   
