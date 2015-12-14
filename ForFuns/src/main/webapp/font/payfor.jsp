@@ -8,6 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>PayFor</title>
+	<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
@@ -32,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		});
 		
-		//查询是否存在该订单，不存在则继续操作，存在的话核对用户名，如果不是该用户的订单则跳转
+		//查询是否存在该订单，不存在则继续操作，存在的话核对用户名，如果不是该用户的订单则跳转 0为未登陆 1为为存在这个订单 2为订单与用户相符 3 为订单和用户不相符
 		function checkOrder(productid){
 			$.ajax({
 				type:'post',
@@ -42,11 +43,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				success:function(json){
 					alert(json);
 					if(json==0){
-						window.open("Login.jsp");
+						//window.open("Login.jsp");
+						var newTab=window.open('about:blank');
+						newTab.location.href="Login.jsp";
 					}else if(json==3){
-						
+						//跳转到错误页面
 					}else if(json==2){
-						
+						//相符则为修改页面
+						$('#subnav').html("修改订单");
+						$('#subtitle').html("修改订单");
 					}
 				},error:function(){
 					
@@ -86,6 +91,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}
 		$(document).ready(function(){
+			$('#usernameaction').hide();
+			$('#loginoutaction').hide();
 			var productid = getUrlParam("productid");
 			if(productid==null){
 				location.href="404.jsp";
@@ -169,12 +176,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 
 	<div class="container">
-		<h6 class="location"><a href="home.html">首页</a> <i> </i> 提交订单 </h6>
+		<h6 class="location"><a href="home.html">首页</a> <i> </i> <font id="subnava">提交订单 </font></h6>
 	</div>
 
 
 	<div class="bar_news">
-		<h2>提交订单</h2>
+		<h2 id="subtitle">提交订单</h2>
 	</div>
 
 

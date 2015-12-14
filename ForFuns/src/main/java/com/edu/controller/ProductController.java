@@ -149,7 +149,7 @@ public class ProductController {
 	
 	
 	/**
-	 * 获取对应分类商品
+	 * 获取上线对应分类商品
 	 * @return
 	 */
 	@ResponseBody
