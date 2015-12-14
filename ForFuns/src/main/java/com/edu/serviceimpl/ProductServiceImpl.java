@@ -28,6 +28,4 @@ public class ProductServiceImpl extends BaseServiceImpl<ProductBean> implements 
 	public int getOnlineProductTotal(int typeid) {
 		return productDao.getOnlineProductTotal(typeid);
 	}
-
-
 }

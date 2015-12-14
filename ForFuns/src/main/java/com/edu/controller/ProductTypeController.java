@@ -38,7 +38,7 @@ import com.edu.table.UserTable;
 import com.edu.util.MD5Util;
 
 /**
- * 用户管理controller
+ * 艺术品类型管理controller
  * @author kh
  * 
  */
