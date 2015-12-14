@@ -1,5 +1,7 @@
 package com.edu.stragegy;
 
+import java.util.Map;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.base.IBaseDao;
@@ -15,6 +17,6 @@ import com.edu.model.ProductBean;
  */
 @Transactional
 public interface ISellStrategy {
-	public int SellProduct(ProductBean productBean,CustomerBean customerBean,Integer money);
+	public int SellProduct(ProductBean productBean,CustomerBean customerBean,Integer money,Map<String, Object> params) throws Exception;
 	//public void Init(IProductDao productDao,IProductMoneyDao productMoneyDao);
 }

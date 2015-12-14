@@ -1,5 +1,7 @@
 package com.edu.proxy;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +48,8 @@ public class ProductProxy {
 	 * 出售商品
 	 * @return
 	 */
-	public int BuyProduct(CustomerBean customerbean,Integer money)throws Exception{
-		return sellStrategy.SellProduct(productBean,customerbean,money);
+	public int BuyProduct(CustomerBean customerbean,Integer money,Map<String, Object> params)throws Exception{
+		return sellStrategy.SellProduct(productBean,customerbean,money,params);
 	}
 
 	public ProductProxy(ProductBean productBean) {

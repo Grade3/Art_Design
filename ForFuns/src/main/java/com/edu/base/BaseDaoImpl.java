@@ -251,7 +251,11 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 			}
 		}
 		System.out.println(hql);
-		return (T) getSession().createQuery(hql).list().get(0);
+		List<T> list = getSession().createQuery(hql).list();
+		if(list.size()==0){
+			return null;
+		}
+		return list.get(0);
 	}
 
 	

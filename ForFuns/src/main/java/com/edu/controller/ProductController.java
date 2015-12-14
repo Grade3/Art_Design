@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,16 +23,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edu.model.CustomerBean;
 import com.edu.model.NewsBean;
+import com.edu.model.OrderBean;
 import com.edu.model.ProductBean;
 import com.edu.model.ProductSellBean;
 import com.edu.model.ProductTypeBean;
 import com.edu.model.SellMethodBean;
 import com.edu.proxy.ProductProxy;
 import com.edu.service.ICustomerService;
+import com.edu.service.IOrderService;
 import com.edu.service.IProductService;
 import com.edu.service.IProductTypeService;
 import com.edu.service.ISellMethodService;
 import com.edu.table.NewsTable;
+import com.edu.table.OrderTable;
+import com.edu.util.CheckTokenTool;
 import com.edu.viewentity.ProductVO;
 
 
@@ -52,6 +57,8 @@ public class ProductController {
 	@Autowired
 	private IProductTypeService productTypeService;
 	
+	@Autowired
+	private IOrderService orderService;
 	/**
 	 * 获取分页列表
 	 * 
@@ -93,7 +100,7 @@ public class ProductController {
 		productProxy.Init(productBean);
 		int result = 0;
 		try{
-			result = productProxy.BuyProduct(customerBean,money);
+			result = productProxy.BuyProduct(customerBean,money,null);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -142,7 +149,7 @@ public class ProductController {
 	
 	
 	/**
-	 * 获取对应分类商品
+	 * 获取上线对应分类商品
 	 * @return
 	 */
 	@ResponseBody
@@ -171,5 +178,89 @@ public class ProductController {
 		ProductVO productVO = new ProductVO(productBean);
 		map.put("product",productVO);
 		return map;
+	}
+	
+	/**
+	 * 通过口令判断是否是有订单
+	 * @param id
+	 * @param useridtoken
+	 * @return
+	 */
+	@RequestMapping(params="method=AddOrder")
+	public String AddOrder(@RequestParam(value="productid")Integer id,@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
+			@RequestParam(value="address")String address,@RequestParam(value="telephone")String telephone){
+		if("".equals(useridtoken))//未登陆
+			return "redirect:/font/Login.jsp?error=2";
+		boolean flag = CheckTokenTool.CheckToken(useridtoken);
+		if(!flag)
+			return "redirect:/font/Login.jsp?error=2";
+		String userid = CheckTokenTool.GetUserid(useridtoken);
+		CustomerBean customerBean = null;
+		ProductBean productBean = null;
+		Map<String, Object> params = new HashMap<String, Object>();
+		try {
+			customerBean =  customerService.getCustomerByUserId(userid);
+			productBean = productService.GetEntityById(ProductBean.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int respons = 0;
+		try {
+			params.put(OrderTable.TELEPHONE, telephone);
+			params.put(OrderTable.ADDRESS, address);
+			productProxy.Init(productBean);
+			respons =productProxy.BuyProduct(customerBean, productBean.getMoney(),params);
+			//respons =  orderService.AddOrder(id, customerBean.getId(), address, telephone);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//return 3;//添加成功
+		//return 1;//不属于该用户的订单
+		//return 2;//属于该用户的订单
+		//return 0;//添加失败
+		if(respons==0){
+			return "redirect:http://www.baidu.com";
+		}else if(respons==1){
+			return "redirect:http://www.bilibili.com/";
+		}else if(respons==2){
+			return "redirect:/font/goodsdetail.jsp?productid="+id;
+		}else if(respons==3){
+			return "redirect:/font/goodsdetail.jsp?productid="+id;
+		}
+		return "redirect:http://www.baidu.com";
+	}
+	/**
+	 * 检测用户是否存在相应的订单。
+	 * @param id
+	 * @param useridtoken
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=checkOrder")
+	public String jsonCheckOrder(@RequestParam(value="productid")Integer id,@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
+		if("".equals(useridtoken)||null==useridtoken)//未登陆
+			return "0";
+		boolean flag = CheckTokenTool.CheckToken(useridtoken);
+		if(!flag)
+			return "0";//未登录
+		String userid = CheckTokenTool.GetUserid(useridtoken);
+		CustomerBean customerBean = null;
+		try {
+			customerBean =  customerService.getCustomerByUserId(userid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		OrderBean orderBean = null;
+		try {
+			orderBean  = orderService.getOrderByProductId(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(null==orderBean)
+			return "1";//不存在这个订单
+		if(!userid.equals(orderBean.getCustomerBean().getUserid())){
+			return "3";//订单与用户不符合
+		}
+		return "2";//订单与用户相符
 	}
 }

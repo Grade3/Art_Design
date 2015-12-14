@@ -326,4 +326,19 @@ public class CustomerController {
 		map.put("total", total);
 		return map;
 	}
+	/**
+	 * 退出登录
+	 * @param token
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(params="method=loginout")
+	public String LoginOut(@CookieValue(value = "useridtoken", required = false) Cookie token,HttpServletResponse response){
+		if(null!=token){
+			token.setMaxAge(0);
+			response.addCookie(token);
+		}
+		return "font/Login.jsp";
+	}
+	
 }

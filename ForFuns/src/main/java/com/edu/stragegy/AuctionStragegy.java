@@ -1,5 +1,7 @@
 package com.edu.stragegy;
 
+import java.util.Map;
+
 import com.edu.base.IBaseDao;
 import com.edu.dao.IProductDao;
 import com.edu.dao.IProductMoneyDao;
@@ -15,8 +17,7 @@ public class AuctionStragegy implements ISellStrategy{
 
 	@Override
 	public int SellProduct(ProductBean productBean, CustomerBean customerBean,
-			Integer money) {
-		// TODO Auto-generated method stub
+			Integer money, Map<String, Object> params) throws Exception {
 		return 0;
 	}
 

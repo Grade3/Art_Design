@@ -23,6 +23,7 @@ import com.edu.model.FunctionBean;
 import com.edu.model.RoleBean;
 import com.edu.model.CustomerBean;
 import com.edu.service.ICustomerService;
+import com.edu.table.CustomerTable;
 
 
 @Lazy(true)
@@ -54,6 +55,11 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerBean> implement
 	public boolean exist(CustomerBean customer)
 	{
 		return customerDao.exist(customer);
+	}
+
+	@Override
+	public CustomerBean getCustomerByUserId(String userid) throws Exception {
+		return customerDao.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, userid, null);
 	}
 
 	/*@Override

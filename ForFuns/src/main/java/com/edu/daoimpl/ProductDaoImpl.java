@@ -26,7 +26,8 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 		String hql ="";
 		List<ProductBean> list = null;
 		try {
-			hql = "from "+ProductBean.class.newInstance().getClass().getName()+" temp where temp.productSellBean.sellMethodBean.id = ? and  current_date() >= timestart and current_date()<=timeout  and typeid=?";
+			//hql = "from "+ProductBean.class.newInstance().getClass().getName()+" temp where temp.productSellBean.sellMethodBean.id = ? and  current_date() >= timestart and current_date()<=timeout  and typeid=? and ( situation = 1 or situation = 0 )";
+			hql = "from "+ProductBean.class.newInstance().getClass().getName()+" temp where temp.productSellBean.sellMethodBean.id = ? and typeid=? and ( situation = 1 or situation = 0 )";
 			System.out.println(hql);
 			Query query = getSession().createQuery(hql);
 			query.setInteger(0, methodid);
