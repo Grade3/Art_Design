@@ -98,7 +98,7 @@ function GetAllOnlineProduct(typeid,page,pageSize){
 					if(i%2==0){
 						tempbody +="<div class='col-md-6 goods_two'>";
 					}
-					tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp'><img src='"+imgurl+"' class='good_item'></a>"
+					tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
 							 +"<div class='good_name'><p>"+name+"</p><p>"+authorname+"</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore'>详情</a></div></div>";
 					if(i%2==1){
 						tempbody +="</div>";
