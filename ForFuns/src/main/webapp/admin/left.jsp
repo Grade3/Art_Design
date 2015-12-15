@@ -138,6 +138,7 @@
                     <ul class="subul">
                          <li ><a target="rightFrame" href="./ManageProduct.jsp">商品管理</a></li>
                          <li ><a target="rightFrame" href="./ManageProductType.jsp">商品类别管理</a></li>
+                         <li ><a target="rightFrame" href="./ManageOrder.jsp">订单管理</a></li>
                     </ul>
                 </li>
                 <!--

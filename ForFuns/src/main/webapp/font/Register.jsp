@@ -92,7 +92,7 @@ function checkUserid(userid)
 
 function checkTelphone(telphone)
 {
-	var strRegex = /[1-9]\d{6,}/;
+	var strRegex = /[1-9]\d{6,}$/;
 	var re = new RegExp(strRegex);
 	
 	if(!re.test(telphone))

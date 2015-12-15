@@ -33,6 +33,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		});
 		
+		function checkTelephone(telephone)
+		{
+			var strRegex = /[1-9]\d{6,}$/;
+			var re = new RegExp(strRegex);
+			
+			if(!re.test(telephone))
+			{
+				$("#telephone").focus();
+				return false;
+			}
+			
+			return true;
+		}
+		
+		function validate()
+		{
+			var telephone = $("#telephone").val();
+			var address = $("#address").val();
+			
+			if(telephone == "" || telephone == null || address == "" || address == null)
+			{
+				alert("信息不完整!");
+				return false;
+			}
+			
+			if(!checkTelephone(telephone))
+			{
+				alert("电话号码格式错误");
+				return false;
+			}
+			
+			return true;
+		}
+		
 		//查询是否存在该订单，不存在则继续操作，存在的话核对用户名，如果不是该用户的订单则跳转 0为未登陆 1为为存在这个订单 2为订单与用户相符 3 为订单和用户不相符
 		function checkOrder(productid){
 			$.ajax({
@@ -117,7 +151,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$(".sub").slideToggle("slow");
 			});
 			$('.readmore').click(function(){
-				$('#orderform').submit();
+				
+				if(validate()){
+					$('#orderform').submit();	
+				}else{
+					return ;
+				}
 			});
 		});
 	</script>
@@ -227,7 +266,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a href="#" class="col-xs-offset-3 col-xs-6 readmore">提交订单</a>
 					</div>
 					<div class="col-xs-12 row buy visible-sm visible-xs">
-						<a href="#" class="col-xs-12 readmore">提交订单</a>
+						<a href="#" class="col-xs-12 readmore"">提交订单</a>
 					</div>
 				</form>
 			</div>

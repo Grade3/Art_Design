@@ -60,7 +60,6 @@ $(document).ready(function(){
 	  $("#menu").click(function(){
 	  $("#menu-xs").toggle(300);
 	  });
-	  $('#errormessage').hide();
 });
 </script>
 
@@ -148,7 +147,7 @@ $(document).ready(function(){
 				<div class="form-group">
 					<div class="col-xs-offset-2 col-xs-10 input_div">
 						<p class="label_link"><a href="Register.jsp">注册新账号 >></a></p>
-						<p class="label_error" id="errormessage">用户名或密码错误！</p>
+						<p class="label_error" id="errormessage" style="display:none;">用户名或密码错误！</p>
 					</div>
 				</div>
 				

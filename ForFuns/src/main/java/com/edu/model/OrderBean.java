@@ -45,6 +45,18 @@ public class OrderBean {
 		this.productBean = productBean;
 		this.customerBean = customerBean;
 	}
+	
+	public OrderBean(String telephone, String address, Date current,
+			Integer ispay, ProductBean productBean, CustomerBean customerBean)
+	{
+		super();
+		this.telephone = telephone;
+		this.address = address;
+		this.current = current;
+		this.ispay = ispay;
+		this.productBean = productBean;
+		this.customerBean = customerBean;
+	}
 
 	public OrderBean() {
 		super();

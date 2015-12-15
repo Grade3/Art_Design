@@ -32,8 +32,6 @@ import org.springframework.stereotype.Repository;
 
 import com.mysql.jdbc.Field;
 
-
-
 @Entity
 @Table(name="a_advert")
 @DynamicInsert

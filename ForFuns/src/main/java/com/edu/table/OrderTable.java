@@ -8,4 +8,5 @@ public class OrderTable {
 	public static String TELEPHONE = "telephone";
 	public static String ADDRESS ="address";
 	public static String CURRENT = "current";
+	public static String ISPAY = "ispay";
 }
