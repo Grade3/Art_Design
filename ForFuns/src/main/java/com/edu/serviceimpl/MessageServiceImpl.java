@@ -19,7 +19,12 @@ public class MessageServiceImpl extends BaseServiceImpl<MessageBean> implements 
 	
 	@Override
 	public List<MessageBean> getUnReadMessage(Integer sendid, Integer fromid) {
-		return null ;
+		List<MessageBean> unReadMessage = messageDao.getUnReadMessage(sendid, fromid);
+		if(null == unReadMessage ||  unReadMessage.size()==0 )
+			return unReadMessage;
+		int lastid = unReadMessage.get(unReadMessage.size()-1).getId();
+		messageDao.alertUnReadMessage(lastid, sendid, fromid);
+		return unReadMessage;
 	}
 
 }

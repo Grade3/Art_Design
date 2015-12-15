@@ -22,9 +22,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </body>
    
   <script type="text/javascript">
-  	  var userid = 1;
+  	  var userid = 2;
+  	  var receiveid = 1;
       var websocket = null;
-      var receiveid = 2;
+       
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
           websocket = new WebSocket("ws://localhost:8080/forfun/websocket");

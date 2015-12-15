@@ -1,9 +1,11 @@
 package com.edu.socket;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
  
+
 
 
 
@@ -81,8 +83,18 @@ public class WebService {
         	webSocketSet.put(myMessage.getSendid(), this);
         	System.out.println("hashmap.size:" + webSocketSet.size());
         	//返回未读信息
-        	
-        	
+        	List<MessageBean> unReadMessage = messageService.getUnReadMessage(Integer.parseInt(myMessage.getReceiverid()), Integer.parseInt(myMessage.getSendid()));
+        	List<MessageVO> returnMessage = MessageVO.ChangeToListMessageVO(unReadMessage);
+        	if(null == unReadMessage){
+        		
+        	}else{
+				try {
+					WebService item = webSocketSet.get(myMessage.getReceiverid());
+					item.sendMessage(FastJsonTool.createJsonString(returnMessage));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+        	}
         }else if("1".equals(myMessage.getFlag())){//关闭连接
         	webSocketSet.remove(myMessage.getSendid());
         	System.out.println("hashmap.size:" + webSocketSet.size());
@@ -100,7 +112,7 @@ public class WebService {
                 messageBean.setIsread(0);
                 messageService.AddBean(messageBean);
                 
-                boolean containsKey = webSocketSet.containsKey(toid);
+                boolean containsKey = webSocketSet.containsKey(toid+"");
                 if(containsKey){
                 	WebService item = webSocketSet.get(myMessage.getReceiverid());
     				item.sendMessage(myMessage.getContent());

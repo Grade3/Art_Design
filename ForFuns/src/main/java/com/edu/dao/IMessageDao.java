@@ -17,5 +17,5 @@ public interface IMessageDao extends IBaseDao<MessageBean>{
 	 * @param messageid
 	 * @return
 	 */
-	public boolean alertUnReadMessage(Integer messageid);
+	public boolean alertUnReadMessage(Integer messageid,Integer sendid, Integer fromid);
 }

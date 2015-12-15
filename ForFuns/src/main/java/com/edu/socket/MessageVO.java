@@ -45,6 +45,8 @@ public class MessageVO {
 	
 	public static List<MessageVO> ChangeToListMessageVO(List<MessageBean> temp){
 		List<MessageVO> list =new ArrayList<MessageVO>();
+		if(null== temp || temp.size()==0)
+			return list;
 		for(MessageBean messageBean : temp){
 			list.add(new MessageVO(messageBean));
 		}
