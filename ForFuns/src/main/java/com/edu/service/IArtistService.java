@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.edu.base.IBaseService;
 import com.edu.model.CustomerBean;
+import com.edu.model.ExamineArtistBean;
 
 public interface IArtistService extends IBaseService<CustomerBean>
 {
@@ -18,11 +19,23 @@ public interface IArtistService extends IBaseService<CustomerBean>
 	 */
 	public boolean isExist(CustomerBean customer);
 	
+	
+	
 	/**
 	 * 保存实体
 	 * @param customer
 	 */
 	public void save(CustomerBean customer);
+	
+	
+	
+	/**
+	 * 计算数量
+	 * @param ea
+	 * @return
+	 */
+	public int countEa();
+	
 	
 	@SuppressWarnings("rawtypes")
 	public List<CustomerBean> GetAllBean(Class clz);

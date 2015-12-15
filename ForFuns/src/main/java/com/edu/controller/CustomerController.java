@@ -59,6 +59,7 @@ public class CustomerController {
 			@RequestParam(value = "password", required = false) String password, HttpServletRequest request,
 			HttpServletResponse response, @CookieValue(value = "useridtoken", required = false) String token) {
 		if (null != token) {
+			//System.out.println("get id");
 			if (null == userid) {
 				System.out.println(token);
 				String[] parts = token.split("\\&");
@@ -106,6 +107,78 @@ public class CustomerController {
 	 */
 	@RequestMapping(params = "method=register")
 	public String register(@RequestParam(value = "userid", required = false) String userid,
+			@RequestParam(value = "username", required = false) String username,
+			@RequestParam(value = "realname", required = false) String realname,
+			@RequestParam(value = "telphone", required = false) String telphone,
+			@RequestParam(value = "personnumber", required = false) String personnumber, HttpServletRequest request,
+			HttpServletResponse response, @CookieValue(value = "token", required = false) String token) {
+		// if (null != token) {
+		// if (null == userid) {
+		// System.out.println(token);
+		// String[] parts = token.split("\\&");
+		// System.out.println(parts.length);
+		// String temp = MD5Util.convertMD5(parts[1]);
+		// System.out.println(temp);
+		// if (parts[0].equals(temp))
+		// return "redirect:/font/news.jsp";
+		// return "redirect:/font/Login.jsp?error=1";
+		// }
+		// }
+		CustomerBean user = new CustomerBean();
+		int registFlag = 0;
+		if (userid.equals("")|| username.equals("")
+				|| realname.equals("") || telphone.equals("") || personnumber.equals(""))
+			registFlag = 1;
+		if (registFlag == 0) {
+			user.setUserid(userid);
+			if(customerService.exist(user)){registFlag = 3;System.out.println("重名！");}
+			else registFlag=2;
+		}
+		if (registFlag == 0) {
+			user.setUsername(username);
+			user.setPersonnumber(personnumber);
+			user.setRealname(realname);
+			user.setTelphone(telphone);
+			
+			System.out.println(user.toString());
+			
+			customerService.AddBean(user);
+
+			String temp = null;
+			try {
+				temp = URLEncoder.encode(MD5Util.convertMD5(userid), "utf-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			String value = userid + "&" + temp;
+			System.out.println(value);
+			Cookie cookie = new Cookie("useridtoken", value);
+			response.addCookie(cookie);
+			return "redirect:/font/personal.jsp";
+		}
+		//用户名重复
+		if (registFlag == 2)
+			return "redirect:/font/Register.jsp?error=2";
+		//没填全
+		else
+			return "redirect:/font/Register.jsp?error=1";
+
+	}
+	
+	/**
+	 * 修改个人信息功能
+	 * 
+	 * @param userid
+	 * @param password
+	 * @param confirm_password
+	 * @param username
+	 * @param realname
+	 * @param telphone
+	 * @param personnumber
+	 * @return
+	 */
+	@RequestMapping(params = "method=modify")
+	public String modify(@RequestParam(value = "userid", required = false) String userid,
 			@RequestParam(value = "password", required = false) String password,
 			@RequestParam(value = "confirm_password", required = false) String confirm_password,
 			@RequestParam(value = "username", required = false) String username,
@@ -174,17 +247,11 @@ public class CustomerController {
 			return "redirect:/font/Register.jsp?error=1";
 
 	}
+	
 
 	/**
-	 * 注册功能
+	 * 功能
 	 * 
-	 * @param userid
-	 * @param password
-	 * @param confirm_password
-	 * @param username
-	 * @param realname
-	 * @param telphone
-	 * @param personnumber
 	 * @return
 	 */
 	@RequestMapping(params = "method=checkUserid")

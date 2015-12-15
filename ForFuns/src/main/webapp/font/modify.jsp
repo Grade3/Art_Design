@@ -7,94 +7,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Modify</title>
-	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
-	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="../css/modify.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Modify</title>
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="../css/dom.css" rel="stylesheet" type="text/css" />
+<link href="../css/footer.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="../css/modify.css">
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 </head>
 <body>
 
-<a href="javascript:;" class="lanrenzhijia_top"></a>
-<script src="../js/lanrenzhijia.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
-<script>
-$(function(){
-	$(window).scroll(function(){
-		var _top = $(window).scrollTop();
-		if(_top>300){
-			$('.lanrenzhijia_top').fadeIn(600);
-		}else{
-			$('.lanrenzhijia_top').fadeOut(600);
-		}
-	});
-	$(".lanrenzhijia_top").click(function(){
-		$("html,body").animate({scrollTop:0},500);
-	});
-});
-</script>
+	<a href="javascript:;" class="lanrenzhijia_top"></a>
+	<script src="../js/lanrenzhijia.js"></script>
+	<script type="text/javascript"
+		src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
+	<script>
+		$(function() {
+			$(window).scroll(function() {
+				var _top = $(window).scrollTop();
+				if (_top > 300) {
+					$('.lanrenzhijia_top').fadeIn(600);
+				} else {
+					$('.lanrenzhijia_top').fadeOut(600);
+				}
+			});
+			$(".lanrenzhijia_top").click(function() {
+				$("html,body").animate({
+					scrollTop : 0
+				}, 500);
+			});
+		});
+	</script>
 
-<script type="text/javascript">
-$(document).ready(function(){
-  $("#menu").click(function(){
-  $("#menu-xs").toggle(300);
-  });
-});
-</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#menu").click(function() {
+				$("#menu-xs").toggle(300);
+			});
+		});
+	</script>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	var width = $(".userpic").width();
-	var height = width;
-	$(".userpic").height(height);
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var width = $(".userpic").width();
+			var height = width;
+			$(".userpic").height(height);
 
-	$(window).resize(function() {
-		var width = $(".userpic").width();
-		var height = width;
-		$(".userpic").height(height);
-	});
-});
-</script>
+			$(window).resize(function() {
+				var width = $(".userpic").width();
+				var height = width;
+				$(".userpic").height(height);
+			});
+		});
+	</script>
 
 	<div class="header-top">
-			<div class="container">
-				<div class="statu_bar">
-					<ul class="support">
-						<li ><span ><i class="item_message"> </i>471979617@qq.com</span></li>
-						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
-					</ul>
-					<ul class="support-right">
-						<li ><a href="Login.html" ><i class="item_login"> </i>登陆</a></li>
-						<li ><a href="Register.html" ><i class="item_register"> </i>注册账号</a></li>			
-					</ul>
-				</div>
+		<div class="container">
+			<div class="statu_bar">
+				<ul class="support">
+					<li><span><i class="item_message"> </i>471979617@qq.com</span></li>
+					<li><span><i class="item_tel"> </i>156-9000-8000</span></li>
+				</ul>
+				<ul class="support-right">
+					<li><a href="Login.html"><i class="item_login"> </i>登陆</a></li>
+					<li><a href="Register.html"><i class="item_register">
+						</i>注册账号</a></li>
+				</ul>
 			</div>
-			<div class="header-bottom">
-				<div class="container">
-					<div class="logo">
-						<h1><a href="home.html">ArtCustomize</a></h1>
+		</div>
+		<div class="header-bottom">
+			<div class="container">
+				<div class="logo">
+					<h1>
+						<a href="home.html">ArtCustomize</a>
+					</h1>
+				</div>
+				<div class="top-nav-xs hidden-lg">
+					<div id="menu" onmouseover="fun1();" onmouseout="fun2();">
+						<p>菜 单</p>
 					</div>
-					<div class="top-nav-xs hidden-lg">
-						<div id="menu" onmouseover="fun1();" onmouseout="fun2();">
-							<p>菜  单</p>
-						</div>
-						<div id="menu-xs">
-							<ul>
-								<li><a href="home.html">首页</a></li>
-								<li><a href="home.html">成品</a></li>
-								<li><a href="home.html">DIY</a></li>
-								<li><a href="home.html">艺术家</a></li>
-								<li><a href="newslist.html">资讯中心</a></li>
-								<li><a href="home.html">联系我们</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="top-nav visible-lg">
-						<ul class="megamenu skyblue">
+					<div id="menu-xs">
+						<ul>
 							<li><a href="home.html">首页</a></li>
 							<li><a href="home.html">成品</a></li>
 							<li><a href="home.html">DIY</a></li>
@@ -104,11 +99,25 @@ $(document).ready(function(){
 						</ul>
 					</div>
 				</div>
+				<div class="top-nav visible-lg">
+					<ul class="megamenu skyblue">
+						<li><a href="home.html">首页</a></li>
+						<li><a href="home.html">成品</a></li>
+						<li><a href="home.html">DIY</a></li>
+						<li><a href="home.html">艺术家</a></li>
+						<li><a href="newslist.html">资讯中心</a></li>
+						<li><a href="home.html">联系我们</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
+	</div>
 
 	<div class="container">
-		<h6 class="location"><a href="home.html">首页</a> <i> </i> <a href="personal.html">个人中心</a> <i> </i> 修改个人信息 </h6>
+		<h6 class="location">
+			<a href="home.html">首页</a> <i> </i> <a href="personal.html">个人中心</a>
+			<i> </i> 修改个人信息
+		</h6>
 	</div>
 
 
@@ -119,70 +128,76 @@ $(document).ready(function(){
 
 	<div class="content">
 		<div class="container">
-			<div class="user_info">
-				<img class="userpic" src="../image/bl.jpg">
-				<p class="picture"><a href="modifyPassword.html">更换头像</a></p>
-			</div>
+			<form
+				action="${pageContext.request.contextPath}/customer.do?method=modify"
+				method="post">
+				<div class="user_info">
+					<img class="userpic" src="../image/bl.jpg">
+					<p class="picture">
+						<a href="modifyPassword.html">更换头像</a>
+					</p>
+				</div>
 
-			<div class="row person_info">
-				<div class="col-xs-offset-1 col-xs-10 info_div visible-lg">
-					<div class="row info">
-						<p class="col-xs-4">用户名</p>
-						<input type="text" class="col-xs-8" value="我的用户名">
+				<div class="row person_info">
+					<div class="col-xs-offset-1 col-xs-10 info_div visible-lg">
+						<div class="row info">
+							<p class="col-xs-4">用户名</p>
+							<input type="text" class="col-xs-8"  value="我的用户名">
+						</div>
+						<div class="row info">
+							<p class="col-xs-4">昵称</p>
+							<input type="text" class="col-xs-8"  value="我的昵称">
+						</div>
+						<div class="row info">
+							<p class="col-xs-4">真实姓名</p>
+							<input type="text" class="col-xs-8" value="我的真实姓名">
+						</div>
+						<div class="row info">
+							<p class="col-xs-4">身份证</p>
+							<input type="text" class="col-xs-8" value="我的身份证">
+						</div>
+						<div class="row info info2">
+							<p class="col-xs-4">手机</p>
+							<input type="text" class="col-xs-8" value="我的手机2">
+						</div>
 					</div>
-					<div class="row info">
-						<p class="col-xs-4">昵称</p>
-						<input type="text" class="col-xs-8" value="我的昵称">
+					<div class="info_div hidden-lg">
+						<div class="row info">
+							<p class="col-xs-4">用户名</p>
+							<input type="text" class="col-xs-8" name= "userid"value="我的用户名">
+						</div>
+						<div class="row info">
+							<p class="col-xs-4">昵称</p>
+							<input type="text" class="col-xs-8"name= "username" value="我的昵称">
+						</div>
+						<div class="row info">
+							<p class="col-xs-4">真实姓名</p>
+							<input type="text" class="col-xs-8" name= "realname"value="我的真实姓名">
+						</div>
+						<div class="row info">
+							<p class="col-xs-4">身份证</p>
+							<input type="text" class="col-xs-8" name= "personnumber"value="我的身份证">
+						</div>
+						<div class="row info info2">
+							<p class="col-xs-4">手机</p>
+							<input type="text" class="col-xs-8" name= "telphone"value="我的手机1">
+						</div>
 					</div>
-					<div class="row info">
-						<p class="col-xs-4">真实姓名</p>
-						<input type="text" class="col-xs-8" value="我的真实姓名">
+
+					<div class="col-xs-12 success_btn visible-lg">
+						<input type="submit" class="col-xs-offset-1 col-xs-10"
+							value="提交修改">
 					</div>
-					<div class="row info">
-						<p class="col-xs-4">身份证</p>
-						<input type="text" class="col-xs-8" value="我的身份证">
-					</div>
-					<div class="row info info2">
-						<p class="col-xs-4">手机</p>
-						<input type="text" class="col-xs-8" value="我的手机">
+
+					<div class="col-xs-12 success_btn hidden-lg">
+						<input type="submit" class="col-xs-12" value="提交修改">
 					</div>
 				</div>
-				<div class="info_div hidden-lg">
-					<div class="row info">
-						<p class="col-xs-4">用户名</p>
-						<input type="text" class="col-xs-8" value="我的用户名">
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">昵称</p>
-						<input type="text" class="col-xs-8" value="我的昵称">
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">真实姓名</p>
-						<input type="text" class="col-xs-8" value="我的真实姓名">
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">身份证</p>
-						<input type="text" class="col-xs-8" value="我的身份证">
-					</div>
-					<div class="row info info2">
-						<p class="col-xs-4">手机</p>
-						<input type="text" class="col-xs-8" value="我的手机">
-					</div>
-				</div>	
-
-				<div class="col-xs-12 success_btn visible-lg">
-					<input type="submit" class="col-xs-offset-1 col-xs-10" value="提交修改">
-				</div>		
-
-				<div class="col-xs-12 success_btn hidden-lg">
-					<input type="submit" class="col-xs-12" value="提交修改">
-				</div>	
-			</div>
-
-			
+			</form>
 
 
-				
+
+
 		</div>
 	</div>
 
@@ -190,7 +205,8 @@ $(document).ready(function(){
 	<div class="bottom-grid1">
 		<div class="fit1">
 			<h3>HAPPY SHOPPING</h3>
-			<p>Lorem Ipsum sit amet consectuer adipiscing elitsed diam nonummy nibh euismod</p>
+			<p>Lorem Ipsum sit amet consectuer adipiscing elitsed diam
+				nonummy nibh euismod</p>
 		</div>
 	</div>
 
@@ -203,7 +219,8 @@ $(document).ready(function(){
 				<p>地址：福建省厦门市思明区422号厦门大学</p>
 			</div>
 			<div class="col-md-12 company">
-				<p class="footer-class">Copyright &copy; 2015.Company name All rights reserved.</p>
+				<p class="footer-class">Copyright &copy; 2015.Company name All
+					rights reserved.</p>
 			</div>
 		</div>
 	</div>

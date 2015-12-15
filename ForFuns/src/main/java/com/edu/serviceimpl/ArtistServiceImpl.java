@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.edu.base.BaseServiceImpl;
 import com.edu.dao.IArtistDao;
 import com.edu.model.CustomerBean;
+import com.edu.model.ExamineArtistBean;
 import com.edu.service.IArtistService;
 
 @Lazy(true)
@@ -55,5 +56,16 @@ public class ArtistServiceImpl extends BaseServiceImpl<CustomerBean> implements
 	public List<CustomerBean> GetAllBean(Class clz)
 	{
 		return artistDao.getAllEntity(clz);
+	}
+
+	@Override
+	public int countEa() {
+		return artistDao.countEa();
+	}
+
+
+	public int AddBean(ExamineArtistBean examineartist) {
+		artistDao.addEntity(examineartist);
+		return 1;
 	}
 }

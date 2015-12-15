@@ -3,7 +3,9 @@
  */
 package com.edu.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.edu.model.ArtistBean;
 import com.edu.model.CustomerBean;
+import com.edu.model.ExamineArtistBean;
 import com.edu.service.IArtistService;
 import com.edu.serviceimpl.ArtistServiceImpl;
 import com.edu.table.CustomerTable;
@@ -42,6 +46,8 @@ public class ArtistController
 	@Resource
 	private IArtistService artistService;
 
+	
+	
 	/**
 	 * 登录功能
 	 * 
@@ -85,6 +91,78 @@ public class ArtistController
 		{
 			return "redirect:/jsp/login.jsp?error=1";
 		}
+	}
+	
+	/**
+	 * 申请成为艺术家功能
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping(params = "method=apply")
+	public String apply(
+			@RequestParam(value = "userid", required = false) String userid,
+			@RequestParam(value = "realname", required = false) String realname,
+			@RequestParam(value = "telphone", required = false) String telphone,
+			@RequestParam(value = "personnumber", required = false) String personnumber,
+			@RequestParam(value = "paymode", required = false) String paymode,
+			@RequestParam(value = "goodat", required = false) String goodat,
+			HttpServletRequest request, HttpServletResponse response,
+			@CookieValue(value = "useridtoken", required = false) String token)
+	{
+		if (null != token)
+		{
+			//System.out.println("get");
+			if (null == userid)
+			{
+				System.out.println(token);
+				String[] parts = token.split("\\&");
+				System.out.println(parts.length);
+				String temp = MD5Util.convertMD5(parts[1]);
+				System.out.println(temp);	
+				userid=temp;
+			}
+		}
+		ExamineArtistBean examineartist=new ExamineArtistBean();
+		int registFlag = 0;
+		if (userid.equals("")||paymode.equals("") || goodat.equals("") 
+				|| realname.equals("") || telphone.equals("") || personnumber.equals(""))
+			registFlag = 1;
+		
+		
+		if (registFlag == 0) {
+			examineartist.setId(artistService.countEa()+1);
+			examineartist.setPaymode(paymode);
+			examineartist.setUserid(userid);
+			examineartist.setGoodat(goodat);
+			examineartist.setPersonnumber(personnumber);
+			examineartist.setRealname(realname);
+			examineartist.setTelphone(telphone);
+			System.out.println(examineartist.toString());
+			
+			artistService.AddBean(examineartist);
+
+			
+			return "redirect:/font/home.jsp";
+		}
+		//没填全
+		else
+			return "redirect:/font/BeArtist.jsp?error=1";
+//		CustomerBean user = new CustomerBean();
+//		
+//		System.out.println(user.toString());
+//		boolean loginResult = artistService.isExist(user);
+//		if (loginResult)
+//		{
+//			Cookie cookie = new Cookie("token", username + "&"
+//					+ MD5Util.convertMD5(username));
+//			response.addCookie(cookie);
+//			return "redirect:/admin/main.jsp";
+//		} else
+//		{
+//			return "redirect:/jsp/login.jsp?error=1";
+//		}
 	}
 
 	/**
