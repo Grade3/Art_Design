@@ -3,7 +3,7 @@ package com.edu.table;
 public class NewsTable {
 	public static String TABLENAME="n_news";
 	public static String ID="id";
-	public static String UUSERID = "userid";
+	public static String USERID = "userid";
 	public static String TITLE = "title";
 	public static String SUMMARY = "summary";
 	public static String AUTHOR	 = "author";

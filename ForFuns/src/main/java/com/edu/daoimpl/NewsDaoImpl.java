@@ -1,6 +1,9 @@
 package com.edu.daoimpl;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
@@ -23,5 +26,7 @@ public class NewsDaoImpl extends BaseDaoImpl<NewsBean> implements INewsDao{
 		String hql ="from NewsBean where "+NewsTable.ISONLINE+" = 1";
 		return getSession().createQuery(hql).list();
 	}
+
+	
 
 }

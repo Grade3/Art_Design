@@ -1,6 +1,7 @@
 package com.edu.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.edu.model.NewsBean;
 import com.edu.base.IBaseDao;
@@ -18,4 +19,5 @@ public interface INewsDao extends IBaseDao<NewsBean>{
 	 * @return
 	 */
 	public List<NewsBean> GetOnlineNews();
+	
 }

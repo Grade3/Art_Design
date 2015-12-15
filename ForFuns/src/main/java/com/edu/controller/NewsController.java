@@ -26,6 +26,7 @@ import com.edu.model.UserBean;
 import com.edu.service.INewsService;
 import com.edu.service.IUserService;
 import com.edu.table.NewsTable;
+import com.edu.viewentity.NewsVO;
 
 @Controller
 @RequestMapping("/news.do")
@@ -45,8 +46,6 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	private INewsService newsService;
 	@Resource
 	private  IUserService userService;
-	@Resource
-	private NewsBean mNewsBean;
 	
 	/**
 	 * 添加资讯
@@ -112,16 +111,14 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	public Map<String, Object> JsonGetAllNewsByUserid(@RequestParam(value="userid") String userid,
 			@RequestParam(value = "page") int page,
 			@RequestParam(value = "rows") int pageSize,
-			@RequestParam(value="selectname",defaultValue="")String selectname,
+			@RequestParam(value="selectname",defaultValue="id")String selectname,
 			@RequestParam(value="value",defaultValue="")String value){
 		Map<String, String> param = null;
-		if(!"".equals(value)){
-			param = new HashMap<String, String>();
-			param.put(selectname, value);
-		}
+		param = new HashMap<String, String>();
+		param.put(selectname, value);
 		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "username", userid,null);
 		//Map<String, Object> map = mNewsBean.GetNewsPage(userBean.getNewsBeans(), page, pageSize,param);
-		Map<String, Object> map = null;
+		Map<String, Object> map = newsService.GetNewsBeanPageByUserid(userBean.getId()+"", page, pageSize, param);
 		return map;
 	}
 	/**

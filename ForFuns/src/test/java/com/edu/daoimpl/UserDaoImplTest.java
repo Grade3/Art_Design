@@ -51,7 +51,7 @@ public class UserDaoImplTest {
 	public void testGetAll(){
 		List<UserBean> list  = userDao.getAllEntity(UserBean.class);
 		UserBean userBean = list.get(0);
-		System.out.println(userBean.getNewsBeans().iterator().next().getTitle());
+		//System.out.println(userBean.getNewsBeans().iterator().next().getTitle());
 		
 	}
 	
