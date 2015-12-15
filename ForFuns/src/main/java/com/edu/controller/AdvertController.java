@@ -111,17 +111,20 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 			@RequestParam(value = "page") int page,
 			@RequestParam(value = "rows") int pageSize,
 			@RequestParam(value="selectname",defaultValue="")String selectname,
-			@RequestParam(value="value",defaultValue="")String value){
+			@RequestParam(value="value",defaultValue="")String value)
+	{
 		Map<String, String> param = null;
-		if(!"".equals(value)){
+		if(!"".equals(value))
+		{
 			param = new HashMap<String, String>();
 			param.put(selectname, value);
 		}
 		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "username", userid,null);
 		//Map<String, Object> map = mAdvertBean.GetAdvertPage(userBean.getAdvertBeans(), page, pageSize,param);
-		Map<String, Object> map = null;
+		Map<String, Object> map = advertService.GetAdvertBeanPageByUserid(userBean.getId()+"", page, pageSize, param);
 		return map;
 	}
+	
 	/**
 	 * 获取全部分页广告
 	 * @param userid
