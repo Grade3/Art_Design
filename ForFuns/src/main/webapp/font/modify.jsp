@@ -1,8 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +20,6 @@
 
 <a href="javascript:;" class="lanrenzhijia_top"></a>
 <script src="../js/lanrenzhijia.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -78,8 +76,18 @@ $(document).ready(function(){
 					<div class="logo">
 						<h1><a href="home.html">ArtCustomize</a></h1>
 					</div>
-					<div class="top-nav-xs hidden-lg">
-						<div id="menu" onmouseover="fun1();" onmouseout="fun2();">
+					<div class="top-nav visible-xs visible-sm">
+						<ul class="megamenu skyblue">
+							<li><a href="home.html" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
+							<li><a href="newslist.html"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
+						</ul>
+					</div>
+					<div class="top-nav-xs visible-md">
+						<div id="menu">
 							<p>菜  单</p>
 						</div>
 						<div id="menu-xs">
@@ -119,73 +127,74 @@ $(document).ready(function(){
 
 	<div class="content">
 		<div class="container">
-			<div class="user_info">
-				<img class="userpic" src="../image/bl.jpg">
-				<p class="picture"><a href="modifyPassword.html">更换头像</a></p>
-			</div>
-
-			<div class="row person_info">
-				<div class="col-xs-offset-1 col-xs-10 info_div visible-lg">
-					<div class="row info">
-						<p class="col-xs-4">用户名</p>
-						<input type="text" class="col-xs-8" value="我的用户名">
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">昵称</p>
-						<input type="text" class="col-xs-8" value="我的昵称">
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">真实姓名</p>
-						<input type="text" class="col-xs-8" value="我的真实姓名">
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">身份证</p>
-						<input type="text" class="col-xs-8" value="我的身份证">
-					</div>
-					<div class="row info info2">
-						<p class="col-xs-4">手机</p>
-						<input type="text" class="col-xs-8" value="我的手机">
-					</div>
+			<div class="main_up">
+				<div class="user_info">
+					<img class="userpic" src="../image/bl.jpg">
+					<p class="picture"><a href="modifyPassword.html">更换头像</a></p>
 				</div>
-				<div class="info_div hidden-lg">
-					<div class="row info">
-						<p class="col-xs-4">用户名</p>
-						<input type="text" class="col-xs-8" value="我的用户名">
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">昵称</p>
-						<input type="text" class="col-xs-8" value="我的昵称">
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">真实姓名</p>
-						<input type="text" class="col-xs-8" value="我的真实姓名">
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">身份证</p>
-						<input type="text" class="col-xs-8" value="我的身份证">
-					</div>
-					<div class="row info info2">
-						<p class="col-xs-4">手机</p>
-						<input type="text" class="col-xs-8" value="我的手机">
-					</div>
-				</div>	
-
-				<div class="col-xs-12 success_btn visible-lg">
-					<input type="submit" class="col-xs-offset-1 col-xs-10" value="提交修改">
-				</div>		
-
-				<div class="col-xs-12 success_btn hidden-lg">
-					<input type="submit" class="col-xs-12" value="提交修改">
-				</div>	
 			</div>
 
-			
 
+			<div class="main-mid">
+				<div class="row person_info">
+					<div class="col-xs-12 info_div">
+						<div class="row info1">
+							<p class="col-xs-12 title_person"><span class="glyphicon glyphicon-ok-circle"></span> &nbsp;账号信息</p>
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-user"></span>　用户名</p>
+							<input type="text" class="col-xs-8" value="我的用户名">
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-user"></span>　昵称</p>
+							<input type="text" class="col-xs-8" value="我的个人简介">
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-heart"></span>　擅长领域</p>
+							<input type="text" class="col-xs-8" value="我擅长的领域">
+						</div>
+						<div class="row info info2">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-leaf"></span>　个人简介</p>
+							<textarea class="col-xs-8">我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介</textarea>
+						</div>
+						
+					</div>
+								
+				</div>
 
+				<div class="row buy_info">
+					<div class="col-xs-12 info_div">
+						<div class="row info1">
+							<p class="col-xs-12 title_person"><span class="glyphicon glyphicon-ok-circle"></span> &nbsp;身份信息</p>
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-tags"></span>　真实姓名</p>
+							<input type="text" class="col-xs-8" value="我的真实姓名">
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-credit-card"></span>　身份证</p>
+							<input type="text" class="col-xs-8" value="我的真身份证号">
+						</div>
+						<div class="row info info2">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-phone"></span>　手机</p>
+							<input type="text" class="col-xs-8" value="我的手机">
+						</div>
+					</div>		
+
+					<div class="col-xs-12 success_btn visible-lg">
+						<input type="submit" class="col-xs-offset-2 col-xs-8" value="提交修改">
+					</div>		
+
+					<div class="col-xs-12 success_btn hidden-lg">
+						<input type="submit" class="col-xs-12" value="提交修改">
+					</div>	
+				</div>
+
+				
+			</div>
 				
 		</div>
 	</div>
-
 
 	<div class="bottom-grid1">
 		<div class="fit1">

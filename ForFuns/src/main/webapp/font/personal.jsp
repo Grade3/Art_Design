@@ -14,13 +14,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="../css/personal.css">
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
-
+<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 </head>
 <body>
 
 <a href="javascript:;" class="lanrenzhijia_top"></a>
 <script src="../js/lanrenzhijia.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -46,26 +45,18 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-function getUrlParam(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-    if (r != null) return unescape(r[2]); return null; //返回参数值
-};
 $(document).ready(function(){
 	var width = $(".userpic").width();
 	var height = width;
 	$(".userpic").height(height);
+
 	$(window).resize(function() {
 		var width = $(".userpic").width();
 		var height = width;
 		$(".userpic").height(height);
 	});
-	
-	
-	var userid = getUrlParam("id");
 });
 </script>
-
 
 	<div class="header-top">
 			<div class="container">
@@ -85,8 +76,18 @@ $(document).ready(function(){
 					<div class="logo">
 						<h1><a href="home.html">ArtCustomize</a></h1>
 					</div>
-					<div class="top-nav-xs hidden-lg">
-						<div id="menu" onmouseover="fun1();" onmouseout="fun2();">
+					<div class="top-nav visible-xs visible-sm">
+						<ul class="megamenu skyblue">
+							<li><a href="home.html" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
+							<li><a href="newslist.html"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
+						</ul>
+					</div>
+					<div class="top-nav-xs visible-md">
+						<div id="menu">
 							<p>菜  单</p>
 						</div>
 						<div id="menu-xs">
@@ -126,139 +127,102 @@ $(document).ready(function(){
 
 	<div class="content">
 		<div class="container">
-			<div class="user_info">
-				<img class="userpic" src="../image/bl.jpg">
-				<p class="username">我的用户名</p>
-			</div>
-			<div class="row person_btn">
-				<div class="col-xs-offset-4 col-xs-4 visible-lg">
-					<a href="BeArtist.html" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
-					<a href="modify.html" class="col-xs-5 readmore modify">修改个人信息</a>
+			<div class="main_up">
+				<div class="user_info">
+					<img class="userpic" src="../image/bl.jpg">
+					<p class="username">我的用户名</p>
 				</div>
-				<div class="col-xs-offset-3 col-xs-6 visible-md">
-					<a href="BeArtist.html" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
-					<a href="modify.html" class="col-xs-5 readmore modify">修改个人信息</a>
-				</div>
-				<div class="col-xs-offset-2 col-xs-8 visible-sm">
-					<a href="BeArtist.html" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
-					<a href="modify.html" class="col-xs-5 readmore modify">修改个人信息</a>
-				</div>
-				<div class="col-xs-offset-1 col-xs-10 visible-xs">
-					<a href="BeArtist.html" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
-					<a href="modify.html" class="col-xs-5 readmore modify">修改个人信息</a>
-				</div>
-			</div>
-
-			<div class="row person_info">
-				<div class="col-xs-offset-1 col-xs-10 info_div visible-lg">
-					<div class="row info1">
-						<p class="col-xs-4 title_person">账号信息</p>
+				<div class="row person_btn">
+					<div class="col-xs-offset-4 col-xs-4 visible-lg">
+						<a href="BeArtist.html" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
+						<a href="modify.html" class="col-xs-5 readmore modify">修改个人信息</a>
 					</div>
-					<div class="row info">
-						<p class="col-xs-4">昵称</p>
-						<p class="col-xs-8">我的昵称</p>
+					<div class="col-xs-offset-3 col-xs-6 visible-md">
+						<a href="BeArtist.html" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
+						<a href="modify.html" class="col-xs-5 readmore modify">修改个人信息</a>
 					</div>
-					<div class="row info info2">
-						<p class="col-xs-4">修改密码</p>
-						<p class="col-xs-8"><a href="modifyPassword.html">点击修改密码</a></p>
+					<div class="col-xs-12 visible-sm btn-xs">
+						<a href="BeArtist.html" class="col-xs-6 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
+						<a href="modify.html" class="col-xs-6 readmore modify">修改个人信息</a>
+					</div>
+					<div class="col-xs-12 visible-xs btn-xs">
+						<a href="BeArtist.html" class="col-xs-6 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
+						<a href="modify.html" class="col-xs-6 readmore modify">修改个人信息</a>
 					</div>
 				</div>
-				<div class="col-xs-12 info_div hidden-lg">
-					<div class="row info1">
-						<p class="col-xs-4 title_person">账号信息</p>
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">昵称</p>
-						<p class="col-xs-8">我的昵称</p>
-					</div>
-					<div class="row info info2">
-						<p class="col-xs-4">修改密码</p>
-						<p class="col-xs-8"><a href="modifyPassword.html">点击修改密码</a></p>
-					</div>
-				</div>				
 			</div>
 
-			<div class="row buy_info">
-				<div class="col-xs-offset-1 col-xs-10 info_div visible-lg">
-					<div class="row info1">
-						<p class="col-xs-4 title_person">身份信息</p>
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">真实姓名</p>
-						<p class="col-xs-8">我的真实姓名</p>
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">身份证</p>
-						<p class="col-xs-8">我的身份证号</p>
-					</div>
-					<div class="row info info2">
-						<p class="col-xs-4">手机</p>
-						<p class="col-xs-8">我的手机</p>
-					</div>
-				</div>	
-				<div class="col-xs-12 info_div hidden-lg">
-					<div class="row info1">
-						<p class="col-xs-4 title_person">身份信息</p>
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">真实姓名</p>
-						<p class="col-xs-8">我的真实姓名</p>
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">身份证</p>
-						<p class="col-xs-8">我的身份证号</p>
-					</div>
-					<div class="row info info2">
-						<p class="col-xs-4">手机</p>
-						<p class="col-xs-8">我的手机</p>
-					</div>
-				</div>			
-			</div>
 
-			<div class="row buy_info">
-				<div class="col-xs-offset-1 col-xs-10 info_div visible-lg">
-					<div class="row info1">
-						<p class="col-xs-4 title_person">购物信息</p>
+			<div class="main-mid">
+				<div class="row person_info">
+					<div class="col-xs-12 info_div">
+						<div class="row info1">
+							<p class="col-xs-12 title_person"><span class="glyphicon glyphicon-ok-circle"></span> &nbsp;账号信息</p>
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-user"></span>　昵称</p>
+							<p class="col-xs-9">我的昵称</p>
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-lock"></span>　修改密码</p>
+							<p class="col-xs-9"><a href="modifyPassword.html"><span class="glyphicon glyphicon-edit"></span> 点击修改密码</a></p>
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-heart"></span>　擅长领域</p>
+							<p class="col-xs-9">我擅长的领域</p>
+						</div>
+						<div class="row info info2">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-leaf"></span>　个人简介</p>
+							<p class="col-xs-9">我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介</p>
+						</div>
+						
 					</div>
-					<div class="row info">
-						<p class="col-xs-4">我的订单</p>
-						<p class="col-xs-8"><a href="#">查看我的所有订单</a></p>
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">我的消息</p>
-						<p class="col-xs-8"><a href="#">查看我的消息</a></p>
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">收货地址</p>
-						<p class="col-xs-8"><a href="#">查看我的收货地址</a></p>
-					</div>
-					<div class="row info info2">
-						<p class="col-xs-4">我的银行卡</p>
-						<p class="col-xs-8"><a href="#">查看我绑定的银行卡</a></p>
-					</div>
+								
 				</div>
-				<div class="col-xs-12 info_div hidden-lg">
-					<div class="row info1">
-						<p class="col-xs-4 title_person">购物信息</p>
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">我的订单</p>
-						<p class="col-xs-8"><a href="#">查看我的所有订单</a></p>
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">我的消息</p>
-						<p class="col-xs-8"><a href="#">查看我的消息</a></p>
-					</div>
-					<div class="row info">
-						<p class="col-xs-4">收货地址</p>
-						<p class="col-xs-8"><a href="#">查看我的收货地址</a></p>
-					</div>
-					<div class="row info info2">
-						<p class="col-xs-4">我的银行卡</p>
-						<p class="col-xs-8"><a href="#">查看我绑定的银行卡</a></p>
-					</div>
-				</div>				
+
+				<div class="row buy_info">
+					<div class="col-xs-12 info_div">
+						<div class="row info1">
+							<p class="col-xs-12 title_person"><span class="glyphicon glyphicon-ok-circle"></span> &nbsp;身份信息</p>
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-tags"></span>　真实姓名</p>
+							<p class="col-xs-9">我的真实姓名</p>
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-credit-card"></span>　身份证</p>
+							<p class="col-xs-9">我的身份证号</p>
+						</div>
+						<div class="row info info2">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-phone"></span>　手机</p>
+							<p class="col-xs-9">我的手机</p>
+						</div>
+					</div>		
+				</div>
+
+				<div class="row buy_info">
+					<div class="col-xs-12 info_div">
+						<div class="row info1">
+							<p class="col-xs-12 title_person"><span class="glyphicon glyphicon-ok-circle"></span> &nbsp;购物信息</p>
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-credit-card"></span>　我的订单</p>
+							<p class="col-xs-9"><a href="#"><span class="glyphicon glyphicon-hand-right"></span>　查看我的所有订单</a></p>
+						</div>
+						<div class="row info">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-envelope"></span>　我的消息</p>
+							<p class="col-xs-9"><a href="#"><span class="glyphicon glyphicon-hand-right"></span>　查看我的消息</a></p>
+						</div>
+						<div class="row info info2">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-floppy-disk"></span>　我的银行卡</p>
+							<p class="col-xs-9"><a href="#"><span class="glyphicon glyphicon-hand-right"></span>　查看我绑定的银行卡</a></p>
+						</div>
+					</div>			
+				</div>
 			</div>
+			
+
+			
 
 
 				

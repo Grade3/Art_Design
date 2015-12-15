@@ -39,6 +39,18 @@ public class MessageBean {
 		this.fromCustomerBean = fromCustomerBean;
 		this.toCustomerBean = toCustomerBean;
 	}
+	
+	public MessageBean(Integer id, String message, Date current,
+			Integer isread, CustomerBean fromCustomerBean,
+			CustomerBean toCustomerBean) {
+		super();
+		this.id = id;
+		this.message = message;
+		this.current = current;
+		this.isread = isread;
+		this.fromCustomerBean = fromCustomerBean;
+		this.toCustomerBean = toCustomerBean;
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

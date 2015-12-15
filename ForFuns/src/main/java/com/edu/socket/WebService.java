@@ -56,7 +56,6 @@ public class WebService {
         //webSocketSet.add(this);     //加入set中
         addOnlineCount();           //在线数加1
         System.out.println("有新连接加入！当前在线人数为" + getOnlineCount());
-        
     }
      
     /**
@@ -81,6 +80,9 @@ public class WebService {
         if("0".equals(myMessage.getFlag())){//开启连接
         	webSocketSet.put(myMessage.getSendid(), this);
         	System.out.println("hashmap.size:" + webSocketSet.size());
+        	//返回未读信息
+        	
+        	
         }else if("1".equals(myMessage.getFlag())){//关闭连接
         	webSocketSet.remove(myMessage.getSendid());
         	System.out.println("hashmap.size:" + webSocketSet.size());

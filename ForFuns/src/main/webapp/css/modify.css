@@ -3,6 +3,7 @@ body
 	font-family: "Microsoft YaHei";
 	font-size: 1.0em;
 	color: #000;
+	/*background-image: url(../image/body-bg.jpg);*/
 }
 
 .header-top
@@ -28,15 +29,167 @@ body
 	border: 5px solid #eeeeee;
 }
 
-.picture
+.username
 {
 	font-size: 2em;
 	margin-top: 0.7em;
 }
 
-.picture a
+.person_btn
+{
+	margin-top: 2em;
+}
+
+a.readmore
+{
+    background: #ff5d56;
+    border: 2px solid #ff5d56;
+    color: #fff;
+    /*background: none;
+    border: 2px solid #000;
+    color: #000;*/
+    padding: 0.3em 1.2em;
+    font-size: 1.5em;
+    text-align: center;
+    text-decoration: none;
+}
+
+a.readmore:hover
+{
+    background: none;
+    border: 2px solid #000;
+    color: #000;
+    /*background: #ff5d56;
+    border: 2px solid #ff5d56;
+    color: #fff;*/
+}
+
+.beartist
+{
+	float: left;
+}
+
+.modify
+{
+	float: right;
+}
+
+.person_info
+{
+	padding: 3em 10% 0em;
+}
+
+.info_div
+{
+	padding: 2em;
+}
+
+.info1
+{
+	margin: 0;
+}
+
+.info
+{
+	margin: 0;
+	background: #fff;
+	padding-top: 1em;
+}
+
+.info2
+{
+	margin: 0;
+	background: #fff;
+	padding-top: 1em;
+	padding-bottom: 2em;
+}
+
+.info p
+{
+	font-size: 1.7em;
+	margin: 0;
+	line-height: 1.7em;
+	color: #535353;
+}
+
+.info p a
 {
 	text-decoration: none;
+	color: #535353;
+}
+
+.info p a:hover
+{
+	text-decoration: none;
+	color: #ff5d56;
+}
+
+p.title_person
+{
+	font-size: 2em;
+	padding-bottom: 0.7em;
+	padding-top: 0.7em;
+	margin-bottom: 0em;
+	background: #eee;
+}
+
+
+.buy_info
+{
+	padding: 0em 10% 0em;
+}
+
+.main_up
+{
+	background: #fff;
+	padding: 2.3em 0em 3em;
+	-webkit-box-shadow:0 0 10px rgba(149, 149, 149, 0.5);  
+	-moz-box-shadow:0 0 10px rgba(149, 149, 149, 0.5);  
+	box-shadow:0 0 10px rgba(149, 149, 149, 0.5);  
+}
+
+.row
+{
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.main-mid
+{
+	background-color: #f8f8f8;
+	-webkit-box-shadow:0 0 10px rgba(149, 149, 149, 0.5);  
+	-moz-box-shadow:0 0 10px rgba(149, 149, 149, 0.5);  
+	box-shadow:0 0 10px rgba(149, 149, 149, 0.5);
+	padding-bottom: 3em;
+}
+
+.glyphicon
+{
+	color: #535353;
+}
+
+.label_t
+{
+	color: #535353;
+}
+
+.info input
+{
+	font-size: 1.7em;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	color: #535353;
+	line-height: 1.7em;
+}
+
+.info2 textarea
+{
+	font-size: 1.7em;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	color: #535353;
+	height: 10em;
+	line-height: 1.7em;
 }
 
 .success_btn
@@ -56,51 +209,13 @@ body
     text-decoration: none;
 }
 
-.person_info
+.picture
 {
-	padding: 1em 10% 0em;
+	font-size: 2em;
+	margin-top: 0.7em;
 }
 
-.info_div
+.picture a
 {
-	padding: 2em;
+	text-decoration: none;
 }
-
-.info1
-{
-	margin: 0;
-}
-
-.info
-{
-	margin: 0;
-	background: #f8f8f8;
-	padding-top: 2em;
-	padding-left: 2em;
-	padding-right: 2em;
-}
-
-.info2
-{
-	margin: 0;
-	background: #f8f8f8;
-	padding-top: 2em;
-	padding-bottom: 2.5em;
-}
-
-.info p
-{
-	font-size: 1.7em;
-	margin: 0;
-	padding-left: 0;
-	padding-top: 0.5em;
-}
-
-.info input
-{
-	font-size: 1.7em;
-	padding-top: 0.3em;
-	padding-bottom: 0.3em;
-}
-
-

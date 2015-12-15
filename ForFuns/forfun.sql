@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-12-14 23:33:09
+Date: 2015-12-15 20:07:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -110,17 +110,18 @@ CREATE TABLE `m_message` (
   `toid` int(11) DEFAULT NULL,
   `message` text,
   `current` datetime DEFAULT NULL,
+  `isread` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_fdblrv579vjxw47ivyxi57orl` (`fromid`),
   KEY `FK_e355tkrguo7feiycq7xognthk` (`toid`),
   CONSTRAINT `FK_e355tkrguo7feiycq7xognthk` FOREIGN KEY (`toid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_fdblrv579vjxw47ivyxi57orl` FOREIGN KEY (`fromid`) REFERENCES `c_customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of m_message
 -- ----------------------------
-INSERT INTO `m_message` VALUES ('1', '1', '2', '{\"sendid\":\"1\",\"receiverid\":\"2\",\"content\":\"\",\"flag\":\"0\"}', '2015-12-14 23:31:20');
+INSERT INTO `m_message` VALUES ('10', '1', '2', '32', '2015-12-15 16:49:21', '0');
 
 -- ----------------------------
 -- Table structure for `n_news`
