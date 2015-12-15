@@ -1,11 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 <script type="text/javascript">
 	
 </script>
@@ -18,6 +22,7 @@
   </body>
    
   <script type="text/javascript">
+  	  var userid = 1;
       var websocket = null;
        
       //判断当前浏览器是否支持WebSocket
@@ -36,7 +41,7 @@
       //连接成功建立的回调方法
       websocket.onopen = function(event){
           setMessageInnerHTML("open");
-          var o = {sendid:"1",receiverid:"2",content:"",flag:"0"};
+          var o = {sendid:userid,receiverid:"2",content:"",flag:"0"};
           var json =  JSON.stringify(o);  
           websocket.send(json);
       };
@@ -72,7 +77,7 @@
       //发送消息
       function send(){
           var message = document.getElementById('text').value;
-          var o = {sendid:"1",receiverid:"2",content:message,flag:"2"};
+          var o = {sendid:userid,receiverid:"2",content:message,flag:"2"};
           var json =  JSON.stringify(o);  
           websocket.send(json);
       };

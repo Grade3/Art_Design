@@ -24,6 +24,7 @@ public class MessageBean {
 	private Integer id;
 	private String message;
 	private Date current;
+	private Integer isread;
 	private CustomerBean fromCustomerBean;
 	private CustomerBean toCustomerBean;
 	public MessageBean() {
@@ -77,6 +78,13 @@ public class MessageBean {
 	
 	public void setToCustomerBean(CustomerBean toCustomerBean) {
 		this.toCustomerBean = toCustomerBean;
+	}
+	@Column(name="isread")
+	public Integer getIsread() {
+		return isread;
+	}
+	public void setIsread(Integer isread) {
+		this.isread = isread;
 	}
 	
 }

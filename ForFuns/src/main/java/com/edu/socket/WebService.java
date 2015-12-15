@@ -77,30 +77,38 @@ public class WebService {
     public void onMessage(String message, Session session) {
         System.out.println("来自客户端的消息:" + message);
         MyMessage myMessage = FastJsonTool.getObject(message, MyMessage.class);
-        MessageBean messageBean = new MessageBean();
-        Integer fromid = Integer.parseInt(myMessage.getSendid());
-        Integer toid = Integer.parseInt(myMessage.getReceiverid());
-        CustomerBean fromBean = customerService.GetEntityById(CustomerBean.class, fromid);
-        CustomerBean toBean = customerService.GetEntityById(CustomerBean.class, toid);
-        messageBean.setFromCustomerBean(fromBean);
-        messageBean.setToCustomerBean(toBean);
-        messageBean.setMessage(message);
-        messageBean.setCurrent(new Date());
-        messageService.AddBean(messageBean);
-       /* if("0".equals(myMessage.getFlag())){
+        
+        if("0".equals(myMessage.getFlag())){//开启连接
         	webSocketSet.put(myMessage.getSendid(), this);
         	System.out.println("hashmap.size:" + webSocketSet.size());
-        }else if("1".equals(myMessage.getFlag())){
+        }else if("1".equals(myMessage.getFlag())){//关闭连接
         	webSocketSet.remove(myMessage.getSendid());
         	System.out.println("hashmap.size:" + webSocketSet.size());
-        }else if("2".equals(myMessage.getFlag())){
+        }else if("2".equals(myMessage.getFlag())){//发送消息
         	try {
-        		WebService item = webSocketSet.get(myMessage.getReceiverid());
-				item.sendMessage(myMessage.getContent());
+        		MessageBean messageBean = new MessageBean();
+                Integer fromid = Integer.parseInt(myMessage.getSendid());
+                Integer toid = Integer.parseInt(myMessage.getReceiverid());
+                CustomerBean fromBean = customerService.GetEntityById(CustomerBean.class, fromid);
+                CustomerBean toBean = customerService.GetEntityById(CustomerBean.class, toid);
+                messageBean.setFromCustomerBean(fromBean);
+                messageBean.setToCustomerBean(toBean);
+                messageBean.setMessage(myMessage.getContent());
+                messageBean.setCurrent(new Date());
+                messageBean.setIsread(0);
+                messageService.AddBean(messageBean);
+                
+                boolean containsKey = webSocketSet.containsKey(toid);
+                if(containsKey){
+                	WebService item = webSocketSet.get(myMessage.getReceiverid());
+    				item.sendMessage(myMessage.getContent());
+                }
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-        }*/
+        }else if("3".equals(myMessage.getFlag())){//表示已经读取消息
+        	
+        }
     }
      
     /**
@@ -121,7 +129,6 @@ public class WebService {
      */
     public void sendMessage(String message) throws IOException{
         this.session.getBasicRemote().sendText(message);
-        //this.session.getAsyncRemote().sendText(message);
     }
  
     public static synchronized int getOnlineCount() {
