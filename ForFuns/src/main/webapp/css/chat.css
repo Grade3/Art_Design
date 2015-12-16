@@ -132,7 +132,7 @@ body {
     width: 50%;
   }
 }
-@keyframes show-chat-even {
+/* @keyframes show-chat-even {
   0% {
     margin-left: -480px;
   }
@@ -185,7 +185,7 @@ body {
   100% {
     margin-right: 0;
   }
-}
+} */
 .credits{
   text-align:center;
   margin-top:35px;
