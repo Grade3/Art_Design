@@ -42,3 +42,9 @@ function CheckUser(){
 		}
 	});
 }
+
+
+$(document).ready(function(){
+	var bg_h = $(".content").height() + $(".header-top").height() + $(".bar_news").height();
+	$("#fontbg").height(bg_h);
+});

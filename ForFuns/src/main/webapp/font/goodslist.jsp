@@ -225,6 +225,7 @@ $(document).ready(function(){
 		<h2>艺术品列表</h2>
 	</div>
 
+<div id="fontbg" style="position:absolute; z-index:-88888; width:100%; background-image:url(../image/fontbg.png);"></div>
 
 	<div class="content">
 		<div class="container">
