@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				url:'<%=basePath%>/product.do?method=checkOrder',
 				data:{productid:productid},
 				success:function(json){
-					alert(json);
+					//alert(json);
 					if(json==0){
 						//window.open("Login.jsp");
 						var newTab=window.open('about:blank');
@@ -177,7 +177,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
 						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
 						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
-						<li id="loginoutaction"><a href="<%=basePath %>>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			</ul>
+						<li id="loginoutaction"><a href="<%=basePath %>>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
+					</ul>
 				</div>
 			</div>
 			<div class="header-bottom">
@@ -266,7 +267,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a href="#" class="col-xs-offset-3 col-xs-6 readmore">提交订单</a>
 					</div>
 					<div class="col-xs-12 row buy visible-sm visible-xs">
-						<a href="#" class="col-xs-12 readmore"">提交订单</a>
+						<a href="#" class="col-xs-12 readmore">提交订单</a>
 					</div>
 				</form>
 			</div>
