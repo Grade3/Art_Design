@@ -21,6 +21,7 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.model.AdvertBean;
+import com.edu.model.NewsBean;
 import com.edu.model.UserBean;
 import com.edu.service.IAdvertService;
 import com.edu.service.IUserService;
@@ -94,6 +95,39 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 			return "0";
 		}
 		return "1";
+	}
+	
+	/**
+	 * 获取第1栏广告
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=GetFirstAdvert")
+	public List<AdvertBean> JsonGetFirstAdvert()
+	{
+		return advertService.GetFirstAdvert();
+	}
+	
+	/**
+	 * 获取第2栏广告
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=GetSecondAdvert")
+	public List<AdvertBean> JsonGetSecondAdvert()
+	{
+		return advertService.GetSecondAdvert();
+	}
+	
+	/**
+	 * 获取第3栏广告
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=GetThirdAdvert")
+	public List<AdvertBean> JsonGetThirdAdvert()
+	{
+		return advertService.GetThirdAdvert();
 	}
 	
 	/**

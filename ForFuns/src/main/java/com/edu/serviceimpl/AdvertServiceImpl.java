@@ -47,4 +47,28 @@ public class AdvertServiceImpl extends BaseServiceImpl<AdvertBean> implements IA
 		map.put("rows",AdvertVO.changeToAdvertVOs(list));
 		return map;
 	}
+	
+	@Override
+	public List<AdvertBean> GetFirstAdvert()
+	{
+		List<AdvertBean> list = null;
+		list = (List<AdvertBean>)advertDao.GetFirstAdvert();
+		return list;
+	}
+	
+	@Override
+	public List<AdvertBean> GetSecondAdvert()
+	{
+		List<AdvertBean> list = null;
+		list = (List<AdvertBean>)advertDao.GetSecondAdvert();
+		return list;
+	}
+	
+	@Override
+	public List<AdvertBean> GetThirdAdvert()
+	{
+		List<AdvertBean> list = null;
+		list = (List<AdvertBean>)advertDao.GetThirdAdvert();
+		return list;
+	}
 }

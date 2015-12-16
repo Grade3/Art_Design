@@ -177,11 +177,120 @@ function GetHotNews(){
 		}
 	});
 }
+
+//获取第1栏广告
+function GetFirstAdvert(){
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'<%=basePath%>advert.do?method=GetFirstAdvert',
+		data:{},
+		success:function(json){
+			if(json.length>0){
+				var body = "";
+				var point = "";
+				for(var i=0;i<json.length;i++){
+					var id = json[i].id;
+					var imgurl = json[i].imgurl;
+					var summary = json[i].summary;
+					var title = json[i].title;
+					if(i==0)
+					{
+						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
+						body += "<div class='item active'><a href='<%=basePath%>font/advert.jsp?advertid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
+					}
+					else
+					{
+						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
+						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
+					}
+					
+				}
+				$('#banner').html(body);
+				$('#bannerpoint').html(point);
+			}
+		},error:function(){
+				
+		}
+	});
+}
+
+//获取第2栏广告
+function GetSecondAdvert(){
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'<%=basePath%>advert.do?method=GetSecondAdvert',
+		data:{},
+		success:function(json){
+			if(json.length>0){
+				var body = "";
+				var point = "";
+				for(var i=0;i<json.length;i++){
+					var id = json[i].id;
+					var imgurl = json[i].imgurl;
+					var summary = json[i].summary;
+					var title = json[i].title;
+					if(i==0){
+						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
+						body += "<div class='item active'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
+					}else{
+						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
+						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
+					}
+					
+				}
+				$('#banner').html(body);
+				$('#bannerpoint').html(point);
+			}
+		},error:function(){
+				
+		}
+	});
+}
+
+//获取第3栏广告
+function GetThirdAdvert(){
+	$.ajax({
+		type:'post',
+		async:false,
+		url:'<%=basePath%>advert.do?method=GetThirdAdvert',
+		data:{},
+		success:function(json){
+			if(json.length>0){
+				var body = "";
+				var point = "";
+				for(var i=0;i<json.length;i++){
+					var id = json[i].id;
+					var imgurl = json[i].imgurl;
+					var summary = json[i].summary;
+					var title = json[i].title;
+					if(i==0){
+						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
+						body += "<div class='item active'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
+					}else{
+						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
+						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
+					}
+					
+				}
+				$('#banner').html(body);
+				$('#bannerpoint').html(point);
+			}
+		},error:function(){
+				
+		}
+	});
+}
+
 $(document).ready(function(){
 	$('#usernameaction').hide();
 	$('#loginoutaction').hide();
 	CheckUser();
 	GetHotNews();
+	GetFirstAdvert();
+	GetSecondAdvert();
+	GetThirdAdvert();
 	var width = $(".carousel-inner").width();
 		var height = $(".carousel-inner").width()/5*2.4;
   		$(".item_pic").width(width);
