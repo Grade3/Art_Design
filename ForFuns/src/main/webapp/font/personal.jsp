@@ -12,9 +12,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="../css/personal.css">
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
-<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 </head>
 <body>
 
@@ -36,6 +36,58 @@ $(function(){
 });
 </script>
 
+<script>
+//获取cookie
+function getCookie(objName){//获取指定名称的cookie的值 
+	var arrStr = document.cookie.split("; "); 
+	for(var i = 0;i < arrStr.length;i ++){ 
+		var temp = arrStr[i].split("="); 
+		if(temp[0] == objName) return unescape(temp[1]); 
+	} 
+};
+
+//获取用户信息
+function GetUser()
+{
+	var useridtoken = getCookie("useridtoken");
+	if(null==useridtoken || "" == useridtoken){
+		return ;
+	}
+	var index = useridtoken.indexOf("&");
+	var id =  useridtoken.substring(0,index);
+	
+	$.ajax({
+		type:'post',
+		url:'<%=basePath%>customer.do?method=getCustomerByUserid',
+		data:{customerid:id},
+		success:function(json){
+			var customer = json.customer;
+			var userid = customer.userid;
+			var username = customer.username;
+			var personnumber = customer.personnumber;
+			var telphone = customer.telphone;
+			var realname = customer.realname;
+			var avator = customer.avator;
+			var isartist = customer.isartist;
+			
+			if (isartist == "0")
+			{
+				$('#showme_div').hide();
+				$('#advantage_div').hide();
+			}
+			
+			$('#username').html(username);
+			$('#userid').html(userid);
+			$('#personnumber').html(personnumber);
+			$('#telphone').html(telphone);
+			$('#realname').html(realname);
+		},error:function(){
+			
+		}
+	});
+}
+</script>
+
 <script type="text/javascript">
 $(document).ready(function(){
   $("#menu").click(function(){
@@ -46,6 +98,8 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 $(document).ready(function(){
+	GetUser();
+	
 	var width = $(".userpic").width();
 	var height = width;
 	$(".userpic").height(height);
@@ -129,25 +183,25 @@ $(document).ready(function(){
 		<div class="container">
 			<div class="main_up">
 				<div class="user_info">
-					<img class="userpic" src="../image/bl.jpg">
-					<p class="username">我的用户名</p>
+					<img class="userpic" src="../image/bl.jpg" id = "avator">
+					<p class="username" id = "userid">我的用户名</p>
 				</div>
 				<div class="row person_btn">
 					<div class="col-xs-offset-4 col-xs-4 visible-lg">
 						<a href="BeArtist.html" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
-						<a href="modify.html" class="col-xs-5 readmore modify">修改个人信息</a>
+						<a  href="modify.jsp" class="col-xs-5 readmore modify">修改个人信息</a>
 					</div>
 					<div class="col-xs-offset-3 col-xs-6 visible-md">
 						<a href="BeArtist.html" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
-						<a href="modify.html" class="col-xs-5 readmore modify">修改个人信息</a>
+						<a href="modify.jsp" class="col-xs-5 readmore modify">修改个人信息</a>
 					</div>
 					<div class="col-xs-12 visible-sm btn-xs">
 						<a href="BeArtist.html" class="col-xs-6 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
-						<a href="modify.html" class="col-xs-6 readmore modify">修改个人信息</a>
+						<a href="modify.jsp" class="col-xs-6 readmore modify">修改个人信息</a>
 					</div>
 					<div class="col-xs-12 visible-xs btn-xs">
 						<a href="BeArtist.html" class="col-xs-6 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
-						<a href="modify.html" class="col-xs-6 readmore modify">修改个人信息</a>
+						<a href="modify.jsp" class="col-xs-6 readmore modify">修改个人信息</a>
 					</div>
 				</div>
 			</div>
@@ -161,17 +215,17 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-user"></span>　昵称</p>
-							<p class="col-xs-9">我的昵称</p>
+							<p class="col-xs-9" id="username">我的昵称</p>
 						</div>
 						<div class="row info">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-lock"></span>　修改密码</p>
 							<p class="col-xs-9"><a href="modifyPassword.html"><span class="glyphicon glyphicon-edit"></span> 点击修改密码</a></p>
 						</div>
-						<div class="row info">
+						<div class="row info" id="advantage_div">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-heart"></span>　擅长领域</p>
 							<p class="col-xs-9">我擅长的领域</p>
 						</div>
-						<div class="row info info2">
+						<div class="row info info2" id="showme_div">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-leaf"></span>　个人简介</p>
 							<p class="col-xs-9">我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介</p>
 						</div>
@@ -187,15 +241,15 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-tags"></span>　真实姓名</p>
-							<p class="col-xs-9">我的真实姓名</p>
+							<p class="col-xs-9" id = "realname">我的真实姓名</p>
 						</div>
 						<div class="row info">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-credit-card"></span>　身份证</p>
-							<p class="col-xs-9">我的身份证号</p>
+							<p class="col-xs-9" id = "personnumber">我的身份证号</p>
 						</div>
 						<div class="row info info2">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-phone"></span>　手机</p>
-							<p class="col-xs-9">我的手机</p>
+							<p class="col-xs-9" id = "telphone">我的手机</p>
 						</div>
 					</div>		
 				</div>
