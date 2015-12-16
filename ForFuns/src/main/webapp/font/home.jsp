@@ -131,26 +131,14 @@ function GetFirstAdvert(){
 		success:function(json){
 			if(json.length>0){
 				var body = "";
-				var point = "";
 				for(var i=0;i<json.length;i++){
-					var id = json[i].id;
+					var name = json[i].title;
 					var imgurl = json[i].imgurl;
-					var summary = json[i].summary;
-					var title = json[i].title;
-					if(i==0)
-					{
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
-						body += "<div class='item active'><a href='<%=basePath%>font/advert.jsp?advertid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}
-					else
-					{
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
-						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}
-					
+					body+="<div class='col-xs-4 Recommend'><a href='news.html' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
-				$('#banner').html(body);
-				$('#bannerpoint').html(point);
+				$('#advertfirst').html(body);
+				var goods_pic_w = $(".good_pic").width();
+		  		$(".good_pic").height(goods_pic_w)*1.7;
 			}
 		},error:function(){
 				
@@ -168,23 +156,14 @@ function GetSecondAdvert(){
 		success:function(json){
 			if(json.length>0){
 				var body = "";
-				var point = "";
 				for(var i=0;i<json.length;i++){
-					var id = json[i].id;
+					var name = json[i].title;
 					var imgurl = json[i].imgurl;
-					var summary = json[i].summary;
-					var title = json[i].title;
-					if(i==0){
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
-						body += "<div class='item active'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}else{
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
-						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}
-					
+					body+="<div class='col-xs-4 Recommend'><a href='news.html' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
-				$('#banner').html(body);
-				$('#bannerpoint').html(point);
+				$('#advertsecond').html(body);
+				var goods_pic_w = $(".good_pic").width();
+		  		$(".good_pic").height(goods_pic_w)*1.7;
 			}
 		},error:function(){
 				
@@ -202,23 +181,14 @@ function GetThirdAdvert(){
 		success:function(json){
 			if(json.length>0){
 				var body = "";
-				var point = "";
 				for(var i=0;i<json.length;i++){
-					var id = json[i].id;
+					var name = json[i].title;
 					var imgurl = json[i].imgurl;
-					var summary = json[i].summary;
-					var title = json[i].title;
-					if(i==0){
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
-						body += "<div class='item active'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}else{
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
-						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}
-					
+					body+="<div class='col-xs-4 Recommend'><a href='news.html' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
-				$('#banner').html(body);
-				$('#bannerpoint').html(point);
+				$('#advertthree').html(body);
+				var goods_pic_w = $(".good_pic").width();
+		  		$(".good_pic").height(goods_pic_w)*1.7;
 			}
 		},error:function(){
 				
@@ -231,9 +201,9 @@ $(document).ready(function(){
 	$('#loginoutaction').hide();
 	CheckUser();
 	GetHotNews();
-	//GetFirstAdvert();
-	//GetSecondAdvert();
-	//GetThirdAdvert();
+	GetFirstAdvert();
+	GetSecondAdvert();
+	GetThirdAdvert();
 	var width = $(".carousel-inner").width();
 		var height = $(".carousel-inner").width()/5*2.4;
   		$(".item_pic").width(width);
@@ -247,6 +217,9 @@ $(document).ready(function(){
   		
   		var artist_h1 = $(".col9").height();
   		$(".col3").height(artist_h1);
+  		var goods_pic_w = $(".good_pic").width();
+  		$(".good_pic").height(goods_pic_w)*1.7;
+  		
 
   	$(window).resize(function() {
   		var width = $(".carousel-inner").width();
@@ -262,6 +235,8 @@ $(document).ready(function(){
   		
   		var artist_h1 = $(".col9").height();
   		$(".col3").height(artist_h1);
+  		var goods_pic_w = $(".good_pic").width();
+  		$(".good_pic").height(goods_pic_w)*1.7;
   	});
   	
   	
@@ -473,23 +448,23 @@ $(document).ready(function(){
 			<div class="sap_tabs">
 				<label class="line"></label>
 				<h2>艺术品成品推荐</h2>
-				<div class="recommend_arts">
+				<div class="recommend_arts" id="advertfirst">
 					<div class="col-xs-4 Recommend">
-						<a href="news.html" target="_blank"><img src="<%=basePath%>image/a11.jpg"></a>
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/a11.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
 					<div class="col-xs-4 Recommend">
-						<a href="news.html" target="_blank"><img src="<%=basePath%>image/a22.jpg"></a>
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/a22.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
 					<div class="col-xs-4 Recommend">
-						<a href="news.html" target="_blank"><img src="<%=basePath%>image/a33.jpg"></a>
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/a33.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
@@ -500,23 +475,23 @@ $(document).ready(function(){
 			<div class="sap_tabs">
 				<label class="line"></label>
 				<h2>艺术品定制推荐</h2>
-				<div class="recommend_arts">
+				<div class="recommend_arts" id="advertsecond">
 					<div class="col-xs-4 Recommend">
-						<a href="news.html" target="_blank"><img src="<%=basePath%>image/b11.jpg"></a>
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/b11.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
 					<div class="col-xs-4 Recommend" >
-						<a href="news.html" target="_blank"><img src="<%=basePath%>image/b22.jpg"></a>
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/b22.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
 					<div class="col-xs-4 Recommend" >
-						<a href="news.html" target="_blank"><img src="<%=basePath%>image/b33.jpg"></a>
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/b33.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
@@ -527,23 +502,23 @@ $(document).ready(function(){
 			<div class="sap_tabs">
 				<label class="line"></label>
 				<h2>艺术家推荐</h2>
-				<div class="recommend_arts">
+				<div class="recommend_arts" id="advertthree">
 					<div class="col-xs-4 Recommend" >
-						<a href="news.html" target="_blank"><img src="<%=basePath%>image/c11.jpg"></a>
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/c11.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
 					<div class="col-xs-4 Recommend" >
-						<a href="news.html" target="_blank"><img src="<%=basePath%>image/c22.jpg"></a>
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/c22.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
 					<div class="col-xs-4 Recommend" >
-						<a href="news.html" target="_blank"><img src="<%=basePath%>image/c33.jpg"></a>
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/c33.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
