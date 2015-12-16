@@ -425,7 +425,7 @@ ul.support-right li i.item_register
 {
 	background: url(../image/back2.jpg) center ;
 	width: 100%;
-	min-height: 250px;
+	/*min-height: 250px;*/
 	display: block;
 	background-size: cover;
 	text-align: left;

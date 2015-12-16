@@ -3,6 +3,7 @@ body
 	font-family: "Microsoft YaHei";
 	font-size: 1.0em;
 	color: #000;
+	/*background-image: url(../image/body-bg.jpg);*/
 }
 
 .header-top
@@ -196,6 +197,13 @@ ul.sub li:hover
 	font-size: 1.7em;
 	margin: 0px;
 	color: #7d7d7d;
+}
+
+@media (max-width: 992px){
+	.fit1
+	{
+		padding: 1em 9em;
+	}
 }
 
 
