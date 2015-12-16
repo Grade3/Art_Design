@@ -10,10 +10,29 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-12-15 20:07:16
+Date: 2015-12-15 22:36:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `ai_artistinfo`
+-- ----------------------------
+DROP TABLE IF EXISTS `ai_artistinfo`;
+CREATE TABLE `ai_artistinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `aritstid` int(11) DEFAULT NULL,
+  `paymode` varchar(255) DEFAULT NULL,
+  `goodat` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `aritstid` (`aritstid`),
+  CONSTRAINT `ARTIST` FOREIGN KEY (`aritstid`) REFERENCES `c_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ai_artistinfo
+-- ----------------------------
+INSERT INTO `ai_artistinfo` VALUES ('1', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for `a_advert`
@@ -70,6 +89,25 @@ INSERT INTO `c_customer` VALUES ('2', '2', '1233', '12', '12', '12', '12', '323'
 INSERT INTO `c_customer` VALUES ('3', '12212', '12', '213', '213', '13', '131', '121', '1');
 
 -- ----------------------------
+-- Table structure for `ea_examineartist`
+-- ----------------------------
+DROP TABLE IF EXISTS `ea_examineartist`;
+CREATE TABLE `ea_examineartist` (
+  `id` int(11) NOT NULL,
+  `userid` varchar(50) DEFAULT NULL,
+  `realname` varchar(20) DEFAULT NULL,
+  `telphone` varchar(30) DEFAULT NULL,
+  `personnumber` varchar(50) DEFAULT NULL,
+  `paymode` varchar(255) DEFAULT NULL,
+  `goodat` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ea_examineartist
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `f_function`
 -- ----------------------------
 DROP TABLE IF EXISTS `f_function`;
@@ -116,12 +154,14 @@ CREATE TABLE `m_message` (
   KEY `FK_e355tkrguo7feiycq7xognthk` (`toid`),
   CONSTRAINT `FK_e355tkrguo7feiycq7xognthk` FOREIGN KEY (`toid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_fdblrv579vjxw47ivyxi57orl` FOREIGN KEY (`fromid`) REFERENCES `c_customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of m_message
 -- ----------------------------
-INSERT INTO `m_message` VALUES ('10', '1', '2', '32', '2015-12-15 16:49:21', '0');
+INSERT INTO `m_message` VALUES ('12', '2', '1', '23', '2015-12-15 21:13:34', '1');
+INSERT INTO `m_message` VALUES ('13', '2', '1', '23', '2015-12-15 21:13:57', '1');
+INSERT INTO `m_message` VALUES ('14', '2', '1', '21', '2015-12-15 21:16:09', '0');
 
 -- ----------------------------
 -- Table structure for `n_news`
