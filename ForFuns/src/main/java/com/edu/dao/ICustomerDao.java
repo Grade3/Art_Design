@@ -10,4 +10,5 @@ public interface ICustomerDao extends IBaseDao<CustomerBean>
 	public boolean isExist(CustomerBean customer);
 	public boolean exist(CustomerBean customer);
 	public int countCustomer();
+	public String getIdbyUserid(String userid);
 }

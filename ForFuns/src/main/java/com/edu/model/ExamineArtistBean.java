@@ -4,8 +4,15 @@
 package com.edu.model;
 
 import java.beans.Transient;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.management.relation.Role;
 import javax.persistence.CascadeType;
@@ -26,8 +33,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @Table(name="ea_examineartist")
 @Entity
-public class ExamineArtistBean
-{
+public class ExamineArtistBean implements Comparable{
 	private Integer id;
 	private String userid;
 	private String personnumber;
@@ -35,6 +41,7 @@ public class ExamineArtistBean
 	private String realname;
 	private String paymode;
 	private String goodat;
+	private String suggestion ="";
 
 	public ExamineArtistBean()
 	{
@@ -80,10 +87,9 @@ public class ExamineArtistBean
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	public Integer getId()
-	{
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	public Integer getId() {
 		return id;
 	}
 
@@ -156,5 +162,106 @@ public class ExamineArtistBean
 	public void setRealname(String realname)
 	{
 		this.realname = realname;
+	}
+	
+	
+
+	@Column(name="suggestion")
+	public String getSuggestion() {
+		return suggestion;
+	}
+
+
+
+	public void setSuggestion(String suggestion) {
+		this.suggestion = suggestion;
+	}
+	
+	/**
+	 * 获取分页信息 
+	 * @param page
+	 * @param pagesize
+	 * @return
+	 */
+	@Transient
+	public Map<String , Object> GetExamineArtistPage(Set<ExamineArtistBean> examineartistSet,int page,int pagesize,
+			Map<String, String> param){
+		//通过treeset由无序转为有序  
+		Iterator<ExamineArtistBean> tempIterator = examineartistSet.iterator();
+		Set<ExamineArtistBean> tempSet = new TreeSet<ExamineArtistBean>();
+		while(tempIterator.hasNext()){
+			tempSet.add(tempIterator.next());
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(null==param){
+			Integer total = tempSet.size();
+			int start = (page-1)*pagesize;
+			int end = page*pagesize;
+			if(end>total)
+				end =total ;
+			List<ExamineArtistBean> list = new ArrayList<ExamineArtistBean>();
+			Iterator<ExamineArtistBean> iterator = tempSet.iterator();
+			int count = 0;
+			while(iterator.hasNext()){
+				if(count>=start&&count<end)
+					list.add(iterator.next());
+				else{
+					iterator.next();
+				}
+				count++;
+			}
+			map.put("total",total);
+			map.put("rows",list);
+			return map;
+		}else{
+			List<ExamineArtistBean> list = new ArrayList<ExamineArtistBean>();
+			Iterator<ExamineArtistBean> iterator = tempSet.iterator();
+			int count = 0;
+			Set<String> keySet = param.keySet();
+			String selectname = keySet.iterator().next();
+			String condition = param.get(selectname);
+			Class clz = ExamineArtistBean.class;
+			Method method  = null;
+			try {
+			  method = clz.getMethod("get"+selectname.substring(0,1).toUpperCase()+selectname.substring(1,selectname.length()));
+			} catch (NoSuchMethodException | SecurityException e) {
+				e.printStackTrace();
+			}
+			while(iterator.hasNext()){
+				ExamineArtistBean next = iterator.next();
+				try {
+					Object invoke = method.invoke(next);
+					if(invoke.toString().contains(condition)){
+						count++;
+						list.add(next);
+					}
+				} catch (Exception e){
+					e.printStackTrace();
+				}
+			}
+			//分页
+			int start = (page-1)*pagesize;
+			int end = page*pagesize;
+			if(list.size()<end)
+				end = list.size();
+			List<ExamineArtistBean> newslist = new ArrayList<ExamineArtistBean>();
+			for(int i=start;i<end;i++){
+				newslist.add(list.get(i));
+			}
+			
+			map.put("total",count);
+			map.put("rows",newslist);
+			return map;
+		}
+	}
+
+	/**
+	 * 排序接口
+	 */
+	@Transient
+	@Override
+	public int compareTo(Object o) {
+		ExamineArtistBean newsBean = (ExamineArtistBean) o;
+		return this.id-newsBean.getId();
 	}
 }

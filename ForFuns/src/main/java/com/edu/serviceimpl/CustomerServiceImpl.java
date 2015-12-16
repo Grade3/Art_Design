@@ -55,6 +55,20 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerBean> implement
 	{
 		return customerDao.exist(customer);
 	}
+	
+	
+
+	@Override
+	public CustomerBean getCustomerInfo(int id) {
+		// TODO Auto-generated method stub
+		return  (CustomerBean) customerDao.getEntitybyId(CustomerBean.class,id);
+	}
+
+	@Override
+	public String getCustomerIdByUserid(String  userid) {
+		// TODO Auto-generated method stub
+		return customerDao.getIdbyUserid(userid);
+	}
 
 	/*@Override
 	public Map<String, Object> GetCustomerTree(int page, int pageSize)

@@ -50,6 +50,66 @@
 	</script>
 
 	<script type="text/javascript">
+//检测用户是否已登录
+//获取cookie
+function getCookie(objName){//获取指定名称的cookie的值 
+	var arrStr = document.cookie.split("; "); 
+	for(var i = 0;i < arrStr.length;i ++){ 
+		var temp = arrStr[i].split("="); 
+		if(temp[0] == objName) return unescape(temp[1]); 
+	} 
+};
+function CheckUser(){
+	var useridtoken = getCookie("useridtoken");
+	if(null==useridtoken || "" == useridtoken){
+		return ;
+	}
+	var index = useridtoken.indexOf("&");
+	var id =  useridtoken.substring(0,index);
+	$.ajax({
+		type:'post',
+		url:'<%=basePath%>customer.do?method=GetCustomerName',
+		data:{customerid:id},
+		success:function(json){
+			$('#registeraction').hide();
+			$('#loginaction').hide();
+			$('#usernameaction').show();
+			$('#loginoutaction').show();
+			$('#username').html("<i class='item_login'/>"+json);
+		},error:function(){
+			
+		}
+	});
+}
+$(document).ready(function(){
+	$('#usernameaction').hide();
+	$('#loginoutaction').hide();
+	CheckUser();
+	
+	
+	//过程
+	var useridtoken = getCookie("useridtoken");
+	if(null==useridtoken || "" == useridtoken){
+		return ;
+	}
+	var index = useridtoken.indexOf("&");
+	var id =  useridtoken.substring(0,index);//拿到了  在这里   id
+	
+  	$('#username').live('click',function(){
+  		var useridtoken = getCookie("useridtoken");
+  		var useridtoken = getCookie("useridtoken");
+  		if(null==useridtoken || "" == useridtoken){
+  			return ;
+  		}
+  		var index = useridtoken.indexOf("&");
+  		var id =  useridtoken.substring(0,index);
+  		var address = "<%=basePath%>font/personal.jsp?id=";
+				location.href = address + id;
+			});
+		});
+	</script>
+
+	<script type="text/javascript">
 		$(document).ready(function() {
 			var width = $(".userpic").width();
 			var height = width;
@@ -142,7 +202,29 @@
 					<div class="col-xs-offset-1 col-xs-10 info_div visible-lg">
 						<div class="row info">
 							<p class="col-xs-4">用户名</p>
-							<input type="text" class="col-xs-8"  value="我的用户名">
+							<input type="text" class="col-xs-8" value="我的用户名">
+						</div>
+						<div class="row info">
+							<p class="col-xs-4">昵称</p>
+							<input type="text" class="col-xs-8" name="username" value="我的昵称">
+						</div>
+						<div class="row info">
+							<p class="col-xs-4">真实姓名</p>
+							<input type="text" class="col-xs-8"  name="realname"value="我的真实姓名">
+						</div>
+						<div class="row info">
+							<p class="col-xs-4">身份证</p>
+							<input type="text" class="col-xs-8"  name="personnumber"value="我的身份证">
+						</div>
+						<div class="row info info2">
+							<p class="col-xs-4">手机</p>
+							<input type="text" class="col-xs-8"name="telphone" value="我的手机2">
+						</div>
+					</div>
+					<div class="info_div hidden-lg">
+						<div class="row info">
+							<p class="col-xs-4">用户名</p>
+							<input type="text" class="col-xs-8" value="我的用户名">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">昵称</p>
@@ -150,37 +232,15 @@
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">真实姓名</p>
-							<input type="text" class="col-xs-8" value="我的真实姓名">
+							<input type="text" class="col-xs-8"  value="我的真实姓名">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">身份证</p>
-							<input type="text" class="col-xs-8" value="我的身份证">
+							<input type="text" class="col-xs-8"  value="我的身份证">
 						</div>
 						<div class="row info info2">
 							<p class="col-xs-4">手机</p>
-							<input type="text" class="col-xs-8" value="我的手机2">
-						</div>
-					</div>
-					<div class="info_div hidden-lg">
-						<div class="row info">
-							<p class="col-xs-4">用户名</p>
-							<input type="text" class="col-xs-8" name= "userid"value="我的用户名">
-						</div>
-						<div class="row info">
-							<p class="col-xs-4">昵称</p>
-							<input type="text" class="col-xs-8"name= "username" value="我的昵称">
-						</div>
-						<div class="row info">
-							<p class="col-xs-4">真实姓名</p>
-							<input type="text" class="col-xs-8" name= "realname"value="我的真实姓名">
-						</div>
-						<div class="row info">
-							<p class="col-xs-4">身份证</p>
-							<input type="text" class="col-xs-8" name= "personnumber"value="我的身份证">
-						</div>
-						<div class="row info info2">
-							<p class="col-xs-4">手机</p>
-							<input type="text" class="col-xs-8" name= "telphone"value="我的手机1">
+							<input type="text" class="col-xs-8" value="我的手机1">
 						</div>
 					</div>
 

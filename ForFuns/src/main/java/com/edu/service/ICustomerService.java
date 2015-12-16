@@ -19,6 +19,13 @@ public interface ICustomerService extends IBaseService<CustomerBean>
 	public boolean isExist(CustomerBean customer);
 	
 	/**
+	 * 从id拿用户信息
+	 * @param customer
+	 * @return
+	 */
+	public CustomerBean getCustomerInfo(int id);
+	
+	/**
 	 * 判断用户是否存在,仅用于注册时的重复判断
 	 * @param customer
 	 * @return
@@ -31,6 +38,13 @@ public interface ICustomerService extends IBaseService<CustomerBean>
 	 * @return
 	 */
 	public int countCustomer();
+	
+	/**
+	 * 根据userid获得记录的id
+	 * @param customer
+	 * @return
+	 */
+	public String getCustomerIdByUserid(String  userid);
 	
 	/**
 	 * 保存实体
