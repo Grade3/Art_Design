@@ -81,6 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						var newTab=window.open('about:blank');
 						newTab.location.href="Login.jsp";
 					}else if(json==3){
+						location.href="<%=basePath%>font/error.jsp";
 						//跳转到错误页面
 					}else if(json==2){
 						//相符则为修改页面
@@ -177,7 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
 						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
 						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
-						<li id="loginoutaction"><a href="<%=basePath %>>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
+						<li id="loginoutaction"><a href="<%=basePath %>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
 					</ul>
 				</div>
 			</div>

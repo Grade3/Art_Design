@@ -25,6 +25,7 @@ import com.edu.model.NewsBean;
 import com.edu.model.UserBean;
 import com.edu.service.IAdvertService;
 import com.edu.service.IUserService;
+import com.edu.viewentity.AdvertVO;
 
 @Controller
 @RequestMapping("/advert.do")
@@ -103,9 +104,11 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	 */
 	@ResponseBody
 	@RequestMapping(params="method=GetFirstAdvert")
-	public List<AdvertBean> JsonGetFirstAdvert()
+	public List<AdvertVO> JsonGetFirstAdvert()
 	{
-		return advertService.GetFirstAdvert();
+		List<AdvertBean> list = advertService.GetFirstAdvert();
+		List<AdvertVO> result = AdvertVO.changeToAdvertVOs(list);
+		return result;
 	}
 	
 	/**
@@ -114,9 +117,11 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	 */
 	@ResponseBody
 	@RequestMapping(params="method=GetSecondAdvert")
-	public List<AdvertBean> JsonGetSecondAdvert()
+	public List<AdvertVO> JsonGetSecondAdvert()
 	{
-		return advertService.GetSecondAdvert();
+		List<AdvertBean> list = advertService.GetSecondAdvert();
+		List<AdvertVO> result = AdvertVO.changeToAdvertVOs(list);
+		return result;
 	}
 	
 	/**
@@ -125,9 +130,11 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	 */
 	@ResponseBody
 	@RequestMapping(params="method=GetThirdAdvert")
-	public List<AdvertBean> JsonGetThirdAdvert()
+	public List<AdvertVO> JsonGetThirdAdvert()
 	{
-		return advertService.GetThirdAdvert();
+		List<AdvertBean> list = advertService.GetThirdAdvert();
+		List<AdvertVO> result = AdvertVO.changeToAdvertVOs(list);
+		return result;
 	}
 	
 	/**
