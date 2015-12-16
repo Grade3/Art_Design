@@ -219,15 +219,15 @@ public class ProductController {
 		//return 2;//属于该用户的订单
 		//return 0;//添加失败
 		if(respons==0){
-			return "redirect:http://www.baidu.com";
+			return "redirect:/font/error.jsp";
 		}else if(respons==1){
-			return "redirect:http://www.bilibili.com/";
+			return "redirect:/font/error.jsp?errorid=1";
 		}else if(respons==2){
 			return "redirect:/font/goodsdetail.jsp?productid="+id;
 		}else if(respons==3){
-			return "redirect:/font/goodsdetail.jsp?productid="+id;
+			return "redirect:/font/success.jsp";
 		}
-		return "redirect:http://www.baidu.com";
+		return "redirect:/font/error.jsp";
 	}
 	/**
 	 * 检测用户是否存在相应的订单。
