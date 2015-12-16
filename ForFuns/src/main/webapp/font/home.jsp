@@ -132,9 +132,11 @@ function GetFirstAdvert(){
 			if(json.length>0){
 				var body = "";
 				for(var i=0;i<json.length;i++){
+					var id = json[i].id;
 					var name = json[i].title;
 					var imgurl = json[i].imgurl;
-					body+="<div class='col-xs-4 Recommend'><a href='news.html' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
+					var link = "<%=basePath%>font/advertdetail.jsp?id="+id;
+					body+="<div class='col-xs-4 Recommend'><a href='"+link+"' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
 				$('#advertfirst').html(body);
 				var goods_pic_w = $(".good_pic").width();
@@ -157,9 +159,11 @@ function GetSecondAdvert(){
 			if(json.length>0){
 				var body = "";
 				for(var i=0;i<json.length;i++){
+					var id = json[i].id;
 					var name = json[i].title;
 					var imgurl = json[i].imgurl;
-					body+="<div class='col-xs-4 Recommend'><a href='news.html' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
+					var link = "<%=basePath%>font/advertdetail.jsp?id="+id;
+					body+="<div class='col-xs-4 Recommend'><a href='"+link+"' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
 				$('#advertsecond').html(body);
 				var goods_pic_w = $(".good_pic").width();
@@ -182,9 +186,11 @@ function GetThirdAdvert(){
 			if(json.length>0){
 				var body = "";
 				for(var i=0;i<json.length;i++){
+					var id = json[i].id;
 					var name = json[i].title;
 					var imgurl = json[i].imgurl;
-					body+="<div class='col-xs-4 Recommend'><a href='news.html' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
+					var link = "<%=basePath%>font/advertdetail.jsp?id="+id;
+					body+="<div class='col-xs-4 Recommend'><a href='"+link+"' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
 				$('#advertthree').html(body);
 				var goods_pic_w = $(".good_pic").width();
