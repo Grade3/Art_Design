@@ -19,64 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/home.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript">
-		function a1_f1() {
-            document.getElementById("detail_a1").style.display = "none";
-        }
-        function a1_f2() {
-            document.getElementById("detail_a1").style.display = "block";
-        }
-        function a2_f1() {
-            document.getElementById("detail_a2").style.display = "none";
-        }
-        function a2_f2() {
-            document.getElementById("detail_a2").style.display = "block";
-        }
-        function a3_f1() {
-            document.getElementById("detail_a3").style.display = "none";
-        }
-        function a3_f2() {
-            document.getElementById("detail_a3").style.display = "block";
-        }
-
-        function b1_f1() {
-            document.getElementById("detail_b1").style.display = "none";
-        }
-        function b1_f2() {
-            document.getElementById("detail_b1").style.display = "block";
-        }
-        function b2_f1() {
-            document.getElementById("detail_b2").style.display = "none";
-        }
-        function b2_f2() {
-            document.getElementById("detail_b2").style.display = "block";
-        }
-        function b3_f1() {
-            document.getElementById("detail_b3").style.display = "none";
-        }
-        function b3_f2() {
-            document.getElementById("detail_b3").style.display = "block";
-        }
-
-        function c1_f1() {
-            document.getElementById("detail_c1").style.display = "none";
-        }
-        function c1_f2() {
-            document.getElementById("detail_c1").style.display = "block";
-        }
-        function c2_f1() {
-            document.getElementById("detail_c2").style.display = "none";
-        }
-        function c2_f2() {
-            document.getElementById("detail_c2").style.display = "block";
-        }
-        function c3_f1() {
-            document.getElementById("detail_c3").style.display = "none";
-        }
-        function c3_f2() {
-            document.getElementById("detail_c3").style.display = "block";
-        }
-	</script>
+	
 <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
 <style type="text/css">
@@ -188,26 +131,14 @@ function GetFirstAdvert(){
 		success:function(json){
 			if(json.length>0){
 				var body = "";
-				var point = "";
 				for(var i=0;i<json.length;i++){
-					var id = json[i].id;
+					var name = json[i].title;
 					var imgurl = json[i].imgurl;
-					var summary = json[i].summary;
-					var title = json[i].title;
-					if(i==0)
-					{
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
-						body += "<div class='item active'><a href='<%=basePath%>font/advert.jsp?advertid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}
-					else
-					{
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
-						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}
-					
+					body+="<div class='col-xs-4 Recommend'><a href='news.html' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
-				$('#banner').html(body);
-				$('#bannerpoint').html(point);
+				$('#advertfirst').html(body);
+				var goods_pic_w = $(".good_pic").width();
+		  		$(".good_pic").height(goods_pic_w)*1.7;
 			}
 		},error:function(){
 				
@@ -225,23 +156,14 @@ function GetSecondAdvert(){
 		success:function(json){
 			if(json.length>0){
 				var body = "";
-				var point = "";
 				for(var i=0;i<json.length;i++){
-					var id = json[i].id;
+					var name = json[i].title;
 					var imgurl = json[i].imgurl;
-					var summary = json[i].summary;
-					var title = json[i].title;
-					if(i==0){
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
-						body += "<div class='item active'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}else{
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
-						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}
-					
+					body+="<div class='col-xs-4 Recommend'><a href='news.html' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
-				$('#banner').html(body);
-				$('#bannerpoint').html(point);
+				$('#advertsecond').html(body);
+				var goods_pic_w = $(".good_pic").width();
+		  		$(".good_pic").height(goods_pic_w)*1.7;
 			}
 		},error:function(){
 				
@@ -259,23 +181,14 @@ function GetThirdAdvert(){
 		success:function(json){
 			if(json.length>0){
 				var body = "";
-				var point = "";
 				for(var i=0;i<json.length;i++){
-					var id = json[i].id;
+					var name = json[i].title;
 					var imgurl = json[i].imgurl;
-					var summary = json[i].summary;
-					var title = json[i].title;
-					if(i==0){
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+" class='active'></li>";
-						body += "<div class='item active'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}else{
-						point +="<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>";
-						body += "<div class='item'><a href='<%=basePath%>font/news.jsp?newsid="+id+"'><img class='item_pic' src='"+imgurl+"' alt='...' "+"onerror=\"javascript:this.src=\'../image/bg_scroll1.jpg\';\""+"><div class='carousel-caption'><h3>"+title+"</h3><p>"+summary+"</p></div></a></div>";
-					}
-					
+					body+="<div class='col-xs-4 Recommend'><a href='news.html' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
-				$('#banner').html(body);
-				$('#bannerpoint').html(point);
+				$('#advertthree').html(body);
+				var goods_pic_w = $(".good_pic").width();
+		  		$(".good_pic").height(goods_pic_w)*1.7;
 			}
 		},error:function(){
 				
@@ -301,6 +214,12 @@ $(document).ready(function(){
 
   		var artist_h = $(".class75").height();
   		$(".class25").height(artist_h);
+  		
+  		var artist_h1 = $(".col9").height();
+  		$(".col3").height(artist_h1);
+  		var goods_pic_w = $(".good_pic").width();
+  		$(".good_pic").height(goods_pic_w)*1.7;
+  		
 
   	$(window).resize(function() {
   		var width = $(".carousel-inner").width();
@@ -313,6 +232,11 @@ $(document).ready(function(){
   		
   		var artist_h = $(".class75").height();
   		$(".class25").height(artist_h);
+  		
+  		var artist_h1 = $(".col9").height();
+  		$(".col3").height(artist_h1);
+  		var goods_pic_w = $(".good_pic").width();
+  		$(".good_pic").height(goods_pic_w)*1.7;
   	});
   	
   	
@@ -334,7 +258,7 @@ $(document).ready(function(){
 		<div class="header-top">
 			<div class="container">
 				<div class="statu_bar">
-					<ul class="support hidden-xs">
+					<ul class="support">
 						<li ><span ><i class="item_message"> </i>471979617@qq.com</span></li>
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
@@ -349,10 +273,20 @@ $(document).ready(function(){
 			<div class="header-bottom">
 				<div class="container">
 					<div class="logo">
-						<h1><a href="home.jsp">ArtCustomize</a></h1>
+						<h1><a href="home.html">ArtCustomize</a></h1>
 					</div>
-					<div class="top-nav-xs hidden-lg">
-						<div id="menu" onmouseover="fun1();" onmouseout="fun2();">
+					<div class="top-nav visible-xs visible-sm">
+						<ul class="megamenu skyblue">
+							<li><a href="home.jsp" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
+							<li><a href="home.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
+							<li><a href="home.jsp"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
+							<li><a href="home.jsp"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
+							<li><a href="newslist.jsp"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
+							<li><a href="home.jsp"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
+						</ul>
+					</div>
+					<div class="top-nav-xs visible-md">
+						<div id="menu">
 							<p>菜  单</p>
 						</div>
 						<div id="menu-xs">
@@ -435,8 +369,8 @@ $(document).ready(function(){
 	</div>
 	<div class="content">
 		<div class="container">
-			<div class="content-top visible-lg">
-				<div class="col-md-9">
+			<div class="content-top visible-lg visible-md">
+				<div class="col-md-9 col9">
 					<div class="col-top">
 						<div class="col-md-6 black">
 							<a href="Arts.html">
@@ -457,12 +391,13 @@ $(document).ready(function(){
 					</div>
 					<div>
 					<div class="col-top-bottom">
-						<h3 class="news">ArtCostomize艺术品资讯专区</h3>
-						<a href="newslist.jsp" class="now-in">进 入</a>
+						<h3 class="news visible-lg">ArtCostomize艺术品资讯专区</h3>
+						<h3 class="news visible-md">艺术品资讯专区</h3>
+						<a href="newslist.html" class="now-in">进 入</a>
 					</div>
 					</div>
 				</div>
-				<div class="col-md-3 per">
+				<div class="col-md-3 per col3">
 					<a href="Artist.html">
 						<img class="img-responsive" src="<%=basePath%>image/artist.png" >
 						<div class="six">
@@ -472,43 +407,6 @@ $(document).ready(function(){
 				</div>
 			</div>
 
-			<div class="content-top visible-md">
-				<div class="col-md-12 col-top-bottom1 arts1">
-					<h3 class="news1">艺术品成品专区</h3>
-					<a href="home.jsp" class="now-in1">进 入</a>
-				</div>
-				<div class="col-md-12 col-top-bottom1 diy1">
-					<h3 class="news1">艺术品定制专区</h3>
-					<a href="home.jsp" class="now-in1">进 入</a>
-				</div>
-				<div class="col-md-12 col-top-bottom1 artist1">
-					<h3 class="news1">平台艺术家专区</h3>
-					<a href="home.jsp" class="now-in1">进 入</a>
-				</div>
-				<div class="col-md-12 col-top-bottom1">
-					<h3 class="news1">艺术品资讯专区</h3>
-					<a href="newslist.jsp" class="now-in1">进 入</a>
-				</div>
-			</div>
-
-			<!-- <div class="content-top visible-sm">
-				<div class="col-md-12 col-top-bottom1 arts1">
-					<h3 class="news2">艺术品成品专区</h3>
-					<a href="home.jsp" class="now-in2">进 入</a>
-				</div>
-				<div class="col-md-12 col-top-bottom1 diy1">
-					<h3 class="news2">艺术品定制专区</h3>
-					<a href="home.jsp" class="now-in2">进 入</a>
-				</div>
-				<div class="col-md-12 col-top-bottom1 artist1">
-					<h3 class="news2">平台艺术家专区</h3>
-					<a href="home.jsp" class="now-in2">进 入</a>
-				</div>
-				<div class="col-md-12 col-top-bottom1">
-					<h3 class="news2">艺术品资讯专区</h3>
-					<a href="news.jsp" class="now-in2">进 入</a>
-				</div>
-			</div> -->
 
 			<div class="content-top visible-xs visible-sm">
 				<div class="class75">
@@ -533,7 +431,7 @@ $(document).ready(function(){
 					<div>
 					<div class="col-top-bottom3">
 						<h3 class="news3">艺术品资讯专区</h3>
-						<a href="newslist.jsp" class="now-in">进 入</a>
+						<a href="newslist.html" class="now-in">进 入</a>
 					</div>
 					</div>
 				</div>
@@ -550,67 +448,25 @@ $(document).ready(function(){
 			<div class="sap_tabs">
 				<label class="line"></label>
 				<h2>艺术品成品推荐</h2>
-				<div class="recommend_arts">
-					<div class="col-md-4 Recommend" onmouseout="a1_f1()" onmouseover="a1_f2()">
-						<img src="<%=basePath%>image/a11.jpg">
-						<div class="tab_desc" id="detail_a1">
-							<ul class="round-top">
-								<li><a href="#"><i> </i></a></li>
-								<li><a href="#"><i class="round"> </i></a></li>
-							</ul>
-							<div class="agency">
-								<div class="agency-left">
-									<h6 class="arts_name">艺术品名称及描述	</h6>
-									<p class="dollor item_price">竞拍价：￥170.00</p>
-									<p class="dollor item_price">一口价：￥250.00</p>
-									<ul class="social">
-										<li><a href="#"><i class="buy"> </i></a></li>
-										<li><a href="#"><i class="love"> </i></a></li>
-									</ul>
-								</div>
-							</div>
+				<div class="recommend_arts" id="advertfirst">
+					<div class="col-xs-4 Recommend">
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/a11.jpg"></a>
+						<div class="tab_desc">
+							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-md-4 Recommend" onmouseout="a2_f1()" onmouseover="a2_f2()">
-						<img src="<%=basePath%>image/a22.jpg">
-						<div class="tab_desc" id="detail_a2">
-							<ul class="round-top">
-								<li><a href="#"><i> </i></a></li>
-								<li><a href="#"><i class="round"> </i></a></li>
-							</ul>
-							<div class="agency">
-								<div class="agency-left">
-									<h6 class="arts_name">艺术品名称及描述	</h6>
-									<p class="dollor item_price">竞拍价：￥170.00</p>
-									<p class="dollor item_price">一口价：￥250.00</p>
-									<ul class="social">
-										<li><a href="#"><i class="buy"> </i></a></li>
-										<li><a href="#"><i class="love"> </i></a></li>
-									</ul>
-								</div>
-							</div>
+					<div class="col-xs-4 Recommend">
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/a22.jpg"></a>
+						<div class="tab_desc">
+							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-md-4 Recommend" onmouseout="a3_f1()" onmouseover="a3_f2()">
-						<img src="<%=basePath%>image/a33.jpg">
-						<div class="tab_desc" id="detail_a3">
-							<ul class="round-top">
-								<li><a href="#"><i> </i></a></li>
-								<li><a href="#"><i class="round"> </i></a></li>
-							</ul>
-							<div class="agency">
-								<div class="agency-left">
-									<h6 class="arts_name">艺术品名称及描述	</h6>
-									<p class="dollor item_price">竞拍价：￥170.00</p>
-									<p class="dollor item_price">一口价：￥250.00</p>
-									<ul class="social">
-										<li><a href="#"><i class="buy"> </i></a></li>
-										<li><a href="#"><i class="love"> </i></a></li>
-									</ul>
-								</div>
-							</div>
+					<div class="col-xs-4 Recommend">
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/a33.jpg"></a>
+						<div class="tab_desc">
+							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 				</div>
@@ -619,67 +475,25 @@ $(document).ready(function(){
 			<div class="sap_tabs">
 				<label class="line"></label>
 				<h2>艺术品定制推荐</h2>
-				<div class="recommend_arts">
-					<div class="col-md-4 Recommend" onmouseout="b1_f1()" onmouseover="b1_f2()">
-						<img src="<%=basePath%>image/b11.jpg">
-						<div class="tab_desc" id="detail_b1">
-							<ul class="round-top">
-								<li><a href="#"><i> </i></a></li>
-								<li><a href="#"><i class="round"> </i></a></li>
-							</ul>
-							<div class="agency">
-								<div class="agency-left">
-									<h6 class="arts_name">艺术品名称及描述	</h6>
-									<p class="dollor item_price">竞拍价：￥170.00</p>
-									<p class="dollor item_price">一口价：￥250.00</p>
-									<ul class="social">
-										<li><a href="#"><i class="buy"> </i></a></li>
-										<li><a href="#"><i class="love"> </i></a></li>
-									</ul>
-								</div>
-							</div>
+				<div class="recommend_arts" id="advertsecond">
+					<div class="col-xs-4 Recommend">
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/b11.jpg"></a>
+						<div class="tab_desc">
+							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-md-4 Recommend" onmouseout="b2_f1()" onmouseover="b2_f2()">
-						<img src="<%=basePath%>image/b22.jpg">
-						<div class="tab_desc" id="detail_b2">
-							<ul class="round-top">
-								<li><a href="#"><i> </i></a></li>
-								<li><a href="#"><i class="round"> </i></a></li>
-							</ul>
-							<div class="agency">
-								<div class="agency-left">
-									<h6 class="arts_name">艺术品名称及描述	</h6>
-									<p class="dollor item_price">竞拍价：￥170.00</p>
-									<p class="dollor item_price">一口价：￥250.00</p>
-									<ul class="social">
-										<li><a href="#"><i class="buy"> </i></a></li>
-										<li><a href="#"><i class="love"> </i></a></li>
-									</ul>
-								</div>
-							</div>
+					<div class="col-xs-4 Recommend" >
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/b22.jpg"></a>
+						<div class="tab_desc">
+							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-md-4 Recommend" onmouseout="b3_f1()" onmouseover="b3_f2()">
-						<img src="<%=basePath%>image/b33.jpg">
-						<div class="tab_desc" id="detail_b3">
-							<ul class="round-top">
-								<li><a href="#"><i> </i></a></li>
-								<li><a href="#"><i class="round"> </i></a></li>
-							</ul>
-							<div class="agency">
-								<div class="agency-left">
-									<h6 class="arts_name">艺术品名称及描述	</h6>
-									<p class="dollor item_price">竞拍价：￥170.00</p>
-									<p class="dollor item_price">一口价：￥250.00</p>
-									<ul class="social">
-										<li><a href="#"><i class="buy"> </i></a></li>
-										<li><a href="#"><i class="love"> </i></a></li>
-									</ul>
-								</div>
-							</div>
+					<div class="col-xs-4 Recommend" >
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/b33.jpg"></a>
+						<div class="tab_desc">
+							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 				</div>
@@ -688,67 +502,25 @@ $(document).ready(function(){
 			<div class="sap_tabs">
 				<label class="line"></label>
 				<h2>艺术家推荐</h2>
-				<div class="recommend_arts">
-					<div class="col-md-4 Recommend" onmouseout="c1_f1()" onmouseover="c1_f2()">
-						<img src="<%=basePath%>image/c11.jpg">
-						<div class="tab_desc" id="detail_c1">
-							<ul class="round-top">
-								<li><a href="#"><i> </i></a></li>
-								<li><a href="#"><i class="round"> </i></a></li>
-							</ul>
-							<div class="agency">
-								<div class="agency-left">
-									<h6 class="arts_name">艺术品名称及描述	</h6>
-									<p class="dollor item_price">竞拍价：￥170.00</p>
-									<p class="dollor item_price">一口价：￥250.00</p>
-									<ul class="social">
-										<li><a href="#"><i class="buy"> </i></a></li>
-										<li><a href="#"><i class="love"> </i></a></li>
-									</ul>
-								</div>
-							</div>
+				<div class="recommend_arts" id="advertthree">
+					<div class="col-xs-4 Recommend" >
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/c11.jpg"></a>
+						<div class="tab_desc">
+							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-md-4 Recommend" onmouseout="c2_f1()" onmouseover="c2_f2()">
-						<img src="<%=basePath%>image/c22.jpg">
-						<div class="tab_desc" id="detail_c2">
-							<ul class="round-top">
-								<li><a href="#"><i> </i></a></li>
-								<li><a href="#"><i class="round"> </i></a></li>
-							</ul>
-							<div class="agency">
-								<div class="agency-left">
-									<h6 class="arts_name">艺术品名称及描述	</h6>
-									<p class="dollor item_price">竞拍价：￥170.00</p>
-									<p class="dollor item_price">一口价：￥250.00</p>
-									<ul class="social">
-										<li><a href="#"><i class="buy"> </i></a></li>
-										<li><a href="#"><i class="love"> </i></a></li>
-									</ul>
-								</div>
-							</div>
+					<div class="col-xs-4 Recommend" >
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/c22.jpg"></a>
+						<div class="tab_desc">
+							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-md-4 Recommend" onmouseout="c3_f1()" onmouseover="c3_f2()">
-						<img src="<%=basePath%>image/c33.jpg">
-						<div class="tab_desc" id="detail_c3">
-							<ul class="round-top">
-								<li><a href="#"><i> </i></a></li>
-								<li><a href="#"><i class="round"> </i></a></li>
-							</ul>
-							<div class="agency">
-								<div class="agency-left">
-									<h6 class="arts_name">艺术品名称及描述	</h6>
-									<p class="dollor item_price">竞拍价：￥170.00</p>
-									<p class="dollor item_price">一口价：￥250.00</p>
-									<ul class="social">
-										<li><a href="#"><i class="buy"> </i></a></li>
-										<li><a href="#"><i class="love"> </i></a></li>
-									</ul>
-								</div>
-							</div>
+					<div class="col-xs-4 Recommend" >
+						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/c33.jpg"></a>
+						<div class="tab_desc">
+							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 				</div>
