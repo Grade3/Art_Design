@@ -3,9 +3,12 @@
  */
 package com.edu.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +27,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.edu.model.NewsBean;
 import com.edu.model.RoleBean;
 import com.edu.model.CustomerBean;
 import com.edu.model.UserBean;
@@ -292,6 +297,19 @@ public class CustomerController {
 		return map;
 	}
 	
+	/**
+	 * 通过id获取customer
+	 * @param customer
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=getCustomerByUserid")
+	public Map<String,Object> JsonGetCustomerByUserid(@RequestParam(value="customerid")String customerid){
+		CustomerBean customerBean = customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, customerid, null);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customer", customerBean);
+		return map;
+	}
 	
 	/**
 	 * 通过id获取username
@@ -341,4 +359,36 @@ public class CustomerController {
 		return "font/Login.jsp";
 	}
 	
+	/**
+	 * 修改用户
+	 * @param userid
+	 * @param username
+	 * @param personnumber
+	 * @param telphone
+	 * @param realname
+	 * @param avator
+	 * @return
+	 */
+	@RequestMapping(params="method=alertcustomer")
+	public String JsonAlertCustomer (@RequestParam(value="userid")String userid,
+			@RequestParam(value="username")String username,
+			@RequestParam(value="personnumber")String personnumber,
+			@RequestParam(value="telphone")String telphone,
+			@RequestParam(value="realname")String realname,
+			HttpServletRequest request)
+	{
+		CustomerBean customerBean = customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, userid, null);
+		
+		customerBean.setRealname(realname);
+		customerBean.setTelphone(telphone);
+		customerBean.setPersonnumber(personnumber);
+		customerBean.setUsername(username);
+		
+		try{
+			customerService.UpdataBean(customerBean);
+		}catch(Exception e){
+			return "redirect:/font/modify";
+		}
+		return "redirect:/font/personal.jsp";
+	}
 }
