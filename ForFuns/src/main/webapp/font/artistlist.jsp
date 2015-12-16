@@ -15,60 +15,94 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
+	<script src="../js/lanrenzhijia.js"></script>
+	<script type="text/javascript">
+	//获取上线新闻
+	function GetArtists(page,pageSize){
+		$.ajax({
+			type:'post',
+			url:'<%=basePath%>artist.do?method=GetArtists',
+			data:{page:page,pageSize:pageSize},
+			success:function(json){
+				var list = json.list;
+				var total = json.total;
+				globaltotal = total;
+				if(list.length>0){
+					var body = "";
+					var count = 0;
+					for(var i=0;i<list.length;i++){
+						var username = list[i].username;
+						var avator = list[i].avator;
+						var id= list[i].id;
+						
+						if(count==0){
+							body +="<div class='col-md-6 goods_two'>";
+						}
+						var link = "<%=basePath%>font/artistHome.jsp?id="+id;
+						body+="<div class='col-xs-6 goods'><a href='"+link+"' target='_blank'><img src='"+avator+"' class='good_item'></a><div class='good_name'><p>"+username+"</p><a href='"+link+"' class='readmore' target='_blank'>进入主页</a></div></div>";
+						if(count==2){
+							body+="</div>";
+						}
+						count++;
+						if(count==2)
+							count=0;
+					}
+					if(page*pageSize <globaltotal){
+						body +="<div class='col-md-12 blog-in-top'><div class='learn_more'><p>查看更多</p></div></div>";
+					}
+					$('#artistlist').append(body);
+				}else{
+					var content ="<div class='col-md-12 blog-in-top'><div class='learn_more'><p>没有更多的信息</p></div></div>";
+					$('#artistlist').html(content);
+				}
+				var width = $(".good_item").width();
+				var height = width/2.5*3;
+		  		$(".good_item").height(height);
+			},error:function(){
+				
+			}
+		});
+	};
+	$(document).ready(function(){
+		
+		
+		  var page = 1;
+		  var pageSize = 12;
+		  var globaltotal = 0;
+		  GetArtists(page,pageSize);
+		  $("#menu").click(function(){
+		  $("#menu-xs").toggle(300);
+		  });
+		  $(window).scroll(function(){
+				var _top = $(window).scrollTop();
+				if(_top>300){
+					$('.lanrenzhijia_top').fadeIn(600);
+				}else{
+					$('.lanrenzhijia_top').fadeOut(600);
+				}
+			});
+			$(".lanrenzhijia_top").click(function(){
+				$("html,body").animate({scrollTop:0},500);
+			});
+			var width = $(".good_item").width();
+			var height = width/2.5*3;
+		  	$(".good_item").height(height);
+
+		  	$(window).resize(function() {
+		  		var width = $(".good_item").width();
+				var height = width/2.5*3;
+		  		$(".good_item").height(height);
+		  	});
+		  	$(".sub").show();
+		  	$(".box_active a").click(function(){
+		  		$(".sub").slideToggle("slow");
+		  	});
+	});
+
+	</script>
 </head>
 <body>
-
 <a href="javascript:;" class="lanrenzhijia_top"></a>
-<script src="../js/lanrenzhijia.js"></script>
-<script>
-$(function(){
-	$(window).scroll(function(){
-		var _top = $(window).scrollTop();
-		if(_top>300){
-			$('.lanrenzhijia_top').fadeIn(600);
-		}else{
-			$('.lanrenzhijia_top').fadeOut(600);
-		}
-	});
-	$(".lanrenzhijia_top").click(function(){
-		$("html,body").animate({scrollTop:0},500);
-	});
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-  $("#menu").click(function(){
-  $("#menu-xs").toggle(300);
-  });
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	var width = $(".good_item").width();
-	var height = width/2.5*3;
-  	$(".good_item").height(height);
-
-  	$(window).resize(function() {
-  		var width = $(".good_item").width();
-		var height = width/2.5*3;
-  		$(".good_item").height(height);
-  	});
-  
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	$(".sub").show();
-	$(".box_active a").click(function(){
-		$(".sub").slideToggle("slow");
-	})
-});
-</script>
-
-
 	<div class="header-top">
 			<div class="container">
 				<div class="statu_bar">
@@ -128,9 +162,9 @@ $(document).ready(function(){
 
 	<div class="content">
 		<div class="container">
-			<div class="col-lg-offset-1 col-lg-10 good_four">
+			<div class="col-lg-offset-1 col-lg-10 good_four" id="artistlist">
 
-				<div class="col-md-6 goods_two">
+				<!-- <div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
 						<a href="artistHome.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
 						<div class="good_name">
@@ -233,7 +267,7 @@ $(document).ready(function(){
 				<div class="col-xs-12 learn_more">
 					<p>查看更多</p>
 				</div>
-			</div>
+			</div> -->
 			
 		</div>
 	</div>
