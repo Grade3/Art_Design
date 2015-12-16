@@ -185,7 +185,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   {//保存修改
 				   text: "查看",
 				   iconCls: "icon-ok",
-				   handler: _saveRows,
+				   handler: _watch,
 			   },'-',{//保存修改
 				   text: "保存",
 				   iconCls: "icon-save",
@@ -398,7 +398,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return (date.getMonth() + 1) +"/"+ date.getDate()+"/"+date.getFullYear() ;
 		}
 	}
-	
+	//------------------------------查看数据-----------------------------
+	function _watch(){
+		var row = $('#grid').datagrid('getSelected');
+		if(row){
+			var id = row.id;
+			var temp = "<%=basePath%>font/goodsdetail.jsp?productid="+id;
+			window.open(temp);
+		}else{
+			$.messager.alert('警告','您没有选择','error');
+		};
+	};
 	//--------------------------------------主体部分！！！-----------------------------
     var doedit = undefined;//用来记录当前编辑的行，如果没有编辑的行则置为undefined
     $(function(){

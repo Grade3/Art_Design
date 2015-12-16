@@ -13,14 +13,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="../css/goodslist.css">
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 </head>
 <body>
 
 <a href="javascript:;" class="lanrenzhijia_top"></a>
 <script src="../js/lanrenzhijia.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
+<style type="text/css">
+		*{font-style: normal;}
+</style>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -123,6 +127,9 @@ function GetAllOnlineProduct(typeid,page,pageSize){
 	});
 };
 $(document).ready(function(){
+	$('#usernameaction').hide();
+	$('#loginoutaction').hide();
+	CheckUser();
 	var globaltotal = 0;
 	var typeid = 1;
 	var page = 1 ;
@@ -149,12 +156,6 @@ $(document).ready(function(){
   	});
 });
 </script>
-<!-- <script type="text/javascript">
-$(document).ready(function(){
-	
-  
-});
-</script> -->
 
 	<div class="header-top">
 			<div class="container">
@@ -164,8 +165,10 @@ $(document).ready(function(){
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li ><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>			
+						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
+						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
+						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
+						<li id="loginoutaction"><a href="<%=basePath %>>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
 					</ul>
 				</div>
 			</div>

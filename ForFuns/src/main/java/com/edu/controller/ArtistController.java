@@ -23,10 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.edu.model.ArtistBean;
 import com.edu.model.CustomerBean;
+import com.edu.model.NewsBean;
 import com.edu.service.IArtistService;
 import com.edu.serviceimpl.ArtistServiceImpl;
 import com.edu.table.CustomerTable;
+import com.edu.table.NewsTable;
 import com.edu.util.MD5Util;
 
 /**
@@ -245,6 +248,23 @@ public class ArtistController
 		List<CustomerBean> list = artistService.GetAllBean(CustomerBean.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("Artists", list);
+		return map;
+	}
+	
+	
+
+	/**
+	 * 获取艺术家分页列表
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=GetArtists")
+	public Map<String, Object> JsonGetArtists(@RequestParam(value="page")Integer page,@RequestParam(value="pageSize")Integer pageSize){
+		Map<String , Object> map = new HashMap<String, Object>();
+		List<CustomerBean> list = artistService.GetPageBeanFilter(CustomerBean.class, page, pageSize,CustomerTable.ISARTIST,1+"");
+		int total = artistService.GetPageBeanFilterTotal(CustomerBean.class, page, pageSize,CustomerTable.ISARTIST,1+"");
+		map.put("list", list);
+		map.put("total", total);
 		return map;
 	}
 }
