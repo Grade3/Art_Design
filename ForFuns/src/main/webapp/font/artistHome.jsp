@@ -24,7 +24,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				url:'<%=basePath%>customer.do?method=getCustomervoByid',
 				data:{customerid:id},
 				success:function(json){
-					alert(json);
+					var customer = json.customer;
+					var name = customer.name;
+					var avator = customer.avator;
+					$('#avator').attr('src',avator);
+					$('#artistname').html(name);
 				},error:function(){
 					
 				}
@@ -149,8 +153,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="content">
 		<div class="container">
 			<div class="user_info">
-				<img class="userpic" src="../image/bl.jpg">
-				<p class="username">艺术家用户名</p>
+				<img class="userpic" id="avator" src="../image/bl.jpg" onerror="javascript:this.src='../image/bl.jpg'";>
+				<p class="username" id="artistname">艺术家用户名</p>
 			</div>
 			<div class="row person_btn">
 				<div class="col-xs-offset-4 col-xs-4 visible-lg">

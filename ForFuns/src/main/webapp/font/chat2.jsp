@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <meta charset="UTF-8">
 
-  <title>Chat</title>
+  <title>Chat2</title>
   	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<script charset="utf-8" src="<%=path%>/kindeditor/kindeditor.js"></script>
@@ -31,8 +31,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	</script>
 	<script type="text/javascript">
-  	  var userid = 1;
-      var receiveid = 2;
+  	  var userid = 2;
+      var receiveid = 1;
       var websocket = null;
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
@@ -44,8 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
       //连接发生错误的回调方法
       websocket.onerror = function(){
-          //setMessageInnerHTML("error");
-          alert("sorry，连接发生错误");
+          setMessageInnerHTML("error");
       };
        
       //连接成功建立的回调方法
