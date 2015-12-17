@@ -187,28 +187,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="logo">
 						<h1><a href="home.html">ArtCustomize</a></h1>
 					</div>
-					<div class="top-nav-xs hidden-lg">
-						<div id="menu" onmouseover="fun1();" onmouseout="fun2();">
+					<div class="top-nav visible-xs visible-sm">
+						<ul class="megamenu skyblue">
+							<li><a href="home.jsp" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
+							<li><a href="goodslist.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
+							<li><a href="artistlist.jsp"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
+							<li><a href="newslist.jsp"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
+						</ul>
+					</div>
+					<div class="top-nav-xs visible-md">
+						<div id="menu">
 							<p>菜  单</p>
 						</div>
 						<div id="menu-xs">
 							<ul>
-								<li><a href="home.html">首页</a></li>
-								<li><a href="home.html">成品</a></li>
+								<li><a href="home.jsp">首页</a></li>
+								<li><a href="goodslist.jsp">成品</a></li>
 								<li><a href="home.html">DIY</a></li>
-								<li><a href="home.html">艺术家</a></li>
-								<li><a href="newslist.html">资讯中心</a></li>
+								<li><a href="artistlist.jsp">艺术家</a></li>
+								<li><a href="newslist.jsp">资讯中心</a></li>
 								<li><a href="home.html">联系我们</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="top-nav visible-lg">
 						<ul class="megamenu skyblue">
-							<li><a href="home.html">首页</a></li>
-							<li><a href="home.html">成品</a></li>
+							<li><a href="home.jsp">首页</a></li>
+							<li><a href="goodslist.jsp">成品</a></li>
 							<li><a href="home.html">DIY</a></li>
-							<li><a href="home.html">艺术家</a></li>
-							<li><a href="newslist.html">资讯中心</a></li>
+							<li><a href="artistlist.jsp">艺术家</a></li>
+							<li><a href="newslist.jsp">资讯中心</a></li>
 							<li><a href="home.html">联系我们</a></li>
 						</ul>
 					</div>
@@ -236,15 +246,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-xs-12 row goods1">
 					<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item col-xs-3"></a>
 					<div class="col-xs-3 name">
-						<p class="name1 visible-lg visible-md">商品名称</p>
+						<p class="name1 ">商品名称</p>
 						<p class="name2"><a href="#" target="_blank" id="productname">商品名称商品名称商品名称商品名称</a></p>
 					</div>				
 					<div class="col-xs-3 name">
-						<p class="name1 visible-lg visible-md">价格</p>
+						<p class="name1 ">价格</p>
 						<p class="name2" id="money">￥99.00</p>
 					</div>
 					<div class="col-xs-3 name">
-						<p class="name1 visible-lg visible-md">艺术家</p>
+						<!-- <p class="name1 visible-lg visible-md">艺术家</p> -->
+						<p class="name1 ">艺术家</p>
 						<p class="name2"><a href="artistHome.html" target="_blank" id="authorname">艺术家艺术家艺术家</a></p>
 					</div>
 				</div>
