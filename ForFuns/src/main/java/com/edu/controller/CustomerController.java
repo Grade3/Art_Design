@@ -39,6 +39,7 @@ import com.edu.serviceimpl.CustomerServiceImpl;
 import com.edu.table.CustomerTable;
 import com.edu.table.UserTable;
 import com.edu.util.MD5Util;
+import com.edu.viewentity.CustomerVO;
 
 /**
  * 客户管理controller
@@ -308,6 +309,22 @@ public class CustomerController {
 		CustomerBean customerBean = customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, customerid, null);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customer", customerBean);
+		return map;
+	}
+	
+
+	/**
+	 * 通过id获取customer
+	 * @param customer
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=getCustomervoByid")
+	public Map<String,Object> JsonGetCustomervoByid(@RequestParam(value="customerid")String customerid){
+		CustomerBean customerBean = customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, customerid, null);
+		CustomerVO customerVO = new CustomerVO(customerBean);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customer", customerVO);
 		return map;
 	}
 	

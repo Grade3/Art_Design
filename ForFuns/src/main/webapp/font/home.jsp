@@ -19,13 +19,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/home.css" rel="stylesheet" type="text/css" />
-	
-<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
-<style type="text/css">
-	.item_pic{width:100%;}
-	*{font-style: normal;}
-</style>
+	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
+	<style type="text/css">
+		.item_pic{width:100%;}
+		*{font-style: normal;}
+	</style>
 </head>
 <body>
 <a href="javascript:;" class="lanrenzhijia_top"></a>
@@ -285,10 +284,10 @@ $(document).ready(function(){
 						<ul class="megamenu skyblue">
 							<li><a href="home.jsp" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
 							<li><a href="goodslist.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
-							<li><a href="home.jsp"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
-							<li><a href="home.jsp"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
+							<li><a href="artistlist.jsp"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
 							<li><a href="newslist.jsp"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
-							<li><a href="home.jsp"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
 						</ul>
 					</div>
 					<div class="top-nav-xs visible-md">
@@ -299,10 +298,10 @@ $(document).ready(function(){
 							<ul>
 								<li><a href="home.jsp">首页</a></li>
 								<li><a href="goodslist.jsp">成品</a></li>
-								<li><a href="home.jsp">DIY</a></li>
-								<li><a href="home.jsp">艺术家</a></li>
+								<li><a href="home.html">DIY</a></li>
+								<li><a href="artistlist.jsp">艺术家</a></li>
 								<li><a href="newslist.jsp">资讯中心</a></li>
-								<li><a href="home.jsp">联系我们</a></li>
+								<li><a href="home.html">联系我们</a></li>
 							</ul>
 						</div>
 					</div>
@@ -310,10 +309,10 @@ $(document).ready(function(){
 						<ul class="megamenu skyblue">
 							<li><a href="home.jsp">首页</a></li>
 							<li><a href="goodslist.jsp">成品</a></li>
-							<li><a href="home.jsp">DIY</a></li>
-							<li><a href="home.jsp">艺术家</a></li>
+							<li><a href="home.html">DIY</a></li>
+							<li><a href="artistlist.jsp">艺术家</a></li>
 							<li><a href="newslist.jsp">资讯中心</a></li>
-							<li><a href="home.jsp">联系我们</a></li>
+							<li><a href="home.html">联系我们</a></li>
 						</ul>
 					</div>
 				</div>
@@ -404,7 +403,7 @@ $(document).ready(function(){
 					</div>
 				</div>
 				<div class="col-md-3 per col3">
-					<a href="Artist.html">
+					<a href="artistlist.jsp">
 						<img class="img-responsive" src="<%=basePath%>image/artist.png" >
 						<div class="six">
 							<h4>平台艺术家</br>专区 >></h4>
@@ -437,12 +436,12 @@ $(document).ready(function(){
 					<div>
 					<div class="col-top-bottom3">
 						<h3 class="news3">艺术品资讯专区</h3>
-						<a href="newslist.html" class="now-in">进 入</a>
+						<a href="newslist.jsp" class="now-in">进 入</a>
 					</div>
 					</div>
 				</div>
 				<div class="class25 per">
-					<a href="Artist.html">
+					<a href="artistlist.jsp">
 						<img class="img-responsive" src="<%=basePath%>image/artist.png" >
 						<div class="six3">
 							<h4>艺术家</br>专区 >></h4>
