@@ -10,4 +10,6 @@ import com.edu.model.UserBean;
 public interface IUserDao extends IBaseDao<UserBean>{
 	
 	public boolean isExist(UserBean user);
+	
+	public void TestNamedQuery();
 }

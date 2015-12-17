@@ -77,6 +77,11 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 				<value>com.edu.model</value>
 			</list> -->
 		</property>
+		<property name="mappingLocations">
+	     <list>
+	      <value>classpath:hbm/*.hbm.xml</value>
+	     </list>
+	    </property>
 	</bean>
 
 	<!-- 

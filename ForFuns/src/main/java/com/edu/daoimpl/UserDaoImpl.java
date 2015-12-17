@@ -5,6 +5,8 @@ package com.edu.daoimpl;
 
 
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
@@ -29,6 +31,13 @@ public class UserDaoImpl extends BaseDaoImpl<UserBean> implements IUserDao {
 		 }else{
 			 return false;
 		 }
+	}
+
+	@Override
+	public void TestNamedQuery() {
+		 Query queryNamed = getSession().getNamedQuery("UserqueryByName");
+		 List<UserBean> list = queryNamed.list();
+		 System.out.println(list.size());
 	}
 	
 	
