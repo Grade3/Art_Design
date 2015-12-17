@@ -7,6 +7,7 @@ import com.edu.model.CustomerBean;
 
 public class CustomerVO {
 	private Integer id;
+	private String userid;
 	private String name;
 	private String avator;
 	public CustomerVO(Integer id, String name, String avator) {
@@ -20,6 +21,7 @@ public class CustomerVO {
 		this.id = customerBean.getId();
 		this.name = customerBean.getUsername();
 		this.avator = customerBean.getAvator();
+		this.userid = customerBean.getUserid();
 	}
 	
 	public static List<CustomerVO> ChangeToList(List<CustomerBean> temp){
@@ -54,4 +56,11 @@ public class CustomerVO {
 	public void setAvator(String avator) {
 		this.avator = avator;
 	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	
 }

@@ -21,12 +21,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function GetArtistInfo(id){
 			$.ajax({
 				type:'post',
+				asycn:false,
 				url:'<%=basePath%>customer.do?method=getCustomervoByid',
 				data:{customerid:id},
 				success:function(json){
 					var customer = json.customer;
 					var name = customer.name;
 					var avator = customer.avator;
+					var artistid = customer.id;
+					var artistuserid = customer.userid;
+					var cookieuserid = getCookieUserid();					
+					if(null == cookieuserid){
+					}else if(cookieuserid==artistuserid){
+						$('.modify').show();
+						$('.beartist').show();
+					}else{
+						
+						$('.chat').show();
+						$('.chat').attr('href','<%=basePath%>font/chat.jsp?id='+artistid);
+					}
 					$('#avator').attr('src',avator);
 					$('#artistname').html(name);
 				},error:function(){
@@ -46,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					$('.lanrenzhijia_top').fadeIn(600);
 				}else{
 					$('.lanrenzhijia_top').fadeOut(600);
-				}
+				};
 			});
 			$(".lanrenzhijia_top").click(function(){
 				$("html,body").animate({scrollTop:0},500);
@@ -160,18 +173,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-xs-offset-4 col-xs-4 visible-lg">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
 					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
+					<a href="artistManage.html" target="_blank" class="col-xs-12 chat">联系艺术家</a>
 				</div>
 				<div class="col-xs-offset-3 col-xs-6 visible-md">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
 					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
+					<a href="artistManage.html"  target="_blank" class="col-xs-12 chat">联系艺术家</a>
 				</div>
 				<div class="col-xs-offset-2 col-xs-8 visible-sm">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
 					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
+					<a href="artistManage.html"  target="_blank" class="col-xs-12 chat">联系艺术家</a>
 				</div>
 				<div class="col-xs-offset-1 col-xs-10 visible-xs">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
 					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
+					<a href="artistManage.html"  target="_blank" class="col-xs-12 chat">联系艺术家</a>
 				</div>
 			</div>
 

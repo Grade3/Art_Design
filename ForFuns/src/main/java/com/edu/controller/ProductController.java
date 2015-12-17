@@ -204,6 +204,8 @@ public class ProductController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(null==customerBean)
+			return "redirect:/font/error.jsp";
 		int respons = 0;
 		try {
 			params.put(OrderTable.TELEPHONE, telephone);

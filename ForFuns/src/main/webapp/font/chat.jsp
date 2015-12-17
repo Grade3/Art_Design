@@ -18,6 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="../css/chat.css" media="screen" type="text/css" />
     <script type="text/javascript" src="../js/bootstrap.js"></script>
 	<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 	<script type="text/javascript">
 		KindEditor.ready(function(K) {
 			 window.editor =K.create('#editor_id', {
@@ -31,6 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	</script>
 	<script type="text/javascript">
+	  getCookieUserid();
   	  var userid = 1;
       var receiveid = 2;
       var websocket = null;

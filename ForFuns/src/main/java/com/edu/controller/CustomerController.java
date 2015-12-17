@@ -373,7 +373,7 @@ public class CustomerController {
 	@ResponseBody
 	@RequestMapping(params="method=getCustomervoByid")
 	public Map<String,Object> JsonGetCustomervoByid(@RequestParam(value="customerid")String customerid){
-		CustomerBean customerBean = customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, customerid, null);
+		CustomerBean customerBean = customerService.GetEntityById(CustomerBean.class, Integer.parseInt(customerid));
 		CustomerVO customerVO = new CustomerVO(customerBean);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customer", customerVO);

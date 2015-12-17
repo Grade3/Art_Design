@@ -15,7 +15,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 	<script src="../js/lanrenzhijia.js"></script>
+	<style type="text/css">
+		*{font-style: normal;}
+	</style>
 	<script type="text/javascript">
 	//获取上线新闻
 	function GetArtists(page,pageSize){
@@ -65,7 +69,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	};
 	$(document).ready(function(){
 		
-		
+		  $('#usernameaction').hide();
+		  $('#loginoutaction').hide();
+		  CheckUser();
 		  var page = 1;
 		  var pageSize = 12;
 		  var globaltotal = 0;
@@ -111,8 +117,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li ><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>			
+						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
+						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
+						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
+						<li id="loginoutaction"><a href="Login.jsp" ><i class="item_register"> </i>退出</a></li>			
 					</ul>
 				</div>
 			</div>
