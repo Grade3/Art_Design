@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50151
+Source Server         : localhost_3306
+Source Server Version : 50709
 Source Host           : localhost:3306
 Source Database       : forfun
 
 Target Server Type    : MYSQL
-Target Server Version : 50151
+Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2015-12-17 15:05:05
+Date: 2015-12-17 16:54:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -73,7 +73,7 @@ INSERT INTO `a_advert` VALUES ('5', '1', '抱歉,又被抽到了', 'fsafasf', 'k
 DROP TABLE IF EXISTS `c_customer`;
 CREATE TABLE `c_customer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `userid` varchar(50) NOT NULL,
   `username` varchar(50) CHARACTER SET utf8 NOT NULL,
   `password` varchar(50) CHARACTER SET utf8 NOT NULL,
   `personnumber` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE `c_customer` (
   `avator` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `isartist` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of c_customer
@@ -90,6 +90,7 @@ CREATE TABLE `c_customer` (
 INSERT INTO `c_customer` VALUES ('1', '1', 'christy', '123456', '3506811111111', '11111', 'gy', '/forfun/newsupload/1449304402174.JPG', '1');
 INSERT INTO `c_customer` VALUES ('2', '2', '1233', '12', '12', '12', '12', '/forfun/newsupload/1449304402174.JPG', '0');
 INSERT INTO `c_customer` VALUES ('3', '12212', '12', '213', '213', '13', '131', '/forfun/newsupload/1449304402174.JPG', '1');
+INSERT INTO `c_customer` VALUES ('4', 'mhzx20', 'kh', '123456', '32108819951117001X', '13666095971', 'kh', '/forfun/image/293.jpg', null);
 
 -- ----------------------------
 -- Table structure for ea_examineartist
@@ -158,11 +159,17 @@ CREATE TABLE `m_message` (
   KEY `FK_e355tkrguo7feiycq7xognthk` (`toid`),
   CONSTRAINT `FK_e355tkrguo7feiycq7xognthk` FOREIGN KEY (`toid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_fdblrv579vjxw47ivyxi57orl` FOREIGN KEY (`fromid`) REFERENCES `c_customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of m_message
 -- ----------------------------
+INSERT INTO `m_message` VALUES ('17', '1', '2', 'sdfsfsdf', '2015-12-17 16:04:58', '1');
+INSERT INTO `m_message` VALUES ('18', '2', '1', '4444', '2015-12-17 16:05:01', '1');
+INSERT INTO `m_message` VALUES ('19', '1', '2', '<img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/18.gif\" border=\"0\" alt=\"\" />', '2015-12-17 16:05:04', '1');
+INSERT INTO `m_message` VALUES ('20', '2', '1', '<img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/43.gif\" border=\"0\" alt=\"\" />', '2015-12-17 16:05:07', '1');
+INSERT INTO `m_message` VALUES ('21', '1', '2', '<img src=\"/forfun/newsupload/1450339515602.JPG\" alt=\"\" />', '2015-12-17 16:05:17', '1');
+INSERT INTO `m_message` VALUES ('22', '1', '2', '<img src=\"/forfun/newsupload/1450339528978.JPG\" alt=\"\" width=\"300\" height=\"228\" title=\"\" align=\"\" />', '2015-12-17 16:05:37', '1');
 
 -- ----------------------------
 -- Table structure for n_news
@@ -228,12 +235,12 @@ CREATE TABLE `o_order` (
   KEY `FK_t89xec3n0adjmtyfww6eow4wc` (`productid`),
   CONSTRAINT `FK_6k0uxsm9w1hjnp1muvkrkfef9` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_t89xec3n0adjmtyfww6eow4wc` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of o_order
 -- ----------------------------
-INSERT INTO `o_order` VALUES ('6', '1', '1', '342432234', '234234', '2015-12-17', '1');
+INSERT INTO `o_order` VALUES ('7', '1', '1', '1234567', '12345678', '2015-12-17', '1');
 
 -- ----------------------------
 -- Table structure for pm_productmoney
@@ -323,10 +330,10 @@ CREATE TABLE `p_product` (
 -- ----------------------------
 -- Records of p_product
 -- ----------------------------
-INSERT INTO `p_product` VALUES ('1', 'kh', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-06', '2015-12-08', '1', '1', '1', '1', '1', '3');
-INSERT INTO `p_product` VALUES ('2', 'lxn', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-05', '2015-12-29', '1', '1', '1', '1', '1', '1');
-INSERT INTO `p_product` VALUES ('3', 'gy', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-13', '2015-12-31', '1', '1', '1', '1', '1', '1');
-INSERT INTO `p_product` VALUES ('4', 'wlx', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-07', '2015-12-31', '1', '1', '1', '1', '1', '1');
+INSERT INTO `p_product` VALUES ('1', 'kh', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-06', '2015-12-08', '1', '非卖品', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '3');
+INSERT INTO `p_product` VALUES ('2', 'lxn', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-05', '2015-12-29', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '1');
+INSERT INTO `p_product` VALUES ('3', 'gy', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-13', '2015-12-31', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '1');
+INSERT INTO `p_product` VALUES ('4', 'wlx', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-07', '2015-12-31', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '1');
 
 -- ----------------------------
 -- Table structure for rf_rolefunction
@@ -447,7 +454,8 @@ DELIMITER ;
 -- ----------------------------
 DROP EVENT IF EXISTS `TimeOutEvent`;
 DELIMITER ;;
-CREATE EVENT `TimeOutEvent` ON SCHEDULE EVERY 1 SECOND STARTS '2015-11-27 21:43:51' ON COMPLETION NOT PRESERVE ENABLE DO CALL TimeOut
+CREATE DEFINER=`root`@`localhost` EVENT `TimeOutEvent` ON SCHEDULE EVERY 1 SECOND STARTS '2015-11-27 21:43:51' ON COMPLETION NOT PRESERVE ENABLE DO CALL TimeOut
+;
 ;;
 DELIMITER ;
 DROP TRIGGER IF EXISTS `ALERTSTUATION`;
