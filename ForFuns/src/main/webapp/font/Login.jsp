@@ -71,8 +71,8 @@ $(document).ready(function(){
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li ><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>			
+						<li ><a href="<%=basePath%>font/Login.jsp" ><i class="item_login"> </i>登陆</a></li>
+						<li ><a href="<%=basePath%>font/Register.jsp" ><i class="item_register"> </i>注册账号</a></li>			
 					</ul>
 				</div>
 			</div>
@@ -156,7 +156,7 @@ $(document).ready(function(){
 				</div>
 				<div class="form-group">
 					<div class="col-xs-offset-2 col-xs-10 input_div">
-						<p class="label_link"><a href="Register.jsp">注册新账号 >></a></p>
+						<p class="label_link"><a href="<%=basePath%>font/Register.jsp">注册新账号 >></a></p>
 						<p class="label_error" id="errormessage" style="display:none;">用户名或密码错误！</p>
 					</div>
 				</div>

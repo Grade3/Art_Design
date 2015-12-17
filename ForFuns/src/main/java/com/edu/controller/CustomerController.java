@@ -116,6 +116,7 @@ public class CustomerController {
 			@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "realname", required = false) String realname,
 			@RequestParam(value = "telphone", required = false) String telphone,
+			@RequestParam(value = "password", required = false) String password,
 			@RequestParam(value = "personnumber", required = false) String personnumber, HttpServletRequest request,
 			HttpServletResponse response, @CookieValue(value = "token", required = false) String token) {
 		// if (null != token) {
@@ -135,20 +136,22 @@ public class CustomerController {
 		if (userid.equals("") || username.equals("") || realname.equals("") || telphone.equals("")
 				|| personnumber.equals(""))
 			registFlag = 1;
-		if (registFlag == 0) {
+		if (registFlag == 0) 
+		{
 			user.setUserid(userid);
-			if (customerService.exist(user)) {
+			if (customerService.exist(user)) 
+			{
 				registFlag = 3;
 				System.out.println("重名！");
-			} else
-				registFlag = 2;
+			} 
 		}
 		if (registFlag == 0) {
 			user.setUsername(username);
 			user.setPersonnumber(personnumber);
 			user.setRealname(realname);
 			user.setTelphone(telphone);
-
+			user.setPassword(password);
+			user.setAvator("/forfun/image/293.jpg");
 			System.out.println(user.toString());
 
 			customerService.AddBean(user);
@@ -166,7 +169,7 @@ public class CustomerController {
 			return "redirect:/font/personal.jsp";
 		}
 		// 用户名重复
-		if (registFlag == 2)
+		if (registFlag == 3)
 			return "redirect:/font/Register.jsp?error=2";
 		// 没填全
 		else
