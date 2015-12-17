@@ -78,6 +78,7 @@ function CheckUser(){
 		}
 	});
 }
+
 $(document).ready(function(){
 	$('#usernameaction').hide();
 	$('#loginoutaction').hide();
@@ -91,6 +92,35 @@ $(document).ready(function(){
 	}
 	var index = useridtoken.indexOf("&");
 	var id =  useridtoken.substring(0,index);//拿到了  在这里   id
+	
+	$.ajax({
+		type:'post',
+		url:'<%=basePath%>/customer.do?method=getCustomerByUserid',
+				data : {
+					customerid : id
+				},
+				success : function(json) {
+					var customer = json.customer;
+					var userid = customer.userid;
+					var username = customer.username;
+					var personnumber = customer.personnumber;
+					var telphone = customer.telphone;
+					var realname = customer.realname;
+					var avator = customer.avator;
+					var isartist = customer.isartist;
+
+					alert(userid+" "+username+" "+personnumber+" "+telphone+" "+realname);
+
+					$('#username').val(username);
+					$('#userid').val(userid);
+					$('#personnumber').val(personnumber);
+					$('#telphone').val(telphone);
+					$('#realname').val(realname);
+				},
+				error : function() {
+
+				}
+			});
 	
   	$('#username').live('click',function(){
   		var useridtoken = getCookie("useridtoken");
@@ -225,15 +255,15 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">真实姓名</p>
-							<input type="text" class="col-xs-8" value="真实姓名">
+							<input type="text" class="col-xs-8" id="realname" value="真实姓名">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">身份证</p>
-							<input type="text" class="col-xs-8" value="123123133313131323">
+							<input type="text" class="col-xs-8" id="personnumber" value="123123133313131323">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">手机</p>
-							<input type="text" class="col-xs-8" value="12312341234">
+							<input type="text" class="col-xs-8" id="telphone" value="12312341234">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">支付宝</p>
@@ -253,12 +283,12 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">真实姓名</p>
-							<input type="text" class="col-xs-8" name="realname" value="孔日天">
+							<input type="text" class="col-xs-8"  name="realname" value="孔日天">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">身份证</p>
-							<input type="text" class="col-xs-8" name="personnumber"
-								value="123123133313131323">
+							<input type="text" class="col-xs-8"  name="personnumber"
+								value="66666">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">手机</p>
@@ -272,7 +302,7 @@ $(document).ready(function(){
 						</div>
 						<div class="row info info2">
 							<p class="col-xs-4">擅长领域</p>
-							<input type="text" class="col-xs-8" name="goodat"
+							<input type="text" class="col-xs-8"  name="goodat"
 								placeholder="请输入您擅长的艺术领域">
 						</div>
 					</div>
