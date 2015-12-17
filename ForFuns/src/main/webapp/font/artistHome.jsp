@@ -14,65 +14,69 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="../css/artistHome.css">
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
+	<script src="../js/lanrenzhijia.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
+	<script type="text/javascript">
+		function GetArtistInfo(id){
+			$.ajax({
+				type:'post',
+				url:'<%=basePath%>customer.do?method=getCustomervoByid',
+				data:{customerid:id},
+				success:function(json){
+					alert(json);
+				},error:function(){
+					
+				}
+			});
+		}
+		$(document).ready(function(){
+			$('#usernameaction').hide();
+			$('#loginoutaction').hide();
+			var id = getUrlParam("id");
+			GetArtistInfo(id);
+			CheckUser();
+			$(window).scroll(function(){
+				var _top = $(window).scrollTop();
+				if(_top>300){
+					$('.lanrenzhijia_top').fadeIn(600);
+				}else{
+					$('.lanrenzhijia_top').fadeOut(600);
+				}
+			});
+			$(".lanrenzhijia_top").click(function(){
+				$("html,body").animate({scrollTop:0},500);
+			});
+			$("#menu").click(function(){
+			  $("#menu-xs").toggle(300);
+			});
+			var width = $(".userpic").width();
+			var height = width;
+			$(".userpic").height(height);
+			$(window).resize(function() {
+				var width = $(".userpic").width();
+				var height = width;
+				$(".userpic").height(height);
+			});
+			var width = $(".good_item").width();
+			var height = width/2.5*3;
+		  	$(".good_item").height(height);
+
+		  	$(window).resize(function() {
+		  		var width = $(".good_item").width();
+				var height = width/2.5*3;
+		  		$(".good_item").height(height);
+		  	});
+		  
+		});
+	</script>
+	<style type="text/css">
+		*{font-style: normal;}
+	</style>
 </head>
 <body>
 
 <a href="javascript:;" class="lanrenzhijia_top"></a>
-<script src="../js/lanrenzhijia.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
-<script>
-$(function(){
-	$(window).scroll(function(){
-		var _top = $(window).scrollTop();
-		if(_top>300){
-			$('.lanrenzhijia_top').fadeIn(600);
-		}else{
-			$('.lanrenzhijia_top').fadeOut(600);
-		}
-	});
-	$(".lanrenzhijia_top").click(function(){
-		$("html,body").animate({scrollTop:0},500);
-	});
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-  $("#menu").click(function(){
-  $("#menu-xs").toggle(300);
-  });
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	var width = $(".userpic").width();
-	var height = width;
-	$(".userpic").height(height);
-
-	$(window).resize(function() {
-		var width = $(".userpic").width();
-		var height = width;
-		$(".userpic").height(height);
-	});
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	var width = $(".good_item").width();
-	var height = width/2.5*3;
-  	$(".good_item").height(height);
-
-  	$(window).resize(function() {
-  		var width = $(".good_item").width();
-		var height = width/2.5*3;
-  		$(".good_item").height(height);
-  	});
-  
-});
-</script>
-
 	<div class="header-top">
 			<div class="container">
 				<div class="statu_bar">
@@ -81,8 +85,10 @@ $(document).ready(function(){
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li ><a href="Login.html" ><i class="item_login"> </i>登陆</a></li>
-						<li ><a href="Register.html" ><i class="item_register"> </i>注册账号</a></li>			
+						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
+						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
+						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
+						<li id="loginoutaction"><a href="<%=basePath %>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
 					</ul>
 				</div>
 			</div>

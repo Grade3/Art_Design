@@ -19,13 +19,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/home.css" rel="stylesheet" type="text/css" />
-	
-<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
-<style type="text/css">
-	.item_pic{width:100%;}
-	*{font-style: normal;}
-</style>
+	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
+	<style type="text/css">
+		.item_pic{width:100%;}
+		*{font-style: normal;}
+	</style>
 </head>
 <body>
 <a href="javascript:;" class="lanrenzhijia_top"></a>
