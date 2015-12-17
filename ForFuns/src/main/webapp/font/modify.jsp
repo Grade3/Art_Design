@@ -161,7 +161,6 @@ function validate()
 	<script type="text/javascript">
 		$(document).ready(function() {
 			GetUser();
-
 			var width = $(".userpic").width();
 			var height = width;
 			$(".userpic").height(height);
@@ -228,11 +227,11 @@ function validate()
 				</div>
 				<div class="top-nav visible-lg">
 					<ul class="megamenu skyblue">
-						<li><a href="home.jsp">首页</a></li>
-						<li><a href="goodslist.jsp">成品</a></li>
+						<li><a href="home.html">首页</a></li>
+						<li><a href="home.html">成品</a></li>
 						<li><a href="home.html">DIY</a></li>
-						<li><a href="artistlist.jsp">艺术家</a></li>
-						<li><a href="newslist.jsp">资讯中心</a></li>
+						<li><a href="home.html">艺术家</a></li>
+						<li><a href="newslist.html">资讯中心</a></li>
 						<li><a href="home.html">联系我们</a></li>
 					</ul>
 				</div>
@@ -344,7 +343,6 @@ function validate()
 						</div>
 					</div>
 				</form>
-
 			</div>
 
 		</div>

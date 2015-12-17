@@ -65,6 +65,7 @@ public class CustomerController {
 			@RequestParam(value = "password", required = false) String password, HttpServletRequest request,
 			HttpServletResponse response, @CookieValue(value = "useridtoken", required = false) String token) {
 		if (null != token) {
+			// System.out.println("get id");
 			if (null == userid) {
 				System.out.println(token);
 				String[] parts = token.split("\\&");
@@ -112,8 +113,6 @@ public class CustomerController {
 	 */
 	@RequestMapping(params = "method=register")
 	public String register(@RequestParam(value = "userid", required = false) String userid,
-			@RequestParam(value = "password", required = false) String password,
-			@RequestParam(value = "confirm_password", required = false) String confirm_password,
 			@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "realname", required = false) String realname,
 			@RequestParam(value = "telphone", required = false) String telphone,
@@ -133,28 +132,25 @@ public class CustomerController {
 		// }
 		CustomerBean user = new CustomerBean();
 		int registFlag = 0;
-		if (userid.equals("") || password.equals("") || confirm_password.equals("") || username.equals("")
-				|| realname.equals("") || telphone.equals("") || personnumber.equals(""))
+		if (userid.equals("") || username.equals("") || realname.equals("") || telphone.equals("")
+				|| personnumber.equals(""))
 			registFlag = 1;
-		if (!password.equals(confirm_password))
-			registFlag = 2;
-
-
 		if (registFlag == 0) {
 			user.setUserid(userid);
-			if(customerService.exist(user)){registFlag = 3;System.out.println("重名！");}
-			else registFlag=4;
+			if (customerService.exist(user)) {
+				registFlag = 3;
+				System.out.println("重名！");
+			} else
+				registFlag = 2;
 		}
-		if (registFlag == 4) {
-			user.setId(customerService.countCustomer() + 1);
-			user.setPassword(password);
-			user.setUserid(userid);
+		if (registFlag == 0) {
 			user.setUsername(username);
 			user.setPersonnumber(personnumber);
 			user.setRealname(realname);
 			user.setTelphone(telphone);
-			user.setIsartist(0);
+
 			System.out.println(user.toString());
+
 			customerService.AddBean(user);
 
 			String temp = null;
@@ -167,22 +163,19 @@ public class CustomerController {
 			System.out.println(value);
 			Cookie cookie = new Cookie("useridtoken", value);
 			response.addCookie(cookie);
-			return "redirect:/font/Login.jsp";
+			return "redirect:/font/personal.jsp";
 		}
-		//密码不同
+		// 用户名重复
 		if (registFlag == 2)
 			return "redirect:/font/Register.jsp?error=2";
-		//用户名重复
-		if (registFlag == 3)
-			return "redirect:/font/Register.jsp?error=3";
-		//没填全
+		// 没填全
 		else
 			return "redirect:/font/Register.jsp?error=1";
 
 	}
 
 	/**
-	 * 注册功能
+	 * 修改个人信息功能
 	 * 
 	 * @param userid
 	 * @param password
@@ -193,20 +186,79 @@ public class CustomerController {
 	 * @param personnumber
 	 * @return
 	 */
+	@RequestMapping(params = "method=modify")
+	public String modify(
+			@RequestParam(value = "username", required = false) String username,
+			@RequestParam(value = "realname", required = false) String realname,
+			@RequestParam(value = "telphone", required = false) String telphone,
+			@RequestParam(value = "personnumber", required = false) String personnumber, HttpServletRequest request,
+			HttpServletResponse response, @CookieValue(value = "useridtoken", required = false) String token) {
+		String userid = null;
+		if (null != token) {
+			if (null == userid) {
+				System.out.println(token);
+				String[] parts = token.split("\\&");
+				System.out.println(parts.length);
+				String temp = MD5Util.convertMD5(parts[1]);
+				System.out.println(temp);
+				userid=temp;
+			}
+		}
+//		CustomerBean user = new CustomerBean();
+		int registFlag = 0;
+		if (userid.equals("") || username.equals("")
+				|| realname.equals("") || telphone.equals("") || personnumber.equals(""))
+			registFlag = 1;
+
+		if (registFlag == 0) {
+			//System.out.println("a");
+			System.out.println(customerService.getCustomerIdByUserid(userid));
+			CustomerBean user = customerService.GetEntityById(CustomerBean.class, Integer.valueOf(customerService.getCustomerIdByUserid(userid)));
+			System.out.println(user.toString());
+//			user.setUserid(userid);
+			user.setUsername(username);
+			user.setPersonnumber(personnumber);
+			user.setRealname(realname);
+			user.setTelphone(telphone);
+			System.out.println(user.toString());
+			customerService.UpdataBean(user);
+
+//			String temp = null;
+//			try {
+//				temp = URLEncoder.encode(MD5Util.convertMD5(userid), "utf-8");
+//			} catch (UnsupportedEncodingException e) {
+//				e.printStackTrace();
+//			}
+//			String value = userid + "&" + temp;
+//			System.out.println(value);
+//			Cookie cookie = new Cookie("useridtoken", value);
+//			response.addCookie(cookie);
+			
+			return "redirect:/font/personal.jsp";
+		}
+		// 没填全
+		else
+			return "redirect:/font/modify.jsp?error=1";
+
+	}
+
+	/**
+	 * 功能
+	 * 
+	 * @return
+	 */
 	@RequestMapping(params = "method=checkUserid")
-	public Boolean isExist(@RequestParam(value = "userid", required = false) String userid)
-	{
+	public Boolean isExist(@RequestParam(value = "userid", required = false) String userid) {
 		CustomerBean user = new CustomerBean();
 
 		user.setUserid(userid);
-		if(customerService.exist(user))
-		{
+		if (customerService.exist(user)) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * 添加用户
 	 * 
@@ -330,15 +382,17 @@ public class CustomerController {
 	
 	/**
 	 * 通过id获取username
+	 * 
 	 * @param username
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(params="method=GetCustomerName",produces="text/html;charset=UTF-8")
-	public String JsonGetUserName(@RequestParam(value="customerid")String customerid){
-		return customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, customerid, null).getUsername();
+	@RequestMapping(params = "method=GetCustomerName", produces = "text/html;charset=UTF-8")
+	public String JsonGetUserName(@RequestParam(value = "customerid") String customerid) {
+		return customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, customerid, null)
+				.getUsername();
 	}
-	
+
 	/**
 	 * 获取分页列表
 	 * 
@@ -348,14 +402,13 @@ public class CustomerController {
 	 */
 	@RequestMapping(params = "method=getCustomerbypage")
 	@ResponseBody
-	public Map<String, Object> JsonGetPageCustomer(
-			@RequestParam(value = "page") int page,
+	public Map<String, Object> JsonGetPageCustomer(@RequestParam(value = "page") int page,
 			@RequestParam(value = "rows") int pageSize,
-			@RequestParam(value="selectname",defaultValue="id")String selectname,
-			@RequestParam(value="value",defaultValue="")String value) {
+			@RequestParam(value = "selectname", defaultValue = "id") String selectname,
+			@RequestParam(value = "value", defaultValue = "") String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<CustomerBean> list = customerService.GetPageBeanFilter(CustomerBean.class, page,
-				pageSize,selectname,value);
+		List<CustomerBean> list = customerService.GetPageBeanFilter(CustomerBean.class, page, pageSize, selectname,
+				value);
 		int total = customerService.GetPageBeanFilterTotal(CustomerBean.class, page, pageSize, selectname, value);
 		map.put("rows", list);
 		map.put("total", total);

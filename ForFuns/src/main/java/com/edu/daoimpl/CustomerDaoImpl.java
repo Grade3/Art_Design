@@ -50,6 +50,17 @@ public class CustomerDaoImpl extends BaseDaoImpl<CustomerBean> implements ICusto
 		 }
 	}
 
+	@Override
+	public String  getIdbyUserid(String userid) {
+		// TODO Auto-generated method stub
+		String hql ="select id from CustomerBean where userid=?";
+		Query query = getSession().createQuery(hql);
+		 query.setString(0, userid);
+		 int i = ((Number)query.uniqueResult()).intValue();  
+		 return  Integer.toString(i);
+	}
+
+
 	
 	
 
