@@ -78,7 +78,7 @@ function GetUser()
 						$('#showme_div').hide();
 						$('#advantage_div').hide();
 					}
-
+					$('#avator').attr('src',avator);
 					$('#username').val(username);
 					$('#userid').val(userid);
 					$('#personnumber').val(personnumber);

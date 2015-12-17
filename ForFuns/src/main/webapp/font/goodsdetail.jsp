@@ -51,8 +51,8 @@ function getProductById(id){
 			var timeout = myformatter(product.timeout);
 			$('#imgurl').attr("src",imgurl);
 			$('#imgone').attr("src",imgone);
-			$('#imgtwo').attr("src",imgthree);
-			$('#imgthree').attr("src",imgurl);
+			$('#imgtwo').attr("src",imgtwo);
+			$('#imgthree').attr("src",imgthree);
 			$('#timestart').html(timestart);
 			$('#timeout').html(timeout);
 			$('#name').html(name);
@@ -139,15 +139,15 @@ $(document).ready(function(){
 	$('#loginoutaction').hide();
 	CheckUser();
   	$(".pic1").click(function() {
-  		var src1 = $(this).attr("id");
+  		var src1 = $(this).attr("src");
   		$(".pic").attr("src",src1);
   	});
   	$(".pic2").click(function() {
-  		var src2 = $(this).attr("id");
+  		var src2 = $(this).attr("src");
   		$(".pic").attr("src",src2);
   	});
   	$(".pic3").click(function() {
-  		var src3 = $(this).attr("id");
+  		var src3 = $(this).attr("src");
   		$(".pic").attr("src",src3);
   	});
 });
@@ -164,7 +164,7 @@ $(document).ready(function(){
 						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
 						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
 						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
-						<li id="loginoutaction"><a href="<%=basePath %>>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
+						<li id="loginoutaction"><a href="<%=basePath %>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
 					</ul>
 				</div>
 			</div>
