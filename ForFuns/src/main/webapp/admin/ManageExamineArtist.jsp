@@ -51,9 +51,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			]],
 			columns: [[
 				{field:'id',title:'ID',sortable:true,width:80,sortable:true,},
-				{field:'title',title:'内容',sortable:true,width:120,sortable:true,
+				{field:'userid',title:'申请人',sortable:true,width:120,sortable:true,
 				},
-				{field:'situation',title:'审核状态',sortable:true,width:120,sortable:true,
+				{field:'realname',title:'真实姓名',sortable:true,width:120,sortable:true,
+				},
+				{field:'telphone',title:'联系方式',sortable:true,width:120,sortable:true,
+				},
+				{field:'personnumber',title:'身份证',sortable:true,width:120,sortable:true,
+				},
+				{field:'paymode',title:'支付宝',sortable:true,width:120,sortable:true,
+				},
+				{field:'goodat',title:'擅长领域',sortable:true,width:120,sortable:true,
+				},
+				{field:'suggestion',title:'审核状态',sortable:true,width:120,sortable:true,
 					formatter:function(value,row,index){
 						if (value == 0 ){
 							return '未审核';

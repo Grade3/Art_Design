@@ -21,8 +21,10 @@ import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.edu.model.CustomerBean;
 import com.edu.model.ExamineArtistBean;
 import com.edu.model.UserBean;
+import com.edu.service.ICustomerService;
 import com.edu.service.IExamineArtistService;
 import com.edu.service.IUserService;
 
@@ -43,6 +45,8 @@ public class ExamineArtistController implements ServletConfigAware,ServletContex
     
 	@Resource
 	private IExamineArtistService examineartistService;
+	@Resource
+	private ICustomerService customerService;
 	@Resource
 	private  IUserService userService;
 	
@@ -81,10 +85,19 @@ public class ExamineArtistController implements ServletConfigAware,ServletContex
 			@RequestParam(value="suggestion")String suggestion){
 		ExamineArtistBean examineartistBean = examineartistService.GetEntityById(ExamineArtistBean.class, examineartistid);
 		examineartistBean.setSuggestion(Integer.toString(situation));
-		if(situation==1)
+		if(situation==1){
 			examineartistBean.setSuggestion("1");
+			String id=customerService.getCustomerIdByUserid(examineartistBean.getUserid().toString());
+			CustomerBean customer = customerService.GetEntityById(CustomerBean.class, Integer.valueOf(id));
+			customer.setIsartist(1);
+			customerService.UpdataBean(customer);
+			}
 		else {
 			examineartistBean.setSuggestion("2");
+			String id=customerService.getCustomerIdByUserid(examineartistBean.getUserid().toString());
+			CustomerBean customer = customerService.GetEntityById(CustomerBean.class, Integer.valueOf(id));
+			customer.setIsartist(0);
+			customerService.UpdataBean(customer);
 		}
 		try{
 			examineartistService.UpdataBean(examineartistBean);
