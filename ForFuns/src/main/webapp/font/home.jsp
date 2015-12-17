@@ -284,7 +284,7 @@ $(document).ready(function(){
 					<div class="top-nav visible-xs visible-sm">
 						<ul class="megamenu skyblue">
 							<li><a href="home.jsp" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
-							<li><a href="home.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
+							<li><a href="goodslist.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
 							<li><a href="home.jsp"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
 							<li><a href="home.jsp"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
 							<li><a href="newslist.jsp"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
@@ -298,7 +298,7 @@ $(document).ready(function(){
 						<div id="menu-xs">
 							<ul>
 								<li><a href="home.jsp">首页</a></li>
-								<li><a href="home.jsp">成品</a></li>
+								<li><a href="goodslist.jsp">成品</a></li>
 								<li><a href="home.jsp">DIY</a></li>
 								<li><a href="home.jsp">艺术家</a></li>
 								<li><a href="newslist.jsp">资讯中心</a></li>
@@ -309,7 +309,7 @@ $(document).ready(function(){
 					<div class="top-nav visible-lg">
 						<ul class="megamenu skyblue">
 							<li><a href="home.jsp">首页</a></li>
-							<li><a href="home.jsp">成品</a></li>
+							<li><a href="goodslist.jsp">成品</a></li>
 							<li><a href="home.jsp">DIY</a></li>
 							<li><a href="home.jsp">艺术家</a></li>
 							<li><a href="newslist.jsp">资讯中心</a></li>
@@ -379,7 +379,7 @@ $(document).ready(function(){
 				<div class="col-md-9 col9">
 					<div class="col-top">
 						<div class="col-md-6 black">
-							<a href="Arts.html">
+							<a href="goodslist.jsp">
 								<div class="arts">
 									<h3>艺术品成品</br>专区 >></h3>
 								</div>
@@ -399,7 +399,7 @@ $(document).ready(function(){
 					<div class="col-top-bottom">
 						<h3 class="news visible-lg">ArtCostomize艺术品资讯专区</h3>
 						<h3 class="news visible-md">艺术品资讯专区</h3>
-						<a href="newslist.html" class="now-in">进 入</a>
+						<a href="newslist.jsp" class="now-in">进 入</a>
 					</div>
 					</div>
 				</div>
@@ -418,7 +418,7 @@ $(document).ready(function(){
 				<div class="class75">
 					<div class="col-top">
 						<div class="class50 black">
-							<a href="Arts.html">
+							<a href="goodslist.jsp">
 								<div class="arts3">
 									<h3>艺术品成品</br>专区 >></h3>
 								</div>

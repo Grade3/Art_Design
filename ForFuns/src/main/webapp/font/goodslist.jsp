@@ -167,7 +167,7 @@ $(document).ready(function(){
 					<ul class="support-right">
 						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
 						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
-						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
+						<li id="usernameaction"><a href="personal.jsp" id="username"><i class="item_login"/></a></li>
 						<li id="loginoutaction"><a href="<%=basePath %>>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
 					</ul>
 				</div>
@@ -179,8 +179,8 @@ $(document).ready(function(){
 					</div>
 					<div class="top-nav visible-xs visible-sm">
 						<ul class="megamenu skyblue">
-							<li><a href="home.html" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
-							<li><a href="home.html"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
+							<li><a href="home.jsp" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
+							<li><a href="goodslist.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
 							<li><a href="home.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
 							<li><a href="home.html"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
 							<li><a href="newslist.html"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
@@ -193,22 +193,22 @@ $(document).ready(function(){
 						</div>
 						<div id="menu-xs">
 							<ul>
-								<li><a href="home.html">首页</a></li>
-								<li><a href="home.html">成品</a></li>
+								<li><a href="home.jsp">首页</a></li>
+								<li><a href="goodslist.jsp">成品</a></li>
 								<li><a href="home.html">DIY</a></li>
 								<li><a href="home.html">艺术家</a></li>
-								<li><a href="newslist.html">资讯中心</a></li>
+								<li><a href="newslist.jsp">资讯中心</a></li>
 								<li><a href="home.html">联系我们</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="top-nav visible-lg">
 						<ul class="megamenu skyblue">
-							<li><a href="home.html">首页</a></li>
-							<li><a href="home.html">成品</a></li>
+							<li><a href="home.jsp">首页</a></li>
+							<li><a href="goodslist.jsp">成品</a></li>
 							<li><a href="home.html">DIY</a></li>
 							<li><a href="home.html">艺术家</a></li>
-							<li><a href="newslist.html">资讯中心</a></li>
+							<li><a href="newslist.jsp">资讯中心</a></li>
 							<li><a href="home.html">联系我们</a></li>
 						</ul>
 					</div>
