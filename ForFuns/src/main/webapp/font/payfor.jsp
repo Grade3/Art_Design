@@ -78,8 +78,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					//alert(json);
 					if(json==0){
 						//window.open("Login.jsp");
-						var newTab=window.open('about:blank');
-						newTab.location.href="Login.jsp";
+						//var newTab=window.open('about:blank');
+						//newTab.location.href="Login.jsp";
+						location.href="<%=basePath%>font/Login.jsp";
 					}else if(json==3){
 						location.href="<%=basePath%>font/error.jsp";
 						//跳转到错误页面

@@ -225,7 +225,7 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">真实姓名</p>
-							<input type="text" class="col-xs-8" value="孔日天">
+							<input type="text" class="col-xs-8" value="真实姓名">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">身份证</p>

@@ -75,7 +75,7 @@ function GetUser()
 				$('#showme_div').hide();
 				$('#advantage_div').hide();
 			}
-			
+			$('#avator').attr('src',avator);
 			$('#username').html(username);
 			$('#userid').html(userid);
 			$('#personnumber').html(personnumber);
@@ -188,19 +188,19 @@ $(document).ready(function(){
 				</div>
 				<div class="row person_btn">
 					<div class="col-xs-offset-4 col-xs-4 visible-lg">
-						<a href="BeArtist.html" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
+						<a href="BeArtist.jsp" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
 						<a  href="modify.jsp" class="col-xs-5 readmore modify">修改个人信息</a>
 					</div>
 					<div class="col-xs-offset-3 col-xs-6 visible-md">
-						<a href="BeArtist.html" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
+						<a href="BeArtist.jsp" class="col-xs-5 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
 						<a href="modify.jsp" class="col-xs-5 readmore modify">修改个人信息</a>
 					</div>
 					<div class="col-xs-12 visible-sm btn-xs">
-						<a href="BeArtist.html" class="col-xs-6 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
+						<a href="BeArtist.jsp" class="col-xs-6 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
 						<a href="modify.jsp" class="col-xs-6 readmore modify">修改个人信息</a>
 					</div>
 					<div class="col-xs-12 visible-xs btn-xs">
-						<a href="BeArtist.html" class="col-xs-6 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
+						<a href="BeArtist.jsp" class="col-xs-6 readmore beartist">申请成为艺术家<!--我的个人主页--></a>
 						<a href="modify.jsp" class="col-xs-6 readmore modify">修改个人信息</a>
 					</div>
 				</div>
@@ -275,10 +275,6 @@ $(document).ready(function(){
 				</div>
 			</div>
 			
-
-			
-
-
 				
 		</div>
 	</div>
