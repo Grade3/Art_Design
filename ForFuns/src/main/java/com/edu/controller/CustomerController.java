@@ -361,6 +361,7 @@ public class CustomerController {
 		CustomerBean customerBean = customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, customerid, null);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customer", customerBean);
+		System.out.println(customerid);
 		return map;
 	}
 	
