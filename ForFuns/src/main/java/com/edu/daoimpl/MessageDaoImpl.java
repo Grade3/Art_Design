@@ -1,5 +1,6 @@
 package com.edu.daoimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -30,6 +31,24 @@ public class MessageDaoImpl extends BaseDaoImpl<MessageBean> implements IMessage
 		String sql = "update "+MessageTable.TABLENAME+" set "+MessageTable.ISREAD+"=1 where "+MessageTable.FROMID+"="+sendid+" and "+ MessageTable.TOID+"="+fromid+" and "+MessageTable.ID+"<= "+messageid;
 		this.sqlWithNone(sql);
 		return true;
+	}
+
+	@Override
+	public List<MessageBean> getUserUnReadMessage(Integer id) {
+		String sql = "SELECT * from "+MessageTable.TABLENAME+" where id in(select  max(id)  from "+MessageTable.TABLENAME+" where "+MessageTable.TOID+" =? GROUP BY "+MessageTable.FROMID+" )";
+		//String sql ="from MessageBean  group by fromid=1";
+		Query query = getSession().createSQLQuery(sql);
+		query.setInteger(0, id);
+		List<Object[]> list = query.list();
+		if(list.size()==0)
+			return null;
+		List<MessageBean> result = new ArrayList<MessageBean>();
+		for(int i=0;i<list.size();i++){
+			Object[] object = list.get(0);
+			MessageBean messageBean = (MessageBean) this.getEntitybyId(MessageBean.class, Integer.parseInt(object[0].toString()));
+			result.add(messageBean);
+		}
+		return result;
 	}
 	
 }

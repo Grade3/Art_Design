@@ -10,6 +10,13 @@ public class MessageVO {
 	private Integer id;
 	private String content;
 	private Date time;
+	private Integer sendid;
+	private Integer toid;
+	private String sendname;
+	private String toname;
+	private String sendavator;
+	private String toavator;
+	
 	public MessageVO(Integer id, String content, Date time) {
 		super();
 		this.id = id;
@@ -20,6 +27,12 @@ public class MessageVO {
 		this.id = messageBean.getId();
 		this.content = messageBean.getMessage();
 		this.time = messageBean.getCurrent();
+		this.sendid = messageBean.getFromCustomerBean().getId();
+		this.toid = messageBean.getToCustomerBean().getId();
+		this.sendname = messageBean.getFromCustomerBean().getUsername();
+		this.toname = messageBean.getToCustomerBean().getUsername();
+		this.toavator = messageBean.getToCustomerBean().getAvator();
+		this.sendavator= messageBean.getFromCustomerBean().getAvator();
 	}
 	public MessageVO() {
 		super();
@@ -43,6 +56,43 @@ public class MessageVO {
 		this.time = time;
 	}
 	
+	public Integer getSendid() {
+		return sendid;
+	}
+	public void setSendid(Integer sendid) {
+		this.sendid = sendid;
+	}
+	public Integer getToid() {
+		return toid;
+	}
+	public void setToid(Integer toid) {
+		this.toid = toid;
+	}
+	public String getSendname() {
+		return sendname;
+	}
+	public void setSendname(String sendname) {
+		this.sendname = sendname;
+	}
+	public String getToname() {
+		return toname;
+	}
+	public void setToname(String toname) {
+		this.toname = toname;
+	}
+	public String getSendavator() {
+		return sendavator;
+	}
+	public void setSendavator(String sendavator) {
+		this.sendavator = sendavator;
+	}
+	public String getToavator() {
+		return toavator;
+	}
+	public void setToavator(String toavator) {
+		this.toavator = toavator;
+	}
+	
 	public static List<MessageVO> ChangeToListMessageVO(List<MessageBean> temp){
 		List<MessageVO> list =new ArrayList<MessageVO>();
 		if(null== temp || temp.size()==0)
@@ -52,4 +102,6 @@ public class MessageVO {
 		}
 		return list;
 	}
+	
+	
 }
