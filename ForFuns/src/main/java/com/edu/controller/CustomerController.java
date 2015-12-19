@@ -396,6 +396,15 @@ public class CustomerController {
 		return customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, customerid, null)
 				.getUsername();
 	}
+	/**
+	 * 通过userid获取id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params = "method=GetCustomerid", produces = "text/html;charset=UTF-8")
+	public String JsonGetid(@RequestParam(value = "customerid") String customerid){
+		return customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, customerid, null).getId().toString();
+	}
 
 	/**
 	 * 获取分页列表

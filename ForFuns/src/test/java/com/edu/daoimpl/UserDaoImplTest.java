@@ -49,10 +49,10 @@ public class UserDaoImplTest {
 
 	@Test
 	public void testGetAll(){
-		List<UserBean> list  = userDao.getAllEntity(UserBean.class);
-		UserBean userBean = list.get(0);
+		//List<UserBean> list  = userDao.getAllEntity(UserBean.class);
+		//UserBean userBean = list.get(0);
 		//System.out.println(userBean.getNewsBeans().iterator().next().getTitle());
-		
+		userDao.TestNamedQuery();
 	}
 	
 	@Test

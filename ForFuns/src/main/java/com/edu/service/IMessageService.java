@@ -7,10 +7,19 @@ import com.edu.model.MessageBean;
 
 public interface IMessageService extends IBaseService<MessageBean>{
 	/**
-	 * 获取未读信息
+	 * 获取特定id未读信息
 	 * @param sendid
 	 * @param fromid
 	 * @return
 	 */
 	public List<MessageBean> getUnReadMessage(Integer sendid,Integer fromid);
+	
+	/**
+	 * 获取当前用户未读信息
+	 * @param sendid
+	 * @param fromid
+	 * @return
+	 */
+	public List<MessageBean> getUserUnReadMessage(Integer id);
+	
 }

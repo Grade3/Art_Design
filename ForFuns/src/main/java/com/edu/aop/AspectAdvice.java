@@ -12,6 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
+import com.edu.util.CheckTokenTool;
+
 
 @Component
 @Aspect
@@ -65,6 +67,31 @@ public class AspectAdvice  {
 	      System.out.println("------------afer---------------");
 	      return object;
 	 }
+	 
+	 
+	 
+	 
+	 @Pointcut("execution(* com.edu.controller.*.Aop*(..) ) ")
+		public void checklogin(){
+			
+		}
+	 
+	 @Around("checklogin()")
+	 public Object aroundchecklogin(ProceedingJoinPoint pjp) throws Throwable{
+		  System.out.println("------------before check---------------");
+		  Object[] args = pjp.getArgs();
+		  String useridtoken = args[0].toString();
+		  Object object = "redirect:/font/Login.jsp?error=2";
+		  if("".equals(useridtoken))//未登陆
+			  return "redirect:/font/Login.jsp?error=2";
+		  boolean flag = CheckTokenTool.CheckToken(useridtoken);
+		  if(!flag)
+			  return  "redirect:/font/Login.jsp?error=2";
+		  object =  pjp.proceed();
+	      System.out.println("------------afer check---------------");
+	      return object;
+	 }
+	 
 	/*@Pointcut("execution(* com.edu.base.*.*(..) )")
 	public void anymethod(){
 		

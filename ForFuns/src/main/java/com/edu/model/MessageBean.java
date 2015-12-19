@@ -74,7 +74,7 @@ public class MessageBean {
 	public void setCurrent(Date current) {
 		this.current = current;
 	}
-	@OneToOne(fetch=FetchType.LAZY)  
+	@OneToOne(fetch=FetchType.EAGER)  
     @JoinColumn(name="fromid") 
 	public CustomerBean getFromCustomerBean() {
 		return fromCustomerBean;
@@ -82,7 +82,7 @@ public class MessageBean {
 	public void setFromCustomerBean(CustomerBean fromCustomerBean) {
 		this.fromCustomerBean = fromCustomerBean;
 	}
-	@OneToOne(fetch=FetchType.LAZY)  
+	@OneToOne(fetch=FetchType.EAGER)  
     @JoinColumn(name="toid") 
 	public CustomerBean getToCustomerBean() {
 		return toCustomerBean;

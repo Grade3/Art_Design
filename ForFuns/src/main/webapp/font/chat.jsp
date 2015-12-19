@@ -30,15 +30,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		       ],
 			});
 		});
+		
+		
+		
+		
+		
 	</script>
 	<script type="text/javascript">
-	  getCookieUserid();
-  	  var userid = 1;
-      var receiveid = 2;
+	  var id = getCookieUserid();
+	  var userid = 1;
+      var receiveid = getUrlParam("id");
+	  $.ajax({
+			type:'post',
+			asycn:false,
+			url:'../customer.do?method=GetCustomerid',
+			data:{customerid:id},
+			success:function(json){
+				userid = json;
+			},error:function(){
+				
+			}
+	  });
+  	  if(userid=="" || receiveid==""||null == receiveid)
+  		  location.href="<%=basePath%>font/error.jsp";
       var websocket = null;
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
-          websocket = new WebSocket("ws://localhost:8080/forfun/websocket");
+          websocket = new WebSocket("ws://<%=request.getServerName()%>:<%=request.getServerPort()%>/forfun/websocket");
       }
       else{
           alert('Not support websocket');

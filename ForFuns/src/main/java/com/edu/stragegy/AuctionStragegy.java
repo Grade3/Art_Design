@@ -16,7 +16,7 @@ import com.edu.model.ProductBean;
 public class AuctionStragegy implements ISellStrategy{
 
 	@Override
-	public int SellProduct(ProductBean productBean, CustomerBean customerBean,
+	public String SellProduct(ProductBean productBean, CustomerBean customerBean,
 			Integer money, Map<String, Object> params) throws Exception {
 		return 0;
 	}

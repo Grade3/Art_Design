@@ -27,4 +27,9 @@ public class MessageServiceImpl extends BaseServiceImpl<MessageBean> implements 
 		return unReadMessage;
 	}
 
+	@Override
+	public List<MessageBean> getUserUnReadMessage(Integer id) {
+		return messageDao.getUserUnReadMessage(id);
+	}
+
 }

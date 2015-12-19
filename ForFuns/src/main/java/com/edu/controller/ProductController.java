@@ -90,7 +90,7 @@ public class ProductController {
 	 * @param money
 	 * @return
 	 */
-	@RequestMapping(params = "method=BuyProduct")
+	/*@RequestMapping(params = "method=BuyProduct")
 	@ResponseBody
 	@Transactional
 	public Map<String, Object> JsonBuyProduct(@RequestParam(value="productid")Integer productid,
@@ -107,7 +107,7 @@ public class ProductController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result",result);
 		return map;
-	}
+	}*/
 	
 	/*@RequestMapping(params="method=AlertProduct")
 	public String JsonAlertProduct(@RequestParam(value="name")String productname,@RequestParam(value="typename")Integer typeid,
@@ -186,7 +186,7 @@ public class ProductController {
 	 * @param useridtoken
 	 * @return
 	 */
-	@RequestMapping(params="method=AddOrder")
+	/*@RequestMapping(params="method=AddOrder")
 	public String AddOrder(@RequestParam(value="productid")Integer id,@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
 			@RequestParam(value="address")String address,@RequestParam(value="telephone")String telephone){
 		if("".equals(useridtoken))//未登陆
@@ -230,6 +230,40 @@ public class ProductController {
 			return "redirect:/font/success.jsp";
 		}
 		return "redirect:/font/error.jsp";
+	}*/
+	
+	/**
+	 * 通过口令判断是否是有订单
+	 * @param id
+	 * @param useridtoken
+	 * @return
+	 */
+	@RequestMapping(params="method=AddOrder")
+	public String AopAddOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="productid")Integer id,
+			@RequestParam(value="address")String address,@RequestParam(value="telephone")String telephone){
+		String userid = CheckTokenTool.GetUserid(useridtoken);
+		CustomerBean customerBean = null;
+		ProductBean productBean = null;
+		Map<String, Object> params = new HashMap<String, Object>();
+		try {
+			customerBean =  customerService.getCustomerByUserId(userid);
+			productBean = productService.GetEntityById(ProductBean.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(null==customerBean)
+			return "redirect:/font/error.jsp";
+		String respons = "redirect:/font/error.jsp";
+		try {
+			params.put(OrderTable.TELEPHONE, telephone);
+			params.put(OrderTable.ADDRESS, address);
+			productProxy.Init(productBean);
+			respons =productProxy.BuyProduct(customerBean, productBean.getMoney(),params);
+			System.out.println(respons);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return respons;
 	}
 	/**
 	 * 检测用户是否存在相应的订单。

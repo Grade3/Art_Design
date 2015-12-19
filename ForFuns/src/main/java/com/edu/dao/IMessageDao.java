@@ -18,4 +18,13 @@ public interface IMessageDao extends IBaseDao<MessageBean>{
 	 * @return
 	 */
 	public boolean alertUnReadMessage(Integer messageid,Integer sendid, Integer fromid);
+	
+	/**
+	 * 获取当前用户未读信息
+	 * @param sendid
+	 * @param fromid
+	 * @return
+	 */
+	public List<MessageBean> getUserUnReadMessage(Integer id);
+	
 }
