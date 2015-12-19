@@ -48,8 +48,8 @@ public class ProductProxy {
 	 * 出售商品
 	 * @return
 	 */
-	public int BuyProduct(CustomerBean customerbean,Integer money,Map<String, Object> params)throws Exception{
-		return sellStrategy.SellProduct(productBean,customerbean,money,params);
+	public String BuyProduct(CustomerBean customerbean,Integer money,Map<String, Object> params)throws Exception{
+		return sellStrategy.SellProduct(productBean,customerbean,money,params)+"";
 	}
 
 	public ProductProxy(ProductBean productBean) {

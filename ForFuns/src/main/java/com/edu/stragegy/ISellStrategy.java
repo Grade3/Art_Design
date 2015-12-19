@@ -17,6 +17,6 @@ import com.edu.model.ProductBean;
  */
 @Transactional
 public interface ISellStrategy {
-	public int SellProduct(ProductBean productBean,CustomerBean customerBean,Integer money,Map<String, Object> params) throws Exception;
+	public String SellProduct(ProductBean productBean,CustomerBean customerBean,Integer money,Map<String, Object> params) throws Exception;
 	//public void Init(IProductDao productDao,IProductMoneyDao productMoneyDao);
 }

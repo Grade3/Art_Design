@@ -51,6 +51,7 @@ function getCookieUserid(){
 	var id =  useridtoken.substring(0,index);
 	return id;
 }
+
 $(document).ready(function(){
 	var bg_h = $(".content").height() + $(".header-top").height() + $(".bar_news").height();
 	$("#fontbg").height(bg_h);

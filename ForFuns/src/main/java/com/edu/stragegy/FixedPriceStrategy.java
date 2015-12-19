@@ -40,7 +40,7 @@ public class FixedPriceStrategy extends BaseServiceImpl<ProductBean> implements 
 	@Autowired
 	private IOrderDao orderDao;
 	@Override
-	public int SellProduct(ProductBean productBean,CustomerBean customerBean,Integer money,Map<String, Object>params) throws Exception {
+	public String SellProduct(ProductBean productBean,CustomerBean customerBean,Integer money,Map<String, Object>params) throws Exception {
 		OrderBean orderBean = orderDao.GetBeanByCondition(OrderBean.class, OrderTable.PRODUCTID, productBean.getId()+"", null);
 		if(null== orderBean){//不存在改商品的订单 
 			orderBean = new OrderBean();
@@ -51,13 +51,17 @@ public class FixedPriceStrategy extends BaseServiceImpl<ProductBean> implements 
 			orderBean.setCurrent(new Date());
 			orderBean.setIspay(1);
 			orderDao.addEntity(orderBean);
-			return 3;//添加成功
+			return "redirect:/font/success.jsp";//添加成功
 		}else if(customerBean.getId() != orderBean.getCustomerBean().getId())
-			return 1;//不属于该用户的订单
+			return "redirect:/font/error.jsp?errorid=1";//不属于该用户的订单
 		else if(customerBean.getId() == orderBean.getCustomerBean().getId()){
-			return 2;//属于该用户的订单
+			return "redirect:/font/goodsdetail.jsp?productid="+productBean.getId();//属于该用户的订单
 		}
-		return 0;//添加失败
+		return "redirect:/font/error.jsp;";//添加失败
+		//return 3;//添加成功
+		//return 1;//不属于该用户的订单
+		//return 2;//属于该用户的订单
+		//return 0;//添加失败
 	}
 	
 	/*@Override
