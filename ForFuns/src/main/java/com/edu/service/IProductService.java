@@ -24,4 +24,23 @@ public interface IProductService extends IBaseService<ProductBean>{
 	 * @return
 	 */
 	public int getOnlineProductTotal(int typeid);
+	
+	
+	/**
+	 * 获取对应艺术家的商品
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	public List<ProductBean> getArtistProduct(int page,int pageSize,int artist);
+	
+	
+	/**
+	 * 获取对应艺术家商品的数量
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	public int getArtistProductTotal(int artist);
+	
 }

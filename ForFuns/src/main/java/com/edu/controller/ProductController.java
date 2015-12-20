@@ -164,7 +164,30 @@ public class ProductController {
 		map.put("total", total);
 		return map;
 	}
-
+	
+	
+	/**
+	 * 获取对应艺术家的所有商品
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=GetArtistProduct")
+	public Map<String, Object> JsonGetArtitsProducts(@RequestParam(value="page")Integer page,@RequestParam(value="pageSize")Integer pageSize,
+			@RequestParam(value="artistid")Integer artistid){
+		Map<String , Object> map = new HashMap<String, Object>();
+		//System.out.println("at getArtistProduct s");
+		//System.out.println(page+" + "+pageSize+" + "+artistid);
+		List<ProductBean> list = productService.getArtistProduct(page, pageSize, artistid);
+		//System.out.println("\r\nThe result of getArtistProduct");
+		//System.out.println("at getArtistProduct f");
+		int total = productService.getArtistProductTotal(artistid);
+		List<ProductVO> productVOs = ProductVO.ChangeListProductToProductVo(list);
+		map.put("list", productVOs);
+		map.put("total", total);
+		System.out.println(total);
+		return map;
+	}
+	
 	/**
 	 * 根据id获取商品
 	 * @param id
@@ -179,6 +202,9 @@ public class ProductController {
 		map.put("product",productVO);
 		return map;
 	}
+	
+	
+	
 	
 	/**
 	 * 通过口令判断是否是有订单
