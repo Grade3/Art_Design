@@ -53,5 +53,10 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderBean> implements IOrd
 		OrderBean orderBean = orderDao.GetBeanByCondition(OrderBean.class, OrderTable.PRODUCTID, productid+"", null);
 		return orderBean;
 	}
+
+	@Override
+	public List<OrderBean> getCusertomerOrder(String customerUserid) {
+		return orderDao.getCusertomerOrder(customerUserid);
+	}
 	
 }
