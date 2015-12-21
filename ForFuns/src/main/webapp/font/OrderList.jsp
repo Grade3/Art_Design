@@ -50,9 +50,9 @@ function getUserOrder(customerUserid){
 					var ispay = list[i].ispay;
 					var money = list[i].money;
 					var artistname =list[i].artistname;
-					content += "<div class='row order_div'><a href='artistHome.html'><div class='row order_artist'><p class='col-xs-9 artist_name'><span class='glyphicon glyphicon-link' aria-hidden='true'>"
-						+"</span>&nbsp;&nbsp;艺术家名称&nbsp;&nbsp;<span class='glyphicon glyphicon-menu-right partten1' aria-hidden='true'></span></p><p class='col-xs-3 order_statue'>订单状态</p></div></a>"
-						+"<a href='OrderDetail.html'><div class='row order_info'><img class='col-xs-3 order_pic' src='<%=basePath%>image/good.jpg'><div class='col-xs-9 row order_label'>"
+					content += "<div class='row order_div'><div class='row order_artist'><a href='<%=basePath%>artistHome.jsp?id="+id+"'><p class='col-xs-9 artist_name'><span class='glyphicon glyphicon-link' aria-hidden='true'>"
+						+"</span>&nbsp;&nbsp;"+artistname+"&nbsp;&nbsp;<span class='glyphicon glyphicon-menu-right partten1' aria-hidden='true'></span></p></a><p class='col-xs-3 order_statue'>订单状态</p></div>"
+						+"<a href='<%=basePath%>OrderDetail.jsp'><div class='row order_info'><img class='col-xs-3 order_pic' src='<%=basePath%>image/good.jpg'><div class='col-xs-9 row order_label'>"
 						+"<div class='row label1'><p class='col-xs-8 order_name'>订单商品名称订单商品名称</p><p class='col-xs-4 order_price'>￥99.00</p></div></div></div></a></div>";
 				}
 				$('#orderlist').html(content);
