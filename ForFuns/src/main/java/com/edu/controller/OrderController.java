@@ -72,7 +72,7 @@ public class OrderController
 
 	
 	/**
-	 * 删除用户
+	 * 删除订单
 	 * @param ids
 	 * @return
 	 */
@@ -95,7 +95,7 @@ public class OrderController
 	
 	
 	/**
-	 * 添加用户
+	 * 添加订单
 	 * @param rowstr
 	 * @return
 	 */
@@ -174,15 +174,9 @@ public class OrderController
 		orderService.UpdataBean(orderBean);
 		return "true";
 	}
-	//[{\"id\":1,\"name\":\"C\",\"size\":\"\",\"date\":\"02/19/2010\",\"children\":[{\"id\":2,\"name\":\"Program Files\",\"size\":\"120 MB\",\"date\":\"03/20/2010\",\"children\":[{\"id\":21,\"name\":\"Java\",\"size\":\"\",\"date\":\"01/13/2010\",\"state\":\"closed\",\"children\":[{\"id\":211,\"name\":\"java.exe\",\"size\":\"142 KB\",\"date\":\"01/13/2010\"},{\"id\":212,\"name\":\"jawt.dll\",\"size\":\"5 KB\",\"date\":\"01/13/2010\"}]}]}]}]
-	@RequestMapping(params="method=gettest")
-	@ResponseBody
-	public String JsonGetTree(){
-		return "[{\"id\":1,\"name\":\"C\",\"children\":[{\"id\":2,\"name\":\"Program Files\"}]}]";
-	}
 	
 	/**
-	 * 获取所有的用户
+	 * 获取所有的订单
 	 * @return
 	 */
 	@ResponseBody
@@ -193,4 +187,19 @@ public class OrderController
 		map.put("orders", list);
 		return map;
 	}
+	
+	/**
+	 * 通过CutomerUserid获取订单 
+	 * @param customerUserId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=getCustomerOrder")
+	public Map<String , Object> JsonGetCustomerOrder(@RequestParam(value="customeruserid")String customerUserId){
+		List<OrderBean> list = orderService.getCusertomerOrder(customerUserId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		return map;
+	}
+	
 }
