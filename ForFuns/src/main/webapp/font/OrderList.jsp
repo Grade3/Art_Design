@@ -34,9 +34,21 @@ $(function(){
 	});
 });
 </script>
-
-
 <script type="text/javascript">
+function getUserOrder(customerUserid){
+	$.ajax({
+		type:'post',
+		url:"<%=basePath%>order.do?method=getCustomerOrder",
+		data:{customeruserid:customerUserid},
+		success:function(json){
+			var list = json.list;
+			alert(list);
+		},error:function(){
+			
+		}
+		
+	});
+}
 $(document).ready(function()
 {
 	var pic_w = $(".order_pic").width();
@@ -48,6 +60,9 @@ $(document).ready(function()
 		var pic_h = pic_w;
 		$(".order_pic").height(pic_h);
   	});
+	
+	
+	
 });
 </script>
 

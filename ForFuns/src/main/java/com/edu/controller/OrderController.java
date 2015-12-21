@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -198,8 +199,12 @@ public class OrderController
 	public Map<String , Object> JsonGetCustomerOrder(@RequestParam(value="customeruserid")String customerUserId){
 		List<OrderBean> list = orderService.getCusertomerOrder(customerUserId);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list);
+		map.put("list", OrderVO.ChangeListProductToOrderVo(list));
 		return map;
 	}
 	
+	@RequestMapping(params="method=EnterMyOrder")
+	public String AOPenterMyOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
+		
+	}
 }

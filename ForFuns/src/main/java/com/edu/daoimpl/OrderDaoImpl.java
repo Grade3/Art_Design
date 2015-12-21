@@ -26,9 +26,9 @@ public class OrderDaoImpl extends BaseDaoImpl<OrderBean> implements IOrderDao{
 
 	@Override
 	public List<OrderBean> getCusertomerOrder(String customerUserid) {
-		String hql = "select order from OrderBean order inner join order.customerBean cc ";//inner join order.customerBean cc where cc.userid = ?";
+		String hql = "select order from OrderBean order where order.customerBean.userid = ?";
 		Query query = getSession().createQuery(hql);
-		//query.setString(0, customerUserid);
+		query.setString(0, customerUserid);
 		List<OrderBean> list =query.list();
 		if(list.size()==0)
 			return null;
