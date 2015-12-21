@@ -13,7 +13,7 @@
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="../css/dom.css" rel="stylesheet" type="text/css" />
-<link href="../css/footer.css" rel="stylesheet" type="text/css" />
+<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="../css/ChangePhoto.css">
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
@@ -186,4 +186,5 @@ function GetUser()
 	</div>
 
 </body>
+
 </html>

@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -72,7 +73,7 @@ public class OrderController
 
 	
 	/**
-	 * 删除用户
+	 * 删除订单
 	 * @param ids
 	 * @return
 	 */
@@ -95,7 +96,7 @@ public class OrderController
 	
 	
 	/**
-	 * 添加用户
+	 * 添加订单
 	 * @param rowstr
 	 * @return
 	 */
@@ -174,15 +175,9 @@ public class OrderController
 		orderService.UpdataBean(orderBean);
 		return "true";
 	}
-	//[{\"id\":1,\"name\":\"C\",\"size\":\"\",\"date\":\"02/19/2010\",\"children\":[{\"id\":2,\"name\":\"Program Files\",\"size\":\"120 MB\",\"date\":\"03/20/2010\",\"children\":[{\"id\":21,\"name\":\"Java\",\"size\":\"\",\"date\":\"01/13/2010\",\"state\":\"closed\",\"children\":[{\"id\":211,\"name\":\"java.exe\",\"size\":\"142 KB\",\"date\":\"01/13/2010\"},{\"id\":212,\"name\":\"jawt.dll\",\"size\":\"5 KB\",\"date\":\"01/13/2010\"}]}]}]}]
-	@RequestMapping(params="method=gettest")
-	@ResponseBody
-	public String JsonGetTree(){
-		return "[{\"id\":1,\"name\":\"C\",\"children\":[{\"id\":2,\"name\":\"Program Files\"}]}]";
-	}
 	
 	/**
-	 * 获取所有的用户
+	 * 获取所有的订单
 	 * @return
 	 */
 	@ResponseBody
@@ -191,6 +186,54 @@ public class OrderController
 		List<OrderBean> list = orderService.GetAllBean(OrderBean.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("orders", list);
+		return map;
+	}
+	
+	/**
+	 * 通过CutomerUserid获取订单 
+	 * @param customerUserId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=getCustomerOrder")
+	public Map<String , Object> JsonGetCustomerOrder(@RequestParam(value="customeruserid")String customerUserId){
+		List<OrderBean> list = orderService.getCusertomerOrder(customerUserId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", OrderVO.ChangeListProductToOrderVo(list));
+		return map;
+	}
+	
+	/**
+	 * 进入我的订单
+	 * @param useridtoken
+	 * @return
+	 */
+	@RequestMapping(params="method=EnterMyOrder")
+	public String CheckLoginEnterMyOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
+		return "font/OrderList.jsp";
+	}
+	
+
+	/**
+	 * 进入订单详情
+	 * @param useridtoken
+	 * @return
+	 */
+	@RequestMapping(params="method=EnterOrderDetail")
+	public String CheckLoginEnterOrderDetail(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="id")Integer id){
+		return "font/OrderDetail.jsp?id="+id;
+	}
+	
+	/**
+	 * 通过id获取订单
+	 * @param id 订单id
+	 * @return
+	 */
+	@RequestMapping(params="")
+	public Map<String, Object> JsonGetOrderbyId(@RequestParam(value="id")Integer id){
+		OrderBean orderBean = orderService.GetEntityById(OrderBean.class, id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("order", orderBean);
 		return map;
 	}
 }

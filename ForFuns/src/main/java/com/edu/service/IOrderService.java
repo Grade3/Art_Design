@@ -22,4 +22,10 @@ public interface IOrderService extends IBaseService<OrderBean>{
 	 */
 	public OrderBean getOrderByProductId(Integer productid) throws Exception;
 	
+	/**
+	 * 通过userid获取用户订单
+	 * @param customerUserid
+	 * @return
+	 */
+	public List<OrderBean> getCusertomerOrder(String customerUserid);
 }

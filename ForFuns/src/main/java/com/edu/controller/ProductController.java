@@ -265,7 +265,7 @@ public class ProductController {
 	 * @return
 	 */
 	@RequestMapping(params="method=AddOrder")
-	public String AopAddOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="productid")Integer id,
+	public String CheckLoginAddOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="productid")Integer id,
 			@RequestParam(value="address")String address,@RequestParam(value="telephone")String telephone){
 		String userid = CheckTokenTool.GetUserid(useridtoken);
 		CustomerBean customerBean = null;

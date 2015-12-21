@@ -227,7 +227,7 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-lock"></span>　修改密码</p>
-							<p class="col-xs-9"><a href="modifyPassword.html"><span class="glyphicon glyphicon-edit"></span> 点击修改密码</a></p>
+							<p class="col-xs-9"><a href="<%=basePath%>customer.do?method=EnterPassword"><span class="glyphicon glyphicon-edit"></span> 点击修改密码</a></p>
 						</div>
 						<div class="row info" id="advantage_div">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-heart"></span>　擅长领域</p>
@@ -269,7 +269,7 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-credit-card"></span>　我的订单</p>
-							<p class="col-xs-9"><a href="#"><span class="glyphicon glyphicon-hand-right"></span>　查看我的所有订单</a></p>
+							<p class="col-xs-9"><a href="<%=basePath%>order.do?method=EnterMyOrder"><span class="glyphicon glyphicon-hand-right"></span>　查看我的所有订单</a></p>
 						</div>
 						<div class="row info">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-envelope"></span>　我的消息</p>

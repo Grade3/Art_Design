@@ -544,4 +544,12 @@ public class CustomerController  implements ServletConfigAware,ServletContextAwa
 		}
 		return "redirect:/font/personal.jsp";
 	}
+	/**
+	 * 检验登录后进入修改密码页面
+	 * @return
+	 */
+	@RequestMapping(params="method=EnterPassword")
+	public String CheckLoginEnterPassword(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
+		return "font/Password.jsp";
+	}
 }
