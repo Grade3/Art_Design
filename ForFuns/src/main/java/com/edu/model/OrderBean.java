@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,48 +17,23 @@ import javax.persistence.Table;
 @Entity
 public class OrderBean {
 	private Integer id;
-	private String telephone;
-	private String address;
 	private Date current;
 	private Integer ispay;
 	private ProductBean productBean;
 	private CustomerBean customerBean;
-	public OrderBean(Integer id, String telephone, String address,
-			Date current, ProductBean productBean, CustomerBean customerBean) {
-		super();
-		this.id = id;
-		this.telephone = telephone;
-		this.address = address;
-		this.current = current;
-		this.productBean = productBean;
-		this.customerBean = customerBean;
-	}
-	
-	public OrderBean(Integer id, String telephone, String address,
-			Date current, Integer ispay, ProductBean productBean,
-			CustomerBean customerBean) {
-		super();
-		this.id = id;
-		this.telephone = telephone;
-		this.address = address;
-		this.current = current;
-		this.ispay = ispay;
-		this.productBean = productBean;
-		this.customerBean = customerBean;
-	}
-	
-	public OrderBean(String telephone, String address, Date current,
-			Integer ispay, ProductBean productBean, CustomerBean customerBean)
-	{
-		super();
-		this.telephone = telephone;
-		this.address = address;
-		this.current = current;
-		this.ispay = ispay;
-		this.productBean = productBean;
-		this.customerBean = customerBean;
-	}
+	private OrderAddressBean orderAddressBean;
 
+	public OrderBean(Integer id, Date current, Integer ispay,
+			ProductBean productBean, CustomerBean customerBean,
+			OrderAddressBean orderAddressBean) {
+		super();
+		this.id = id;
+		this.current = current;
+		this.ispay = ispay;
+		this.productBean = productBean;
+		this.customerBean = customerBean;
+		this.orderAddressBean = orderAddressBean;
+	}
 	public OrderBean() {
 		super();
 	}
@@ -69,20 +45,6 @@ public class OrderBean {
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	@Column(name="telephone")
-	public String getTelephone() {
-		return telephone;
-	}
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-	@Column(name="address")
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
 	}
 	@Column(name="current")
 	public Date getCurrent() {
@@ -113,6 +75,14 @@ public class OrderBean {
 	}
 	public void setIspay(Integer ispay) {
 		this.ispay = ispay;
+	}
+	@OneToOne(mappedBy="orderBean")
+	public OrderAddressBean getOrderAddressBean() {
+		return orderAddressBean;
+	}
+
+	public void setOrderAddressBean(OrderAddressBean orderAddressBean) {
+		this.orderAddressBean = orderAddressBean;
 	}
 	
 }

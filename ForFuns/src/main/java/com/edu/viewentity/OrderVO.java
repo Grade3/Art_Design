@@ -89,8 +89,8 @@ public class OrderVO
 	{
 		super();
 		id = orderBean.getId();
-		telephone = orderBean.getTelephone();
-		address = orderBean.getAddress();
+		//telephone = orderBean.getOrderAddressBean().getTelephone();
+		address = orderBean.getOrderAddressBean().getAddressBean().getAddress();
 		current = orderBean.getCurrent();
 		ispay = orderBean.getIspay();
 		productid = orderBean.getProductBean().getId();

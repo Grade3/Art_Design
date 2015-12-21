@@ -46,8 +46,8 @@ public class FixedPriceStrategy extends BaseServiceImpl<ProductBean> implements 
 			orderBean = new OrderBean();
 			orderBean.setCustomerBean(customerBean);
 			orderBean.setProductBean(productBean);
-			orderBean.setAddress(params.get(OrderTable.ADDRESS).toString());
-			orderBean.setTelephone(params.get(OrderTable.TELEPHONE).toString());
+			//orderBean.setAddress(params.get(OrderTable.ADDRESS).toString());
+			//orderBean.setTelephone(params.get(OrderTable.TELEPHONE).toString());
 			orderBean.setCurrent(new Date());
 			orderBean.setIspay(1);
 			orderDao.addEntity(orderBean);

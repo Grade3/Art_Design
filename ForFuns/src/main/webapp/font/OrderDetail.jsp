@@ -58,6 +58,25 @@ function checkOrder(productid){
 		}
 	});
 }
+function getOderDetail(id){
+	$.ajax({
+		type:'post',
+		url:'<%=basePath%>order.do?method=GetOrderByid',
+		data:{id:id},
+		success:function(json){
+			var order = json.order;
+			var id =order.id;
+			var telephone = order.telephone;
+			var address = order.address;
+			var current = order.current;
+			var ispay = order.ispay;
+			var productname = order.productname;
+			
+		},error:function(){
+			
+		}
+	});
+}
 $(document).ready(function()
 {
 	var productid = getUrlParam("id");
