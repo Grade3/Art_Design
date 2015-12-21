@@ -47,12 +47,81 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 			});
 		}
+		
+		
+		
+		
+		function GetArtistProduct(page,pageSize,artistid){
+			$.ajax({
+				type:'post',
+				asycn:false,
+				url:'<%=basePath%>/product.do?method=GetArtistProduct',
+				data:{artistid:artistid,page:page,pageSize:pageSize},
+				success:function(json){
+					var products = json.list;
+					var total = json.total;
+					globaltotal = total;
+					
+					if(products.length>0){
+						var body = "";
+						var tempbody ="";
+						for(var i=0;i<products.length;i++){
+							tempbody ="";
+							var id = products[i].id;
+							var imgurl = products[i].imgurl;
+							var name = products[i].name;
+							var money = products[i].initmoney;
+							var authorname = products[i].authorname;
+							var situation = products[i].situation;
+							
+							if(i%2==0){
+								tempbody +="<div class='col-md-6 goods_two'>";
+							}
+							tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
+							 +"<div class='good_name'><p>"+name+"</p><p>";
+							if(situation==0)tempbody+="未上架";
+							if(situation==1)tempbody+="上架中";
+							if(situation==2)tempbody+="已下架";
+							if(situation==3)tempbody+="已出售";
+		
+							tempbody += "</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore'>详情</a></div></div>";
+							if(i%2==1){
+								tempbody +="</div>";
+							}
+							body+=tempbody;
+						}
+						if(page*pageSize <globaltotal){
+							body +="<div class='col-xs-12 learn_more'><p>查看更多</p></div>";
+						}
+						$('#goodlist').append(body);
+						var width = $(".good_item").width();
+						var height = width/2.5*3;
+					  	$(".good_item").height(height);
+
+					}else{
+						var none = "";
+						none +="<div class='col-xs-12 none'><p>暂无此类商品</p></div>";
+						$('#goodlist').html(none);
+					}
+				},error:function(){
+				},
+			});
+		};
 		$(document).ready(function(){
 			$('#usernameaction').hide();
 			$('#loginoutaction').hide();
 			var id = getUrlParam("id");
+			var page = 1 ;
+			var pageSize = 4;
 			GetArtistInfo(id);
+			GetArtistProduct(page,pageSize,id);
 			CheckUser();
+			//查看更多点击事件
+			$('.learn_more').live('click',function(){
+				 page = page +1 ;
+				 GetArtistProduct(page,pageSize,artistid);
+				 $(this).hide();
+		  	});
 			$(window).scroll(function(){
 				var _top = $(window).scrollTop();
 				if(_top>300){
@@ -192,7 +261,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 
-			<div class="row artwork">
+			<div class="row artwork" id="goodlist">
+			<!--  
 				<div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
 						<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
@@ -213,6 +283,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
 						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
@@ -295,6 +366,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
 						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
@@ -320,6 +392,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-xs-12 learn_more">
 					<p>查看更多</p>
 				</div>
+				-->
 			</div>
 			
 		</div>

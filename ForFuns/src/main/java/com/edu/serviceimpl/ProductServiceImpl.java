@@ -28,4 +28,14 @@ public class ProductServiceImpl extends BaseServiceImpl<ProductBean> implements 
 	public int getOnlineProductTotal(int typeid) {
 		return productDao.getOnlineProductTotal(typeid);
 	}
+	
+	@Override
+	public List<ProductBean> getArtistProduct(int page, int pageSize,int artistid) {
+		return productDao.GetArtistProduct(page, pageSize, artistid);
+	}
+
+	@Override
+	public int getArtistProductTotal(int artistid) {
+		return productDao.getArtistProductTotal(artistid);
+	}
 }

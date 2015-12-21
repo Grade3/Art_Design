@@ -56,4 +56,39 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 		return list.size();
 	}
 
+	@Override
+	public List<ProductBean> GetArtistProduct(int page, int pageSize, int artistid) {
+		String hql ="";
+		List<ProductBean> list = null;
+		try {
+			//hql = "from "+ProductBean.class.newInstance().getClass().getName()+" temp where temp.productSellBean.sellMethodBean.id = ? and  current_date() >= timestart and current_date()<=timeout  and typeid=? and ( situation = 1 or situation = 0 )";
+			hql = "from "+ProductBean.class.newInstance().getClass().getName()+" where artistid="+artistid;
+			//System.out.println(hql);
+			Query query = getSession().createQuery(hql);
+			//query.setFirstResult((page-1)*pageSize); 
+			//query.setMaxResults(pageSize); 
+			list = query.list();
+			//System.out.println(list.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int getArtistProductTotal(int artistid) {
+		String hql ="";
+		List<ProductBean> list = null;
+		try {
+			hql = "from "+ProductBean.class.newInstance().getClass().getName()+" temp where artistid="+artistid;
+			System.out.println(hql);
+			System.out.println("getArtistProductTotal");
+			Query query = getSession().createQuery(hql);
+			list = query.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list.size();
+	}
+
 }
