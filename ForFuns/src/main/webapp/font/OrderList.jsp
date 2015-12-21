@@ -12,7 +12,7 @@
 	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
-	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer2.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/OrderList.css">
 	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
