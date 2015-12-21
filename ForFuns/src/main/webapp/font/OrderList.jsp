@@ -50,12 +50,24 @@ function getUserOrder(customerUserid){
 					var ispay = list[i].ispay;
 					var money = list[i].money;
 					var artistname =list[i].artistname;
+					var imgurl = list[i].productimg;
+					var situation = "";
+					var link = "<%=basePath%>order.do?method=EnterOrderDetail&id="+id;
+					if(ispay==0){
+						situation ="未付款";
+					}else if(ispay==1){
+						situation = "已付款";
+					}
 					content += "<div class='row order_div'><div class='row order_artist'><a href='<%=basePath%>artistHome.jsp?id="+id+"'><p class='col-xs-9 artist_name'><span class='glyphicon glyphicon-link' aria-hidden='true'>"
-						+"</span>&nbsp;&nbsp;"+artistname+"&nbsp;&nbsp;<span class='glyphicon glyphicon-menu-right partten1' aria-hidden='true'></span></p></a><p class='col-xs-3 order_statue'>订单状态</p></div>"
-						+"<a href='<%=basePath%>OrderDetail.jsp'><div class='row order_info'><img class='col-xs-3 order_pic' src='<%=basePath%>image/good.jpg'><div class='col-xs-9 row order_label'>"
-						+"<div class='row label1'><p class='col-xs-8 order_name'>订单商品名称订单商品名称</p><p class='col-xs-4 order_price'>￥99.00</p></div></div></div></a></div>";
+						+"</span>&nbsp;&nbsp;"+artistname+"&nbsp;&nbsp;<span class='glyphicon glyphicon-menu-right partten1' aria-hidden='true'></span></p></a><p class='col-xs-3 order_statue'>"+situation+"</p></div>"
+						+"<a href='"+link+"'><div class='row order_info'><img class='col-xs-3 order_pic' src='"+imgurl+"'><div class='col-xs-9 row order_label'>"
+						+"<div class='row label1'><p class='col-xs-8 order_name'>"+productname+"</p><p class='col-xs-4 order_price'>￥"+money+"</p></div></div></div></a></div>";
 				}
 				$('#orderlist').html(content);
+				var pic_w = $(".order_pic").width();
+				var pic_h = pic_w;
+				$(".order_pic").height(pic_h);
+
 			}
 		},error:function(){
 			
@@ -75,9 +87,6 @@ $(document).ready(function(){
 		var pic_h = pic_w;
 		$(".order_pic").height(pic_h);
   	});
-	
-	
-	
 });
 </script>
 
@@ -89,7 +98,7 @@ $(document).ready(function(){
 
 <div class="container-fluid header">
 	<div class="title_bar">
-		<p class="back_btn"><span class="glyphicon glyphicon-menu-left partten" aria-hidden="true"></span></p>
+		<p class="back_btn"><a href="<%=basePath%>font/personal.jsp"><span class="glyphicon glyphicon-menu-left partten" aria-hidden="true"></span></a></p>
 		<p><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;&nbsp;我的订单</p>
 	</div>
 </div>

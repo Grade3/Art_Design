@@ -212,4 +212,28 @@ public class OrderController
 	public String CheckLoginEnterMyOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
 		return "font/OrderList.jsp";
 	}
+	
+
+	/**
+	 * 进入订单详情
+	 * @param useridtoken
+	 * @return
+	 */
+	@RequestMapping(params="method=EnterOrderDetail")
+	public String CheckLoginEnterOrderDetail(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="id")Integer id){
+		return "font/OrderDetail.jsp?id="+id;
+	}
+	
+	/**
+	 * 通过id获取订单
+	 * @param id 订单id
+	 * @return
+	 */
+	@RequestMapping(params="")
+	public Map<String, Object> JsonGetOrderbyId(@RequestParam(value="id")Integer id){
+		OrderBean orderBean = orderService.GetEntityById(OrderBean.class, id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("order", orderBean);
+		return map;
+	}
 }

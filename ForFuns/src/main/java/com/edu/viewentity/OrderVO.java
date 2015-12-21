@@ -20,6 +20,7 @@ public class OrderVO
 	private String productname;
 	private Integer money;
 	private String artistname;
+	private String productimg;
 	
 	public String getProductname() {
 		return productname;
@@ -97,10 +98,16 @@ public class OrderVO
 		this.productname = orderBean.getProductBean().getName();
 		this.money = orderBean.getProductBean().getMoney();
 		this.artistname = orderBean.getCustomerBean().getUsername();
+		this.productimg = orderBean.getProductBean().getImgurl();
 	}
 	
 	
-	
+	public String getProductimg() {
+		return productimg;
+	}
+	public void setProductimg(String productimg) {
+		this.productimg = productimg;
+	}
 	public Integer getMoney() {
 		return money;
 	}
