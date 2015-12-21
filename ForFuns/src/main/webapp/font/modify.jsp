@@ -258,7 +258,7 @@ function validate()
 				<div class="user_info">
 					<img class="userpic" src="../image/bl.jpg" id="avator">
 					<p class="picture">
-						<a href="modifyPassword.html">更换头像</a>
+						<a href="ChangePhoto.jsp">更换头像</a>
 					</p>
 				</div>
 			</div>

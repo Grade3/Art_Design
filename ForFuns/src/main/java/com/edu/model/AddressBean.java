@@ -11,15 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.hibernate.annotations.DynamicInsert;
-import org.springframework.stereotype.Repository;
-
-@Entity
 @Table(name="ad_address")
-@DynamicInsert
-@JsonIgnoreProperties(value={"userBean"})
-@Repository
+@Entity
 public class AddressBean
 {
 	private Integer id;
@@ -57,5 +50,25 @@ public class AddressBean
 	public void setCustomerBean(CustomerBean customerBean)
 	{
 		this.customerBean = customerBean;
+	}
+	
+	
+	
+	public AddressBean(Integer id, String address, CustomerBean customerBean)
+	{
+		super();
+		this.id = id;
+		this.address = address;
+		this.customerBean = customerBean;
+	}
+	public AddressBean(String address, CustomerBean customerBean)
+	{
+		super();
+		this.address = address;
+		this.customerBean = customerBean;
+	}
+	public AddressBean()
+	{
+		super();
 	}
 }

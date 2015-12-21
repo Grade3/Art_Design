@@ -109,6 +109,7 @@
                 <li ><a href="#"><img src="<%=basePath%>admin/img/icons/menu/layout.png" alt="" />客户管理</a>
                     <ul class="subul">
                          <li ><a target="rightFrame" href="./ManageCustomer.jsp">客户管理</a></li>
+                         <li ><a target="rightFrame" href="./ManageAddress.jsp">客户地址管理</a></li>
                          <li ><a target="rightFrame" href="./ManageArtist.jsp">艺术家管理</a></li>
                          <li ><a target="rightFrame" href="./ManageExamineArtist.jsp">艺术家审核</a></li>
                     </ul>

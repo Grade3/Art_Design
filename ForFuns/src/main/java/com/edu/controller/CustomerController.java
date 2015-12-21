@@ -4,16 +4,21 @@
 package com.edu.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.channels.FileChannel;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +32,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ServletConfigAware;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.model.NewsBean;
@@ -49,7 +56,18 @@ import com.edu.viewentity.CustomerVO;
  */
 @Controller
 @RequestMapping("/customer.do")
-public class CustomerController {
+public class CustomerController  implements ServletConfigAware,ServletContextAware{
+	private ServletContext servletContext;  
+    @Override  
+    public void setServletContext(ServletContext arg0) {  
+        this.servletContext = arg0;  
+    }  
+    private ServletConfig servletConfig;  
+    @Override  
+    public void setServletConfig(ServletConfig arg0) {  
+        this.servletConfig = arg0;  
+    }
+	
 	@Resource
 	private ICustomerService customerService;
 
@@ -245,6 +263,58 @@ public class CustomerController {
 
 	}
 
+	/**
+	 * 修改个人头像
+	 * 
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping(params="method=alertAvator")
+	public String AlertAvator(@RequestParam(value = "file", required = false) MultipartFile file
+								, HttpServletRequest request, @CookieValue(value = "useridtoken", required = false) String token)
+	{
+		String userid = null;
+		if (null != token) 
+		{
+			if (null == userid) 
+			{
+				System.out.println(token);
+				String[] parts = token.split("\\&");
+				System.out.println(parts.length);
+				String temp = MD5Util.convertMD5(parts[1]);
+				System.out.println(temp);
+				userid=temp;
+			}
+		}
+		
+		String filePath = servletContext.getRealPath("/")+"avatorupload/";
+		String saveUrl  = request.getContextPath() + "/avatorupload/";
+		System.out.println(filePath);
+		File filedir = new File(filePath);
+		if(!filedir.exists()){
+			filedir.mkdir();
+		}
+		String ext =file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")); ;
+		String newfilename = System.currentTimeMillis()+ext;
+		String PathAndName = filePath + newfilename;
+		saveUrl = saveUrl+newfilename;
+		File resultFile = new File(PathAndName);
+		try {
+			file.transferTo(resultFile);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		CustomerBean customerBean = customerService.GetEntityById(CustomerBean.class, Integer.valueOf(customerService.getCustomerIdByUserid(userid)));
+		
+		customerBean.setAvator(saveUrl);
+		
+		customerService.UpdataBean(customerBean);
+		
+		return "redirect:/font/modify.jsp";
+	}
+	
+	
 	/**
 	 * 功能
 	 * 

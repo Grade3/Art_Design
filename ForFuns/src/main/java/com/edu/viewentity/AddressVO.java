@@ -1,0 +1,81 @@
+package com.edu.viewentity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.edu.model.AddressBean;
+import com.edu.model.ProductBean;
+
+/**
+ * 地址显示层
+ * @author kh
+ *
+ */
+public class AddressVO
+{
+	private Integer id;
+	private Integer userid;
+	private String address;
+	
+	public AddressVO(AddressBean addressBean)
+	{
+		super();
+		id = addressBean.getId();
+		userid = addressBean.getCustomerBean().getId();
+		address = addressBean.getAddress();
+	}
+	
+	/**
+	 * 将list中的addressBean实体转变为addressVO
+	 * @param list
+	 * @return
+	 */
+	public static List<AddressVO> ChangeListAddressToAddressVo(List<AddressBean> list)
+	{
+		List<AddressVO> addressVOs = new ArrayList<AddressVO>();
+		for(int i=0;i<list.size();i++)
+		{
+			AddressVO addressVO = new AddressVO(list.get(i));
+			addressVOs.add(addressVO);
+		}
+		return addressVOs;
+	}
+
+	public Integer getId()
+	{
+		return id;
+	}
+
+	public void setId(Integer id)
+	{
+		this.id = id;
+	}
+
+	public Integer getUserid()
+	{
+		return userid;
+	}
+
+	public void setUserid(Integer userid)
+	{
+		this.userid = userid;
+	}
+
+	public String getAddress()
+	{
+		return address;
+	}
+
+	public void setAddress(String address)
+	{
+		this.address = address;
+	}
+
+	public AddressVO(Integer id, Integer userid, String address)
+	{
+		super();
+		this.id = id;
+		this.userid = userid;
+		this.address = address;
+	}
+}
