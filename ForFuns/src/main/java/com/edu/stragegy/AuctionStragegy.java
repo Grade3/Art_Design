@@ -18,7 +18,7 @@ public class AuctionStragegy implements ISellStrategy{
 	@Override
 	public String SellProduct(ProductBean productBean, CustomerBean customerBean,
 			Integer money, Map<String, Object> params) throws Exception {
-		return 0;
+		return 0+"";
 	}
 
 

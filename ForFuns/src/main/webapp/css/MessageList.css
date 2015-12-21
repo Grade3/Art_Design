@@ -1,0 +1,64 @@
+.message_div
+{
+	width: 100%;
+	margin-bottom: 2.5em;
+}
+
+.message_photo
+{
+	border-radius: 100%;
+	display: inline-block;
+}
+
+.message_label
+{
+	display: inline-block;
+	padding-left: 4em;
+	border-bottom: 1px solid #aaa;
+	padding-right: 0px;
+	padding-top: 2.2em;
+}
+
+.label1
+{
+	padding-right: 0px;
+}
+
+.send_message
+{
+	font-size: 4em;
+	color: #333;
+}
+
+.new_message
+{
+	font-size: 3em;
+	color: #aaa;
+}
+
+.send_time
+{
+	font-size: 3em;
+	color: #aaa;
+	padding-top: 0.2em;	
+}
+
+.num_message
+{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.circle_num
+{
+	background-color: #ff5d56;
+	border-radius: 100%;
+	text-align: center;
+}
+
+.circle_num p
+{
+	font-size: 2.7em;
+	color: #fff;
+}
+
