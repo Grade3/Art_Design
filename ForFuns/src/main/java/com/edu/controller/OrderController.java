@@ -203,8 +203,13 @@ public class OrderController
 		return map;
 	}
 	
+	/**
+	 * 进入我的订单
+	 * @param useridtoken
+	 * @return
+	 */
 	@RequestMapping(params="method=EnterMyOrder")
-	public String AOPenterMyOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
-		
+	public String CheckLoginEnterMyOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
+		return "font/OrderList.jsp";
 	}
 }

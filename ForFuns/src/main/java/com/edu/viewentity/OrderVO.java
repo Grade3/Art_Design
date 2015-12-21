@@ -17,7 +17,16 @@ public class OrderVO
 	private Integer ispay;
 	private Integer productid;
 	private Integer customerid;
+	private String productname;
+	private Integer money;
+	private String artistname;
 	
+	public String getProductname() {
+		return productname;
+	}
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
 	public Integer getId()
 	{
 		return id;
@@ -85,10 +94,28 @@ public class OrderVO
 		ispay = orderBean.getIspay();
 		productid = orderBean.getProductBean().getId();
 		customerid = orderBean.getCustomerBean().getId();
+		this.productname = orderBean.getProductBean().getName();
+		this.money = orderBean.getProductBean().getMoney();
+		this.artistname = orderBean.getCustomerBean().getUsername();
+	}
+	
+	
+	
+	public Integer getMoney() {
+		return money;
+	}
+	public void setMoney(Integer money) {
+		this.money = money;
+	}
+	public String getArtistname() {
+		return artistname;
+	}
+	public void setArtistname(String artistname) {
+		this.artistname = artistname;
 	}
 	public OrderVO(Integer id, String telephone, String address, Date current,
-			Integer ispay, Integer productid, Integer customerid)
-	{
+			Integer ispay, Integer productid, Integer customerid,
+			String productname, Integer money, String artistname) {
 		super();
 		this.id = id;
 		this.telephone = telephone;
@@ -97,8 +124,10 @@ public class OrderVO
 		this.ispay = ispay;
 		this.productid = productid;
 		this.customerid = customerid;
+		this.productname = productname;
+		this.money = money;
+		this.artistname = artistname;
 	}
-	
 	/**
 	 * 将list中的orderBean实体转变为ordervo
 	 * @param list
@@ -106,6 +135,8 @@ public class OrderVO
 	 */
 	public static List<OrderVO> ChangeListProductToOrderVo(List<OrderBean> list ){
 		List<OrderVO> orderVOs = new ArrayList<OrderVO>();
+		if(null==list)
+			return orderVOs;
 		for(int i=0;i<list.size();i++){
 			OrderVO orderVO = new OrderVO(list.get(i));
 			orderVOs.add(orderVO);

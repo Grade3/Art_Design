@@ -71,7 +71,7 @@ public class AspectAdvice  {
 	 
 	 
 	 
-	 @Pointcut("execution(* com.edu.controller.*.Aop*(..) ) ")
+	 @Pointcut("execution(* com.edu.controller.*.CheckLogin*(..) ) ")
 		public void checklogin(){
 			
 		}
