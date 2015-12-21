@@ -112,14 +112,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$('#loginoutaction').hide();
 			var id = getUrlParam("id");
 			var page = 1 ;
-			var pageSize = 4;
+			var pageSize = 2;
 			GetArtistInfo(id);
 			GetArtistProduct(page,pageSize,id);
 			CheckUser();
 			//查看更多点击事件
 			$('.learn_more').live('click',function(){
 				 page = page +1 ;
-				 GetArtistProduct(page,pageSize,artistid);
+				 GetArtistProduct(page,pageSize,id);
 				 $(this).hide();
 		  	});
 			$(window).scroll(function(){

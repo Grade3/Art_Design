@@ -67,8 +67,8 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 			hql = "from "+ProductBean.class.newInstance().getClass().getName()+" where artistid="+artistid;
 			//System.out.println(hql);
 			Query query = getSession().createQuery(hql);
-			//query.setFirstResult((page-1)*pageSize); 
-			//query.setMaxResults(pageSize); 
+			query.setFirstResult((page-1)*pageSize); 
+			query.setMaxResults(pageSize); 
 			list = query.list();
 			//System.out.println(list.toString());
 		} catch (Exception e) {
