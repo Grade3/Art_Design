@@ -12,11 +12,11 @@
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="../css/OrderDetail.css">
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
-<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
 
 <script src="../js/lanrenzhijia.js"></script>
 <script>
