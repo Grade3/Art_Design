@@ -237,4 +237,20 @@ public class OrderController
 		map.put("order", new OrderVO(orderBean));
 		return map;
 	}
+	
+	/**
+	 * 通过id删除订单
+	 * @param id 订单id
+	 * @return
+	 */
+	@RequestMapping(params="method=DeleteOrderByid")
+	public String CheckLoginGetOrderbyId(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="id")Integer id){
+		try {
+			orderService.DeleteByid(OrderBean.class,id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "font/error.jsp?errorid=2";
+		}
+		return "redirect:/font/success.jsp?successid=1";
+	}
 }

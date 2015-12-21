@@ -65,8 +65,9 @@ public interface IBaseService<T>{
 	 * @param clz
 	 * @param id
 	 * @return
+	 * @throws Exception 
 	 */
-	public int DeleteByid(Class clz,int id);
+	public int DeleteByid(Class clz,int id) throws Exception;
 	/**
 	 * 添加实体
 	 * @param object

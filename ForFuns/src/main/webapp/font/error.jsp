@@ -18,11 +18,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(document).ready(function(){
 			var error = getUrlParam('errorid');
 			if(null==error){
-				return;
+			}else if(error==1){
+				$('.label_wrong').html("操作失败，不属于您的订单");
+				$('.readmore').html('返回商品页面');
+				$('.readmore').attr('href',"<%=basePath%>font/goodslist.jsp");
+			}else if(error==2){
+				$('.label_wrong').html("操作失败，不属于您的订单");
+				$('.readmore').html('返回订单页面');
+				$('.readmore').attr('href',"<%=basePath%>order.do?method=EnterMyOrder");
 			}
-			$('.label_wrong').html("操作失败，不属于您的订单");
-			$('.readmore').html('返回商品页面');
-			$('.readmore').attr('href',"<%=basePath%>font/goodslist.jsp");
+			
 		});
 	</script>
 </head>

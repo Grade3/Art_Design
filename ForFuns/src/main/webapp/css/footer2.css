@@ -20,13 +20,13 @@ body
 	text-align: center;
 	background: #eee;
 	/*background: #ff5d56;*/
-	padding: 3em 3em;
+	padding: 1em 1em;
 	box-shadow: 0 0 10px rgba(100,100,100,0.5);
 }
 
 .title_bar p
 {
-	font-size: 4.5em;
+	font-size: 1.7em;
 	color: #333;
 	margin-bottom: 0px;
 }
@@ -39,7 +39,7 @@ body
 
 .mainer
 {
-	padding: 16em 4em 4em;
+	padding: 6em 1.5em 2em;
 }
 
 .partten

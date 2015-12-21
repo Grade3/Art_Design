@@ -21,7 +21,7 @@ public class OrderVO
 	private Integer money;
 	private String artistname;
 	private String productimg;
-	
+	private String receiver;
 	public String getProductname() {
 		return productname;
 	}
@@ -88,20 +88,27 @@ public class OrderVO
 	public OrderVO(OrderBean orderBean)
 	{
 		super();
-		id = orderBean.getId();
-		//telephone = orderBean.getOrderAddressBean().getTelephone();
-		address = orderBean.getOrderAddressBean().getAddressBean().getAddress();
-		current = orderBean.getCurrent();
-		ispay = orderBean.getIspay();
-		productid = orderBean.getProductBean().getId();
-		customerid = orderBean.getCustomerBean().getId();
+		this.id = orderBean.getId();
+		this.address = orderBean.getOrderAddressBean().getAddressBean().getAddress();
+		this.current = orderBean.getCurrent();
+		this.ispay = orderBean.getIspay();
+		this.productid = orderBean.getProductBean().getId();
+		this.customerid = orderBean.getCustomerBean().getId();
 		this.productname = orderBean.getProductBean().getName();
 		this.money = orderBean.getProductBean().getMoney();
 		this.artistname = orderBean.getCustomerBean().getUsername();
 		this.productimg = orderBean.getProductBean().getImgurl();
+		this.receiver = orderBean.getOrderAddressBean().getAddressBean().getReceiver();
+		this.telephone = orderBean.getOrderAddressBean().getAddressBean().getTelephone();
 	}
 	
 	
+	public String getReceiver() {
+		return receiver;
+	}
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
 	public String getProductimg() {
 		return productimg;
 	}

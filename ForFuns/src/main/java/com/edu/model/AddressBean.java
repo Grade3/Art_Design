@@ -1,14 +1,10 @@
 package com.edu.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name="ad_address")
@@ -17,8 +13,8 @@ public class AddressBean
 {
 	private Integer id;
 	private String address;
-	private CustomerBean customerBean;
-	
+	private String telephone;
+	private String receiver;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -40,35 +36,30 @@ public class AddressBean
 	{
 		this.address = address;
 	}
-	
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinColumn(name="userid")
-	public CustomerBean getCustomerBean()
-	{
-		return customerBean;
-	}
-	public void setCustomerBean(CustomerBean customerBean)
-	{
-		this.customerBean = customerBean;
-	}
-	
-	
-	
-	public AddressBean(Integer id, String address, CustomerBean customerBean)
-	{
+	public AddressBean(Integer id, String address, String telephone,
+			String receiver) {
 		super();
 		this.id = id;
 		this.address = address;
-		this.customerBean = customerBean;
+		this.telephone = telephone;
+		this.receiver = receiver;
 	}
-	public AddressBean(String address, CustomerBean customerBean)
-	{
-		super();
-		this.address = address;
-		this.customerBean = customerBean;
-	}
-	public AddressBean()
-	{
+	public AddressBean() {
 		super();
 	}
+	@Column(name="telephone")
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	@Column(name="receiver")
+	public String getReceiver() {
+		return receiver;
+	}
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+	
 }
