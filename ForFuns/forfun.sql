@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-12-22 13:22:13
+Date: 2015-12-23 01:39:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -125,10 +125,10 @@ CREATE TABLE `c_customer` (
 -- ----------------------------
 -- Records of c_customer
 -- ----------------------------
-INSERT INTO `c_customer` VALUES ('1', '1', 'christy', '123456', '3506811111111', '11111', 'gy', '/forfun/newsupload/1449304402174.JPG', '1');
-INSERT INTO `c_customer` VALUES ('2', '2', '1233', '12', '12', '12', '12', '/forfun/newsupload/1449304402174.JPG', '0');
-INSERT INTO `c_customer` VALUES ('3', '12212', '12', '213', '213', '13', '131', '/forfun/newsupload/1449304402174.JPG', '1');
-INSERT INTO `c_customer` VALUES ('4', 'mhzx20', 'kh', '123456', '32108819951117001X', '13666095971', 'kh', '/forfun/image/293.jpg', null);
+INSERT INTO `c_customer` VALUES ('1', 'gy', 'christy', '123456', '3506811111111', '11111', 'gy', '/forfun/avatorupload/1450781848430.jpg', '1');
+INSERT INTO `c_customer` VALUES ('2', '2', '1233', '12', '12', '12', '12', '/forfun/avatorupload/1450781848430.jpg', '0');
+INSERT INTO `c_customer` VALUES ('3', '12212', '12', '213', '213', '13', '131', '/forfun/avatorupload/1450781848430.jpg', '1');
+INSERT INTO `c_customer` VALUES ('4', 'mhzx20', 'kh', '123456', '32108819951117001X', '13666095971', 'kh', '/forfun/avatorupload/1450781848430.jpg', null);
 
 -- ----------------------------
 -- Table structure for `ea_examineartist`
@@ -197,15 +197,16 @@ CREATE TABLE `m_message` (
   KEY `FK_e355tkrguo7feiycq7xognthk` (`toid`),
   CONSTRAINT `FK_e355tkrguo7feiycq7xognthk` FOREIGN KEY (`toid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_fdblrv579vjxw47ivyxi57orl` FOREIGN KEY (`fromid`) REFERENCES `c_customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of m_message
 -- ----------------------------
-INSERT INTO `m_message` VALUES ('25', '2', '1', '3234', '2015-12-18 21:04:47', '1');
-INSERT INTO `m_message` VALUES ('26', '1', '3', 'ggg', '2015-12-18 21:52:53', '0');
+INSERT INTO `m_message` VALUES ('25', '2', '1', '<img src=\"/forfun/newsupload/1450447015339.jpg\" alt=\"\" />哈哈哈', '2015-12-18 21:04:47', '1');
+INSERT INTO `m_message` VALUES ('26', '3', '1', 'ggg', '2015-12-18 21:52:53', '1');
 INSERT INTO `m_message` VALUES ('27', '1', '3', 'jhhh', '2015-12-18 21:53:31', '0');
 INSERT INTO `m_message` VALUES ('28', '1', '3', '<img src=\"/forfun/newsupload/1450447015339.jpg\" alt=\"\" />哈哈哈', '2015-12-18 21:56:59', '0');
+INSERT INTO `m_message` VALUES ('29', '1', '2', 'asd', '2015-12-22 21:25:02', '0');
 
 -- ----------------------------
 -- Table structure for `n_news`
@@ -310,8 +311,8 @@ CREATE TABLE `pm_productmoney` (
   PRIMARY KEY (`id`),
   KEY `FK_medowh6ptfyd3ag6j59viq9np` (`customerid`),
   KEY `FK_ner8fgw1gx6osl7b6i6fxvxei` (`productid`),
-  CONSTRAINT `FK_medowh6ptfyd3ag6j59viq9np` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`),
-  CONSTRAINT `FK_ner8fgw1gx6osl7b6i6fxvxei` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`)
+  CONSTRAINT `FK_medowh6ptfyd3ag6j59viq9np` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_ner8fgw1gx6osl7b6i6fxvxei` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -329,9 +330,9 @@ CREATE TABLE `ps_productsell` (
   PRIMARY KEY (`id`),
   KEY `FK_b767vrittw9fd943i9hig7yij` (`sellmethodid`),
   KEY `FK_em1wxfqchkn2yluip1xc4krfb` (`productid`),
-  CONSTRAINT `FK_b767vrittw9fd943i9hig7yij` FOREIGN KEY (`sellmethodid`) REFERENCES `sm_sellmethod` (`id`),
-  CONSTRAINT `FK_em1wxfqchkn2yluip1xc4krfb` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK_b767vrittw9fd943i9hig7yij` FOREIGN KEY (`sellmethodid`) REFERENCES `sm_sellmethod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_em1wxfqchkn2yluip1xc4krfb` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ps_productsell
@@ -340,6 +341,7 @@ INSERT INTO `ps_productsell` VALUES ('1', '1', '1');
 INSERT INTO `ps_productsell` VALUES ('2', '2', '1');
 INSERT INTO `ps_productsell` VALUES ('3', '3', '1');
 INSERT INTO `ps_productsell` VALUES ('4', '4', '1');
+INSERT INTO `ps_productsell` VALUES ('6', '6', '1');
 
 -- ----------------------------
 -- Table structure for `pt_producttype`
@@ -380,7 +382,7 @@ CREATE TABLE `p_product` (
   KEY `FK_b3oo9oqhednel04ew5ix08gxa` (`typeid`),
   CONSTRAINT `FK_3a2286hejr4r95bofseli5r42` FOREIGN KEY (`artistid`) REFERENCES `c_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_b3oo9oqhednel04ew5ix08gxa` FOREIGN KEY (`typeid`) REFERENCES `pt_producttype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of p_product
@@ -389,6 +391,7 @@ INSERT INTO `p_product` VALUES ('1', 'kh', '/forfun/newsupload/1449304402174.JPG
 INSERT INTO `p_product` VALUES ('2', 'lxn', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-05', '2015-12-29', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '3');
 INSERT INTO `p_product` VALUES ('3', 'gy', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-13', '2015-12-31', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '1');
 INSERT INTO `p_product` VALUES ('4', 'wlx', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-07', '2015-12-31', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '3');
+INSERT INTO `p_product` VALUES ('6', '123', '/forfun/avatorupload/1450804600085.jpg', '1', '123', '2015-12-23', '2015-12-25', '1', '132141', '/forfun/avatorupload/1450804600085.jpg1450804600086.jpg', '/forfun/avatorupload/1450804600085.jpg1450804600086.jpg1450804600087.png', '/forfun/avatorupload/1450804600085.jpg1450804600086.jpg1450804600087.png1450804600087.png', null);
 
 -- ----------------------------
 -- Table structure for `rf_rolefunction`
