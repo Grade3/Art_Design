@@ -16,13 +16,8 @@ public class MessageVO {
 	private String toname;
 	private String sendavator;
 	private String toavator;
+	private Integer fromid;
 	
-	public MessageVO(Integer id, String content, Date time) {
-		super();
-		this.id = id;
-		this.content = content;
-		this.time = time;
-	}
 	public MessageVO(MessageBean messageBean) {
 		this.id = messageBean.getId();
 		this.content = messageBean.getMessage();
@@ -33,6 +28,7 @@ public class MessageVO {
 		this.toname = messageBean.getToCustomerBean().getUsername();
 		this.toavator = messageBean.getToCustomerBean().getAvator();
 		this.sendavator= messageBean.getFromCustomerBean().getAvator();
+		this.fromid = messageBean.getFromCustomerBean().getId();
 	}
 	public MessageVO() {
 		super();
@@ -93,6 +89,27 @@ public class MessageVO {
 		this.toavator = toavator;
 	}
 	
+	public Integer getFromid() {
+		return fromid;
+	}
+	public void setFromid(Integer fromid) {
+		this.fromid = fromid;
+	}
+	public MessageVO(Integer id, String content, Date time, Integer sendid,
+			Integer toid, String sendname, String toname, String sendavator,
+			String toavator, Integer fromid) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.time = time;
+		this.sendid = sendid;
+		this.toid = toid;
+		this.sendname = sendname;
+		this.toname = toname;
+		this.sendavator = sendavator;
+		this.toavator = toavator;
+		this.fromid = fromid;
+	}
 	public static List<MessageVO> ChangeToListMessageVO(List<MessageBean> temp){
 		List<MessageVO> list =new ArrayList<MessageVO>();
 		if(null== temp || temp.size()==0)

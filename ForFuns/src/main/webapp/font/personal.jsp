@@ -273,7 +273,7 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-envelope"></span>　我的消息</p>
-							<p class="col-xs-9"><a href="#"><span class="glyphicon glyphicon-hand-right"></span>　查看我的消息</a></p>
+							<p class="col-xs-9"><a href="<%=basePath%>message.do?method=entermymessage"><span class="glyphicon glyphicon-hand-right"></span>　查看我的消息</a></p>
 						</div>
 						<div class="row info info2">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-floppy-disk"></span>　我的银行卡</p>

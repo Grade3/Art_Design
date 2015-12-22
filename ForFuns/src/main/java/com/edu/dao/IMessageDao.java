@@ -25,6 +25,6 @@ public interface IMessageDao extends IBaseDao<MessageBean>{
 	 * @param fromid
 	 * @return
 	 */
-	public List<MessageBean> getUserUnReadMessage(Integer id);
+	public List<MessageBean> getUserMessage(Integer id,Integer isread);
 	
 }

@@ -19,6 +19,13 @@ function myformatter(value) {
         return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 	}
 }
+//更改datebox的日期格式
+function myformattertwo(value) {
+	if(value != null && value != ""){
+		var date = new Date(value);
+        return (date.getMonth() + 1) + '-' + date.getDate();
+	}
+}
 //检测用户是否已登录
 function CheckUser(){
 	var useridtoken = getCookie("useridtoken");

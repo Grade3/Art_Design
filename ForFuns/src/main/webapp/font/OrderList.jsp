@@ -78,6 +78,8 @@ function getUserOrder(customerUserid){
 }
 $(document).ready(function(){
 	var customerUserid = getCookieUserid();
+	if(null==customerUserid)
+		location.href="<%=basePath%>font/Login.jsp";
 	getUserOrder(customerUserid);
 	var pic_w = $(".order_pic").width();
 	var pic_h = pic_w;

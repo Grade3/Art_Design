@@ -34,11 +34,13 @@ public class MessageDaoImpl extends BaseDaoImpl<MessageBean> implements IMessage
 	}
 
 	@Override
-	public List<MessageBean> getUserUnReadMessage(Integer id) {
-		String sql = "SELECT * from "+MessageTable.TABLENAME+" where id in(select  max(id)  from "+MessageTable.TABLENAME+" where "+MessageTable.TOID+" =? GROUP BY "+MessageTable.FROMID+" )";
+	public List<MessageBean> getUserMessage(Integer id,Integer isread) {
+		String sql = "SELECT * from "+MessageTable.TABLENAME+" where id in(select  max(id)  from "+MessageTable.TABLENAME+" where "+MessageTable.TOID+" =? and isread =?  GROUP BY "+MessageTable.FROMID+" )";
 		//String sql ="from MessageBean  group by fromid=1";
+		System.out.println(sql);
 		Query query = getSession().createSQLQuery(sql);
 		query.setInteger(0, id);
+		query.setInteger(1, isread);
 		List<Object[]> list = query.list();
 		if(list.size()==0)
 			return null;

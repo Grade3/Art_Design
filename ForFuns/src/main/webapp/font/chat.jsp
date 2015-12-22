@@ -31,10 +31,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		});
 		
-		
-		
-		
-		
 	</script>
 	<script type="text/javascript">
 	  var id = getCookieUserid();
