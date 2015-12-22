@@ -17,6 +17,8 @@ public class AddressBean
 {
 	private Integer id;
 	private String address;
+	private String name;
+	private String telephone;
 	private CustomerBean customerBean;
 	
 	@Id
@@ -52,21 +54,47 @@ public class AddressBean
 		this.customerBean = customerBean;
 	}
 	
+	@Column(name="name")
+	public String getName()
+	{
+		return name;
+	}
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 	
+	@Column(name="telephone")
+	public String getTelephone()
+	{
+		return telephone;
+	}
+	public void setTelephone(String telephone)
+	{
+		this.telephone = telephone;
+	}
 	
-	public AddressBean(Integer id, String address, CustomerBean customerBean)
+	public AddressBean(String address, String name, String telephone,
+			CustomerBean customerBean)
+	{
+		super();
+		this.address = address;
+		this.name = name;
+		this.telephone = telephone;
+		this.customerBean = customerBean;
+	}
+	
+	public AddressBean(Integer id, String address, String name,
+			String telephone, CustomerBean customerBean)
 	{
 		super();
 		this.id = id;
 		this.address = address;
+		this.name = name;
+		this.telephone = telephone;
 		this.customerBean = customerBean;
 	}
-	public AddressBean(String address, CustomerBean customerBean)
-	{
-		super();
-		this.address = address;
-		this.customerBean = customerBean;
-	}
+	
 	public AddressBean()
 	{
 		super();

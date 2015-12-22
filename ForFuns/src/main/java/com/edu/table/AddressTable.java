@@ -6,4 +6,6 @@ public class AddressTable
 	public static String ID = "id";
 	public static String USERID = "userid";
 	public static String ADDRESS = "address";
+	public static String TELEPHONE = "telephone";
+	public static String NAME = "name";
 }

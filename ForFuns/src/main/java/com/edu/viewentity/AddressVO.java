@@ -16,6 +16,8 @@ public class AddressVO
 	private Integer id;
 	private Integer userid;
 	private String address;
+	private String name;
+	private String telephone;
 	
 	public AddressVO(AddressBean addressBean)
 	{
@@ -23,6 +25,8 @@ public class AddressVO
 		id = addressBean.getId();
 		userid = addressBean.getCustomerBean().getId();
 		address = addressBean.getAddress();
+		name = addressBean.getName();
+		telephone = addressBean.getTelephone();
 	}
 	
 	/**
@@ -70,12 +74,35 @@ public class AddressVO
 	{
 		this.address = address;
 	}
+	
+	public String getName()
+	{
+		return name;
+	}
 
-	public AddressVO(Integer id, Integer userid, String address)
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public String getTelephone()
+	{
+		return telephone;
+	}
+
+	public void setTelephone(String telephone)
+	{
+		this.telephone = telephone;
+	}
+
+	public AddressVO(Integer id, Integer userid, String address, String name,
+			String telephone)
 	{
 		super();
 		this.id = id;
 		this.userid = userid;
 		this.address = address;
+		this.name = name;
+		this.telephone = telephone;
 	}
 }

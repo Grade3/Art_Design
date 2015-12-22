@@ -120,9 +120,11 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 			JSONObject jsonObject = new JSONObject(data);
 			Integer userid = jsonObject.getInt(AddressTable.USERID);
 			String address = jsonObject.getString(AddressTable.ADDRESS);
+			String name = jsonObject.getString(AddressTable.NAME);
+			String telephone = jsonObject.getString(AddressTable.TELEPHONE);
 			
 			CustomerBean customerBean = customerService.GetEntityById(CustomerBean.class, userid);
-			AddressBean addressBean = new AddressBean(address, customerBean);
+			AddressBean addressBean = new AddressBean(address, name, telephone, customerBean);
 			addressService.AddBean(addressBean);
 			return 1;
 		} catch (Exception e) {
@@ -137,7 +139,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(params="method=updateCustomer")
+	@RequestMapping(params="method=updateAddress")
 	@ResponseBody
 	public String JsonUpdate(@RequestParam(value="data") String data) throws Exception{
 		try {
@@ -151,9 +153,11 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 		int id = jsonObject.getInt(AddressTable.ID);
 		Integer userid = jsonObject.getInt(AddressTable.USERID);
 		String address = jsonObject.getString(AddressTable.ADDRESS);
+		String name = jsonObject.getString(AddressTable.NAME);
+		String telephone = jsonObject.getString(AddressTable.TELEPHONE);
 		
 		CustomerBean customerBean = customerService.GetEntityById(CustomerBean.class, userid);
-		AddressBean addressBean = new AddressBean(id,address, customerBean);
+		AddressBean addressBean = new AddressBean(id, address, name, telephone, customerBean);
 		addressService.UpdataBean(addressBean);
 		return "true";
 	}

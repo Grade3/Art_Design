@@ -58,6 +58,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				{field:'address',title:'地址',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
+				{field:'name',title:'收件人',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
+				{field:'telephone',title:'联系方式',sortable:true,width:120,sortable:true,
+					editor: { type: 'validatebox',options: { required: true}  }
+				},
 			]],
 			toolbar:[
 			   {//添加数据
