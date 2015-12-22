@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.edu.base.IBaseService;
+import com.edu.model.ArtistBean;
 import com.edu.model.CustomerBean;
 import com.edu.model.ExamineArtistBean;
 
@@ -46,4 +47,13 @@ public interface IArtistService extends IBaseService<CustomerBean>
 	@SuppressWarnings("rawtypes")
 	public int GetPageBeanFilterTotal(Class clz, int page, int pageSize,
 			String selectname, String value);
+
+
+	/**
+	 * 通过userid获取艺术家信息
+	 * @param userid
+	 * @return
+	 * @throws Exception
+	 */
+	public CustomerBean getArtistByUserId(String userid) throws Exception;
 }

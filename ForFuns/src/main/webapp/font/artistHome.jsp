@@ -35,6 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}else if(cookieuserid==artistuserid){
 						$('.modify').show();
 						$('.beartist').show();
+						$('.modify').attr('href','<%=basePath%>product.do?method=EnterPublish');
+						
 					}else{
 						
 						$('.chat').show();

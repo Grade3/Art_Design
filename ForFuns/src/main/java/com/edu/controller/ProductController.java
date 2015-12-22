@@ -1,7 +1,10 @@
 package com.edu.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,6 +13,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.naming.spi.DirStateFactory.Result;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +26,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ServletConfigAware;
+import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.edu.model.ArtistBean;
 import com.edu.model.CustomerBean;
 import com.edu.model.NewsBean;
 import com.edu.model.OrderBean;
@@ -42,8 +52,22 @@ import com.edu.viewentity.ProductVO;
 
 @Controller
 @RequestMapping("/product.do")
-public class ProductController {
-	
+public class ProductController implements ServletConfigAware,
+ServletContextAware {
+	private ServletContext servletContext;
+
+	@Override
+	public void setServletContext(ServletContext arg0){
+		this.servletContext = arg0;
+	}
+
+	private ServletConfig servletConfig;
+
+	@Override
+	public void setServletConfig(ServletConfig arg0){
+		this.servletConfig = arg0;
+	}
+
 	@Autowired
 	private IProductService productService;
 	
@@ -323,5 +347,130 @@ public class ProductController {
 			return "3";//订单与用户不符合
 		}
 		return "2";//订单与用户相符
+	}
+	/**
+	 * 验证登录后进入发布页面 
+	 * @param useridtoken
+	 * @return
+	 */
+	@RequestMapping(params="method=EnterPublish")
+	public String CheckLoginPublish(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
+		return "/font/Publish.jsp";
+	}
+	/**
+	 * 
+	 * @param useridtoken
+	 * @param request
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping(params="method=PublishProduct")
+	public String CheckLoginAddProduct(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,HttpServletRequest request,
+			@RequestParam(value = "imgurl", required = true) MultipartFile file,@RequestParam(value = "imgone", required = true) MultipartFile imgone,
+			@RequestParam(value = "imgtwo", required = true) MultipartFile imgtwo,@RequestParam(value = "imgthree", required = true) MultipartFile imgthree,
+			@RequestParam(value="productname")String productname,@RequestParam(name="money")Integer money,@RequestParam(name="typeid")Integer typeid,
+			@RequestParam(value="sellid")Integer sellid,@RequestParam(value="starttime")String starttime,@RequestParam(value="endtime")String endtime,
+			@RequestParam(value="content")String content){
+		
+		ProductBean productBean = new ProductBean();
+		try {
+			CustomerBean customerBean = customerService.getCustomerByUserId(CheckTokenTool.GetUserid(useridtoken));
+			productBean.setArtistBean(new ArtistBean(customerBean));
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			return "redirect:/font/error.jsp?";
+		}
+		productBean.setName(productname);
+		productBean.setMoney(money);
+		try  {  
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+		    Date date = sdf.parse(starttime); 
+		    productBean.setTimestart(date);
+		}  catch (ParseException e)  {  
+		    System.out.println(e.getMessage());  
+		    return "redirect:/font/error.jsp?";
+		}  
+		try  {  
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+		    Date date = sdf.parse(endtime); 
+		    productBean.setTimeout(date);
+		}  catch (ParseException e)  {  
+		    System.out.println(e.getMessage());  
+		    return "redirect:/font/error.jsp?";
+		}  
+		productBean.setContent(content);
+		productBean.setProductTypeBean(productTypeService.GetEntityById(ProductTypeBean.class, typeid));
+		
+		
+		
+		
+		
+		
+		String filePath = servletContext.getRealPath("/") + "avatorupload/";
+		String saveUrl = request.getContextPath() + "/avatorupload/";
+		System.out.println(filePath);
+		File filedir = new File(filePath);
+		if (!filedir.exists()){
+			filedir.mkdir();
+			return "redirect:/font/error.jsp?";
+		}
+		String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+		String newfilename = System.currentTimeMillis() + ext;
+		String PathAndName = filePath + newfilename;
+		saveUrl = saveUrl + newfilename;
+		File resultFile = new File(PathAndName);
+		try{
+			file.transferTo(resultFile);
+		} catch (IOException e1){
+			e1.printStackTrace();
+			return "redirect:/font/error.jsp?";
+		}
+		productBean.setImgurl(saveUrl);
+		ext = imgone.getOriginalFilename().substring(imgone.getOriginalFilename().lastIndexOf("."));
+		newfilename = System.currentTimeMillis() + ext;
+		PathAndName = filePath + newfilename;
+		saveUrl = saveUrl + newfilename;
+		resultFile = new File(PathAndName);
+		try{
+			imgone.transferTo(resultFile);
+		} catch (IOException e1){
+			e1.printStackTrace();
+			return "redirect:/font/error.jsp?";
+		}
+		productBean.setImgone(saveUrl);
+		ext = imgtwo.getOriginalFilename().substring(imgtwo.getOriginalFilename().lastIndexOf("."));
+		newfilename = System.currentTimeMillis() + ext;
+		PathAndName = filePath + newfilename;
+		saveUrl = saveUrl + newfilename;
+		resultFile = new File(PathAndName);
+		try{
+			imgtwo.transferTo(resultFile);
+		} catch (IOException e1){
+			e1.printStackTrace();
+			return "redirect:/font/error.jsp?";
+		}
+		productBean.setImgtwo(saveUrl);
+		ext = imgthree.getOriginalFilename().substring(imgthree.getOriginalFilename().lastIndexOf("."));
+		newfilename = System.currentTimeMillis() + ext;
+		PathAndName = filePath + newfilename;
+		saveUrl = saveUrl + newfilename;
+		resultFile = new File(PathAndName);
+		try{
+			imgthree.transferTo(resultFile);
+		} catch (IOException e1){
+			e1.printStackTrace();
+			return "redirect:/font/error.jsp?";
+		}
+		productBean.setImgthree(saveUrl);
+		
+		
+		
+		ProductSellBean productSellBean = new ProductSellBean();
+		productSellBean.setSellMethodBean(sellMethodService.GetEntityById(SellMethodBean.class, sellid));
+		productSellBean.setProductBean(productBean);
+		productBean.setProductSellBean(productSellBean);
+		productService.AddBean(productBean);
+		return "redirect:/font/success.jsp?successid=2";
+		
 	}
 }

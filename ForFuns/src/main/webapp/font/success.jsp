@@ -20,6 +20,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}else if(successid==1){
 				$('.readmore').html('返回订单页面');
 				$('.readmore').attr('href',"<%=basePath%>order.do?method=EnterMyOrder");
+			}else if(successid==2){
+				$('.readmore').html('返回个人信息页面 ');
+				$('.readmore').attr('href',"<%=basePath%>font/personal.jsp");
 			}
 			
 		});

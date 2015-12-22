@@ -20,6 +20,19 @@ public class ArtistBean
 	private String realname;
 	private String avator;
 	private Integer isartist = 1;
+	
+	public ArtistBean(CustomerBean customerBean) {
+		super();
+		this.id = customerBean.getId();
+		this.userid = customerBean.getUserid();
+		this.username = customerBean.getUsername();
+		this.password = customerBean.getPassword();
+		this.personnumber = customerBean.getPersonnumber();
+		this.telphone = customerBean.getTelphone();
+		this.realname = customerBean.getRealname();
+		this.avator = customerBean.getAvator();
+		this.isartist = 1;
+	}
 
 	public ArtistBean()
 	{

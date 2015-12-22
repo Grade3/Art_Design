@@ -326,9 +326,7 @@ public class CustomerController implements ServletConfigAware,
 		{
 			filedir.mkdir();
 		}
-		String ext = file.getOriginalFilename().substring(
-				file.getOriginalFilename().lastIndexOf("."));
-		;
+		String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 		String newfilename = System.currentTimeMillis() + ext;
 		String PathAndName = filePath + newfilename;
 		saveUrl = saveUrl + newfilename;
@@ -453,12 +451,6 @@ public class CustomerController implements ServletConfigAware,
 		return "error";
 	}
 
-	@RequestMapping(params = "method=gettest")
-	@ResponseBody
-	public String JsonGetTree()
-	{
-		return "[{\"id\":1,\"name\":\"C\",\"children\":[{\"id\":2,\"name\":\"Program Files\"}]}]";
-	}
 
 	/**
 	 * 获取所有的用户

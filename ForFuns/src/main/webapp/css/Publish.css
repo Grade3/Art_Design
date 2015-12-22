@@ -19,6 +19,17 @@
 	border: 0px;
 }
 
+.btn_submit
+{
+	background-color: #ff5d56;
+	color: #fff;
+	font-size: 1.3em;
+	padding: 0.7em 0;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	border: 0px;
+}
+
 .password_label,.password_input,.password_error,.password_btn,.show_pic
 {
 	margin-left: 0px;
@@ -110,17 +121,16 @@
 .pic_word
 {
 	height: 15em;
-	border: 1px solid #333;
+	/* border: 1px solid #333; */
 	border-radius: 5px;
+	padding: 0px;
 }
 
-.btn_submit
+.lie
 {
-	background-color: #ff5d56;
-	color: #fff;
-	font-size: 1.2em;
-	padding: 0.8em 0;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	border: 0px;
+	margin-bottom: 0px;
 }
+#errorname{display: none;}
+#errormoney{display: none;}
+#errorstarttime{display: none;}
+#errorendtime{display: none;}

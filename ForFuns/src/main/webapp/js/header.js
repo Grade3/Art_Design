@@ -26,6 +26,8 @@ function myformattertwo(value) {
         return (date.getMonth() + 1) + '-' + date.getDate();
 	}
 }
+//移动函数
+function mScroll(id){$("html,body").stop(true);$("html,body").animate({scrollTop: $("#"+id).offset().top-150}, 1000);}
 //检测用户是否已登录
 function CheckUser(){
 	var useridtoken = getCookie("useridtoken");

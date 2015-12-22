@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.base.BaseServiceImpl;
 import com.edu.dao.IArtistDao;
+import com.edu.model.ArtistBean;
 import com.edu.model.CustomerBean;
 import com.edu.model.ExamineArtistBean;
 import com.edu.service.IArtistService;
+import com.edu.table.CustomerTable;
 
 @Lazy(true)
 @Transactional
@@ -67,5 +69,10 @@ public class ArtistServiceImpl extends BaseServiceImpl<CustomerBean> implements
 	public int AddBean(ExamineArtistBean examineartist) {
 		artistDao.addEntity(examineartist);
 		return 1;
+	}
+	
+	@Override
+	public CustomerBean getArtistByUserId(String userid) throws Exception {
+		return artistDao.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, userid, null);
 	}
 }
