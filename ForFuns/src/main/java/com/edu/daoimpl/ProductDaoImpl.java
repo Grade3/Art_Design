@@ -13,28 +13,44 @@ import com.edu.table.ProductTable;
 
 @Lazy(true)
 @Repository("productDao")
-public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProductDao{
+public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProductDao {
 
 	@Override
-	public int ChangeSituation(ProductBean productBean,Integer situation) {
-		this.sqlWithNone("update "+ProductTable.TABLENAME+" set "+ProductTable.SITUATION+" ="+situation+" and "+ProductTable.ARTISTID+" ="+productBean.getId());
+	public int ChangeSituation(ProductBean productBean, Integer situation) {
+		this.sqlWithNone("update " + ProductTable.TABLENAME + " set " + ProductTable.SITUATION + " =" + situation
+				+ " and " + ProductTable.ARTISTID + " =" + productBean.getId());
 		return 1;
 	}
 
 	@Override
-	public List<ProductBean> GetOnlineProduct(int page, int pageSize,int typeid,int methodid) {
-		String hql ="";
+	public List<ProductBean> GetOnlineProduct(int page, int pageSize, int typeid, int methodid) {
+		String hql = "";
 		List<ProductBean> list = null;
 		try {
-			//hql = "from "+ProductBean.class.newInstance().getClass().getName()+" temp where temp.productSellBean.sellMethodBean.id = ? and  current_date() >= timestart and current_date()<=timeout  and typeid=? and ( situation = 1 or situation = 0 )";
-			//hql = "from "+ProductBean.class.newInstance().getClass().getName()+" temp where temp.productSellBean.sellMethodBean.id = ? and typeid=? and ( situation = 1 or situation = 0 )";
-			hql = "select temp from "+ProductBean.class.newInstance().getClass().getName()+" temp inner join temp.productTypeBean type  where temp.productSellBean.sellMethodBean.id = ? and type.id=? and ( situation = 1 or situation = 0 )";
-			System.out.println(hql);
-			Query query = getSession().createQuery(hql);
-			query.setInteger(0, methodid);
-			query.setInteger(1, typeid);
-			query.setFirstResult((page-1)*pageSize); 
-			query.setMaxResults(pageSize); 
+			// hql = "from
+			// "+ProductBean.class.newInstance().getClass().getName()+" temp
+			// where temp.productSellBean.sellMethodBean.id = ? and
+			// current_date() >= timestart and current_date()<=timeout and
+			// typeid=? and ( situation = 1 or situation = 0 )";
+			// hql = "from
+			// "+ProductBean.class.newInstance().getClass().getName()+" temp
+			// where temp.productSellBean.sellMethodBean.id = ? and typeid=? and
+			// ( situation = 1 or situation = 0 )";
+			
+			//以下源代码
+//			 hql = "select temp from  "+ProductBean.class.newInstance().getClass().getName()+" temp  inner join temp.productTypeBean type where temp.productSellBean.sellMethodBean.id = ? and type.id=? and ( situation = 1 or situation = 0 )";
+//			 System.out.println(hql);
+//			 Query query = getSession().createQuery(hql);
+//			 query.setInteger(0, methodid);
+//			 query.setInteger(1, typeid);
+
+			Query query = getSession().getNamedQuery("ProductqueryGetOnlineProduct");
+//			query.setString("classname", ProductBean.class.newInstance().getClass().getName());
+			query.setInteger("methodid", methodid);
+			query.setInteger("typeid", typeid);
+
+			query.setFirstResult((page - 1) * pageSize);
+			query.setMaxResults(pageSize);
 			list = query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,13 +60,21 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 
 	@Override
 	public int getOnlineProductTotal(int typeid) {
-		String hql ="";
+		String hql = "";
 		List<ProductBean> list = null;
 		try {
-			//hql = "from "+ProductBean.class.newInstance().getClass().getName()+" where  current_date() >= timestart and current_date()<=timeout  and typeid="+typeid;
-			hql = "select temp from "+ProductBean.class.newInstance().getClass().getName()+" temp inner join temp.productTypeBean type  where temp.productSellBean.sellMethodBean.id = ? and type.id=? and ( situation = 1 or situation = 0 )";
+			// hql = "from
+			// "+ProductBean.class.newInstance().getClass().getName()+" where
+			// current_date() >= timestart and current_date()<=timeout and
+			// typeid="+typeid;
+			
+			//以下
+			//函数未完成
+			hql = "select temp from " + ProductBean.class.newInstance().getClass().getName()
+					+ " temp inner join temp.productTypeBean type  where temp.productSellBean.sellMethodBean.id = ? and type.id=? and ( situation = 1 or situation = 0 )";
 			System.out.println(hql);
 			Query query = getSession().createQuery(hql);
+
 			list = query.list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,17 +84,28 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 
 	@Override
 	public List<ProductBean> GetArtistProduct(int page, int pageSize, int artistid) {
-		String hql ="";
+		String hql = "";
 		List<ProductBean> list = null;
 		try {
-			//hql = "from "+ProductBean.class.newInstance().getClass().getName()+" temp where temp.productSellBean.sellMethodBean.id = ? and  current_date() >= timestart and current_date()<=timeout  and typeid=? and ( situation = 1 or situation = 0 )";
-			hql = "from "+ProductBean.class.newInstance().getClass().getName()+" where artistid="+artistid;
-			//System.out.println(hql);
-			Query query = getSession().createQuery(hql);
-			query.setFirstResult((page-1)*pageSize); 
-			query.setMaxResults(pageSize); 
+			// hql = "from
+			// "+ProductBean.class.newInstance().getClass().getName()+" temp
+			// where temp.productSellBean.sellMethodBean.id = ? and
+			// current_date() >= timestart and current_date()<=timeout and
+			// typeid=? and ( situation = 1 or situation = 0 )";
+			
+			//以下
+//			hql = "from " + ProductBean.class.newInstance().getClass().getName() + " where artistid=" + artistid;
+//			// System.out.println(hql);
+//			Query query = getSession().createQuery(hql);
+			
+			Query query = getSession().getNamedQuery("ProductqueryGetArtistProduct");
+//			query.setString("classname", ProductBean.class.newInstance().getClass().getName());
+			query.setInteger("artistid", artistid);
+
+			query.setFirstResult((page - 1) * pageSize);
+			query.setMaxResults(pageSize);
 			list = query.list();
-			//System.out.println(list.toString());
+			// System.out.println(list.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -79,13 +114,21 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 
 	@Override
 	public int getArtistProductTotal(int artistid) {
-		String hql ="";
+//		String hql = "";
 		List<ProductBean> list = null;
 		try {
-			hql = "from "+ProductBean.class.newInstance().getClass().getName()+" temp where artistid="+artistid;
-			System.out.println(hql);
-			System.out.println("getArtistProductTotal");
-			Query query = getSession().createQuery(hql);
+			
+			
+//			hql = "from " + ProductBean.class.newInstance().getClass().getName() + " temp where artistid=" + artistid;
+//			System.out.println(hql);
+//			System.out.println("getArtistProductTotal");
+//
+//			Query query = getSession().createQuery(hql);
+			
+			Query query = getSession().getNamedQuery("ProductquerygetArtistProductTotal");
+//			query.setString("classname", ProductBean.class.newInstance().getClass().getName());
+			query.setInteger("artistid", artistid);
+			
 			list = query.list();
 		} catch (Exception e) {
 			e.printStackTrace();

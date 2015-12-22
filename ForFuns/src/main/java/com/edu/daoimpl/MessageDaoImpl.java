@@ -12,43 +12,74 @@ import com.edu.model.MessageBean;
 import com.edu.table.MessageTable;
 
 @Repository("messageDao")
-public class MessageDaoImpl extends BaseDaoImpl<MessageBean> implements IMessageDao{
+public class MessageDaoImpl extends BaseDaoImpl<MessageBean> implements IMessageDao {
 
 	@Override
 	public List<MessageBean> getUnReadMessage(Integer sendid, Integer fromid) {
-		String hql = "from MessageBean where isread=0 and "+ MessageTable.FROMID +"=? and "+MessageTable.TOID +"=? ";
-		Query createQuery = getSession().createQuery(hql);
-		createQuery.setInteger(0, sendid);
-		createQuery.setInteger(1, fromid);
-		List<MessageBean> list = createQuery.list();
-		if(list.size()==0)
+//		 String hql = "from MessageBean where isread=0 and "+
+//		 MessageTable.FROMID +"=? and "+MessageTable.TOID +"=? ";
+//		 Query createQuery = getSession().createQuery(hql);
+//		 createQuery.setInteger(0, sendid);
+//		 createQuery.setInteger(1, fromid);
+		Query query = getSession().getNamedQuery("MessagequerygetUnReadMessage");
+		query.setInteger("fid", sendid);
+		query.setInteger("tid", fromid);
+		query.setString("fromid", MessageTable.FROMID);
+		query.setString("toid", MessageTable.TOID);
+		List<MessageBean> list = query.list();
+		if (list.size() == 0)
 			return null;
 		return list;
 	}
-
+	
 	@Override
-	public boolean alertUnReadMessage(Integer messageid,Integer sendid, Integer fromid) {
-		String sql = "update "+MessageTable.TABLENAME+" set "+MessageTable.ISREAD+"=1 where "+MessageTable.FROMID+"="+sendid+" and "+ MessageTable.TOID+"="+fromid+" and "+MessageTable.ID+"<= "+messageid;
+	public boolean alertUnReadMessage(Integer messageid, Integer sendid, Integer fromid) {
+		String sql = "update " + MessageTable.TABLENAME + " set " + MessageTable.ISREAD + "=1 where "
+				+ MessageTable.FROMID + "=" + sendid + " and " + MessageTable.TOID + "=" + fromid + " and "
+				+ MessageTable.ID + "<= " + messageid;
 		this.sqlWithNone(sql);
 		return true;
+		
+//		Query query = getSession().getNamedQuery("MessagequeryalertUnReadMessage");
+//		query.setString("tablename", MessageTable.TABLENAME);
+//		query.setString("isread", MessageTable.ISREAD);
+//		query.setString("toid", MessageTable.TOID);
+//		query.setString("fromid", MessageTable.FROMID);
+//		query.setInteger("tid", fromid);
+//		query.setInteger("fid", sendid);
+//		query.setString("messageid", MessageTable.ID);
+//		query.setInteger("mid", messageid);
+//		query.executeUpdate();  
+//		return true;
 	}
 
 	@Override
 	public List<MessageBean> getUserUnReadMessage(Integer id) {
-		String sql = "SELECT * from "+MessageTable.TABLENAME+" where id in(select  max(id)  from "+MessageTable.TABLENAME+" where "+MessageTable.TOID+" =? GROUP BY "+MessageTable.FROMID+" )";
-		//String sql ="from MessageBean  group by fromid=1";
-		Query query = getSession().createSQLQuery(sql);
-		query.setInteger(0, id);
+		
+//		String sql = "SELECT * from " + MessageTable.TABLENAME + " where id in(select  max(id)  from "
+//				+ MessageTable.TABLENAME + " where " + MessageTable.TOID + " =? GROUP BY " + MessageTable.FROMID + " )";
+//		// String sql ="from MessageBean group by fromid=1";
+//		Query query = getSession().createSQLQuery(sql);
+//		query.setInteger(0, id);
+		
+		Query query = getSession().getNamedQuery("MessagequerygetUserUnReadMessage");
+//		query.setString("tablename", MessageTable.TABLENAME);
+//		query.setString("tablenamed", MessageTable.TABLENAME);
+		query.setString("toid", MessageTable.TOID);
+		query.setInteger("tid", id);
+		query.setString("fromid", MessageTable.FROMID);
+		
 		List<Object[]> list = query.list();
-		if(list.size()==0)
+		if (list.size() == 0)
 			return null;
 		List<MessageBean> result = new ArrayList<MessageBean>();
-		for(int i=0;i<list.size();i++){
+		for (int i = 0; i < list.size(); i++) {
 			Object[] object = list.get(0);
-			MessageBean messageBean = (MessageBean) this.getEntitybyId(MessageBean.class, Integer.parseInt(object[0].toString()));
+			MessageBean messageBean = (MessageBean) this.getEntitybyId(MessageBean.class,
+					Integer.parseInt(object[0].toString()));
 			result.add(messageBean);
 		}
 		return result;
 	}
-	
+
 }

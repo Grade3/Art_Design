@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping>
-	<query name="UserqueryByName">  
-    <![CDATA[from UserBean where username=:username and password=:password]]>
+	<query name="ProductTypequeryisExist">  
+        <![CDATA[from ProductTypeBean where id=:id]]>
 	</query>
 </hibernate-mapping>  

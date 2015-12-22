@@ -12,17 +12,21 @@ import com.edu.model.UserBean;
 @Lazy(true)
 @Repository("productTypeDao")
 
-public class ProductTypeDaoImpl extends BaseDaoImpl<ProductTypeBean> implements IProductTypeDao
-{
+public class ProductTypeDaoImpl extends BaseDaoImpl<ProductTypeBean> implements IProductTypeDao {
 	@Override
 	public boolean isExist(ProductTypeBean productType) {
-		 String hql = "from ProductTypeBean where id=?";
-		 Query query = getSession().createQuery(hql);
-		 query.setLong(0, productType.getId());
-		 if(query.list().size()>=1){
-			 return true;
-		 }else{
-			 return false;
-		 }
+
+		// String hql = "from ProductTypeBean where id=?";
+		// Query query = getSession().createQuery(hql);
+		// query.setLong(0, productType.getId());
+
+		Query query = getSession().getNamedQuery("ProductTypequeryisExist");
+		query.setInteger("id", productType.getId());
+
+		if (query.list().size() >= 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
