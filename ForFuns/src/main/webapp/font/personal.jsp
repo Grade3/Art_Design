@@ -80,7 +80,7 @@ function GetUser()
 				$('#advantage_div').hide();
 			}
 			$('#avator').attr('src',avator);
-			$('#username').html(username);
+			$('#nickname').html(username);
 			$('#userid').html(userid);
 			$('#personnumber').html(personnumber);
 			$('#telphone').html(telphone);
@@ -223,7 +223,7 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-user"></span>　昵称</p>
-							<p class="col-xs-9" id="username">我的昵称</p>
+							<p class="col-xs-9" id="nickname">我的昵称</p>
 						</div>
 						<div class="row info">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-lock"></span>　修改密码</p>
