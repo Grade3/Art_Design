@@ -14,18 +14,16 @@ import com.edu.model.ProductBean;
 public class AddressVO
 {
 	private Integer id;
-	private Integer userid;
 	private String address;
-	private String name;
+	private String receiver;
 	private String telephone;
 	
 	public AddressVO(AddressBean addressBean)
 	{
 		super();
 		id = addressBean.getId();
-		userid = addressBean.getCustomerBean().getId();
 		address = addressBean.getAddress();
-		name = addressBean.getName();
+		receiver = addressBean.getReceiver();
 		telephone = addressBean.getTelephone();
 	}
 	
@@ -55,16 +53,6 @@ public class AddressVO
 		this.id = id;
 	}
 
-	public Integer getUserid()
-	{
-		return userid;
-	}
-
-	public void setUserid(Integer userid)
-	{
-		this.userid = userid;
-	}
-
 	public String getAddress()
 	{
 		return address;
@@ -74,15 +62,15 @@ public class AddressVO
 	{
 		this.address = address;
 	}
-	
-	public String getName()
+
+	public String getReceiver()
 	{
-		return name;
+		return receiver;
 	}
 
-	public void setName(String name)
+	public void setReceiver(String receiver)
 	{
-		this.name = name;
+		this.receiver = receiver;
 	}
 
 	public String getTelephone()
@@ -95,14 +83,13 @@ public class AddressVO
 		this.telephone = telephone;
 	}
 
-	public AddressVO(Integer id, Integer userid, String address, String name,
+	public AddressVO(Integer id, String address, String receiver,
 			String telephone)
 	{
 		super();
 		this.id = id;
-		this.userid = userid;
 		this.address = address;
-		this.name = name;
+		this.receiver = receiver;
 		this.telephone = telephone;
 	}
 }
