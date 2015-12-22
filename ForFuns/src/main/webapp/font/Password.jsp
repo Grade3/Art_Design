@@ -40,6 +40,11 @@ $(document).ready(function()
 {
 	var customerUserid = getCookieUserid();
 	alert(customerUserid);
+	
+	
+	
+	
+	
 	var pic_w = $(".order_pic").width();
 	var pic_h = pic_w;
 	$(".order_pic").height(pic_h);
