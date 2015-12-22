@@ -17,8 +17,6 @@ public class AddressBean
 {
 	private Integer id;
 	private String address;
-	private String name;
-	private CustomerBean customerBean;
 	private String telephone;
 	private String receiver;
 	@Id
@@ -42,26 +40,6 @@ public class AddressBean
 	{
 		this.address = address;
 	}
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinColumn(name="userid")
-	public CustomerBean getCustomerBean()
-	{
-		return customerBean;
-	}
-	public void setCustomerBean(CustomerBean customerBean)
-	{
-		this.customerBean = customerBean;
-	}
-	
-	@Column(name="name")
-	public String getName()
-	{
-		return name;
-	}
-	public void setName(String name)
-	{
-		this.name = name;
-	}
 	
 	@Column(name="telephone")
 	public String getTelephone()
@@ -84,15 +62,19 @@ public class AddressBean
 	public AddressBean() {
 		super();
 	}
-	public AddressBean(Integer id, String address, String name,
-			CustomerBean customerBean, String telephone, String receiver) {
+	public AddressBean(Integer id, String address, String telephone, String receiver) 
+	{
 		super();
 		this.id = id;
 		this.address = address;
-		this.name = name;
-		this.customerBean = customerBean;
 		this.telephone = telephone;
 		this.receiver = receiver;
 	}
-	
+	public AddressBean(String address, String telephone, String receiver)
+	{
+		super();
+		this.address = address;
+		this.telephone = telephone;
+		this.receiver = receiver;
+	}
 }

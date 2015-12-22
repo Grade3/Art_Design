@@ -118,13 +118,11 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 			data = data.substring(1,data.length()-1);
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
-			Integer userid = jsonObject.getInt(AddressTable.USERID);
 			String address = jsonObject.getString(AddressTable.ADDRESS);
-			String name = jsonObject.getString(AddressTable.NAME);
+			String receiver = jsonObject.getString(AddressTable.RECEIVER);
 			String telephone = jsonObject.getString(AddressTable.TELEPHONE);
 			
-			CustomerBean customerBean = customerService.GetEntityById(CustomerBean.class, userid);
-			AddressBean addressBean = new AddressBean(address, name, telephone, customerBean);
+			AddressBean addressBean = new AddressBean(address, telephone, receiver);
 			addressService.AddBean(addressBean);
 			return 1;
 		} catch (Exception e) {
@@ -151,13 +149,11 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 		System.out.println(data);
 		JSONObject jsonObject = new JSONObject(data);
 		int id = jsonObject.getInt(AddressTable.ID);
-		Integer userid = jsonObject.getInt(AddressTable.USERID);
 		String address = jsonObject.getString(AddressTable.ADDRESS);
-		String name = jsonObject.getString(AddressTable.NAME);
+		String receiver = jsonObject.getString(AddressTable.RECEIVER);
 		String telephone = jsonObject.getString(AddressTable.TELEPHONE);
 		
-		CustomerBean customerBean = customerService.GetEntityById(CustomerBean.class, userid);
-		AddressBean addressBean = new AddressBean(id, address, name, telephone, customerBean);
+		AddressBean addressBean = new AddressBean(id, address, telephone, receiver);
 		addressService.UpdataBean(addressBean);
 		return "true";
 	}
