@@ -36,8 +36,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderBean> implements IOrd
 			CustomerBean customerBean = (CustomerBean) customerDao.getEntitybyId(CustomerBean.class, customerid);
 			orderBean.setCustomerBean(customerBean);
 			orderBean.setProductBean(productBean);
-			orderBean.setAddress(address);
-			orderBean.setTelephone(telephone);
+			//orderBean.setAddress(address);
+			//orderBean.setTelephone(telephone);
 			orderDao.addEntity(orderBean);
 			return 3;//添加成功
 		}else if(customerid != orderBean.getCustomerBean().getId())

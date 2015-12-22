@@ -124,8 +124,8 @@ public class OrderController
 			CustomerBean customerBean = customerService.GetEntityById(CustomerBean.class, customerid);
 			ProductBean productBean = productService.GetEntityById(ProductBean.class, productid);
 			
-			OrderBean orderBean = new OrderBean(telephone, address, current, ispay, productBean, customerBean);
-			orderService.AddBean(orderBean);
+			//OrderBean orderBean = new OrderBean(telephone, address, current, ispay, productBean, customerBean);
+			//orderService.AddBean(orderBean);
 			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -165,12 +165,12 @@ public class OrderController
 		
 		OrderBean orderBean = orderService.GetEntityById(OrderBean.class, id);
 		
-		orderBean.setAddress(address);
+		//orderBean.setAddress(address);
 		orderBean.setCurrent(current);
 		orderBean.setCustomerBean(customerBean);
 		orderBean.setIspay(ispay);
 		orderBean.setProductBean(productBean);
-		orderBean.setTelephone(telephone);
+		//orderBean.setTelephone(telephone);
 		
 		orderService.UpdataBean(orderBean);
 		return "true";
@@ -229,11 +229,28 @@ public class OrderController
 	 * @param id 订单id
 	 * @return
 	 */
-	@RequestMapping(params="")
+	@ResponseBody
+	@RequestMapping(params="method=GetOrderByid")
 	public Map<String, Object> JsonGetOrderbyId(@RequestParam(value="id")Integer id){
 		OrderBean orderBean = orderService.GetEntityById(OrderBean.class, id);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("order", orderBean);
+		map.put("order", new OrderVO(orderBean));
 		return map;
+	}
+	
+	/**
+	 * 通过id删除订单
+	 * @param id 订单id
+	 * @return
+	 */
+	@RequestMapping(params="method=DeleteOrderByid")
+	public String CheckLoginGetOrderbyId(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="id")Integer id){
+		try {
+			orderService.DeleteByid(OrderBean.class,id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "font/error.jsp?errorid=2";
+		}
+		return "redirect:/font/success.jsp?successid=1";
 	}
 }

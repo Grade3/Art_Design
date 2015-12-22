@@ -8,6 +8,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<title>OrderList</title>
 	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />

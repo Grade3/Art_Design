@@ -37,7 +37,7 @@ public class CustomerBean
 	private String realname;
 	private String avator;
 	private Integer isartist;
-
+	
 	public CustomerBean()
 	{
 		super();

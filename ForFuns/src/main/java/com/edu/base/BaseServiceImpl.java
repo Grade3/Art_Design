@@ -54,14 +54,9 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public int DeleteByid(Class clz, int id) {
-		try {
-			baseDao.deleteEntitybyId(clz, id);
-			return 1;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 0;
-		}
+	public int DeleteByid(Class clz, int id) throws Exception {
+		baseDao.deleteEntitybyId(clz, id);
+		return 1;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

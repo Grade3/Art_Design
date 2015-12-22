@@ -8,6 +8,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<title>OrderDetail</title>
 	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -17,6 +18,7 @@
 	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -58,6 +60,46 @@ function checkOrder(productid){
 		}
 	});
 }
+function getOderDetail(id){
+	$.ajax({
+		type:'post',
+		url:'<%=basePath%>order.do?method=GetOrderByid',
+		data:{id:id},
+		success:function(json){
+			var order = json.order;
+			var id =order.id;
+			var telephone = order.telephone;
+			var address = order.address;
+			var current = order.current;
+			var ispay = order.ispay;
+			var productname = order.productname;
+			var address = order.address;
+			var telephone = order.telephone;
+			var money = order.money;
+			var receiver = order.receiver;
+			var artistname = order.artistname;
+			var current = myformatter(order.current);
+			$('#money').html("订单金额：￥"+money);
+			$('#receiver').html(receiver);
+			$('#address').html("收货地址："+address);
+			$('#telephone').html("联系电话："+telephone);
+			$('#artistname').html(artistname);
+			$('#productname').html(productname);
+			$('#undermoney').html("￥"+money);
+			$('#orderid').html("订单号："+id);
+			$('#current').html("下单时间："+current);
+			if(ispay==0){
+				var temp = "<button class='col-xs-5 btn btn-default' type='button' id='btnpay'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>&nbsp;&nbsp;支付订单</button>";
+				$('#opert').append(temp);
+			}else{
+				var temp = "<button class='col-xs-5 btn btn-default' type='button' id='btndelete'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>&nbsp;&nbsp;删除订单</button>";
+				$('#opert').append(temp);
+			}
+		},error:function(){
+			
+		}
+	});
+}
 $(document).ready(function()
 {
 	var productid = getUrlParam("id");
@@ -65,6 +107,7 @@ $(document).ready(function()
 		location.href="404.jsp";
 	}
 	checkOrder(productid);
+	getOderDetail(productid);
 	var pic_w = $(".order_pic").width();
 	var pic_h = pic_w;
 	$(".order_pic").height(pic_h);
@@ -74,6 +117,9 @@ $(document).ready(function()
 		var pic_h = pic_w;
 		$(".order_pic").height(pic_h);
   	});
+	$('#btndelete').live('click',function(){
+		location.href="<%=basePath%>order.do?method=DeleteOrderByid&id="+productid;
+	});
 });
 </script>
 
@@ -92,18 +138,18 @@ $(document).ready(function()
 <div class="container-fluid mainer">
 	<div class="row statue_detail">
 		<p class="col-xs-12 statue_label"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;&nbsp;订单状态</p>
-		<p class="statue_price" id="money">订单金额（含运费）：￥99.00</p>
+		<p class="statue_price" id="money">订单金额：￥99.00</p>
 		<!-- <p class="statue_price">运费：￥10.00</p> -->
 	</div>
 	<div class="row receiver">
-		<p class="col-xs-12 receiver_name"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;&nbsp;收货人：孔日天</p>
-		<p class="receiver_add">收货地址：福建省厦门市思明区厦大学生公寓</p>
-		<p class="receiver_add">联系电话：15699990000</p>
+		<p class="col-xs-12 receiver_name"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;&nbsp;收货人：<span id="receiver">孔日天</span></p>
+		<p class="receiver_add" id="address">收货地址：福建省厦门市思明区厦大学生公寓</p>
+		<p class="receiver_add" id="telephone">联系电话：15699990000</p>
 	</div>
 	<div class="row order_div">
 		<a href="artistHome.html">
 			<div class="row order_artist">
-				<p class="col-xs-12 artist_name"><span class="glyphicon glyphicon-link" aria-hidden="true"></span>&nbsp;&nbsp;艺术家名称&nbsp;&nbsp;<span class="glyphicon glyphicon-menu-right partten1" aria-hidden="true"></span></p>
+				<p class="col-xs-12 artist_name"><span class="glyphicon glyphicon-link" aria-hidden="true"></span>&nbsp;&nbsp;<spand id="artistname">艺术家名称</spand>&nbsp;&nbsp;<span class="glyphicon glyphicon-menu-right partten1" aria-hidden="true"></span></p>
 			</div>
 		</a>
 		<a href="OrderDetail.html">
@@ -111,19 +157,19 @@ $(document).ready(function()
 				<img class="col-xs-3 order_pic" src="<%=basePath%>image/good.jpg">
 				<div class="col-xs-9 row order_label">
 					<div class="row label1">
-						<p class="col-xs-8 order_name">订单商品名称订单商品名称</p>
-						<p class="col-xs-4 order_price">￥99.00</p>
+						<p class="col-xs-8 order_name" id="productname">订单商品名称订单商品名称</p>
+						<p class="col-xs-4 order_price" id="undermoney">￥99.00</p>
 					</div>
 				</div>
 			</div>
 		</a>
 		<div class="row order_sth">
-			<p class="col-xs-12 order_id">订单号：1234567890</p>
-			<p class="col-xs-12 order_time">下单时间：2015-12-21 14:20:53</p>
+			<p class="col-xs-12 order_id" id="orderid">订单号：1234567890</p>
+			<p class="col-xs-12 order_time" id="current">下单时间：2015-12-21 14:20:53</p>
 		</div>
-		<div class="row order_btn">
-			<button class="col-xs-4 btn btn-default" type="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;&nbsp;删除订单</button>
-			<button class="col-xs-4 btn btn-default" type="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;&nbsp;删除订单</button>
+		<div class="row order_btn" id="opert">
+			<!-- <button class="col-xs-4 btn btn-default" type="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;&nbsp;删除订单</button> -->
+			<!-- <button class="col-xs-4 btn btn-default" type="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;&nbsp;删除订单</button> -->
 		</div>
 	</div>
 </div>

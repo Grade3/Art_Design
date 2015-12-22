@@ -18,9 +18,9 @@ public class AddressBean
 	private Integer id;
 	private String address;
 	private String name;
-	private String telephone;
 	private CustomerBean customerBean;
-	
+	private String telephone;
+	private String receiver;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -42,7 +42,6 @@ public class AddressBean
 	{
 		this.address = address;
 	}
-	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="userid")
 	public CustomerBean getCustomerBean()
@@ -74,29 +73,26 @@ public class AddressBean
 		this.telephone = telephone;
 	}
 	
-	public AddressBean(String address, String name, String telephone,
-			CustomerBean customerBean)
-	{
-		super();
-		this.address = address;
-		this.name = name;
-		this.telephone = telephone;
-		this.customerBean = customerBean;
-	}
 	
+	@Column(name="receiver")
+	public String getReceiver() {
+		return receiver;
+	}
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+	public AddressBean() {
+		super();
+	}
 	public AddressBean(Integer id, String address, String name,
-			String telephone, CustomerBean customerBean)
-	{
+			CustomerBean customerBean, String telephone, String receiver) {
 		super();
 		this.id = id;
 		this.address = address;
 		this.name = name;
-		this.telephone = telephone;
 		this.customerBean = customerBean;
+		this.telephone = telephone;
+		this.receiver = receiver;
 	}
 	
-	public AddressBean()
-	{
-		super();
-	}
 }

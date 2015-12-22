@@ -266,7 +266,7 @@ public class ProductController {
 	 */
 	@RequestMapping(params="method=AddOrder")
 	public String CheckLoginAddOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="productid")Integer id,
-			@RequestParam(value="address")String address,@RequestParam(value="telephone")String telephone){
+			@RequestParam(value="addressid")Integer addressid){
 		String userid = CheckTokenTool.GetUserid(useridtoken);
 		CustomerBean customerBean = null;
 		ProductBean productBean = null;
@@ -281,8 +281,7 @@ public class ProductController {
 			return "redirect:/font/error.jsp";
 		String respons = "redirect:/font/error.jsp";
 		try {
-			params.put(OrderTable.TELEPHONE, telephone);
-			params.put(OrderTable.ADDRESS, address);
+			params.put("addressid", addressid);
 			productProxy.Init(productBean);
 			respons =productProxy.BuyProduct(customerBean, productBean.getMoney(),params);
 			System.out.println(respons);

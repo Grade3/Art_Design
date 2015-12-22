@@ -8,6 +8,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<title>MessageList</title>
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -46,9 +47,6 @@ $(document).ready(function()
 	var label_h = $(".message_photo").height();
 	$(".message_label").height(label_h);
 
-	var num_h = $(".message_photo").height();
-	$(".num_message").height(num_h);
-
 	var circle_h = $(".circle_num").width();
 	$(".circle_num").height(circle_h);
 
@@ -59,9 +57,6 @@ $(document).ready(function()
 
 		var label_h = $(".message_photo").height();
 		$(".message_label").height(label_h);
-
-		var num_h = $(".message_photo").height();
-		$(".num_message").height(num_h);
 
 		var circle_h = $(".circle_num").width();
 		$(".circle_num").height(circle_h);
@@ -95,7 +90,24 @@ $(document).ready(function()
 				<p class="col-xs-11 new_message">这是一条最新消息</p>
 				<div class="col-xs-1 num_message">
 					<div class="circle_num">
-						<p>3</p>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+</a>
+<a href="message.html">
+	<div class="row message_div">
+		<img class="col-xs-3 message_photo" src="../image/good.jpg">
+		<div class="col-xs-9 row message_label">
+			<div class="col-xs-12 row label1">
+				<p class="col-xs-10 send_message">发送者用户名</p>
+				<p class="col-xs-2 send_time">08:30</p>
+			</div>	
+			<div class="col-xs-12 row label1">
+				<p class="col-xs-11 new_message">这是一条最新消息</p>
+				<div class="col-xs-1 num_message">
+					<div class="circle_num">
 					</div>
 				</div>			
 			</div>
@@ -114,7 +126,6 @@ $(document).ready(function()
 				<p class="col-xs-11 new_message">这是一条最新消息</p>
 				<div class="col-xs-1 num_message">
 					<div class="circle_num">
-						<p>3</p>
 					</div>
 				</div>			
 			</div>
@@ -133,7 +144,6 @@ $(document).ready(function()
 				<p class="col-xs-11 new_message">这是一条最新消息</p>
 				<div class="col-xs-1 num_message">
 					<div class="circle_num">
-						<p>3</p>
 					</div>
 				</div>			
 			</div>
@@ -152,7 +162,6 @@ $(document).ready(function()
 				<p class="col-xs-11 new_message">这是一条最新消息</p>
 				<div class="col-xs-1 num_message">
 					<div class="circle_num">
-						<p>3</p>
 					</div>
 				</div>			
 			</div>
@@ -171,7 +180,6 @@ $(document).ready(function()
 				<p class="col-xs-11 new_message">这是一条最新消息</p>
 				<div class="col-xs-1 num_message">
 					<div class="circle_num">
-						<p>3</p>
 					</div>
 				</div>			
 			</div>
@@ -190,7 +198,6 @@ $(document).ready(function()
 				<p class="col-xs-11 new_message">这是一条最新消息</p>
 				<div class="col-xs-1 num_message">
 					<div class="circle_num">
-						<p>3</p>
 					</div>
 				</div>			
 			</div>
@@ -209,26 +216,6 @@ $(document).ready(function()
 				<p class="col-xs-11 new_message">这是一条最新消息</p>
 				<div class="col-xs-1 num_message">
 					<div class="circle_num">
-						<p>3</p>
-					</div>
-				</div>			
-			</div>
-		</div>
-	</div>
-</a>
-<a href="message.html">
-	<div class="row message_div">
-		<img class="col-xs-3 message_photo" src="../image/good.jpg">
-		<div class="col-xs-9 row message_label">
-			<div class="col-xs-12 row label1">
-				<p class="col-xs-10 send_message">发送者用户名</p>
-				<p class="col-xs-2 send_time">08:30</p>
-			</div>	
-			<div class="col-xs-12 row label1">
-				<p class="col-xs-11 new_message">这是一条最新消息</p>
-				<div class="col-xs-1 num_message">
-					<div class="circle_num">
-						<p>3</p>
 					</div>
 				</div>			
 			</div>
