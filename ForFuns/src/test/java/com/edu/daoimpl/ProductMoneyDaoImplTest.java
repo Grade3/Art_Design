@@ -38,7 +38,7 @@ public class ProductMoneyDaoImplTest {
 
 	@Test
 	public void test() {
-		productMoneyDao.GetMaxMoney();
+		productMoneyDao.GetMaxMoneyid(1);
 	}
 
 }

@@ -6,6 +6,6 @@
 	</query>
 	
 	<query name="NewsqueryGetOnlineNews">  
-        <![CDATA[from NewsBean where :isonline = 1]]>
+        <![CDATA[from NewsBean where isonline = 1]]>
 	</query>
 </hibernate-mapping>  
