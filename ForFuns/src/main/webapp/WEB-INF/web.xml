@@ -66,10 +66,11 @@
 		<filter-name>AdminLoginFilter</filter-name>
 		<filter-class>com.edu.filter.AdminLoginFilter</filter-class>
 	</filter>
-	<!-- <filter-mapping>
+	<filter-mapping>
 		<filter-name>AdminLoginFilter</filter-name>
 		<url-pattern>/admin/main.jsp</url-pattern>
-	</filter-mapping>  
+	</filter-mapping> 
+	<!--  
 	<error-page>
     	<error-code>404</error-code>
    	 	<location>/font/404.jsp</location>

@@ -37,16 +37,14 @@ public class CustomerBean
 	private String realname;
 	private String avator;
 	private Integer isartist;
-	
-	public CustomerBean()
-	{
+	private Set<CustomerAddressBean> customerAddressBeans;
+	public CustomerBean(){
 		super();
 	}
 
 	public CustomerBean(Integer id, String userid, String username,
 			String password, String personnumber, String telphone,
-			String realname, String avator, Integer isartist)
-	{
+			String realname, String avator, Integer isartist){
 		super();
 		this.id = id;
 		this.userid = userid;
@@ -59,15 +57,13 @@ public class CustomerBean
 		this.isartist = isartist;
 	}
 	
-	public CustomerBean(String username, String password)
-	{
+	public CustomerBean(String username, String password){
 		super();
 		this.username = username;
 		this.password = password;
 	}
 
-	public CustomerBean(int id, String username, String password)
-	{
+	public CustomerBean(int id, String username, String password){
 		super();
 		this.id = id;
 		this.username = username;
@@ -76,8 +72,7 @@ public class CustomerBean
 
 	public CustomerBean(String userid, String username, String password,
 			String personnumber, String telphone, String realname,
-			String avator, Integer isartist)
-	{
+			String avator, Integer isartist){
 		super();
 		this.userid = userid;
 		this.username = username;
@@ -90,8 +85,7 @@ public class CustomerBean
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString(){
 		return "CustomerBean [id=" + id + ", userid=" + userid + ", username="
 				+ username + ", password=" + password + ", personnumber="
 				+ personnumber + ", telphone=" + telphone + ", realname="
@@ -102,101 +96,111 @@ public class CustomerBean
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	public Integer getId()
-	{
+	public Integer getId(){
 		return id;
 	}
 
-	public void setId(Integer id)
-	{
+	public void setId(Integer id){
 		this.id = id;
 	}
 
 	@Column(name = "userid")
-	public String getUserid()
-	{
+	public String getUserid(){
 		return userid;
 	}
 
-	public void setUserid(String userid)
-	{
+	public void setUserid(String userid){
 		this.userid = userid;
 	}
 
 	@Column(name = "username")
-	public String getUsername()
-	{
+	public String getUsername(){
 		return username;
 	}
 
-	public void setUsername(String username)
-	{
+	public void setUsername(String username){
 		this.username = username;
 	}
 
 	@Column(name = "password")
-	public String getPassword()
-	{
+	public String getPassword(){
 		return password;
 	}
 
-	public void setPassword(String password)
-	{
+	public void setPassword(String password){
 		this.password = password;
 	}
 
 	@Column(name = "personnumber")
-	public String getPersonnumber()
-	{
+	public String getPersonnumber(){
 		return personnumber;
 	}
 
-	public void setPersonnumber(String personnumber)
-	{
+	public void setPersonnumber(String personnumber){
 		this.personnumber = personnumber;
 	}
 
 	@Column(name = "telphone")
-	public String getTelphone()
-	{
+	public String getTelphone(){
 		return telphone;
 	}
 
-	public void setTelphone(String telphone)
-	{
+	public void setTelphone(String telphone){
 		this.telphone = telphone;
 	}
 
 	@Column(name = "realname")
-	public String getRealname()
-	{
+	public String getRealname(){
 		return realname;
 	}
 
-	public void setRealname(String realname)
-	{
+	public void setRealname(String realname){
 		this.realname = realname;
 	}
 
 	@Column(name = "avator")
-	public String getAvator()
-	{
+	public String getAvator(){
 		return avator;
 	}
 
-	public void setAvator(String avator)
-	{
+	public void setAvator(String avator){
 		this.avator = avator;
 	}
 
 	@Column(name = "isartist")
-	public Integer getIsartist()
-	{
+	public Integer getIsartist(){
 		return isartist;
 	}
 
-	public void setIsartist(Integer isartist)
-	{
+	public void setIsartist(Integer isartist){
 		this.isartist = isartist;
 	}
+
+	@OneToMany(mappedBy="customerBean")
+	public Set<CustomerAddressBean> getCustomerAddressBeans() {
+		return customerAddressBeans;
+	}
+
+	public void setCustomerAddressBeans(
+			Set<CustomerAddressBean> customerAddressBeans) {
+		this.customerAddressBeans = customerAddressBeans;
+	}
+
+	public CustomerBean(Integer id, String userid, String username,
+			String password, String personnumber, String telphone,
+			String realname, String avator, Integer isartist,
+			Set<CustomerAddressBean> customerAddressBeans) {
+		super();
+		this.id = id;
+		this.userid = userid;
+		this.username = username;
+		this.password = password;
+		this.personnumber = personnumber;
+		this.telphone = telphone;
+		this.realname = realname;
+		this.avator = avator;
+		this.isartist = isartist;
+		this.customerAddressBeans = customerAddressBeans;
+	}
+
 }

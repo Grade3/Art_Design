@@ -2,9 +2,14 @@ package com.edu.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletConfig;
@@ -13,20 +18,27 @@ import javax.servlet.ServletContext;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
+import org.w3c.dom.ls.LSException;
 
 import com.edu.model.AddressBean;
+import com.edu.model.CustomerAddressBean;
 import com.edu.model.CustomerBean;
 import com.edu.model.ProductBean;
 import com.edu.model.UserBean;
 import com.edu.service.IAddressService;
+import com.edu.service.ICustomerAddressService;
 import com.edu.service.ICustomerService;
 import com.edu.table.AddressTable;
+import com.edu.table.CustomerTable;
 import com.edu.table.UserTable;
+import com.edu.util.CheckTokenTool;
 import com.edu.viewentity.AddressVO;
 import com.edu.viewentity.ProductVO;
 
@@ -54,6 +66,9 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
     @Autowired
     private IAddressService addressService;
     
+    @Autowired
+    private ICustomerAddressService customerAddressService;
+    
 	/**
 	 * 获取分页列表
 	 * 
@@ -63,7 +78,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	 */
 	@RequestMapping(params = "method=getAddressByPage")
 	@ResponseBody
-	public Map<String, Object> JsonGetPageProduct(
+	public Map<String, Object> JsonGetPageAddress(
 			@RequestParam(value = "page") int page,
 			@RequestParam(value = "rows") int pageSize,
 			@RequestParam(value="selectname",defaultValue="id")String selectname,
@@ -79,7 +94,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	}
 	
 	/**
-	 * 删除用户
+	 * 删除地址
 	 * @param ids
 	 * @return
 	 */
@@ -101,8 +116,8 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	}
 	
 	/**
-	 * 添加用户
-	 * @param rowstr
+	 * 添加地址
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params="method=addAddress")
@@ -157,4 +172,109 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 		addressService.UpdataBean(addressBean);
 		return "true";
 	}
+	
+	/**
+	 * 获取树分页列表
+	 * 
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	@RequestMapping(params = "method=getAddressTree")
+	@ResponseBody
+	public Map<String, Object> JsonGetAddressTree(
+			@RequestParam(value = "page") int page,
+			@RequestParam(value = "rows") int pageSize) {
+		Map<String, Object> map = addressService.GetAddressTree(page, pageSize);
+		return map;
+	}
+	
+	/**
+	 * 获取地址
+	 * @param customerUserId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=getAddressByCustomerid")
+	public List<AddressVO> JsonGetAddressByCustomerUserid(@RequestParam(value="customerUserid")String customerUserId){
+		List<AddressVO> list = new ArrayList<AddressVO>();
+		try {
+			Set<CustomerAddressBean> customerAddressBeans = customerService.getCustomerByUserId(customerUserId).getCustomerAddressBeans();
+			for(CustomerAddressBean customerAddressBean: customerAddressBeans){
+				list.add(new AddressVO(customerAddressBean.getAddressBean()));
+			}
+			if(list.size()!=0){
+				Collections.sort(list,new  Comparator<AddressVO>() {
+					@Override
+					public int compare(AddressVO o1, AddressVO o2) {
+						return o1.getId().compareTo(o2.getId());
+					}
+				});
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/**
+	 * 添加地址
+	 * @param useridtoken
+	 * @param addressBean
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="mehtod=addAddress")
+	public String CheckLoginAddAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
+			AddressBean addressBean){
+		try{
+			String Userid = CheckTokenTool.GetUserid(useridtoken);
+			CustomerBean customerBean = customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, Userid, null);
+			CustomerAddressBean customerAddressBean = new CustomerAddressBean();
+			customerAddressBean.setCustomerBean(customerBean);
+			customerAddressBean.setAddressBean(addressBean);
+			customerAddressService.AddBean(customerAddressBean);
+		}catch(Exception e){
+			e.printStackTrace();
+			return "0";
+		}
+		return "1";
+	}
+	
+	/**
+	 * 通过id删除地址
+	 * @param useridtoken
+	 * @param addressid
+	 * @return
+	 */
+	@RequestMapping(params="method=deleteAddress")
+	public String CheckLogindeleteAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
+			@RequestParam(value="addressid")Integer addressid){
+		try {
+			addressService.DeleteByid(AddressBean.class, addressid);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "0";
+		}
+		return "1";
+	}
+	/**
+	 * 修改地址
+	 * @param useridtoken
+	 * @param addressBean
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=alertAddress")
+	public String CheckLoginAlertAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
+			AddressBean addressBean){
+		try{
+			addressService.UpdataBean(addressBean);
+		}catch(Exception e){
+			e.printStackTrace();
+			return "0";
+		}
+		return "1";
+	}
+	
 }

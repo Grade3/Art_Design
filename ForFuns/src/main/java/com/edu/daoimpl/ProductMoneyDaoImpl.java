@@ -9,4 +9,10 @@ import com.edu.dao.IProductMoneyDao;
 @Repository("productMoneyDao")
 public class ProductMoneyDaoImpl extends BaseDaoImpl<ProductMoneyBean> implements IProductMoneyDao{
 
+	@Override
+	public ProductMoneyBean GetMaxMoney() {
+		String hql = "from ProductMoneyBean where " ;
+		return null;
+	}
+
 }
