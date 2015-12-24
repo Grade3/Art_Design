@@ -32,7 +32,7 @@ public class NewsDaoImpl extends BaseDaoImpl<NewsBean> implements INewsDao{
 //		String hql ="from NewsBean where "+NewsTable.ISONLINE+" = 1";
 //		return getSession().createQuery(hql).list();
 		Query query = getSession().getNamedQuery("NewsqueryGetOnlineNews");
-		query.setString("isonline", NewsTable.ISONLINE);
+//		query.setString("isonline", NewsTable.ISONLINE);
 		return query.list();
 	}
 

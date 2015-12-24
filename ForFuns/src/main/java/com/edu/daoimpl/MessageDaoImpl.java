@@ -24,8 +24,8 @@ public class MessageDaoImpl extends BaseDaoImpl<MessageBean> implements IMessage
 		Query query = getSession().getNamedQuery("MessagequerygetUnReadMessage");
 		query.setInteger("fid", sendid);
 		query.setInteger("tid", fromid);
-		query.setString("fromid", MessageTable.FROMID);
-		query.setString("toid", MessageTable.TOID);
+//		query.setString("fromid", MessageTable.FROMID);
+//		query.setString("toid", MessageTable.TOID);
 		List<MessageBean> list = query.list();
 		if (list.size() == 0)
 			return null;

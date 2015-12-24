@@ -52,18 +52,18 @@ public class ArtistDaoImpl extends BaseDaoImpl<CustomerBean> implements IArtistD
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List<CustomerBean> getPageBeanFilter(Class clz, int page, int pageSize, String selectname, String value) {
-//		String hql = "";
+		String hql = "";
 		List<CustomerBean> list = null;
 		try {
-//			hql = "from " + clz.newInstance().getClass().getName() + " where " + selectname + " like '%" + value
-//					+ "%' and isartist=1";
-//			System.out.println(hql);
-//			Query query = getSession().createQuery(hql);
+			hql = "from " + clz.newInstance().getClass().getName() + " where " + selectname + " like '%" + value
+					+ "%' and isartist=1";
+			System.out.println(hql);
+			Query query = getSession().createQuery(hql);
 			
-			Query query = getSession().getNamedQuery("ArtistquerygetPageBeanFilter");
+			//Query query = getSession().getNamedQuery("ArtistquerygetPageBeanFilter");
 			//query.setString("classname", clz.newInstance().getClass().getName());
-			query.setString("selectname", selectname);
-			query.setString("value", value);
+			//query.setString("selectname", selectname);
+			//query.setString("value", value);
 			
 			query.setFirstResult((page - 1) * pageSize);
 			query.setMaxResults(pageSize);
