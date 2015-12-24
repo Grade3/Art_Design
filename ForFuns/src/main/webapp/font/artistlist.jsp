@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					var body = "";
 					var count = 0;
 					for(var i=0;i<list.length;i++){
-						var username = list[i].username;
+						var username = list[i].name;
 						var avator = list[i].avator;
 						var id= list[i].id;
 						

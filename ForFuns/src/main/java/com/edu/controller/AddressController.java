@@ -224,7 +224,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(params="mehtod=addAddress")
+	@RequestMapping(params="mehtod=addCustomerAddress")
 	public String CheckLoginAddAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
 			AddressBean addressBean){
 		try{
@@ -247,7 +247,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	 * @param addressid
 	 * @return
 	 */
-	@RequestMapping(params="method=deleteAddress")
+	@RequestMapping(params="method=deleteCustomerAddress")
 	public String CheckLogindeleteAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
 			@RequestParam(value="addressid")Integer addressid){
 		try {
@@ -265,7 +265,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(params="method=alertAddress")
+	@RequestMapping(params="method=alertCustomerAddress")
 	public String CheckLoginAlertAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
 			AddressBean addressBean){
 		try{

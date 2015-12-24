@@ -11,7 +11,9 @@ public class ProductMoneyDaoImpl extends BaseDaoImpl<ProductMoneyBean> implement
 
 	@Override
 	public ProductMoneyBean GetMaxMoney() {
-		String hql = "from ProductMoneyBean where " ;
+		String hql = "select max(pm.money) from ProductMoneyBean pm where pm.productBean.id=1" ;
+		Object uniqueResult = getSession().createQuery(hql).uniqueResult();
+		System.out.println(uniqueResult);
 		return null;
 	}
 

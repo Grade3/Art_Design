@@ -33,6 +33,7 @@ import com.edu.serviceimpl.ArtistServiceImpl;
 import com.edu.table.CustomerTable;
 import com.edu.table.NewsTable;
 import com.edu.util.MD5Util;
+import com.edu.viewentity.CustomerVO;
 
 /**
  * 艺术家管理controller
@@ -339,7 +340,7 @@ public class ArtistController
 		Map<String , Object> map = new HashMap<String, Object>();
 		List<CustomerBean> list = artistService.GetPageBeanFilter(CustomerBean.class, page, pageSize,CustomerTable.ISARTIST,1+"");
 		int total = artistService.GetPageBeanFilterTotal(CustomerBean.class, page, pageSize,CustomerTable.ISARTIST,1+"");
-		map.put("list", list);
+		map.put("list", CustomerVO.ChangeToList(list));
 		map.put("total", total);
 		return map;
 	}
