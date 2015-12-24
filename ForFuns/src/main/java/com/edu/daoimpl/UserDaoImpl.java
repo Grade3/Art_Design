@@ -22,10 +22,11 @@ public class UserDaoImpl extends BaseDaoImpl<UserBean> implements IUserDao {
 
 	@Override
 	public boolean isExist(UserBean user) {
-		 String hql = "from UserBean where username=? and password=?";
-		 Query query = getSession().createQuery(hql);
-		 query.setString(0, user.getUsername());
-		 query.setString(1, user.getPassword());
+//		 String hql = "from UserBean where username=? and password=?";
+//		 Query query = getSession().createQuery(hql);
+		 Query query = getSession().getNamedQuery("UserqueryByName");
+		 query.setString("username", user.getUsername());
+		 query.setString("password", user.getPassword());
 		 if(query.list().size()>=1){
 			 return true;
 		 }else{
