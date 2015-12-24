@@ -23,7 +23,7 @@ public interface IProductService extends IBaseService<ProductBean>{
 	 * @param pageSize
 	 * @return
 	 */
-	public int getOnlineProductTotal(int typeid);
+	public int getOnlineProductTotal(int typeid,int methodid);
 	
 	
 	/**

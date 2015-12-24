@@ -46,6 +46,7 @@ import com.edu.serviceimpl.CustomerServiceImpl;
 import com.edu.table.CustomerTable;
 import com.edu.table.UserTable;
 import com.edu.util.MD5Util;
+import com.edu.viewentity.AdminCustomerVO;
 import com.edu.viewentity.CustomerVO;
 
 /**
@@ -482,7 +483,7 @@ public class CustomerController implements ServletConfigAware,
 		CustomerBean customerBean = customerService.GetBeanByCondition(
 				CustomerBean.class, CustomerTable.USERID, customerid, null);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("customer", customerBean);
+		map.put("customer",new  CustomerVO(customerBean));
 		System.out.println(customerid);
 		return map;
 	}
@@ -556,7 +557,7 @@ public class CustomerController implements ServletConfigAware,
 				CustomerBean.class, page, pageSize, selectname, value);
 		int total = customerService.GetPageBeanFilterTotal(CustomerBean.class,
 				page, pageSize, selectname, value);
-		map.put("rows", list);
+		map.put("rows", AdminCustomerVO.ChangeToList(list));
 		map.put("total", total);
 		return map;
 	}

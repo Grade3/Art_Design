@@ -59,7 +59,7 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 	}
 
 	@Override
-	public int getOnlineProductTotal(int typeid) {
+	public int getOnlineProductTotal(int typeid, int methodid) {
 		String hql = "";
 		List<ProductBean> list = null;
 		try {
@@ -74,7 +74,8 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 					+ " temp inner join temp.productTypeBean type  where temp.productSellBean.sellMethodBean.id = ? and type.id=? and ( situation = 1 or situation = 0 )";
 			System.out.println(hql);
 			Query query = getSession().createQuery(hql);
-
+			query.setInteger(0, methodid);
+			query.setInteger(1, typeid);
 			list = query.list();
 		} catch (Exception e) {
 			e.printStackTrace();

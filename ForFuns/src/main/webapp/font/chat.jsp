@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        uploadJson : '<%=basePath%>imageupload.do?method=keuploadimg',
 		        allowFileManager : false,
 		        items:[
-		                'image', 'media','emoticons'
+		               'emoticons'
 		       ],
 			});
 		});

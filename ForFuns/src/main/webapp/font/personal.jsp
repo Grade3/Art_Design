@@ -67,17 +67,17 @@ function GetUser()
 		success:function(json){
 			var customer = json.customer;
 			var userid = customer.userid;
-			var username = customer.username;
+			var username = customer.name;
 			var personnumber = customer.personnumber;
-			var telphone = customer.telphone;
+			var telphone = customer.telephone;
 			var realname = customer.realname;
 			var avator = customer.avator;
 			var isartist = customer.isartist;
 			
 			if (isartist == "0")
 			{
-				$('#showme_div').hide();
-				$('#advantage_div').hide();
+				//$('#showme_div').hide();
+				//$('#advantage_div').hide();
 			}
 			$('#avator').attr('src',avator);
 			$('#nickname').html(username);
@@ -229,14 +229,14 @@ $(document).ready(function(){
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-lock"></span>　修改密码</p>
 							<p class="col-xs-9"><a href="<%=basePath%>customer.do?method=EnterPassword"><span class="glyphicon glyphicon-edit"></span> 点击修改密码</a></p>
 						</div>
-						<div class="row info" id="advantage_div">
+						<!-- <div class="row info" id="advantage_div">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-heart"></span>　擅长领域</p>
 							<p class="col-xs-9">我擅长的领域</p>
-						</div>
-						<div class="row info info2" id="showme_div">
+						</div> -->
+						<!-- <div class="row info info2" id="showme_div">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-leaf"></span>　个人简介</p>
 							<p class="col-xs-9">我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介</p>
-						</div>
+						</div> -->
 						
 					</div>
 								

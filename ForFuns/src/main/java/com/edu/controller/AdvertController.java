@@ -151,15 +151,12 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	public Map<String, Object> JsonGetAllAdvertByUserid(@RequestParam(value="userid") String userid,
 			@RequestParam(value = "page") int page,
 			@RequestParam(value = "rows") int pageSize,
-			@RequestParam(value="selectname",defaultValue="")String selectname,
+			@RequestParam(value="selectname",defaultValue="id")String selectname,
 			@RequestParam(value="value",defaultValue="")String value)
 	{
 		Map<String, String> param = null;
-		if(!"".equals(value))
-		{
-			param = new HashMap<String, String>();
-			param.put(selectname, value);
-		}
+		param = new HashMap<String, String>();
+		param.put(selectname, value);
 		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "username", userid,null);
 		//Map<String, Object> map = mAdvertBean.GetAdvertPage(userBean.getAdvertBeans(), page, pageSize,param);
 		Map<String, Object> map = advertService.GetAdvertBeanPageByUserid(userBean.getId()+"", page, pageSize, param);

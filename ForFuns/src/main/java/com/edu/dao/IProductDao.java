@@ -27,7 +27,7 @@ public interface IProductDao extends IBaseDao<ProductBean>{
 	 * @param pageSize
 	 * @return
 	 */
-	public int getOnlineProductTotal(int typeid);
+	public int getOnlineProductTotal(int typeid, int methodid);
 	
 	/**
 	 * 获取对应艺术家的商品

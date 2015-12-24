@@ -31,7 +31,7 @@ KindEditor.ready(function(K) {
        uploadJson : '<%=basePath%>imageupload.do?method=keuploadimg',
        allowFileManager : false,
        items:[
-              'image', 'media', 
+		   'emoticons'
       ],
 	});
 });

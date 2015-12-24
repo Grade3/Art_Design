@@ -33,6 +33,7 @@ import com.edu.serviceimpl.ArtistServiceImpl;
 import com.edu.table.CustomerTable;
 import com.edu.table.NewsTable;
 import com.edu.util.MD5Util;
+import com.edu.viewentity.AdminCustomerVO;
 import com.edu.viewentity.CustomerVO;
 
 /**
@@ -187,7 +188,7 @@ public class ArtistController
 				CustomerBean.class, page, pageSize, selectname, value);
 		int total = artistService.GetPageBeanFilterTotal(CustomerBean.class,
 				page, pageSize, selectname, value);
-		map.put("rows", list);
+		map.put("rows", AdminCustomerVO.ChangeToList(list));
 		map.put("total", total);
 		return map;
 	}

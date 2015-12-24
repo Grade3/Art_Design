@@ -182,7 +182,7 @@ ServletContextAware {
 			@RequestParam(value="typeid")Integer typeid,@RequestParam(value="methodid")Integer methodid){
 		Map<String , Object> map = new HashMap<String, Object>();
 		List<ProductBean> list = productService.getOnlineProduct(page, pageSize, typeid,methodid);
-		int total = productService.getOnlineProductTotal(typeid);
+		int total = productService.getOnlineProductTotal(typeid,methodid);
 		List<ProductVO> productVOs = ProductVO.ChangeListProductToProductVo(list);
 		map.put("list", productVOs);
 		map.put("total", total);

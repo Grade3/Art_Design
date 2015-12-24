@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				{field:'userid',title:'用户名',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
-				{field:'username',title:'昵称',sortable:true,width:120,sortable:true,
+				{field:'name',title:'昵称',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
 				{field:'password',title:'密码',sortable:true,width:120,sortable:true,
@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				{field:'personnumber',title:'身份证号',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
-				{field:'telphone',title:'手机号',sortable:true,width:120,sortable:true,
+				{field:'telephone',title:'手机号',sortable:true,width:120,sortable:true,
 					editor: { type: 'validatebox',options: { required: true}  }
 				},
 				{field:'realname',title:'真实姓名',sortable:true,width:120,sortable:true,

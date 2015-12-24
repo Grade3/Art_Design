@@ -34,8 +34,8 @@ public class OrderDaoImpl extends BaseDaoImpl<OrderBean> implements IOrderDao{
 //		Query query = getSession().createQuery(hql);
 //		query.setString(0, customerUserid);
 		
-		Query query = getSession().getNamedQuery("OrderquerygetOrderByIds");
-		 query.setString("customerid", customerUserid);
+		Query query = getSession().getNamedQuery("OrderquerygetCusertomerOrder");
+		query.setString("customerid", customerUserid);
 		List<OrderBean> list =query.list();
 		if(list.size()==0)
 			return null;

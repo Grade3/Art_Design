@@ -25,8 +25,8 @@ public class ProductServiceImpl extends BaseServiceImpl<ProductBean> implements 
 	}
 
 	@Override
-	public int getOnlineProductTotal(int typeid) {
-		return productDao.getOnlineProductTotal(typeid);
+	public int getOnlineProductTotal(int typeid,int methodid) {
+		return productDao.getOnlineProductTotal(typeid,methodid);
 	}
 	
 	@Override

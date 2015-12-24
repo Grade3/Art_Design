@@ -106,7 +106,7 @@ $(document).ready(function()
 	if(null==customerUserid)
 		location.href="<%=basePath%>font/Login.jsp";
 	getUnReadMessage();
-	//setInterval(getUnReadMessage, 5000);  
+	setInterval(getUnReadMessage, 5000);  
 	var photo_w = $(".message_photo").width();
 	var photo_h = photo_w;
 	$(".message_photo").height(photo_h);
