@@ -4,26 +4,26 @@ package com.edu.dao;
 import java.util.List;
 
 import com.edu.base.IBaseDao;
-import com.edu.model.AdvertBean;
-import com.edu.model.NewsBean;
+import com.edu.model.Advert;
+import com.edu.model.News;
 
-public interface IAdvertDao extends IBaseDao<AdvertBean>
+public interface IAdvertDao extends IBaseDao<Advert>
 {
 	/**
 	 * 获取第1行广告
 	 * @return
 	 */
-	public List<AdvertBean> GetFirstAdvert();
+	public List<Advert> GetFirstAdvert();
 	
 	/**
 	 * 获取第2行广告
 	 * @return
 	 */
-	public List<AdvertBean> GetSecondAdvert();
+	public List<Advert> GetSecondAdvert();
 	
 	/**
 	 * 获取第3行广告
 	 * @return
 	 */
-	public List<AdvertBean> GetThirdAdvert();
+	public List<Advert> GetThirdAdvert();
 }

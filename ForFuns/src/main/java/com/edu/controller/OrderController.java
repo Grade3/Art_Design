@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edu.dao.ICustomerDao;
 import com.edu.dao.IProductDao;
-import com.edu.model.CustomerBean;
-import com.edu.model.OrderBean;
-import com.edu.model.ProductBean;
-import com.edu.model.UserBean;
+import com.edu.model.Customer;
+import com.edu.model.Order;
+import com.edu.model.Product;
+import com.edu.model.User;
 import com.edu.service.ICustomerService;
 import com.edu.service.IOrderService;
 import com.edu.service.IProductService;
@@ -61,9 +61,9 @@ public class OrderController
 			@RequestParam(value="value",defaultValue="")String value) 
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<OrderBean> list = orderService.GetPageBeanFilter(OrderBean.class, page,
+		List<Order> list = orderService.GetPageBeanFilter(Order.class, page,
 				pageSize,selectname,value);
-		int total = orderService.GetPageBeanFilterTotal(OrderBean.class, page, pageSize, selectname, value);
+		int total = orderService.GetPageBeanFilterTotal(Order.class, page, pageSize, selectname, value);
 		List<OrderVO> listVO = OrderVO.ChangeListProductToOrderVo(list);
 		
 		map.put("rows", listVO);
@@ -86,7 +86,7 @@ public class OrderController
 			temp[i] = Integer.parseInt(id[i]);
 		}
 		try {
-			orderService.DeleteBatch(OrderBean.class, temp);
+			orderService.DeleteBatch(Order.class, temp);
 			return "true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,8 +121,8 @@ public class OrderController
 			String telephone = jsonObject.getString(OrderTable.TELEPHONE);
 			Integer ispay = jsonObject.getInt(OrderTable.ISPAY);
 			
-			CustomerBean customerBean = customerService.GetEntityById(CustomerBean.class, customerid);
-			ProductBean productBean = productService.GetEntityById(ProductBean.class, productid);
+			Customer customerBean = customerService.GetEntityById(Customer.class, customerid);
+			Product productBean = productService.GetEntityById(Product.class, productid);
 			
 			//OrderBean orderBean = new OrderBean(telephone, address, current, ispay, productBean, customerBean);
 			//orderService.AddBean(orderBean);
@@ -160,10 +160,10 @@ public class OrderController
 		String telephone = jsonObject.getString(OrderTable.TELEPHONE);
 		Integer ispay = jsonObject.getInt(OrderTable.ISPAY);
 		
-		CustomerBean customerBean = customerService.GetEntityById(CustomerBean.class, customerid);
-		ProductBean productBean = productService.GetEntityById(ProductBean.class, productid);
+		Customer customerBean = customerService.GetEntityById(Customer.class, customerid);
+		Product productBean = productService.GetEntityById(Product.class, productid);
 		
-		OrderBean orderBean = orderService.GetEntityById(OrderBean.class, id);
+		Order orderBean = orderService.GetEntityById(Order.class, id);
 		
 		//orderBean.setAddress(address);
 		orderBean.setCurrent(current);
@@ -183,7 +183,7 @@ public class OrderController
 	@ResponseBody
 	@RequestMapping(params="method=getAllOrder")
 	public Map<String, Object> GetAllOrder(){
-		List<OrderBean> list = orderService.GetAllBean(OrderBean.class);
+		List<Order> list = orderService.GetAllBean(Order.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("orders", list);
 		return map;
@@ -197,7 +197,7 @@ public class OrderController
 	@ResponseBody
 	@RequestMapping(params="method=getCustomerOrder")
 	public Map<String , Object> JsonGetCustomerOrder(@RequestParam(value="customeruserid")String customerUserId){
-		List<OrderBean> list = orderService.getCusertomerOrder(customerUserId);
+		List<Order> list = orderService.getCusertomerOrder(customerUserId);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", OrderVO.ChangeListProductToOrderVo(list));
 		return map;
@@ -232,7 +232,7 @@ public class OrderController
 	@ResponseBody
 	@RequestMapping(params="method=GetOrderByid")
 	public Map<String, Object> JsonGetOrderbyId(@RequestParam(value="id")Integer id){
-		OrderBean orderBean = orderService.GetEntityById(OrderBean.class, id);
+		Order orderBean = orderService.GetEntityById(Order.class, id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("order", new OrderVO(orderBean));
 		return map;
@@ -246,7 +246,7 @@ public class OrderController
 	@RequestMapping(params="method=DeleteOrderByid")
 	public String CheckLoginGetOrderbyId(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="id")Integer id){
 		try {
-			orderService.DeleteByid(OrderBean.class,id);
+			orderService.DeleteByid(Order.class,id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "font/error.jsp?errorid=2";

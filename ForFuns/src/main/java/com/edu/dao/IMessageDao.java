@@ -3,14 +3,14 @@ package com.edu.dao;
 import java.util.List;
 
 import com.edu.base.IBaseDao;
-import com.edu.model.MessageBean;
+import com.edu.model.Message;
 
-public interface IMessageDao extends IBaseDao<MessageBean>{
+public interface IMessageDao extends IBaseDao<Message>{
 	/**
 	 * 获取未读信息
 	 * @return
 	 */
-	public List<MessageBean> getUnReadMessage(Integer sendid,Integer fromid);
+	public List<Message> getUnReadMessage(Integer sendid,Integer fromid);
 	
 	/**
 	 * 将该id之前的改为已读
@@ -25,6 +25,6 @@ public interface IMessageDao extends IBaseDao<MessageBean>{
 	 * @param fromid
 	 * @return
 	 */
-	public List<MessageBean> getUserMessage(Integer id,Integer isread);
+	public List<Message> getUserMessage(Integer id,Integer isread);
 	
 }

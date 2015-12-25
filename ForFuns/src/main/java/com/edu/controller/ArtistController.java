@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.edu.model.ArtistBean;
-import com.edu.model.CustomerBean;
-import com.edu.model.ExamineArtistBean;
+import com.edu.model.Artist;
+import com.edu.model.Customer;
+import com.edu.model.ExamineArtist;
 import com.edu.service.IArtistService;
 import com.edu.serviceimpl.ArtistServiceImpl;
 import com.edu.table.CustomerTable;
@@ -79,7 +79,7 @@ public class ArtistController
 				return "redirect:/jsp/login.jsp?error=1";
 			}
 		}
-		CustomerBean user = new CustomerBean();
+		Customer user = new Customer();
 		user.setPassword(password);
 		user.setUsername(username);
 		System.out.println(user.toString());
@@ -127,7 +127,7 @@ public class ArtistController
 				userid=temp;
 			}
 		}
-		ExamineArtistBean examineartist=new ExamineArtistBean();
+		ExamineArtist examineartist=new ExamineArtist();
 		int registFlag = 0;
 		if (userid.equals("")||paymode.equals("") || goodat.equals("") 
 				|| realname.equals("") || telphone.equals("") || personnumber.equals(""))
@@ -184,9 +184,9 @@ public class ArtistController
 			@RequestParam(value = "value", defaultValue = "") String value)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<CustomerBean> list = artistService.GetPageBeanFilter(
-				CustomerBean.class, page, pageSize, selectname, value);
-		int total = artistService.GetPageBeanFilterTotal(CustomerBean.class,
+		List<Customer> list = artistService.GetPageBeanFilter(
+				Customer.class, page, pageSize, selectname, value);
+		int total = artistService.GetPageBeanFilterTotal(Customer.class,
 				page, pageSize, selectname, value);
 		map.put("rows", AdminCustomerVO.ChangeToList(list));
 		map.put("total", total);
@@ -214,8 +214,8 @@ public class ArtistController
 		for (int i = 0; i < id.length; i++)
 		{
 			System.out.println(temp[i]);
-			CustomerBean customerBean = artistService.GetEntityById(
-					CustomerBean.class, temp[i]);
+			Customer customerBean = artistService.GetEntityById(
+					Customer.class, temp[i]);
 			customerBean.setIsartist(0);
 			int result = artistService.UpdataBean(customerBean);
 			if (result != 1)
@@ -254,7 +254,7 @@ public class ArtistController
 			String telphone = jsonObject.getString(CustomerTable.TELPHONE);
 			String realname = jsonObject.getString(CustomerTable.REALNAME);
 			String avator = jsonObject.getString(CustomerTable.AVATOR);
-			CustomerBean CustomerBean = new CustomerBean(userid, username,
+			Customer CustomerBean = new Customer(userid, username,
 					password, personnumber, telphone, realname, avator, 1);
 			artistService.AddBean(CustomerBean);
 			return 1;
@@ -283,7 +283,7 @@ public class ArtistController
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
 			int id = jsonObject.getInt(CustomerTable.ID);
-			CustomerBean customerBean = artistService.GetEntityById(CustomerBean.class, id);
+			Customer customerBean = artistService.GetEntityById(Customer.class, id);
 			String userid = jsonObject.getString(CustomerTable.USERID);
 			customerBean.setUserid(userid);
 			String username = jsonObject.getString(CustomerTable.USERNAME);
@@ -323,7 +323,7 @@ public class ArtistController
 	@RequestMapping(params = "method=getallArtist")
 	public Map<String, Object> GetAllArtist()
 	{
-		List<CustomerBean> list = artistService.GetAllBean(CustomerBean.class);
+		List<Customer> list = artistService.GetAllBean(Customer.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("Artists", list);
 		return map;
@@ -339,8 +339,8 @@ public class ArtistController
 	@RequestMapping(params="method=GetArtists")
 	public Map<String, Object> JsonGetArtists(@RequestParam(value="page")Integer page,@RequestParam(value="pageSize")Integer pageSize){
 		Map<String , Object> map = new HashMap<String, Object>();
-		List<CustomerBean> list = artistService.GetPageBeanFilter(CustomerBean.class, page, pageSize,CustomerTable.ISARTIST,1+"");
-		int total = artistService.GetPageBeanFilterTotal(CustomerBean.class, page, pageSize,CustomerTable.ISARTIST,1+"");
+		List<Customer> list = artistService.GetPageBeanFilter(Customer.class, page, pageSize,CustomerTable.ISARTIST,1+"");
+		int total = artistService.GetPageBeanFilterTotal(Customer.class, page, pageSize,CustomerTable.ISARTIST,1+"");
 		map.put("list", CustomerVO.ChangeToList(list));
 		map.put("total", total);
 		return map;

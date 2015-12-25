@@ -13,31 +13,31 @@ import org.springframework.transaction.annotation.Transactional;
 import com.edu.base.BaseServiceImpl;
 import com.edu.base.TreeBean;
 import com.edu.base.TreeChildItemBean;
-import com.edu.model.FunctionBean;
-import com.edu.model.RoleBean;
-import com.edu.model.RoleFunctionBean;
+import com.edu.model.Function;
+import com.edu.model.Role;
+import com.edu.model.RoleFunction;
 import com.edu.service.IRoleService;
 import com.edu.util.FastJsonTool;
 
 @Lazy(true)
 @Transactional
 @Service("roleService")
-public class RoleServiceImpl extends BaseServiceImpl<RoleBean> implements IRoleService {
+public class RoleServiceImpl extends BaseServiceImpl<Role> implements IRoleService {
 
 	@Override
 	public Map<String, Object> GetPowerTree(int page,int pageSize) {
-		List<RoleBean> list =  this.GetPageBean(RoleBean.class, page, pageSize);
+		List<Role> list =  this.GetPageBean(Role.class, page, pageSize);
 		List<TreeBean> temp = new ArrayList<TreeBean>();
 		int total = 0;
 		for(int i=0;i<list.size();i++){
-			RoleBean roleBean = list.get(i);
-			Set<FunctionBean> set = roleBean.getFunctionBeans();
+			Role roleBean = list.get(i);
+			Set<Function> set = roleBean.getFunctionBeans();
 			if (set.size()!=0) {
 				total++;
 				TreeBean treeBean = new TreeBean();
 				treeBean.setId(roleBean.getId()+"");
 				treeBean.setName(roleBean.getRolename());
-				for(FunctionBean functionBean : set){
+				for(Function functionBean : set){
 					treeBean.getChildren().add(new TreeChildItemBean(roleBean.getId()+"_"+functionBean.getId(),
 							functionBean.getFunctionname()));
 				}
@@ -51,12 +51,12 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleBean> implements IRoleS
 	}
 
 	@Override
-	public List<RoleBean> GetAllRole() {
-		List<RoleBean> list = this.GetAllBean(RoleBean.class);
-		List<RoleBean> temp  = new  ArrayList<RoleBean>();
+	public List<Role> GetAllRole() {
+		List<Role> list = this.GetAllBean(Role.class);
+		List<Role> temp  = new  ArrayList<Role>();
 		for(int i =0;i<list.size();i++){
-			RoleBean role = list.get(i);
-			RoleBean one = new RoleBean(role.getId(), role.getRolename());
+			Role role = list.get(i);
+			Role one = new Role(role.getId(), role.getRolename());
 			temp.add(one);
 		}
 		return temp;

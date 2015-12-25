@@ -1,9 +1,9 @@
 package com.edu.service;
 
 import com.edu.base.IBaseService;
-import com.edu.model.RoleFunctionBean;
+import com.edu.model.RoleFunction;
 
-public interface IRoleFunctionService extends IBaseService<RoleFunctionBean>{
+public interface IRoleFunctionService extends IBaseService<RoleFunction>{
 	
 	/**
 	 * 判断权限是否存在   1为存在 0为不存在 -1为异常

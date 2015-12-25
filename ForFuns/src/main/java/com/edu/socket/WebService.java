@@ -27,8 +27,8 @@ import javax.websocket.server.ServerEndpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.server.standard.SpringConfigurator;
 
-import com.edu.model.CustomerBean;
-import com.edu.model.MessageBean;
+import com.edu.model.Customer;
+import com.edu.model.Message;
 import com.edu.service.ICustomerService;
 import com.edu.service.IMessageService;
 import com.edu.util.FastJsonTool;
@@ -85,7 +85,7 @@ public class WebService {
         	webSocketSet.put(myMessage.getSendid(), this);
         	System.out.println("hashmap.size:" + webSocketSet.size());
         	//返回未读信息
-        	List<MessageBean> unReadMessage = messageService.getUnReadMessage(Integer.parseInt(myMessage.getReceiverid()),Integer.parseInt(myMessage.getSendid()));
+        	List<Message> unReadMessage = messageService.getUnReadMessage(Integer.parseInt(myMessage.getReceiverid()),Integer.parseInt(myMessage.getSendid()));
         	List<MessageVO> returnMessage = MessageVO.ChangeToListMessageVO(unReadMessage);
         	if(null == unReadMessage){
         		
@@ -102,11 +102,11 @@ public class WebService {
         	System.out.println("hashmap.size:" + webSocketSet.size());
         }else if("2".equals(myMessage.getFlag())){//发送消息
         	try {
-        		MessageBean messageBean = new MessageBean();
+        		Message messageBean = new Message();
                 Integer fromid = Integer.parseInt(myMessage.getSendid());
                 Integer toid = Integer.parseInt(myMessage.getReceiverid());
-                CustomerBean fromBean = customerService.GetEntityById(CustomerBean.class, fromid);
-                CustomerBean toBean = customerService.GetEntityById(CustomerBean.class, toid);
+                Customer fromBean = customerService.GetEntityById(Customer.class, fromid);
+                Customer toBean = customerService.GetEntityById(Customer.class, toid);
                 messageBean.setFromCustomerBean(fromBean);
                 messageBean.setToCustomerBean(toBean);
                 messageBean.setMessage(myMessage.getContent());

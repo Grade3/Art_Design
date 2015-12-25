@@ -14,16 +14,16 @@ import com.edu.base.TreeBean;
 import com.edu.base.TreeChildItemBean;
 import com.edu.dao.IAddressDao;
 import com.edu.dao.ICustomerDao;
-import com.edu.model.AddressBean;
-import com.edu.model.CustomerAddressBean;
-import com.edu.model.CustomerBean;
-import com.edu.model.RoleBean;
-import com.edu.model.UserBean;
+import com.edu.model.Address;
+import com.edu.model.CustomerAddress;
+import com.edu.model.Customer;
+import com.edu.model.Role;
+import com.edu.model.User;
 import com.edu.service.IAddressService;
 import com.edu.service.ICustomerService;
 
 @Service("addressService")
-public class AddressServiceImpl extends BaseServiceImpl<AddressBean> implements IAddressService
+public class AddressServiceImpl extends BaseServiceImpl<Address> implements IAddressService
 {
 	@Autowired
 	private IAddressDao addressDao;
@@ -33,18 +33,18 @@ public class AddressServiceImpl extends BaseServiceImpl<AddressBean> implements 
 	private ICustomerDao customerDao;
 	@Override
 	public Map<String, Object> GetAddressTree(int page, int pageSize) {
-		List<CustomerBean> list = customerService.GetPageBean(CustomerBean.class, page, pageSize);
+		List<Customer> list = customerService.GetPageBean(Customer.class, page, pageSize);
 		List<TreeBean> temp = new ArrayList<TreeBean>();
 		int total = 0;
 		for(int i=0;i<list.size();i++){
-			CustomerBean customerBean = list.get(i);
-			Set<CustomerAddressBean> set =customerBean.getCustomerAddressBeans();
+			Customer customerBean = list.get(i);
+			Set<CustomerAddress> set =customerBean.getCustomerAddressBeans();
 			if (set.size()!=0) {
 				total++;
 				TreeBean treeBean = new TreeBean();
 				treeBean.setId(customerBean.getId()+"");
 				treeBean.setName(customerBean.getUserid());
-				for(CustomerAddressBean  customerAddressBean : set){
+				for(CustomerAddress  customerAddressBean : set){
 					treeBean.getChildren().add(new TreeChildItemBean(customerBean.getId()+"_"+customerAddressBean.getAddressBean().getId(),
 							customerAddressBean.getAddressBean().getAddress()));
 				}
@@ -57,7 +57,7 @@ public class AddressServiceImpl extends BaseServiceImpl<AddressBean> implements 
 		return map;
 	}
 	@Override
-	public List<AddressBean> GetAddressByCusetomerUserId(String CusetomerUserId) {
+	public List<Address> GetAddressByCusetomerUserId(String CusetomerUserId) {
 		return null;
 	}
 }

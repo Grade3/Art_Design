@@ -8,20 +8,20 @@ import org.springframework.transaction.annotation.Transactional;
 import com.edu.base.BaseServiceImpl;
 import com.edu.dao.IProductMoneyDao;
 import com.edu.daoimpl.ProductDaoImpl;
-import com.edu.model.ProductBean;
-import com.edu.model.ProductMoneyBean;
+import com.edu.model.Product;
+import com.edu.model.ProductMoney;
 import com.edu.service.IProductMoneyService;
 @Lazy
 @Service("productMoneyService")
 @Transactional
-public class ProductMoneyServiceImpl extends BaseServiceImpl<ProductMoneyBean> implements IProductMoneyService{
+public class ProductMoneyServiceImpl extends BaseServiceImpl<ProductMoney> implements IProductMoneyService{
 
 	@Autowired
 	private IProductMoneyDao productMoneyDao;
 	@Override
-	public ProductMoneyBean getMaxMoney(Integer productid) {
+	public ProductMoney getMaxMoney(Integer productid) {
 		Integer MaxMoneyid = productMoneyDao.GetMaxMoneyid(productid);
-		ProductMoneyBean productMoneyBean  = (ProductMoneyBean) productMoneyDao.getEntitybyId(ProductMoneyBean.class, MaxMoneyid);
+		ProductMoney productMoneyBean  = (ProductMoney) productMoneyDao.getEntitybyId(ProductMoney.class, MaxMoneyid);
 		return productMoneyBean;
 	}
 

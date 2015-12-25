@@ -8,14 +8,14 @@ import org.springframework.stereotype.Repository;
 
 import com.edu.base.BaseDaoImpl;
 import com.edu.dao.IMessageDao;
-import com.edu.model.MessageBean;
+import com.edu.model.Message;
 import com.edu.table.MessageTable;
 
 @Repository("messageDao")
-public class MessageDaoImpl extends BaseDaoImpl<MessageBean> implements IMessageDao {
+public class MessageDaoImpl extends BaseDaoImpl<Message> implements IMessageDao {
 
 	@Override
-	public List<MessageBean> getUnReadMessage(Integer sendid, Integer fromid) {
+	public List<Message> getUnReadMessage(Integer sendid, Integer fromid) {
 //		 String hql = "from MessageBean where isread=0 and "+
 //		 MessageTable.FROMID +"=? and "+MessageTable.TOID +"=? ";
 //		 Query createQuery = getSession().createQuery(hql);
@@ -26,7 +26,7 @@ public class MessageDaoImpl extends BaseDaoImpl<MessageBean> implements IMessage
 		query.setInteger("tid", fromid);
 //		query.setString("fromid", MessageTable.FROMID);
 //		query.setString("toid", MessageTable.TOID);
-		List<MessageBean> list = query.list();
+		List<Message> list = query.list();
 		if (list.size() == 0)
 			return null;
 		return list;
@@ -54,7 +54,7 @@ public class MessageDaoImpl extends BaseDaoImpl<MessageBean> implements IMessage
 	}
 
 	@Override
-	public List<MessageBean> getUserMessage(Integer id,Integer isread) {
+	public List<Message> getUserMessage(Integer id,Integer isread) {
 		String sql = "SELECT * from "+MessageTable.TABLENAME+" where id in(select  max(id)  from "+MessageTable.TABLENAME+" where "+MessageTable.TOID+" =? and isread =?  GROUP BY "+MessageTable.FROMID+" )";
 		//String sql ="from MessageBean  group by fromid=1";
 		System.out.println(sql);
@@ -64,10 +64,10 @@ public class MessageDaoImpl extends BaseDaoImpl<MessageBean> implements IMessage
 		List<Object[]> list = query.list();
 		if (list.size() == 0)
 			return null;
-		List<MessageBean> result = new ArrayList<MessageBean>();
+		List<Message> result = new ArrayList<Message>();
 		for (int i = 0; i < list.size(); i++) {
 			Object[] object = list.get(0);
-			MessageBean messageBean = (MessageBean) this.getEntitybyId(MessageBean.class,
+			Message messageBean = (Message) this.getEntitybyId(Message.class,
 					Integer.parseInt(object[0].toString()));
 			result.add(messageBean);
 		}

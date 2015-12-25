@@ -10,26 +10,26 @@ import org.springframework.stereotype.Service;
 
 import com.edu.base.BaseServiceImpl;
 import com.edu.dao.INewsDao;
-import com.edu.model.NewsBean;
+import com.edu.model.News;
 import com.edu.service.INewsService;
 import com.edu.table.NewsTable;
 import com.edu.viewentity.NewsVO;
 
 @Service("newsService")
-public class NewsServiceImpl extends BaseServiceImpl<NewsBean> implements INewsService{
+public class NewsServiceImpl extends BaseServiceImpl<News> implements INewsService{
 
 	@Autowired
 	private INewsDao newsDao;
 	
 	@Override
-	public List<NewsBean> GetHotNews() {
-		List<NewsBean> list = null;
-		list = (List<NewsBean>) newsDao.GetHotNews();
+	public List<News> GetHotNews() {
+		List<News> list = null;
+		list = (List<News>) newsDao.GetHotNews();
 		return list;
 	}
 
 	@Override
-	public List<NewsBean> GetOnlineNews() {
+	public List<News> GetOnlineNews() {
 		return newsDao.GetOnlineNews();
 	}
 
@@ -46,7 +46,7 @@ public class NewsServiceImpl extends BaseServiceImpl<NewsBean> implements INewsS
 				value= entry.getValue();
 			}
 		}
-		List<NewsBean> list = newsDao.getPageBeanFilterMore(NewsBean.class, page, pageSize, selectname, value, NewsTable.USERID, userid);
+		List<News> list = newsDao.getPageBeanFilterMore(News.class, page, pageSize, selectname, value, NewsTable.USERID, userid);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("total",list.size());
 		map.put("rows",NewsVO.changeToNewsVOs(list));

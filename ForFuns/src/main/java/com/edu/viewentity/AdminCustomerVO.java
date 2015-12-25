@@ -3,7 +3,7 @@ package com.edu.viewentity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.edu.model.CustomerBean;
+import com.edu.model.Customer;
 
 public class AdminCustomerVO {
 	private Integer id;
@@ -21,7 +21,7 @@ public class AdminCustomerVO {
 		this.name = name;
 		this.avator = avator;
 	}
-	public AdminCustomerVO(CustomerBean customerBean) {
+	public AdminCustomerVO(Customer customerBean) {
 		super();
 		this.id = customerBean.getId();
 		this.name = customerBean.getUsername();
@@ -53,12 +53,12 @@ public class AdminCustomerVO {
 		this.realname = realname;
 		this.isartist = isartist;
 	}
-	public static List<AdminCustomerVO> ChangeToList(List<CustomerBean> temp){
+	public static List<AdminCustomerVO> ChangeToList(List<Customer> temp){
 		List<AdminCustomerVO> list = new ArrayList<AdminCustomerVO>();
 		if(temp.size()==0||null==temp){
 			return list;
 		}
-		for(CustomerBean customerBean : temp){
+		for(Customer customerBean : temp){
 			list.add(new AdminCustomerVO(customerBean));
 		}
 		return list;

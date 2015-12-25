@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.edu.base.IBaseService;
-import com.edu.model.AdvertBean;
-import com.edu.model.NewsBean;
+import com.edu.model.Advert;
+import com.edu.model.News;
 
-public interface IAdvertService extends IBaseService<AdvertBean>
+public interface IAdvertService extends IBaseService<Advert>
 {
 	/**
 	 * 通过userid获取咨询分页
@@ -20,9 +20,9 @@ public interface IAdvertService extends IBaseService<AdvertBean>
 	 */
 	public Map<String, Object>  GetAdvertBeanPageByUserid(String userid, int page,int pageSize, Map<String, String> param);
 
-	public List<AdvertBean> GetFirstAdvert();
+	public List<Advert> GetFirstAdvert();
 	
-	public List<AdvertBean> GetSecondAdvert();
+	public List<Advert> GetSecondAdvert();
 	
-	public List<AdvertBean> GetThirdAdvert();
+	public List<Advert> GetThirdAdvert();
 }

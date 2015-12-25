@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.edu.model.FunctionBean;
-import com.edu.model.UserBean;
-import com.edu.model.UserRoleBean;
+import com.edu.model.Function;
+import com.edu.model.User;
+import com.edu.model.UserRole;
 import com.edu.service.IUserRoleService;
 import com.edu.table.UserRoleTable;
 import com.edu.table.UserTable;
@@ -42,7 +42,7 @@ public class UserRoleController {
 		Map<String, String> require = new HashMap<String, String>();
 		require.put(UserRoleTable.USERID, userid+"");
 		require.put(UserRoleTable.ROLEID, roleid+"");
-		int result = userRoleService.DeleteBean(UserRoleBean.class,UserRoleTable.TABLENAME, require );
+		int result = userRoleService.DeleteBean(UserRole.class,UserRoleTable.TABLENAME, require );
 		return ""+result;
 	}
 	
@@ -56,7 +56,7 @@ public class UserRoleController {
 	@ResponseBody
 	@RequestMapping(params="method=getuserfunction")
 	public Map<String, Object> JsonGetUserFunction(@RequestParam(value="userid")int userid){
-		List<FunctionBean> result = userRoleService.GetUserFunctions(userid);
+		List<Function> result = userRoleService.GetUserFunctions(userid);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("functions", result);
 		return map;

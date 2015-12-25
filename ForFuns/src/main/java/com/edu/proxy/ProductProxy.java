@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.edu.base.IBaseDao;
 import com.edu.dao.IProductDao;
 import com.edu.dao.IProductMoneyDao;
-import com.edu.model.CustomerBean;
-import com.edu.model.ProductBean;
+import com.edu.model.Customer;
+import com.edu.model.Product;
 import com.edu.stragegy.ISellStrategy;
 import com.edu.util.GetConfigData;
 import com.edu.util.SpringContextUtil;
@@ -25,7 +25,7 @@ import com.edu.util.SpringContextUtil;
 @Transactional
 @Service("productProxy")
 public class ProductProxy {
-	private ProductBean productBean;
+	private Product productBean;
 	private ISellStrategy sellStrategy;
 	@Resource
 	private IProductDao productDao ;
@@ -33,7 +33,7 @@ public class ProductProxy {
 	private IProductMoneyDao productMoneyDao;
 	@Resource
 	private SpringContextUtil springContextUtil;
-	public void Init(ProductBean productBean){
+	public void Init(Product productBean){
 		this.productBean = productBean;
 		int methodid = productBean.getProductSellBean().getSellMethodBean().getId();
 		try {
@@ -48,11 +48,11 @@ public class ProductProxy {
 	 * 出售商品
 	 * @return
 	 */
-	public String BuyProduct(CustomerBean customerbean,Integer money,Map<String, Object> params)throws Exception{
+	public String BuyProduct(Customer customerbean,Integer money,Map<String, Object> params)throws Exception{
 		return sellStrategy.SellProduct(productBean,customerbean,money,params)+"";
 	}
 
-	public ProductProxy(ProductBean productBean) {
+	public ProductProxy(Product productBean) {
 		super();
 		this.productBean = productBean;
 		int methodid = productBean.getProductSellBean().getSellMethodBean().getId();

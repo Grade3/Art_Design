@@ -1,10 +1,10 @@
 package com.edu.dao;
 
 import com.edu.base.IBaseDao;
-import com.edu.model.ProductTypeBean;
-import com.edu.model.UserBean;
+import com.edu.model.ProductType;
+import com.edu.model.User;
 
-public interface IProductTypeDao extends IBaseDao<ProductTypeBean>
+public interface IProductTypeDao extends IBaseDao<ProductType>
 {
-	public boolean isExist(ProductTypeBean productType);
+	public boolean isExist(ProductType productType);
 }

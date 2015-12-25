@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.edu.base.BaseServiceImpl;
 import com.edu.dao.IAdvertDao;
-import com.edu.model.AdvertBean;
+import com.edu.model.Advert;
 import com.edu.service.IAdvertService;
 import com.edu.table.AdvertTable;
 import com.edu.viewentity.AdvertVO;
 
 @Service("advertService")
-public class AdvertServiceImpl extends BaseServiceImpl<AdvertBean> implements IAdvertService
+public class AdvertServiceImpl extends BaseServiceImpl<Advert> implements IAdvertService
 {
 	@Autowired
 	private IAdvertDao advertDao;
@@ -41,7 +41,7 @@ public class AdvertServiceImpl extends BaseServiceImpl<AdvertBean> implements IA
 				value= entry.getValue();
 			}
 		}
-		List<AdvertBean> list = advertDao.getPageBeanFilterMore(AdvertBean.class, page, pageSize, selectname, value, AdvertTable.USERID, userid);
+		List<Advert> list = advertDao.getPageBeanFilterMore(Advert.class, page, pageSize, selectname, value, AdvertTable.USERID, userid);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("total",list.size());
 		map.put("rows",AdvertVO.changeToAdvertVOs(list));
@@ -49,26 +49,26 @@ public class AdvertServiceImpl extends BaseServiceImpl<AdvertBean> implements IA
 	}
 	
 	@Override
-	public List<AdvertBean> GetFirstAdvert()
+	public List<Advert> GetFirstAdvert()
 	{
-		List<AdvertBean> list = null;
-		list = (List<AdvertBean>)advertDao.GetFirstAdvert();
+		List<Advert> list = null;
+		list = (List<Advert>)advertDao.GetFirstAdvert();
 		return list;
 	}
 	
 	@Override
-	public List<AdvertBean> GetSecondAdvert()
+	public List<Advert> GetSecondAdvert()
 	{
-		List<AdvertBean> list = null;
-		list = (List<AdvertBean>)advertDao.GetSecondAdvert();
+		List<Advert> list = null;
+		list = (List<Advert>)advertDao.GetSecondAdvert();
 		return list;
 	}
 	
 	@Override
-	public List<AdvertBean> GetThirdAdvert()
+	public List<Advert> GetThirdAdvert()
 	{
-		List<AdvertBean> list = null;
-		list = (List<AdvertBean>)advertDao.GetThirdAdvert();
+		List<Advert> list = null;
+		list = (List<Advert>)advertDao.GetThirdAdvert();
 		return list;
 	}
 }

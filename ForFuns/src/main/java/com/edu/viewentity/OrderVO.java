@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.edu.model.CustomerBean;
-import com.edu.model.OrderBean;
-import com.edu.model.ProductBean;
+import com.edu.model.Customer;
+import com.edu.model.Order;
+import com.edu.model.Product;
 
 public class OrderVO
 {
@@ -85,7 +85,7 @@ public class OrderVO
 		this.customerid = customerid;
 	}
 	
-	public OrderVO(OrderBean orderBean)
+	public OrderVO(Order orderBean)
 	{
 		super();
 		this.id = orderBean.getId();
@@ -147,7 +147,7 @@ public class OrderVO
 	 * @param list
 	 * @return
 	 */
-	public static List<OrderVO> ChangeListProductToOrderVo(List<OrderBean> list ){
+	public static List<OrderVO> ChangeListProductToOrderVo(List<Order> list ){
 		List<OrderVO> orderVOs = new ArrayList<OrderVO>();
 		if(null==list)
 			return orderVOs;

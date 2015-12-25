@@ -3,8 +3,8 @@ package com.edu.viewentity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.edu.model.AddressBean;
-import com.edu.model.ProductBean;
+import com.edu.model.Address;
+import com.edu.model.Product;
 
 /**
  * 地址显示层
@@ -18,7 +18,7 @@ public class AddressVO
 	private String receiver;
 	private String telephone;
 	
-	public AddressVO(AddressBean addressBean)
+	public AddressVO(Address addressBean)
 	{
 		super();
 		id = addressBean.getId();
@@ -32,7 +32,7 @@ public class AddressVO
 	 * @param list
 	 * @return
 	 */
-	public static List<AddressVO> ChangeListAddressToAddressVo(List<AddressBean> list)
+	public static List<AddressVO> ChangeListAddressToAddressVo(List<Address> list)
 	{
 		List<AddressVO> addressVOs = new ArrayList<AddressVO>();
 		for(int i=0;i<list.size();i++)

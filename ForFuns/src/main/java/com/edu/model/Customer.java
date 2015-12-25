@@ -26,7 +26,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @Table(name="c_customer")
 @Entity
-public class CustomerBean
+public class Customer
 {
 	private Integer id;
 	private String userid;
@@ -37,12 +37,12 @@ public class CustomerBean
 	private String realname;
 	private String avator;
 	private Integer isartist;
-	private Set<CustomerAddressBean> customerAddressBeans;
-	public CustomerBean(){
+	private Set<CustomerAddress> customerAddressBeans;
+	public Customer(){
 		super();
 	}
 
-	public CustomerBean(Integer id, String userid, String username,
+	public Customer(Integer id, String userid, String username,
 			String password, String personnumber, String telphone,
 			String realname, String avator, Integer isartist){
 		super();
@@ -57,20 +57,20 @@ public class CustomerBean
 		this.isartist = isartist;
 	}
 	
-	public CustomerBean(String username, String password){
+	public Customer(String username, String password){
 		super();
 		this.username = username;
 		this.password = password;
 	}
 
-	public CustomerBean(int id, String username, String password){
+	public Customer(int id, String username, String password){
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 	}
 
-	public CustomerBean(String userid, String username, String password,
+	public Customer(String userid, String username, String password,
 			String personnumber, String telphone, String realname,
 			String avator, Integer isartist){
 		super();
@@ -177,19 +177,19 @@ public class CustomerBean
 	}
 
 	@OneToMany(mappedBy="customerBean")
-	public Set<CustomerAddressBean> getCustomerAddressBeans() {
+	public Set<CustomerAddress> getCustomerAddressBeans() {
 		return customerAddressBeans;
 	}
 
 	public void setCustomerAddressBeans(
-			Set<CustomerAddressBean> customerAddressBeans) {
+			Set<CustomerAddress> customerAddressBeans) {
 		this.customerAddressBeans = customerAddressBeans;
 	}
 
-	public CustomerBean(Integer id, String userid, String username,
+	public Customer(Integer id, String userid, String username,
 			String password, String personnumber, String telphone,
 			String realname, String avator, Integer isartist,
-			Set<CustomerAddressBean> customerAddressBeans) {
+			Set<CustomerAddress> customerAddressBeans) {
 		super();
 		this.id = id;
 		this.userid = userid;

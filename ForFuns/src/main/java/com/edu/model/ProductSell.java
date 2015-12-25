@@ -23,20 +23,20 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @Table(name="ps_productsell")
 @Entity
 @JsonIgnoreProperties(value="productBean")
-public class ProductSellBean {
+public class ProductSell {
 	private Integer id;
-	private ProductBean productBean;
-	private SellMethodBean sellMethodBean;
+	private Product productBean;
+	private SellMethod sellMethodBean;
 	
 	
-	public ProductSellBean(Integer id, ProductBean productBean,
-			SellMethodBean sellMethodBean) {
+	public ProductSell(Integer id, Product productBean,
+			SellMethod sellMethodBean) {
 		super();
 		this.id = id;
 		this.productBean = productBean;
 		this.sellMethodBean = sellMethodBean;
 	}
-	public ProductSellBean() {
+	public ProductSell() {
 		super();
 	}
 	@Id
@@ -50,19 +50,19 @@ public class ProductSellBean {
 	}
 	@OneToOne(fetch=FetchType.LAZY)  
     @JoinColumn(name="productid") 
-	public ProductBean getProductBean() {
+	public Product getProductBean() {
 		return productBean;
 	}
 	
-	public void setProductBean(ProductBean productBean) {
+	public void setProductBean(Product productBean) {
 		this.productBean = productBean;
 	}
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="sellmethodid")
-	public SellMethodBean getSellMethodBean() {
+	public SellMethod getSellMethodBean() {
 		return sellMethodBean;
 	}
-	public void setSellMethodBean(SellMethodBean sellMethodBean) {
+	public void setSellMethodBean(SellMethod sellMethodBean) {
 		this.sellMethodBean = sellMethodBean;
 	}
 }

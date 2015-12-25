@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.edu.model.FunctionBean;
-import com.edu.model.RoleBean;
-import com.edu.model.UserBean;
+import com.edu.model.Function;
+import com.edu.model.Role;
+import com.edu.model.User;
 import com.edu.service.IUserService;
 import com.edu.serviceimpl.UserServiceImpl;
 import com.edu.table.UserTable;
@@ -69,7 +69,7 @@ public class UserController {
 				return "redirect:/admin/Admin_login.jsp?error=1";
 			}
 		}
-		UserBean user = new UserBean();
+		User user = new User();
 		user.setPassword(password);
 		user.setUsername(username);
 		System.out.println(user.toString());
@@ -108,9 +108,9 @@ public class UserController {
 			@RequestParam(value="selectname",defaultValue="id")String selectname,
 			@RequestParam(value="value",defaultValue="")String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UserBean> list = userService.GetPageBeanFilter(UserBean.class, page,
+		List<User> list = userService.GetPageBeanFilter(User.class, page,
 				pageSize,selectname,value);
-		int total = userService.GetPageBeanFilterTotal(UserBean.class, page, pageSize, selectname, value);
+		int total = userService.GetPageBeanFilterTotal(User.class, page, pageSize, selectname, value);
 		map.put("rows", list);
 		map.put("total", total);
 		return map;
@@ -131,7 +131,7 @@ public class UserController {
 			temp[i] = Integer.parseInt(id[i]);
 		}
 		try {
-			userService.DeleteBatch(UserBean.class, temp);
+			userService.DeleteBatch(User.class, temp);
 			return "true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -160,7 +160,7 @@ public class UserController {
 			JSONObject jsonObject = new JSONObject(data);
 			String username = jsonObject.getString(UserTable.USERNAME);
 			String password = jsonObject.getString(UserTable.PASSWORD);
-			UserBean userBean = new UserBean(username, password);
+			User userBean = new User(username, password);
 			userService.AddBean(userBean);
 			return 1;
 		} catch (Exception e) {
@@ -189,7 +189,7 @@ public class UserController {
 		int id = jsonObject.getInt(UserTable.ID);
 		String username = jsonObject.getString(UserTable.USERNAME);
 		String password = jsonObject.getString(UserTable.PASSWORD);
-		UserBean userBean = new UserBean(id,username, password);
+		User userBean = new User(id,username, password);
 		userService.UpdataBean(userBean);
 		return "true";
 	}
@@ -225,7 +225,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(params="method=getalluser")
 	public Map<String, Object> GetAllUser(){
-		List<UserBean> list = userService.GetAllBean(UserBean.class);
+		List<User> list = userService.GetAllBean(User.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("users", list);
 		return map;
@@ -239,8 +239,8 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(params="method=getuserpower")
 	public Map<String,Object> GetUserPower(@RequestParam(value="username")String username){
-		UserBean userBean = userService.GetBeanByCondition(UserBean.class, UserTable.USERNAME, username, null);
-		List<FunctionBean> list = userBean.GetPowers();
+		User userBean = userService.GetBeanByCondition(User.class, UserTable.USERNAME, username, null);
+		List<Function> list = userBean.GetPowers();
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("power", list);
 		return map;

@@ -14,15 +14,15 @@ import com.edu.base.BaseServiceImpl;
 import com.edu.dao.IFunctionDao;
 import com.edu.dao.IRoleDao;
 import com.edu.dao.IRoleFunctionDao;
-import com.edu.model.FunctionBean;
-import com.edu.model.RoleBean;
-import com.edu.model.RoleFunctionBean;
+import com.edu.model.Function;
+import com.edu.model.Role;
+import com.edu.model.RoleFunction;
 import com.edu.service.IRoleFunctionService;
 import com.edu.table.RoleFunctionTable;
 @Lazy(true)
 @Transactional
 @Service("roleFunctionService")
-public class RoleFunctionServiceImpl extends BaseServiceImpl<RoleFunctionBean>
+public class RoleFunctionServiceImpl extends BaseServiceImpl<RoleFunction>
 		implements IRoleFunctionService {
 
 	@Resource
@@ -48,9 +48,9 @@ public class RoleFunctionServiceImpl extends BaseServiceImpl<RoleFunctionBean>
 	public int AddRoleFunction(int roleid, int functionid) {
 		int fontResult = IsExitRoleFunction(roleid, functionid);
 		if(fontResult==0){
-			RoleBean roleBean = (RoleBean) roleDao.getEntitybyId(RoleBean.class,roleid);
-			FunctionBean functionBean = (FunctionBean) functionDao.getEntitybyId(FunctionBean.class, functionid);
-			RoleFunctionBean roleFunctionBean = new RoleFunctionBean(roleBean, functionBean);
+			Role roleBean = (Role) roleDao.getEntitybyId(Role.class,roleid);
+			Function functionBean = (Function) functionDao.getEntitybyId(Function.class, functionid);
+			RoleFunction roleFunctionBean = new RoleFunction(roleBean, functionBean);
 			roleFunctionDao.addEntity(roleFunctionBean);
 			return 2;
 		}else if(fontResult==1){

@@ -20,14 +20,14 @@ import javax.persistence.Table;
  */
 @Table(name="pm_productmoney")
 @Entity
-public class ProductMoneyBean{
+public class ProductMoney{
 	private Integer id;
-	private ProductBean productBean;
-	private CustomerBean customerBean;
+	private Product productBean;
+	private Customer customerBean;
 	private Integer money;
 	private Date currenttime;
 	
-	public ProductMoneyBean(ProductBean productBean, CustomerBean customerBean,
+	public ProductMoney(Product productBean, Customer customerBean,
 			Integer money, Date currenttime) {
 		super();
 		this.productBean = productBean;
@@ -35,8 +35,8 @@ public class ProductMoneyBean{
 		this.money = money;
 		this.currenttime = currenttime;
 	}
-	public ProductMoneyBean(Integer id, ProductBean productBean,
-			CustomerBean customerBean, Integer money, Date currenttime) {
+	public ProductMoney(Integer id, Product productBean,
+			Customer customerBean, Integer money, Date currenttime) {
 		super();
 		this.id = id;
 		this.productBean = productBean;
@@ -55,18 +55,18 @@ public class ProductMoneyBean{
 	}
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="productid")
-	public ProductBean getProductBean() {
+	public Product getProductBean() {
 		return productBean;
 	}
-	public void setProductBean(ProductBean productBean) {
+	public void setProductBean(Product productBean) {
 		this.productBean = productBean;
 	}
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="customerid")
-	public CustomerBean getCustomerBean() {
+	public Customer getCustomerBean() {
 		return customerBean;
 	}
-	public void setCustomerBean(CustomerBean customerBean) {
+	public void setCustomerBean(Customer customerBean) {
 		this.customerBean = customerBean;
 	}
 	@Column(name="money")
@@ -76,7 +76,7 @@ public class ProductMoneyBean{
 	public void setMoney(Integer money) {
 		this.money = money;
 	}
-	public ProductMoneyBean() {
+	public ProductMoney() {
 		super();
 	}
 	@Column(name="currenttime")

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.edu.model.RoleFunctionBean;
+import com.edu.model.RoleFunction;
 import com.edu.service.IRoleFunctionService;
 import com.edu.service.IRoleService;
 import com.edu.table.RoleFunctionTable;
@@ -56,7 +56,7 @@ public class PowerController {
 		Map<String, String> require = new HashMap<String, String>();
 		require.put(RoleFunctionTable.ROLEID, roleid+"");
 		require.put(RoleFunctionTable.FUNCTIONID, functionid+"");
-		int result = roleFunctionService.DeleteBean(RoleFunctionBean.class, RoleFunctionTable.TABLENAME, require );
+		int result = roleFunctionService.DeleteBean(RoleFunction.class, RoleFunctionTable.TABLENAME, require );
 		return result+"";
 	}
 }

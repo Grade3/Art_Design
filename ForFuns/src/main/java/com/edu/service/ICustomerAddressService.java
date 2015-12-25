@@ -1,8 +1,8 @@
 package com.edu.service;
 
 import com.edu.base.IBaseService;
-import com.edu.model.CustomerAddressBean;
+import com.edu.model.CustomerAddress;
 
-public interface ICustomerAddressService extends IBaseService<CustomerAddressBean>{
+public interface ICustomerAddressService extends IBaseService<CustomerAddress>{
 
 }

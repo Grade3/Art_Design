@@ -3,7 +3,7 @@
 <hibernate-mapping>
 
 	<query name="ProductqueryGetOnlineProduct">  
-        <![CDATA[select temp from ProductBean temp inner join temp.productTypeBean type  where temp.productSellBean.sellMethodBean.id = :methodid and type.id=:typeid and ( situation = 1 or situation = 0 )]]>
+        <![CDATA[select temp from Product temp inner join temp.productTypeBean type  where temp.productSellBean.sellMethodBean.id = :methodid and type.id=:typeid and ( situation = 1 or situation = 0 )]]>
 	</query>
 	 
 <!-- 
@@ -12,9 +12,9 @@
 	</query>
 	-->
 	<query name="ProductqueryGetArtistProduct">  
-        <![CDATA[from ProductBean where artistid= :artistid]]>
+        <![CDATA[from Product where artistid= :artistid]]>
 	</query>
 	<query name="ProductquerygetArtistProductTotal">  
-        <![CDATA[from ProductBean where artistid= :artistid]]>
+        <![CDATA[from Product where artistid= :artistid]]>
 	</query>
 </hibernate-mapping>  

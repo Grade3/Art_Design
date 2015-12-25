@@ -20,9 +20,9 @@ import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.edu.model.AdvertBean;
-import com.edu.model.NewsBean;
-import com.edu.model.UserBean;
+import com.edu.model.Advert;
+import com.edu.model.News;
+import com.edu.model.User;
 import com.edu.service.IAdvertService;
 import com.edu.service.IUserService;
 import com.edu.viewentity.AdvertVO;
@@ -46,7 +46,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	@Resource
 	private  IUserService userService;
 	@Resource
-	private AdvertBean mAdvertBean;
+	private Advert mAdvertBean;
 	
 	/**
 	 * 添加资讯
@@ -88,8 +88,8 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		UserBean userBean = userService.GetEntityById(UserBean.class, 1);
-		AdvertBean advertBean = new AdvertBean(title, summary, author, saveUrl, content, money, position, timestart, timeout,"",userBean);
+		User userBean = userService.GetEntityById(User.class, 1);
+		Advert advertBean = new Advert(title, summary, author, saveUrl, content, money, position, timestart, timeout,"",userBean);
 		try{
 			advertService.AddBean(advertBean);
 		}catch(Exception e){
@@ -106,7 +106,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	@RequestMapping(params="method=GetFirstAdvert")
 	public List<AdvertVO> JsonGetFirstAdvert()
 	{
-		List<AdvertBean> list = advertService.GetFirstAdvert();
+		List<Advert> list = advertService.GetFirstAdvert();
 		List<AdvertVO> result = AdvertVO.changeToAdvertVOs(list);
 		return result;
 	}
@@ -119,7 +119,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	@RequestMapping(params="method=GetSecondAdvert")
 	public List<AdvertVO> JsonGetSecondAdvert()
 	{
-		List<AdvertBean> list = advertService.GetSecondAdvert();
+		List<Advert> list = advertService.GetSecondAdvert();
 		List<AdvertVO> result = AdvertVO.changeToAdvertVOs(list);
 		return result;
 	}
@@ -132,7 +132,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	@RequestMapping(params="method=GetThirdAdvert")
 	public List<AdvertVO> JsonGetThirdAdvert()
 	{
-		List<AdvertBean> list = advertService.GetThirdAdvert();
+		List<Advert> list = advertService.GetThirdAdvert();
 		List<AdvertVO> result = AdvertVO.changeToAdvertVOs(list);
 		return result;
 	}
@@ -157,7 +157,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 		Map<String, String> param = null;
 		param = new HashMap<String, String>();
 		param.put(selectname, value);
-		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "username", userid,null);
+		User userBean = userService.GetBeanByCondition(User.class, "username", userid,null);
 		//Map<String, Object> map = mAdvertBean.GetAdvertPage(userBean.getAdvertBeans(), page, pageSize,param);
 		Map<String, Object> map = advertService.GetAdvertBeanPageByUserid(userBean.getId()+"", page, pageSize, param);
 		return map;
@@ -180,9 +180,9 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 			@RequestParam(value="selectname",defaultValue="id")String selectname,
 			@RequestParam(value="value",defaultValue="")String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<AdvertBean> list = advertService.GetPageBeanFilter(AdvertBean.class, page,
+		List<Advert> list = advertService.GetPageBeanFilter(Advert.class, page,
 				pageSize,selectname,value);
-		int total = advertService.GetPageBeanFilterTotal(AdvertBean.class, page, pageSize, selectname, value);
+		int total = advertService.GetPageBeanFilterTotal(Advert.class, page, pageSize, selectname, value);
 		map.put("rows", list);
 		map.put("total", total);
 		return map;
@@ -199,7 +199,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 			temp[i] = Integer.parseInt(id[i]);
 		}
 		try {
-			advertService.DeleteBatch(AdvertBean.class, temp);
+			advertService.DeleteBatch(Advert.class, temp);
 			return "true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -214,7 +214,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	@ResponseBody
 	@RequestMapping(params="method=GetAdvertByid")
 	public Map<String,Object> JsonGetAdvertById(@RequestParam(value="advertid")Integer advertid){
-		AdvertBean advertBean = advertService.GetEntityById(AdvertBean.class, advertid);
+		Advert advertBean = advertService.GetEntityById(Advert.class, advertid);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("advert", advertBean);
 		return map;
@@ -246,7 +246,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 			@RequestParam(value="position")Integer position,HttpServletRequest request,
 			@RequestParam(value = "file", required = false) MultipartFile file
 	){
-		AdvertBean advertBean = advertService.GetEntityById(AdvertBean.class, advertid);
+		Advert advertBean = advertService.GetEntityById(Advert.class, advertid);
 		
 		String filePath = servletContext.getRealPath("/")+"advertupload/";
 		String saveUrl  = request.getContextPath() + "/advertupload/";
@@ -289,7 +289,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	@ResponseBody
 	@RequestMapping(params="method=AlertSituation")
 	public String JsonAlertSituation(@RequestParam(value="advertid")Integer advertid,@RequestParam(value="situation")Integer situation,@RequestParam(value="suggestion")String suggestion){
-		AdvertBean advertBean = advertService.GetEntityById(AdvertBean.class, advertid);
+		Advert advertBean = advertService.GetEntityById(Advert.class, advertid);
 		advertBean.setSituation(situation);
 		if(situation==1)
 			advertBean.setSuggestion("");

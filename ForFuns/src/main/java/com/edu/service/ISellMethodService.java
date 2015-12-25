@@ -1,8 +1,8 @@
 package com.edu.service;
 
 import com.edu.base.IBaseService;
-import com.edu.model.SellMethodBean;
+import com.edu.model.SellMethod;
 
-public interface ISellMethodService extends IBaseService<SellMethodBean>{
+public interface ISellMethodService extends IBaseService<SellMethod>{
 
 }

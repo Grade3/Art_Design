@@ -1,9 +1,9 @@
 package com.edu.dao;
 
-import com.edu.model.OrderAddressBean;
+import com.edu.model.OrderAddress;
 
 import com.edu.base.IBaseDao;
 
-public interface IOrderAddressDao extends IBaseDao<OrderAddressBean>{
+public interface IOrderAddressDao extends IBaseDao<OrderAddress>{
 
 }

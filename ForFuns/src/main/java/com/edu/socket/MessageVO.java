@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.edu.model.MessageBean;
+import com.edu.model.Message;
 
 public class MessageVO {
 	private Integer id;
@@ -18,7 +18,7 @@ public class MessageVO {
 	private String toavator;
 	private Integer fromid;
 	
-	public MessageVO(MessageBean messageBean) {
+	public MessageVO(Message messageBean) {
 		this.id = messageBean.getId();
 		this.content = messageBean.getMessage();
 		this.time = messageBean.getCurrent();
@@ -110,11 +110,11 @@ public class MessageVO {
 		this.toavator = toavator;
 		this.fromid = fromid;
 	}
-	public static List<MessageVO> ChangeToListMessageVO(List<MessageBean> temp){
+	public static List<MessageVO> ChangeToListMessageVO(List<Message> temp){
 		List<MessageVO> list =new ArrayList<MessageVO>();
 		if(null== temp || temp.size()==0)
 			return list;
-		for(MessageBean messageBean : temp){
+		for(Message messageBean : temp){
 			list.add(new MessageVO(messageBean));
 		}
 		return list;

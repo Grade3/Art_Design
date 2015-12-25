@@ -14,18 +14,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ca_customeraddress")
-public class CustomerAddressBean {
+public class CustomerAddress {
 	private Integer id;
-	private CustomerBean customerBean;
-	private AddressBean addressBean;
-	public CustomerAddressBean(Integer id, CustomerBean customerBean,
-			AddressBean addressBean) {
+	private Customer customerBean;
+	private Address addressBean;
+	public CustomerAddress(Integer id, Customer customerBean,
+			Address addressBean) {
 		super();
 		this.id = id;
 		this.customerBean = customerBean;
 		this.addressBean = addressBean;
 	}
-	public CustomerAddressBean() {
+	public CustomerAddress() {
 		super();
 	}
 	@Id
@@ -39,19 +39,19 @@ public class CustomerAddressBean {
 	}
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="customerid")
-	public CustomerBean getCustomerBean() {
+	public Customer getCustomerBean() {
 		return customerBean;
 	}
-	public void setCustomerBean(CustomerBean customerBean) {
+	public void setCustomerBean(Customer customerBean) {
 		this.customerBean = customerBean;
 	}
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="addressid")
-	public AddressBean getAddressBean() {
+	public Address getAddressBean() {
 		return addressBean;
 	}
 	
-	public void setAddressBean(AddressBean addressBean) {
+	public void setAddressBean(Address addressBean) {
 		this.addressBean = addressBean;
 	}
 }

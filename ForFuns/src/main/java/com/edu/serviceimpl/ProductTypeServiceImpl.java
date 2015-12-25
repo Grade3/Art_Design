@@ -8,25 +8,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.base.BaseServiceImpl;
 import com.edu.dao.IProductTypeDao;
-import com.edu.model.ProductTypeBean;
+import com.edu.model.ProductType;
 import com.edu.service.IProductTypeService;
 
 @Lazy(true)
 @Transactional
 @Service("productTypeService")
-public class ProductTypeServiceImpl extends BaseServiceImpl<ProductTypeBean> implements IProductTypeService
+public class ProductTypeServiceImpl extends BaseServiceImpl<ProductType> implements IProductTypeService
 {
 	@Resource
 	private IProductTypeDao productTypeDao;
 
 	@Override
-	public boolean isExist(ProductTypeBean productType) 
+	public boolean isExist(ProductType productType) 
 	{
 		return productTypeDao.isExist(productType);
 	}
 
 	@Override
-	public void save(ProductTypeBean productType) 
+	public void save(ProductType productType) 
 	{
 		productTypeDao.addEntity(productType);
 
