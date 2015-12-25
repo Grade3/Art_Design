@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.edu.base.IBaseDao;
 import com.edu.dao.IProductDao;
 import com.edu.dao.IProductMoneyDao;
-import com.edu.model.CustomerBean;
-import com.edu.model.ProductBean;
-import com.edu.model.ProductMoneyBean;
+import com.edu.model.Customer;
+import com.edu.model.Product;
+import com.edu.model.ProductMoney;
 import com.edu.service.IProductMoneyService;
 import com.edu.table.ProductMoneyTable;
 
@@ -32,9 +32,9 @@ public class AuctionStragegy implements ISellStrategy{
 	private IProductMoneyDao productMoneyDao;
 	
 	@Override
-	public String SellProduct(ProductBean productBean, CustomerBean customerBean,
+	public String SellProduct(Product productBean, Customer customerBean,
 			Integer money, Map<String, Object> params) throws Exception {
-		ProductMoneyBean productMoneyBean = productMoneyDao.GetBeanByCondition(ProductMoneyBean.class, ProductMoneyTable.PRODUCTID, productBean.getId()+"", null);
+		ProductMoney productMoneyBean = productMoneyDao.GetBeanByCondition(ProductMoney.class, ProductMoneyTable.PRODUCTID, productBean.getId()+"", null);
 		if(null == productMoneyBean){
 			productMoneyBean.setCustomerBean(customerBean);
 			productMoneyBean.setProductBean(productBean);
@@ -44,7 +44,7 @@ public class AuctionStragegy implements ISellStrategy{
 			return "xxxxxxxx";
 		}else{
 			Integer id   = productMoneyDao.GetMaxMoneyid(productBean.getId());
-			ProductMoneyBean maxProductMoneyBean = (ProductMoneyBean) productMoneyDao.getEntitybyId(ProductMoneyBean.class, id);
+			ProductMoney maxProductMoneyBean = (ProductMoney) productMoneyDao.getEntitybyId(ProductMoney.class, id);
 			if(maxProductMoneyBean.getMoney()>=money){//如果竞价的值比原来的小，拒绝
 				return "xxxxxxxx";
 			}else{

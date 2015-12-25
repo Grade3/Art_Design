@@ -32,14 +32,12 @@ import org.springframework.stereotype.Repository;
 
 import com.mysql.jdbc.Field;
 
-
-
 @Entity
-@Table(name="n_news")
+@Table(name="a_advert")
 @DynamicInsert
 @JsonIgnoreProperties(value={"userBean"})
 @Repository
-public class NewsBean implements Comparable{
+public class Advert implements Comparable{
 	private Integer id;
 	private String title;
 	private String summary;
@@ -47,33 +45,33 @@ public class NewsBean implements Comparable{
 	private String imgurl;
 	private String content;
 	private Integer money;
-	private Integer ishot;
+	private Integer position;
 	private Date timestart;
 	private Date timeout;
 	private Integer situation = 0;
 	private String suggestion ="";
 	private Integer isonline = 0;
-	private UserBean userBean;
+	private User userBean;
 	
-	public NewsBean() {
+	public Advert() {
 		super();
 	}
 	
 	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="userid")
-	public UserBean getUserBean() {
+	public User getUserBean() {
 		return userBean;
 	}
 
-	public void setUserBean(UserBean userBean) {
+	public void setUserBean(User userBean) {
 		this.userBean = userBean;
 	}
 
 
 
-	public NewsBean(Integer id, String title, String summary, String author,
-			String imgurl, String content, Integer money, Integer ishot,
+	public Advert(Integer id, String title, String summary, String author,
+			String imgurl, String content, Integer money, Integer position,
 			Date timestart, Date timeout, Integer situation,
 			String suggestion, Integer isonline) {
 		super();
@@ -84,7 +82,7 @@ public class NewsBean implements Comparable{
 		this.imgurl = imgurl;
 		this.content = content;
 		this.money = money;
-		this.ishot = ishot;
+		this.position = position;
 		this.timestart = timestart;
 		this.timeout = timeout;
 		this.situation = situation;
@@ -167,15 +165,15 @@ public class NewsBean implements Comparable{
 	}
 
 
-	@Column(name="ishot")
-	public Integer getIshot() {
-		return ishot;
+	@Column(name="position")
+	public Integer getPosition() {
+		return position;
 	}
 
 
 
-	public void setIshot(Integer ishot) {
-		this.ishot = ishot;
+	public void setPosition(Integer position) {
+		this.position = position;
 	}
 
 
@@ -239,9 +237,9 @@ public class NewsBean implements Comparable{
 	}
 
 
-	public NewsBean(String title, String summary, String author, String imgurl,
-			String content, Integer money, Integer ishot, Date timestart,
-			Date timeout,UserBean userBean) {
+	public Advert(String title, String summary, String author, String imgurl,
+			String content, Integer money, Integer position, Date timestart,
+			Date timeout,User userBean) {
 		super();
 		this.title = title;
 		this.summary = summary;
@@ -249,15 +247,15 @@ public class NewsBean implements Comparable{
 		this.imgurl = imgurl;
 		this.content = content;
 		this.money = money;
-		this.ishot = ishot;
+		this.position = position;
 		this.timestart = timestart;
 		this.timeout = timeout;
 		this.userBean = userBean;
 	}
 	
-	public NewsBean(String title, String summary, String author, String imgurl,
-			String content, Integer money, Integer ishot, Date timestart,
-			Date timeout, String suggestion, UserBean userBean) {
+	public Advert(String title, String summary, String author, String imgurl,
+			String content, Integer money, Integer position, Date timestart,
+			Date timeout, String suggestion, User userBean) {
 		super();
 		this.title = title;
 		this.summary = summary;
@@ -265,7 +263,7 @@ public class NewsBean implements Comparable{
 		this.imgurl = imgurl;
 		this.content = content;
 		this.money = money;
-		this.ishot = ishot;
+		this.position = position;
 		this.timestart = timestart;
 		this.timeout = timeout;
 		this.suggestion = suggestion;
@@ -280,10 +278,10 @@ public class NewsBean implements Comparable{
 	 * @return
 	 */
 	@Transient
-	public Map<String , Object> GetNewsPage(Set<NewsBean> newsSet,int page,int pagesize,Map<String, String> param){
+	public Map<String , Object> GetAdvertPage(Set<Advert> advertSet,int page,int pagesize,Map<String, String> param){
 		//通过treeset由无序转为有序  
-		Iterator<NewsBean> tempIterator = newsSet.iterator();
-		Set<NewsBean> tempSet = new TreeSet<NewsBean>();
+		Iterator<Advert> tempIterator = advertSet.iterator();
+		Set<Advert> tempSet = new TreeSet<Advert>();
 		while(tempIterator.hasNext()){
 			tempSet.add(tempIterator.next());
 		}
@@ -294,8 +292,8 @@ public class NewsBean implements Comparable{
 			int end = page*pagesize;
 			if(end>total)
 				end =total ;
-			List<NewsBean> list = new ArrayList<NewsBean>();
-			Iterator<NewsBean> iterator = tempSet.iterator();
+			List<Advert> list = new ArrayList<Advert>();
+			Iterator<Advert> iterator = tempSet.iterator();
 			int count = 0;
 			while(iterator.hasNext()){
 				if(count>=start&&count<end)
@@ -309,13 +307,13 @@ public class NewsBean implements Comparable{
 			map.put("rows",list);
 			return map;
 		}else{
-			List<NewsBean> list = new ArrayList<NewsBean>();
-			Iterator<NewsBean> iterator = tempSet.iterator();
+			List<Advert> list = new ArrayList<Advert>();
+			Iterator<Advert> iterator = tempSet.iterator();
 			int count = 0;
 			Set<String> keySet = param.keySet();
 			String selectname = keySet.iterator().next();
 			String condition = param.get(selectname);
-			Class clz = NewsBean.class;
+			Class clz = Advert.class;
 			Method method  = null;
 			try {
 			  method = clz.getMethod("get"+selectname.substring(0,1).toUpperCase()+selectname.substring(1,selectname.length()));
@@ -323,7 +321,7 @@ public class NewsBean implements Comparable{
 				e.printStackTrace();
 			}
 			while(iterator.hasNext()){
-				NewsBean next = iterator.next();
+				Advert next = iterator.next();
 				try {
 					Object invoke = method.invoke(next);
 					if(invoke.toString().contains(condition)){
@@ -339,7 +337,7 @@ public class NewsBean implements Comparable{
 			int end = page*pagesize;
 			if(list.size()<end)
 				end = list.size();
-			List<NewsBean> newslist = new ArrayList<NewsBean>();
+			List<Advert> newslist = new ArrayList<Advert>();
 			for(int i=start;i<end;i++){
 				newslist.add(list.get(i));
 			}
@@ -356,7 +354,7 @@ public class NewsBean implements Comparable{
 	@Transient
 	@Override
 	public int compareTo(Object o) {
-		NewsBean newsBean = (NewsBean) o;
+		Advert newsBean = (Advert) o;
 		return this.id-newsBean.getId();
 	}
 }

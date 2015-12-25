@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.edu.base.IBaseService;
-import com.edu.model.AddressBean;
+import com.edu.model.Address;
 
-public interface IAddressService extends IBaseService<AddressBean>{
+public interface IAddressService extends IBaseService<Address>{
 	/**
 	 * 获取地址分页
 	 * @param page
@@ -20,5 +20,5 @@ public interface IAddressService extends IBaseService<AddressBean>{
 	 * @param CusetomerUserId
 	 * @return
 	 */
-	public List<AddressBean> GetAddressByCusetomerUserId(String CusetomerUserId);	
+	public List<Address> GetAddressByCusetomerUserId(String CusetomerUserId);	
 }

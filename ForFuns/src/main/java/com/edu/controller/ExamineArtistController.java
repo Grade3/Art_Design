@@ -21,9 +21,9 @@ import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.edu.model.CustomerBean;
-import com.edu.model.ExamineArtistBean;
-import com.edu.model.UserBean;
+import com.edu.model.Customer;
+import com.edu.model.ExamineArtist;
+import com.edu.model.User;
 import com.edu.service.ICustomerService;
 import com.edu.service.IExamineArtistService;
 import com.edu.service.IUserService;
@@ -68,9 +68,9 @@ public class ExamineArtistController implements ServletConfigAware,ServletContex
 			@RequestParam(value="selectname",defaultValue="id")String selectname,
 			@RequestParam(value="value",defaultValue="")String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<ExamineArtistBean> list = examineartistService.GetPageBeanFilter(ExamineArtistBean.class, page,
+		List<ExamineArtist> list = examineartistService.GetPageBeanFilter(ExamineArtist.class, page,
 				pageSize,selectname,value);
-		int total = examineartistService.GetPageBeanFilterTotal(ExamineArtistBean.class, page, pageSize, selectname, value);
+		int total = examineartistService.GetPageBeanFilterTotal(ExamineArtist.class, page, pageSize, selectname, value);
 		map.put("rows", list);
 		map.put("total", total);
 		return map;
@@ -83,19 +83,19 @@ public class ExamineArtistController implements ServletConfigAware,ServletContex
 			@RequestParam(value="examineartistid")Integer examineartistid,
 			@RequestParam(value="situation")Integer situation,
 			@RequestParam(value="suggestion")String suggestion){
-		ExamineArtistBean examineartistBean = examineartistService.GetEntityById(ExamineArtistBean.class, examineartistid);
+		ExamineArtist examineartistBean = examineartistService.GetEntityById(ExamineArtist.class, examineartistid);
 		examineartistBean.setSuggestion(Integer.toString(situation));
 		if(situation==1){
 			examineartistBean.setSuggestion("1");
 			String id=customerService.getCustomerIdByUserid(examineartistBean.getUserid().toString());
-			CustomerBean customer = customerService.GetEntityById(CustomerBean.class, Integer.valueOf(id));
+			Customer customer = customerService.GetEntityById(Customer.class, Integer.valueOf(id));
 			customer.setIsartist(1);
 			customerService.UpdataBean(customer);
 			}
 		else {
 			examineartistBean.setSuggestion("2");
 			String id=customerService.getCustomerIdByUserid(examineartistBean.getUserid().toString());
-			CustomerBean customer = customerService.GetEntityById(CustomerBean.class, Integer.valueOf(id));
+			Customer customer = customerService.GetEntityById(Customer.class, Integer.valueOf(id));
 			customer.setIsartist(0);
 			customerService.UpdataBean(customer);
 		}

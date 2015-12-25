@@ -1,9 +1,9 @@
 package com.edu.dao;
 
 import com.edu.base.IBaseDao;
-import com.edu.model.RoleFunctionBean;
+import com.edu.model.RoleFunction;
 
-public interface IRoleFunctionDao extends IBaseDao<RoleFunctionBean>{
+public interface IRoleFunctionDao extends IBaseDao<RoleFunction>{
 	
 	/**
 	 * 判断是否存在

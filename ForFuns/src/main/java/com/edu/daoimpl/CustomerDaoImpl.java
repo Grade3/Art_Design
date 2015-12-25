@@ -9,14 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import com.edu.base.BaseDaoImpl;
 import com.edu.dao.ICustomerDao;
-import com.edu.model.CustomerBean;
+import com.edu.model.Customer;
 
 @Lazy(true)
 @Repository("customerDao")
-public class CustomerDaoImpl extends BaseDaoImpl<CustomerBean> implements ICustomerDao {
+public class CustomerDaoImpl extends BaseDaoImpl<Customer> implements ICustomerDao {
 
 	@Override
-	public boolean isExist(CustomerBean user) {
+	public boolean isExist(Customer user) {
 		// String hql = "from CustomerBean where userid=? and password=?";
 		// Query query = getSession().createQuery(hql);
 		// query.setString(0, user.getUserid());
@@ -40,7 +40,7 @@ public class CustomerDaoImpl extends BaseDaoImpl<CustomerBean> implements ICusto
 	}
 
 	@Override
-	public boolean exist(CustomerBean customer) {
+	public boolean exist(Customer customer) {
 //		String hql = "from CustomerBean where userid=?";
 //		Query query = getSession().createQuery(hql);
 //		query.setString(0, customer.getUserid());

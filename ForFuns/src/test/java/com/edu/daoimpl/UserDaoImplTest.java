@@ -21,8 +21,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.edu.dao.IUserDao;
-import com.edu.model.NewsBean;
-import com.edu.model.UserBean;
+import com.edu.model.News;
+import com.edu.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-hibernate.xml","classpath:spring.xml","classpath:spring-mvc.xml"}) 
@@ -57,7 +57,7 @@ public class UserDaoImplTest {
 	
 	@Test
 	public void testsave() {
-		UserBean user = new UserBean();
+		User user = new User();
 		user.setUsername("1111111111");
 		userDao.addEntity(user);
 	}
@@ -67,7 +67,7 @@ public class UserDaoImplTest {
 		Map<String, String> require = new HashMap<String, String>();
 		require.put("username", "222");
 		try {
-			Object object = userDao.getObjectbyRequir(UserBean.class, require );
+			Object object = userDao.getObjectbyRequir(User.class, require );
 			System.out.println(object);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,7 +92,7 @@ public class UserDaoImplTest {
 		Ids[0] = 39;
 		Ids[1] = 40;
 		try {
-			userDao.deleteBatch(UserBean.class, Ids );
+			userDao.deleteBatch(User.class, Ids );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

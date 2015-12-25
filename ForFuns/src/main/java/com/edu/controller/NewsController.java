@@ -21,8 +21,8 @@ import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.edu.model.NewsBean;
-import com.edu.model.UserBean;
+import com.edu.model.News;
+import com.edu.model.User;
 import com.edu.service.INewsService;
 import com.edu.service.IUserService;
 import com.edu.table.NewsTable;
@@ -87,8 +87,8 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "username", userid,null);
-		NewsBean newsBean = new NewsBean(title, summary, author, saveUrl, content, money, ishot, timestart, timeout,"",userBean);
+		User userBean = userService.GetBeanByCondition(User.class, "username", userid,null);
+		News newsBean = new News(title, summary, author, saveUrl, content, money, ishot, timestart, timeout,"",userBean);
 		try{
 			newsService.AddBean(newsBean);
 		}catch(Exception e){
@@ -116,7 +116,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		Map<String, String> param = null;
 		param = new HashMap<String, String>();
 		param.put(selectname, value);
-		UserBean userBean = userService.GetBeanByCondition(UserBean.class, "username", userid,null);
+		User userBean = userService.GetBeanByCondition(User.class, "username", userid,null);
 		//Map<String, Object> map = mNewsBean.GetNewsPage(userBean.getNewsBeans(), page, pageSize,param);
 		Map<String, Object> map = newsService.GetNewsBeanPageByUserid(userBean.getId()+"", page, pageSize, param);
 		return map;
@@ -138,9 +138,9 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 			@RequestParam(value="selectname",defaultValue="id")String selectname,
 			@RequestParam(value="value",defaultValue="")String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<NewsBean> list = newsService.GetPageBeanFilter(NewsBean.class, page,
+		List<News> list = newsService.GetPageBeanFilter(News.class, page,
 				pageSize,selectname,value);
-		int total = newsService.GetPageBeanFilterTotal(NewsBean.class, page, pageSize, selectname, value);
+		int total = newsService.GetPageBeanFilterTotal(News.class, page, pageSize, selectname, value);
 		map.put("rows", list);
 		map.put("total", total);
 		return map;
@@ -157,7 +157,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 			temp[i] = Integer.parseInt(id[i]);
 		}
 		try {
-			newsService.DeleteBatch(NewsBean.class, temp);
+			newsService.DeleteBatch(News.class, temp);
 			return "true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -173,7 +173,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	@ResponseBody
 	@RequestMapping(params="method=getnewsbyid")
 	public Map<String,Object> JsonGetNewsById(@RequestParam(value="newsid")Integer newsid){
-		NewsBean newsBean = newsService.GetEntityById(NewsBean.class, newsid);
+		News newsBean = newsService.GetEntityById(News.class, newsid);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("news", newsBean);
 		return map;
@@ -204,7 +204,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 			@RequestParam(value="ishot")Integer ishot,HttpServletRequest request,
 			@RequestParam(value = "file", required = false) MultipartFile file
 	){
-		NewsBean newsBean = newsService.GetEntityById(NewsBean.class, newsid);
+		News newsBean = newsService.GetEntityById(News.class, newsid);
 		
 		String filePath = servletContext.getRealPath("/")+"newsupload/";
 		String saveUrl  = request.getContextPath() + "/newsupload/";
@@ -247,7 +247,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	@ResponseBody
 	@RequestMapping(params="method=alertsituation")
 	public String JsonAlertSituation(@RequestParam(value="newsid")Integer newsid,@RequestParam(value="situation")Integer situation,@RequestParam(value="suggestion")String suggestion){
-		NewsBean newsBean = newsService.GetEntityById(NewsBean.class, newsid);
+		News newsBean = newsService.GetEntityById(News.class, newsid);
 		newsBean.setSituation(situation);
 		if(situation==1)
 			newsBean.setSuggestion("");
@@ -268,7 +268,7 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	 */
 	@ResponseBody
 	@RequestMapping(params="method=GetHotNew")
-	public List<NewsBean> JsonGetHotNew(){
+	public List<News> JsonGetHotNew(){
 		return newsService.GetHotNews();
 	}
 	
@@ -282,8 +282,8 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		Map<String , Object> map = new HashMap<String, Object>();
 		//List<NewsBean> list = newsService.GetPageBeanFilter(NewsBean.class,page,pageSize, NewsTable.ISONLINE, 1+"");
 		//int total = newsService.GetPageBeanFilterTotal(NewsBean.class, page, pageSize,NewsTable.ISONLINE, 1+"");
-		List<NewsBean> list = newsService.GetPageBeanFilterMore(NewsBean.class, page, pageSize, NewsTable.ISONLINE, 1+"", NewsTable.SITUATION, 1+"");
-		int total = newsService.GetPageBeanFilterMoreTotal(NewsBean.class, page, pageSize, NewsTable.ISONLINE, 1+"", NewsTable.SITUATION, 1+"");
+		List<News> list = newsService.GetPageBeanFilterMore(News.class, page, pageSize, NewsTable.ISONLINE, 1+"", NewsTable.SITUATION, 1+"");
+		int total = newsService.GetPageBeanFilterMoreTotal(News.class, page, pageSize, NewsTable.ISONLINE, 1+"", NewsTable.SITUATION, 1+"");
 		map.put("list", list);
 		map.put("total", total);
 		return map;

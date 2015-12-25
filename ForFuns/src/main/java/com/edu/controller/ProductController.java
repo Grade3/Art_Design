@@ -30,14 +30,14 @@ import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.edu.model.ArtistBean;
-import com.edu.model.CustomerBean;
-import com.edu.model.NewsBean;
-import com.edu.model.OrderBean;
-import com.edu.model.ProductBean;
-import com.edu.model.ProductSellBean;
-import com.edu.model.ProductTypeBean;
-import com.edu.model.SellMethodBean;
+import com.edu.model.Artist;
+import com.edu.model.Customer;
+import com.edu.model.News;
+import com.edu.model.Order;
+import com.edu.model.Product;
+import com.edu.model.ProductSell;
+import com.edu.model.ProductType;
+import com.edu.model.SellMethod;
 import com.edu.proxy.ProductProxy;
 import com.edu.service.ICustomerService;
 import com.edu.service.IOrderService;
@@ -98,10 +98,10 @@ ServletContextAware {
 			@RequestParam(value="selectname",defaultValue="id")String selectname,
 			@RequestParam(value="value",defaultValue="")String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<ProductBean> list = productService.GetPageBeanFilter(ProductBean.class, page,
+		List<Product> list = productService.GetPageBeanFilter(Product.class, page,
 				pageSize,selectname,value);
 		List<ProductVO> productVOs = ProductVO.ChangeListProductToProductVo(list);
-		int total = productService.GetPageBeanFilterTotal(ProductBean.class, page, pageSize, selectname, value);
+		int total = productService.GetPageBeanFilterTotal(Product.class, page, pageSize, selectname, value);
 		map.put("rows", productVOs);
 		map.put("total", total);
 		return map;
@@ -148,7 +148,7 @@ ServletContextAware {
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
 			Integer id = jsonObject.getInt("id");
-			ProductBean productBean = productService.GetEntityById(ProductBean.class, id);
+			Product productBean = productService.GetEntityById(Product.class, id);
 			String name = jsonObject.getString("name");
 			productBean.setName(name);
 			Integer typeid = jsonObject.getInt("typeid");
@@ -158,10 +158,10 @@ ServletContextAware {
 			productBean.setTimestart(timestart);
 			Date timeout = sdf.parse(jsonObject.getString("timeout"));
 			productBean.setTimeout(timeout);
-			SellMethodBean sellMethodBean = sellMethodService.GetEntityById(SellMethodBean.class, methodid);
+			SellMethod sellMethodBean = sellMethodService.GetEntityById(SellMethod.class, methodid);
 			productBean.getProductSellBean().setSellMethodBean(sellMethodBean);
 			//System.out.println(productBean.getProductSellBean().getSellMethodBean().getName());
-			ProductTypeBean productTypeBean = productTypeService.GetEntityById(ProductTypeBean.class, typeid);
+			ProductType productTypeBean = productTypeService.GetEntityById(ProductType.class, typeid);
 			productBean.setProductTypeBean(productTypeBean);
 			productService.UpdataBean(productBean);
 			return "1";
@@ -181,7 +181,7 @@ ServletContextAware {
 	public Map<String, Object> JsonGetOnlineNews(@RequestParam(value="page")Integer page,@RequestParam(value="pageSize")Integer pageSize,
 			@RequestParam(value="typeid")Integer typeid,@RequestParam(value="methodid")Integer methodid){
 		Map<String , Object> map = new HashMap<String, Object>();
-		List<ProductBean> list = productService.getOnlineProduct(page, pageSize, typeid,methodid);
+		List<Product> list = productService.getOnlineProduct(page, pageSize, typeid,methodid);
 		int total = productService.getOnlineProductTotal(typeid,methodid);
 		List<ProductVO> productVOs = ProductVO.ChangeListProductToProductVo(list);
 		map.put("list", productVOs);
@@ -201,7 +201,7 @@ ServletContextAware {
 		Map<String , Object> map = new HashMap<String, Object>();
 		//System.out.println("at getArtistProduct s");
 		//System.out.println(page+" + "+pageSize+" + "+artistid);
-		List<ProductBean> list = productService.getArtistProduct(page, pageSize, artistid);
+		List<Product> list = productService.getArtistProduct(page, pageSize, artistid);
 		//System.out.println("\r\nThe result of getArtistProduct");
 		//System.out.println("at getArtistProduct f");
 		int total = productService.getArtistProductTotal(artistid);
@@ -221,7 +221,7 @@ ServletContextAware {
 	@RequestMapping(params="method=GetProductById")
 	public Map<String, Object> JsonGetProductById(@RequestParam(value="productid")Integer id){
 		Map<String , Object> map = new HashMap<String, Object>();
-		ProductBean productBean = productService.GetEntityById(ProductBean.class, id);
+		Product productBean = productService.GetEntityById(Product.class, id);
 		ProductVO productVO = new ProductVO(productBean);
 		map.put("product",productVO);
 		return map;
@@ -292,12 +292,12 @@ ServletContextAware {
 	public String CheckLoginAddOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="productid")Integer id,
 			@RequestParam(value="addressid")Integer addressid){
 		String userid = CheckTokenTool.GetUserid(useridtoken);
-		CustomerBean customerBean = null;
-		ProductBean productBean = null;
+		Customer customerBean = null;
+		Product productBean = null;
 		Map<String, Object> params = new HashMap<String, Object>();
 		try {
 			customerBean =  customerService.getCustomerByUserId(userid);
-			productBean = productService.GetEntityById(ProductBean.class, id);
+			productBean = productService.GetEntityById(Product.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -329,13 +329,13 @@ ServletContextAware {
 		if(!flag)
 			return "0";//未登录
 		String userid = CheckTokenTool.GetUserid(useridtoken);
-		CustomerBean customerBean = null;
+		Customer customerBean = null;
 		try {
 			customerBean =  customerService.getCustomerByUserId(userid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		OrderBean orderBean = null;
+		Order orderBean = null;
 		try {
 			orderBean  = orderService.getOrderByProductId(id);
 		} catch (Exception e) {
@@ -372,10 +372,10 @@ ServletContextAware {
 			@RequestParam(value="sellid")Integer sellid,@RequestParam(value="starttime")String starttime,@RequestParam(value="endtime")String endtime,
 			@RequestParam(value="content")String content){
 		
-		ProductBean productBean = new ProductBean();
+		Product productBean = new Product();
 		try {
-			CustomerBean customerBean = customerService.getCustomerByUserId(CheckTokenTool.GetUserid(useridtoken));
-			productBean.setArtistBean(new ArtistBean(customerBean));
+			Customer customerBean = customerService.getCustomerByUserId(CheckTokenTool.GetUserid(useridtoken));
+			productBean.setArtistBean(new Artist(customerBean));
 		} catch (Exception e2) {
 			e2.printStackTrace();
 			return "redirect:/font/error.jsp?";
@@ -399,7 +399,7 @@ ServletContextAware {
 		    return "redirect:/font/error.jsp?";
 		}  
 		productBean.setContent(content);
-		productBean.setProductTypeBean(productTypeService.GetEntityById(ProductTypeBean.class, typeid));
+		productBean.setProductTypeBean(productTypeService.GetEntityById(ProductType.class, typeid));
 		
 		
 		
@@ -465,8 +465,8 @@ ServletContextAware {
 		
 		
 		
-		ProductSellBean productSellBean = new ProductSellBean();
-		productSellBean.setSellMethodBean(sellMethodService.GetEntityById(SellMethodBean.class, sellid));
+		ProductSell productSellBean = new ProductSell();
+		productSellBean.setSellMethodBean(sellMethodService.GetEntityById(SellMethod.class, sellid));
 		productSellBean.setProductBean(productBean);
 		productBean.setProductSellBean(productSellBean);
 		productService.AddBean(productBean);

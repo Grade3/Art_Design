@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.edu.model.ProductBean;
+import com.edu.model.Product;
 
 /**
  * 商品显示层
@@ -29,7 +29,7 @@ public class ProductVO {
 	private String methodname;//出售方式名称
 	private Integer typeid;//出售方式id
 	private String typename;//出售方式名称
-	public ProductVO(ProductBean productBean) {
+	public ProductVO(Product productBean) {
 		super();
 		this.id = productBean.getId();
 		this.name = productBean.getName();
@@ -54,7 +54,7 @@ public class ProductVO {
 	 * @param list
 	 * @return
 	 */
-	public static List<ProductVO> ChangeListProductToProductVo(List<ProductBean> list ){
+	public static List<ProductVO> ChangeListProductToProductVo(List<Product> list ){
 		List<ProductVO> productVOs = new ArrayList<ProductVO>();
 		for(int i=0;i<list.size();i++){
 			ProductVO productVO = new ProductVO(list.get(i));

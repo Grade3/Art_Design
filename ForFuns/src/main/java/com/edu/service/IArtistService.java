@@ -7,18 +7,18 @@ import java.util.List;
 import java.util.Map;
 
 import com.edu.base.IBaseService;
-import com.edu.model.ArtistBean;
-import com.edu.model.CustomerBean;
-import com.edu.model.ExamineArtistBean;
+import com.edu.model.Artist;
+import com.edu.model.Customer;
+import com.edu.model.ExamineArtist;
 
-public interface IArtistService extends IBaseService<CustomerBean>
+public interface IArtistService extends IBaseService<Customer>
 {
 	/**
 	 * 判断用户是否存在
 	 * @param customer
 	 * @return
 	 */
-	public boolean isExist(CustomerBean customer);
+	public boolean isExist(Customer customer);
 	
 	
 	
@@ -26,7 +26,7 @@ public interface IArtistService extends IBaseService<CustomerBean>
 	 * 保存实体
 	 * @param customer
 	 */
-	public void save(CustomerBean customer);
+	public void save(Customer customer);
 	
 	
 	
@@ -39,10 +39,10 @@ public interface IArtistService extends IBaseService<CustomerBean>
 	
 	
 	@SuppressWarnings("rawtypes")
-	public List<CustomerBean> GetAllBean(Class clz);
+	public List<Customer> GetAllBean(Class clz);
 	
 	@SuppressWarnings("rawtypes")
-	public List<CustomerBean> GetPageBeanFilter(Class clz,int page,int pageSize,String selectname,String value);
+	public List<Customer> GetPageBeanFilter(Class clz,int page,int pageSize,String selectname,String value);
 	
 	@SuppressWarnings("rawtypes")
 	public int GetPageBeanFilterTotal(Class clz, int page, int pageSize,
@@ -55,5 +55,5 @@ public interface IArtistService extends IBaseService<CustomerBean>
 	 * @return
 	 * @throws Exception
 	 */
-	public CustomerBean getArtistByUserId(String userid) throws Exception;
+	public Customer getArtistByUserId(String userid) throws Exception;
 }

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edu.dao.ICustomerDao;
-import com.edu.model.CustomerBean;
-import com.edu.model.MessageBean;
+import com.edu.model.Customer;
+import com.edu.model.Message;
 import com.edu.service.ICustomerService;
 import com.edu.service.IMessageService;
 import com.edu.socket.MessageVO;
@@ -35,11 +35,11 @@ public class MessageController {
 	@RequestMapping(params="method=getUndReadMessage")
 	public Map<String, Object> JsonGetUnRead(@RequestParam(name="customerUserid")String customerUserid){
 		Map<String, Object> map = new HashMap<String, Object>();
-		CustomerBean customerBean = null;
+		Customer customerBean = null;
 		try {
 			customerBean = customerService.getCustomerByUserId(customerUserid+"");
-			List<MessageBean> unread = messageService.getUserMessage(customerBean.getId(),0);
-			List<MessageBean> read = messageService.getUserMessage(customerBean.getId(),1);
+			List<Message> unread = messageService.getUserMessage(customerBean.getId(),0);
+			List<Message> read = messageService.getUserMessage(customerBean.getId(),1);
 			map.put("unread", MessageVO.ChangeToListMessageVO(unread));
 			map.put("read", MessageVO.ChangeToListMessageVO(read));
 		} catch (Exception e) {

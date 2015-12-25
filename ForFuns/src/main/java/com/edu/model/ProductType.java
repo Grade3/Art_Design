@@ -8,19 +8,28 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * 出售方式
+ * 商品类型表
  * @author Gy
  *
  */
 @Entity
-@Table(name="sm_sellmethod")
-public class SellMethodBean {
+@Table(name="pt_producttype")
+public class ProductType{
 	private Integer id;
 	private String name;
-	public SellMethodBean(Integer id, String name) {
+	
+	public ProductType(String name) {
+		super();
+		this.name = name;
+	}
+	
+	public ProductType(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
+	}
+	public ProductType(){
+		super();
 	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,9 +46,6 @@ public class SellMethodBean {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public SellMethodBean() {
-		super();
 	}
 	
 }

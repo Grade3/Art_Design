@@ -18,10 +18,10 @@ import com.edu.base.TreeBean;
 import com.edu.base.TreeChildItemBean;
 import com.edu.dao.IArtistDao;
 import com.edu.dao.ICustomerDao;
-import com.edu.model.ArtistBean;
-import com.edu.model.FunctionBean;
-import com.edu.model.RoleBean;
-import com.edu.model.CustomerBean;
+import com.edu.model.Artist;
+import com.edu.model.Function;
+import com.edu.model.Role;
+import com.edu.model.Customer;
 import com.edu.service.ICustomerService;
 import com.edu.table.CustomerTable;
 
@@ -29,20 +29,20 @@ import com.edu.table.CustomerTable;
 @Lazy(true)
 @Transactional
 @Service("customerService")
-public class CustomerServiceImpl extends BaseServiceImpl<CustomerBean> implements
+public class CustomerServiceImpl extends BaseServiceImpl<Customer> implements
 		ICustomerService
 {
 	@Autowired
 	private ICustomerDao customerDao;
 	
 	@Override
-	public boolean isExist(CustomerBean customer)
+	public boolean isExist(Customer customer)
 	{
 		return customerDao.isExist(customer);
 	}
 
 	@Override
-	public void save(CustomerBean customer) 
+	public void save(Customer customer) 
 	{
 		customerDao.addEntity(customer);
 	}
@@ -52,7 +52,7 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerBean> implement
 		return customerDao.countCustomer();
 	}
 	
-	public boolean exist(CustomerBean customer)
+	public boolean exist(Customer customer)
 	{
 		return customerDao.exist(customer);
 	}
@@ -60,9 +60,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerBean> implement
 	
 
 	@Override
-	public CustomerBean getCustomerInfo(int id) {
+	public Customer getCustomerInfo(int id) {
 		// TODO Auto-generated method stub
-		return  (CustomerBean) customerDao.getEntitybyId(CustomerBean.class,id);
+		return  (Customer) customerDao.getEntitybyId(Customer.class,id);
 	}
 
 	@Override
@@ -72,8 +72,8 @@ public class CustomerServiceImpl extends BaseServiceImpl<CustomerBean> implement
 	}
 
 	@Override
-	public CustomerBean getCustomerByUserId(String userid) throws Exception {
-		return customerDao.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, userid, null);
+	public Customer getCustomerByUserId(String userid) throws Exception {
+		return customerDao.GetBeanByCondition(Customer.class, CustomerTable.USERID, userid, null);
 	}
 
 	/*@Override

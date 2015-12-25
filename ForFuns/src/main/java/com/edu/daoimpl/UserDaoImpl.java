@@ -13,15 +13,15 @@ import org.springframework.stereotype.Repository;
 
 import com.edu.base.BaseDaoImpl;
 import com.edu.dao.IUserDao;
-import com.edu.model.UserBean;
+import com.edu.model.User;
 
 @Lazy(true)
 @Repository("userDao")
-public class UserDaoImpl extends BaseDaoImpl<UserBean> implements IUserDao {
+public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
 
 
 	@Override
-	public boolean isExist(UserBean user) {
+	public boolean isExist(User user) {
 //		 String hql = "from UserBean where username=? and password=?";
 //		 Query query = getSession().createQuery(hql);
 		 Query query = getSession().getNamedQuery("UserqueryByName");
@@ -37,7 +37,7 @@ public class UserDaoImpl extends BaseDaoImpl<UserBean> implements IUserDao {
 	@Override
 	public void TestNamedQuery() {
 		 Query queryNamed = getSession().getNamedQuery("UserqueryByName");
-		 List<UserBean> list = queryNamed.list();
+		 List<User> list = queryNamed.list();
 		 System.out.println(list.size());
 	}
 	

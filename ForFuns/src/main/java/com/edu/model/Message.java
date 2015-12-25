@@ -20,18 +20,18 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
  */
 @Table(name="m_message")
 @Entity
-public class MessageBean {
+public class Message {
 	private Integer id;
 	private String message;
 	private Date current;
 	private Integer isread;
-	private CustomerBean fromCustomerBean;
-	private CustomerBean toCustomerBean;
-	public MessageBean() {
+	private Customer fromCustomerBean;
+	private Customer toCustomerBean;
+	public Message() {
 		super();
 	}
-	public MessageBean(Integer id, String message, Date current,
-			CustomerBean fromCustomerBean, CustomerBean toCustomerBean) {
+	public Message(Integer id, String message, Date current,
+			Customer fromCustomerBean, Customer toCustomerBean) {
 		super();
 		this.id = id;
 		this.message = message;
@@ -40,9 +40,9 @@ public class MessageBean {
 		this.toCustomerBean = toCustomerBean;
 	}
 	
-	public MessageBean(Integer id, String message, Date current,
-			Integer isread, CustomerBean fromCustomerBean,
-			CustomerBean toCustomerBean) {
+	public Message(Integer id, String message, Date current,
+			Integer isread, Customer fromCustomerBean,
+			Customer toCustomerBean) {
 		super();
 		this.id = id;
 		this.message = message;
@@ -76,19 +76,19 @@ public class MessageBean {
 	}
 	@OneToOne(fetch=FetchType.EAGER)  
     @JoinColumn(name="fromid") 
-	public CustomerBean getFromCustomerBean() {
+	public Customer getFromCustomerBean() {
 		return fromCustomerBean;
 	}
-	public void setFromCustomerBean(CustomerBean fromCustomerBean) {
+	public void setFromCustomerBean(Customer fromCustomerBean) {
 		this.fromCustomerBean = fromCustomerBean;
 	}
 	@OneToOne(fetch=FetchType.EAGER)  
     @JoinColumn(name="toid") 
-	public CustomerBean getToCustomerBean() {
+	public Customer getToCustomerBean() {
 		return toCustomerBean;
 	}
 	
-	public void setToCustomerBean(CustomerBean toCustomerBean) {
+	public void setToCustomerBean(Customer toCustomerBean) {
 		this.toCustomerBean = toCustomerBean;
 	}
 	@Column(name="isread")

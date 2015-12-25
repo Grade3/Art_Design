@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import com.edu.base.BaseDaoImpl;
 import com.edu.dao.IAddressDao;
-import com.edu.model.AddressBean;
+import com.edu.model.Address;
 
 @Repository("addressDao")
-public class AddressDaoImpl extends BaseDaoImpl<AddressBean> implements IAddressDao{
+public class AddressDaoImpl extends BaseDaoImpl<Address> implements IAddressDao{
 
 }

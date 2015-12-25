@@ -3,7 +3,7 @@ package com.edu.viewentity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.edu.model.AdvertBean;
+import com.edu.model.Advert;
 
 /**
  * 广告显示层
@@ -97,7 +97,7 @@ public class AdvertVO
 		this.isonline = isonline;
 	}
 
-	public AdvertVO(AdvertBean advertBean)
+	public AdvertVO(Advert advertBean)
 	{
 		super();
 		this.id = advertBean.getId();
@@ -112,10 +112,10 @@ public class AdvertVO
 	 * @param list
 	 * @return
 	 */
-	public static List<AdvertVO> changeToAdvertVOs(List<AdvertBean> list)
+	public static List<AdvertVO> changeToAdvertVOs(List<Advert> list)
 	{
 		List<AdvertVO> results = new ArrayList<AdvertVO>();
-		for(AdvertBean advertBean:list){
+		for(Advert advertBean:list){
 			results.add(new AdvertVO(advertBean));
 		}
 		return results;

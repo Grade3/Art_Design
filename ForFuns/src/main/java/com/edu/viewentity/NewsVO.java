@@ -3,7 +3,7 @@ package com.edu.viewentity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.edu.model.NewsBean;
+import com.edu.model.News;
 
 /**
  * 咨询显示层
@@ -49,7 +49,7 @@ public class NewsVO {
 	public void setIsonline(Integer isonline) {
 		this.isonline = isonline;
 	}
-	public NewsVO(NewsBean newsBean) {
+	public NewsVO(News newsBean) {
 		super();
 		this.id = newsBean.getId();
 		this.title = newsBean.getTitle();
@@ -71,9 +71,9 @@ public class NewsVO {
 	 * @param list
 	 * @return
 	 */
-	public static List<NewsVO> changeToNewsVOs(List<NewsBean> list){
+	public static List<NewsVO> changeToNewsVOs(List<News> list){
 		List<NewsVO> results = new ArrayList<NewsVO>();
-		for(NewsBean newsBean:list){
+		for(News newsBean:list){
 			results.add(new NewsVO(newsBean));
 		}
 		return results;

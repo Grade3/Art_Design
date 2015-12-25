@@ -3,16 +3,16 @@ package com.edu.dao;
 import java.util.List;
 
 import com.edu.base.IBaseDao;
-import com.edu.model.OrderBean;
+import com.edu.model.Order;
 
-public interface IOrderDao extends IBaseDao<OrderBean>{
+public interface IOrderDao extends IBaseDao<Order>{
 	/**
 	 * 通过商品id和用户id查找订单
 	 * @param productid
 	 * @param customerid
 	 * @return
 	 */
-	public OrderBean getOrderByIds(Integer productid,Integer customerid);
+	public Order getOrderByIds(Integer productid,Integer customerid);
 	
 	
 	/**
@@ -20,5 +20,5 @@ public interface IOrderDao extends IBaseDao<OrderBean>{
 	 * @param customerUserid
 	 * @return
 	 */
-	public List<OrderBean> getCusertomerOrder(String customerUserid);
+	public List<Order> getCusertomerOrder(String customerUserid);
 }

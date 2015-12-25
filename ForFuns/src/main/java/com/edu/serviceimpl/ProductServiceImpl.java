@@ -8,19 +8,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.base.BaseServiceImpl;
 import com.edu.dao.IProductDao;
-import com.edu.model.CustomerBean;
-import com.edu.model.ProductBean;
+import com.edu.model.Customer;
+import com.edu.model.Product;
 import com.edu.proxy.ProductProxy;
 import com.edu.service.IProductService;
 @Transactional
 @Service("productService")
-public class ProductServiceImpl extends BaseServiceImpl<ProductBean> implements IProductService{
+public class ProductServiceImpl extends BaseServiceImpl<Product> implements IProductService{
 
 	@Autowired
 	private IProductDao productDao;
 	
 	@Override
-	public List<ProductBean> getOnlineProduct(int page, int pageSize,int typeid,int methodid) {
+	public List<Product> getOnlineProduct(int page, int pageSize,int typeid,int methodid) {
 		return productDao.GetOnlineProduct(page, pageSize, typeid,methodid);
 	}
 
@@ -30,7 +30,7 @@ public class ProductServiceImpl extends BaseServiceImpl<ProductBean> implements 
 	}
 	
 	@Override
-	public List<ProductBean> getArtistProduct(int page, int pageSize,int artistid) {
+	public List<Product> getArtistProduct(int page, int pageSize,int artistid) {
 		return productDao.GetArtistProduct(page, pageSize, artistid);
 	}
 

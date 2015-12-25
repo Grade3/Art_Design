@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 import com.edu.dao.INewsDao;
-import com.edu.model.NewsBean;
+import com.edu.model.News;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -45,7 +45,7 @@ public class NewsDaoImplTest {
 
 	@Test
 	public void test() {
-		List<NewsBean> list = newsDao.getAllEntity(NewsBean.class);
+		List<News> list = newsDao.getAllEntity(News.class);
 		System.out.println(list.get(0).getUserBean().getPassword());
 	}
 

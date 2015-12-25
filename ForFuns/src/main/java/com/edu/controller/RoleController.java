@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.edu.model.RoleBean;
-import com.edu.model.UserBean;
+import com.edu.model.Role;
+import com.edu.model.User;
 import com.edu.service.IRoleService;
 import com.edu.table.RoleTable;
 import com.edu.table.UserTable;
@@ -33,7 +33,7 @@ public class RoleController {
 	@ResponseBody
 	@RequestMapping(params="method=getallrole")
 	public Map<String, Object> GetAllRole(){
-		List<RoleBean> list = roleService.GetAllRole();
+		List<Role> list = roleService.GetAllRole();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("roles", list);
 		return map;
@@ -57,9 +57,9 @@ public class RoleController {
 			@RequestParam(value="selectname",defaultValue="id")String selectname,
 			@RequestParam(value="value",defaultValue="")String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<RoleBean> list = roleService.GetPageBeanFilter(RoleBean.class, page,
+		List<Role> list = roleService.GetPageBeanFilter(Role.class, page,
 				pageSize,selectname,value);
-		int total = roleService.GetPageBeanFilterTotal(RoleBean.class, page, pageSize, selectname, value);
+		int total = roleService.GetPageBeanFilterTotal(Role.class, page, pageSize, selectname, value);
 		map.put("rows", list);
 		map.put("total", total);
 		return map;
@@ -79,7 +79,7 @@ public class RoleController {
 			temp[i] = Integer.parseInt(id[i]);
 		}
 		try {
-			roleService.DeleteBatch(RoleBean.class, temp);
+			roleService.DeleteBatch(Role.class, temp);
 			return "true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,7 +103,7 @@ public class RoleController {
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
 			String rolename = jsonObject.getString(RoleTable.ROLENAME);
-			RoleBean roleBean = new RoleBean(rolename);
+			Role roleBean = new Role(rolename);
 			roleService.AddBean(roleBean);
 			return 1;
 		} catch (Exception e) {
@@ -132,7 +132,7 @@ public class RoleController {
 		JSONObject jsonObject = new JSONObject(data);
 		int id = jsonObject.getInt(RoleTable.ID);
 		String rolename = jsonObject.getString(RoleTable.ROLENAME);
-		RoleBean roleBean = new RoleBean(id,rolename);
+		Role roleBean = new Role(id,rolename);
 		roleService.UpdataBean(roleBean);
 		return "true";
 	}

@@ -8,24 +8,24 @@ import org.springframework.stereotype.Repository;
 
 import com.edu.base.BaseDaoImpl;
 import com.edu.dao.IProductDao;
-import com.edu.model.ProductBean;
+import com.edu.model.Product;
 import com.edu.table.ProductTable;
 
 @Lazy(true)
 @Repository("productDao")
-public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProductDao {
+public class ProductDaoImpl extends BaseDaoImpl<Product> implements IProductDao {
 
 	@Override
-	public int ChangeSituation(ProductBean productBean, Integer situation) {
+	public int ChangeSituation(Product productBean, Integer situation) {
 		this.sqlWithNone("update " + ProductTable.TABLENAME + " set " + ProductTable.SITUATION + " =" + situation
 				+ " and " + ProductTable.ARTISTID + " =" + productBean.getId());
 		return 1;
 	}
 
 	@Override
-	public List<ProductBean> GetOnlineProduct(int page, int pageSize, int typeid, int methodid) {
+	public List<Product> GetOnlineProduct(int page, int pageSize, int typeid, int methodid) {
 		String hql = "";
-		List<ProductBean> list = null;
+		List<Product> list = null;
 		try {
 			// hql = "from
 			// "+ProductBean.class.newInstance().getClass().getName()+" temp
@@ -61,7 +61,7 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 	@Override
 	public int getOnlineProductTotal(int typeid, int methodid) {
 		String hql = "";
-		List<ProductBean> list = null;
+		List<Product> list = null;
 		try {
 			// hql = "from
 			// "+ProductBean.class.newInstance().getClass().getName()+" where
@@ -70,8 +70,8 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 			
 			//以下
 			//函数未完成
-			hql = "select temp from " + ProductBean.class.newInstance().getClass().getName()
-					+ " temp inner join temp.productTypeBean type  where temp.productSellBean.sellMethodBean.id = ? and type.id=? and ( situation = 1 or situation = 0 )";
+			hql = "select temp from " + Product.class.newInstance().getClass().getName()
+					+ " temp inner join temp.productType type  where temp.productSell.sellMethod.id = ? and type.id=? and ( situation = 1 or situation = 0 )";
 			System.out.println(hql);
 			Query query = getSession().createQuery(hql);
 			query.setInteger(0, methodid);
@@ -84,9 +84,9 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 	}
 
 	@Override
-	public List<ProductBean> GetArtistProduct(int page, int pageSize, int artistid) {
+	public List<Product> GetArtistProduct(int page, int pageSize, int artistid) {
 		String hql = "";
-		List<ProductBean> list = null;
+		List<Product> list = null;
 		try {
 			// hql = "from
 			// "+ProductBean.class.newInstance().getClass().getName()+" temp
@@ -116,7 +116,7 @@ public class ProductDaoImpl extends BaseDaoImpl<ProductBean> implements IProduct
 	@Override
 	public int getArtistProductTotal(int artistid) {
 //		String hql = "";
-		List<ProductBean> list = null;
+		List<Product> list = null;
 		try {
 			
 			

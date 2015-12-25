@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.edu.base.IBaseService;
-import com.edu.model.RoleBean;
+import com.edu.model.Role;
 
-public interface IRoleService extends IBaseService<RoleBean>{
+public interface IRoleService extends IBaseService<Role>{
 	/**
 	 * 得到树状结构
 	 * @param page
@@ -18,7 +18,7 @@ public interface IRoleService extends IBaseService<RoleBean>{
 	 * 得到所有的角色
 	 * @return
 	 */
-	public List<RoleBean> GetAllRole();
+	public List<Role> GetAllRole();
 	
 	
 }

@@ -16,17 +16,17 @@ import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="oa_orderaddress")
-public class OrderAddressBean {
+public class OrderAddress {
 	private Integer id;
-	private OrderBean orderBean;
-	private AddressBean addressBean;
-	public OrderAddressBean(Integer id, OrderBean orderBean, AddressBean addressBean) {
+	private Order orderBean;
+	private Address addressBean;
+	public OrderAddress(Integer id, Order orderBean, Address addressBean) {
 		super();
 		this.id = id;
 		this.orderBean = orderBean;
 		this.addressBean = addressBean;
 	}
-	public OrderAddressBean() {
+	public OrderAddress() {
 		super();
 	}
 	@Id
@@ -40,18 +40,18 @@ public class OrderAddressBean {
 	}
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="orderid")
-	public OrderBean getOrderBean() {
+	public Order getOrderBean() {
 		return orderBean;
 	}
-	public void setOrderBean(OrderBean orderBean) {
+	public void setOrderBean(Order orderBean) {
 		this.orderBean = orderBean;
 	}
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="addressid")
-	public AddressBean getAddressBean() {
+	public Address getAddressBean() {
 		return addressBean;
 	}
-	public void setAddressBean(AddressBean addressBean) {
+	public void setAddressBean(Address addressBean) {
 		this.addressBean = addressBean;
 	}
 	

@@ -23,7 +23,7 @@ import javax.persistence.Table;
  */
 @Table(name="p_product")
 @Entity
-public class ProductBean {
+public class Product {
 	private Integer id;
 	private String name;
 	private String imgurl;
@@ -35,22 +35,22 @@ public class ProductBean {
 	private String imgtwo;//图片2地址
 	private String imgthree;//图片3地址
 	private Integer situation;//状态  0：未上架   1：上架中  2：已下架  3：已出售
-	private ArtistBean artistBean;
-	private ProductTypeBean productTypeBean;
-	private ProductSellBean productSellBean;
+	private Artist artistBean;
+	private ProductType productTypeBean;
+	private ProductSell productSellBean;
 	@Transient
 	@OneToOne( cascade = CascadeType.ALL, mappedBy = "productBean")
-	public ProductSellBean getProductSellBean() {
+	public ProductSell getProductSellBean() {
 		return productSellBean;
 	}
-	public void setProductSellBean(ProductSellBean productSellBean) {
+	public void setProductSellBean(ProductSell productSellBean) {
 		this.productSellBean = productSellBean;
 	}
-	public ProductBean(Integer id, String name, String imgurl, Integer money,
+	public Product(Integer id, String name, String imgurl, Integer money,
 			Date timestart, Date timeout, String content, String imgone,
 			String imgtwo, String imgthree, Integer situation,
-			ArtistBean artistBean, ProductTypeBean productTypeBean,
-			ProductSellBean productSellBean) {
+			Artist artistBean, ProductType productTypeBean,
+			ProductSell productSellBean) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -67,7 +67,7 @@ public class ProductBean {
 		this.productTypeBean = productTypeBean;
 		this.productSellBean = productSellBean;
 	}
-	public ProductBean() {
+	public Product() {
 		super();
 	}
 	@Id
@@ -151,18 +151,18 @@ public class ProductBean {
 	}
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="artistid")
-	public ArtistBean getArtistBean() {
+	public Artist getArtistBean() {
 		return artistBean;
 	}
-	public void setArtistBean(ArtistBean artistBean) {
+	public void setArtistBean(Artist artistBean) {
 		this.artistBean = artistBean;
 	}
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="typeid")
-	public ProductTypeBean getProductTypeBean() {
+	public ProductType getProductTypeBean() {
 		return productTypeBean;
 	}
-	public void setProductTypeBean(ProductTypeBean productTypeBean) {
+	public void setProductTypeBean(ProductType productTypeBean) {
 		this.productTypeBean = productTypeBean;
 	}
 	
