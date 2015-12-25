@@ -26,6 +26,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('.label_wrong').html("操作失败，不属于您的订单");
 				$('.readmore').html('返回订单页面');
 				$('.readmore').attr('href',"<%=basePath%>order.do?method=EnterMyOrder");
+			}else if(error==3){//拍卖不在时间内
+				$('.label_wrong').html("操作失败，该商品不在拍卖时间范围内");
+				$('.readmore').html('返回商品页面');
+				$('.readmore').attr('href',"<%=basePath%>font/goodslist.jsp");
+			}else if(error==4){//拍卖金额小于当前金额
+				$('.label_wrong').html("操作失败，金额小于当前最高价");
+				$('.readmore').html('返回商品页面');
+				$('.readmore').attr('href',"<%=basePath%>font/goodslist.jsp");
 			}
 			
 		});

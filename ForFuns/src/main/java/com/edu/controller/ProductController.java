@@ -139,6 +139,11 @@ ServletContextAware {
 			@RequestParam(value="timestart")Date timestart,@RequestParam(value="timeout")Date timeout){
 		return "";
 	}*/
+	/**
+	 * 修改商品状态
+	 * @param data
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=AlertProduct")
 	public String JsoonAlertProduct(@RequestParam(value="data")String data){
@@ -283,14 +288,14 @@ ServletContextAware {
 	}*/
 	
 	/**
-	 * 通过口令判断是否是有订单
+	 * 购买
 	 * @param id
 	 * @param useridtoken
 	 * @return
 	 */
 	@RequestMapping(params="method=AddOrder")
-	public String CheckLoginAddOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="productid")Integer id,
-			@RequestParam(value="addressid")Integer addressid){
+	public String CheckLoginAddOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
+			@RequestParam(value="productid")Integer id,@RequestParam(value="addressid",required=false)Integer addressid){
 		String userid = CheckTokenTool.GetUserid(useridtoken);
 		Customer customerBean = null;
 		Product productBean = null;
@@ -314,6 +319,11 @@ ServletContextAware {
 		}
 		return respons;
 	}
+	
+	
+	
+	
+	
 	/**
 	 * 检测用户是否存在相应的订单。
 	 * @param id
@@ -402,10 +412,6 @@ ServletContextAware {
 		productBean.setProductTypeBean(productTypeService.GetEntityById(ProductType.class, typeid));
 		
 		
-		
-		
-		
-		
 		String filePath = servletContext.getRealPath("/") + "avatorupload/";
 		String saveUrl = request.getContextPath() + "/avatorupload/";
 		System.out.println(filePath);
@@ -449,6 +455,7 @@ ServletContextAware {
 			e1.printStackTrace();
 			return "redirect:/font/error.jsp?";
 		}
+		
 		productBean.setImgtwo(saveUrl);
 		ext = imgthree.getOriginalFilename().substring(imgthree.getOriginalFilename().lastIndexOf("."));
 		newfilename = System.currentTimeMillis() + ext;
@@ -464,6 +471,128 @@ ServletContextAware {
 		productBean.setImgthree(saveUrl);
 		
 		
+		
+		ProductSell productSellBean = new ProductSell();
+		productSellBean.setSellMethodBean(sellMethodService.GetEntityById(SellMethod.class, sellid));
+		productSellBean.setProductBean(productBean);
+		productBean.setProductSellBean(productSellBean);
+		productService.AddBean(productBean);
+		return "redirect:/font/success.jsp?successid=2";
+		
+	}
+	
+	
+	/**
+	 * 
+	 * @param useridtoken
+	 * @param request
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping(params="method=AlertProduct")
+	public String CheckLoginAlertProduct(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
+			HttpServletRequest request,@RequestParam(value="id")Integer id,@RequestParam(value = "imgurl", required = false) MultipartFile file,@RequestParam(value = "imgone", required = false) MultipartFile imgone,
+			@RequestParam(value = "imgtwo", required = false) MultipartFile imgtwo,@RequestParam(value = "imgthree", required = false) MultipartFile imgthree,
+			@RequestParam(value="productname")String productname,@RequestParam(name="money")Integer money,@RequestParam(name="typeid")Integer typeid,
+			@RequestParam(value="sellid")Integer sellid,@RequestParam(value="starttime")String starttime,@RequestParam(value="endtime")String endtime,
+			@RequestParam(value="content")String content){
+		Product productBean = productService.GetEntityById(Product.class, id);
+		try {
+			Customer customerBean = customerService.getCustomerByUserId(CheckTokenTool.GetUserid(useridtoken));
+			productBean.setArtistBean(new Artist(customerBean));
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			return "redirect:/font/error.jsp?";
+		}
+		productBean.setName(productname);
+		productBean.setMoney(money);
+		try  {  
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+		    Date date = sdf.parse(starttime); 
+		    productBean.setTimestart(date);
+		}  catch (ParseException e)  {  
+		    System.out.println(e.getMessage());  
+		    return "redirect:/font/error.jsp?";
+		}  
+		try  {  
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+		    Date date = sdf.parse(endtime); 
+		    productBean.setTimeout(date);
+		}  catch (ParseException e)  {  
+		    System.out.println(e.getMessage());  
+		    return "redirect:/font/error.jsp?";
+		}  
+		productBean.setContent(content);
+		productBean.setProductTypeBean(productTypeService.GetEntityById(ProductType.class, typeid));
+		
+		String ext ="";
+		String filePath = servletContext.getRealPath("/") + "avatorupload/";
+		String saveUrl = request.getContextPath() + "/avatorupload/";
+		String newfilename = System.currentTimeMillis() + ext;
+		String PathAndName = filePath + newfilename;
+		
+		if(!(null==file)){
+			System.out.println(filePath);
+			File filedir = new File(filePath);
+			if (!filedir.exists()){
+				filedir.mkdir();
+				return "redirect:/font/error.jsp?";
+			}
+			ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+			
+			saveUrl = saveUrl + newfilename;
+			File resultFile = new File(PathAndName);
+			try{
+				file.transferTo(resultFile);
+			} catch (IOException e1){
+				e1.printStackTrace();
+				return "redirect:/font/error.jsp?";
+			}
+			productBean.setImgurl(saveUrl);
+		}
+		if(!(null==imgone)){
+			ext = imgone.getOriginalFilename().substring(imgone.getOriginalFilename().lastIndexOf("."));
+			newfilename = System.currentTimeMillis() + ext;
+			PathAndName = filePath + newfilename;
+			saveUrl = saveUrl + newfilename;
+			File resultFile = new File(PathAndName);
+			try{
+				imgone.transferTo(resultFile);
+			} catch (IOException e1){
+				e1.printStackTrace();
+				return "redirect:/font/error.jsp?";
+			}
+			productBean.setImgone(saveUrl);
+		}
+		if(!(null==imgtwo)){
+			ext = imgtwo.getOriginalFilename().substring(imgtwo.getOriginalFilename().lastIndexOf("."));
+			newfilename = System.currentTimeMillis() + ext;
+			PathAndName = filePath + newfilename;
+			saveUrl = saveUrl + newfilename;
+			File resultFile = new File(PathAndName);
+			try{
+				imgtwo.transferTo(resultFile);
+			} catch (IOException e1){
+				e1.printStackTrace();
+				return "redirect:/font/error.jsp?";
+			}
+		}
+		
+		if(!(null==imgthree)){
+			productBean.setImgtwo(saveUrl);
+			ext = imgthree.getOriginalFilename().substring(imgthree.getOriginalFilename().lastIndexOf("."));
+			newfilename = System.currentTimeMillis() + ext;
+			PathAndName = filePath + newfilename;
+			saveUrl = saveUrl + newfilename;
+			File resultFile = new File(PathAndName);
+			try{
+				imgthree.transferTo(resultFile);
+			} catch (IOException e1){
+				e1.printStackTrace();
+				return "redirect:/font/error.jsp?";
+			}
+			productBean.setImgthree(saveUrl);
+		}
 		
 		ProductSell productSellBean = new ProductSell();
 		productSellBean.setSellMethodBean(sellMethodService.GetEntityById(SellMethod.class, sellid));

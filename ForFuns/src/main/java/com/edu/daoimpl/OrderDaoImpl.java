@@ -42,4 +42,12 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements IOrderDao{
 		return list;
 	}
 
+	@Override
+	public Order getOrderByProductid(Integer productid) {
+		Query query =getSession().getNamedQuery("getOrderByProductid");
+		query.setInteger("productid", productid);
+		Order order = (Order) query.uniqueResult();
+		return order;
+	}
+
 }

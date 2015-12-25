@@ -21,4 +21,11 @@ public interface IOrderDao extends IBaseDao<Order>{
 	 * @return
 	 */
 	public List<Order> getCusertomerOrder(String customerUserid);
+	
+	/**
+	 * 通过商品id获取订单
+	 * @param productid
+	 * @return
+	 */
+	public Order getOrderByProductid(Integer productid);
 }

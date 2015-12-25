@@ -23,6 +23,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}else if(successid==2){
 				$('.readmore').html('返回个人信息页面 ');
 				$('.readmore').attr('href',"<%=basePath%>font/personal.jsp");
+			}else if(successid==3){
+				$('.readmore').html('返回商品列表页面');
+				$('.readmore').attr('href',"<%=basePath%>font/goodslist.jsp");
 			}
 			
 		});

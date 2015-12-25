@@ -8,4 +8,8 @@
 	<query name="OrderquerygetCusertomerOrder">  
         <![CDATA[select order from Order order where order.customerBean.userid = :customerid ]]>
 	</query>
+	
+	<query name="getOrderByProductid">  
+        <![CDATA[select order from Order order where order.productBean.id = :productid ]]>
+	</query>
 </hibernate-mapping>  
