@@ -92,6 +92,27 @@ public class AspectAdvice  {
 	      return object;
 	 }
 	 
+	 @Pointcut("execution(* com.edu.controller.*.JsonCheckLogin*(..) ) ")
+		public void jsonchecklogin(){
+			
+		}
+	 
+	 @Around("jsonchecklogin()")
+	 public Object aroundsjonchecklogin(ProceedingJoinPoint pjp) throws Throwable{
+		  System.out.println("------------before jsoncheck---------------");
+		  Object[] args = pjp.getArgs();
+		  String useridtoken = args[0].toString();
+		  Object object = "-1";
+		  if("".equals(useridtoken))//未登陆
+			  return "-1";
+		  boolean flag = CheckTokenTool.CheckToken(useridtoken);
+		  if(!flag)
+			  return  "-1";
+		  object =  pjp.proceed();
+	      System.out.println("------------afer jsoncheck---------------");
+	      return object;
+	 }
+	 
 	/*@Pointcut("execution(* com.edu.base.*.*(..) )")
 	public void anymethod(){
 		

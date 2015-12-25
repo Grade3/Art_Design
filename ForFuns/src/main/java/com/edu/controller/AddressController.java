@@ -225,7 +225,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	 */
 	@ResponseBody
 	@RequestMapping(params="mehtod=addCustomerAddress")
-	public String CheckLoginAddAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
+	public String JsonCheckLoginAddAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
 			Address addressBean){
 		try{
 			String Userid = CheckTokenTool.GetUserid(useridtoken);
@@ -247,8 +247,9 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	 * @param addressid
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(params="method=deleteCustomerAddress")
-	public String CheckLogindeleteAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
+	public String JsonCheckLogindeleteAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
 			@RequestParam(value="addressid")Integer addressid){
 		try {
 			addressService.DeleteByid(Address.class, addressid);
