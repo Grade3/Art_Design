@@ -22,6 +22,7 @@ public class OrderVO
 	private String artistname;
 	private String productimg;
 	private String receiver;
+	private Integer artistid;
 	public String getProductname() {
 		return productname;
 	}
@@ -100,6 +101,7 @@ public class OrderVO
 		this.productimg = orderBean.getProductBean().getImgurl();
 		this.receiver = orderBean.getOrderAddressBean().getAddressBean().getReceiver();
 		this.telephone = orderBean.getOrderAddressBean().getAddressBean().getTelephone();
+		this.artistid = orderBean.getProductBean().getArtistBean().getId();
 	}
 	
 	
@@ -141,6 +143,13 @@ public class OrderVO
 		this.productname = productname;
 		this.money = money;
 		this.artistname = artistname;
+	}
+	
+	public Integer getArtistid() {
+		return artistid;
+	}
+	public void setArtistid(Integer artistid) {
+		this.artistid = artistid;
 	}
 	/**
 	 * 将list中的orderBean实体转变为ordervo

@@ -79,6 +79,11 @@ function getOderDetail(id){
 			var receiver = order.receiver;
 			var artistname = order.artistname;
 			var current = myformatter(order.current);
+			var productid = order.productid;
+			var artistid = order.artistid;
+			var productimg = order.productimg;
+			var linkartist = "<%=basePath%>font/artistHome.jsp?id="+artistid;
+			var linkproduct = "<%=basePath%>font/goodsdetail.jsp?productid="+productid; 
 			$('#money').html("订单金额：￥"+money);
 			$('#receiver').html(receiver);
 			$('#address').html("收货地址："+address);
@@ -88,8 +93,11 @@ function getOderDetail(id){
 			$('#undermoney').html("￥"+money);
 			$('#orderid').html("订单号："+id);
 			$('#current').html("下单时间："+current);
+			$('#artisthome').attr('href',linkartist);
+			$('#productimg').attr('src',productimg);
+			$('#productdetail').attr('href',linkproduct);
 			if(ispay==0){
-				var temp = "<button class='col-xs-5 btn btn-default' type='button' id='btnpay'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>&nbsp;&nbsp;支付订单</button>";
+				var temp = "<button class='col-xs-5 btn btn-default' type='button' id='btnpay' name='"+productid+"'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>&nbsp;&nbsp;支付订单</button>";
 				$('#opert').append(temp);
 			}else{
 				var temp = "<button class='col-xs-5 btn btn-default' type='button' id='btndelete'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span>&nbsp;&nbsp;删除订单</button>";
@@ -120,6 +128,10 @@ $(document).ready(function()
 	$('#btndelete').live('click',function(){
 		location.href="<%=basePath%>order.do?method=DeleteOrderByid&id="+productid;
 	});
+	$('#btnpay').live('click',function(){
+		var id = $(this).attr('name');
+		location.href="<%=basePath%>font/payfor.jsp?productid="+id;		
+	});
 });
 </script>
 
@@ -147,14 +159,14 @@ $(document).ready(function()
 		<p class="receiver_add" id="telephone">联系电话：15699990000</p>
 	</div>
 	<div class="row order_div">
-		<a href="artistHome.html">
+		<a href="artistHome.html" id="artisthome">
 			<div class="row order_artist">
 				<p class="col-xs-12 artist_name"><span class="glyphicon glyphicon-link" aria-hidden="true"></span>&nbsp;&nbsp;<spand id="artistname">艺术家名称</spand>&nbsp;&nbsp;<span class="glyphicon glyphicon-menu-right partten1" aria-hidden="true"></span></p>
 			</div>
 		</a>
-		<a href="OrderDetail.html">
+		<a href="OrderDetail.html" id="productdetail">
 			<div class="row order_info">
-				<img class="col-xs-3 order_pic" src="<%=basePath%>image/good.jpg">
+				<img class="col-xs-3 order_pic" src="<%=basePath%>image/good.jpg" id="productimg">
 				<div class="col-xs-9 row order_label">
 					<div class="row label1">
 						<p class="col-xs-8 order_name" id="productname">订单商品名称订单商品名称</p>

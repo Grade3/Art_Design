@@ -7,19 +7,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>ArtistHome</title>
+	<title>ArtistManage</title>
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="../css/artistHome.css">
+	<link rel="stylesheet" type="text/css" href="../css/artistManage.css">
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 </head>
 <body>
 
 <a href="javascript:;" class="lanrenzhijia_top"></a>
 <script src="../js/lanrenzhijia.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -63,11 +63,27 @@ $(document).ready(function(){
 	var width = $(".good_item").width();
 	var height = width/2.5*3;
   	$(".good_item").height(height);
+  	var pic_h = $(".pic").height()
+  	$(".detail").height(pic_h);
+
+  	var width1 = $(".good_item1").width();
+	var height1 = width1/3*3;
+  	$(".good_item1").height(height1);
+  	var pic_h1 = $(".pic1").height()
+  	$(".detail1").height(pic_h1);
 
   	$(window).resize(function() {
   		var width = $(".good_item").width();
 		var height = width/2.5*3;
   		$(".good_item").height(height);
+  		var pic_h = $(".pic").height()
+  		$(".detail").height(pic_h);
+
+  		var width1 = $(".good_item1").width();
+		var height1 = width1/3*3;
+	  	$(".good_item1").height(height1);
+	  	var pic_h1 = $(".pic1").height()
+	  	$(".detail1").height(pic_h1);
   	});
   
 });
@@ -91,38 +107,28 @@ $(document).ready(function(){
 					<div class="logo">
 						<h1><a href="home.html">ArtCustomize</a></h1>
 					</div>
-					<div class="top-nav visible-xs visible-sm">
-						<ul class="megamenu skyblue">
-							<li><a href="home.jsp" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
-							<li><a href="goodslist.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
-							<li><a href="home.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
-							<li><a href="artistlist.jsp"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
-							<li><a href="newslist.jsp"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
-							<li><a href="home.html"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
-						</ul>
-					</div>
-					<div class="top-nav-xs visible-md">
-						<div id="menu">
+					<div class="top-nav-xs hidden-lg">
+						<div id="menu" onmouseover="fun1();" onmouseout="fun2();">
 							<p>菜  单</p>
 						</div>
 						<div id="menu-xs">
 							<ul>
-								<li><a href="home.jsp">首页</a></li>
-								<li><a href="goodslist.jsp">成品</a></li>
+								<li><a href="home.html">首页</a></li>
+								<li><a href="home.html">成品</a></li>
 								<li><a href="home.html">DIY</a></li>
-								<li><a href="artistlist.jsp">艺术家</a></li>
-								<li><a href="newslist.jsp">资讯中心</a></li>
+								<li><a href="home.html">艺术家</a></li>
+								<li><a href="newslist.html">资讯中心</a></li>
 								<li><a href="home.html">联系我们</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="top-nav visible-lg">
 						<ul class="megamenu skyblue">
-							<li><a href="home.jsp">首页</a></li>
-							<li><a href="goodslist.jsp">成品</a></li>
+							<li><a href="home.html">首页</a></li>
+							<li><a href="home.html">成品</a></li>
 							<li><a href="home.html">DIY</a></li>
-							<li><a href="artistlist.jsp">艺术家</a></li>
-							<li><a href="newslist.jsp">资讯中心</a></li>
+							<li><a href="home.html">艺术家</a></li>
+							<li><a href="newslist.html">资讯中心</a></li>
 							<li><a href="home.html">联系我们</a></li>
 						</ul>
 					</div>
@@ -131,167 +137,257 @@ $(document).ready(function(){
 		</div>
 
 	<div class="container">
-		<h6 class="location"><a href="home.html">首页</a> <i> </i> 艺术家主页 </h6>
+		<h6 class="location"><a href="home.html">首页</a> <i> </i> <a href="artistHome.html">艺术家主页</a> <i> </i> 发布管理 </h6>
 	</div>
 
 
 	<div class="bar_news">
-		<h2>艺术家主页</h2>
+		<h2>发布管理</h2>
 	</div>
 
 
 	<div class="content">
 		<div class="container">
-			<div class="user_info">
-				<img class="userpic" src="../image/bl.jpg">
-				<p class="username">艺术家用户名</p>
-			</div>
-			<div class="row person_btn">
-				<div class="col-xs-offset-4 col-xs-4 visible-lg">
-					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
-				</div>
-				<div class="col-xs-offset-3 col-xs-6 visible-md">
-					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
-				</div>
-				<div class="col-xs-offset-2 col-xs-8 visible-sm">
-					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
-				</div>
-				<div class="col-xs-offset-1 col-xs-10 visible-xs">
-					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
-				</div>
-			</div>
 
 			<div class="row artwork">
-				<div class="col-md-6 goods_two">
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
-						</div>
-					</div>
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 goods_two">
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
-						</div>
-					</div>
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
-						</div>
-					</div>
-				</div>
+				<div class="col-lg-offset-1 col-lg-10 good_four">
 
-				<div class="col-md-6 goods_two">
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
+					<div class="col-xs-6 goods_two visible-lg visible-md">
+						<div class="col-xs-6 goods pic">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+						</div>
+						<div class="col-xs-6 goods detail">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore modify_btn" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
 						</div>
 					</div>
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 goods_two">
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
-						</div>
-					</div>
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
-						</div>
-					</div>
-				</div>
 
-				<div class="col-md-6 goods_two">
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
+					<div class="col-xs-12 row goods_two visible-sm visible-xs">
+						<div class="col-xs-5 goods pic pic1">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item good_item1"></a>
+						</div>						
+						<div class="col-xs-offset-1 col-xs-6 goods detail detail1">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
 						</div>
 					</div>
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 goods_two">
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
-						</div>
-					</div>
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>已上架</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.html" class="readmore" target="_blank">详情</a>
-						</div>
-					</div>
-				</div>
-				
 
-				<div class="col-xs-12 learn_more">
-					<p>查看更多</p>
+					<div class="col-xs-6 goods_two visible-lg visible-md">
+						<div class="col-xs-6 goods pic">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+						</div>
+						<div class="col-xs-6 goods detail">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 row goods_two visible-sm visible-xs">
+						<div class="col-xs-5 goods pic pic1">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item good_item1"></a>
+						</div>						
+						<div class="col-xs-offset-1 col-xs-6 goods detail detail1">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
+						</div>
+					</div>
+					<!--大图第一行结束-->
+
+
+					<div class="col-xs-6 goods_two visible-lg visible-md">
+						<div class="col-xs-6 goods pic">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+						</div>
+						<div class="col-xs-6 goods detail">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 row goods_two visible-sm visible-xs">
+						<div class="col-xs-5 goods pic pic1">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item good_item1"></a>
+						</div>						
+						<div class="col-xs-offset-1 col-xs-6 goods detail detail1">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-6 goods_two visible-lg visible-md">
+						<div class="col-xs-6 goods pic">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+						</div>
+						<div class="col-xs-6 goods detail">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 row goods_two visible-sm visible-xs">
+						<div class="col-xs-5 goods pic pic1">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item good_item1"></a>
+						</div>						
+						<div class="col-xs-offset-1 col-xs-6 goods detail detail1">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
+						</div>
+					</div>
+					<!--大图第二行结束-->
+
+
+					<div class="col-xs-6 goods_two visible-lg visible-md">
+						<div class="col-xs-6 goods pic">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+						</div>
+						<div class="col-xs-6 goods detail">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 row goods_two visible-sm visible-xs">
+						<div class="col-xs-5 goods pic pic1">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item good_item1"></a>
+						</div>						
+						<div class="col-xs-offset-1 col-xs-6 goods detail detail1">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-6 goods_two visible-lg visible-md">
+						<div class="col-xs-6 goods pic">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+						</div>
+						<div class="col-xs-6 goods detail">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 row goods_two visible-sm visible-xs">
+						<div class="col-xs-5 goods pic pic1">
+							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item good_item1"></a>
+						</div>						
+						<div class="col-xs-offset-1 col-xs-6 goods detail detail1">
+							<div class="good_name">
+								<p class="name">商品名称</p>
+								<p class="other">分类：分类1</p>
+								<p class="other">上架时间：2015-12-7 8:00</p>
+								<p class="other">下架时间：2015-12-31 23:59</p>
+								<p class="other">状态：已上架</p>
+								<p class="price">￥99.0</p>
+								<a href="artistModify.html" class="readmore" target="_blank">修改</a>
+								<a class="readmore operation" target="_blank">上架</a>
+								<a class="readmore operation" target="_blank">删除</a>
+							</div>
+						</div>
+					</div>
+					
+
+					<div class="col-xs-12 learn_more">
+						<p>查看更多</p>
+					</div>
 				</div>
 			</div>
 			
