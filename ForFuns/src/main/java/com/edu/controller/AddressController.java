@@ -27,11 +27,11 @@ import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
 import org.w3c.dom.ls.LSException;
 
-import com.edu.model.AddressBean;
-import com.edu.model.CustomerAddressBean;
-import com.edu.model.CustomerBean;
-import com.edu.model.ProductBean;
-import com.edu.model.UserBean;
+import com.edu.model.Address;
+import com.edu.model.CustomerAddress;
+import com.edu.model.Customer;
+import com.edu.model.Product;
+import com.edu.model.User;
 import com.edu.service.IAddressService;
 import com.edu.service.ICustomerAddressService;
 import com.edu.service.ICustomerService;
@@ -84,10 +84,10 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 			@RequestParam(value="selectname",defaultValue="id")String selectname,
 			@RequestParam(value="value",defaultValue="")String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<AddressBean> list = addressService.GetPageBeanFilter(AddressBean.class, page,
+		List<Address> list = addressService.GetPageBeanFilter(Address.class, page,
 				pageSize,selectname,value);
 		List<AddressVO> addressVOs = AddressVO.ChangeListAddressToAddressVo(list);
-		int total = addressService.GetPageBeanFilterTotal(AddressBean.class, page, pageSize, selectname, value);
+		int total = addressService.GetPageBeanFilterTotal(Address.class, page, pageSize, selectname, value);
 		map.put("rows", addressVOs);
 		map.put("total", total);
 		return map;
@@ -107,7 +107,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 			temp[i] = Integer.parseInt(id[i]);
 		}
 		try {
-			addressService.DeleteBatch(AddressBean.class, temp);
+			addressService.DeleteBatch(Address.class, temp);
 			return "true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -137,7 +137,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 			String receiver = jsonObject.getString(AddressTable.RECEIVER);
 			String telephone = jsonObject.getString(AddressTable.TELEPHONE);
 			
-			AddressBean addressBean = new AddressBean(address, telephone, receiver);
+			Address addressBean = new Address(address, telephone, receiver);
 			addressService.AddBean(addressBean);
 			return 1;
 		} catch (Exception e) {
@@ -168,7 +168,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 		String receiver = jsonObject.getString(AddressTable.RECEIVER);
 		String telephone = jsonObject.getString(AddressTable.TELEPHONE);
 		
-		AddressBean addressBean = new AddressBean(id, address, telephone, receiver);
+		Address addressBean = new Address(id, address, telephone, receiver);
 		addressService.UpdataBean(addressBean);
 		return "true";
 	}
@@ -199,8 +199,8 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	public List<AddressVO> JsonGetAddressByCustomerUserid(@RequestParam(value="customerUserid")String customerUserId){
 		List<AddressVO> list = new ArrayList<AddressVO>();
 		try {
-			Set<CustomerAddressBean> customerAddressBeans = customerService.getCustomerByUserId(customerUserId).getCustomerAddressBeans();
-			for(CustomerAddressBean customerAddressBean: customerAddressBeans){
+			Set<CustomerAddress> customerAddressBeans = customerService.getCustomerByUserId(customerUserId).getCustomerAddressBeans();
+			for(CustomerAddress customerAddressBean: customerAddressBeans){
 				list.add(new AddressVO(customerAddressBean.getAddressBean()));
 			}
 			if(list.size()!=0){
@@ -226,11 +226,11 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	@ResponseBody
 	@RequestMapping(params="mehtod=addCustomerAddress")
 	public String CheckLoginAddAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
-			AddressBean addressBean){
+			Address addressBean){
 		try{
 			String Userid = CheckTokenTool.GetUserid(useridtoken);
-			CustomerBean customerBean = customerService.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, Userid, null);
-			CustomerAddressBean customerAddressBean = new CustomerAddressBean();
+			Customer customerBean = customerService.GetBeanByCondition(Customer.class, CustomerTable.USERID, Userid, null);
+			CustomerAddress customerAddressBean = new CustomerAddress();
 			customerAddressBean.setCustomerBean(customerBean);
 			customerAddressBean.setAddressBean(addressBean);
 			customerAddressService.AddBean(customerAddressBean);
@@ -251,7 +251,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	public String CheckLogindeleteAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
 			@RequestParam(value="addressid")Integer addressid){
 		try {
-			addressService.DeleteByid(AddressBean.class, addressid);
+			addressService.DeleteByid(Address.class, addressid);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "0";
@@ -267,7 +267,7 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 	@ResponseBody
 	@RequestMapping(params="method=alertCustomerAddress")
 	public String CheckLoginAlertAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
-			AddressBean addressBean){
+			Address addressBean){
 		try{
 			addressService.UpdataBean(addressBean);
 		}catch(Exception e){

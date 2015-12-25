@@ -16,17 +16,17 @@ import com.edu.base.BaseServiceImpl;
 import com.edu.dao.IRoleDao;
 import com.edu.dao.IUserDao;
 import com.edu.dao.IUserRoleDao;
-import com.edu.model.FunctionBean;
-import com.edu.model.RoleBean;
-import com.edu.model.RoleFunctionBean;
-import com.edu.model.UserBean;
-import com.edu.model.UserRoleBean;
+import com.edu.model.Function;
+import com.edu.model.Role;
+import com.edu.model.RoleFunction;
+import com.edu.model.User;
+import com.edu.model.UserRole;
 import com.edu.service.IUserRoleService;
 import com.edu.table.UserRoleTable;
 @Lazy(true)
 @Transactional
 @Service("userRoleService")
-public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleBean> implements IUserRoleService{
+public class UserRoleServiceImpl extends BaseServiceImpl<UserRole> implements IUserRoleService{
 	@Resource
 	private IUserRoleDao userRoleDao;
 	
@@ -56,9 +56,9 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleBean> implement
 	public int AddUserRole(int userid, int roleid) {
 		int fontResult = IsExitUserRole(userid, roleid);
 		if(fontResult==0){
-			UserBean user = (UserBean) userDao.getEntitybyId(UserBean.class, userid);
-			RoleBean role = (RoleBean) roleDao.getEntitybyId(RoleBean.class,roleid);
-			UserRoleBean userRoleBean = new UserRoleBean(user, role);
+			User user = (User) userDao.getEntitybyId(User.class, userid);
+			Role role = (Role) roleDao.getEntitybyId(Role.class,roleid);
+			UserRole userRoleBean = new UserRole(user, role);
 			userRoleDao.addEntity(userRoleBean);
 			return 2;
 		}else if(fontResult==1){
@@ -69,13 +69,13 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRoleBean> implement
 	}
 
 	@Override
-	public List<FunctionBean> GetUserFunctions(int userid) {
-		UserBean userBean = (UserBean) userDao.getEntitybyId(UserBean.class, userid);
-		Set<RoleBean> roleset= userBean.getRoleBeans();
-		List<FunctionBean> functionBeans = new ArrayList<FunctionBean>();
-		for(RoleBean roleBean: roleset){
-			Set<FunctionBean> functionSet = roleBean.getFunctionBeans();
-			for(FunctionBean functionBean:functionSet){
+	public List<Function> GetUserFunctions(int userid) {
+		User userBean = (User) userDao.getEntitybyId(User.class, userid);
+		Set<Role> roleset= userBean.getRoleBeans();
+		List<Function> functionBeans = new ArrayList<Function>();
+		for(Role roleBean: roleset){
+			Set<Function> functionSet = roleBean.getFunctionBeans();
+			for(Function functionBean:functionSet){
 				functionBeans.add(functionBean);
 			}
 		}

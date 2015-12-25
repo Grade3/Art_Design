@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.edu.model.SellMethodBean;
+import com.edu.model.SellMethod;
 import com.edu.service.ISellMethodService;
 
 
@@ -21,7 +21,7 @@ public class SellMethodController {
 	
 	@ResponseBody
 	@RequestMapping(params="method=GetAllSellMethod")
-	public List<SellMethodBean> JsonGetAllSellMethod(){
-		return sellMethodService.GetAllBean(SellMethodBean.class);
+	public List<SellMethod> JsonGetAllSellMethod(){
+		return sellMethodService.GetAllBean(SellMethod.class);
 	}
 }

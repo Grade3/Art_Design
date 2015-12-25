@@ -3,18 +3,18 @@ package com.edu.service;
 import java.util.List;
 
 import com.edu.base.IBaseService;
-import com.edu.model.CustomerBean;
-import com.edu.model.ProductBean;
+import com.edu.model.Customer;
+import com.edu.model.Product;
 import com.edu.proxy.ProductProxy;
 
-public interface IProductService extends IBaseService<ProductBean>{
+public interface IProductService extends IBaseService<Product>{
 	/**
 	 * 获取上线商品
 	 * @param page
 	 * @param pageSize
 	 * @return
 	 */
-	public List<ProductBean> getOnlineProduct(int page,int pageSize,int typeid,int methodid);
+	public List<Product> getOnlineProduct(int page,int pageSize,int typeid,int methodid);
 	
 	
 	/**
@@ -32,7 +32,7 @@ public interface IProductService extends IBaseService<ProductBean>{
 	 * @param pageSize
 	 * @return
 	 */
-	public List<ProductBean> getArtistProduct(int page,int pageSize,int artist);
+	public List<Product> getArtistProduct(int page,int pageSize,int artist);
 	
 	
 	/**

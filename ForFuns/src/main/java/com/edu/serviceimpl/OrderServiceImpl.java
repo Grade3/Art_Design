@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.edu.model.CustomerBean;
-import com.edu.model.OrderBean;
-import com.edu.model.ProductBean;
+import com.edu.model.Customer;
+import com.edu.model.Order;
+import com.edu.model.Product;
 import com.edu.service.IOrderService;
 import com.edu.service.IProductService;
 import com.edu.table.OrderTable;
@@ -18,7 +18,7 @@ import com.edu.dao.IOrderDao;
 import com.edu.dao.IProductDao;
 @Transactional
 @Service("orderService")
-public class OrderServiceImpl extends BaseServiceImpl<OrderBean> implements IOrderService{
+public class OrderServiceImpl extends BaseServiceImpl<Order> implements IOrderService{
 
 	@Autowired
 	private IProductDao productDao;
@@ -30,10 +30,10 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderBean> implements IOrd
 	//如果存在的订单与用户名不一致，则为已经被购买。如果为空则添加。
 	@Override
 	public int AddOrder(Integer productid, Integer customerid,String address,String telephone) throws Exception {
-		OrderBean orderBean = orderDao.GetBeanByCondition(OrderBean.class, OrderTable.PRODUCTID, productid+"", null);
+		Order orderBean = orderDao.GetBeanByCondition(Order.class, OrderTable.PRODUCTID, productid+"", null);
 		if(null== orderBean){//不存在改商品的订单 
-			ProductBean productBean = (ProductBean) productDao.getEntitybyId(ProductBean.class, productid);
-			CustomerBean customerBean = (CustomerBean) customerDao.getEntitybyId(CustomerBean.class, customerid);
+			Product productBean = (Product) productDao.getEntitybyId(Product.class, productid);
+			Customer customerBean = (Customer) customerDao.getEntitybyId(Customer.class, customerid);
 			orderBean.setCustomerBean(customerBean);
 			orderBean.setProductBean(productBean);
 			//orderBean.setAddress(address);
@@ -49,13 +49,13 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderBean> implements IOrd
 	}
 
 	@Override
-	public OrderBean getOrderByProductId(Integer productid) throws Exception {
-		OrderBean orderBean = orderDao.GetBeanByCondition(OrderBean.class, OrderTable.PRODUCTID, productid+"", null);
+	public Order getOrderByProductId(Integer productid) throws Exception {
+		Order orderBean = orderDao.GetBeanByCondition(Order.class, OrderTable.PRODUCTID, productid+"", null);
 		return orderBean;
 	}
 
 	@Override
-	public List<OrderBean> getCusertomerOrder(String customerUserid) {
+	public List<Order> getCusertomerOrder(String customerUserid) {
 		return orderDao.getCusertomerOrder(customerUserid);
 	}
 	

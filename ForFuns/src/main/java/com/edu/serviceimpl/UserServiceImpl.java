@@ -19,25 +19,25 @@ import com.edu.base.BaseServiceImpl;
 import com.edu.base.TreeBean;
 import com.edu.base.TreeChildItemBean;
 import com.edu.dao.IUserDao;
-import com.edu.model.FunctionBean;
-import com.edu.model.RoleBean;
-import com.edu.model.UserBean;
+import com.edu.model.Function;
+import com.edu.model.Role;
+import com.edu.model.User;
 import com.edu.service.IUserService;
 
 @Lazy(true)
 @Transactional
 @Service("userService")
-public class UserServiceImpl extends BaseServiceImpl<UserBean> implements IUserService {
+public class UserServiceImpl extends BaseServiceImpl<User> implements IUserService {
 	@Resource
 	private IUserDao userDao;
 
 	@Override
-	public boolean isExist(UserBean user) {
+	public boolean isExist(User user) {
 		return userDao.isExist(user);
 	}
 
 	@Override
-	public void save(UserBean user) {
+	public void save(User user) {
 		userDao.addEntity(user);
 		/*int i=1/0;
 		userDao.addEntity(user);*/
@@ -45,18 +45,18 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean> implements IUserS
 
 	@Override
 	public Map<String, Object> GetUserTree(int page, int pageSize) {
-		List<UserBean> list = this.GetPageBean(UserBean.class, page, pageSize);
+		List<User> list = this.GetPageBean(User.class, page, pageSize);
 		List<TreeBean> temp = new ArrayList<TreeBean>();
 		int total = 0;
 		for(int i=0;i<list.size();i++){
-			UserBean userBean = list.get(i);
-			Set<RoleBean> set =userBean.getRoleBeans();
+			User userBean = list.get(i);
+			Set<Role> set =userBean.getRoleBeans();
 			if (set.size()!=0) {
 				total++;
 				TreeBean treeBean = new TreeBean();
 				treeBean.setId(userBean.getId()+"");
 				treeBean.setName(userBean.getUsername());
-				for(RoleBean  roleBean : set){
+				for(Role  roleBean : set){
 					treeBean.getChildren().add(new TreeChildItemBean(userBean.getId()+"_"+roleBean.getId(),
 							roleBean.getRolename()));
 				}

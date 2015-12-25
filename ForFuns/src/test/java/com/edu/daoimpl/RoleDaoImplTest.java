@@ -14,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.edu.dao.IRoleDao;
-import com.edu.model.RoleBean;
+import com.edu.model.Role;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-hibernate.xml","classpath:spring.xml","classpath:spring-mvc.xml"}) 
@@ -30,8 +30,8 @@ public class RoleDaoImplTest {
 
 	@Test
 	public void testGetAll() {
-		List<RoleBean> list = roleDao.getAllEntity(RoleBean.class);
-		RoleBean roleBean  = list.get(0);
+		List<Role> list = roleDao.getAllEntity(Role.class);
+		Role roleBean  = list.get(0);
 		System.out.println(roleBean);
 	}
 

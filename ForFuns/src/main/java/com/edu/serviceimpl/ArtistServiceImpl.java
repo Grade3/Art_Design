@@ -11,36 +11,36 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.base.BaseServiceImpl;
 import com.edu.dao.IArtistDao;
-import com.edu.model.ArtistBean;
-import com.edu.model.CustomerBean;
-import com.edu.model.ExamineArtistBean;
+import com.edu.model.Artist;
+import com.edu.model.Customer;
+import com.edu.model.ExamineArtist;
 import com.edu.service.IArtistService;
 import com.edu.table.CustomerTable;
 
 @Lazy(true)
 @Transactional
 @Service("artistService")
-public class ArtistServiceImpl extends BaseServiceImpl<CustomerBean> implements
+public class ArtistServiceImpl extends BaseServiceImpl<Customer> implements
 		IArtistService
 {
 	@Resource
 	private IArtistDao artistDao;
 
 	@Override
-	public boolean isExist(CustomerBean customer)
+	public boolean isExist(Customer customer)
 	{
 		return artistDao.isExist(customer);
 	}
 
 	@Override
-	public void save(CustomerBean customer)
+	public void save(Customer customer)
 	{
 		artistDao.addEntity(customer);
 	}
 
 	@SuppressWarnings({ "rawtypes" })
 	@Override
-	public List<CustomerBean> GetPageBeanFilter(Class clz, int page, int pageSize,
+	public List<Customer> GetPageBeanFilter(Class clz, int page, int pageSize,
 			String selectname, String value) 
 	{
 		return artistDao.getPageBeanFilter(clz, page, pageSize, selectname, value);
@@ -55,7 +55,7 @@ public class ArtistServiceImpl extends BaseServiceImpl<CustomerBean> implements
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public List<CustomerBean> GetAllBean(Class clz)
+	public List<Customer> GetAllBean(Class clz)
 	{
 		return artistDao.getAllEntity(clz);
 	}
@@ -66,13 +66,13 @@ public class ArtistServiceImpl extends BaseServiceImpl<CustomerBean> implements
 	}
 
 
-	public int AddBean(ExamineArtistBean examineartist) {
+	public int AddBean(ExamineArtist examineartist) {
 		artistDao.addEntity(examineartist);
 		return 1;
 	}
 	
 	@Override
-	public CustomerBean getArtistByUserId(String userid) throws Exception {
-		return artistDao.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID, userid, null);
+	public Customer getArtistByUserId(String userid) throws Exception {
+		return artistDao.GetBeanByCondition(Customer.class, CustomerTable.USERID, userid, null);
 	}
 }

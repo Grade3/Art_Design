@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Table(name="c_customer")
 @Entity
-public class ArtistBean
+public class Artist
 {
 	private Integer id;
 	private String userid;
@@ -21,7 +21,7 @@ public class ArtistBean
 	private String avator;
 	private Integer isartist = 1;
 	
-	public ArtistBean(CustomerBean customerBean) {
+	public Artist(Customer customerBean) {
 		super();
 		this.id = customerBean.getId();
 		this.userid = customerBean.getUserid();
@@ -34,12 +34,12 @@ public class ArtistBean
 		this.isartist = 1;
 	}
 
-	public ArtistBean()
+	public Artist()
 	{
 		super();
 	}
 
-	public ArtistBean(Integer id, String userid, String username,
+	public Artist(Integer id, String userid, String username,
 			String password, String personnumber, String telphone,
 			String realname, String avator)
 	{
@@ -54,14 +54,14 @@ public class ArtistBean
 		this.avator = avator;
 	}
 	
-	public ArtistBean(String username, String password)
+	public Artist(String username, String password)
 	{
 		super();
 		this.username = username;
 		this.password = password;
 	}
 
-	public ArtistBean(int id, String username, String password)
+	public Artist(int id, String username, String password)
 	{
 		super();
 		this.id = id;
@@ -69,7 +69,7 @@ public class ArtistBean
 		this.password = password;
 	}
 
-	public ArtistBean(String userid, String username, String password,
+	public Artist(String userid, String username, String password,
 			String personnumber, String telphone, String realname,
 			String avator)
 	{

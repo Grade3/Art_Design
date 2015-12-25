@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.edu.model.UserBean;
+import com.edu.model.User;
 import com.edu.service.IUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,7 +19,7 @@ public class UserServiceImplTest {
 
 	@Test
 	public void testSave() {
-		UserBean user = new UserBean();
+		User user = new User();
 		user.setUsername("428");
 		userService.save(user);
 	

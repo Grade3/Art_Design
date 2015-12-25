@@ -8,16 +8,16 @@ import java.util.Set;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
-import com.edu.model.NewsBean;
+import com.edu.model.News;
 import com.edu.table.NewsTable;
 import com.edu.base.BaseDaoImpl;
 import com.edu.dao.INewsDao;
 
 @Repository("newsDao")
-public class NewsDaoImpl extends BaseDaoImpl<NewsBean> implements INewsDao{
+public class NewsDaoImpl extends BaseDaoImpl<News> implements INewsDao{
 
 	@Override
-	public List<NewsBean> GetHotNews() {
+	public List<News> GetHotNews() {
 		//String hql ="from NewsBean where "+NewsTable.ISHOT+" = 1 and "+NewsTable.ISONLINE+" = 1 and "+NewsTable.SITUATION+"=1  order by money desc";
 		//return getSession().createQuery(hql).list();
 		Query query = getSession().getNamedQuery("NewsqueryGetHotNews");
@@ -28,7 +28,7 @@ public class NewsDaoImpl extends BaseDaoImpl<NewsBean> implements INewsDao{
 	}
 
 	@Override
-	public List<NewsBean> GetOnlineNews() {
+	public List<News> GetOnlineNews() {
 //		String hql ="from NewsBean where "+NewsTable.ISONLINE+" = 1";
 //		return getSession().createQuery(hql).list();
 		Query query = getSession().getNamedQuery("NewsqueryGetOnlineNews");

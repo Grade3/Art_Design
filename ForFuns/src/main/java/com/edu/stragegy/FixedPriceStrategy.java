@@ -15,11 +15,11 @@ import com.edu.dao.IOrderAddressDao;
 import com.edu.dao.IOrderDao;
 import com.edu.dao.IProductDao;
 import com.edu.dao.IProductMoneyDao;
-import com.edu.model.AddressBean;
-import com.edu.model.CustomerBean;
-import com.edu.model.OrderAddressBean;
-import com.edu.model.OrderBean;
-import com.edu.model.ProductBean;
+import com.edu.model.Address;
+import com.edu.model.Customer;
+import com.edu.model.OrderAddress;
+import com.edu.model.Order;
+import com.edu.model.Product;
 import com.edu.table.OrderTable;
 
 /**
@@ -29,7 +29,7 @@ import com.edu.table.OrderTable;
  */
 @Transactional
 @Service("FixedPriceStrategy")
-public class FixedPriceStrategy extends BaseServiceImpl<ProductBean> implements ISellStrategy,IBaseService<ProductBean>{
+public class FixedPriceStrategy extends BaseServiceImpl<Product> implements ISellStrategy,IBaseService<Product>{
 	@Autowired
 	private IProductDao productDao ;
 	@Autowired
@@ -41,16 +41,16 @@ public class FixedPriceStrategy extends BaseServiceImpl<ProductBean> implements 
 	@Autowired
 	private IAddressDao addressDao;
 	@Override
-	public String SellProduct(ProductBean productBean,CustomerBean customerBean,Integer money,Map<String, Object>params) throws Exception {
-		OrderBean orderBean = orderDao.GetBeanByCondition(OrderBean.class, OrderTable.PRODUCTID, productBean.getId()+"", null);
+	public String SellProduct(Product productBean,Customer customerBean,Integer money,Map<String, Object>params) throws Exception {
+		Order orderBean = orderDao.GetBeanByCondition(Order.class, OrderTable.PRODUCTID, productBean.getId()+"", null);
 		if(null== orderBean){//不存在改商品的订单 
-			orderBean = new OrderBean();
+			orderBean = new Order();
 			orderBean.setCustomerBean(customerBean);
 			orderBean.setProductBean(productBean);
 			orderBean.setCurrent(new Date());
 			orderBean.setIspay(1);
-			OrderAddressBean orderAddressBean = new OrderAddressBean();
-			AddressBean addressBean = (AddressBean) addressDao.getEntitybyId(AddressBean.class, Integer.parseInt(params.get("addressid").toString()));
+			OrderAddress orderAddressBean = new OrderAddress();
+			Address addressBean = (Address) addressDao.getEntitybyId(Address.class, Integer.parseInt(params.get("addressid").toString()));
 			orderAddressBean.setOrderBean(orderBean);
 			orderAddressBean.setAddressBean(addressBean);
 			orderAddressDao.addEntity(orderAddressBean);

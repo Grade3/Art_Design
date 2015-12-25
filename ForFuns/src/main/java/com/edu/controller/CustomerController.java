@@ -36,10 +36,10 @@ import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.edu.model.NewsBean;
-import com.edu.model.RoleBean;
-import com.edu.model.CustomerBean;
-import com.edu.model.UserBean;
+import com.edu.model.News;
+import com.edu.model.Role;
+import com.edu.model.Customer;
+import com.edu.model.User;
 import com.edu.service.ICustomerService;
 import com.edu.service.IUserService;
 import com.edu.serviceimpl.CustomerServiceImpl;
@@ -108,7 +108,7 @@ public class CustomerController implements ServletConfigAware,
 				return "redirect:/font/Login.jsp?error=1";
 			}
 		}
-		CustomerBean user = new CustomerBean();
+		Customer user = new Customer();
 		user.setPassword(password);
 		user.setUserid(userid);
 		System.out.println(user.toString());
@@ -169,7 +169,7 @@ public class CustomerController implements ServletConfigAware,
 		// return "redirect:/font/Login.jsp?error=1";
 		// }
 		// }
-		CustomerBean user = new CustomerBean();
+		Customer user = new Customer();
 		int registFlag = 0;
 		if (userid.equals("") || username.equals("") || realname.equals("")
 				|| telphone.equals("") || personnumber.equals(""))
@@ -262,8 +262,8 @@ public class CustomerController implements ServletConfigAware,
 		{
 			// System.out.println("a");
 			System.out.println(customerService.getCustomerIdByUserid(userid));
-			CustomerBean user = customerService.GetEntityById(
-					CustomerBean.class, Integer.valueOf(customerService
+			Customer user = customerService.GetEntityById(
+					Customer.class, Integer.valueOf(customerService
 							.getCustomerIdByUserid(userid)));
 			System.out.println(user.toString());
 			// user.setUserid(userid);
@@ -340,8 +340,8 @@ public class CustomerController implements ServletConfigAware,
 			e1.printStackTrace();
 		}
 
-		CustomerBean customerBean = customerService.GetEntityById(
-				CustomerBean.class,
+		Customer customerBean = customerService.GetEntityById(
+				Customer.class,
 				Integer.valueOf(customerService.getCustomerIdByUserid(userid)));
 
 		customerBean.setAvator(saveUrl);
@@ -360,7 +360,7 @@ public class CustomerController implements ServletConfigAware,
 	public Boolean isExist(
 			@RequestParam(value = "userid", required = false) String userid)
 	{
-		CustomerBean user = new CustomerBean();
+		Customer user = new Customer();
 
 		user.setUserid(userid);
 		if (customerService.exist(user))
@@ -396,7 +396,7 @@ public class CustomerController implements ServletConfigAware,
 			String realname = jsonObject.getString(CustomerTable.REALNAME);
 			String avator = jsonObject.getString(CustomerTable.AVATOR);
 			Integer isartist = 0;
-			CustomerBean customerBean = new CustomerBean(userid, username,
+			Customer customerBean = new Customer(userid, username,
 					password, personnumber, telphone, realname, avator,
 					isartist);
 			customerService.AddBean(customerBean);
@@ -426,8 +426,8 @@ public class CustomerController implements ServletConfigAware,
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
 			int id = jsonObject.getInt(CustomerTable.ID);
-			CustomerBean customerBean = customerService.GetEntityById(
-					CustomerBean.class, id);
+			Customer customerBean = customerService.GetEntityById(
+					Customer.class, id);
 			String userid = jsonObject.getString(CustomerTable.USERID);
 			customerBean.setUserid(userid);
 			String username = jsonObject.getString(CustomerTable.USERNAME);
@@ -462,8 +462,8 @@ public class CustomerController implements ServletConfigAware,
 	@RequestMapping(params = "method=getallcustomer")
 	public Map<String, Object> GetAllCustomer()
 	{
-		List<CustomerBean> list = customerService
-				.GetAllBean(CustomerBean.class);
+		List<Customer> list = customerService
+				.GetAllBean(Customer.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customers", list);
 		return map;
@@ -480,8 +480,8 @@ public class CustomerController implements ServletConfigAware,
 	public Map<String, Object> JsonGetCustomerByUserid(
 			@RequestParam(value = "customerid") String customerid)
 	{
-		CustomerBean customerBean = customerService.GetBeanByCondition(
-				CustomerBean.class, CustomerTable.USERID, customerid, null);
+		Customer customerBean = customerService.GetBeanByCondition(
+				Customer.class, CustomerTable.USERID, customerid, null);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customer",new  CustomerVO(customerBean));
 		System.out.println(customerid);
@@ -499,8 +499,8 @@ public class CustomerController implements ServletConfigAware,
 	public Map<String, Object> JsonGetCustomervoByid(
 			@RequestParam(value = "customerid") String customerid)
 	{
-		CustomerBean customerBean = customerService.GetEntityById(
-				CustomerBean.class, Integer.parseInt(customerid));
+		Customer customerBean = customerService.GetEntityById(
+				Customer.class, Integer.parseInt(customerid));
 		CustomerVO customerVO = new CustomerVO(customerBean);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customer", customerVO);
@@ -518,7 +518,7 @@ public class CustomerController implements ServletConfigAware,
 	public String JsonGetUserName(
 			@RequestParam(value = "customerid") String customerid)
 	{
-		return customerService.GetBeanByCondition(CustomerBean.class,
+		return customerService.GetBeanByCondition(Customer.class,
 				CustomerTable.USERID, customerid, null).getUsername();
 	}
 
@@ -533,7 +533,7 @@ public class CustomerController implements ServletConfigAware,
 			@RequestParam(value = "customerid") String customerid)
 	{
 		return customerService
-				.GetBeanByCondition(CustomerBean.class, CustomerTable.USERID,
+				.GetBeanByCondition(Customer.class, CustomerTable.USERID,
 						customerid, null).getId().toString();
 	}
 
@@ -553,9 +553,9 @@ public class CustomerController implements ServletConfigAware,
 			@RequestParam(value = "value", defaultValue = "") String value)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<CustomerBean> list = customerService.GetPageBeanFilter(
-				CustomerBean.class, page, pageSize, selectname, value);
-		int total = customerService.GetPageBeanFilterTotal(CustomerBean.class,
+		List<Customer> list = customerService.GetPageBeanFilter(
+				Customer.class, page, pageSize, selectname, value);
+		int total = customerService.GetPageBeanFilterTotal(Customer.class,
 				page, pageSize, selectname, value);
 		map.put("rows", AdminCustomerVO.ChangeToList(list));
 		map.put("total", total);
@@ -602,8 +602,8 @@ public class CustomerController implements ServletConfigAware,
 			@RequestParam(value = "realname") String realname,
 			HttpServletRequest request)
 	{
-		CustomerBean customerBean = customerService.GetBeanByCondition(
-				CustomerBean.class, CustomerTable.USERID, userid, null);
+		Customer customerBean = customerService.GetBeanByCondition(
+				Customer.class, CustomerTable.USERID, userid, null);
 
 		customerBean.setRealname(realname);
 		customerBean.setTelphone(telphone);
@@ -661,7 +661,7 @@ public class CustomerController implements ServletConfigAware,
 
 		int flag = 0;
 		System.out.println(customerService.getCustomerIdByUserid(userid));
-		CustomerBean user = customerService.GetEntityById(CustomerBean.class,
+		Customer user = customerService.GetEntityById(Customer.class,
 				Integer.valueOf(customerService.getCustomerIdByUserid(userid)));
 		System.out.println(user.toString());
 		if (!user.getPassword().equals(password))

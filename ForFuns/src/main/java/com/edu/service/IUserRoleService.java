@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.edu.base.IBaseService;
-import com.edu.model.FunctionBean;
-import com.edu.model.UserRoleBean;
+import com.edu.model.Function;
+import com.edu.model.UserRole;
 
 
-public interface IUserRoleService extends IBaseService<UserRoleBean>{
+public interface IUserRoleService extends IBaseService<UserRole>{
 	/**
 	 * 判断是否存在
 	 * @param userid
@@ -30,5 +30,5 @@ public interface IUserRoleService extends IBaseService<UserRoleBean>{
 	 * @param userid
 	 * @return
 	 */
-	public List<FunctionBean> GetUserFunctions(int userid);
+	public List<Function> GetUserFunctions(int userid);
 }

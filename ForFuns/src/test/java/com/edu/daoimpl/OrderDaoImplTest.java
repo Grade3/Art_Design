@@ -13,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.edu.dao.IOrderDao;
-import com.edu.model.OrderBean;
+import com.edu.model.Order;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-hibernate.xml","classpath:spring.xml","classpath:spring-mvc.xml"}) 
@@ -40,7 +40,7 @@ public class OrderDaoImplTest {
 
 	@Test
 	public void test() {
-		OrderBean entitybyId = (OrderBean) orderDao.getEntitybyId(OrderBean.class,1);
+		Order entitybyId = (Order) orderDao.getEntitybyId(Order.class,1);
 		System.out.println(entitybyId.getOrderAddressBean().getAddressBean().getAddress());
 	}
 

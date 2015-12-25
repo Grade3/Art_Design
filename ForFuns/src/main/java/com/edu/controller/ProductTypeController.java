@@ -26,10 +26,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.edu.dao.IProductTypeDao;
-import com.edu.model.FunctionBean;
-import com.edu.model.ProductTypeBean;
-import com.edu.model.RoleBean;
-import com.edu.model.UserBean;
+import com.edu.model.Function;
+import com.edu.model.ProductType;
+import com.edu.model.Role;
+import com.edu.model.User;
 import com.edu.service.IProductTypeService;
 import com.edu.service.IUserService;
 import com.edu.serviceimpl.UserServiceImpl;
@@ -63,7 +63,7 @@ public class ProductTypeController
 			temp[i] = Integer.parseInt(id[i]);
 		}
 		try {
-			productTypeService.DeleteBatch(ProductTypeBean.class, temp);
+			productTypeService.DeleteBatch(ProductType.class, temp);
 			return "true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,7 +93,7 @@ public class ProductTypeController
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
 			String name = jsonObject.getString(ProductTypeTable.NAME);
-			ProductTypeBean productTypeBean = new ProductTypeBean(name);
+			ProductType productTypeBean = new ProductType(name);
 			productTypeService.AddBean(productTypeBean);
 			return 1;
 		} catch (Exception e) {
@@ -121,7 +121,7 @@ public class ProductTypeController
 		JSONObject jsonObject = new JSONObject(data);
 		int id = jsonObject.getInt(ProductTypeTable.ID);
 		String name = jsonObject.getString(ProductTypeTable.NAME);
-		ProductTypeBean productTypeBean = new ProductTypeBean(id, name);
+		ProductType productTypeBean = new ProductType(id, name);
 		productTypeService.UpdataBean(productTypeBean);
 		return "true";
 	}
@@ -139,7 +139,7 @@ public class ProductTypeController
 	@ResponseBody
 	@RequestMapping(params="method=getAllProductType")
 	public Map<String, Object> GetAllProductType(){
-		List<ProductTypeBean> list = productTypeService.GetAllBean(ProductTypeBean.class);
+		List<ProductType> list = productTypeService.GetAllBean(ProductType.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("productTypes", list);
 		return map;
@@ -160,9 +160,9 @@ public class ProductTypeController
 			@RequestParam(value="selectname",defaultValue="id")String selectname,
 			@RequestParam(value="value",defaultValue="")String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<ProductTypeBean> list = productTypeService.GetPageBeanFilter(ProductTypeBean.class, page,
+		List<ProductType> list = productTypeService.GetPageBeanFilter(ProductType.class, page,
 				pageSize,selectname,value);
-		int total = productTypeService.GetPageBeanFilterTotal(ProductTypeBean.class, page, pageSize, selectname, value);
+		int total = productTypeService.GetPageBeanFilterTotal(ProductType.class, page, pageSize, selectname, value);
 		map.put("rows", list);
 		map.put("total", total);
 		return map;

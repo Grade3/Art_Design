@@ -13,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.edu.dao.IFunctionDao;
-import com.edu.model.FunctionBean;
+import com.edu.model.Function;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-hibernate.xml","classpath:spring.xml","classpath:spring-mvc.xml"}) 
@@ -40,7 +40,7 @@ public class FunctionDaoImplTest {
 
 	@Test
 	public void testSave() {
-		FunctionBean functionBean = new FunctionBean();
+		Function functionBean = new Function();
 		functionDao.addEntity(functionBean);
 	}
 

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.edu.model.FunctionBean;
-import com.edu.model.UserBean;
+import com.edu.model.Function;
+import com.edu.model.User;
 import com.edu.service.IFunctionService;
 import com.edu.table.FunctionTable;
 import com.edu.table.UserTable;
@@ -41,9 +41,9 @@ public class FunctionController {
 	 */
 	@RequestMapping(params="method=getfunction")
 	@ResponseBody
-	public List<FunctionBean> JsonGetAllFunction(){
+	public List<Function> JsonGetAllFunction(){
 		//Map<String, Object> map = new HashMap<String, Object>();
-		List<FunctionBean> list = functionService.GetAllFunction();
+		List<Function> list = functionService.GetAllFunction();
 		//map.put("list", list);
 		return list;
 	}
@@ -56,9 +56,9 @@ public class FunctionController {
 	 */
 	@RequestMapping(params="method=GetSecondFunction")
 	@ResponseBody
-	public List<FunctionBean> JsonGetAllSecondFunction(){
+	public List<Function> JsonGetAllSecondFunction(){
 		//Map<String, Object> map = new HashMap<String, Object>();
-		List<FunctionBean> list = functionService.GetAllFunction();
+		List<Function> list = functionService.GetAllFunction();
 		//map.put("list", list);
 		return list;
 	}
@@ -70,8 +70,8 @@ public class FunctionController {
 	public Map<String, Object> JsonGetPageFunction(@RequestParam(value="page") int page,
 			@RequestParam(value="rows") int pageSize){
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<FunctionBean> list = functionService.GetPageBean(FunctionBean.class, page, pageSize);
-		int total = functionService.GetPageBeanTotal(FunctionBean.class);
+		List<Function> list = functionService.GetPageBean(Function.class, page, pageSize);
+		int total = functionService.GetPageBeanTotal(Function.class);
 		map.put("rows", list);
 		map.put("total", total);
 		return map;
@@ -98,7 +98,7 @@ public class FunctionController {
 			String functionlink = jsonObject.getString(FunctionTable.FUNCTIONLINK);
 			Integer istopmenu = jsonObject.getInt(FunctionTable.ISTOPMENU);
 			Integer topmenu = jsonObject.getInt(FunctionTable.TOPMUNE);
-			FunctionBean functionBean  = new FunctionBean(functionname, functionlink,istopmenu,topmenu);
+			Function functionBean  = new Function(functionname, functionlink,istopmenu,topmenu);
 			functionService.AddBean(functionBean);
 			return "1";
 		}catch(Exception e){
@@ -123,7 +123,7 @@ public class FunctionController {
 			temp[i] = Integer.parseInt(id[i]);
 		}
 		try {
-			functionService.DeleteBatch(FunctionBean.class, temp);
+			functionService.DeleteBatch(Function.class, temp);
 			return "true";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,7 +153,7 @@ public class FunctionController {
 		String functionlink = jsonObject.getString(FunctionTable.FUNCTIONLINK);
 		Integer istopmenu = jsonObject.getInt(FunctionTable.ISTOPMENU);
 		Integer topmenu = jsonObject.getInt(FunctionTable.TOPMUNE);
-		FunctionBean functionBean  = new FunctionBean(id,functionname, functionlink,istopmenu,topmenu);
+		Function functionBean  = new Function(id,functionname, functionlink,istopmenu,topmenu);
 		functionService.UpdataBean(functionBean);
 		return "true";
 	}
@@ -165,8 +165,8 @@ public class FunctionController {
 	 */
 	@RequestMapping(params="method=GetAllTopMenu")
 	@ResponseBody
-	public List<FunctionBean> JsonGetAllTopMenu(){
-		List<FunctionBean> list = functionService.GetAllTopMenu();
+	public List<Function> JsonGetAllTopMenu(){
+		List<Function> list = functionService.GetAllTopMenu();
 		return list;
 	}
 	
@@ -176,8 +176,8 @@ public class FunctionController {
 	 */
 	@RequestMapping(params="method=GetAllSecondMenu")
 	@ResponseBody
-	public List<FunctionBean> JsonGetAllSecondMenu(){
-		List<FunctionBean> list = functionService.GetAllSecondMenu();
+	public List<Function> JsonGetAllSecondMenu(){
+		List<Function> list = functionService.GetAllSecondMenu();
 		return list;
 	}
 }

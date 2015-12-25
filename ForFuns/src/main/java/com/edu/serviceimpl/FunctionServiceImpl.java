@@ -10,26 +10,26 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.base.BaseServiceImpl;
 import com.edu.dao.IFunctionDao;
-import com.edu.model.FunctionBean;
+import com.edu.model.Function;
 import com.edu.service.IFunctionService;
 @Lazy(true)
 @Transactional
 @Service("functionService")
-public class FunctionServiceImpl extends BaseServiceImpl<FunctionBean> implements IFunctionService {
+public class FunctionServiceImpl extends BaseServiceImpl<Function> implements IFunctionService {
 	@Resource
 	private IFunctionDao functionDao;
 	
-	public List<FunctionBean> GetAllFunction(){
-		return functionDao.getAllEntity(FunctionBean.class);
+	public List<Function> GetAllFunction(){
+		return functionDao.getAllEntity(Function.class);
 	}
 
 	@Override
-	public List<FunctionBean> GetAllTopMenu() {
+	public List<Function> GetAllTopMenu() {
 		return functionDao.GetAllTopMenu();
 	}
 
 	@Override
-	public List<FunctionBean> GetAllSecondMenu() {
+	public List<Function> GetAllSecondMenu() {
 		return functionDao.GetAllSecondMenu();
 	}
 
