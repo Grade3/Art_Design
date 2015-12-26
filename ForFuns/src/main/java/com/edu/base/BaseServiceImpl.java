@@ -133,6 +133,11 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 	public void setBaseDao(IBaseDao baseDao) {
 		this.baseDao = baseDao;
 	}
+
+	@Override
+	public Object MergeObject(Object object) {
+		return baseDao.getSession().merge(object);
+	}
 	
 	
 }

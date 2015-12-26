@@ -17,10 +17,12 @@ public class ProductVO {
 	private String imgurl;//封面图片
 	private Integer initmoney;
 	private Integer authorid;
+	private String artistuserid;
 	private String authorname;
 	private Date timestart;
 	private Date timeout;
 	private String content;
+	private Integer money;
 	private String imgone;//图片1地址
 	private String imgtwo;//图片2地址
 	private String imgthree;//图片3地址
@@ -48,6 +50,20 @@ public class ProductVO {
 		this.methodname = productBean.getProductSellBean().getSellMethodBean().getName();
 		this.typeid = productBean.getProductTypeBean().getId();
 		this.typename = productBean.getProductTypeBean().getName();
+		this.artistuserid = productBean.getArtistBean().getUserid();
+		this.money = productBean.getMoney();
+	}
+	public Integer getMoney() {
+		return money;
+	}
+	public void setMoney(Integer money) {
+		this.money = money;
+	}
+	public String getArtistuserid() {
+		return artistuserid;
+	}
+	public void setArtistuserid(String artistuserid) {
+		this.artistuserid = artistuserid;
 	}
 	/**
 	 * 将list中的productbean实体转变为productvo

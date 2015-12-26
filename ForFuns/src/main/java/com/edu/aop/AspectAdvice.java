@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.edu.util.CheckTokenTool;
@@ -18,7 +19,7 @@ import com.edu.util.CheckTokenTool;
 @Component
 @Aspect
 public class AspectAdvice  {
-	@Resource
+	@Autowired
 	protected SessionFactory sessionFactory;
  
 	public SessionFactory getSessionFactory() {

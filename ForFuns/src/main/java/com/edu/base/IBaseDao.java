@@ -3,8 +3,15 @@ package com.edu.base;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Session;
+
 
 public interface IBaseDao<T> {
+	/**
+	 * 获取session
+	 * @return
+	 */
+	public Session getSession();
 	/**
 	 * 增加数据或者保存数据。如果存在主键就更新，如果不存在主键则插入
 	 * @param object

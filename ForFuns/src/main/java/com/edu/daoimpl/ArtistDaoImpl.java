@@ -9,13 +9,15 @@ import org.springframework.stereotype.Repository;
 
 import com.edu.base.BaseDaoImpl;
 import com.edu.dao.IArtistDao;
+import com.edu.model.Artist;
 import com.edu.model.Customer;
 import com.edu.model.ExamineArtist;
+import com.edu.model.Product;
 import com.edu.table.AdvertTable;
 
 @Lazy(true)
 @Repository("artistDao")
-public class ArtistDaoImpl extends BaseDaoImpl<Customer> implements IArtistDao {
+public class ArtistDaoImpl extends BaseDaoImpl<Artist> implements IArtistDao {
 	@Override
 	public boolean isExist(Customer customer) {
 //		String hql = "from CustomerBean where username=? and password=? and isartist=1";
@@ -34,9 +36,9 @@ public class ArtistDaoImpl extends BaseDaoImpl<Customer> implements IArtistDao {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public List<Customer> getAllEntity(Class clz) {
+	public List<Artist> getAllEntity(Class clz) {
 		//String hql = "";
-		List<Customer> list = null;
+		List<Artist> list = null;
 		try {
 //			hql = "from CustomerBean where isartist=1";
 //			System.out.println(hql);
@@ -51,9 +53,9 @@ public class ArtistDaoImpl extends BaseDaoImpl<Customer> implements IArtistDao {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public List<Customer> getPageBeanFilter(Class clz, int page, int pageSize, String selectname, String value) {
+	public List<Artist> getPageBeanFilter(Class clz, int page, int pageSize, String selectname, String value) {
 		String hql = "";
-		List<Customer> list = null;
+		List<Artist> list = null;
 		try {
 			hql = "from " + clz.newInstance().getClass().getName() + " where " + selectname + " like '%" + value
 					+ "%' and isartist=1";
@@ -82,5 +84,6 @@ public class ArtistDaoImpl extends BaseDaoImpl<Customer> implements IArtistDao {
 		Query query = getSession().getNamedQuery("ArtistquerycountEa");
 		return ((Number) query.uniqueResult()).intValue();
 	}
+
 
 }

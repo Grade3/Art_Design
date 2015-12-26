@@ -61,7 +61,10 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		return getSession().createQuery(hql).list().get(0);
+		List<Object> list = getSession().createQuery(hql).list();
+		if(list.size()==0)
+			return null;
+		return list.get(0);
 	}
 
 	public void deleteEntity(Object object){

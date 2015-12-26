@@ -20,8 +20,7 @@ import com.edu.table.CustomerTable;
 @Lazy(true)
 @Transactional
 @Service("artistService")
-public class ArtistServiceImpl extends BaseServiceImpl<Customer> implements
-		IArtistService
+public class ArtistServiceImpl extends BaseServiceImpl<Artist> implements IArtistService
 {
 	@Resource
 	private IArtistDao artistDao;
@@ -40,7 +39,7 @@ public class ArtistServiceImpl extends BaseServiceImpl<Customer> implements
 
 	@SuppressWarnings({ "rawtypes" })
 	@Override
-	public List<Customer> GetPageBeanFilter(Class clz, int page, int pageSize,
+	public List<Artist> GetPageBeanFilter(Class clz, int page, int pageSize,
 			String selectname, String value) 
 	{
 		return artistDao.getPageBeanFilter(clz, page, pageSize, selectname, value);
@@ -55,7 +54,7 @@ public class ArtistServiceImpl extends BaseServiceImpl<Customer> implements
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public List<Customer> GetAllBean(Class clz)
+	public List<Artist> GetAllBean(Class clz)
 	{
 		return artistDao.getAllEntity(clz);
 	}
@@ -72,7 +71,7 @@ public class ArtistServiceImpl extends BaseServiceImpl<Customer> implements
 	}
 	
 	@Override
-	public Customer getArtistByUserId(String userid) throws Exception {
-		return artistDao.GetBeanByCondition(Customer.class, CustomerTable.USERID, userid, null);
+	public Artist getArtistByUserId(String userid) throws Exception {
+		return artistDao.GetBeanByCondition(Artist.class, CustomerTable.USERID, userid, null);
 	}
 }

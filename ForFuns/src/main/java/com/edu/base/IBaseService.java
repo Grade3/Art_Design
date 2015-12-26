@@ -131,5 +131,12 @@ public interface IBaseService<T>{
 	 * @return
 	 */
 	public T GetBeanByCondition(Class clz,String conditionName,String conditionValue,Map<String, String> param);
+	
+	/**
+	 * 进行同步
+	 * @param object
+	 * @return
+	 */
+	public Object MergeObject(Object object);
 		
 }

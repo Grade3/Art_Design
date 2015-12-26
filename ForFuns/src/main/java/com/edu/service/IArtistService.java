@@ -11,7 +11,7 @@ import com.edu.model.Artist;
 import com.edu.model.Customer;
 import com.edu.model.ExamineArtist;
 
-public interface IArtistService extends IBaseService<Customer>
+public interface IArtistService extends IBaseService<Artist>
 {
 	/**
 	 * 判断用户是否存在
@@ -39,10 +39,10 @@ public interface IArtistService extends IBaseService<Customer>
 	
 	
 	@SuppressWarnings("rawtypes")
-	public List<Customer> GetAllBean(Class clz);
+	public List<Artist> GetAllBean(Class clz);
 	
 	@SuppressWarnings("rawtypes")
-	public List<Customer> GetPageBeanFilter(Class clz,int page,int pageSize,String selectname,String value);
+	public List<Artist> GetPageBeanFilter(Class clz,int page,int pageSize,String selectname,String value);
 	
 	@SuppressWarnings("rawtypes")
 	public int GetPageBeanFilterTotal(Class clz, int page, int pageSize,
@@ -55,5 +55,5 @@ public interface IArtistService extends IBaseService<Customer>
 	 * @return
 	 * @throws Exception
 	 */
-	public Customer getArtistByUserId(String userid) throws Exception;
+	public Artist getArtistByUserId(String userid) throws Exception;
 }

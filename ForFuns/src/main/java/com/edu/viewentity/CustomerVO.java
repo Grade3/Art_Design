@@ -3,6 +3,7 @@ package com.edu.viewentity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.edu.model.Artist;
 import com.edu.model.Customer;
 
 public class CustomerVO {
@@ -32,6 +33,18 @@ public class CustomerVO {
 		this.realname = customerBean.getRealname();
 	}
 	
+	public CustomerVO(Artist customerBean) {
+		super();
+		this.id = customerBean.getId();
+		this.name = customerBean.getUsername();
+		this.avator = customerBean.getAvator();
+		this.userid = customerBean.getUserid();
+		this.telephone = customerBean.getTelphone();
+		this.personnumber = customerBean.getPersonnumber();
+		this.isartist = 1;
+		this.realname = customerBean.getRealname();
+	}
+	
 	public CustomerVO(Integer id, String userid, String name, String avator,
 			String telephone, String personnumber, String realname,
 			Integer isartist) {
@@ -51,6 +64,17 @@ public class CustomerVO {
 			return list;
 		}
 		for(Customer customerBean : temp){
+			list.add(new CustomerVO(customerBean));
+		}
+		return list;
+	}
+	
+	public static List<CustomerVO> ChangeArtistToList(List<Artist> temp){
+		List<CustomerVO> list = new ArrayList<CustomerVO>();
+		if(temp.size()==0||null==temp){
+			return list;
+		}
+		for(Artist customerBean : temp){
 			list.add(new CustomerVO(customerBean));
 		}
 		return list;

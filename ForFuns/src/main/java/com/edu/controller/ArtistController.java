@@ -29,6 +29,7 @@ import com.edu.model.Artist;
 import com.edu.model.Customer;
 import com.edu.model.ExamineArtist;
 import com.edu.service.IArtistService;
+import com.edu.service.ICustomerService;
 import com.edu.serviceimpl.ArtistServiceImpl;
 import com.edu.table.CustomerTable;
 import com.edu.table.NewsTable;
@@ -46,10 +47,10 @@ import com.edu.viewentity.CustomerVO;
 @RequestMapping("/artist.do")
 public class ArtistController
 {
-	@Resource
+	@Autowired
 	private IArtistService artistService;
-
-	
+	@Autowired
+	private ICustomerService customerService;
 	
 	/**
 	 * 登录功能
@@ -184,11 +185,11 @@ public class ArtistController
 			@RequestParam(value = "value", defaultValue = "") String value)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Customer> list = artistService.GetPageBeanFilter(
-				Customer.class, page, pageSize, selectname, value);
+		List<Artist> list = artistService.GetPageBeanFilter(
+				Artist.class, page, pageSize, selectname, value);
 		int total = artistService.GetPageBeanFilterTotal(Customer.class,
 				page, pageSize, selectname, value);
-		map.put("rows", AdminCustomerVO.ChangeToList(list));
+		map.put("rows", AdminCustomerVO.ChangeAtistToList(list));
 		map.put("total", total);
 		return map;
 	}
@@ -214,7 +215,7 @@ public class ArtistController
 		for (int i = 0; i < id.length; i++)
 		{
 			System.out.println(temp[i]);
-			Customer customerBean = artistService.GetEntityById(
+			Customer customerBean = customerService.GetEntityById(
 					Customer.class, temp[i]);
 			customerBean.setIsartist(0);
 			int result = artistService.UpdataBean(customerBean);
@@ -283,7 +284,7 @@ public class ArtistController
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
 			int id = jsonObject.getInt(CustomerTable.ID);
-			Customer customerBean = artistService.GetEntityById(Customer.class, id);
+			Artist customerBean = artistService.GetEntityById(Artist.class, id);
 			String userid = jsonObject.getString(CustomerTable.USERID);
 			customerBean.setUserid(userid);
 			String username = jsonObject.getString(CustomerTable.USERNAME);
@@ -307,13 +308,6 @@ public class ArtistController
 		return "error";
 	}
 
-	@RequestMapping(params = "method=gettest")
-	@ResponseBody
-	public String JsonGetTree()
-	{
-		return "[{\"id\":1,\"name\":\"C\",\"children\":[{\"id\":2,\"name\":\"Program Files\"}]}]";
-	}
-
 	/**
 	 * 获取所有的用户
 	 * 
@@ -323,7 +317,7 @@ public class ArtistController
 	@RequestMapping(params = "method=getallArtist")
 	public Map<String, Object> GetAllArtist()
 	{
-		List<Customer> list = artistService.GetAllBean(Customer.class);
+		List<Artist> list = artistService.GetAllBean(Artist.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("Artists", list);
 		return map;
@@ -339,9 +333,9 @@ public class ArtistController
 	@RequestMapping(params="method=GetArtists")
 	public Map<String, Object> JsonGetArtists(@RequestParam(value="page")Integer page,@RequestParam(value="pageSize")Integer pageSize){
 		Map<String , Object> map = new HashMap<String, Object>();
-		List<Customer> list = artistService.GetPageBeanFilter(Customer.class, page, pageSize,CustomerTable.ISARTIST,1+"");
-		int total = artistService.GetPageBeanFilterTotal(Customer.class, page, pageSize,CustomerTable.ISARTIST,1+"");
-		map.put("list", CustomerVO.ChangeToList(list));
+		List<Artist> list = artistService.GetPageBeanFilter(Artist.class, page, pageSize,CustomerTable.ISARTIST,1+"");
+		int total = artistService.GetPageBeanFilterTotal(Artist.class, page, pageSize,CustomerTable.ISARTIST,1+"");
+		map.put("list", CustomerVO.ChangeArtistToList(list));
 		map.put("total", total);
 		return map;
 	}

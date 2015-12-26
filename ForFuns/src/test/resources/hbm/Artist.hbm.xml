@@ -16,4 +16,5 @@
     <query name="ArtistquerycountEa">  
         <![CDATA[select count(id) from ExamineArtist]]>
     </query>
+    
 </hibernate-mapping>  

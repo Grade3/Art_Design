@@ -3,6 +3,7 @@ package com.edu.viewentity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.edu.model.Artist;
 import com.edu.model.Customer;
 
 public class AdminCustomerVO {
@@ -34,6 +35,19 @@ public class AdminCustomerVO {
 		this.password = customerBean.getPassword();
 	}
 	
+	public AdminCustomerVO(Artist artist) {
+		super();
+		this.id = artist.getId();
+		this.name = artist.getUsername();
+		this.avator = artist.getAvator();
+		this.userid = artist.getUserid();
+		this.telephone = artist.getTelphone();
+		this.personnumber = artist.getPersonnumber();
+		this.isartist = 1;
+		this.realname = artist.getRealname();
+		this.password = artist.getPassword();
+	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -60,6 +74,17 @@ public class AdminCustomerVO {
 		}
 		for(Customer customerBean : temp){
 			list.add(new AdminCustomerVO(customerBean));
+		}
+		return list;
+	}
+	
+	public static List<AdminCustomerVO> ChangeAtistToList(List<Artist> temp){
+		List<AdminCustomerVO> list = new ArrayList<AdminCustomerVO>();
+		if(temp.size()==0||null==temp){
+			return list;
+		}
+		for(Artist artist : temp){
+			list.add(new AdminCustomerVO(artist));
 		}
 		return list;
 	}

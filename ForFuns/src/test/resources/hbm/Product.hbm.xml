@@ -17,4 +17,5 @@
 	<query name="ProductquerygetArtistProductTotal">  
         <![CDATA[from Product where artistid= :artistid]]>
 	</query>
+	
 </hibernate-mapping>  

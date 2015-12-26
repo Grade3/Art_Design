@@ -30,6 +30,7 @@ import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.edu.daoimpl.CustomerDaoImpl;
 import com.edu.model.Artist;
 import com.edu.model.Customer;
 import com.edu.model.News;
@@ -39,6 +40,7 @@ import com.edu.model.ProductSell;
 import com.edu.model.ProductType;
 import com.edu.model.SellMethod;
 import com.edu.proxy.ProductProxy;
+import com.edu.service.IArtistService;
 import com.edu.service.ICustomerService;
 import com.edu.service.IOrderService;
 import com.edu.service.IProductService;
@@ -83,6 +85,8 @@ ServletContextAware {
 	
 	@Autowired
 	private IOrderService orderService;
+	@Autowired
+	private IArtistService artistService;
 	/**
 	 * 获取分页列表
 	 * 
@@ -226,8 +230,10 @@ ServletContextAware {
 	@RequestMapping(params="method=GetProductById")
 	public Map<String, Object> JsonGetProductById(@RequestParam(value="productid")Integer id){
 		Map<String , Object> map = new HashMap<String, Object>();
+		ProductVO productVO = null;
 		Product productBean = productService.GetEntityById(Product.class, id);
-		ProductVO productVO = new ProductVO(productBean);
+		if(null!=productBean)
+			productVO = new ProductVO(productBean);
 		map.put("product",productVO);
 		return map;
 	}
@@ -469,9 +475,6 @@ ServletContextAware {
 			return "redirect:/font/error.jsp?";
 		}
 		productBean.setImgthree(saveUrl);
-		
-		
-		
 		ProductSell productSellBean = new ProductSell();
 		productSellBean.setSellMethodBean(sellMethodService.GetEntityById(SellMethod.class, sellid));
 		productSellBean.setProductBean(productBean);
@@ -480,16 +483,25 @@ ServletContextAware {
 		return "redirect:/font/success.jsp?successid=2";
 		
 	}
-	
-	
 	/**
-	 * 
+	 * 检验权限后进入修改页面
+	 * @param useridtoken
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(params="enterAlertProduct")
+	public String CheckLoginEnterAlertProduct(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
+			@RequestParam(value="id")Integer id){
+		return "redirect:/font/AlertProduct.jsp?id="+id;
+	}
+	/**
+	 * 修改商品详情
 	 * @param useridtoken
 	 * @param request
 	 * @param file
 	 * @return
 	 */
-	@RequestMapping(params="method=AlertProduct")
+	@RequestMapping(params="method=checkAlertProduct")
 	public String CheckLoginAlertProduct(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
 			HttpServletRequest request,@RequestParam(value="id")Integer id,@RequestParam(value = "imgurl", required = false) MultipartFile file,@RequestParam(value = "imgone", required = false) MultipartFile imgone,
 			@RequestParam(value = "imgtwo", required = false) MultipartFile imgtwo,@RequestParam(value = "imgthree", required = false) MultipartFile imgthree,
@@ -498,8 +510,8 @@ ServletContextAware {
 			@RequestParam(value="content")String content){
 		Product productBean = productService.GetEntityById(Product.class, id);
 		try {
-			Customer customerBean = customerService.getCustomerByUserId(CheckTokenTool.GetUserid(useridtoken));
-			productBean.setArtistBean(new Artist(customerBean));
+			Artist artist = artistService.getArtistByUserId(CheckTokenTool.GetUserid(useridtoken));
+			productBean.setArtistBean(artist);
 		} catch (Exception e2) {
 			e2.printStackTrace();
 			return "redirect:/font/error.jsp?";
@@ -523,7 +535,8 @@ ServletContextAware {
 		    return "redirect:/font/error.jsp?";
 		}  
 		productBean.setContent(content);
-		productBean.setProductTypeBean(productTypeService.GetEntityById(ProductType.class, typeid));
+		ProductType productType = productTypeService.GetEntityById(ProductType.class, typeid);
+		productBean.setProductTypeBean(productType);
 		
 		String ext ="";
 		String filePath = servletContext.getRealPath("/") + "avatorupload/";
@@ -531,7 +544,7 @@ ServletContextAware {
 		String newfilename = System.currentTimeMillis() + ext;
 		String PathAndName = filePath + newfilename;
 		
-		if(!(null==file)){
+		if(!(file.isEmpty())){
 			System.out.println(filePath);
 			File filedir = new File(filePath);
 			if (!filedir.exists()){
@@ -550,7 +563,7 @@ ServletContextAware {
 			}
 			productBean.setImgurl(saveUrl);
 		}
-		if(!(null==imgone)){
+		if(!(imgone.isEmpty())){
 			ext = imgone.getOriginalFilename().substring(imgone.getOriginalFilename().lastIndexOf("."));
 			newfilename = System.currentTimeMillis() + ext;
 			PathAndName = filePath + newfilename;
@@ -564,7 +577,7 @@ ServletContextAware {
 			}
 			productBean.setImgone(saveUrl);
 		}
-		if(!(null==imgtwo)){
+		if(!(imgtwo.isEmpty())){
 			ext = imgtwo.getOriginalFilename().substring(imgtwo.getOriginalFilename().lastIndexOf("."));
 			newfilename = System.currentTimeMillis() + ext;
 			PathAndName = filePath + newfilename;
@@ -578,7 +591,7 @@ ServletContextAware {
 			}
 		}
 		
-		if(!(null==imgthree)){
+		if(!(imgthree.isEmpty())){
 			productBean.setImgtwo(saveUrl);
 			ext = imgthree.getOriginalFilename().substring(imgthree.getOriginalFilename().lastIndexOf("."));
 			newfilename = System.currentTimeMillis() + ext;
@@ -600,6 +613,7 @@ ServletContextAware {
 		productBean.setProductSellBean(productSellBean);
 		productService.AddBean(productBean);
 		return "redirect:/font/success.jsp?successid=2";
-		
 	}
+	
+	
 }
