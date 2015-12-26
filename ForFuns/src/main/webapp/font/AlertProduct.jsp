@@ -380,6 +380,12 @@ function getProductInfo(productid){
 				var typename = json.typename;
 				$('#typeselect').val(typeid);
 				$('#sellmethodselect').val(methodid);
+				
+				if(situation==1||situation==3){
+					$('.starttime').hide();
+					$('.endtime').hide();
+					$('.sellmethod').hide();
+				}				
 			}else{
 				location.href="<%=basePath%>font/error.jsp";
 			}
@@ -504,10 +510,10 @@ $(function(){
 		<!-- <p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;商品类别不能为空</p> -->
 	</div>
 
-	<div class="row password_label">
+	<div class="row password_label sellmethod">
 		<p>出售方式：</p>
 	</div>
-	<div class="row password_input">
+	<div class="row password_input sellmethod">
 		<select class="col-xs-12 selection" id="sellmethodselect" name="sellid">
 			<option class="col-xs-12 option1">请选择</option>
 			<option class="col-xs-12 option1">类别1</option>
@@ -519,10 +525,10 @@ $(function(){
 		<!-- <p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;出售方式不能为空</p> -->
 	</div>
 
-	<div class="row password_label">
+	<div class="row password_label starttime" >
 		<p>上架时间：</p>
 	</div>
-	<div class="row password_input">
+	<div class="row password_input starttime">
 		<div class="demo">
 			<div class="lie"><input id="beginTime" class="col-xs-12 kbtn" name="starttime"/></div>
 		</div>
@@ -532,10 +538,10 @@ $(function(){
 		<p id="errorstarttime"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;<span id="starttimeerror">上架时间不能为空</span></p>
 	</div>
 
-	<div class="row password_label">
+	<div class="row password_label endtime">
 		<p>下架时间：</p>
 	</div>
-	<div class="row password_input">
+	<div class="row password_input endtime">
 		<div class="demo">
 			<div class="lie"><input id="beginTime2" class="col-xs-12 kbtn" name="endtime"/></div>
 		</div>

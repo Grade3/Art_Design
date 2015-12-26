@@ -607,11 +607,10 @@ ServletContextAware {
 			productBean.setImgthree(saveUrl);
 		}
 		
-		ProductSell productSellBean = new ProductSell();
+		ProductSell productSellBean = productBean.getProductSellBean();
 		productSellBean.setSellMethodBean(sellMethodService.GetEntityById(SellMethod.class, sellid));
-		productSellBean.setProductBean(productBean);
 		productBean.setProductSellBean(productSellBean);
-		productService.AddBean(productBean);
+		productService.UpdataBean(productBean);
 		return "redirect:/font/success.jsp?successid=2";
 	}
 	
