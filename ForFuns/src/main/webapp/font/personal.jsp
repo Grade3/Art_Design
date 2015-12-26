@@ -66,6 +66,7 @@ function GetUser()
 		data:{customerid:id},
 		success:function(json){
 			var customer = json.customer;
+			var id = customer.id;
 			var userid = customer.userid;
 			var username = customer.name;
 			var personnumber = customer.personnumber;
@@ -73,9 +74,10 @@ function GetUser()
 			var realname = customer.realname;
 			var avator = customer.avator;
 			var isartist = customer.isartist;
-			
-			if (isartist == "0")
+			if (isartist == "1")
 			{
+				$('.beartist').html("查看我的主页");
+				$('.beartist').attr("href","<%=basePath%>font/artistHome.jsp?id="+id);
 				//$('#showme_div').hide();
 				//$('#advantage_div').hide();
 			}

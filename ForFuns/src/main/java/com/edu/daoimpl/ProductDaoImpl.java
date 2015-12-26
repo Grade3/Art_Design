@@ -70,8 +70,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements IProductDao 
 			
 			//以下
 			//函数未完成
-			hql = "select temp from " + Product.class.newInstance().getClass().getName()
-					+ " temp inner join temp.productType type  where temp.productSell.sellMethod.id = ? and type.id=? and ( situation = 1 or situation = 0 )";
+			hql = "select temp from Product temp inner join temp.productTypeBean type  where temp.productSellBean.sellMethodBean.id = ? and type.id=? and ( situation = 1 or situation = 0 )";
 			System.out.println(hql);
 			Query query = getSession().createQuery(hql);
 			query.setInteger(0, methodid);
