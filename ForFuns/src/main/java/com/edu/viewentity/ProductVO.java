@@ -29,8 +29,8 @@ public class ProductVO {
 	private Integer situation;//状态  0：未上架   1：上架中  2：已下架  3：已出售
 	private Integer methodid;//出售方式id
 	private String methodname;//出售方式名称
-	private Integer typeid;//出售方式id
-	private String typename;//出售方式名称
+	private Integer typeid;//分类id
+	private String typename;//分类名称
 	public ProductVO(Product productBean) {
 		super();
 		this.id = productBean.getId();

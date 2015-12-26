@@ -9,19 +9,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<title>ArtistManage</title>
-	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
-	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="../css/artistManage.css">
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.js"></script>
-	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer2.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/artistManage.css">
+	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
+	
+	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 </head>
 <body>
 <a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
-<script src="../js/lanrenzhijia.js"></script>
+<script src="<%=basePath%>js/lanrenzhijia.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.7.1.min.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -36,18 +38,115 @@ $(function(){
 		$("html,body").animate({scrollTop:0},500);
 	});
 });
+
+function GetAllMyProduct(page,pageSize){
+	$.ajax({
+		type:'post',
+		asycn:false,
+		url:'<%=basePath%>product.do?method=GetArtistProducts',
+		data:{page:page,pageSize:pageSize},
+		success:function(json){
+			var products = json.list;
+			var total = json.total;
+			globaltotal = total;
+			if(products.length>0){
+				var body = "";
+				var tempbody ="";
+				for(var i=0;i<products.length;i++){
+					var id = products[i].id;
+					var imgurl = products[i].imgurl;
+					var name = products[i].name;
+					var money = products[i].initmoney;
+					var authorname = products[i].authorname;
+					var typename = products[i].typename;
+					var timestart = myformatter(products[i].timestart);
+					var endtime = myformatter(products[i].timeout);
+					var methodname = products[i].methodname;
+					var situation =products[i].situation;
+					var link = "<%=basePath%>product.do?method=enterAlertProduct&id="+id;
+					var detaillink = "<%=basePath%>font/goodsdetail.jsp?productid="+id;
+					if(situation==0){
+						situation = "未上架";
+					}else if(situation==1){
+						situation = "上架中";
+					}else if(situation==2){
+						situation = "已下架";
+					}else if(situation==3){
+						situation = "已出售";
+					}
+					tempbody+="<div class='col-md-6 goods_two'>"
+					+"<div class='col-md-6 goods pic'>"
+					+"<a href='"+detaillink+"' target='_blank'><img src='"+imgurl+"' class='good_item'></a>"
+					+"</div>"
+					+"<div class='col-md-6 goods detail'>"
+					+"<div class='good_name'>"
+					+"<p class='name'>"+name+"</p>"
+					+"<p class='other'>分类："+typename+"</p>"
+					+"<p class='other'>上架时间："+timestart+"</p>"
+					+"<p class='other'>下架时间："+endtime+"</p>"
+					+"<p class='other'>"+methodname+" - "+situation+"</p>"
+					+"<p class='price'>当前价格：￥"+money+"</p>"
+					+"<a href='"+link+"' class='col-xs-12 readmore operation oper1' target='_blank'>修改</a>"
+					+"</div>"
+					+"</div>"
+					+"</div>";
+					}
+					body+=tempbody;
+				if(page*pageSize <globaltotal){
+					body +="<div class='col-xs-12 learn_more'><p>查看更多</p></div>";
+				}
+				$('#goodlist').append(body);
+				
+				
+				var width = $(".good_item").width();
+				var height = width/3*3;
+		  		$(".good_item").height(height);
+		  		var pic_h = $(".pic").height()+25;
+		  		$(".detail").height(pic_h);
+
+			  	var width = $(".userpic").width();
+				var height = width;
+				$(".userpic").height(height);
+
+
+				var title_w = $(window).width();
+				$(".title_bar").width(title_w);
+			}else{
+				var none = "";
+				none +="<div class='col-xs-12 none'><p>暂无此类商品</p></div>";
+				$('#goodlist').html(none);
+			}
+		},error:function(){
+		},
+	});
+};
 </script>
 
 <script type="text/javascript">
 $(document).ready(function(){
+	var customerUserid = getCookieUserid();
+	if(null==customerUserid)
+		location.href="<%=basePath%>font/Login.jsp";
+	var globaltotal = 0;
+	var page = 1 ;
+	var pageSize = 6;
+	
+	GetAllMyProduct(page,pageSize);
+	
+	//查看更多点击事件
+	$('.learn_more').live('click',function(){
+		 page = page +1 ;
+		 GetAllMyProduct(page,pageSize);
+		 $(this).hide();
+ 	});
 	$("#menu").click(function(){
   		$("#menu-xs").toggle(300);
   	});
 
 	var width = $(".good_item").width();
-	var height = width/2.5*3;
+	var height = width/3*3;
   	$(".good_item").height(height);
-  	var pic_h = $(".pic").height()
+  	var pic_h = $(".pic").height()+12;
   	$(".detail").height(pic_h);
 
   	var width = $(".userpic").width();
@@ -59,9 +158,9 @@ $(document).ready(function(){
 
   	$(window).resize(function() {
   		var width = $(".good_item").width();
-		var height = width/2.5*3;
+		var height = width/3*3;
   		$(".good_item").height(height);
-  		var pic_h = $(".pic").height()
+  		var pic_h = $(".pic").height();
   		$(".detail").height(pic_h);
 
 	  	var width = $(".userpic").width();
@@ -150,11 +249,11 @@ $(document).ready(function(){
 		<div class="container">
 
 			<div class="row artwork">
-				<div class="col-xs-12 good_four">
+				<div class="col-xs-12 good_four" id="goodlist">
 
-					<div class="col-md-6 goods_two">
+					<%-- <div class="col-md-6 goods_two">
 						<div class="col-md-6 goods pic">
-							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+							<a href="goodsdetail.html" target="_blank"><img src="<%=basePath%>image/bg_login1.jpg" class="good_item"></a>
 						</div>
 						<div class="col-md-6 goods detail">
 							<div class="good_name">
@@ -173,7 +272,7 @@ $(document).ready(function(){
 
 					<div class="col-md-6 goods_two">
 						<div class="col-md-6 goods pic">
-							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+							<a href="goodsdetail.html" target="_blank"><img src="<%=basePath%>image/bg_login1.jpg" class="good_item"></a>
 						</div>
 						<div class="col-md-6 goods detail">
 							<div class="good_name">
@@ -195,7 +294,7 @@ $(document).ready(function(){
 
 					<div class="col-md-6 goods_two">
 						<div class="col-md-6 goods pic">
-							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+							<a href="goodsdetail.html" target="_blank"><img src="<%=basePath%>image/bg_login1.jpg" class="good_item"></a>
 						</div>
 						<div class="col-md-6 goods detail">
 							<div class="good_name">
@@ -214,7 +313,7 @@ $(document).ready(function(){
 
 					<div class="col-md-6 goods_two">
 						<div class="col-md-6 goods pic">
-							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+							<a href="goodsdetail.html" target="_blank"><img src="<%=basePath%>image/bg_login1.jpg" class="good_item"></a>
 						</div>
 						<div class="col-md-6 goods detail">
 							<div class="good_name">
@@ -234,7 +333,7 @@ $(document).ready(function(){
 
 					<div class="col-md-6 goods_two">
 						<div class="col-md-6 goods pic">
-							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+							<a href="goodsdetail.html" target="_blank"><img src="<%=basePath%>image/bg_login1.jpg" class="good_item"></a>
 						</div>
 						<div class="col-md-6 goods detail">
 							<div class="good_name">
@@ -253,7 +352,7 @@ $(document).ready(function(){
 					
 					<div class="col-md-6 goods_two">
 						<div class="col-md-6 goods pic">
-							<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+							<a href="goodsdetail.html" target="_blank"><img src="<%=basePath%>image/bg_login1.jpg" class="good_item"></a>
 						</div>
 						<div class="col-md-6 goods detail">
 							<div class="good_name">
@@ -272,7 +371,7 @@ $(document).ready(function(){
 
 					<div class="col-xs-12 learn_more">
 						<p>查看更多</p>
-					</div>
+					</div> --%>
 				</div>
 			</div>
 			

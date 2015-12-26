@@ -489,7 +489,7 @@ ServletContextAware {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(params="enterAlertProduct")
+	@RequestMapping(params="method=enterAlertProduct")
 	public String CheckLoginEnterAlertProduct(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
 			@RequestParam(value="id")Integer id){
 		return "redirect:/font/AlertProduct.jsp?id="+id;
@@ -614,5 +614,26 @@ ServletContextAware {
 		return "redirect:/font/success.jsp?successid=2";
 	}
 	
-	
+	/**
+	 * 获取艺术家的分页商品
+	 * @param useridtoken
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(params="method=GetArtistProducts")
+	public Map<String, Object> getArtistProduct(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
+			@RequestParam(value="page")Integer page,@RequestParam(value="pageSize")Integer pageSize){
+		Map<String , Object> map = new HashMap<String, Object>();
+		String customerUserid = CheckTokenTool.GetUserid(useridtoken);
+		if(null==customerUserid)
+			return null;
+		String artistid = customerService.getCustomerIdByUserid(customerUserid);
+		List<Product> list = productService.getArtistProduct(page, pageSize, Integer.parseInt(artistid));
+		Integer total = productService.getArtistProductTotal(Integer.parseInt(artistid));
+		map.put("list", ProductVO.ChangeListProductToProductVo(list));
+		map.put("total", total);
+		return map;
+	}
 }
