@@ -52,7 +52,7 @@ public class ProductProxy {
 		return sellStrategy.SellProduct(productBean,customerbean,money,params)+"";
 	}
 
-	public ProductProxy(Product productBean) {
+	/*public ProductProxy(Product productBean) {
 		super();
 		this.productBean = productBean;
 		int methodid = productBean.getProductSellBean().getSellMethodBean().getId();
@@ -64,7 +64,7 @@ public class ProductProxy {
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	public ProductProxy() {
 		super();
