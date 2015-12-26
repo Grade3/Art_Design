@@ -46,3 +46,22 @@ body
 {
 	/*color: #ff5d56;*/
 }
+
+@media(max-width: 992px){
+.head1
+{
+	position: fixed;
+	background-color: #eee;
+	box-shadow: 0 0 10px rgba(149,149,149,0.5);
+	z-index: 99999;
+	padding: 0.5em 2em;
+}
+
+ul.support li span, ul.support-right li a
+{
+	font-size: 1.5em;
+	text-decoration: none;
+	color: #333;
+}
+}
+

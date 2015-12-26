@@ -7,11 +7,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<title>PayFor</title>
 	<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="../css/payfor.css">
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
@@ -116,16 +119,123 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					var typename = product.typename;
 					var timestart = myformatter(product.timestart);
 					var timeout = myformatter(product.timeout);
+					var authorid = product.authorid;
 					$('#productid').val(id);
 					$('#productname').html(name);
-					$('#productname').attr('href','goodsdetail.jsp?productid='+id);
+					$('#goodsdetail').attr('href','<%=basePath%>font/goodsdetail.jsp?productid='+id);
 					$('#money').html(money);
 					$('#authorname').html(authorname);
+					$('#productimg').attr('src',imgurl);
+					$('#artistlink').attr('href','<%=basePath%>font/artistHome.jsp?id='+authorid);
+					var width = $(".good_item").width();
+					var height = width/4*3;
+				  	$(".good_item").height(height);
+				  	
+				  	
+				  	var pic_w = $(".order_pic").width();
+					var pic_h = pic_w;
+					$(".order_pic").height(pic_h);
+
+					var btn_remove_h = $(".add_div").height();
+					$(".add_remove").height(btn_remove_h);
+
+					var add_hidden_w = $(".add_new").width();
+					$(".add_hidden").width(add_hidden_w);
 				},error:function(){
 					
 				}
 			});
 		}
+		
+		//获取地址列表
+		function getAddress(customerUserId){
+			$.ajax({
+				type:'post',
+				url:'<%=basePath%>address.do?method=getAddressByCustomerid',
+				data:{customerUserid:customerUserId},
+				success:function(json){
+					var body = "";
+					body += "<div class='row order_artist order_add'>"
+						+"<p class='col-xs-12 artist_name'><span class='glyphicon glyphicon-link' aria-hidden='true'></span>&nbsp;&nbsp;收货信息&nbsp;&nbsp;<span class='glyphicon glyphicon-menu-right partten1' aria-hidden='true'></span></p>"
+						+"</div>";
+					if(json.length>0){
+						for(var i=0;i<json.length;i++){
+							var receiver = json[i].receiver;
+							var address = json[i].address;
+							var telephone = json[i].telephone;
+							var id = json[i].id;
+							body += "<div class='row order_add_1'>"
+								+"<div class='radio add_radio'>"
+						  			+"<label>";
+						  			if(i==0)
+						  				body +="<input type='radio' name='addressid' id='blankRadio1' value='"+id+"' checked>";
+						  			else
+						  				body +="<input type='radio' name='addressid' id='blankRadio1' value='"+id+"'>";
+						  			body+="</label>"
+						  		+"</div>"
+						  			+"<div class='add_info'>"
+						  			+"<p>收货人："+receiver+"</p>"
+						  			+"<p>地址："+address+"</p>"
+						  			+"<p>电话："+telephone+"</p>"
+						  		+"</div>"
+						  	+"</div>";
+						}
+						
+					}
+					body+="<div class='row add_new'>"
+					+"<button class='new_btn' onclick='addNewOne()' type='button'><span class='glyphicon glyphicon-plus-sign' aria-hidden='true'></span>&nbsp;&nbsp;新增地址</button>"
+					+"</div>";
+					$('#addresslist').html(body);
+				},error:function(){
+					
+				}
+			});
+		};
+		function addNewOne(){
+			$(".add_hidden_bg").show();
+			$(".add_hidden").show();
+		}
+
+		function submitNewOne(){
+			$(".add_hidden_bg").hide();
+			$(".add_hidden").hide();
+		}
+		function validate(obj){  
+		     var reg = new RegExp("^[0-9]*$");  
+			 if(!reg.test(obj)){  
+			     alert("请输入数字!");  
+			     return false;
+			 }  
+			 return true;
+		}
+		function addAddress(address,telephone,receiver){
+			$.ajax({
+				type:'post',
+				asycn:false,
+				url:'<%=basePath%>address.do?mehtod=addCustomerAddress',
+				data:{address:address,telephone:telephone,receiver:receiver},
+				success:function(json){
+					if(json==-1){
+						location.href="<%=basePath%>font/Login.jsp";
+					}else if(json==0){
+						alert("添加失败");
+					}else if(json==1){
+						alert("添加成功");
+						$(".add_hidden_bg").hide();
+						$(".add_hidden").hide();
+						$('#AddReceiver').val("");
+						$('#AddAddress').val("");
+						$('#AddTelephone').val("");
+						var customerUserid = getCookieUserid();
+						if(null==customerUserid)
+							location.href="<%=basePath%>font/Login.jsp";
+						getAddress(customerUserid);
+					} 
+				},error:function(){
+					alert("fail");
+				}
+			});
+		};
 		$(document).ready(function(){
 			$('#usernameaction').hide();
 			$('#loginoutaction').hide();
@@ -136,28 +246,72 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			checkOrder(productid);
 			getProductById(productid);
 			CheckUser();
+
+			var customerUserid = getCookieUserid();
+			if(null==customerUserid)
+				location.href="<%=basePath%>font/Login.jsp";
+			getAddress(customerUserid);
+			
 			$("#menu").click(function(){
 			 $("#menu-xs").toggle(300);
 			});
 			var width = $(".good_item").width();
 			var height = width/4*3;
 			$(".good_item").height(height);
+			
+			
+			var pic_w = $(".order_pic").width();
+			var pic_h = pic_w;
+			$(".order_pic").height(pic_h);
+
+			var btn_remove_h = $(".add_div").height();
+			$(".add_remove").height(btn_remove_h);
+
+			var add_hidden_w = $(".add_new").width();
+			$(".add_hidden").width(add_hidden_w);
+			
 
 			$(window).resize(function() {
 			  	var width = $(".good_item").width();
 				var height = width/4*3;
 			  	$(".good_item").height(height);
+			  	
+			  	
+			  	var pic_w = $(".order_pic").width();
+				var pic_h = pic_w;
+				$(".order_pic").height(pic_h);
+
+				var btn_remove_h = $(".add_div").height();
+				$(".add_remove").height(btn_remove_h);
+
+				var add_hidden_w = $(".add_new").width();
+				$(".add_hidden").width(add_hidden_w);
 			});
 			$(".sub").show();
 			$(".box_active a").click(function(){
 				$(".sub").slideToggle("slow");
 			});
-			$('.readmore').click(function(){
-				
-				if(validate()){
-					$('#orderform').submit();	
-				}else{
-					return ;
+			$('#payfor').click(function(){
+				$('#orderform').submit();	
+			});
+			$('#addsubmit').click(function(){
+				var receiver = $('#AddReceiver').val();
+				var address = $('#AddAddress').val();
+				var telephone = $('#AddTelephone').val();
+				if(""==receiver || undefined == receiver || null ==receiver){
+					alert("收货人不得为空");
+					return;
+				}
+				if(""==address || undefined == address|| null==address){
+					alert("地址不得为空");
+					return;
+				}
+				if(""==telephone || undefined == telephone|| null==telephone){
+					alert("联系电话不得为空");
+					return;
+				}
+				if(validate(telephone)){
+					addAddress(address,telephone,receiver);
 				}
 			});
 		});
@@ -168,145 +322,113 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<a href="javascript:;" class="lanrenzhijia_top"></a>
-	<div class="header-top">
-			<div class="container">
-				<div class="statu_bar">
-					<ul class="support">
-						<li ><span ><i class="item_message"> </i>471979617@qq.com</span></li>
-						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
-					</ul>
-					<ul class="support-right">
-						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
-						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
-						<li id="loginoutaction"><a href="<%=basePath %>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
-					</ul>
-				</div>
-			</div>
-			<div class="header-bottom">
-				<div class="container">
-					<div class="logo">
-						<h1><a href="home.html">ArtCustomize</a></h1>
-					</div>
-					<div class="top-nav visible-xs visible-sm">
-						<ul class="megamenu skyblue">
-							<li><a href="home.jsp" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
-							<li><a href="goodslist.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
-							<li><a href="home.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
-							<li><a href="artistlist.jsp"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
-							<li><a href="newslist.jsp"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
-							<li><a href="home.html"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
-						</ul>
-					</div>
-					<div class="top-nav-xs visible-md">
-						<div id="menu">
-							<p>菜  单</p>
-						</div>
-						<div id="menu-xs">
-							<ul>
-								<li><a href="home.jsp">首页</a></li>
-								<li><a href="goodslist.jsp">成品</a></li>
-								<li><a href="home.html">DIY</a></li>
-								<li><a href="artistlist.jsp">艺术家</a></li>
-								<li><a href="newslist.jsp">资讯中心</a></li>
-								<li><a href="home.html">联系我们</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="top-nav visible-lg">
-						<ul class="megamenu skyblue">
-							<li><a href="home.jsp">首页</a></li>
-							<li><a href="goodslist.jsp">成品</a></li>
-							<li><a href="home.html">DIY</a></li>
-							<li><a href="artistlist.jsp">艺术家</a></li>
-							<li><a href="newslist.jsp">资讯中心</a></li>
-							<li><a href="home.html">联系我们</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	<div class="container">
-		<h6 class="location"><a href="home.html">首页</a> <i> </i> <font id="subnava">提交订单 </font></h6>
-	</div>
-
-
-	<div class="bar_news">
-		<h2 id="subtitle">提交订单</h2>
-	</div>
-
-
-	<div class="content">
-		<div class="container">
-			<div class="col-xs-offset-1 col-xs-10 good_four">
-				<div class="row info1">
-					<p class="col-xs-3 title_person">商品信息</p>
-				</div>
-
-				<div class="col-xs-12 row goods1">
-					<a href="goodsdetail.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item col-xs-3"></a>
-					<div class="col-xs-3 name">
-						<p class="name1 ">商品名称</p>
-						<p class="name2"><a href="#" target="_blank" id="productname">商品名称商品名称商品名称商品名称</a></p>
-					</div>				
-					<div class="col-xs-3 name">
-						<p class="name1 ">价格</p>
-						<p class="name2" id="money">￥99.00</p>
-					</div>
-					<div class="col-xs-3 name">
-						<!-- <p class="name1 visible-lg visible-md">艺术家</p> -->
-						<p class="name1 ">艺术家</p>
-						<p class="name2"><a href="artistHome.html" target="_blank" id="authorname">艺术家艺术家艺术家</a></p>
-					</div>
-				</div>
-				<form action="<%=basePath%>product.do?method=AddOrder" method="post" id="orderform">
-					<div class="row info1">
-						<p class="col-xs-3 title_person1">送货信息</p>
-					</div>
 	
-					<div class="col-xs-12 row goods1">
-						<input type="hidden" name="productid" id="productid">
-						<div class="col-xs-12 row">
-							<p class="col-xs-3 label1">联系电话</p>
-							<input class="col-xs-offset-1 col-xs-8 label2" type="text" name="telephone" id="telephone"/>
-						</div>
-						<div class="col-xs-12 row label0">
-							<p class="col-xs-3 label1">收货地址</p>
-							<input class="col-xs-offset-1 col-xs-8 label2" type="text" name="address" id="address"/>
-						</div>					
-					</div>
-					<div class="col-xs-12 row buy visible-lg visible-md">
-						<a href="#" class="col-xs-offset-3 col-xs-6 readmore">提交订单</a>
-					</div>
-					<div class="col-xs-12 row buy visible-sm visible-xs">
-						<a href="#" class="col-xs-12 readmore">提交订单</a>
-					</div>
-				</form>
+<div class="container-fluid header">
+	<div class="title_bar">
+		<p class="back_btn"><span class="glyphicon glyphicon-menu-left partten" aria-hidden="true"></span></p>
+		<p><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>&nbsp;&nbsp;现在购买</p>
+	</div>
+</div>
+
+<div class="container-fluid mainer">
+	<div class="row order_div">
+		<a href="artistHome.html" id="artistlink">
+			<div class="row order_artist">
+				<p class="col-xs-12 artist_name"><span class="glyphicon glyphicon-link" aria-hidden="true"></span>&nbsp;&nbsp;<span id="authorname">艺术家名称</span>&nbsp;&nbsp;<span class="glyphicon glyphicon-menu-right partten1" aria-hidden="true"></span></p>
 			</div>
-			
+		</a>
+		<a href="OrderDetail.html" id="goodsdetail">
+			<div class="row order_info">
+				<img class="col-xs-3 order_pic" src="../image/good.jpg" id="productimg">
+				<div class="col-xs-9 row order_label">
+					<div class="row label1">
+						<p class="col-xs-8 order_name" id="productname">订单商品名称订单商品名称</p>
+						<p class="col-xs-4 order_price" id="money">￥89.00</p>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+	
+	
+	<form action="<%=basePath%>product.do?method=AddOrder" method="post" id="orderform">
+	<input type="hidden" name="productid" value="" id="productid">
+	<div class="row order_div" id='addresslist'>
+		<div class="row order_artist order_add">
+			<p class="col-xs-12 artist_name"><span class="glyphicon glyphicon-link" aria-hidden="true"></span>&nbsp;&nbsp;收货信息&nbsp;&nbsp;<span class="glyphicon glyphicon-menu-right partten1" aria-hidden="true"></span></p>
+		</div>
+		<div class="row order_add_1">
+			<div class="radio add_radio">
+	  			<label>
+	    			<input type="radio" name="blankRadio" id="blankRadio1" value="option1">
+	  			</label>
+			</div>
+			<div class="add_info">
+				<p>收货人：孔日天</p>
+				<p>地址：福建省厦门市思明区厦门大学</p>
+				<p>电话：15659992000</p>
+			</div>
+		</div>
+		<div class="row order_add_1">
+			<div class="radio add_radio">
+	  			<label>
+	    			<input type="radio" name="blankRadio" id="blankRadio1" value="option1">
+	  			</label>
+			</div>
+			<div class="add_info">
+				<p>收货人：孔日天</p>
+				<p>地址：福建省厦门市思明区厦门大学</p>
+				<p>电话：15659992000</p>
+			</div>
+		</div>
+		<div class="row order_add_1">
+			<div class="radio add_radio">
+	  			<label>
+	    			<input type="radio" name="blankRadio" id="blankRadio1" value="option1">
+	  			</label>
+			</div>
+			<div class="add_info">
+				<p>收货人：孔日天</p>
+				<p>地址：福建省厦门市思明区厦门大学</p>
+				<p>电话：15659992000</p>
+			</div>
+		</div>
+		<div class="row add_new">
+			<button type="button"  class="new_btn" onclick="addNewOne()"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>&nbsp;&nbsp;新增地址</button>
 		</div>
 	</div>
-
-
-	<div class="bottom-grid1">
-		<div class="fit1">
-			<h3>HAPPY SHOPPING</h3>
-			<p>Lorem Ipsum sit amet consectuer adipiscing elitsed diam nonummy nibh euismod</p>
-		</div>
+	
+	<div class="row add_new">
+		<button type="submit" class="new_btn1" id="payfor">确认购买</button>
 	</div>
+	
+	</form>
+</div>
+	
+				
+					
+				
 
 
-
-	<div class="footer">
-		<div class="container footer-div">
-			<div class="col-md-12 footer-middle">
-				<p>公司简介：这里是公司简介公司简介公司简介公司简介公司简介公司简介</p>
-				<p>地址：福建省厦门市思明区422号厦门大学</p>
-			</div>
-			<div class="col-md-12 company">
-				<p class="footer-class">Copyright &copy; 2015.Company name All rights reserved.</p>
-			</div>
+	<div class="row add_hidden_bg"></div>
+	<div class="row add_hidden">
+		<div class="row add_name1">
+			<button class="col-xs-offset-11 col-xs-1 new_submit1" onclick="submitNewOne()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+		</div>
+		<div class="row add_name">
+			<p>收货人：</p>
+			<input type="text" class="col-xs-12" id="AddReceiver"/>
+		</div>
+		<div class="row add_name">
+			<p>地址：</p>
+			<input type="text" class="col-xs-12" id="AddAddress"/>
+		</div>
+		<div class="row add_name">
+			<p>电话：</p>
+			<input type="text" class="col-xs-12" id="AddTelephone"/>
+		</div>
+		<div class="row add_name">
+			<button class="col-xs-12 new_submit" id="addsubmit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;&nbsp;提交</button>
 		</div>
 	</div>
 </body>
