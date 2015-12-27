@@ -15,6 +15,8 @@ public class CustomerVO {
 	private String personnumber;
 	private String realname;
 	private Integer isartist;
+	private Double balance;
+	
 	public CustomerVO(Integer id, String name, String avator) {
 		super();
 		this.id = id;
@@ -31,6 +33,7 @@ public class CustomerVO {
 		this.personnumber = customerBean.getPersonnumber();
 		this.isartist = customerBean.getIsartist();
 		this.realname = customerBean.getRealname();
+		this.balance=customerBean.getBalance();
 	}
 	
 	public CustomerVO(Artist customerBean) {
@@ -130,6 +133,12 @@ public class CustomerVO {
 	}
 	public void setIsartist(Integer isartist) {
 		this.isartist = isartist;
+	}
+	public Double getBalance() {
+		return balance;
+	}
+	public void setBalance(Double balance) {
+		this.balance = balance;
 	}
 	
 }
