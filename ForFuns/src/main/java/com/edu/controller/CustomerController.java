@@ -57,22 +57,18 @@ import com.edu.viewentity.CustomerVO;
  */
 @Controller
 @RequestMapping("/customer.do")
-public class CustomerController implements ServletConfigAware,
-		ServletContextAware
-{
+public class CustomerController implements ServletConfigAware, ServletContextAware {
 	private ServletContext servletContext;
 
 	@Override
-	public void setServletContext(ServletContext arg0)
-	{
+	public void setServletContext(ServletContext arg0) {
 		this.servletContext = arg0;
 	}
 
 	private ServletConfig servletConfig;
 
 	@Override
-	public void setServletConfig(ServletConfig arg0)
-	{
+	public void setServletConfig(ServletConfig arg0) {
 		this.servletConfig = arg0;
 	}
 
@@ -87,17 +83,12 @@ public class CustomerController implements ServletConfigAware,
 	 * @return
 	 */
 	@RequestMapping(params = "method=login")
-	public String login(
-			@RequestParam(value = "userid", required = false) String userid,
-			@RequestParam(value = "password", required = false) String password,
-			HttpServletRequest request, HttpServletResponse response,
-			@CookieValue(value = "useridtoken", required = false) String token)
-	{
-		if (null != token)
-		{
+	public String login(@RequestParam(value = "userid", required = false) String userid,
+			@RequestParam(value = "password", required = false) String password, HttpServletRequest request,
+			HttpServletResponse response, @CookieValue(value = "useridtoken", required = false) String token) {
+		if (null != token) {
 			// System.out.println("get id");
-			if (null == userid)
-			{
+			if (null == userid) {
 				System.out.println(token);
 				String[] parts = token.split("\\&");
 				System.out.println(parts.length);
@@ -113,14 +104,11 @@ public class CustomerController implements ServletConfigAware,
 		user.setUserid(userid);
 		System.out.println(user.toString());
 		boolean loginResult = customerService.isExist(user);
-		if (loginResult)
-		{
+		if (loginResult) {
 			String temp = null;
-			try
-			{
+			try {
 				temp = URLEncoder.encode(MD5Util.convertMD5(userid), "utf-8");
-			} catch (UnsupportedEncodingException e)
-			{
+			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
 			String value = userid + "&" + temp;
@@ -128,8 +116,7 @@ public class CustomerController implements ServletConfigAware,
 			Cookie cookie = new Cookie("useridtoken", value);
 			response.addCookie(cookie);
 			return "redirect:/font/home.jsp";
-		} else
-		{
+		} else {
 			return "redirect:/font/Login.jsp?error=1";
 		}
 	}
@@ -147,16 +134,13 @@ public class CustomerController implements ServletConfigAware,
 	 * @return
 	 */
 	@RequestMapping(params = "method=register")
-	public String register(
-			@RequestParam(value = "userid", required = false) String userid,
+	public String register(@RequestParam(value = "userid", required = false) String userid,
 			@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "realname", required = false) String realname,
 			@RequestParam(value = "telphone", required = false) String telphone,
 			@RequestParam(value = "password", required = false) String password,
-			@RequestParam(value = "personnumber", required = false) String personnumber,
-			HttpServletRequest request, HttpServletResponse response,
-			@CookieValue(value = "token", required = false) String token)
-	{
+			@RequestParam(value = "personnumber", required = false) String personnumber, HttpServletRequest request,
+			HttpServletResponse response, @CookieValue(value = "token", required = false) String token) {
 		// if (null != token) {
 		// if (null == userid) {
 		// System.out.println(token);
@@ -171,20 +155,17 @@ public class CustomerController implements ServletConfigAware,
 		// }
 		Customer user = new Customer();
 		int registFlag = 0;
-		if (userid.equals("") || username.equals("") || realname.equals("")
-				|| telphone.equals("") || personnumber.equals(""))
+		if (userid.equals("") || username.equals("") || realname.equals("") || telphone.equals("")
+				|| personnumber.equals(""))
 			registFlag = 1;
-		if (registFlag == 0)
-		{
+		if (registFlag == 0) {
 			user.setUserid(userid);
-			if (customerService.exist(user))
-			{
+			if (customerService.exist(user)) {
 				registFlag = 3;
 				System.out.println("重名！");
 			}
 		}
-		if (registFlag == 0)
-		{
+		if (registFlag == 0) {
 			user.setUsername(username);
 			user.setPersonnumber(personnumber);
 			user.setRealname(realname);
@@ -196,11 +177,9 @@ public class CustomerController implements ServletConfigAware,
 			customerService.AddBean(user);
 
 			String temp = null;
-			try
-			{
+			try {
 				temp = URLEncoder.encode(MD5Util.convertMD5(userid), "utf-8");
-			} catch (UnsupportedEncodingException e)
-			{
+			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
 			String value = userid + "&" + temp;
@@ -231,19 +210,14 @@ public class CustomerController implements ServletConfigAware,
 	 * @return
 	 */
 	@RequestMapping(params = "method=modify")
-	public String modify(
-			@RequestParam(value = "username", required = false) String username,
+	public String modify(@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "realname", required = false) String realname,
 			@RequestParam(value = "telphone", required = false) String telphone,
-			@RequestParam(value = "personnumber", required = false) String personnumber,
-			HttpServletRequest request, HttpServletResponse response,
-			@CookieValue(value = "useridtoken", required = false) String token)
-	{
+			@RequestParam(value = "personnumber", required = false) String personnumber, HttpServletRequest request,
+			HttpServletResponse response, @CookieValue(value = "useridtoken", required = false) String token) {
 		String userid = null;
-		if (null != token)
-		{
-			if (null == userid)
-			{
+		if (null != token) {
+			if (null == userid) {
 				System.out.println(token);
 				String[] parts = token.split("\\&");
 				System.out.println(parts.length);
@@ -254,17 +228,15 @@ public class CustomerController implements ServletConfigAware,
 		}
 		// CustomerBean user = new CustomerBean();
 		int registFlag = 0;
-		if (userid.equals("") || username.equals("") || realname.equals("")
-				|| telphone.equals("") || personnumber.equals(""))
+		if (userid.equals("") || username.equals("") || realname.equals("") || telphone.equals("")
+				|| personnumber.equals(""))
 			registFlag = 1;
 
-		if (registFlag == 0)
-		{
+		if (registFlag == 0) {
 			// System.out.println("a");
 			System.out.println(customerService.getCustomerIdByUserid(userid));
-			Customer user = customerService.GetEntityById(
-					Customer.class, Integer.valueOf(customerService
-							.getCustomerIdByUserid(userid)));
+			Customer user = customerService.GetEntityById(Customer.class,
+					Integer.valueOf(customerService.getCustomerIdByUserid(userid)));
 			System.out.println(user.toString());
 			// user.setUserid(userid);
 			user.setUsername(username);
@@ -294,22 +266,65 @@ public class CustomerController implements ServletConfigAware,
 	}
 
 	/**
+	 * 充值功能
+	 * 
+	 * @param userid
+	 * @param password
+	 * @param username
+	 * @param realname
+	 * @param telphone
+	 * @param personnumber
+	 * @return
+	 */
+	@RequestMapping(params = "method=addbalance")
+	public String addBalance(@RequestParam(value = "money", required = false) Double money,
+			HttpServletResponse response, @CookieValue(value = "useridtoken", required = false) String token) {
+		String userid = null;
+		if (null != token) {
+			if (null == userid) {
+				System.out.println(token);
+				String[] parts = token.split("\\&");
+				System.out.println(parts.length);
+				String temp = MD5Util.convertMD5(parts[1]);
+				System.out.println(temp);
+				userid = temp;
+			}
+		}
+		
+		// CustomerBean user = new CustomerBean();
+
+		// System.out.println("a");
+		System.out.println(customerService.getCustomerIdByUserid(userid));
+		Customer user = customerService.GetEntityById(Customer.class,
+				Integer.valueOf(customerService.getCustomerIdByUserid(userid)));
+		System.out.println(user.toString());
+		// user.setUserid(userid);
+		double money_b;
+		
+		System.out.println(money);
+		System.out.println(user.getBalance());
+		money_b=user.getBalance()+money;
+		System.out.println(money_b);
+		user.setBalance(money_b);
+		System.out.println(user.toString());
+		customerService.UpdataBean(user);
+
+		return "redirect:/font/balance.jsp";
+
+	}
+
+	/**
 	 * 修改个人头像
 	 * 
 	 * @param file
 	 * @return
 	 */
 	@RequestMapping(params = "method=alertAvator")
-	public String AlertAvator(
-			@RequestParam(value = "file", required = false) MultipartFile file,
-			HttpServletRequest request,
-			@CookieValue(value = "useridtoken", required = false) String token)
-	{
+	public String AlertAvator(@RequestParam(value = "file", required = false) MultipartFile file,
+			HttpServletRequest request, @CookieValue(value = "useridtoken", required = false) String token) {
 		String userid = null;
-		if (null != token)
-		{
-			if (null == userid)
-			{
+		if (null != token) {
+			if (null == userid) {
 				System.out.println(token);
 				String[] parts = token.split("\\&");
 				System.out.println(parts.length);
@@ -323,8 +338,7 @@ public class CustomerController implements ServletConfigAware,
 		String saveUrl = request.getContextPath() + "/avatorupload/";
 		System.out.println(filePath);
 		File filedir = new File(filePath);
-		if (!filedir.exists())
-		{
+		if (!filedir.exists()) {
 			filedir.mkdir();
 		}
 		String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
@@ -332,16 +346,13 @@ public class CustomerController implements ServletConfigAware,
 		String PathAndName = filePath + newfilename;
 		saveUrl = saveUrl + newfilename;
 		File resultFile = new File(PathAndName);
-		try
-		{
+		try {
 			file.transferTo(resultFile);
-		} catch (IOException e1)
-		{
+		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 
-		Customer customerBean = customerService.GetEntityById(
-				Customer.class,
+		Customer customerBean = customerService.GetEntityById(Customer.class,
 				Integer.valueOf(customerService.getCustomerIdByUserid(userid)));
 
 		customerBean.setAvator(saveUrl);
@@ -357,14 +368,11 @@ public class CustomerController implements ServletConfigAware,
 	 * @return
 	 */
 	@RequestMapping(params = "method=checkUserid")
-	public Boolean isExist(
-			@RequestParam(value = "userid", required = false) String userid)
-	{
+	public Boolean isExist(@RequestParam(value = "userid", required = false) String userid) {
 		Customer user = new Customer();
 
 		user.setUserid(userid);
-		if (customerService.exist(user))
-		{
+		if (customerService.exist(user)) {
 			return true;
 		}
 
@@ -379,10 +387,8 @@ public class CustomerController implements ServletConfigAware,
 	 */
 	@RequestMapping(params = "method=addCustomer")
 	@ResponseBody
-	public int JsonAddUser(@RequestParam(value = "data") String data)
-	{
-		try
-		{
+	public int JsonAddUser(@RequestParam(value = "data") String data) {
+		try {
 			data = URLDecoder.decode(data, "utf-8");
 			data = data.substring(1, data.length() - 1);
 			System.out.println(data);
@@ -390,19 +396,16 @@ public class CustomerController implements ServletConfigAware,
 			String userid = jsonObject.getString(CustomerTable.USERID);
 			String username = jsonObject.getString(CustomerTable.USERNAME);
 			String password = jsonObject.getString(CustomerTable.PASSWORD);
-			String personnumber = jsonObject
-					.getString(CustomerTable.PERSONNUMBER);
+			String personnumber = jsonObject.getString(CustomerTable.PERSONNUMBER);
 			String telphone = jsonObject.getString(CustomerTable.TELPHONE);
 			String realname = jsonObject.getString(CustomerTable.REALNAME);
 			String avator = jsonObject.getString(CustomerTable.AVATOR);
 			Integer isartist = 0;
-			Customer customerBean = new Customer(userid, username,
-					password, personnumber, telphone, realname, avator,
+			Customer customerBean = new Customer(userid, username, password, personnumber, telphone, realname, avator,
 					isartist);
 			customerService.AddBean(customerBean);
 			return 1;
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
 		}
@@ -417,25 +420,21 @@ public class CustomerController implements ServletConfigAware,
 	 */
 	@RequestMapping(params = "method=updateCustomer")
 	@ResponseBody
-	public String JsonUpdate(@RequestParam(value = "data") String data)
-	{
-		try
-		{
+	public String JsonUpdate(@RequestParam(value = "data") String data) {
+		try {
 			data = URLDecoder.decode(data, "utf-8");
 			data = data.substring(1, data.length() - 1);
 			System.out.println(data);
 			JSONObject jsonObject = new JSONObject(data);
 			int id = jsonObject.getInt(CustomerTable.ID);
-			Customer customerBean = customerService.GetEntityById(
-					Customer.class, id);
+			Customer customerBean = customerService.GetEntityById(Customer.class, id);
 			String userid = jsonObject.getString(CustomerTable.USERID);
 			customerBean.setUserid(userid);
 			String username = jsonObject.getString(CustomerTable.USERNAME);
 			customerBean.setUsername(username);
 			String password = jsonObject.getString(CustomerTable.PASSWORD);
 			customerBean.setPassword(password);
-			String personnumber = jsonObject
-					.getString(CustomerTable.PERSONNUMBER);
+			String personnumber = jsonObject.getString(CustomerTable.PERSONNUMBER);
 			customerBean.setPersonnumber(personnumber);
 			String telphone = jsonObject.getString(CustomerTable.TELPHONE);
 			customerBean.setTelphone(telphone);
@@ -445,13 +444,11 @@ public class CustomerController implements ServletConfigAware,
 			customerBean.setAvator(avator);
 			customerService.UpdataBean(customerBean);
 			return "true";
-		} catch (UnsupportedEncodingException e)
-		{
+		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		return "error";
 	}
-
 
 	/**
 	 * 获取所有的用户
@@ -460,10 +457,8 @@ public class CustomerController implements ServletConfigAware,
 	 */
 	@ResponseBody
 	@RequestMapping(params = "method=getallcustomer")
-	public Map<String, Object> GetAllCustomer()
-	{
-		List<Customer> list = customerService
-				.GetAllBean(Customer.class);
+	public Map<String, Object> GetAllCustomer() {
+		List<Customer> list = customerService.GetAllBean(Customer.class);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customers", list);
 		return map;
@@ -477,14 +472,13 @@ public class CustomerController implements ServletConfigAware,
 	 */
 	@ResponseBody
 	@RequestMapping(params = "method=getCustomerByUserid")
-	public Map<String, Object> JsonGetCustomerByUserid(
-			@RequestParam(value = "customerid") String customerid)
-	{
-		Customer customerBean = customerService.GetBeanByCondition(
-				Customer.class, CustomerTable.USERID, customerid, null);
+	public Map<String, Object> JsonGetCustomerByUserid(@RequestParam(value = "customerid") String customerid) {
+		Customer customerBean = customerService.GetBeanByCondition(Customer.class, CustomerTable.USERID, customerid,
+				null);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("customer",new  CustomerVO(customerBean));
+		map.put("customer", new CustomerVO(customerBean));
 		System.out.println(customerid);
+		
 		return map;
 	}
 
@@ -496,11 +490,8 @@ public class CustomerController implements ServletConfigAware,
 	 */
 	@ResponseBody
 	@RequestMapping(params = "method=getCustomervoByid")
-	public Map<String, Object> JsonGetCustomervoByid(
-			@RequestParam(value = "customerid") String customerid)
-	{
-		Customer customerBean = customerService.GetEntityById(
-				Customer.class, Integer.parseInt(customerid));
+	public Map<String, Object> JsonGetCustomervoByid(@RequestParam(value = "customerid") String customerid) {
+		Customer customerBean = customerService.GetEntityById(Customer.class, Integer.parseInt(customerid));
 		CustomerVO customerVO = new CustomerVO(customerBean);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customer", customerVO);
@@ -515,11 +506,8 @@ public class CustomerController implements ServletConfigAware,
 	 */
 	@ResponseBody
 	@RequestMapping(params = "method=GetCustomerName", produces = "text/html;charset=UTF-8")
-	public String JsonGetUserName(
-			@RequestParam(value = "customerid") String customerid)
-	{
-		return customerService.GetBeanByCondition(Customer.class,
-				CustomerTable.USERID, customerid, null).getUsername();
+	public String JsonGetUserName(@RequestParam(value = "customerid") String customerid) {
+		return customerService.GetBeanByCondition(Customer.class, CustomerTable.USERID, customerid, null).getUsername();
 	}
 
 	/**
@@ -529,12 +517,9 @@ public class CustomerController implements ServletConfigAware,
 	 */
 	@ResponseBody
 	@RequestMapping(params = "method=GetCustomerid", produces = "text/html;charset=UTF-8")
-	public String JsonGetid(
-			@RequestParam(value = "customerid") String customerid)
-	{
-		return customerService
-				.GetBeanByCondition(Customer.class, CustomerTable.USERID,
-						customerid, null).getId().toString();
+	public String JsonGetid(@RequestParam(value = "customerid") String customerid) {
+		return customerService.GetBeanByCondition(Customer.class, CustomerTable.USERID, customerid, null).getId()
+				.toString();
 	}
 
 	/**
@@ -546,17 +531,13 @@ public class CustomerController implements ServletConfigAware,
 	 */
 	@RequestMapping(params = "method=getCustomerbypage")
 	@ResponseBody
-	public Map<String, Object> JsonGetPageCustomer(
-			@RequestParam(value = "page") int page,
+	public Map<String, Object> JsonGetPageCustomer(@RequestParam(value = "page") int page,
 			@RequestParam(value = "rows") int pageSize,
 			@RequestParam(value = "selectname", defaultValue = "id") String selectname,
-			@RequestParam(value = "value", defaultValue = "") String value)
-	{
+			@RequestParam(value = "value", defaultValue = "") String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Customer> list = customerService.GetPageBeanFilter(
-				Customer.class, page, pageSize, selectname, value);
-		int total = customerService.GetPageBeanFilterTotal(Customer.class,
-				page, pageSize, selectname, value);
+		List<Customer> list = customerService.GetPageBeanFilter(Customer.class, page, pageSize, selectname, value);
+		int total = customerService.GetPageBeanFilterTotal(Customer.class, page, pageSize, selectname, value);
 		map.put("rows", AdminCustomerVO.ChangeToList(list));
 		map.put("total", total);
 		return map;
@@ -570,12 +551,9 @@ public class CustomerController implements ServletConfigAware,
 	 * @return
 	 */
 	@RequestMapping(params = "method=loginout")
-	public String LoginOut(
-			@CookieValue(value = "useridtoken", required = false) Cookie token,
-			HttpServletResponse response)
-	{
-		if (null != token)
-		{
+	public String LoginOut(@CookieValue(value = "useridtoken", required = false) Cookie token,
+			HttpServletResponse response) {
+		if (null != token) {
 			token.setMaxAge(0);
 			response.addCookie(token);
 		}
@@ -594,27 +572,21 @@ public class CustomerController implements ServletConfigAware,
 	 * @return
 	 */
 	@RequestMapping(params = "method=alertcustomer")
-	public String JsonAlertCustomer(
-			@RequestParam(value = "userid") String userid,
+	public String JsonAlertCustomer(@RequestParam(value = "userid") String userid,
 			@RequestParam(value = "username") String username,
 			@RequestParam(value = "personnumber") String personnumber,
-			@RequestParam(value = "telphone") String telphone,
-			@RequestParam(value = "realname") String realname,
-			HttpServletRequest request)
-	{
-		Customer customerBean = customerService.GetBeanByCondition(
-				Customer.class, CustomerTable.USERID, userid, null);
+			@RequestParam(value = "telphone") String telphone, @RequestParam(value = "realname") String realname,
+			HttpServletRequest request) {
+		Customer customerBean = customerService.GetBeanByCondition(Customer.class, CustomerTable.USERID, userid, null);
 
 		customerBean.setRealname(realname);
 		customerBean.setTelphone(telphone);
 		customerBean.setPersonnumber(personnumber);
 		customerBean.setUsername(username);
 
-		try
-		{
+		try {
 			customerService.UpdataBean(customerBean);
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			return "redirect:/font/modify";
 		}
 		return "redirect:/font/personal.jsp";
@@ -627,8 +599,7 @@ public class CustomerController implements ServletConfigAware,
 	 */
 	@RequestMapping(params = "method=EnterPassword")
 	public String CheckLoginEnterPassword(
-			@CookieValue(value = "useridtoken", required = false, defaultValue = "") String useridtoken)
-	{
+			@CookieValue(value = "useridtoken", required = false, defaultValue = "") String useridtoken) {
 		return "font/Password.jsp";
 	}
 
@@ -639,17 +610,12 @@ public class CustomerController implements ServletConfigAware,
 	 * @return
 	 */
 	@RequestMapping(params = "method=changePassword")
-	public String changePassword(
-			@RequestParam(value = "password", required = false) String password,
-			@RequestParam(value = "new_password", required = false) String new_password,
-			HttpServletRequest request, HttpServletResponse response,
-			@CookieValue(value = "useridtoken", required = false) String token)
-	{
+	public String changePassword(@RequestParam(value = "password", required = false) String password,
+			@RequestParam(value = "new_password", required = false) String new_password, HttpServletRequest request,
+			HttpServletResponse response, @CookieValue(value = "useridtoken", required = false) String token) {
 		String userid = null;
-		if (null != token)
-		{
-			if (null == userid)
-			{
+		if (null != token) {
+			if (null == userid) {
 				System.out.println(token);
 				String[] parts = token.split("\\&");
 				System.out.println(parts.length);
@@ -664,23 +630,17 @@ public class CustomerController implements ServletConfigAware,
 		Customer user = customerService.GetEntityById(Customer.class,
 				Integer.valueOf(customerService.getCustomerIdByUserid(userid)));
 		System.out.println(user.toString());
-		if (!user.getPassword().equals(password))
-		{
+		if (!user.getPassword().equals(password)) {
 			flag = 1;
-		} 
-		else
-		{
+		} else {
 			System.out.println(new_password);
 			user.setPassword(new_password);
 			customerService.UpdataBean(user);
 		}
 
-		if(flag == 0)
-		{
+		if (flag == 0) {
 			return "redirect:/font/personal.jsp";
-		}
-		else 
-		{
+		} else {
 			return "redirect:/font/Password.jsp?error=1";
 		}
 	}
