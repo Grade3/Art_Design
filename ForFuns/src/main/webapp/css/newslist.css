@@ -140,6 +140,13 @@ a.sed
 {
 	font-size: 1.3em;
 	color: #333;
+	text-decoration: none;
+}
+
+.tag a:hover
+{
+	color: #ff5d56;
+	text-decoration: none;
 }
 
 .pattern1

@@ -15,14 +15,14 @@
 <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 <title>Login</title>
 <link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer2.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/login1.css">
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript">
 	function getUrlParam(name) {
@@ -70,7 +70,7 @@ $(document).ready(function(){
 
 <div class="container-fluid header">
 	<div class="title_bar">
-		<p class="back_btn"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p>
+		<a href="<%=basePath%>font/home.jsp"><p class="back_btn"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p></a>
 		<p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</p>
 	</div>
 </div>

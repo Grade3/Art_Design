@@ -660,6 +660,13 @@ ul.support-right li
 {
 	font-size: 1.5em;
 	color: #333;
+	text-decoration: none;
+}
+
+.tag a:hover
+{
+	text-decoration: none;
+	color: #ff5d56;
 }
 
 .tag1

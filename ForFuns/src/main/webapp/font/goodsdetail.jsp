@@ -166,7 +166,7 @@ $(document).ready(function(){
 
 <div class="container-fluid header">
 	<div class="title_bar">
-		<p class="back_btn"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p>
+		<a href="<%=basePath%>font/goodslist.jsp"><p class="back_btn"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p></a>
 		<p><span class="glyphicon glyphicon-tower" aria-hidden="true"></span>&nbsp;&nbsp;商品详情</p>
 	</div>
 </div>

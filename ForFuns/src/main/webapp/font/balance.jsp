@@ -162,7 +162,7 @@ $(document).ready(function()
 					//if($("#id").attr("checked")==true)
 					//alert(userid+" "+username+" "+personnumber+" "+telphone+" "+realname);
 					
-					$('#balance').text(balance);
+					$('#balance').text('￥'+balance);
 				},
 				error : function() {
 

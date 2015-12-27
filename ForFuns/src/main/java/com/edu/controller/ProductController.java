@@ -237,7 +237,7 @@ ServletContextAware {
 		Product productBean = productService.GetEntityById(Product.class, id);
 		if(null!=productBean){
 			productVO = new ProductVO(productBean);
-			productVO.setAddmoney(productMoneyService.getMaxMoney(productBean.getId()).getMoney());
+			//productVO.setAddmoney(productMoneyService.getMaxMoney(productBean.getId()).getMoney());
 		}
 
 		map.put("product",productVO);

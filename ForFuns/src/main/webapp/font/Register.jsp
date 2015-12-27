@@ -226,7 +226,7 @@ $(document).ready(function(){
 
 <div class="container-fluid header">
 	<div class="title_bar">
-		<p class="back_btn"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p>
+		<a href="<%=basePath%>font/home.jsp"><p class="back_btn"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p></a>
 		<p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;注册用户</p>
 	</div>
 </div>

@@ -61,7 +61,6 @@ function CheckUser(){
 	var id =  useridtoken.substring(0,index);
 	$.ajax({
 		type:'post',
-		asycn:false,
 		url:'<%=basePath%>customer.do?method=GetCustomerName',
 		data:{customerid:id},
 		success:function(json){
@@ -128,6 +127,19 @@ $(document).ready(function(){
 		 GetNewsList(page,pageSize);
 		 $(this).parent().hide();
   });
+  
+  
+  $('#username').live('click',function(){
+		var useridtoken = getCookie("useridtoken");
+		var useridtoken = getCookie("useridtoken");
+		if(null==useridtoken || "" == useridtoken){
+			return ;
+		}
+		var index = useridtoken.indexOf("&");
+		var id =  useridtoken.substring(0,index);
+		var address = "<%=basePath%>font/personal.jsp?id=";
+		location.href=address+id;
+	});
 });
 </script>
 
@@ -142,7 +154,7 @@ $(document).ready(function(){
 						<li class="li1" id="loginaction" ><a href="Login.jsp" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
 						<li class="li2" id="registeraction"><a href="Register.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>
 						<li class="li1" id="usernameaction"><a href="#" id="username"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;</a></li>
-						<li class="li2" id="loginoutaction"><a href="home.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
+						<li class="li2" id="loginoutaction"><a href="<%=basePath%>customer.do?method=loginout" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
 					</ul>
 				</div>
 			</div>
@@ -193,8 +205,8 @@ $(document).ready(function(){
 								</div>
 							</div>
 							<div class="col-xs-3 tag0">
-								<div class="row col-xs-12 tag tag4">
-									<a href="<%=basePath%>font/newslist.jsp"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
+								<div class="row col-xs-12 tag tag4" style="border-bottom: 3px solid #ff5d56; border-radius: 0px;">
+									<a href="<%=basePath%>font/newslist.jsp" style="color: #ff5d56;"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
 								</div>	
 							</div>
 						</div>

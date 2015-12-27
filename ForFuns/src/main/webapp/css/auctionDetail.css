@@ -226,6 +226,16 @@ p.price4
 	display: none;
 }
 
+.title_bar a
+{
+	text-decoration: none;
+}
+
+.title_bar a:hover
+{
+	text-decoration: none;
+}
+
 .userpic
 {
 	width: 30%;

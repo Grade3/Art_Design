@@ -22,7 +22,7 @@ public class ExamineArtistDaoImpl extends BaseDaoImpl<ExamineArtist> implements 
 		String hql ="";
 		List<ExamineArtist> list = null;
 		try {
-			hql = "from "+clz.newInstance().getClass().getName()+" where "+selectname+" like '%"+value+"%' and suggestion == 0";
+			hql = "from "+clz.newInstance().getClass().getName()+" where "+selectname+" like '%"+value+"%' and suggestion = 0";
 			System.out.println(hql);
 			Query query = getSession().createQuery(hql);
 			query.setFirstResult((page-1)*pageSize); 

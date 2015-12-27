@@ -38,7 +38,7 @@ img
 	margin-top: 15px;
 }
 
-.news_author span
+.news_author p
 {
 	font-size: 1.3em;
 	margin: 0 2em;
@@ -48,6 +48,7 @@ img
 {
 	font-size: 1.3em;
 	margin: 0 2em;
+	display: inline-block;
 }
 
 .news_content
@@ -124,6 +125,7 @@ img
 .news_content p
 {
 	font-size: 1.5em;
+	display: block;
 }
 
 }

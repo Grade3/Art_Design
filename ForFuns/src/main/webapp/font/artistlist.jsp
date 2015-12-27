@@ -24,6 +24,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		*{font-style: normal;}
 	</style>
 	<script type="text/javascript">
+	
+	//获取cookie
+	function getCookie(objName){//获取指定名称的cookie的值 
+		var arrStr = document.cookie.split("; "); 
+		for(var i = 0;i < arrStr.length;i ++){ 
+			var temp = arrStr[i].split("="); 
+			if(temp[0] == objName) return unescape(temp[1]); 
+		} 
+	};
+	//检测用户是否已登录
+	function CheckUser(){
+		var useridtoken = getCookie("useridtoken");
+		if(null==useridtoken || "" == useridtoken){
+			return ;
+		}
+		var index = useridtoken.indexOf("&");
+		var id =  useridtoken.substring(0,index);
+		$.ajax({
+			type:'post',
+			url:'<%=basePath%>customer.do?method=GetCustomerName',
+			data:{customerid:id},
+			success:function(json){
+				$('#registeraction').hide();
+				$('#loginaction').hide();
+				$('#usernameaction').show();
+				$('#usernameaction').css("display","inline-block");
+				$('#loginoutaction').show();
+				$('#username').html("<span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp;&nbsp;"+json);
+			},error:function(){
+				
+			}
+		});
+	}
+	
 	//获取上线新闻
 	function GetArtists(page,pageSize){
 		$.ajax({
@@ -115,6 +149,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  	$(".box_active a").click(function(){
 		  		$(".sub").slideToggle("slow");
 		  	});
+		  	
+		  	$('#username').live('click',function(){
+		  		var useridtoken = getCookie("useridtoken");
+		  		var useridtoken = getCookie("useridtoken");
+		  		if(null==useridtoken || "" == useridtoken){
+		  			return ;
+		  		}
+		  		var index = useridtoken.indexOf("&");
+		  		var id =  useridtoken.substring(0,index);
+		  		var address = "<%=basePath%>font/personal.jsp?id=";
+		  		location.href=address+id;
+		  	});
 	});
 
 	</script>
@@ -179,8 +225,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 							</div>
 							<div class="col-xs-3 tag0">
-								<div class="row col-xs-12 tag tag3">
-									<a href="<%=basePath%>font/artistlist.jsp"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
+								<div class="row col-xs-12 tag tag3" style="border-bottom: 3px solid #ff5d56; border-radius: 0px;">
+									<a href="<%=basePath%>font/artistlist.jsp" style="color: #ff5d56;"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
 								</div>
 							</div>
 							<div class="col-xs-3 tag0">

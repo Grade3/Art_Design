@@ -56,9 +56,9 @@ body
 .beartist1:hover
 {
 	text-decoration: none;
-	background: #ff5d56;
-	border: 2px solid #ff5d56;
-	color: #fff;
+	background: #fff;
+	border: 2px solid #000;
+	color: #000;
 }
 
 .beartist:hover
@@ -360,7 +360,7 @@ p.name1
 
 .beartist1
 {
-	border: 1px solid #ff5d56;
+	border: 2px solid #ff5d56;
 	background: #ff5d56;
     color: #fff;
     padding: 0.3em 1.2em;

@@ -41,8 +41,14 @@ $(function(){
 });
 </script>
 
-	<script type="text/javascript">
+<script type="text/javascript">
+	
+	
+	
 $(document).ready(function(){
+	$('.back_btn').click(function(){
+		location.href="<%=basePath%>font/personal.jsp";
+	});
   $("#menu").click(function(){
   $("#menu-xs").toggle(300);
   });
