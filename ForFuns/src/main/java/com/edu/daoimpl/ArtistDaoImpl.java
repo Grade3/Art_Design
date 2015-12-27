@@ -76,6 +76,29 @@ public class ArtistDaoImpl extends BaseDaoImpl<Artist> implements IArtistDao {
 
 		return list;
 	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public List<Artist> getPageBeanFilterTotal(Class clz, String selectname, String value) {
+		String hql = "";
+		List<Artist> list = null;
+		try {
+			hql = "from " + clz.newInstance().getClass().getName() + " where " + selectname + " like '%" + value
+					+ "%' and isartist=1";
+			System.out.println(hql);
+			Query query = getSession().createQuery(hql);
+			
+			//Query query = getSession().getNamedQuery("ArtistquerygetPageBeanFilter");
+			//query.setString("classname", clz.newInstance().getClass().getName());
+			//query.setString("selectname", selectname);
+			//query.setString("value", value);
+			list = query.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 
 	@Override
 	public int countEa() {

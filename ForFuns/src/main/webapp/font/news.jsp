@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=path%>/js/easyUI/jquery-1.4.4.min.js"></script>
 <style type="text/css">
 	*{font-style: normal;}
+	embed{width: 100%;}
 </style>
 <script>
 function getUrlParam(name) {

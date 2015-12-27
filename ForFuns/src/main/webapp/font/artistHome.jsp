@@ -39,11 +39,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						$('.modify').show();
 						$('.beartist').show();
 						$('.beartist').attr('href','<%=basePath%>product.do?method=EnterPublish');
-						
 					}else{
 						
-						$('.chat').show();
-						$('.chat').attr('href','<%=basePath%>font/chat.jsp?id='+artistid);
+						$('.beartist1').show();
+						$('.beartist1').attr('href','<%=basePath%>font/chat.jsp?id='+artistid);
 					}
 					$('#avator').attr('src',avator);
 					$('#artistname').html(name);
@@ -113,6 +112,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		};
 		$(document).ready(function(){
+			$('.back_btn').click(function(){
+				location.href="<%=basePath%>font/artistlist.jsp";
+			});
+			$('.modify').hide();
+			$('.beartist').hide();
+			$('.beartist1').hide();
 			$('#usernameaction').hide();
 			$('#loginoutaction').hide();
 			var id = getUrlParam("id");
@@ -262,22 +267,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="row person_btn">
 				<div class="col-xs-offset-4 col-xs-4 visible-lg">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
+					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-5 modify">管理艺术品</a>
 					<a href="artistManage.html" target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 				<div class="col-xs-offset-3 col-xs-6 visible-md">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
+					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-5 modify">管理艺术品</a>
 					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 				<div class="col-xs-offset-2 col-xs-8 visible-sm">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
+					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-5 modify">管理艺术品</a>
 					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 				<div class="col-xs-12 btn-artisthome visible-xs">
 					<a href="release.html" class="col-xs-6 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-6 modify">管理艺术品</a>
+					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-6 modify">管理艺术品</a>
 					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 			</div>

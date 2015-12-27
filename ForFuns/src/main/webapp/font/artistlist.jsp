@@ -9,17 +9,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<title>Artistlist</title>
-	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
-	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="../css/artistlist.css">
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.js"></script>
-	<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
+	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer2.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/artistlist.css">
+	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
+	
 	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
-	<script src="../js/lanrenzhijia.js"></script>
+	<script src="<%=basePath%>js/lanrenzhijia.js"></script>
 	<style type="text/css">
 		*{font-style: normal;}
 	</style>
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							body +="<div class='col-md-6 goods_two'>";
 						}
 						var link = "<%=basePath%>font/artistHome.jsp?id="+id;
-						body+="<div class='col-xs-6 goods'><a href='"+link+"' target='_blank'><img src='"+avator+"' class='good_item'></a><div class='good_name'><p>"+username+"</p><a href='"+link+"' class='readmore' target='_blank'>进入主页</a></div></div>";
+						body+="<div class='col-xs-6 goods'><a href='"+link+"'><img src='"+avator+"' class='good_item'></a><div class='good_name'><p>"+username+"</p><a href='"+link+"' class='readmore' target='_blank'>进入主页</a></div></div>";
 						if(count==1){
 							body+="</div>";
 						}
@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							count=0;
 					}
 					if(page*pageSize <globaltotal){
-						body +="<div class='col-md-12 blog-in-top'><div class='learn_more'><p>查看更多</p></div></div>";
+						body +="<div class='learn_more' style='clear:both;'><p>查看更多</p></div>";
 					}
 					$('#artistlist').append(body);
 				}else{
@@ -71,12 +71,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	};
 	$(document).ready(function(){
-		
+		  $('.learn_more').live('click',function(){
+				 page = page +1 ;
+				 GetArtists(page,pageSize);
+				 $(this).hide();
+		  });
 		  $('#usernameaction').hide();
 		  $('#loginoutaction').hide();
 		  CheckUser();
 		  var page = 1;
-		  var pageSize = 12;
+		  var pageSize = 4;
 		  var globaltotal = 0;
 		  GetArtists(page,pageSize);
 		  $("#menu").click(function(){
@@ -116,6 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
 </head>
 <body>
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
 
 	<div class="header-top">
@@ -144,43 +149,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 						<div id="menu-xs">
 							<ul>
-								<li><a href="home.jsp">首页</a></li>
-								<li><a href="goodslist.jsp">成品</a></li>
-								<li><a href="home.html">DIY</a></li>
-								<li><a href="artistlist.jsp">艺术家</a></li>
-								<li><a href="newslist.jsp">资讯中心</a></li>
+								<li><a href="<%=basePath%>font/home.jsp">首页</a></li>
+								<li><a href="<%=basePath%>font/goodslist.jsp">成品</a></li>
+								<li><a href="<%=basePath%>font/auctionList.jsp">拍卖</a></li>
+								<li><a href="<%=basePath%>font/artistlist.jsp">艺术家</a></li>
+								<li><a href="<%=basePath%>font/newslist.jsp">资讯中心</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="top-nav visible-lg">
 						<ul class="megamenu skyblue">
-							<li><a href="home.jsp">首页</a></li>
-							<li><a href="goodslist.jsp">成品</a></li>
-							<li><a href="home.html">DIY</a></li>
-							<li><a href="artistlist.jsp">艺术家</a></li>
-							<li><a href="newslist.jsp">资讯中心</a></li>
+							<li><a href="<%=basePath%>font/home.jsp">首页</a></li>
+							<li><a href="<%=basePath%>font/goodslist.jsp">成品</a></li>
+							<li><a href="<%=basePath%>font/auctionList.jsp">拍卖</a></li>
+							<li><a href="<%=basePath%>font/artistlist.jsp">艺术家</a></li>
+							<li><a href="<%=basePath%>font/newslist.jsp">资讯中心</a></li>
 						</ul>
 					</div>
 					<div class="content-top content-top1 visible-xs visible-sm">
 						<div class="row tag_up">
 							<div class="col-xs-3 tag0 tag01">
 								<div class="row col-xs-12 tag tag1">
-									<a href="home.html"><span class="glyphicon glyphicon-home pattern1" aria-hidden="true"></span></br>首页</a>
+									<a href="<%=basePath%>font/home.jsp"><span class="glyphicon glyphicon-home pattern1" aria-hidden="true"></span></br>首页</a>
 								</div>			
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag2">
-									<a href="goodslist.html"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
+									<a href="<%=basePath%>font/goodslist.jsp"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
 								</div>
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag3">
-									<a href="home.html"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
+									<a href="<%=basePath%>font/artistlist.jsp"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
 								</div>
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag4">
-									<a href="newslist.html"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
+									<a href="<%=basePath%>font/newslist.jsp"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
 								</div>	
 							</div>
 						</div>
@@ -205,47 +210,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<!-- <div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/bg_login1.jpg" class="good_item"></a>
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/bg_login1.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>艺术家名称</p>
 							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
 						</div>
 					</div>
 					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>艺术家名称</p>
-							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 goods_two">
-					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>艺术家名称</p>
-							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
-						</div>
-					</div>
-					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>艺术家名称</p>
-							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 goods_two">
-					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>艺术家名称</p>
-							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
-						</div>
-					</div>
-					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>艺术家名称</p>
 							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
@@ -254,14 +226,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>艺术家名称</p>
 							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
 						</div>
 					</div>
 					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>艺术家名称</p>
 							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
@@ -271,14 +243,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>艺术家名称</p>
 							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
 						</div>
 					</div>
 					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>艺术家名称</p>
 							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
@@ -287,14 +259,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>艺术家名称</p>
 							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
 						</div>
 					</div>
 					<div class="col-xs-6 goods">
-						<a href="artistHome.html" target="_blank"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
+						<div class="good_name">
+							<p>艺术家名称</p>
+							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6 goods_two">
+					<div class="col-xs-6 goods">
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
+						<div class="good_name">
+							<p>艺术家名称</p>
+							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
+						</div>
+					</div>
+					<div class="col-xs-6 goods">
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
+						<div class="good_name">
+							<p>艺术家名称</p>
+							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 goods_two">
+					<div class="col-xs-6 goods">
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
+						<div class="good_name">
+							<p>艺术家名称</p>
+							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>
+						</div>
+					</div>
+					<div class="col-xs-6 goods">
+						<a href="artistHome.html" target="_blank"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>艺术家名称</p>
 							<a href="artistHome.html" class="readmore" target="_blank">进入主页</a>

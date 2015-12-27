@@ -157,6 +157,23 @@ a.readmore:hover
 	color: #7d7d7d;
 }
 
+
+.none
+{
+	background-color: #eeeeee;
+	text-align: center;
+	padding: 1.5em 0;
+	margin: 2em 0 0;
+	cursor: pointer;
+}
+
+.none p
+{
+	font-size: 1.7em;
+	margin: 0px;
+	color: #7d7d7d;
+}
+
 .artwork
 {
 	margin-top: 3em;

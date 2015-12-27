@@ -282,7 +282,7 @@ $(document).ready(function(){
 			<div class="header-bottom">
 				<div class="container">
 					<div class="logo">
-						<h1><a href="home.html">ArtCustomize</a></h1>
+						<h1><a href="<%=basePath%>font/home.jsp">ArtCustomize</a></h1>
 					</div>
 					<div class="top-nav-xs visible-md">
 						<div id="menu">
@@ -290,21 +290,21 @@ $(document).ready(function(){
 						</div>
 						<div id="menu-xs">
 							<ul>
-								<li><a href="home.jsp">首页</a></li>
-								<li><a href="goodslist.jsp">成品</a></li>
-								<li><a href="home.html">DIY</a></li>
-								<li><a href="artistlist.jsp">艺术家</a></li>
-								<li><a href="newslist.jsp">资讯中心</a></li>
+								<li><a href="<%=basePath%>font/home.jsp">首页</a></li>
+								<li><a href="<%=basePath%>font/goodslist.jsp">成品</a></li>
+								<li><a href="<%=basePath%>font/auctionList.jsp">拍卖</a></li>
+								<li><a href="<%=basePath%>font/artistlist.jsp">艺术家</a></li>
+								<li><a href="<%=basePath%>font/newslist.jsp">资讯中心</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="top-nav visible-lg">
 						<ul class="megamenu skyblue">
-							<li><a href="home.jsp">首页</a></li>
-							<li><a href="goodslist.jsp">成品</a></li>
-							<li><a href="home.html">DIY</a></li>
-							<li><a href="artistlist.jsp">艺术家</a></li>
-							<li><a href="newslist.jsp">资讯中心</a></li>
+							<li><a href="<%=basePath%>font/home.jsp">首页</a></li>
+							<li><a href="<%=basePath%>font/goodslist.jsp">成品</a></li>
+							<li><a href="<%=basePath%>font/auctionList.jsp">拍卖</a></li>
+							<li><a href="<%=basePath%>font/artistlist.jsp">艺术家</a></li>
+							<li><a href="<%=basePath%>font/newslist.jsp">资讯中心</a></li>
 						</ul>
 					</div>
 				</div>
@@ -411,22 +411,22 @@ $(document).ready(function(){
 				<div class="row tag_up">
 					<div class="col-xs-3 tag0 tag01">
 						<div class="row col-xs-12 tag tag1">
-							<a href="goodslist.html"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
+							<a href="<%=basePath%>font/goodslist.jsp"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
 						</div>			
 					</div>
 					<div class="col-xs-3 tag0">
 						<div class="row col-xs-12 tag tag2">
-							<a href="home.html"><span class="glyphicon glyphicon-tags pattern1" aria-hidden="true"></span></br>艺术定制</a>
+							<a href="<%=basePath%>font/auctionList.jsp"><span class="glyphicon glyphicon-tags pattern1" aria-hidden="true"></span></br>拍卖</a>
 						</div>
 					</div>
 					<div class="col-xs-3 tag0">
 						<div class="row col-xs-12 tag tag3">
-							<a href="home.html"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
+							<a href="<%=basePath%>font/artistlist.jsp"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
 						</div>
 					</div>
 					<div class="col-xs-3 tag0">
 						<div class="row col-xs-12 tag tag4">
-							<a href="newslist.html"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
+							<a href="<%=basePath%>font/newslist.jsp"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
 						</div>	
 					</div>
 				</div>

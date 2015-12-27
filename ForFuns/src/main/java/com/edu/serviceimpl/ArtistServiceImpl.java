@@ -50,7 +50,7 @@ public class ArtistServiceImpl extends BaseServiceImpl<Artist> implements IArtis
 	public int GetPageBeanFilterTotal(Class clz, int page, int pageSize,
 			String selectname, String value) 
 	{
-		return artistDao.getPageBeanFilter(clz, page, pageSize, selectname, value).size();
+		return artistDao.getPageBeanFilterTotal(clz, selectname, value).size();
 	}
 	
 	@SuppressWarnings("rawtypes")

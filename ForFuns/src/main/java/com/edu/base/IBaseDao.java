@@ -177,6 +177,17 @@ public interface IBaseDao<T> {
 	 * @throws Exception 
 	 */
 	public T GetBeanByCondition(Class clz,String conditionName,String conditionValue,Map<String, String> param) throws Exception;
+	
+	/**
+	 * 获取总数
+	 * @param clz
+	 * @param selectname
+	 * @param value
+	 * @param Morename
+	 * @param Morevalue
+	 * @return
+	 */
+	List<T> getPageBeanFilterMoreTotal(Class clz, String selectname,String value, String Morename, String Morevalue);
 
 
 }
