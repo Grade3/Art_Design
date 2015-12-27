@@ -92,6 +92,9 @@ function ok_remove1()
 
 $(document).ready(function()
 {
+	$('#back_btn').click(function(){
+		location.href="<%=basePath%>font/personal.jsp";
+	});
 	var pic_w = $(".order_pic").width();
 	var pic_h = pic_w;
 	$(".order_pic").height(pic_h);
@@ -164,7 +167,7 @@ $(document).ready(function()
 
 	<div class="container-fluid header">
 		<div class="title_bar">
-			<p class="back_btn">
+			<p class="back_btn" id="back_btn">
 				<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
 			</p>
 			<p>

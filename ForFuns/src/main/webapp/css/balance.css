@@ -307,3 +307,7 @@ button.new_submit
 	color: #ff5d56;
 	margin-bottom: 0px;
 }
+
+.back_btn{
+	cursor: pointer;
+}
