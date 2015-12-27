@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}else{
 						
 						$('.beartist1').show();
-						$('.beartist1').attr('href','<%=basePath%>font/chat.jsp?id='+artistid);
+						$('.beartist1').attr('href','<%=basePath%>customer.do?method=EnterChat&toid='+artistid);
 					}
 					$('#avator').attr('src',avator);
 					$('#artistname').html(name);

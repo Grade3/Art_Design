@@ -19,8 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script charset="utf-8" src="<%=path%>/kindeditor/kindeditor.js"></script>
 	<script charset="utf-8" src="<%=path%>/kindeditor/lang/zh_CN.js"></script>
     <link rel="stylesheet" href="../css/chat.css" media="screen" type="text/css" />
-    <script type="text/javascript" src="../js/bootstrap.js"></script>
-	<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 	<script type="text/javascript">
 		KindEditor.ready(function(K) {
@@ -36,22 +35,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	</script>
 	<script type="text/javascript">
-	  var id = getCookieUserid();
-	  var userid = 1;
+		$(document).ready(function(){
+			var name = getUrlParam("name");
+			$('#toname').html(name);
+		});
+	  var userid = getUrlParam("fromid");
       var receiveid = getUrlParam("id");
-	  $.ajax({
-			type:'post',
-			asycn:false,
-			url:'../customer.do?method=GetCustomerid',
-			data:{customerid:id},
-			success:function(json){
-				userid = json;
-			},error:function(){
-				
-			}
-	  });
-  	  if(userid=="" || receiveid==""||null == receiveid)
-  		  location.href="<%=basePath%>font/error.jsp";
+      
+	  if(userid=="" || receiveid==""||null == receiveid){
+		  location.href="<%=basePath%>font/error.jsp";
+	  }
+	  
       var websocket = null;
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
@@ -69,6 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
       //连接成功建立的回调方法
       websocket.onopen = function(event){
+    	  
           //setMessageInnerHTML("open");
           var o = {sendid:userid,receiverid:receiveid,content:"",flag:"0"};
           var json =  JSON.stringify(o);  
@@ -155,7 +150,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="container-fluid header">
 	<div class="title_bar">
 		<p class="back_btn"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p>
-		<p>对方用户名</p>
+		<p id="toname">对方用户名</p>
 	</div>
 </div>
 

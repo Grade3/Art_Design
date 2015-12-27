@@ -45,6 +45,7 @@ import com.edu.service.IUserService;
 import com.edu.serviceimpl.CustomerServiceImpl;
 import com.edu.table.CustomerTable;
 import com.edu.table.UserTable;
+import com.edu.util.CheckTokenTool;
 import com.edu.util.MD5Util;
 import com.edu.viewentity.AdminCustomerVO;
 import com.edu.viewentity.CustomerVO;
@@ -516,10 +517,12 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(params = "method=GetCustomerid", produces = "text/html;charset=UTF-8")
-	public String JsonGetid(@RequestParam(value = "customerid") String customerid) {
-		return customerService.GetBeanByCondition(Customer.class, CustomerTable.USERID, customerid, null).getId()
-				.toString();
+	@RequestMapping(params = "method=GetCustomerid")
+	public Map<String, Object> JsonGetid(@RequestParam(value = "customerid") String customerid) {
+		Map<String,	Object> map = new HashMap<String, Object>();
+		String id = customerService.getCustomerIdByUserid(customerid);
+		map.put("id", id);
+		return map;
 	}
 
 	/**
@@ -653,5 +656,26 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	@RequestMapping(params="method=EnterBalance")
 	public String CheckLoginEnterAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
 		return "font/balance.jsp";
+	}
+	/**
+	 * 进入聊天
+	 * @param useridtoken
+	 * @return
+	 */
+	@RequestMapping(params="method=EnterChat")
+	public String CheckLoginEnterChat(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="toid")Integer toid){
+		String customeruserid = CheckTokenTool.GetUserid(useridtoken);
+		Customer customer =null;
+		try {
+			customer = customerService.getCustomerByUserId(customeruserid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(null==customer){
+			return "redirect:/font/error.jsp";
+		}
+		String link = "redirect:/font/chat.jsp?id="+toid+"&fromid="+customer.getId()+"&name="+customer.getUsername();
+		System.out.println(link);
+		return link;
 	}
 }
