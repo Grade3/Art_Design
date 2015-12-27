@@ -7,6 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<title>Success</title>
 	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
@@ -36,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="content">
 		<div class="container">
 			<div class="main_404">
-				<img src="<%=basePath%>image/succeed.png">
+				<img src="<%=basePath%>image/success.png">
 				<p class="label_wrong">恭喜您！操作成功！</p>
 				<a href="home.jsp" class="readmore">返回首页</a>
 			</div>

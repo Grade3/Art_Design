@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="main_404">
 				<img src="../image/error404.png">
 				<p class="label_wrong">很抱歉，您的页面请求有误！</p>
-				<a href="home.html" class="readmore">返回首页</a>
+				<a href="<%=basePath%>font/home.jsp" class="readmore">返回首页</a>
 			</div>
 		</div>
 	</div>

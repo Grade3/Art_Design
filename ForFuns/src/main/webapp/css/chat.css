@@ -111,7 +111,7 @@ body {
 /* Small screens */
 @media all and (max-width: 767px) {
   .chat-thread {
-    width: 90%;
+    width: 100%;
     height: 260px;
   }
 
@@ -123,7 +123,7 @@ body {
 /* Medium and large screens */
 @media all and (min-width: 768px) {
   .chat-thread {
-    width: 50%;
+    width: 100%;
     height: 320px;
   }
 
@@ -196,3 +196,73 @@ body {
   text-decoration:none;
   color: rgba(255, 255, 255, 0.35);
 }
+
+#convo
+{
+	padding: 22em 0 3em;
+}
+
+#chatframge
+{
+	padding: 0em 0 3em;
+}
+
+.chat-thread
+{
+	height: auto;
+}
+
+.chatright
+{
+	margin-right: 30px;
+	color: #333;
+}
+
+.chatleft
+{
+	margin-left: 30px;
+	color: #333;
+}
+
+
+body{background: #eee;}
+		#personinfo{margin: 0 auto;box-shadow:0 0 15px rgba(149,149,149,0.8); background-image: url(../image/293.jpg);background-size: 100% 100%;color: white;}
+		#personavator{border-radius: 50%;}
+		#personright{float: left;}
+		#textform{margin:0 auto 0px auto;}
+		.chat-thread{box-shadow:0 0 2px rgba(149,149,149,0.5); margin-top: 0px;}
+		.btn_send{ font-family: "黑体";}
+
+#textform
+{
+	width: 100%;
+	padding-top: 60px;
+	position: fixed;
+	z-index: 9996;
+	background: #eee;
+	padding-bottom: 1em;
+}
+
+.btn_send
+{
+	background: #ff5d56;
+	border: 2px solid #ff5d56;
+	color: #fff;
+	border-radius: 2px;
+	padding: 0.6em 0;
+}
+
+.btn_send:hover
+{/*
+	background: #fff;
+	border: 2px solid #333;
+	color: #333;*/
+	background: #ff5d56;
+	border: 2px solid #ff5d56;
+	color: #fff;
+}
+
+		
+
+
+
