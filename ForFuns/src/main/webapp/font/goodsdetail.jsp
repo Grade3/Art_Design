@@ -52,6 +52,10 @@ function getProductById(id){
 			var typename = product.typename;
 			var timestart = myformatter(product.timestart);
 			var timeout = myformatter(product.timeout);
+			var artistuserid = product.artistuserid;
+			$('.back_btn').click(function(){
+				location.href="<%=basePath%>font/artistHome.jsp?id="+artistuserid;
+			});
 			if(methodid!=1)
 				location.href="<%=basePath%>font/404.jsp";
 			$('#imgurl').attr("src",imgurl);

@@ -77,16 +77,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							var money = products[i].initmoney;
 							var authorname = products[i].authorname;
 							var situation = products[i].situation;
-							
+							var methodid= products[i].methodid;
+							var methodname = products[i].methodname;
 							if(i%2==0){
 								tempbody +="<div class='col-md-6 goods_two'>";
 							}
-							tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
-							 +"<div class='good_name'><p>"+name+"</p><p>";
-							if(situation==0)tempbody+="未上架";
-							if(situation==1)tempbody+="上架中";
-							if(situation==2)tempbody+="已下架";
-							if(situation==3)tempbody+="已出售";
+							if(methodid==1){
+								tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
+								 +"<div class='good_name'><p>"+name+"</p><p>";
+							}else if(methodid==2){
+								tempbody +="<div class='col-xs-6 goods'><a href='auctionDetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
+								 +"<div class='good_name'><p>"+name+"</p><p>";
+							}
+							
+							tempbody+=methodname;
+							if(situation==0)tempbody+="|未上架";
+							if(situation==1)tempbody+="|上架中";
+							if(situation==2)tempbody+="|已下架";
+							if(situation==3)tempbody+="|已出售";
 		
 							tempbody += "</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore'>详情</a></div></div>";
 							if(i%2==1){
