@@ -21,6 +21,13 @@ public class ExamineArtistServiceImpl extends BaseServiceImpl<ExamineArtist> imp
 
 	@Autowired
 	private IExamineArtistDao examineartistDao;
+
+	@Override
+	public List<ExamineArtist> GetPageBeanFilterWhereSugNotEqualOne(Class clz, int page, int pageSize,
+			String selectname, String value) {
+		// TODO Auto-generated method stub
+		return examineartistDao.getPageBeanFilterrWhereSugNotEqualOne(clz, page, pageSize, selectname, value);
+	}
 	
 
 }

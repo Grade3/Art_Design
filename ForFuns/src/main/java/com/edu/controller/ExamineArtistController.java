@@ -68,7 +68,7 @@ public class ExamineArtistController implements ServletConfigAware,ServletContex
 			@RequestParam(value="selectname",defaultValue="id")String selectname,
 			@RequestParam(value="value",defaultValue="")String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<ExamineArtist> list = examineartistService.GetPageBeanFilter(ExamineArtist.class, page,
+		List<ExamineArtist> list = examineartistService.GetPageBeanFilterWhereSugNotEqualOne(ExamineArtist.class, page,
 				pageSize,selectname,value);
 		int total = examineartistService.GetPageBeanFilterTotal(ExamineArtist.class, page, pageSize, selectname, value);
 		map.put("rows", list);
@@ -86,7 +86,6 @@ public class ExamineArtistController implements ServletConfigAware,ServletContex
 		ExamineArtist examineartistBean = examineartistService.GetEntityById(ExamineArtist.class, examineartistid);
 		examineartistBean.setSuggestion(Integer.toString(situation));
 		if(situation==1){
-			examineartistBean.setSuggestion("1");
 			String id=customerService.getCustomerIdByUserid(examineartistBean.getUserid().toString());
 			Customer customer = customerService.GetEntityById(Customer.class, Integer.valueOf(id));
 			customer.setIsartist(1);
