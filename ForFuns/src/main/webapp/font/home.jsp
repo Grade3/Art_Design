@@ -284,16 +284,6 @@ $(document).ready(function(){
 					<div class="logo">
 						<h1><a href="home.html">ArtCustomize</a></h1>
 					</div>
-					<div class="top-nav visible-xs visible-sm">
-						<ul class="megamenu skyblue">
-							<li><a href="home.jsp" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
-							<li><a href="goodslist.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
-							<li><a href="home.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
-							<li><a href="artistlist.jsp"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
-							<li><a href="newslist.jsp"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
-							<li><a href="home.html"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
-						</ul>
-					</div>
 					<div class="top-nav-xs visible-md">
 						<div id="menu">
 							<p>菜  单</p>

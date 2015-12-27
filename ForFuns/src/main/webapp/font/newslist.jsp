@@ -7,19 +7,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 	<title>Newslist</title>
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />	
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
 	<link href="../css/newslist.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<style type="text/css">
 	*{font-style: normal;}
 </style>
 </head>
 <body>
 
-<a href="javascript:;" class="lanrenzhijia_top"></a>
+<a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
 <script src="../js/lanrenzhijia.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
@@ -63,8 +68,9 @@ function CheckUser(){
 			$('#registeraction').hide();
 			$('#loginaction').hide();
 			$('#usernameaction').show();
+			$('#usernameaction').css("display","inline-block");
 			$('#loginoutaction').show();
-			$('#username').html("<i class='item_login'/>"+json);
+			$('#username').html("<span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp;&nbsp;"+json);
 		},error:function(){
 			
 		}
@@ -91,9 +97,12 @@ function GetNewsList(page,pageSize){
 					body += content;
 				}
 				if(page*pageSize <globaltotal){
-					body +="<div class='col-md-12 blog-in-top'><div class='learn_more'><p>查看更多</p></div></div>";
+					body +="<div class='col-md-12 blog-in-top more1'><div class='learn_more'><p>查看更多</p></div></div>";
 				}
 				$('#newslist').append(body);
+				
+				
+				
 			}else{
 				var content ="<div class='col-md-12 blog-in-top'><div class='learn_more'><p>没有更多的信息</p></div></div>";
 				$('#newslist').html(content);
@@ -123,17 +132,17 @@ $(document).ready(function(){
 </script>
 
 	<div class="header-top">
-			<div class="container">
+			<div class="container head1">
 				<div class="statu_bar">
 					<ul class="support">
 						<li ><span ><i class="item_message"> </i>471979617@qq.com</span></li>
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
-						<li id="usernameaction"><a href="javascrip:void(0);" id="username"><i class="item_login"/>登陆</a></li>
-						<li id="loginoutaction"><a href="Login.jsp" ><i class="item_register"> </i>退出</a></li>			
+						<li class="li1" id="loginaction" ><a href="Login.jsp" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
+						<li class="li2" id="registeraction"><a href="Register.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>
+						<li class="li1" id="usernameaction"><a href="#" id="username"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;</a></li>
+						<li class="li2" id="loginoutaction"><a href="home.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
 					</ul>
 				</div>
 			</div>
@@ -141,16 +150,6 @@ $(document).ready(function(){
 				<div class="container">
 					<div class="logo">
 						<h1><a href="home.html">ArtCustomize</a></h1>
-					</div>
-					<div class="top-nav visible-xs visible-sm">
-						<ul class="megamenu skyblue">
-							<li><a href="home.jsp" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
-							<li><a href="goodslist.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
-							<li><a href="home.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
-							<li><a href="artistlist.jsp"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
-							<li><a href="newslist.jsp"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
-							<li><a href="home.html"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
-						</ul>
 					</div>
 					<div class="top-nav-xs visible-md">
 						<div id="menu">
@@ -163,7 +162,6 @@ $(document).ready(function(){
 								<li><a href="home.html">DIY</a></li>
 								<li><a href="artistlist.jsp">艺术家</a></li>
 								<li><a href="newslist.jsp">资讯中心</a></li>
-								<li><a href="home.html">联系我们</a></li>
 							</ul>
 						</div>
 					</div>
@@ -174,9 +172,34 @@ $(document).ready(function(){
 							<li><a href="home.html">DIY</a></li>
 							<li><a href="artistlist.jsp">艺术家</a></li>
 							<li><a href="newslist.jsp">资讯中心</a></li>
-							<li><a href="home.html">联系我们</a></li>
 						</ul>
 					</div>
+					
+					<div class="content-top content-top1 visible-xs visible-sm">
+						<div class="row tag_up">
+							<div class="col-xs-3 tag0 tag01">
+								<div class="row col-xs-12 tag tag1">
+									<a href="home.html"><span class="glyphicon glyphicon-home pattern1" aria-hidden="true"></span></br>首页</a>
+								</div>			
+							</div>
+							<div class="col-xs-3 tag0">
+								<div class="row col-xs-12 tag tag2">
+									<a href="goodslist.html"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
+								</div>
+							</div>
+							<div class="col-xs-3 tag0">
+								<div class="row col-xs-12 tag tag3">
+									<a href="home.html"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
+								</div>
+							</div>
+							<div class="col-xs-3 tag0">
+								<div class="row col-xs-12 tag tag4">
+									<a href="newslist.html"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
+								</div>	
+							</div>
+						</div>
+					</div>
+					
 				</div>
 			</div>
 		</div>
