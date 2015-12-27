@@ -75,6 +75,16 @@ function CheckUser(){
 	});
 }
 
+function keyPress() {    
+    var keyCode = event.keyCode;    
+    if ((keyCode >= 48 && keyCode <= 57))    
+   {    
+        event.returnValue = true;    
+    } else {    
+          event.returnValue = false;    
+   }    
+}  
+
 function addNewOne(){
 	$(".add_hidden").show();
 }
@@ -89,6 +99,19 @@ function ok_remove1()
 	$(".add_hidden_bg").hide();
 	$(".ok_remove").hide();
 	$(".add_hidden").hide();
+}
+
+function validate(){
+	var money = $("#money").val();
+	if(money == null || money == "" )
+	{
+		$("#alertmessage").show();
+		return false;
+	}
+	else {
+		$(".add_hidden_bg").show();
+		$(".ok_remove").show();
+	}
 }
 
 $(document).ready(function()
@@ -116,7 +139,7 @@ $(document).ready(function()
 	$('#usernameaction').hide();
 	$('#loginoutaction').hide();
 	CheckUser();
-	
+	$("#alertmessage").hide()
 	
 	//过程
 	var useridtoken = getCookie("useridtoken");
@@ -154,9 +177,10 @@ $(document).ready(function()
   		}
   		var index = useridtoken.indexOf("&");
   		var id =  useridtoken.substring(0,index);
-  		var address = "<%=basePath%>font/personal.jsp?id=";
+  		var address = "<%=basePath%>ont/personal.jsp?id=";
 			location.href = address + id;
 		});
+
 	});
 </script>
 
@@ -177,8 +201,8 @@ $(document).ready(function()
 		</div>
 	</div>
 
-	<div class="container-fluid mainer">
-		<div class="row order_div">
+	<div class="container-fluid mainer" >
+		<div class="row order_div" >
 			<p class="col-xs-12 statue_label">
 				<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;&nbsp;当前余额
 			</p>
@@ -199,16 +223,18 @@ $(document).ready(function()
 		<div class="row add_hidden">
 			<div class="row add_name">
 				<p>充值金额：</p>
-				<input type="text" class="col-xs-12" name="money"/>
+				<input type="text" class="col-xs-12" name="money" id="money"
+					style="ime-mode: disabled;" onpaste="return false;"
+					onkeypress="keyPress()" />
 			</div>
 
-			<div class="row password_error">
+			<div class="row password_error" id="alertmessage">
 				<p>
 					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;充值金额不能为空
 				</p>
 			</div>
 			<div class="row add_name">
-				<button class="col-xs-12 new_submit" onclick="submitNewOne()">
+				<button class="col-xs-12 new_submit" onclick="return validate()">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;&nbsp;确认充值
 				</button>
 			</div>
