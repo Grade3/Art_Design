@@ -275,7 +275,7 @@ $(document).ready(function(){
 						<li class="li1" id="loginaction" ><a href="Login.jsp" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
 						<li class="li2" id="registeraction"><a href="Register.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>
 						<li class="li1" id="usernameaction"><a href="#" id="username"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;</a></li>
-						<li class="li2" id="loginoutaction"><a href="home.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
+						<li class="li2" id="loginoutaction"><a href="<%=basePath%>customer.do?method=loginout" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
 					</ul>
 				</div>
 			</div>
@@ -446,7 +446,7 @@ $(document).ready(function(){
 				<label class="line"></label>
 				<h2>艺术成品推荐</h2>
 				<div class="recommend_arts" id="advertfirst">
-					<div class="col-md-4 Recommend">
+					<%-- <div class="col-md-4 Recommend">
 						<a href="news.jsp" target="_blank"><img class="good_pic" src="<%=basePath%>image/a11.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
@@ -465,7 +465,7 @@ $(document).ready(function(){
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
-					</div>
+					</div> --%>
 				</div>
 			</div>
 
@@ -473,7 +473,7 @@ $(document).ready(function(){
 				<label class="line"></label>
 				<h2>艺术定制推荐</h2>
 				<div class="recommend_arts" id="advertsecond">
-					<div class="col-md-4 Recommend">
+					<%-- <div class="col-md-4 Recommend">
 						<a href="news.jsp" target="_blank"><img class="good_pic" src="<%=basePath%>image/b11.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
@@ -492,7 +492,7 @@ $(document).ready(function(){
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
-					</div>
+					</div> --%>
 				</div>
 			</div>
 
@@ -500,7 +500,7 @@ $(document).ready(function(){
 				<label class="line"></label>
 				<h2>艺术家推荐</h2>
 				<div class="recommend_arts" id="advertthree">
-					<div class="col-md-4 Recommend" >
+					<%-- <div class="col-md-4 Recommend" >
 						<a href="news.jsp" target="_blank"><img class="good_pic" src="<%=basePath%>image/c11.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
@@ -519,7 +519,7 @@ $(document).ready(function(){
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
-					</div>
+					</div> --%>
 				</div>
 			</div>
 		</div>

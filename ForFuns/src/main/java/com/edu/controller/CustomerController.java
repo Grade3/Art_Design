@@ -579,7 +579,7 @@ public class CustomerController implements ServletConfigAware,
 			token.setMaxAge(0);
 			response.addCookie(token);
 		}
-		return "font/Login.jsp";
+		return "font/home.jsp";
 	}
 
 	/**
