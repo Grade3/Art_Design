@@ -144,11 +144,12 @@ function validate()
 		alert("身份证号码格式错误");
 		return false;
 	}
-	
+	alert("提交申请成功");
 	return true;
 }
 
 $(document).ready(function(){
+	$('.password_error').hide();
 	$('#usernameaction').hide();
 	$('#loginoutaction').hide();
 	CheckUser();

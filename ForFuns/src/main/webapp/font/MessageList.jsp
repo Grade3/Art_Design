@@ -102,6 +102,9 @@ function getUnReadMessage(){
 }
 $(document).ready(function()
 {
+	$('.back_btn').click(function(){
+		location.href="<%=basePath%>font/personal.jsp";
+	});
 	customerUserid = getCookieUserid();
 	if(null==customerUserid)
 		location.href="<%=basePath%>font/Login.jsp";

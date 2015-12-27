@@ -45,6 +45,8 @@
 
 <script type="text/javascript">
 	function validate() {
+		$('#errormessage3').hide();
+		$('#errormessage2').hide();
 		var raw_password = $("#raw-password").val();
 		var new_password = $("#new-password").val();
 		var confirm_new_password = $("#confirm-new-password").val();
@@ -52,7 +54,7 @@
 		if (raw_password == null || raw_password == "" || new_password == null
 				|| new_password == "" || confirm_new_password == null
 				|| confirm_new_password == "") {
-			$('#errormessage2').show();
+			$('#errormessage3').show();
 			return false;
 		}
 
@@ -67,13 +69,14 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		$('.back_btn').click(function(){
+			location.href="<%=basePath%>font/personal.jsp";
+		});
 		var error = getUrlParam("error");
 		if (error == 1) 
 		{
 			$('#errormessage1').show();
 		}
-	});
-	$(document).ready(function() {
 		var customerUserid = getCookieUserid();
 
 		var pic_w = $(".order_pic").width();
@@ -143,6 +146,11 @@
 			<div class="row password_error" id="errormessage2"  style="display:none;">
 				<p>
 					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;两次密码输入不一致
+				</p>
+			</div>
+			<div class="row password_error" id="errormessage3"  style="display:none;">
+				<p>
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;请输入密码
 				</p>
 			</div>
 

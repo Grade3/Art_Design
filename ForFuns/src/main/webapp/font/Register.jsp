@@ -315,14 +315,14 @@ $(document).ready(function(){
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;密码：</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" class="form-control inputSth" placeholder="请输入密码" name="password" id="password">
+						<input type="password" class="form-control inputSth" placeholder="请输入密码" name="password" id="password">
 					</div>
 					<p class="label_error1" id="errormessage3"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;密码不能为空</p>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;确认密码：</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" class="form-control inputSth" placeholder="请再次输入密码" id="confirm_password">
+						<input type="password" class="form-control inputSth" placeholder="请再次输入密码" id="confirm_password">
 					</div>
 					<p class="label_error1" id="errormessage4"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;两次密码输入不一致</p>
 				</div>
