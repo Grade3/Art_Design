@@ -115,6 +115,16 @@ function getAddress(customerUserId){
 			+"<button class='new_btn' onclick='addNewOne()'><span class='glyphicon glyphicon-plus-sign'aria-hidden='true'></span>&nbsp;&nbsp;新增地址</button>"
 			+"</div>";
 			$('#addresslist').html(body);
+			
+			var btn_remove_h = $(".add_div").height();
+			$(".add_remove").height(btn_remove_h);
+			
+			var add_hidden_w = $(".new_btn").width()-35;
+			$(".add_hidden").width(add_hidden_w);
+			
+
+			var ok_remove_w = $(".new_btn").width()-35;
+			$(".ok_remove").width(ok_remove_w);
 		},error:function(){
 			
 		}
@@ -139,6 +149,9 @@ function addAddress(address,telephone,receiver){
 				if(null==customerUserid)
 					location.href="<%=basePath%>font/Login.jsp";
 				getAddress(customerUserid);
+				$('#inputreceiver').val("");
+				$('#inputaddress').val("");
+				$('#inputtelephone').val("");
 			} 
 		},error:function(){
 			alert("fail");
@@ -147,18 +160,17 @@ function addAddress(address,telephone,receiver){
 };
 $(document).ready(function()
 {
+	$('.back_btn').click(function(){
+		location.href="<%=basePath%>font/personal.jsp";
+	});
 	var customerUserid = getCookieUserid();
 	if(null==customerUserid)
 		location.href="<%=basePath%>font/Login.jsp";
 	getAddress(customerUserid);
-	var btn_remove_h = $(".add_div").height();
-	$(".add_remove").height(btn_remove_h);
+	
 
-	var add_hidden_w = $(".add_new").width();
-	$(".add_hidden").width(add_hidden_w);
-
-	var ok_remove_w = $(".add_new").width();
-	$(".ok_remove").width(ok_remove_w);
+	
+	
 	$('#submitbtn').click(function(){
 		var receiver = $('#inputreceiver').val();
 		var address = $('#inputaddress').val();
@@ -179,6 +191,15 @@ $(document).ready(function()
 			addAddress(address,telephone,receiver);
 		}
 	});
+	
+	var btn_remove_h = $(".add_div").height();
+	$(".add_remove").height(btn_remove_h);
+	var add_hidden_w = $(".new_btn").width()-35;
+	$(".add_hidden").width(add_hidden_w);
+	
+
+	var ok_remove_w = $(".new_btn").width()-35;
+	$(".ok_remove").width(ok_remove_w);
 });
  
 </script>

@@ -132,7 +132,7 @@ public class ArtistController
 
 		artistService.AddBean(examineartist);
 
-		return "redirect:/font/home.jsp";
+		return "redirect:/font/personal.jsp";
 
 		// CustomerBean user = new CustomerBean();
 		//
