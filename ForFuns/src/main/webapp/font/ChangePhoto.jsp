@@ -164,7 +164,7 @@ function GetUser()
 					<tr>
 						<td class="table_photo">
 							<div id="localImag">
-								<img id="preview" src="../image/good.jpg">
+								<img id="preview" src="../image/default.jpg">
 							</div>
 						</td>
 					</tr>

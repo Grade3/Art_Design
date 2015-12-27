@@ -3,6 +3,7 @@ body
 	font-family: "Microsoft YaHei";
 	font-size: 1.0em;
 	color: #000;
+	/*background-image: url(../image/body-bg.jpg);*/
 }
 
 .header-top
@@ -55,6 +56,7 @@ a.readmore:hover
 	padding-top: 1em;
 	padding-bottom: 1em;
 	border: 1px solid #eeeeee;
+	background-color: #fff;
 }
 
 .goods_two
@@ -181,4 +183,118 @@ ul.sub li:hover
 	color: #7d7d7d;
 }
 
+
+@media(max-width: 992px){
+
+.bar_news
+{
+	display: none;
+}
+
+.head1
+{
+	/*box-shadow: none;*/
+	/*border-bottom: 1px solid #eee;*/
+	box-shadow: 0 0 2px rgba(149,149,149,0.5);
+}
+
+.content-top1
+{
+	padding: 0;
+	position: fixed;
+	width: 100%;
+	background-color: #f8f8f8;
+	padding-top: 40px;
+	box-shadow: 0 0 5px rgba(149,149,149,0.5);
+}
+
+.content
+{
+	margin-top: 130px;
+	margin-bottom: 2em;
+}
+
+.tag_up,.tag
+{
+	margin-right: 0;
+	margin-left: 0;
+}
+
+.tag0
+{
+	padding: 0px;
+}
+
+.tag
+{
+	padding: 0.8em 0;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.tag a
+{
+	font-size: 1.3em;
+	color: #333;
+}
+
+.pattern1
+{
+	padding: 0.5em;
+	background-color: #ff5d56;
+	border-radius: 100%;
+	color: #fff;
+	font-size: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.good_name p
+{
+	font-size: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.good_item
+{
+	margin-bottom: 0.5em;
+}
+
+a.readmore
+{
+	background: #ff5d56;
+    border: 2px solid #ff5d56;
+    color: #fff;
+    /*background: none;
+    border: 2px solid #000;
+    color: #000;*/
+    padding: 0.3em 1.2em;
+    font-size: 1.2em;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.3em;
+}
+
+a.readmore:hover
+{
+    /*background: #ff5d56;
+    border: 2px solid #ff5d56;
+    color: #fff;*/
+    background: none;
+    border: 2px solid #000;
+    color: #000;
+}
+
+.learn_more
+{
+	padding: 1em 0;
+	margin-top: 1.5em;
+}
+
+.learn_more p
+{
+	font-size: 1.5em;
+}
+
+}
 

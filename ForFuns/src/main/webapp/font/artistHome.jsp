@@ -7,10 +7,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<title>ArtistHome</title>
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="../css/artistHome.css">
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
@@ -138,6 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#menu").click(function(){
 			  $("#menu-xs").toggle(300);
 			});
+			
 			var width = $(".userpic").width();
 			var height = width;
 			$(".userpic").height(height);
@@ -146,14 +150,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var height = width;
 				$(".userpic").height(height);
 			});
-			var width = $(".good_item").width();
+		  	
+		  	var width = $(".good_item").width();
 			var height = width/2.5*3;
 		  	$(".good_item").height(height);
 
+		  	var title_w = $(window).width();	  	
+			$(".title_bar").width(title_w);
+			
+
 		  	$(window).resize(function() {
+		  		
 		  		var width = $(".good_item").width();
-				var height = width/2.5*3;
-		  		$(".good_item").height(height);
+		  		var height = width/2.5*3;
+		  	  	$(".good_item").height(height);
+
+		  	  	var title_w = $(window).width();
+		  		$(".title_bar").width(title_w);
 		  	});
 		  
 		});
@@ -164,8 +177,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 
-<a href="javascript:;" class="lanrenzhijia_top"></a>
-	<div class="header-top">
+<a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
+
+<div class="container-fluid header">
+	<div class="title_bar">
+		<p class="back_btn"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p>
+		<p><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp;&nbsp;艺术家主页</p>
+	</div>
+</div>
+
+	<div class="col-xs-12 header-top">
 			<div class="container">
 				<div class="statu_bar">
 					<ul class="support">
@@ -173,10 +194,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
-						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
-						<li id="loginoutaction"><a href="<%=basePath %>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
+						<li class="li1" id="loginaction" ><a href="Login.jsp" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
+						<li class="li2" id="registeraction"><a href="Register.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>
+						<li class="li1" id="usernameaction"><a href="#" id="username"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;</a></li>
+						<li class="li2" id="loginoutaction"><a href="<%=basePath%>customer.do?method=loginout" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
 					</ul>
 				</div>
 			</div>
@@ -205,8 +226,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<li><a href="goodslist.jsp">成品</a></li>
 								<li><a href="home.html">DIY</a></li>
 								<li><a href="artistlist.jsp">艺术家</a></li>
-								<li><a href="newslist.jsp">资讯中心</a></li>
-								<li><a href="home.html">联系我们</a></li>
+								<li><a href="newslist.jsp">资讯中心</a></li> 
 							</ul>
 						</div>
 					</div>
@@ -217,7 +237,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<li><a href="home.html">DIY</a></li>
 							<li><a href="artistlist.jsp">艺术家</a></li>
 							<li><a href="newslist.jsp">资讯中心</a></li>
-							<li><a href="home.html">联系我们</a></li>
 						</ul>
 					</div>
 				</div>
@@ -244,22 +263,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-xs-offset-4 col-xs-4 visible-lg">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
 					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
-					<a href="artistManage.html" target="_blank" class="col-xs-12 chat">联系艺术家</a>
+					<a href="artistManage.html" target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 				<div class="col-xs-offset-3 col-xs-6 visible-md">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
 					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
-					<a href="artistManage.html"  target="_blank" class="col-xs-12 chat">联系艺术家</a>
+					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 				<div class="col-xs-offset-2 col-xs-8 visible-sm">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
 					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
-					<a href="artistManage.html"  target="_blank" class="col-xs-12 chat">联系艺术家</a>
+					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
-				<div class="col-xs-offset-1 col-xs-10 visible-xs">
-					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
-					<a href="artistManage.html"  target="_blank" class="col-xs-12 chat">联系艺术家</a>
+				<div class="col-xs-12 btn-artisthome visible-xs">
+					<a href="release.html" class="col-xs-6 beartist">发布艺术品<!--我的个人主页--></a>
+					<a href="artistManage.html" class="col-xs-6 modify">管理艺术品</a>
+					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 			</div>
 
