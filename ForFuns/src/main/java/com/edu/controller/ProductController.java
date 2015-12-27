@@ -301,7 +301,8 @@ ServletContextAware {
 	 */
 	@RequestMapping(params="method=AddOrder")
 	public String CheckLoginAddOrder(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
-			@RequestParam(value="productid")Integer id,@RequestParam(value="addressid",required=false)Integer addressid){
+			@RequestParam(value="productid")Integer id,@RequestParam(value="addressid",required=false,defaultValue="")Integer addressid,
+			@RequestParam(value="addmoney",required=false,defaultValue="0")Integer addmoney){
 		String userid = CheckTokenTool.GetUserid(useridtoken);
 		Customer customerBean = null;
 		Product productBean = null;
@@ -317,6 +318,7 @@ ServletContextAware {
 		String respons = "redirect:/font/error.jsp";
 		try {
 			params.put("addressid", addressid);
+			params.put("addmoney", addmoney);
 			productProxy.Init(productBean);
 			respons =productProxy.BuyProduct(customerBean, productBean.getMoney(),params);
 			System.out.println(respons);

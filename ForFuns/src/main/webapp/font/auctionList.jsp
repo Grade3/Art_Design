@@ -17,12 +17,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/auctionList.css">
 	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
-	<script type="text/javascript" src="<%=basePath%>js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 </head>
 <body>
 
 <a href="javascript:;" class="lanrenzhijia_top"></a>
 <script src="<%=basePath%>js/lanrenzhijia.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.7.1.min.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -82,7 +83,7 @@ function GetAllOnlineProduct(typeid,page,pageSize){
 						tempbody +="<div class='col-md-6 goods_two'>";
 					}
 					tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
-							 +"<div class='good_name'><p>"+name+"</p><p>"+authorname+"</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore'>详情</a></div></div>";
+							 +"<div class='good_name'><p>"+name+"</p><p>"+authorname+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore'>详情</a></div></div>";
 					if(i%2==1){
 						tempbody +="</div>";
 					}
@@ -271,7 +272,7 @@ $(document).ready(function(){
 
 			<div class="col-lg-10 good_four" id="goodlist">
 
-				<div class="col-md-6 goods_two">
+				<%-- <div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
 						<a href="goodsdetail.html" target="_blank"><img src="<%=basePath%>image/bg_login1.jpg" class="good_item"></a>
 						<div class="good_name">
@@ -397,7 +398,7 @@ $(document).ready(function(){
 
 				<div class="col-xs-12 learn_more">
 					<p>查看更多</p>
-				</div>
+				</div> --%>
 			</div>
 			
 		</div>

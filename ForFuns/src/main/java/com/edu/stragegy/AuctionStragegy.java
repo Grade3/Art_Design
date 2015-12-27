@@ -40,6 +40,7 @@ public class AuctionStragegy implements ISellStrategy{
 			Integer money, Map<String, Object> params) throws Exception {
 		ProductMoney productMoneyBean = productMoneyDao.GetBeanByCondition(ProductMoney.class, ProductMoneyTable.PRODUCTID, productBean.getId()+"", null);
 		ProductMoney maxProductMoneyBean  = null;
+		Integer addmony = Integer.parseInt(params.get("addmoney").toString());
 		if(!(null == productMoneyBean)){//如果有人竞拍,找出最高价
 			Integer id   = productMoneyDao.GetMaxMoneyid(productBean.getId());
 			maxProductMoneyBean = (ProductMoney) productMoneyDao.getEntitybyId(ProductMoney.class, id);
@@ -71,19 +72,19 @@ public class AuctionStragegy implements ISellStrategy{
 			ProductMoney newproductMoney =  new ProductMoney();
 			newproductMoney.setCustomerBean(customerBean);
 			newproductMoney.setProductBean(productBean);
-			newproductMoney.setMoney(money);
+			newproductMoney.setMoney(addmony);
 			newproductMoney.setCurrenttime(new Date());
 			productMoneyDao.addEntity(newproductMoney);
-			return "xxxxxxxx";
+			return "redirect:/font/success.jsp?successid=1";
 		}else{//如果存在，找出最高值
 			
-			if(maxProductMoneyBean.getMoney()>=money){//如果竞价的值比原来的小，拒绝
+			if(maxProductMoneyBean.getMoney()>=addmony){//如果竞价的值比原来的小，拒绝
 				return "redirect:/font/error.jsp?errorid=4";
 			}else{
 				ProductMoney newproductMoney =  new ProductMoney();
 				newproductMoney.setCustomerBean(customerBean);
 				newproductMoney.setProductBean(productBean);
-				newproductMoney.setMoney(money);
+				newproductMoney.setMoney(addmony);
 				newproductMoney.setCurrenttime(new Date());
 				productMoneyDao.addEntity(newproductMoney);
 				return "redirect:/font/success.jsp?successid=4";

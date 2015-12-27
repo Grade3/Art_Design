@@ -29,11 +29,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}else if(error==3){//拍卖不在时间内
 				$('.label_wrong').html("操作失败，该商品不在拍卖时间范围内");
 				$('.readmore').html('返回商品页面');
-				$('.readmore').attr('href',"<%=basePath%>font/goodslist.jsp");
+				$('.readmore').attr('href',"<%=basePath%>font/auctionList.jsp");
 			}else if(error==4){//拍卖金额小于当前金额
 				$('.label_wrong').html("操作失败，金额小于当前最高价");
 				$('.readmore').html('返回商品页面');
-				$('.readmore').attr('href',"<%=basePath%>font/goodslist.jsp");
+				$('.readmore').attr('href',"<%=basePath%>font/auctionList.jsp");
+			}else if(error==5){//余额不足
+				$('.label_wrong').html("操作失败，余额不足");
+				$('.readmore').html('返回充值页面');
+				$('.readmore').attr('href',"<%=basePath%>font/personal.jsp");
 			}
 			
 		});

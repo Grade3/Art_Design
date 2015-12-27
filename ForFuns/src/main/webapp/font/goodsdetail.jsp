@@ -49,6 +49,8 @@ function getProductById(id){
 			var typename = product.typename;
 			var timestart = myformatter(product.timestart);
 			var timeout = myformatter(product.timeout);
+			if(methodid!=1)
+				location.href="<%=basePath%>font/404.jsp";
 			$('#imgurl').attr("src",imgurl);
 			$('#imgone').attr("src",imgone);
 			$('#imgtwo').attr("src",imgtwo);
@@ -81,7 +83,7 @@ function getProductById(id){
 $(document).ready(function(){
 	var productid = getUrlParam("productid");
 	if(null==productid){
-		//location.href="404.html";
+		location.href="<%=basePath%>font/404.jsp";
 	}
 	getProductById(productid);
 });

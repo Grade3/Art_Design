@@ -17,12 +17,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/auctionDetail.css">
 	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
-	<script type="text/javascript" src="<%=basePath%>js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 </head>
 <body>
 
 <a href="javascript:;" class="lanrenzhijia_top"></a>
 <script src="<%=basePath%>js/lanrenzhijia.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.7.1.min.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -48,6 +49,62 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
+//通过id获取商品详情 
+function getProductById(id){
+	$.ajax({
+		type:'post',
+		asycn:false,
+		url:'<%=basePath%>/product.do?method=GetProductById',
+		data:{productid:id},
+		success:function(json){
+			var product = json.product;
+			var id = product.id;
+			var money = "￥"+product.initmoney;
+			var name= product.name;
+			var imgurl = product.imgurl;
+			var authorname = product.authorname;
+			var content = product.content;
+			var imgone = product.imgone;
+			var imgtwo = product.imgtwo;
+			var imgthree = product.imgthree;
+			var situation = product.situation;
+			var methodid = product.methodid;
+			var typename = product.typename;
+			var timestart = myformatter(product.timestart);
+			var timeout = myformatter(product.timeout);
+			if(methodid!=2)
+				location.href="<%=basePath%>font/404.jsp";
+			$('#productid').val(id);
+			$('#imgurl').attr("src",imgurl);
+			$('#imgone').attr("src",imgone);
+			$('#imgtwo').attr("src",imgtwo);
+			$('#imgthree').attr("src",imgthree);
+			$('#timestart').html(timestart);
+			$('#timeout').html(timeout);
+			$('#name').html(name);
+			$('#money').html(money);
+			$('#typename').html(typename);
+			$('#authorname').html(authorname);
+			$('#content').html(content);
+			if(situation==1){
+				var tempcontent = "<div class='row buy'><a target='_blank' href='payfor.jsp?productid="+id+"' class='col-xs-12 readmore'>现在购买</a></div>";
+				$('#gooddetail').append(tempcontent);
+			}
+			if(situation==0){
+				$('#situation').html("未上架");
+			}else if(situation==1){
+				$('#situation').html("上架中");
+			}else if(situation==2){
+				$('#situation').html("已下架");
+			}else if(situation==3){
+				$('#situation').html("已出售");
+			}
+		},error:function(){
+			
+		}
+	});
+}
+
 
 function addNewOne(){
 	$(".add_hidden_bg").show();
@@ -58,26 +115,46 @@ function submitNewOne(){
 	$(".add_hidden_bg").hide();
 	$(".add_hidden").hide();
 }
-
+//检验数字
+function validatenumber(number){ 
+	var reg = /^\d+$/;
+    if (!number.match(reg)){
+        return false;
+    }else{    
+    	return true;
+    }    
+} ;
 $(document).ready(function(){
 
-	var src1 = "<%=basePath%>image/good.jpg";
-	var src2 = "<%=basePath%>image/bl.jpg";
-	var src3 = "<%=basePath%>image/bl2.jpg";
-
-
-  	$(".pic1").click(function() {
+	var productid = getUrlParam("productid");
+	if(null==productid){
+		location.href="<%=basePath%>font/404.jsp";
+	}
+	getProductById(productid);
+	
+	$('#addmoneysubmit').click(function(){
+		var addmoney = $('#addmoney').val();
+		if(validatenumber(addmoney)){
+			//var money = $('#money').html();
+			//money = money.substring(1,money.length);
+			//money = Number(money) + Number(addmoney);
+			$('#addform').submit();
+		}
+	});
+	$(".pic1").click(function() {
+  		var src1 = $(this).attr("src");
   		$(".pic").attr("src",src1);
   	});
-
   	$(".pic2").click(function() {
+  		var src2 = $(this).attr("src");
   		$(".pic").attr("src",src2);
   	});
-
   	$(".pic3").click(function() {
+  		var src3 = $(this).attr("src");
   		$(".pic").attr("src",src3);
   	});
-
+  	
+  	
   	var width = $(".good_item img").width();
 	var height = width;
   	$(".good_item img").height(height);
@@ -172,23 +249,23 @@ $(document).ready(function(){
 			<div class="col-xs-12">
 				<div class="col-md-6 good_show">
 					<div class="col-xs-12 good_item">
-						<img src="<%=basePath%>image/good.jpg" class="pic">
+						<img src="<%=basePath%>image/good.jpg" class="pic" id="imgurl">
 					</div>
 					<div class="col-xs-4 good_pic">
-						<img src="<%=basePath%>image/good.jpg" class="pic1">
+						<img src="<%=basePath%>image/good.jpg" class="pic1" id="imgone">
 					</div>
 					<div class="col-xs-4 good_pic">
-						<img src="<%=basePath%>image/bl.jpg" class="pic2">
+						<img src="<%=basePath%>image/bl.jpg" class="pic2" id="imgtwo">
 					</div>
 					<div class="col-xs-4 good_pic">
-						<img src="<%=basePath%>image/bl2.jpg" class="pic3">
+						<img src="<%=basePath%>image/bl2.jpg" class="pic3" id="imgthree">
 					</div>
 				</div>
 				<div class="col-md-6 good_detail">
-					<p class="good_name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</p>
+					<p class="good_name" id="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</p>
 					<div class="row price">
 						<p class="col-xs-3 good_price1 price1">起始价</p>
-						<p class="col-xs-9 good_price price2">￥98.00</p>
+						<p class="col-xs-9 good_price price2" id="money">￥98.00</p>
 						<p class="col-xs-3 good_price1 price3">当前价</p>
 						<p class="col-xs-9 good_price price4">￥230.00</p>
 					</div>
@@ -198,23 +275,23 @@ $(document).ready(function(){
 					</div>
 					<div class="row other">
 						<p class="col-xs-3 good_other">所属分类</p>
-						<p class="col-xs-9 good_other good_other1">分类6</p>
+						<p class="col-xs-9 good_other good_other1" id="typename">分类6</p>
 					</div>
 					<div class="row">
 						<p class="col-xs-3 good_other">上架时间</p>
-						<p class="col-xs-9 good_other good_other1">2015-12-7 8:00</p>
+						<p class="col-xs-9 good_other good_other1" id="timestart">2015-12-7 8:00</p>
 					</div>
 					<div class="row">
 						<p class="col-xs-3 good_other">下架时间</p>
-						<p class="col-xs-9 good_other good_other1">2015-12-31 23:59</p>
+						<p class="col-xs-9 good_other good_other1" id="timeout">2015-12-31 23:59</p>
 					</div>
 					<div class="row artist">
 						<p class="col-xs-3 good_other">艺术家</p>
-						<p class="col-xs-5 good_artist">艺术家名称</p>
+						<p class="col-xs-5 good_artist" id="authorname">艺术家名称</p>
 						<a href="artist.html" class="col-xs-4 readmore enter" target="_blank">进入主页</a>
 					</div>
 					<div class="row buy">
-						<a class="col-xs-12 readmore" onclick="addNewOne()">现在购买</a>
+						<a class="col-xs-12 readmore" onclick="addNewOne()">加入竞拍</a>
 					</div>
 				</div>
 			</div>
@@ -224,23 +301,26 @@ $(document).ready(function(){
 					<p>图文详情</p>
 					<label class="line"></label>
 				</div>
-				<p class="des_p">这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述</p>
+				<p class="des_p" id="content">这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述这里是商品详细描述</p>
 			</div>
 		</div>
 	</div>
 
 	<div class="row add_hidden_bg"></div>
 	<div class="row add_hidden">
+	<form action="<%=basePath%>product.do?method=AddOrder" method="post" id="addform">
+		<input type="hidden" value="" id="productid" name = "productid">
 		<div class="row add_name1">
 			<button class="col-xs-offset-11 col-xs-1 new_submit1" onclick="submitNewOne()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 		</div>
 		<div class="row add_name">
 			<p>加价：</p>
-			<input type="text" class="col-xs-12" />
+			<input type="text" class="col-xs-12" id="addmoney" name ="addmoney" />
 		</div>
 		<div class="row add_name">
-			<button class="col-xs-12 new_submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;&nbsp;提交</button>
+			<button class="col-xs-12 new_submit" id="addmoneysubmit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;&nbsp;提交</button>
 		</div>
+	</form>
 	</div>
 
 
