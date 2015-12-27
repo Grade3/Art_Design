@@ -7,11 +7,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 	<title>Goodsdetail</title>
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="../css/goodsdetail.css">
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
@@ -155,7 +158,14 @@ $(document).ready(function(){
 });
 </script>
 
-	<div class="header-top">
+<div class="container-fluid header">
+	<div class="title_bar">
+		<p class="back_btn"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p>
+		<p><span class="glyphicon glyphicon-tower" aria-hidden="true"></span>&nbsp;&nbsp;商品详情</p>
+	</div>
+</div>
+
+	<div class="col-xs-12 header-top">
 			<div class="container">
 				<div class="statu_bar">
 					<ul class="support">
@@ -163,10 +173,10 @@ $(document).ready(function(){
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
-						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
-						<li id="loginoutaction"><a href="<%=basePath %>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
+						<li class="li1" id="loginaction" ><a href="Login.jsp" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
+						<li class="li2" id="registeraction"><a href="Register.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>
+						<li class="li1" id="usernameaction"><a href="#" id="username"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;</a></li>
+						<li class="li2" id="loginoutaction"><a href="<%=basePath%>customer.do?method=loginout" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
 					</ul>
 				</div>
 			</div>
@@ -195,8 +205,7 @@ $(document).ready(function(){
 								<li><a href="goodslist.jsp">成品</a></li>
 								<li><a href="home.html">DIY</a></li>
 								<li><a href="artistlist.jsp">艺术家</a></li>
-								<li><a href="newslist.jsp">资讯中心</a></li>
-								<li><a href="home.html">联系我们</a></li>
+								<li><a href="newslist.jsp">资讯中心</a></li> 
 							</ul>
 						</div>
 					</div>
@@ -207,11 +216,10 @@ $(document).ready(function(){
 							<li><a href="home.html">DIY</a></li>
 							<li><a href="artistlist.jsp">艺术家</a></li>
 							<li><a href="newslist.jsp">资讯中心</a></li>
-							<li><a href="home.html">联系我们</a></li>
 						</ul>
 					</div>
 				</div>
-			</div>	
+			</div>
 		</div>
 
 	<div class="container">
@@ -244,7 +252,7 @@ $(document).ready(function(){
 				<div class="col-md-6 good_detail" id="gooddetail">
 					<p class="good_name" id="name"><!-- 商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称 --></p>
 					<div class="row price">
-						<p class="col-xs-3 good_price1">一口价</p>
+						<p class="col-xs-3 good_price1">价格</p>
 						<p class="col-xs-9 good_price" id="money"><!-- ￥98.00 --></p>
 					</div>
 					<div class="row trans">
@@ -252,7 +260,7 @@ $(document).ready(function(){
 						<p class="col-xs-9 good_other">卖家城市 快递公司</p>
 					</div>
 					<div class="row other">
-						<p class="col-xs-3 good_other">艺术品分类</p>
+						<p class="col-xs-3 good_other">所属分类</p>
 						<p class="col-xs-9 good_other" id="typename"><!-- 分类6 --></p>
 					</div>
 					<div class="row">
@@ -263,14 +271,10 @@ $(document).ready(function(){
 						<p class="col-xs-3 good_other">下架时间</p>
 						<p class="col-xs-9 good_other" id="timeout"><!-- 2015-12-31 23:59 --></p>
 					</div>
-					<div class="row">
-						<p class="col-xs-3 good_other">状态</p>
-						<p class="col-xs-9 good_other" id="situation"></p>
-					</div>
 					<div class="row artist">
 						<p class="col-xs-3 good_other">艺术家</p>
 						<p class="col-xs-9 good_artist" id="authorname"><!-- 艺术家名称 --></p>
-						<a href="artist.html" class="col-xs-4 readmore" target="_blank">进入艺术家主页</a>
+						<a href="artist.html" class="col-xs-4 readmore enter" target="_blank">进入艺术家主页</a>
 					</div>
 					<!-- <div class="row buy">
 						<a href="buy.html" class="col-xs-12 readmore">现在购买</a>

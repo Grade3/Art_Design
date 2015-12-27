@@ -9,10 +9,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 <title>Modify</title>
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="../css/dom.css" rel="stylesheet" type="text/css" />
 <link href="../css/footer.css" rel="stylesheet" type="text/css" />
+<link href="../css/footer2.css" rel="stylesheet" type="text/css" /> 
 <link rel="stylesheet" type="text/css" href="../css/modify.css">
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
@@ -20,7 +23,7 @@
 </head>
 <body>
 
-	<a href="javascript:;" class="lanrenzhijia_top"></a>
+	<a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
 	<script src="../js/lanrenzhijia.js"></script>
 	<script>
 $(function(){
@@ -173,71 +176,69 @@ function validate()
 		});
 	</script>
 
-	<div class="header-top">
-		<div class="container">
-			<div class="statu_bar">
-				<ul class="support">
-					<li><span><i class="item_message"> </i>471979617@qq.com</span></li>
-					<li><span><i class="item_tel"> </i>156-9000-8000</span></li>
-				</ul>
-				<ul class="support-right">
-					<li><a href="Login.html"><i class="item_login"> </i>登陆</a></li>
-					<li><a href="Register.html"><i class="item_register">
-						</i>注册账号</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="header-bottom">
+<div class="container-fluid header">
+	<div class="title_bar">
+		<p class="back_btn"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p>
+		<p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;修改信息</p>
+	</div>
+</div>
+
+	<div class="col-xs-12 header-top">
 			<div class="container">
-				<div class="logo">
-					<h1>
-						<a href="home.html">ArtCustomize</a>
-					</h1>
-				</div>
-				<div class="top-nav visible-xs visible-sm">
-					<ul class="megamenu skyblue">
-						<li><a href="home.jsp" class="menu_home"><span
-								class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
-						<li><a href="goodslist.jsp"><span
-								class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
-						<li><a href="home.html"><span
-								class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
-						<li><a href="artistlist.jsp"><span
-								class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
-						<li><a href="newslist.jsp"><span
-								class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
-						<li><a href="home.html"><span
-								class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
+				<div class="statu_bar">
+					<ul class="support">
+						<li ><span ><i class="item_message"> </i>471979617@qq.com</span></li>
+						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
+					</ul>
+					<ul class="support-right">
+						<li class="li1" id="loginaction" ><a href="Login.jsp" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
+						<li class="li2" id="registeraction"><a href="Register.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>
+						<li class="li1" id="usernameaction"><a href="#" id="username"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;</a></li>
+						<li class="li2" id="loginoutaction"><a href="<%=basePath%>customer.do?method=loginout" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
 					</ul>
 				</div>
-				<div class="top-nav-xs visible-md">
-					<div id="menu">
-						<p>菜 单</p>
+			</div>
+			<div class="header-bottom">
+				<div class="container">
+					<div class="logo">
+						<h1><a href="home.html">ArtCustomize</a></h1>
 					</div>
-					<div id="menu-xs">
-						<ul>
+					<div class="top-nav visible-xs visible-sm">
+						<ul class="megamenu skyblue">
+							<li><a href="home.jsp" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
+							<li><a href="goodslist.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
+							<li><a href="artistlist.jsp"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
+							<li><a href="newslist.jsp"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
+							<li><a href="home.html"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
+						</ul>
+					</div>
+					<div class="top-nav-xs visible-md">
+						<div id="menu">
+							<p>菜  单</p>
+						</div>
+						<div id="menu-xs">
+							<ul>
+								<li><a href="home.jsp">首页</a></li>
+								<li><a href="goodslist.jsp">成品</a></li>
+								<li><a href="home.html">DIY</a></li>
+								<li><a href="artistlist.jsp">艺术家</a></li>
+								<li><a href="newslist.jsp">资讯中心</a></li> 
+							</ul>
+						</div>
+					</div>
+					<div class="top-nav visible-lg">
+						<ul class="megamenu skyblue">
 							<li><a href="home.jsp">首页</a></li>
 							<li><a href="goodslist.jsp">成品</a></li>
 							<li><a href="home.html">DIY</a></li>
 							<li><a href="artistlist.jsp">艺术家</a></li>
 							<li><a href="newslist.jsp">资讯中心</a></li>
-							<li><a href="home.html">联系我们</a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="top-nav visible-lg">
-					<ul class="megamenu skyblue">
-						<li><a href="home.html">首页</a></li>
-						<li><a href="home.html">成品</a></li>
-						<li><a href="home.html">DIY</a></li>
-						<li><a href="home.html">艺术家</a></li>
-						<li><a href="newslist.html">资讯中心</a></li>
-						<li><a href="home.html">联系我们</a></li>
-					</ul>
-				</div>
 			</div>
 		</div>
-	</div>
 
 	<div class="container">
 		<h6 class="location">
@@ -276,31 +277,28 @@ function validate()
 								</p>
 							</div>
 							<div class="row info">
-								<p class="col-xs-3 label_t">
-									<span class="glyphicon glyphicon-user"></span> 用户名
-								</p>
-								<input type="text" class="col-xs-8" name = "userid" value="我的用户名" id="userid" readonly="readonly">
+								<div class="row password_label">
+									<p>&nbsp;用户名：</p>
+								</div>
+								<div class="row password_input">
+									<input class="col-xs-12" type="text" name = "userid" value="我的用户名" id="userid" readonly="readonly" />
+								</div>
+								<div class="row password_error">
+									<p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;用户名不能为空</p>
+								</div>
+							
 							</div>
 							<div class="row info">
-								<p class="col-xs-3 label_t">
-									<span class="glyphicon glyphicon-user"></span> 昵称
-								</p>
-								<input type="text" class="col-xs-8" value="我的昵称" name = "username" id="username">
+								<div class="row password_label">
+									<p>&nbsp;昵称：</p>
+								</div>
+								<div class="row password_input">
+									<input class="col-xs-12" type="text" value="我的昵称" name = "username" id="username" />
+								</div>
+								<div class="row password_error">
+									<p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;昵称不能为空</p>
+								</div>
 							</div>
-							<div class="row info" id="advantage_div">
-								<p class="col-xs-3 label_t">
-									<span class="glyphicon glyphicon-heart"></span> 擅长领域
-								</p>
-								<input type="text" class="col-xs-8" value="我擅长的领域"
-									id="advantage" name = "advantage">
-							</div>
-							<div class="row info info2" id="showme_div">
-								<p class="col-xs-3 label_t">
-									<span class="glyphicon glyphicon-leaf"></span> 个人简介
-								</p>
-								<textarea class="col-xs-8" id="showme" name = "showme">我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介我的个人简介</textarea>
-							</div>
-
 						</div>
 
 					</div>
@@ -313,25 +311,43 @@ function validate()
 								</p>
 							</div>
 							<div class="row info">
-								<p class="col-xs-3 label_t">
-									<span class="glyphicon glyphicon-tags"></span> 真实姓名
-								</p>
-								<input type="text" class="col-xs-8" value="我的真实姓名" id="realname" name="realname">
+								<div class="row password_label">
+									<p>&nbsp;真实姓名：</p>
+								</div>
+								<div class="row password_input">
+									<input class="col-xs-12" type="text" value="我的真实姓名" id="realname" name="realname" />
+								</div>
+								<div class="row password_error">
+									<p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;真实姓名不能为空</p>
+								</div>
+
 							</div>
 							<div class="row info">
-								<p class="col-xs-3 label_t">
-									<span class="glyphicon glyphicon-credit-card"></span> 身份证
-								</p>
-								<input type="text" class="col-xs-8" value="我的真身份证号"
-									id="personnumber" name="personnumber">
+								<div class="row password_label">
+									<p>&nbsp;身份证：</p>
+								</div>
+								<div class="row password_input">
+									<input class="col-xs-12" type="text" value="我的身份证" id="personnumber" name="personnumber" />
+								</div>
+								<div class="row password_error">
+									<p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;身份证不能为空</p>
+								</div>
+
 							</div>
 							<div class="row info info2">
-								<p class="col-xs-3 label_t">
-									<span class="glyphicon glyphicon-phone"></span> 手机
-								</p>
-								<input type="text" class="col-xs-8" value="我的手机" id="telphone" name="telphone">
+								<div class="row password_label">
+									<p>&nbsp;手机：</p>
+								</div>
+								<div class="row password_input">
+									<input class="col-xs-12" type="text" value="我的手机" id="telphone" name="telphone" />
+								</div>
+								<div class="row password_error">
+									<p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;手机不能为空</p>
+								</div>
+
 							</div>
 						</div>
+					</div>
 
 						<div class="col-xs-12 success_btn visible-lg">
 							<input type="submit" class="col-xs-offset-2 col-xs-8"
@@ -341,7 +357,7 @@ function validate()
 						<div class="col-xs-12 success_btn hidden-lg">
 							<input type="submit" class="col-xs-12" value="提交修改" onclick="return validate()">
 						</div>
-					</div>
+					
 				</form>
 			</div>
 

@@ -7,11 +7,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<title>Goodslist</title>
 	<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="../css/goodslist.css">
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
@@ -19,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 
-<a href="javascript:;" class="lanrenzhijia_top"></a>
+<a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
 <script src="../js/lanrenzhijia.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <style type="text/css">
@@ -103,7 +106,7 @@ function GetAllOnlineProduct(typeid,page,pageSize){
 						tempbody +="<div class='col-md-6 goods_two'>";
 					}
 					tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
-							 +"<div class='good_name'><p>"+name+"</p><p>"+authorname+"</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore'>详情</a></div></div>";
+							 +"<div class='good_name'><p>"+name+"</p><p class='artistname1'>"+authorname+"</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore read1' target='_blank'>详情</a></div></div>";
 					if(i%2==1){
 						tempbody +="</div>";
 					}
@@ -158,17 +161,17 @@ $(document).ready(function(){
 </script>
 
 	<div class="header-top">
-			<div class="container">
+			<div class="container head1">
 				<div class="statu_bar">
 					<ul class="support">
 						<li ><span ><i class="item_message"> </i>471979617@qq.com</span></li>
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
-						<li id="usernameaction"><a href="personal.jsp" id="username"><i class="item_login"/></a></li>
-						<li id="loginoutaction"><a href="<%=basePath %>>customer.do?method=loginout" ><i class="item_register"> </i>退出</a></li>			
+						<li class="li1" id="loginaction" ><a href="Login.jsp" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
+						<li class="li2" id="registeraction"><a href="Register.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>
+						<li class="li1" id="usernameaction"><a href="#" id="username"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;</a></li>
+						<li class="li2" id="loginoutaction"><a href="<%=basePath%>customer.do?method=loginout" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
 					</ul>
 				</div>
 			</div>
@@ -176,16 +179,6 @@ $(document).ready(function(){
 				<div class="container">
 					<div class="logo">
 						<h1><a href="home.html">ArtCustomize</a></h1>
-					</div>
-					<div class="top-nav visible-xs visible-sm">
-						<ul class="megamenu skyblue">
-							<li><a href="home.jsp" class="menu_home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></br>首页</a></li>
-							<li><a href="goodslist.jsp"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></br>成品</a></li>
-							<li><a href="home.html"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></br>DIY</a></li>
-							<li><a href="artistlist.jsp"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span></br>艺术家</a></li>
-							<li><a href="newslist.jsp"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></br>资讯中心</a></li>
-							<li><a href="home.html"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></br>联系我们</a></li>
-						</ul>
 					</div>
 					<div class="top-nav-xs visible-md">
 						<div id="menu">
@@ -198,7 +191,6 @@ $(document).ready(function(){
 								<li><a href="home.html">DIY</a></li>
 								<li><a href="artistlist.jsp">艺术家</a></li>
 								<li><a href="newslist.jsp">资讯中心</a></li>
-								<li><a href="home.html">联系我们</a></li>
 							</ul>
 						</div>
 					</div>
@@ -209,8 +201,31 @@ $(document).ready(function(){
 							<li><a href="home.html">DIY</a></li>
 							<li><a href="artistlist.jsp">艺术家</a></li>
 							<li><a href="newslist.jsp">资讯中心</a></li>
-							<li><a href="home.html">联系我们</a></li>
 						</ul>
+					</div>
+					<div class="content-top content-top1 visible-xs visible-sm">
+						<div class="row tag_up">
+							<div class="col-xs-3 tag0 tag01">
+								<div class="row col-xs-12 tag tag1">
+									<a href="home.html"><span class="glyphicon glyphicon-home pattern1" aria-hidden="true"></span></br>首页</a>
+								</div>			
+							</div>
+							<div class="col-xs-3 tag0">
+								<div class="row col-xs-12 tag tag2">
+									<a href="goodslist.html"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
+								</div>
+							</div>
+							<div class="col-xs-3 tag0">
+								<div class="row col-xs-12 tag tag3">
+									<a href="home.html"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
+								</div>
+							</div>
+							<div class="col-xs-3 tag0">
+								<div class="row col-xs-12 tag tag4">
+									<a href="newslist.html"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
+								</div>	
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -225,13 +240,13 @@ $(document).ready(function(){
 		<h2>艺术品列表</h2>
 	</div>
 
-<div id="fontbg" style="position:absolute; z-index:-88888; width:100%; background-image:url(../image/fontbg.png);"></div>
 
 	<div class="content">
 		<div class="container">
 			<div class="col-lg-2 s_menu">
 				<div class="menu_box box_active">
-					<a>艺术品分类</a><i> </i>
+					<a class="thisCategory">艺术品分类&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-down partten2" aria-hidden="true"></span></a>
+					<a href="auctionList.jsp" class="otherCategory">拍卖品</a>
 					<ul class="sub" id="typeul">
 						<!-- <li>分类11111111111111</li>
 						<li>分类2</li>
