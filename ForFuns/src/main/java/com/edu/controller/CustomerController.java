@@ -173,7 +173,7 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 			user.setPassword(password);
 			user.setAvator("/forfun/image/293.jpg");
 			System.out.println(user.toString());
-
+			user.setBalance(0.0);
 			customerService.AddBean(user);
 
 			String temp = null;
@@ -643,5 +643,15 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 		} else {
 			return "redirect:/font/Password.jsp?error=1";
 		}
+	}
+	
+	/**
+	 * 进入余额管理
+	 * @param useridtoken
+	 * @return
+	 */
+	@RequestMapping(params="method=EnterBalance")
+	public String CheckLoginEnterAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
+		return "font/balance.jsp";
 	}
 }
