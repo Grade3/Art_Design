@@ -13,6 +13,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.aspectj.bridge.IMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,9 +25,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.model.Customer;
 import com.edu.model.ExamineArtist;
+import com.edu.model.Message;
 import com.edu.model.User;
 import com.edu.service.ICustomerService;
 import com.edu.service.IExamineArtistService;
+import com.edu.service.IMessageService;
 import com.edu.service.IUserService;
 
 @Controller
@@ -43,12 +47,14 @@ public class ExamineArtistController implements ServletConfigAware,ServletContex
         this.servletConfig = arg0;  
     }
     
-	@Resource
+	@Autowired
 	private IExamineArtistService examineartistService;
-	@Resource
+	@Autowired
 	private ICustomerService customerService;
-	@Resource
+	@Autowired
 	private  IUserService userService;
+	@Autowired
+	private  IMessageService messageService;
 	
 	
 	/**
@@ -76,7 +82,13 @@ public class ExamineArtistController implements ServletConfigAware,ServletContex
 		return map;
 	}
 	
-	
+	/**
+	 * 审核艺术家
+	 * @param examineartistid
+	 * @param situation
+	 * @param suggestion
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=alertsituation")
 	public String JsonAlertSituation(
@@ -84,22 +96,34 @@ public class ExamineArtistController implements ServletConfigAware,ServletContex
 			@RequestParam(value="situation")Integer situation,
 			@RequestParam(value="suggestion")String suggestion){
 		ExamineArtist examineartistBean = examineartistService.GetEntityById(ExamineArtist.class, examineartistid);
+		Message message=new Message();
 		examineartistBean.setSuggestion(Integer.toString(situation));
+		String id=customerService.getCustomerIdByUserid(examineartistBean.getUserid().toString());
+		Customer customerTo = customerService.GetEntityById(Customer.class, Integer.valueOf(id));
+		Customer customerFrom = customerService.GetEntityById(Customer.class, Integer.valueOf(4));
 		if(situation==1){
-			String id=customerService.getCustomerIdByUserid(examineartistBean.getUserid().toString());
-			Customer customer = customerService.GetEntityById(Customer.class, Integer.valueOf(id));
-			customer.setIsartist(1);
-			customerService.UpdataBean(customer);
+			customerTo.setIsartist(1);
+			
+			message.setCurrent(new Date());
+			message.setFromCustomerBean(customerFrom);
+			message.setToCustomerBean(customerTo);
+			message.setIsread(0);
+			message.setMessage("尊敬的"+customerTo.getUsername()+"，您好，非常感谢您申请成为本站的艺术家，您的申请信息非常具有竞争力，我站决定录用您成为本站的艺术合作伙伴，请尽快完善您的艺术家主页，以便向客户展示您的作品并获得收益。再次感谢您对我公司的信任，祝您未来一切顺利！");
 			}
 		else {
 			examineartistBean.setSuggestion("2");
-			String id=customerService.getCustomerIdByUserid(examineartistBean.getUserid().toString());
-			Customer customer = customerService.GetEntityById(Customer.class, Integer.valueOf(id));
-			customer.setIsartist(0);
-			customerService.UpdataBean(customer);
+			customerTo.setIsartist(0);
+			message.setCurrent(new Date());
+			message.setFromCustomerBean(customerFrom);
+			message.setToCustomerBean(customerTo);
+			message.setIsread(0);
+			message.setMessage("尊敬的"+customerTo.getUsername()+"，您好，非常感谢您申请成为本站的艺术家，您的申请信息非常具有竞争力，然而非常遗憾的是我站未能录用您成为本站的艺术合作伙伴，但我们已经将您的个人信息归入人才库，只要有合适的机会，我们将第一时间通知，再次感谢您对我公司的信任，祝您未来一切顺利，有机会我们再合作！");
+			
 		}
 		try{
 			examineartistService.UpdataBean(examineartistBean);
+			customerService.UpdataBean(customerTo);
+			messageService.AddBean(message);
 		}catch(Exception e){
 			return "0";
 		}
