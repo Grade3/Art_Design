@@ -66,8 +66,9 @@ function CheckUser(){
 			$('#registeraction').hide();
 			$('#loginaction').hide();
 			$('#usernameaction').show();
+			$('#usernameaction').css("display","inline-block");
 			$('#loginoutaction').show();
-			$('#username').html("<i class='item_login'/>"+json);
+			$('#username').html("<span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp;&nbsp;"+json);
 		},error:function(){
 			
 		}
@@ -98,18 +99,18 @@ $(document).ready(function()
 	var pic_w = $(".order_pic").width();
 	var pic_h = pic_w;
 	$(".order_pic").height(pic_h);
-	var add_hidden_w = $(".add_new").width();
+	var add_hidden_w = $(".order_div").width();
 	$(".add_hidden").width(add_hidden_w);
-	var ok_remove_w = $(".add_new").width();
+	var ok_remove_w = $(".order_div").width();
 	$(".ok_remove").width(ok_remove_w);
 
 	$(window).resize(function() {
   		var pic_w = $(".order_pic").width();
 		var pic_h = pic_w;
 		$(".order_pic").height(pic_h);
-		var add_hidden_w = $(".add_new").width();
+		var add_hidden_w = $(".new_btn").width();
 		$(".add_hidden").width(add_hidden_w);
-		var ok_remove_w = $(".add_new").width();
+		var ok_remove_w = $(".new_btn").width();
 		$(".ok_remove").width(ok_remove_w);
   	});
 	$('#usernameaction').hide();
@@ -178,10 +179,10 @@ $(document).ready(function()
 
 	<div class="container-fluid mainer">
 		<div class="row order_div">
-			<p class="col-xs-8 statue_label">
+			<p class="col-xs-12 statue_label">
 				<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;&nbsp;当前余额
 			</p>
-			<p class="col-xs-4 statue_label now_balance" id="balance"></p>
+			<p class="col-xs-12 statue_label now_balance" id="balance"></p>
 		</div>
 		<div class="row add_new">
 			<button class="new_btn" onclick="addNewOne()">

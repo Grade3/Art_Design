@@ -278,4 +278,13 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 		return "1";
 	}
 	
+	/**
+	 * 进入地址管理
+	 * @param useridtoken
+	 * @return
+	 */
+	@RequestMapping(params="method=EnterAddress")
+	public String CheckLoginEnterAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
+		return "font/address.jsp";
+	}
 }

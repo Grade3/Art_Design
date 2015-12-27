@@ -167,7 +167,9 @@
 
 .now_balance
 {
-	text-align: right;
+	margin-top: 0.3em;
+	font-size: 1.7em;
+	color: #ff5d56;
 }
 
 .add_new
@@ -213,7 +215,7 @@
 	margin-left: 0px;
 	margin-right: 0px;
 	top: 9em;
-	margin-left: 1.5em;
+	margin-left: 1em;
 	z-index: 999999;
 	display: none;
 }
@@ -269,7 +271,7 @@ button.new_submit
 	margin-right: 0px;
 	position: fixed;
 	top: 13em;
-	margin-left: 1.5em;
+	margin-left: 1em;
 	z-index: 999999;
 	text-align: center;
 	display: none;

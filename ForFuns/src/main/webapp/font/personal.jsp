@@ -291,16 +291,16 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-map-marker partten"></span>　我的地址</p>
-							<p class="col-xs-9"><a href="address.html">查看我的地址 >></a></p>
-						</div>
-						<div class="row info">
-							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-usd partten"></span>　余额</p>
-							<p class="col-xs-9"><a href="#">查看我的余额 >></a></p>
+							<p class="col-xs-9"><a href="<%=basePath%>address.do?method=EnterAddress">查看我的地址 >></a></p>
 						</div>
 						<div class="row info info2">
+							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-usd partten"></span>　余额</p>
+							<p class="col-xs-9"><a href="<%=basePath%>customer.do?method=EnterBalance">查看我的余额 >></a></p>
+						</div>
+						<!-- <div class="row info info2">
 							<p class="col-xs-3 label_t"><span class="glyphicon glyphicon-floppy-disk partten"></span>　支付宝</p>
 							<p class="col-xs-9" id = "telphone">我的支付宝号码</p>
-						</div>
+						</div> -->
 					</div>			
 				</div>
 			</div>
