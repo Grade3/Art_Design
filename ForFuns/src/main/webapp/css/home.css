@@ -3,9 +3,10 @@ body
 	background: #fff;
 	font-family: "Microsoft YaHei";
 	font-size: 1.0em;
+	
 }
 
-.header
+.header1
 {
 	/*background: url(../image/bg_login.jpg) no-repeat center;*/
 	width: 100%;
@@ -63,21 +64,11 @@ body
 
 
 
-.statu_bar
-{
-	padding: 0em 3em 0em 0;
-	background: rgba(225, 225, 225, 0.68);	
-	height: 50px;
-}
+
 
 ul.support
 {
 	float: left;
-}
-
-ul.support-right
-{
-	float: right;
 }
 
 ul.support li, ul.support-right li 
@@ -88,9 +79,9 @@ ul.support li, ul.support-right li
 
 ul.support li span, ul.support-right li a
 {
-	font-size: 1em;
+	font-size: 1.5em;
 	text-decoration: none;
-	color: #000;
+	color: #333;
 	vertical-align: top;
 	text-decoration: none;
 }
@@ -543,6 +534,12 @@ label.line
 
 
 @media (max-width: 992px){
+
+	body
+	{
+		background-color: #f8f8f8;
+	}
+
 	.bottom-grid
 	{
 		margin-bottom: 0px;
@@ -551,10 +548,225 @@ label.line
 	{
 		margin-top: 0px;
 	}
+
+.header
+{
+	display: none;
+}
+
+.ul.support
+{
+	/*display: none;*/
+}
+
+.header-top
+{
+	background: transparent;
+}
+
+.head1
+{
+	position: fixed;
+	background-color: #eee;
+	box-shadow: 0 0 10px rgba(149,149,149,0.5);
+	z-index: 99999;
+	padding: 0.5em 2em;
+}
+
+.statu_bar
+{
+	padding-left: 1.5em 2em;
+	background-color: transparent;
+}
+
+ul.support-right
+{
+	border: 0px;
+}
+
+ul.support-right li
+{
+	margin: 0px;
+}
+
+.header-bottom
+{
+	display: none;
+}
+
+.loca
+{
+	display: none;
+}
+
+.bar_news
+{
+	display: none;
+}
+
+.scroll_bar
+{
+	padding-top: 52px;
+}
+
+.carousel-indicators
+{
+	margin-bottom: 0px;
+}
+
+.carousel-caption
+{
+	bottom: 20px;
+}
+
+.carousel-control
+{
+	width: 12%;
+}
+
+.carousel-caption h3
+{
+	font-size: 2em;
+}
+
+.carousel-caption p
+{
+	font-size: 1.1em;
+}
+
+.content-top1
+{
+	padding: 0;
+}
+
+.tag_up,.tag
+{
+	margin-right: 0;
+	margin-left: 0;
+}
+
+.tag0
+{
+	padding: 0px;
+}
+
+.tag
+{
+	padding: 1em 0;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.tag a
+{
+	font-size: 1.5em;
+	color: #333;
+}
+
+.tag1
+{
+}
+
+.tag2
+{
+}
+
+.tag3
+{
+}
+
+.tag4
+{
+}
+
+.pattern1
+{
+	padding: 0.5em;
+	background-color: #ff5d56;
+	border-radius: 100%;
+	color: #fff;
+	font-size: 1.7em;
+	margin-bottom: 0.5em;
+}
+
+.sap_tabs h2
+{
+	font-size: 3em;
+}
+
+.bottom-grid
+{
+	display: none;
+}
+
+.litter_footer
+{
+	text-align: center;
+	margin-bottom: 3em;
+	margin-top: 3em;
+}
+
+.line1
+{
+	width: 40%;
+	background-color: #000;
+	height: 1px;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 1em;
+}
+
+#carousel-example-generic
+{
+	/*box-shadow: 0 0 10px rgba(149,149,149,0.6);*/
+}
+
+.content-top1
+{
+	padding-top: 0.5em;
+	/*background-color: #fff;*/
+	box-shadow: 0 0 5px rgba(149,149,149,0.4);
+}
+
+.sap_tabs 
+{
+	box-shadow: 0 0 5px rgba(149,149,149,0.4);
+	/*background-color: #fff;*/
+	margin-top: 1em;
+}
+
+/*.sap_tabs1
+{
+	padding-top: 1em;
+}*/
+
 }
 
 
 @media (min-width: 992px){
+
+.litter_footer
+{
+	display: none;
+}
+
+.header-top
+{
+
+}
+
+.statu_bar
+{
+	padding: 0em 3em 0em 0;
+	background: rgba(225, 225, 225, 0.68);	
+	height: 50px;
+}
+
+ul.support-right
+{
+	float: right;
+}
+
 	.top-nav
 	{
 		width: 50%;
@@ -591,6 +803,11 @@ label.line
 
 
 @media (min-width: 1200px){
+
+.litter_footer
+{
+	display: none;
+}
 
 .arts
 {

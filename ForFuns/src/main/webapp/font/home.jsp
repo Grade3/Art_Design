@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="zh-CN">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<!--[if It IE 9]>
 	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
@@ -18,6 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer2.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/home.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
@@ -27,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>
 </head>
 <body>
-<a href="javascript:;" class="lanrenzhijia_top"></a>
+<a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
 <script src="../js/lanrenzhijia.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
@@ -79,8 +80,9 @@ function CheckUser(){
 			$('#registeraction').hide();
 			$('#loginaction').hide();
 			$('#usernameaction').show();
+			$('#usernameaction').css("display","inline-block");
 			$('#loginoutaction').show();
-			$('#username').html("<i class='item_login'/>"+json);
+			$('#username').html("<span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp;&nbsp;"+json);
 		},error:function(){
 			
 		}
@@ -135,7 +137,7 @@ function GetFirstAdvert(){
 					var name = json[i].title;
 					var imgurl = json[i].imgurl;
 					var link = "<%=basePath%>font/advertdetail.jsp?id="+id;
-					body+="<div class='col-xs-4 Recommend'><a href='"+link+"' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
+					body+="<div class='col-md-4 Recommend'><a href='"+link+"' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
 				$('#advertfirst').html(body);
 				var goods_pic_w = $(".good_pic").width();
@@ -162,7 +164,7 @@ function GetSecondAdvert(){
 					var name = json[i].title;
 					var imgurl = json[i].imgurl;
 					var link = "<%=basePath%>font/advertdetail.jsp?id="+id;
-					body+="<div class='col-xs-4 Recommend'><a href='"+link+"' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
+					body+="<div class='col-md-4 Recommend'><a href='"+link+"' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
 				$('#advertsecond').html(body);
 				var goods_pic_w = $(".good_pic").width();
@@ -189,7 +191,7 @@ function GetThirdAdvert(){
 					var name = json[i].title;
 					var imgurl = json[i].imgurl;
 					var link = "<%=basePath%>font/advertdetail.jsp?id="+id;
-					body+="<div class='col-xs-4 Recommend'><a href='"+link+"' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
+					body+="<div class='col-md-4 Recommend'><a href='"+link+"' target='_blank'><img class='good_pic' src='"+imgurl+"'></a><div class='tab_desc'><p>"+name+"</p></div></div>";
 				}
 				$('#advertthree').html(body);
 				var goods_pic_w = $(".good_pic").width();
@@ -219,11 +221,12 @@ $(document).ready(function(){
 
   		var artist_h = $(".class75").height();
   		$(".class25").height(artist_h);
-  		
+
   		var artist_h1 = $(".col9").height();
   		$(".col3").height(artist_h1);
-  		var goods_pic_w = $(".good_pic").width();
-  		$(".good_pic").height(goods_pic_w)*1.7;
+
+  		var tag3_h = $(".tag01").height();
+  		$(".tag3").height(tag3_h);
   		
 
   	$(window).resize(function() {
@@ -237,11 +240,12 @@ $(document).ready(function(){
   		
   		var artist_h = $(".class75").height();
   		$(".class25").height(artist_h);
-  		
+
   		var artist_h1 = $(".col9").height();
   		$(".col3").height(artist_h1);
-  		var goods_pic_w = $(".good_pic").width();
-  		$(".good_pic").height(goods_pic_w)*1.7;
+
+  		var tag3_h = $(".tag01").height();
+  		$(".tag3").height(tag3_h);
   	});
   	
   	
@@ -259,19 +263,19 @@ $(document).ready(function(){
 });
 </script>
 
-	<div class="header">
-		<div class="header-top">
-			<div class="container">
+	<div class="header1">
+		<div class="col-xs-12 header-top">
+			<div class="container head1">
 				<div class="statu_bar">
 					<ul class="support">
 						<li ><span ><i class="item_message"> </i>471979617@qq.com</span></li>
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
-						<li id="usernameaction"><a href="#" id="username"><i class="item_login"/></a></li>
-						<li id="loginoutaction"><a href="Login.jsp" ><i class="item_register"> </i>退出</a></li>			
+						<li class="li1" id="loginaction" ><a href="Login.jsp" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
+						<li class="li2" id="registeraction"><a href="Register.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>
+						<li class="li1" id="usernameaction"><a href="#" id="username"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;</a></li>
+						<li class="li2" id="loginoutaction"><a href="home.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
 					</ul>
 				</div>
 			</div>
@@ -301,7 +305,6 @@ $(document).ready(function(){
 								<li><a href="home.html">DIY</a></li>
 								<li><a href="artistlist.jsp">艺术家</a></li>
 								<li><a href="newslist.jsp">资讯中心</a></li>
-								<li><a href="home.html">联系我们</a></li>
 							</ul>
 						</div>
 					</div>
@@ -312,13 +315,14 @@ $(document).ready(function(){
 							<li><a href="home.html">DIY</a></li>
 							<li><a href="artistlist.jsp">艺术家</a></li>
 							<li><a href="newslist.jsp">资讯中心</a></li>
-							<li><a href="home.html">联系我们</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div>
+		
+		
+		<div class="scroll_bar">
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators" id="bannerpoint">
@@ -413,63 +417,51 @@ $(document).ready(function(){
 			</div>
 
 
-			<div class="content-top visible-xs visible-sm">
-				<div class="class75">
-					<div class="col-top">
-						<div class="class50 black">
-							<a href="goodslist.jsp">
-								<div class="arts3">
-									<h3>艺术品成品</br>专区 >></h3>
-								</div>
-								<img src="<%=basePath%>image/arts_pic.png" alt="" style="display: none;"></a>
-							</a>
+			<div class="content-top content-top1 visible-xs visible-sm">
+				<div class="row tag_up">
+					<div class="col-xs-3 tag0 tag01">
+						<div class="row col-xs-12 tag tag1">
+							<a href="goodslist.html"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
+						</div>			
+					</div>
+					<div class="col-xs-3 tag0">
+						<div class="row col-xs-12 tag tag2">
+							<a href="home.html"><span class="glyphicon glyphicon-tags pattern1" aria-hidden="true"></span></br>艺术定制</a>
 						</div>
-						<div class="class50 black1-in">
-							<a href="DIY.html">
-								<div class="arts3 diy3">
-									<h3>艺术品定制</br>专区 >></h3>
-								</div>
-								<img src="<%=basePath%>image/diy_pic.png" alt="" style="display: none;"></a>
-							</a>
-						</div>						
 					</div>
-					<div>
-					<div class="col-top-bottom3">
-						<h3 class="news3">艺术品资讯专区</h3>
-						<a href="newslist.jsp" class="now-in">进 入</a>
-					</div>
-					</div>
-				</div>
-				<div class="class25 per">
-					<a href="artistlist.jsp">
-						<img class="img-responsive" src="<%=basePath%>image/artist.png" >
-						<div class="six3">
-							<h4>艺术家</br>专区 >></h4>
+					<div class="col-xs-3 tag0">
+						<div class="row col-xs-12 tag tag3">
+							<a href="home.html"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
 						</div>
-					</a>
+					</div>
+					<div class="col-xs-3 tag0">
+						<div class="row col-xs-12 tag tag4">
+							<a href="newslist.html"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
+						</div>	
+					</div>
 				</div>
 			</div>
 
-			<div class="sap_tabs">
+			<div class="sap_tabs sap_tabs1">
 				<label class="line"></label>
-				<h2>艺术品成品推荐</h2>
+				<h2>艺术成品推荐</h2>
 				<div class="recommend_arts" id="advertfirst">
-					<div class="col-xs-4 Recommend">
-						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/a11.jpg"></a>
+					<div class="col-md-4 Recommend">
+						<a href="news.jsp" target="_blank"><img class="good_pic" src="<%=basePath%>image/a11.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-xs-4 Recommend">
-						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/a22.jpg"></a>
+					<div class="col-md-4 Recommend">
+						<a href="news.jsp" target="_blank"><img class="good_pic" src="<%=basePath%>image/a22.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-xs-4 Recommend">
-						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/a33.jpg"></a>
+					<div class="col-md-4 Recommend">
+						<a href="news.jsp" target="_blank"><img class="good_pic" src="<%=basePath%>image/a33.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
@@ -479,24 +471,24 @@ $(document).ready(function(){
 
 			<div class="sap_tabs">
 				<label class="line"></label>
-				<h2>艺术品定制推荐</h2>
+				<h2>艺术定制推荐</h2>
 				<div class="recommend_arts" id="advertsecond">
-					<div class="col-xs-4 Recommend">
-						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/b11.jpg"></a>
+					<div class="col-md-4 Recommend">
+						<a href="news.jsp" target="_blank"><img class="good_pic" src="<%=basePath%>image/b11.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-xs-4 Recommend" >
-						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/b22.jpg"></a>
+					<div class="col-md-4 Recommend" >
+						<a href="news.jsp" target="_blank"><img class="good_pic" src="<%=basePath%>image/b22.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-xs-4 Recommend" >
-						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/b33.jpg"></a>
+					<div class="col-md-4 Recommend" >
+						<a href="news.jsp" target="_blank"><img class="good_pic" src="<%=basePath%>image/b33.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
@@ -508,21 +500,21 @@ $(document).ready(function(){
 				<label class="line"></label>
 				<h2>艺术家推荐</h2>
 				<div class="recommend_arts" id="advertthree">
-					<div class="col-xs-4 Recommend" >
-						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/c11.jpg"></a>
+					<div class="col-md-4 Recommend" >
+						<a href="news.jsp" target="_blank"><img class="good_pic" src="<%=basePath%>image/c11.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-xs-4 Recommend" >
+					<div class="col-md-4 Recommend" >
 						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/c22.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
 						</div>
 					</div>
 
-					<div class="col-xs-4 Recommend" >
+					<div class="col-md-4 Recommend" >
 						<a href="news.html" target="_blank"><img class="good_pic" src="<%=basePath%>image/c33.jpg"></a>
 						<div class="tab_desc">
 							<p>艺术品名称及描述艺术品名称及描述艺术品名称及描述</p>
@@ -539,6 +531,10 @@ $(document).ready(function(){
 					<h6>ART IS A FUNNY WORD</h6>
 					<p>Enjoy yourself in ArtCustomize</p>
 				</div>
+			</div>
+			<div class="litter_footer">
+				<label class="line1"></label>
+				<p>Copyright &copy; 2015. All rights reserved.</p>
 			</div>
 		</div>
 	</div>
