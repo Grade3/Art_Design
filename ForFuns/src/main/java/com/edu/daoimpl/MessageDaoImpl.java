@@ -66,7 +66,7 @@ public class MessageDaoImpl extends BaseDaoImpl<Message> implements IMessageDao 
 			return null;
 		List<Message> result = new ArrayList<Message>();
 		for (int i = 0; i < list.size(); i++) {
-			Object[] object = list.get(0);
+			Object[] object = list.get(i);
 			Message messageBean = (Message) this.getEntitybyId(Message.class,
 					Integer.parseInt(object[0].toString()));
 			result.add(messageBean);

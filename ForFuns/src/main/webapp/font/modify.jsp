@@ -70,9 +70,9 @@ function GetUser()
 				success : function(json) {
 					var customer = json.customer;
 					var userid = customer.userid;
-					var username = customer.username;
+					var username = customer.name;
 					var personnumber = customer.personnumber;
-					var telphone = customer.telphone;
+					var telphone = customer.telephone;
 					var realname = customer.realname;
 					var avator = customer.avator;
 					var isartist = customer.isartist;
@@ -82,7 +82,7 @@ function GetUser()
 						$('#advantage_div').hide();
 					}
 					$('#avator').attr('src',avator);
-					$('#username').val(username);
+					$('#nickname').val(username);
 					$('#userid').val(userid);
 					$('#personnumber').val(personnumber);
 					$('#telphone').val(telphone);
@@ -125,7 +125,7 @@ function checkPersonnumber(personnum)
 function validate()
 {	
 	var userid = $("#userid").val();
-	var username = $("#username").val();
+	var username = $("#nickname").val();
 	var realname = $("#realname").val();
 	var telphone = $("#telphone").val();
 	var personnumber = $("#personnumber").val();
@@ -155,14 +155,13 @@ function validate()
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$('.back_btn').click(function(){
+				location.href="<%=basePath%>font/personal.jsp";
+			});
 			$("#menu").click(function() {
 				$("#menu-xs").toggle(300);
 			});
-		});
-	</script>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
+			$('.password_error').hide();
 			GetUser();
 			var width = $(".userpic").width();
 			var height = width;
@@ -293,7 +292,7 @@ function validate()
 									<p>&nbsp;昵称：</p>
 								</div>
 								<div class="row password_input">
-									<input class="col-xs-12" type="text" value="我的昵称" name = "username" id="username" />
+									<input class="col-xs-12" type="text" value="我的昵称" name = "username" id="nickname" />
 								</div>
 								<div class="row password_error">
 									<p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;昵称不能为空</p>

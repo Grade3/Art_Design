@@ -9,15 +9,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<title>Personal</title>
-	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
-	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="../css/personal.css">
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.js"></script>
-	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer2.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/personal.css">
+	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 	<style type="text/css">
 		*{font-style: normal;}
@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 
 <a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
-<script src="../js/lanrenzhijia.js"></script>
+<script src="<%=basePath%>js/lanrenzhijia.js"></script>
 <script>
 $(function(){
 	$(window).scroll(function(){
@@ -56,6 +56,9 @@ function getCookie(objName){//获取指定名称的cookie的值
 //获取用户信息
 function GetUser()
 {
+	$('.back_btn').click(function(){
+		location.href="<%=basePath%>font/home.jsp";
+	});
 	var useridtoken = getCookie("useridtoken");
 	if(null==useridtoken || "" == useridtoken){
 		return ;
@@ -205,7 +208,7 @@ $(document).ready(function(){
 		<div class="container">
 			<div class="main_up">
 				<div class="user_info">
-					<img class="userpic" src="../image/bl.jpg" id = "avator">
+					<img class="userpic" src="<%=basePath%>image/bl.jpg" id = "avator">
 					<p class="username" id = "userid">我的用户名</p>
 				</div>
 				<div class="row person_btn">

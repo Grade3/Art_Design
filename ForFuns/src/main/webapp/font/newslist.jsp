@@ -10,14 +10,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 	<title>Newslist</title>
-	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
-	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="../css/dom.css" rel="stylesheet" type="text/css" />	
-	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
-	<link href="../css/newslist.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.js"></script>
+	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />	
+	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer2.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/newslist.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
 	<style type="text/css">
 	*{font-style: normal;}
 </style>
@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 
 <a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
-<script src="../js/lanrenzhijia.js"></script>
+<script src="<%=basePath%>js/lanrenzhijia.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <script>
 $(function(){
@@ -157,21 +157,21 @@ $(document).ready(function(){
 						</div>
 						<div id="menu-xs">
 							<ul>
-								<li><a href="home.jsp">首页</a></li>
-								<li><a href="goodslist.jsp">成品</a></li>
-								<li><a href="home.html">DIY</a></li>
-								<li><a href="artistlist.jsp">艺术家</a></li>
-								<li><a href="newslist.jsp">资讯中心</a></li>
+								<li><a href="<%=basePath%>font/home.jsp">首页</a></li>
+								<li><a href="<%=basePath%>font/goodslist.jsp">成品</a></li>
+								<li><a href="<%=basePath%>font/goodslist.jsp">DIY</a></li>
+								<li><a href="<%=basePath%>font/artistlist.jsp">艺术家</a></li>
+								<li><a href="<%=basePath%>font/newslist.jsp">资讯中心</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="top-nav visible-lg">
 						<ul class="megamenu skyblue">
-							<li><a href="home.jsp">首页</a></li>
-							<li><a href="goodslist.jsp">成品</a></li>
-							<li><a href="home.html">DIY</a></li>
-							<li><a href="artistlist.jsp">艺术家</a></li>
-							<li><a href="newslist.jsp">资讯中心</a></li>
+							<li><a href="<%=basePath%>font/home.jsp">首页</a></li>
+							<li><a href="<%=basePath%>font/goodslist.jsp">成品</a></li>
+							<li><a href="<%=basePath%>font/goodslist.jsp">DIY</a></li>
+							<li><a href="<%=basePath%>font/artistlist.jsp">艺术家</a></li>
+							<li><a href="<%=basePath%>font/newslist.jsp">资讯中心</a></li>
 						</ul>
 					</div>
 					
@@ -179,22 +179,22 @@ $(document).ready(function(){
 						<div class="row tag_up">
 							<div class="col-xs-3 tag0 tag01">
 								<div class="row col-xs-12 tag tag1">
-									<a href="home.html"><span class="glyphicon glyphicon-home pattern1" aria-hidden="true"></span></br>首页</a>
+									<a href="<%=basePath%>font/home.jsp"><span class="glyphicon glyphicon-home pattern1" aria-hidden="true"></span></br>首页</a>
 								</div>			
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag2">
-									<a href="goodslist.html"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
+									<a href="<%=basePath%>font/goodslist.jsp"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
 								</div>
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag3">
-									<a href="home.html"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
+									<a href="<%=basePath%>font/artistlist.jsp"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
 								</div>
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag4">
-									<a href="newslist.html"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
+									<a href="<%=basePath%>font/newslist.jsp"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
 								</div>	
 							</div>
 						</div>
@@ -218,7 +218,7 @@ $(document).ready(function(){
 				<div>
 					<div class="col-md-4 van">
 						<a href="news.jsp">
-							<img src="../image/bl.jpg" class="img-responsive news_pic" alt=""/>
+							<img src="<%=basePath%>image/bl.jpg" class="img-responsive news_pic" alt=""/>
 						</a>
 					</div>
 					<div class="col-md-8 on-para">
@@ -235,7 +235,7 @@ $(document).ready(function(){
 				<div>
 					<div class="col-md-4 van">
 						<a href="news.jsp">
-							<img src="../image/bl.jpg" class="img-responsive news_pic" alt=""/>
+							<img src="<%=basePath%>image/bl.jpg" class="img-responsive news_pic" alt=""/>
 						</a>
 					</div>
 					<div class="col-md-8 on-para">
@@ -252,7 +252,7 @@ $(document).ready(function(){
 				<div>
 					<div class="col-md-4 van">
 						<a href="news.jsp">
-							<img src="../image/bl.jpg" class="img-responsive news_pic" alt=""/>
+							<img src="<%=basePath%>image/bl.jpg" class="img-responsive news_pic" alt=""/>
 						</a>
 					</div>
 					<div class="col-md-8 on-para">
