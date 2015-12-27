@@ -7,16 +7,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
 	<title>Home</title>
 	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer2.css" rel="stylesheet" type="text/css" />
 	<link href="<%=basePath%>css/news.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.js"></script>
 </head>
 <body>
 
-<a href="javascript:;" class="lanrenzhijia_top"></a>
+<a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
 <script src="<%=basePath%>js/lanrenzhijia.js"></script>
 <script type="text/javascript" src="<%=path%>/js/easyUI/jquery-1.4.4.min.js"></script>
 <style type="text/css">
@@ -52,8 +57,9 @@ function CheckUser(){
 			$('#registeraction').hide();
 			$('#loginaction').hide();
 			$('#usernameaction').show();
+			$('#usernameaction').css("display","inline-block");
 			$('#loginoutaction').show();
-			$('#username').html("<i class='item_login'/>"+json);
+			$('#username').html("<span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp;&nbsp;"+json);
 		},error:function(){
 			
 		}
@@ -122,6 +128,14 @@ $(document).ready(function(){
 });
 </script>
 
+<div class="col-xs-12 container-fluid header">
+	<div class="title_bar">
+		<p class="back_btn"><span class="glyphicon glyphicon-menu-left partten" aria-hidden="true"></span></p>
+		<p><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;资讯详情</p>
+	</div>
+</div>
+
+
 	<div class="header-top">
 			<div class="container">
 				<div class="statu_bar">
@@ -130,10 +144,10 @@ $(document).ready(function(){
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li id="loginaction" ><a href="Login.jsp" ><i class="item_login"> </i>登陆</a></li>
-						<li id="registeraction"><a href="Register.jsp" ><i class="item_register"> </i>注册账号</a></li>
-						<li id="usernameaction"><a href="javascrip:void(0);" id="username"><i class="item_login"/>登陆</a></li>
-						<li id="loginoutaction"><a href="Login.jsp" ><i class="item_register"> </i>退出</a></li>			
+						<li class="li1" id="loginaction" ><a href="Login.jsp" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
+						<li class="li2" id="registeraction"><a href="Register.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>
+						<li class="li1" id="usernameaction"><a href="#" id="username"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;</a></li>
+						<li class="li2" id="loginoutaction"><a href="<%=basePath%>customer.do?method=loginout" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
 					</ul>
 				</div>
 			</div>
@@ -163,7 +177,6 @@ $(document).ready(function(){
 								<li><a href="home.html">DIY</a></li>
 								<li><a href="artistlist.jsp">艺术家</a></li>
 								<li><a href="newslist.jsp">资讯中心</a></li>
-								<li><a href="home.html">联系我们</a></li>
 							</ul>
 						</div>
 					</div>
@@ -174,7 +187,6 @@ $(document).ready(function(){
 							<li><a href="home.html">DIY</a></li>
 							<li><a href="artistlist.jsp">艺术家</a></li>
 							<li><a href="newslist.jsp">资讯中心</a></li>
-							<li><a href="home.html">联系我们</a></li>
 						</ul>
 					</div>
 				</div>
