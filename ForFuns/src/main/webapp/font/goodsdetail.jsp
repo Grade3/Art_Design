@@ -52,9 +52,10 @@ function getProductById(id){
 			var typename = product.typename;
 			var timestart = myformatter(product.timestart);
 			var timeout = myformatter(product.timeout);
+			var authorid = product.authorid;
 			var artistuserid = product.artistuserid;
 			$('.back_btn').click(function(){
-				location.href="<%=basePath%>font/artistHome.jsp?id="+artistuserid;
+				location.href="<%=basePath%>font/artistHome.jsp?id="+authorid;
 			});
 			if(methodid!=1)
 				location.href="<%=basePath%>font/404.jsp";
@@ -69,8 +70,9 @@ function getProductById(id){
 			$('#typename').html(typename);
 			$('#authorname').html(authorname);
 			$('#content').html(content);
-			if(situation==1){
-				var tempcontent = "<div class='row buy'><a target='_blank' href='payfor.jsp?productid="+id+"' class='col-xs-12 readmore'>现在购买</a></div>";
+			var userid = getCookieUserid();
+			if(situation==1 && artistuserid!=userid){
+				var tempcontent = "<div class='row buy'><a  href='payfor.jsp?productid="+id+"' class='col-xs-12 readmore'>现在购买</a></div>";
 				$('#gooddetail').append(tempcontent);
 			}
 			if(situation==0){

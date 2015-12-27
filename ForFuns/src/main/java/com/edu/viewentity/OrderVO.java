@@ -3,8 +3,10 @@ package com.edu.viewentity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.edu.model.Customer;
+import com.edu.model.CustomerAddress;
 import com.edu.model.Order;
 import com.edu.model.Product;
 
@@ -90,17 +92,32 @@ public class OrderVO
 	{
 		super();
 		this.id = orderBean.getId();
-		this.address = orderBean.getOrderAddressBean().getAddressBean().getAddress();
+		try{
+			this.address = orderBean.getOrderAddressBean().getAddressBean().getAddress();
+		}catch(Exception e){
+			 Set<CustomerAddress> customerAddressBeans = orderBean.getCustomerBean().getCustomerAddressBeans();
+			this.address = new ArrayList<CustomerAddress>(customerAddressBeans).get(0).getAddressBean().getAddress();
+		}
 		this.current = orderBean.getCurrent();
 		this.ispay = orderBean.getIspay();
 		this.productid = orderBean.getProductBean().getId();
 		this.customerid = orderBean.getCustomerBean().getId();
 		this.productname = orderBean.getProductBean().getName();
 		this.money = orderBean.getProductBean().getMoney();
-		this.artistname = orderBean.getCustomerBean().getUsername();
+		this.artistname = orderBean.getProductBean().getArtistBean().getUsername();
 		this.productimg = orderBean.getProductBean().getImgurl();
-		this.receiver = orderBean.getOrderAddressBean().getAddressBean().getReceiver();
-		this.telephone = orderBean.getOrderAddressBean().getAddressBean().getTelephone();
+		try{
+			this.receiver = orderBean.getOrderAddressBean().getAddressBean().getReceiver();
+		}catch(Exception e){
+			 Set<CustomerAddress> customerAddressBeans = orderBean.getCustomerBean().getCustomerAddressBeans();
+			this.receiver = new ArrayList<CustomerAddress>(customerAddressBeans).get(0).getAddressBean().getReceiver();
+		}
+		try{
+			this.telephone = orderBean.getOrderAddressBean().getAddressBean().getTelephone();
+		}catch(Exception e){
+			 Set<CustomerAddress> customerAddressBeans = orderBean.getCustomerBean().getCustomerAddressBeans();
+			this.telephone = new ArrayList<CustomerAddress>(customerAddressBeans).get(0).getAddressBean().getTelephone();
+		}
 		this.artistid = orderBean.getProductBean().getArtistBean().getId();
 	}
 	

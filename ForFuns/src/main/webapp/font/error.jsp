@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}else if(error==5){//余额不足
 				$('.label_wrong').html("操作失败，余额不足");
 				$('.readmore').html('返回充值页面');
-				$('.readmore').attr('href',"<%=basePath%>font/personal.jsp");
+				$('.readmore').attr('href',"<%=basePath%>customer.do?method=EnterBalance");
 			}
 			
 		});

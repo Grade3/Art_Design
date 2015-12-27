@@ -31,6 +31,7 @@ public class ProductVO {
 	private String methodname;//出售方式名称
 	private Integer typeid;//分类id
 	private String typename;//分类名称
+	private Integer addmoney = 0;
 	public ProductVO(Product productBean) {
 		super();
 		this.id = productBean.getId();
@@ -52,6 +53,7 @@ public class ProductVO {
 		this.typename = productBean.getProductTypeBean().getName();
 		this.artistuserid = productBean.getArtistBean().getUserid();
 		this.money = productBean.getMoney();
+		
 	}
 	public Double getMoney() {
 		return money;
@@ -64,6 +66,12 @@ public class ProductVO {
 	}
 	public void setArtistuserid(String artistuserid) {
 		this.artistuserid = artistuserid;
+	}
+	public Integer getAddmoney() {
+		return addmoney;
+	}
+	public void setAddmoney(Integer addmoney) {
+		this.addmoney = addmoney;
 	}
 	/**
 	 * 将list中的productbean实体转变为productvo

@@ -142,7 +142,7 @@ $(document).ready(function()
 
 <div class="container-fluid header">
 	<div class="title_bar">
-		<p class="back_btn"><span class="glyphicon glyphicon-menu-left partten" aria-hidden="true"></span></p>
+		<p class="back_btn"><a href="<%=basePath%>font/OrderList.jsp"><span class="glyphicon glyphicon-menu-left partten" aria-hidden="true"></span></p>
 		<p><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;&nbsp;订单详情</p>
 	</div>
 </div>

@@ -130,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$('#loginoutaction').hide();
 			var id = getUrlParam("id");
 			var page = 1 ;
-			var pageSize = 2;
+			var pageSize = 8;
 			GetArtistInfo(id);
 			GetArtistProduct(page,pageSize,id);
 			CheckUser();

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Map;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.edu.base.BaseServiceImpl;
 import com.edu.base.IBaseService;
 import com.edu.dao.IAddressDao;
+import com.edu.dao.ICustomerDao;
 import com.edu.dao.IOrderAddressDao;
 import com.edu.dao.IOrderDao;
 import com.edu.dao.IProductDao;
@@ -40,8 +42,13 @@ public class FixedPriceStrategy extends BaseServiceImpl<Product> implements ISel
 	private IOrderAddressDao orderAddressDao;
 	@Autowired
 	private IAddressDao addressDao;
+	@Autowired
+	private ICustomerDao customerDao;
 	@Override
 	public String SellProduct(Product productBean,Customer customerBean,Double money,Map<String, Object>params) throws Exception {
+		if(productBean.getMoney()>customerBean.getBalance()){
+			return "redirect:/font/error.jsp?errorid=5";//余额不足
+		}
 		Order orderBean = orderDao.GetBeanByCondition(Order.class, OrderTable.PRODUCTID, productBean.getId()+"", null);
 		if(null== orderBean){//不存在改商品的订单 
 			orderBean = new Order();
@@ -55,6 +62,8 @@ public class FixedPriceStrategy extends BaseServiceImpl<Product> implements ISel
 			orderAddressBean.setOrderBean(orderBean);
 			orderAddressBean.setAddressBean(addressBean);
 			orderAddressDao.addEntity(orderAddressBean);
+			customerBean.setBalance(customerBean.getBalance()-money);
+			customerDao.updateEntity(customerBean);
 			//orderDao.addEntity(orderBean);
 			return "redirect:/font/success.jsp";//添加成功
 		}else if(customerBean.getId() != orderBean.getCustomerBean().getId())

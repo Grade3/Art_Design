@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.base.IBaseDao;
+import com.edu.dao.ICustomerDao;
 import com.edu.dao.IOrderDao;
 import com.edu.dao.IProductDao;
 import com.edu.dao.IProductMoneyDao;
@@ -34,6 +35,8 @@ public class AuctionStragegy implements ISellStrategy{
 	private IProductMoneyDao productMoneyDao;
 	@Autowired
 	private IOrderDao orderDao;
+	@Autowired
+	private ICustomerDao customerDao;
 	
 	@Override
 	public String SellProduct(Product productBean, Customer customerBean,
@@ -56,7 +59,10 @@ public class AuctionStragegy implements ISellStrategy{
 			if(maxProductMoneyBean.getCustomerBean().getId()==customerBean.getId()){//如果最高价与用户相等  则扣钱
 				Order order = orderDao.getOrderByProductid(productBean.getId());
 				//先付款
-				
+				if(customerBean.getBalance()<order.getMoney())
+					return "redirect:/font/error.jsp?errorid=5";
+				customerBean.setBalance(customerBean.getBalance()-order.getMoney());
+				customerDao.updateEntity(customerBean);
 				//修改订单状态
 				order.setIspay(1);
 				orderDao.updateEntity(order);
