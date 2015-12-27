@@ -386,7 +386,7 @@ ServletContextAware {
 	public String CheckLoginAddProduct(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,HttpServletRequest request,
 			@RequestParam(value = "imgurl", required = true) MultipartFile file,@RequestParam(value = "imgone", required = true) MultipartFile imgone,
 			@RequestParam(value = "imgtwo", required = true) MultipartFile imgtwo,@RequestParam(value = "imgthree", required = true) MultipartFile imgthree,
-			@RequestParam(value="productname")String productname,@RequestParam(name="money")Integer money,@RequestParam(name="typeid")Integer typeid,
+			@RequestParam(value="productname")String productname,@RequestParam(name="money")Double money,@RequestParam(name="typeid")Integer typeid,
 			@RequestParam(value="sellid")Integer sellid,@RequestParam(value="starttime")String starttime,@RequestParam(value="endtime")String endtime,
 			@RequestParam(value="content")String content){
 		
@@ -507,7 +507,7 @@ ServletContextAware {
 	public String CheckLoginAlertProduct(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,
 			HttpServletRequest request,@RequestParam(value="id")Integer id,@RequestParam(value = "imgurl", required = false) MultipartFile file,@RequestParam(value = "imgone", required = false) MultipartFile imgone,
 			@RequestParam(value = "imgtwo", required = false) MultipartFile imgtwo,@RequestParam(value = "imgthree", required = false) MultipartFile imgthree,
-			@RequestParam(value="productname")String productname,@RequestParam(name="money")Integer money,@RequestParam(name="typeid")Integer typeid,
+			@RequestParam(value="productname")String productname,@RequestParam(name="money")Double money,@RequestParam(name="typeid")Integer typeid,
 			@RequestParam(value="sellid")Integer sellid,@RequestParam(value="starttime")String starttime,@RequestParam(value="endtime")String endtime,
 			@RequestParam(value="content")String content){
 		Product productBean = productService.GetEntityById(Product.class, id);

@@ -37,7 +37,7 @@ public class AuctionStragegy implements ISellStrategy{
 	
 	@Override
 	public String SellProduct(Product productBean, Customer customerBean,
-			Integer money, Map<String, Object> params) throws Exception {
+			Double money, Map<String, Object> params) throws Exception {
 		ProductMoney productMoneyBean = productMoneyDao.GetBeanByCondition(ProductMoney.class, ProductMoneyTable.PRODUCTID, productBean.getId()+"", null);
 		ProductMoney maxProductMoneyBean  = null;
 		Integer addmony = Integer.parseInt(params.get("addmoney").toString());
