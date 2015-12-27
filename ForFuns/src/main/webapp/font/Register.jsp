@@ -9,20 +9,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 <title>Register</title>
 <link rel="shortcut icon"
 	href="http://static.hdslb.com/images/favicon.ico">
 <link href="<%=basePath%>css/bootstrap.css" rel="stylesheet"
 	type="text/css" />
+	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/footer.css" rel="stylesheet"
 	type="text/css" />
+	<link href="../css/footer2.css" rel="stylesheet" type="text/css" /> 
 <link rel="stylesheet" type="text/css"
 	href="<%=basePath%>css/Register.css">
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.js"></script>
 </head>
 <body>
 
-	<a href="javascript:;" class="lanrenzhijia_top"></a>
+	<a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
 	<script src="../js/lanrenzhijia.js"></script>
 	<script>
 	function getUrlParam(name) {
@@ -221,24 +226,58 @@ function validate2()
 	$('#success2').show();
 	return true;
 }
+
+function submitNewOne(){
+	$(".add_hidden_bg").show();
+	$(".ok_remove").show();
+}
+
+function ok_remove1()
+{
+	$(".add_hidden_bg").hide();
+	$(".ok_remove").hide();
+	$(".add_hidden").hide();
+}
+
+$(document).ready(function(){
+
+	var ok_remove_w = $(".inputSth").width();
+	$(".ok_remove").width(ok_remove_w);
+
+	$(window).resize(function() {
+		var ok_remove_w = $(".inputSth").width();
+		$(".ok_remove").width(ok_remove_w);
+  	});
+
+	$("#menu").click(function(){
+		$("#menu-xs").toggle(300);
+	});
+});
 </script>
 
+<div class="container-fluid header">
+	<div class="title_bar">
+		<p class="back_btn"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p>
+		<p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;注册用户</p>
+	</div>
+</div>
 
-	<div class="header-top">
-		<div class="container">
-			<div class="statu_bar">
-				<ul class="support">
-					<li><span><i class="item_message"> </i>471979617@qq.com</span></li>
-					<li><span><i class="item_tel"> </i>156-9000-8000</span></li>
-				</ul>
-				<ul class="support-right">
-					<li><a href="Login.jsp"><i class="item_login"> </i>登陆</a></li>
-					<li><a href="Register.jsp"><i class="item_register">
-						</i>注册账号</a></li>
-				</ul>
+	<div class="col-xs-12 header-top">
+			<div class="container">
+				<div class="statu_bar">
+					<ul class="support">
+						<li ><span ><i class="item_message"> </i>471979617@qq.com</span></li>
+						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
+					</ul>
+					<ul class="support-right">
+						<li class="li1" id="loginaction" ><a href="Login.jsp" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
+						<li class="li2" id="registeraction"><a href="Register.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>
+						<li class="li1" id="usernameaction"><a href="#" id="username"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;</a></li>
+						<li class="li2" id="loginoutaction"><a href="<%=basePath%>customer.do?method=loginout" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;退出</a></li>			
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div class="header-bottom">
+			<div class="header-bottom">
 				<div class="container">
 					<div class="logo">
 						<h1><a href="home.html">ArtCustomize</a></h1>
@@ -263,8 +302,7 @@ function validate2()
 								<li><a href="goodslist.jsp">成品</a></li>
 								<li><a href="home.html">DIY</a></li>
 								<li><a href="artistlist.jsp">艺术家</a></li>
-								<li><a href="newslist.jsp">资讯中心</a></li>
-								<li><a href="home.html">联系我们</a></li>
+								<li><a href="newslist.jsp">资讯中心</a></li> 
 							</ul>
 						</div>
 					</div>
@@ -275,12 +313,11 @@ function validate2()
 							<li><a href="home.html">DIY</a></li>
 							<li><a href="artistlist.jsp">艺术家</a></li>
 							<li><a href="newslist.jsp">资讯中心</a></li>
-							<li><a href="home.html">联系我们</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
-	</div>
+		</div>
 
 	<div class="container">
 		<h6 class="location">
@@ -296,175 +333,68 @@ function validate2()
 
 	<div class="content">
 		<div class="container">
-			<div class="col-sm-offset-2 col-md-8 visible-md visible-lg">
-				<form
-					action="${pageContext.request.contextPath}/customer.do?method=register"
-					method="post">
-					<div class="form-group">
-						<label for="inputEmail3"
-							class="col-sm-2 control-label label_login">用户名</label>
-						<div class="col-sm-10 input_div">
-							<input type="text" name="userid" id="userid1"
-								class="form-control inputSth" placeholder="请输入用户名">
-						</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label label_login">&nbsp;用户名：</label>
+					<div class="col-sm-10 input_div">
+						<input type="text" class="form-control inputSth" placeholder="请输入用户名">
 					</div>
-					<div class="form-group">
-						<label for="inputPassword3"
-							class="col-sm-2 control-label label_login">密码</label>
-						<div class="col-sm-10 input_div">
-							<input type="password" name="password" id="password1"
-								class="form-control inputSth" placeholder="请输入密码">
-						</div>
+					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;用户名不能为空</p>
+					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;用户名已被注册</p>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;密码：</label>
+					<div class="col-sm-10 input_div">
+						<input type="text" class="form-control inputSth" placeholder="请输入密码">
 					</div>
-					<div class="form-group">
-						<label for="inputPassword3"
-							class="col-sm-2 control-label label_login">确认密码</label>
-						<div class="col-sm-10 input_div">
-							<input type="password" name="confirm_password"
-								id="confirm_password1" class="form-control inputSth"
-								placeholder="请再次输入密码">
-						</div>
+					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;密码不能为空</p>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;确认密码：</label>
+					<div class="col-sm-10 input_div">
+						<input type="text" class="form-control inputSth" placeholder="请再次输入密码">
 					</div>
-					<div class="form-group">
-						<label for="inputPassword3"
-							class="col-sm-2 control-label label_login">昵称</label>
-						<div class="col-sm-10 input_div">
-							<input type="text" name="username" id="username1"
-								class="form-control inputSth" placeholder="请输入昵称">
-						</div>
+					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;两次密码输入不一致</p>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;昵称：</label>
+					<div class="col-sm-10 input_div">
+						<input type="text" class="form-control inputSth" placeholder="请输入昵称">
 					</div>
-					<div class="form-group">
-						<label for="inputPassword3"
-							class="col-sm-2 control-label label_login">真实姓名</label>
-						<div class="col-sm-10 input_div">
-							<input type="text" name="realname" id="realname1"
-								class="form-control inputSth" placeholder="请输入真实姓名">
-						</div>
+					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;昵称不能为空</p>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;真实姓名：</label>
+					<div class="col-sm-10 input_div">
+						<input type="text" class="form-control inputSth" placeholder="请输入真实姓名">
 					</div>
-					<div class="form-group">
-						<label for="inputPassword3"
-							class="col-sm-2 control-label label_login">身份证</label>
-						<div class="col-sm-10 input_div">
-							<input type="text" name="personnumber" id="personnumber1"
-								class="form-control inputSth" placeholder="请输入二代身份证号">
-						</div>
+					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;真实姓名不能为空</p>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;身份证：</label>
+					<div class="col-sm-10 input_div">
+						<input type="text" class="form-control inputSth" placeholder="请输入二代身份证号">
 					</div>
-					<div class="form-group">
-						<label for="inputPassword3"
-							class="col-sm-2 control-label label_login">手机</label>
-						<div class="col-sm-10 input_div">
-							<input type="text" name="telphone" id="telphone1"
-								class="form-control inputSth" placeholder="请输入手机号码">
-						</div>
+					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;身份证不能为空</p>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;手机：</label>
+					<div class="col-sm-10 input_div">
+						<input type="text" class="form-control inputSth" placeholder="请输入手机号码">
 					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10 input_div">
-							<button type="submit" class="btn btn-default col-sm-12"
-								id="btn_login" onclick="return validate1()">注册</button>
-						</div>
+					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;手机不能为空</p>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10 input_div">
+						<button type="submit" class="btn btn-default col-sm-12" id="btn_login" onclick="submitNewOne()">注册</button>
 					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10 input_div">
-							<p class="label_error1" id="errormessage11" style="display:none;">输入信息不完整！</p>
-							<p class="label_error1" id="errormessage12" style="display:none;">用户名已被注册！</p>
-							<p class="label_error1" id="errormessage13" style="display:none;">用户名长度不对,应为5到18个字符</p>
-							<p class="label_error1" id="errormessage14" style="display:none;">用户名应包括字母、数字和下划线，以字母开头</p>
-							<p class="label_error" id="errormessage15" style="display:none;">两次密码不一致！</p>
-							<p class="label_error1" id="errormessage16" style="display:none;">手机号格式错误！</p>
-							<p class="label_error" id="errormessage17" style="display:none;">身份证格式错误！</p>
-							<div class="success" id="success1" hidden="true">
-								<img src="../image/success_pic.png">
-								<p>注册成功</p>
-							</div>
-						</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10 input_div">
 					</div>
-				</form>
+				</div>
 			</div>
-
-			<div class="col-md-8 visible-sm visible-xs">
-				<form
-					action="${pageContext.request.contextPath}/customer.do?method=register"
-					method="post">
-					<div class="form-group">
-						<label for="inputEmail3"
-							class="col-sm-2 control-label label_login">用户名</label>
-						<div class="col-sm-10 input_div">
-							<input type="text" name="userid" id="userid2" class="form-control inputSth"
-								placeholder="请输入用户名">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputPassword3" 
-							class="col-sm-2 control-label label_login">密码</label>
-						<div class="col-sm-10 input_div">
-							<input type="password" name="password" id="password2" class="form-control inputSth"
-								placeholder="请输入密码">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputPassword3" 
-							class="col-sm-2 control-label label_login">确认密码</label>
-						<div class="col-sm-10 input_div">
-							<input type="password" name="confirm_password" id="confirm_password2"
-								class="form-control inputSth" placeholder="请再次输入密码">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputPassword3"
-							class="col-sm-2 control-label label_login">昵称</label>
-						<div class="col-sm-10 input_div">
-							<input type="text" id="username2" name="username" class="form-control inputSth"
-								placeholder="请输入昵称">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputPassword3"
-							class="col-sm-2 control-label label_login">真实姓名</label>
-						<div class="col-sm-10 input_div">
-							<input type="text" name="realname" id="realname2" class="form-control inputSth"
-								placeholder="请输入真实姓名">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputPassword3"
-							class="col-sm-2 control-label label_login">身份证</label>
-						<div class="col-sm-10 input_div">
-							<input type="text" name="personnumber" id="personnumber2"
-								class="form-control inputSth" placeholder="请输入二代身份证号">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputPassword3"
-							class="col-sm-2 control-label label_login">手机</label>
-						<div class="col-sm-10 input_div">
-							<input type="text" id="telphone2" name="telphone" class="form-control inputSth"
-								placeholder="请输入手机号码">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10 input_div">
-							<button type="submit" class="btn btn-default col-sm-12"
-								id="btn_login" onclick="return validate2()">注册</button>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10 input_div">
-							<p class="label_error1" id="errormessage21" style="display:none;">输入信息不完整！</p>
-							<p class="label_error1" id="errormessage22" style="display:none;">用户名已被注册！</p>
-							<p class="label_error1" id="errormessage23" style="display:none;">用户名长度不对,应为5到18个字符</p>
-							<p class="label_error1" id="errormessage24" style="display:none;">用户名应包括字母、数字和下划线，以字母开头</p>
-							<p class="label_error" id="errormessage25" style="display:none;">两次密码不一致！</p>
-							<p class="label_error1" id="errormessage26" style="display:none;">手机号格式错误！</p>
-							<p class="label_error" id="errormessage27" style="display:none;">身份证格式错误！</p>
-							<div class="success" id="success2" hidden="true">
-								<img src="../image/success_pic.png">
-								<p>注册成功</p>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-
+				
 		</div>
 	</div>
 
@@ -477,7 +407,19 @@ function validate2()
 		</div>
 	</div>
 
+	<div class="row add_hidden_bg"></div>
 
+	<div class="row ok_remove">
+		<p>注册成功！</p>
+		<button class="col-xs-offset-4 col-xs-4 btn_remove" onclick="ok_remove1()">确定</button>
+	</div>
+	
+	<div class="bottom-grid1">
+		<div class="fit1">
+			<h3>HAPPY SHOPPING</h3>
+			<p>Lorem Ipsum sit amet consectuer adipiscing elitsed diam nonummy nibh euismod</p>
+		</div>
+	</div>
 
 	<div class="footer">
 		<div class="container footer-div">

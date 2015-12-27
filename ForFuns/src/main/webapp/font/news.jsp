@@ -136,7 +136,7 @@ $(document).ready(function(){
 </div>
 
 
-	<div class="header-top">
+	<div class="col-xs-12 header-top">
 			<div class="container">
 				<div class="statu_bar">
 					<ul class="support">
@@ -176,7 +176,7 @@ $(document).ready(function(){
 								<li><a href="goodslist.jsp">成品</a></li>
 								<li><a href="home.html">DIY</a></li>
 								<li><a href="artistlist.jsp">艺术家</a></li>
-								<li><a href="newslist.jsp">资讯中心</a></li>
+								<li><a href="newslist.jsp">资讯中心</a></li> 
 							</ul>
 						</div>
 					</div>
