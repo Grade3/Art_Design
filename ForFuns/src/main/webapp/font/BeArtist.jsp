@@ -109,19 +109,23 @@ function checkPersonnumber(personnum)
 
 function validate()
 {	
-	var userid = $("#userid").val();
-	var username = $("#username").val();
 	var realname = $("#realname").val();
 	var telphone = $("#telphone").val();
 	var personnumber = $("#personnumber").val();
 	var paymode = $("#paymode").val();
 	var goodat = $("#goodat").val();
 	
-	if(username == null || username == "" || realname == null || realname == "" 
+	if(realname == null || realname == "" 
 			||telphone == null || telphone == ""||personnumber==null||personnumber==""
 			||paymode==null||paymode==""||goodat==null||goodat=="")
 	{
 		alert("信息不完整");
+		return false;
+	}
+	//alert($("#checkbox").attr("checked"));
+	if($("#checkbox").attr("checked")!="checked")
+	{
+		alert("请仔细阅读协议并确认同意");
 		return false;
 	}
 	
@@ -316,23 +320,23 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">真实姓名</p>
-							<input type="text" class="col-xs-8"  value="真实姓名"  name="realname" id="realname">
+							<input type="text" class="col-xs-8"  value="真实姓名"  >
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">身份证</p>
-							<input type="text" class="col-xs-8" value="123123133313131323" name="personnumber" id="personnumber">
+							<input type="text" class="col-xs-8" value="123123133313131323" >
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">手机</p>
-							<input type="text" class="col-xs-8"  value="12312341234"  name="telphone" id="telphone">
+							<input type="text" class="col-xs-8"  value="12312341234" >
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">支付宝</p>
-							<input type="text" class="col-xs-8"  placeholder="请输入支付宝账号"   name="paymode">
+							<input type="text" class="col-xs-8"  placeholder="请输入支付宝账号" >
 						</div>
 						<div class="row info info2">
 							<p class="col-xs-4">擅长领域</p>
-							<input type="text" class="col-xs-8" placeholder="请输入您擅长的艺术领域" name="goodat" >
+							<input type="text" class="col-xs-8" placeholder="请输入您擅长的艺术领域" >
 						</div>
 					</div>
 					
@@ -345,26 +349,26 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">真实姓名</p>
-							<input type="text" class="col-xs-8" value="孔日天" >
+							<input type="text" class="col-xs-8" value="孔日天" name="realname" id="realname" >
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">身份证</p>
-							<input type="text" class="col-xs-8" 
+							<input type="text" class="col-xs-8" name="personnumber" id="personnumber"
 								value="66666">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">手机</p>
-							<input type="text" class="col-xs-8" 
+							<input type="text" class="col-xs-8" name="telphone" id="telphone"
 								value="12312341234">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">支付宝</p>
-							<input type="text" class="col-xs-8"
+							<input type="text" class="col-xs-8"  name="paymode" id="paymode"
 								placeholder="请输入支付宝账号">
 						</div>
 						<div class="row info info2">
 							<p class="col-xs-4">擅长领域</p>
-							<input type="text" class="col-xs-8" 
+							<input type="text" class="col-xs-8" name="goodat" id="goodat"
 								placeholder="请输入您擅长的艺术领域">
 						</div>
 					</div>
@@ -401,7 +405,7 @@ $(document).ready(function(){
 					</div>
   
 					<div class="col-xs-12 agree hidden-lg">
-						<input type="checkbox"/>
+						<input type="checkbox" id="checkbox"/>
 						<p>我已阅读并同意该协议</p>
 					</div>
 
