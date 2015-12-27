@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						}
 						var link = "<%=basePath%>font/artistHome.jsp?id="+id;
 						body+="<div class='col-xs-6 goods'><a href='"+link+"' target='_blank'><img src='"+avator+"' class='good_item'></a><div class='good_name'><p>"+username+"</p><a href='"+link+"' class='readmore' target='_blank'>进入主页</a></div></div>";
-						if(count==2){
+						if(count==1){
 							body+="</div>";
 						}
 						count++;

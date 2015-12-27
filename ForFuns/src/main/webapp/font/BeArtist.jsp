@@ -10,19 +10,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 <title>BeArtist</title>
-<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="../css/dom.css" rel="stylesheet" type="text/css" />
-<link href="../css/footer.css" rel="stylesheet" type="text/css" />
-<link href="../css/footer2.css" rel="stylesheet" type="text/css" /> 
-<link rel="stylesheet" type="text/css" href="../css/BeArtist.css">
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script>
+<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>css/footer2.css" rel="stylesheet" type="text/css" /> 
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/BeArtist.css">
+<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
 </head>
 <body>
 
 	<a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
-	<script src="../js/lanrenzhijia.js"></script>
+	<script src="<%=basePath%>js/lanrenzhijia.js"></script>
 	<script type="text/javascript"
 		src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 	<script>
