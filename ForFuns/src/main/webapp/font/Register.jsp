@@ -11,24 +11,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 <title>Register</title>
-<link rel="shortcut icon"
-	href="http://static.hdslb.com/images/favicon.ico">
-<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet"
-	type="text/css" />
-	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
+<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet"type="text/css" />
+<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
-<link href="<%=basePath%>css/footer.css" rel="stylesheet"
-	type="text/css" />
-	<link href="../css/footer2.css" rel="stylesheet" type="text/css" /> 
-<link rel="stylesheet" type="text/css"
-	href="<%=basePath%>css/Register.css">
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.js"></script>
+<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
+<link href="../css/footer2.css" rel="stylesheet" type="text/css" /> 
+<link rel="stylesheet" type="text/css" href="<%=basePath%>css/Register.css">
+<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 </head>
 <body>
 
 	<a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
-	<script src="../js/lanrenzhijia.js"></script>
+	<script src="<%=basePath%>js/lanrenzhijia.js"></script>
 	<script>
 	function getUrlParam(name) {
 	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -53,6 +50,11 @@ $(function(){
 <script type="text/javascript">
 $(document).ready(function()
 {
+	$('.label_error1').hide();
+	var errorid = getUrlParam("error");
+	if(errorid=="2"){
+		$('#errormessage2').show();
+	}
   	$("#menu").click(function()
 	{
   		$("#menu-xs").toggle(300);
@@ -73,10 +75,7 @@ function checkUserid(userid)
 {	  
 	 if(userid.length > 18)
 	 {
-	  	$("#errormessage13").show();
-	  	$("#userid1").focus();
-	  	$("#errormessage23").show();
-	  	$("#userid2").focus();
+	  	alert("用户名长度不对,应为5到18个字符");
 	 	return false;
 	 }
 	 else
@@ -85,10 +84,7 @@ function checkUserid(userid)
 		var re=new RegExp(strRegex);
 	    if(!re.test(userid))
 	    {
-	    	$('#errormessage14').show();
-	    	$('#errormessage24').show();
-	    	$("#userid1").focus();
-	    	$("#userid2").focus();
+	    	alert("用户名应包括字母、数字和下划线，以字母开头");
 			return false;
 	    }
 	 }
@@ -117,115 +113,89 @@ function checkPersonnumber(personnum)
 	
 	if(!re.test(personnum))
 	{
-		$("#personnumber1").focus();
-		$("#personnumber2").focus();
+		$("#personnumber").focus();
 		return false;
 	}
 	
 	return true;
 }
 
-function validate1()
+function validate()
 {
-	for(var i = 0; i < 7; i++)
-	{
-		var str = '#errormessage1' + i;
-		$(str).hide();
-	}
+	$('.label_error1').hide();
+	var userid = $("#userid").val();
+	var username = $("#nickname").val();
+	var password = $("#password").val();
+	var confirm_password = $("#confirm_password").val();
+	var realname = $("#realname").val();
+	var telphone = $("#telphone").val();
+	var personnumber = $("#personnumber").val();
 	
-	var userid = $("#userid1").val();
-	var username = $("#username1").val();
-	var password = $("#password1").val();
-	var confirm_password = $("#confirm_password1").val();
-	var realname = $("#realname1").val();
-	var telphone = $("#telphone1").val();
-	var personnumber = $("#personnumber1").val();
-	
-	if(userid == null || userid == "" || username == null || username == "" || password == null || password == "" 
-			|| confirm_password == null || confirm_password == "" || realname == null || realname == "" || 
-			realname == null || realname == "" ||telphone == null || telphone == "")
+	if(userid == null || userid == "" )
 	{
-		$('#errormessage11').show();
+		$('#errormessage1').show();
 		return false;
 	}
+	
+	if(password == null || password == ""){
+		$('#errormessage3').show();
+		return false;
+	}
+	if( confirm_password == null || confirm_password == "" ){
+		$('#errormessage4').show();
+		return false;
+	}
+	if(password != confirm_password)
+	{
+		$('#errormessage4').show();
+		return false;
+	}
+	
+	if(username == null || username == "" ){
+		$('#errormessage5').show();
+		return false;
+	}
+	
+	if(realname == null || realname == "" ){
+		$('#errormessage6').show();
+		return false;
+	}
+	
+	if(personnumber == null || personnumber == ""){
+		$('#errormessage7').show();
+		return false;
+	}
+	
+	if(telphone == null || telphone == ""){
+		$('#errormessage8').show();
+		return false;
+	}
+	
+	
 	
 	if(!checkUserid(userid))
 	{
 		return false;
 	}
 	
-	if(password != confirm_password)
-	{
-		$('#errormessage15').show();
-		return false;
-	}
 	
 	if(!checkTelphone(telphone))
 	{
-		$('#errormessage16').show();
+		alert("手机号格式错误！");
 		return false;
 	}
 	
 	if(!checkPersonnumber(personnumber))
 	{
-		$('#errormessage17').show();
+		alert("身份证格式错误！");
 		return false;
 	}
 	
-	$('#success1').show();
+	//$('#success1').show();
 	return true;
 }
 
-function validate2()
-{
-	for(var i = 0; i < 7; i++)
-	{
-		var str = '#errormessage2' + i;
-		$(str).hide();
-	}
-	
-	var userid = $("#userid2").val();
-	var username = $("#username2").val();
-	var password = $("#password2").val();
-	var confirm_password = $("#confirm_password2").val();
-	var realname = $("#realname2").val();
-	var telphone = $("#telphone2").val();
-	var personnumber = $("#personnumber2").val();
-	
-	if(userid == null || userid == "" || username == null || username == "" || password == null || password == "" 
-			|| confirm_password == null || confirm_password == "" || realname == null || realname == "" || 
-			realname == null || realname == "" ||telphone == null || telphone == "")
-	{
-		$('#errormessage21').show();
-		return false;
-	}
-	
-	if(!checkUserid(userid))
-	{
-		return false;
-	}
-	
-	if(password != confirm_password)
-	{
-		$('#errormessage25').show();
-		return false;
-	}
-	
-	if(!checkTelphone(telphone))
-	{
-		$('#errormessage26').show();
-		return false;
-	}
-	
-	if(!checkPersonnumber(personnumber))
-	{
-		$('#errormessage27').show();
-		return false;
-	}
-	
-	$('#success2').show();
-	return true;
-}
+
 
 function submitNewOne(){
 	$(".add_hidden_bg").show();
@@ -240,7 +210,6 @@ function ok_remove1()
 }
 
 $(document).ready(function(){
-
 	var ok_remove_w = $(".inputSth").width();
 	$(".ok_remove").width(ok_remove_w);
 
@@ -335,64 +304,66 @@ $(document).ready(function(){
 		<div class="container">
 			<div class="col-md-12">
 				<div class="form-group">
+				<form action="<%=basePath%>customer.do?method=register" method="post">
 					<label for="inputEmail3" class="col-sm-2 control-label label_login">&nbsp;用户名：</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" class="form-control inputSth" placeholder="请输入用户名">
+						<input type="text" class="form-control inputSth" placeholder="请输入用户名" name="userid" id="userid">
 					</div>
-					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;用户名不能为空</p>
-					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;用户名已被注册</p>
+					<p class="label_error1" id="errormessage1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;用户名不能为空</p>
+					<p class="label_error1" id="errormessage2"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;用户名已被注册</p>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;密码：</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" class="form-control inputSth" placeholder="请输入密码">
+						<input type="text" class="form-control inputSth" placeholder="请输入密码" name="password" id="password">
 					</div>
-					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;密码不能为空</p>
+					<p class="label_error1" id="errormessage3"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;密码不能为空</p>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;确认密码：</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" class="form-control inputSth" placeholder="请再次输入密码">
+						<input type="text" class="form-control inputSth" placeholder="请再次输入密码" id="confirm_password">
 					</div>
-					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;两次密码输入不一致</p>
+					<p class="label_error1" id="errormessage4"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;两次密码输入不一致</p>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;昵称：</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" class="form-control inputSth" placeholder="请输入昵称">
+						<input type="text" class="form-control inputSth" placeholder="请输入昵称" name="username" id="nickname">
 					</div>
-					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;昵称不能为空</p>
+					<p class="label_error1" id="errormessage5"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;昵称不能为空</p>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;真实姓名：</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" class="form-control inputSth" placeholder="请输入真实姓名">
+						<input type="text" class="form-control inputSth" placeholder="请输入真实姓名" name="realname" id="realname">
 					</div>
-					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;真实姓名不能为空</p>
+					<p class="label_error1" id="errormessage6"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;真实姓名不能为空</p>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;身份证：</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" class="form-control inputSth" placeholder="请输入二代身份证号">
+						<input type="text" class="form-control inputSth" placeholder="请输入二代身份证号" name="personnumber" id="personnumber">
 					</div>
-					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;身份证不能为空</p>
+					<p class="label_error1" id="errormessage7"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;身份证不能为空</p>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label label_login">&nbsp;手机：</label>
 					<div class="col-sm-10 input_div">
-						<input type="text" class="form-control inputSth" placeholder="请输入手机号码">
+						<input type="text" class="form-control inputSth" placeholder="请输入手机号码" name="telphone" id="telphone">
 					</div>
-					<p class="label_error1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;手机不能为空</p>
+					<p class="label_error1" id="errormessage8"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;&nbsp;手机不能为空</p>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10 input_div">
-						<button type="submit" class="btn btn-default col-sm-12" id="btn_login" onclick="submitNewOne()">注册</button>
+						<button type="submit" class="btn btn-default col-sm-12" id="btn_login" onclick="return validate()">注册</button>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10 input_div">
 					</div>
 				</div>
+			</form>
 			</div>
 				
 		</div>
@@ -414,12 +385,6 @@ $(document).ready(function(){
 		<button class="col-xs-offset-4 col-xs-4 btn_remove" onclick="ok_remove1()">确定</button>
 	</div>
 	
-	<div class="bottom-grid1">
-		<div class="fit1">
-			<h3>HAPPY SHOPPING</h3>
-			<p>Lorem Ipsum sit amet consectuer adipiscing elitsed diam nonummy nibh euismod</p>
-		</div>
-	</div>
 
 	<div class="footer">
 		<div class="container footer-div">
