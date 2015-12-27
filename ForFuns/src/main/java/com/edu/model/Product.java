@@ -27,7 +27,7 @@ public class Product {
 	private Integer id;
 	private String name;
 	private String imgurl;
-	private Integer money;
+	private Double money;
 	private Date timestart;
 	private Date timeout;
 	private String content;
@@ -46,7 +46,7 @@ public class Product {
 	public void setProductSellBean(ProductSell productSellBean) {
 		this.productSellBean = productSellBean;
 	}
-	public Product(Integer id, String name, String imgurl, Integer money,
+	public Product(Integer id, String name, String imgurl, Double money,
 			Date timestart, Date timeout, String content, String imgone,
 			String imgtwo, String imgthree, Integer situation,
 			Artist artistBean, ProductType productTypeBean,
@@ -94,10 +94,10 @@ public class Product {
 		this.imgurl = imgurl;
 	}
 	@Column(name = "money")
-	public Integer getMoney() {
+	public Double getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
 	@Column(name = "timestart")

@@ -18,7 +18,7 @@ public class OrderVO
 	private Integer productid;
 	private Integer customerid;
 	private String productname;
-	private Integer money;
+	private Double money;
 	private String artistname;
 	private String productimg;
 	private String receiver;
@@ -117,10 +117,10 @@ public class OrderVO
 	public void setProductimg(String productimg) {
 		this.productimg = productimg;
 	}
-	public Integer getMoney() {
+	public Double getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
 	public String getArtistname() {
@@ -131,7 +131,7 @@ public class OrderVO
 	}
 	public OrderVO(Integer id, String telephone, String address, Date current,
 			Integer ispay, Integer productid, Integer customerid,
-			String productname, Integer money, String artistname) {
+			String productname, Double money, String artistname) {
 		super();
 		this.id = id;
 		this.telephone = telephone;

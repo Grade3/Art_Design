@@ -41,13 +41,14 @@ public class FixedPriceStrategy extends BaseServiceImpl<Product> implements ISel
 	@Autowired
 	private IAddressDao addressDao;
 	@Override
-	public String SellProduct(Product productBean,Customer customerBean,Integer money,Map<String, Object>params) throws Exception {
+	public String SellProduct(Product productBean,Customer customerBean,Double money,Map<String, Object>params) throws Exception {
 		Order orderBean = orderDao.GetBeanByCondition(Order.class, OrderTable.PRODUCTID, productBean.getId()+"", null);
 		if(null== orderBean){//不存在改商品的订单 
 			orderBean = new Order();
 			orderBean.setCustomerBean(customerBean);
 			orderBean.setProductBean(productBean);
 			orderBean.setCurrent(new Date());
+			orderBean.setMoney(money);
 			orderBean.setIspay(1);
 			OrderAddress orderAddressBean = new OrderAddress();
 			Address addressBean = (Address) addressDao.getEntitybyId(Address.class, Integer.parseInt(params.get("addressid").toString()));

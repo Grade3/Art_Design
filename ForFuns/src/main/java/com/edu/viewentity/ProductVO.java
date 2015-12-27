@@ -15,14 +15,14 @@ public class ProductVO {
 	private Integer id;
 	private String name;
 	private String imgurl;//封面图片
-	private Integer initmoney;
+	private Double initmoney;
 	private Integer authorid;
 	private String artistuserid;
 	private String authorname;
 	private Date timestart;
 	private Date timeout;
 	private String content;
-	private Integer money;
+	private Double money;
 	private String imgone;//图片1地址
 	private String imgtwo;//图片2地址
 	private String imgthree;//图片3地址
@@ -53,10 +53,10 @@ public class ProductVO {
 		this.artistuserid = productBean.getArtistBean().getUserid();
 		this.money = productBean.getMoney();
 	}
-	public Integer getMoney() {
+	public Double getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
 	public String getArtistuserid() {
@@ -79,7 +79,7 @@ public class ProductVO {
 		return productVOs;
 	}
 	
-	public ProductVO(Integer id, String name, String imgurl, Integer initmoney,
+	public ProductVO(Integer id, String name, String imgurl, Double initmoney,
 			Integer authorid, String authorname, Date timestart, Date timeout,
 			String content, String imgone, String imgtwo, String imgthree,
 			Integer situation, Integer methodid, String methodname,
@@ -121,10 +121,10 @@ public class ProductVO {
 	public void setImgurl(String imgurl) {
 		this.imgurl = imgurl;
 	}
-	public Integer getInitmoney() {
+	public Double getInitmoney() {
 		return initmoney;
 	}
-	public void setInitmoney(Integer initmoney) {
+	public void setInitmoney(Double initmoney) {
 		this.initmoney = initmoney;
 	}
 	public Integer getAuthorid() {

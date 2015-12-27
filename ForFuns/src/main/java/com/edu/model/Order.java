@@ -19,7 +19,7 @@ public class Order {
 	private Integer id;
 	private Date current;
 	private Integer ispay;
-	private Integer money;
+	private Double money;
 	private Product productBean;
 	private Customer customerBean;
 	private OrderAddress orderAddressBean;
@@ -85,11 +85,13 @@ public class Order {
 	public void setOrderAddressBean(OrderAddress orderAddressBean) {
 		this.orderAddressBean = orderAddressBean;
 	}
-	public Integer getMoney() {
+	@Column(name="money")
+	public Double getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
+	
 	
 }
