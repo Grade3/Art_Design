@@ -60,16 +60,11 @@ public class ArtistController
 	 * @return
 	 */
 	@RequestMapping(params = "method=login")
-	public String login(
-			@RequestParam(value = "username", required = false) String username,
-			@RequestParam(value = "password", required = false) String password,
-			HttpServletRequest request, HttpServletResponse response,
-			@CookieValue(value = "token", required = false) String token)
-	{
-		if (null != token)
-		{
-			if (null == username)
-			{
+	public String login(@RequestParam(value = "username", required = false) String username,
+			@RequestParam(value = "password", required = false) String password, HttpServletRequest request,
+			HttpServletResponse response, @CookieValue(value = "token", required = false) String token) {
+		if (null != token) {
+			if (null == username) {
 				System.out.println(token);
 				String[] parts = token.split("\\&");
 				System.out.println(parts.length);
@@ -85,18 +80,15 @@ public class ArtistController
 		user.setUsername(username);
 		System.out.println(user.toString());
 		boolean loginResult = artistService.isExist(user);
-		if (loginResult)
-		{
-			Cookie cookie = new Cookie("token", username + "&"
-					+ MD5Util.convertMD5(username));
+		if (loginResult) {
+			Cookie cookie = new Cookie("token", username + "&" + MD5Util.convertMD5(username));
 			response.addCookie(cookie);
 			return "redirect:/admin/main.jsp";
-		} else
-		{
+		} else {
 			return "redirect:/jsp/login.jsp?error=1";
 		}
 	}
-	
+
 	/**
 	 * 申请成为艺术家功能
 	 * 
@@ -105,68 +97,57 @@ public class ArtistController
 	 * @return
 	 */
 	@RequestMapping(params = "method=apply")
-	public String apply(
-			@RequestParam(value = "userid", required = false) String userid,
+	public String apply(@RequestParam(value = "userid", required = false) String userid,
 			@RequestParam(value = "realname", required = false) String realname,
 			@RequestParam(value = "telphone", required = false) String telphone,
 			@RequestParam(value = "personnumber", required = false) String personnumber,
 			@RequestParam(value = "paymode", required = false) String paymode,
-			@RequestParam(value = "goodat", required = false) String goodat,
-			HttpServletRequest request, HttpServletResponse response,
-			@CookieValue(value = "useridtoken", required = false) String token)
-	{
-		if (null != token)
-		{
-			//System.out.println("get");
-			if (null == userid)
-			{
+			@RequestParam(value = "goodat", required = false) String goodat, HttpServletRequest request,
+			HttpServletResponse response, @CookieValue(value = "useridtoken", required = false) String token) {
+		if (null != token) {
+			// System.out.println("get");
+			if (null == userid) {
 				System.out.println(token);
 				String[] parts = token.split("\\&");
 				System.out.println(parts.length);
 				String temp = MD5Util.convertMD5(parts[1]);
-				System.out.println(temp);	
-				userid=temp;
+				System.out.println(temp);
+				userid = temp;
 			}
 		}
-		ExamineArtist examineartist=new ExamineArtist();
-		int registFlag = 0;
-		if (userid.equals("")||paymode.equals("") || goodat.equals("") 
-				|| realname.equals("") || telphone.equals("") || personnumber.equals(""))
-			registFlag = 1;
-		
-		
-		if (registFlag == 0) {
-			examineartist.setId(artistService.countEa()+1);
-			examineartist.setPaymode(paymode);
-			examineartist.setUserid(userid);
-			examineartist.setGoodat(goodat);
-			examineartist.setPersonnumber(personnumber);
-			examineartist.setRealname(realname);
-			examineartist.setTelphone(telphone);
-			System.out.println(examineartist.toString());
-			
-			artistService.AddBean(examineartist);
+		ExamineArtist examineartist = new ExamineArtist();
 
-			
-			return "redirect:/font/home.jsp";
-		}
-		//没填全
-		else
-			return "redirect:/font/BeArtist.jsp?error=1";
-//		CustomerBean user = new CustomerBean();
-//		
-//		System.out.println(user.toString());
-//		boolean loginResult = artistService.isExist(user);
-//		if (loginResult)
-//		{
-//			Cookie cookie = new Cookie("token", username + "&"
-//					+ MD5Util.convertMD5(username));
-//			response.addCookie(cookie);
-//			return "redirect:/admin/main.jsp";
-//		} else
-//		{
-//			return "redirect:/jsp/login.jsp?error=1";
-//		}
+		// 13806049834
+		// 2187181
+
+		examineartist.setId(artistService.countEa() + 1);
+		examineartist.setPaymode(paymode);
+		examineartist.setUserid(userid);
+		examineartist.setGoodat(goodat);
+		examineartist.setPersonnumber(personnumber);
+		examineartist.setRealname(realname);
+		examineartist.setTelphone(telphone);
+		examineartist.setSuggestion("0");
+		System.out.println(examineartist.toString());
+
+		artistService.AddBean(examineartist);
+
+		return "redirect:/font/home.jsp";
+
+		// CustomerBean user = new CustomerBean();
+		//
+		// System.out.println(user.toString());
+		// boolean loginResult = artistService.isExist(user);
+		// if (loginResult)
+		// {
+		// Cookie cookie = new Cookie("token", username + "&"
+		// + MD5Util.convertMD5(username));
+		// response.addCookie(cookie);
+		// return "redirect:/admin/main.jsp";
+		// } else
+		// {
+		// return "redirect:/jsp/login.jsp?error=1";
+		// }
 	}
 
 	/**
@@ -178,12 +159,10 @@ public class ArtistController
 	 */
 	@RequestMapping(params = "method=getArtistbypage")
 	@ResponseBody
-	public Map<String, Object> JsonGetPageArtist(
-			@RequestParam(value = "page") int page,
+	public Map<String, Object> JsonGetPageArtist(@RequestParam(value = "page") int page,
 			@RequestParam(value = "rows") int pageSize,
 			@RequestParam(value = "selectname", defaultValue = "id") String selectname,
-			@RequestParam(value = "value", defaultValue = "") String value)
-	{
+			@RequestParam(value = "value", defaultValue = "") String value) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Artist> list = artistService.GetPageBeanFilter(
 				Artist.class, page, pageSize, selectname, value);
@@ -202,18 +181,15 @@ public class ArtistController
 	 */
 	@RequestMapping(params = "method=deleteArtist")
 	@ResponseBody
-	public String JsonDeleteUser(@RequestParam(value = "ids") String ids)
-	{
+	public String JsonDeleteUser(@RequestParam(value = "ids") String ids) {
 		Boolean flag = true;
 		String[] id = ids.split(",");
 		int[] temp = new int[id.length];
-		for (int i = 0; i < id.length; i++)
-		{
+		for (int i = 0; i < id.length; i++) {
 			temp[i] = Integer.parseInt(id[i]);
 		}
 
-		for (int i = 0; i < id.length; i++)
-		{
+		for (int i = 0; i < id.length; i++) {
 			System.out.println(temp[i]);
 			Customer customerBean = customerService.GetEntityById(
 					Customer.class, temp[i]);
@@ -222,11 +198,10 @@ public class ArtistController
 			if (result != 1)
 				flag = false;
 		}
-		
+
 		if (flag == true)
 			return "true";
-		else 
-		{
+		else {
 			return "error";
 		}
 	}
@@ -239,10 +214,8 @@ public class ArtistController
 	 */
 	@RequestMapping(params = "method=addArtist")
 	@ResponseBody
-	public int JsonAddUser(@RequestParam(value = "data") String data)
-	{
-		try
-		{
+	public int JsonAddUser(@RequestParam(value = "data") String data) {
+		try {
 			data = URLDecoder.decode(data, "utf-8");
 			data = data.substring(1, data.length() - 1);
 			System.out.println(data);
@@ -250,17 +223,15 @@ public class ArtistController
 			String userid = jsonObject.getString(CustomerTable.USERID);
 			String username = jsonObject.getString(CustomerTable.USERNAME);
 			String password = jsonObject.getString(CustomerTable.PASSWORD);
-			String personnumber = jsonObject
-					.getString(CustomerTable.PERSONNUMBER);
+			String personnumber = jsonObject.getString(CustomerTable.PERSONNUMBER);
 			String telphone = jsonObject.getString(CustomerTable.TELPHONE);
 			String realname = jsonObject.getString(CustomerTable.REALNAME);
 			String avator = jsonObject.getString(CustomerTable.AVATOR);
-			Customer CustomerBean = new Customer(userid, username,
-					password, personnumber, telphone, realname, avator, 1);
+			Customer CustomerBean = new Customer(userid, username, password, personnumber, telphone, realname, avator,
+					1);
 			artistService.AddBean(CustomerBean);
 			return 1;
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
 		}
@@ -275,10 +246,8 @@ public class ArtistController
 	 */
 	@RequestMapping(params = "method=updateArtist")
 	@ResponseBody
-	public String JsonUpdate(@RequestParam(value = "data") String data)
-	{
-		try
-		{
+	public String JsonUpdate(@RequestParam(value = "data") String data) {
+		try {
 			data = URLDecoder.decode(data, "utf-8");
 			data = data.substring(1, data.length() - 1);
 			System.out.println(data);
@@ -301,8 +270,7 @@ public class ArtistController
 			customerBean.setAvator(avator);
 			artistService.UpdataBean(customerBean);
 			return "true";
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "error";
@@ -322,11 +290,10 @@ public class ArtistController
 		map.put("Artists", list);
 		return map;
 	}
-	
-	
 
 	/**
 	 * 获取艺术家分页列表
+	 * 
 	 * @return
 	 */
 	@ResponseBody

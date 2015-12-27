@@ -8,5 +8,8 @@ import com.edu.base.IBaseDao;
 
 public interface IExamineArtistDao extends IBaseDao<ExamineArtist>{
 
+	List<ExamineArtist> getPageBeanFilterrWhereSugNotEqualOne(Class clz, int page, int pageSize, String selectname,
+			String value);
+
 	
 }

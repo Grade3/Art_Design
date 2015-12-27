@@ -79,6 +79,67 @@ function CheckUser(){
 	});
 }
 
+function checkTelphone(telphone)
+{
+	var strRegex = /[1-9]\d{6,}$/;
+	var re = new RegExp(strRegex);
+	
+	if(!re.test(telphone))
+	{
+		$("#telphone").focus();
+		return false;
+	}
+	
+	return true;
+}
+
+function checkPersonnumber(personnum)
+{
+	var strRegex = /\d{17}(\d|X)$/;
+	var re = new RegExp(strRegex);
+	
+	if(!re.test(personnum))
+	{
+		$("#personnumber").focus();
+		return false;
+	}
+	
+	return true;
+}
+
+function validate()
+{	
+	var userid = $("#userid").val();
+	var username = $("#username").val();
+	var realname = $("#realname").val();
+	var telphone = $("#telphone").val();
+	var personnumber = $("#personnumber").val();
+	var paymode = $("#paymode").val();
+	var goodat = $("#goodat").val();
+	
+	if(username == null || username == "" || realname == null || realname == "" 
+			||telphone == null || telphone == ""||personnumber==null||personnumber==""
+			||paymode==null||paymode==""||goodat==null||goodat=="")
+	{
+		alert("信息不完整");
+		return false;
+	}
+	
+	if(!checkTelphone(telphone))
+	{
+		alert("联系方式格式错误");
+		return false;
+	}
+	
+	if(!checkPersonnumber(personnumber))
+	{
+		alert("身份证号码格式错误");
+		return false;
+	}
+	
+	return true;
+}
+
 $(document).ready(function(){
 	$('#usernameaction').hide();
 	$('#loginoutaction').hide();
@@ -104,12 +165,12 @@ $(document).ready(function(){
 					var userid = customer.userid;
 					var username = customer.username;
 					var personnumber = customer.personnumber;
-					var telphone = customer.telphone;
+					var telphone = customer.telephone;
 					var realname = customer.realname;
 					var avator = customer.avator;
 					var isartist = customer.isartist;
-
-					alert(userid+" "+username+" "+personnumber+" "+telphone+" "+realname);
+					//if($("#id").attr("checked")==true)
+					//alert(userid+" "+username+" "+personnumber+" "+telphone+" "+realname);
 
 					$('#username').val(username);
 					$('#userid').val(userid);
@@ -255,25 +316,26 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">真实姓名</p>
-							<input type="text" class="col-xs-8" id="realname" value="真实姓名">
+							<input type="text" class="col-xs-8"  value="真实姓名"  name="realname" id="realname">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">身份证</p>
-							<input type="text" class="col-xs-8" id="personnumber" value="123123133313131323">
+							<input type="text" class="col-xs-8" value="123123133313131323" name="personnumber" id="personnumber">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">手机</p>
-							<input type="text" class="col-xs-8" id="telphone" value="12312341234">
+							<input type="text" class="col-xs-8"  value="12312341234"  name="telphone" id="telphone">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">支付宝</p>
-							<input type="text" class="col-xs-8" placeholder="请输入支付宝账号">
+							<input type="text" class="col-xs-8"  placeholder="请输入支付宝账号"   name="paymode">
 						</div>
 						<div class="row info info2">
 							<p class="col-xs-4">擅长领域</p>
-							<input type="text" class="col-xs-8" placeholder="请输入您擅长的艺术领域">
+							<input type="text" class="col-xs-8" placeholder="请输入您擅长的艺术领域" name="goodat" >
 						</div>
 					</div>
+					
 					<div class="info_div hidden-lg">
 						<div class="row info1">
 							<p class="col-xs-4 title_person">身份信息</p>
@@ -283,26 +345,26 @@ $(document).ready(function(){
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">真实姓名</p>
-							<input type="text" class="col-xs-8"  name="realname" value="孔日天">
+							<input type="text" class="col-xs-8" value="孔日天" >
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">身份证</p>
-							<input type="text" class="col-xs-8"  name="personnumber"
+							<input type="text" class="col-xs-8" 
 								value="66666">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">手机</p>
-							<input type="text" class="col-xs-8" name="telphone"
+							<input type="text" class="col-xs-8" 
 								value="12312341234">
 						</div>
 						<div class="row info">
 							<p class="col-xs-4">支付宝</p>
-							<input type="text" class="col-xs-8" name="paymode"
+							<input type="text" class="col-xs-8"
 								placeholder="请输入支付宝账号">
 						</div>
 						<div class="row info info2">
 							<p class="col-xs-4">擅长领域</p>
-							<input type="text" class="col-xs-8"  name="goodat"
+							<input type="text" class="col-xs-8" 
 								placeholder="请输入您擅长的艺术领域">
 						</div>
 					</div>
@@ -320,7 +382,7 @@ $(document).ready(function(){
 						<div class="row label1">
 							<p class="col-xs-12">在通过艺术网进行网上作品委托交易时，艺术家需明确了解以下几点事项:1. 艺术家注册首先需要先在艺术网上注册成为会员（根据网上提示填写完整基本个人信息）。2. 艺术家实名认证在艺术网注册完成后，需要在其个人主页里点击实名认证按钮进行艺术家实名认证（具体步骤为：首先需要填写实名认证申请表，表格内容为相关个人信息，并且需要上传艺术家的有效身份证的电子扫描件或数码照片，要求正反面都要上传，上传完成后点击提交即可）。艺术网的工作人员对艺术家提交的电子信息进行网上审核，审核时间为两个工作日内。审核完成后艺术网工作人员会以电子邮件的形式通知艺术家是否通过审核。若审核通过，艺术家即可在线签订《艺术品网络服务委托协议》。若审核未通过，通知邮件会简要说明原因，艺术家可以再次申请认证。3. 在线签署委托协议待艺术家实名认证审核通过后，即可查阅《艺术品网络服务委托协议》并在线签署该协议。该协议线上签署完毕后，该艺术家即正式与艺术网建立了委托合作关系。4.  艺术作品上线艺术家在签订《艺术品网络服务委托协议》后，艺术家需配合艺术网工作人员完成其作品图片在艺术网的上传工作，并提供作品清晰的数码图片和详细的文字说明（图片规格要求为：分辨率72dpi-100dpi范围内，最小短边不得小于600像素，最大长边不得大于2000像素）。</p>
 						</div>
-					</div>
+					</div> 
 					<div class="info_div hidden-lg">
 						<div class="row info1">
 							<p class="col-xs-4 title_person">艺术家协议</p>
@@ -337,22 +399,22 @@ $(document).ready(function(){
 						<input type="checkbox" />
 						<p>我已阅读并同意该协议</p>
 					</div>
-
+  
 					<div class="col-xs-12 agree hidden-lg">
-						<input type="checkbox" />
+						<input type="checkbox"/>
 						<p>我已阅读并同意该协议</p>
 					</div>
 
 					<div class="col-xs-12 success_btn visible-lg">
 						<input type="submit" class="col-xs-offset-1 col-xs-10"
-							value="提交申请">
+							value="提交申请" >
 					</div>
-
+ 
 					<div class="col-xs-12 success_btn hidden-lg">
-						<input type="submit" class="col-xs-12" value="提交申请">
+						<input type="submit" class="col-xs-12" value="提交申请" onclick="return validate()">
 					</div>
 				</div>
-
+ 
 
 			</form>
 
