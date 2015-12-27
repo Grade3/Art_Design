@@ -18,5 +18,14 @@ public interface IArtistDao extends IBaseDao<Artist>
 	public List<Artist> getPageBeanFilter(Class clz,int page,int pageSize,String selectname,String value);
 	
 	public int countEa();
+
+	/**
+	 * 获取总数
+	 * @param clz
+	 * @param selectname
+	 * @param value
+	 * @return
+	 */
+	List<Artist> getPageBeanFilterTotal(Class clz, String selectname,String value);
 	
 }

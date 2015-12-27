@@ -72,6 +72,7 @@ function getProductById(id){
 			var typename = product.typename;
 			var timestart = myformatter(product.timestart);
 			var timeout = myformatter(product.timeout);
+			var addmoney = product.addmoney;
 			if(methodid!=2)
 				location.href="<%=basePath%>font/404.jsp";
 			$('#productid').val(id);
@@ -86,6 +87,7 @@ function getProductById(id){
 			$('#typename').html(typename);
 			$('#authorname').html(authorname);
 			$('#content').html(content);
+			/* $('#addmoney').html("￥"+addmoney); */
 			if(situation==1){
 				var tempcontent = "<div class='row buy'><a target='_blank' href='payfor.jsp?productid="+id+"' class='col-xs-12 readmore'>现在购买</a></div>";
 				$('#gooddetail').append(tempcontent);
@@ -264,10 +266,10 @@ $(document).ready(function(){
 				<div class="col-md-6 good_detail">
 					<p class="good_name" id="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</p>
 					<div class="row price">
-						<p class="col-xs-3 good_price1 price1">起始价</p>
+						<p class="col-xs-3 good_price1 price1">当前价</p>
 						<p class="col-xs-9 good_price price2" id="money">￥98.00</p>
-						<p class="col-xs-3 good_price1 price3">当前价</p>
-						<p class="col-xs-9 good_price price4">￥230.00</p>
+						<!-- <p class="col-xs-3 good_price1 price3">当前价</p>
+						<p class="col-xs-9 good_price price4" id="addmoney">￥230.00</p> -->
 					</div>
 					<div class="row trans">
 						<p class="col-xs-3 good_other">配送</p>

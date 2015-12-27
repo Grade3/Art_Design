@@ -14,18 +14,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/404.css">
 	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var successid = getUrlParam('successid');
 			if(null==successid){
 			}else if(successid==1){
-				$('.readmore').html('返回订单页面');
+				$('.label_wrong').html('返回订单页面');
 				$('.readmore').attr('href',"<%=basePath%>order.do?method=EnterMyOrder");
 			}else if(successid==2){
-				$('.readmore').html('返回个人信息页面 ');
+				$('.label_wrong').html('返回个人信息页面 ');
 				$('.readmore').attr('href',"<%=basePath%>font/personal.jsp");
 			}else if(successid==3){
-				$('.readmore').html('返回商品列表页面');
+				$('.label_wrong').html('返回商品列表页面');
 				$('.readmore').attr('href',"<%=basePath%>font/goodslist.jsp");
 			}
 			

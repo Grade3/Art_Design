@@ -10,20 +10,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
 	<title>Goodslist</title>
 	<link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
-	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
-	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="../css/dom.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer.css" rel="stylesheet" type="text/css" />
-	<link href="../css/footer2.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="../css/goodslist.css">
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/bootstrap.js"></script>
+	<link href="<%=basePath%>css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/dom.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer.css" rel="stylesheet" type="text/css" />
+	<link href="<%=basePath%>css/footer2.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/goodslist.css">
+	<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/header.js"></script>
 </head>
 <body>
 
 <a href="javascript:;" class="lanrenzhijia_top hidden-xs hidden-sm"></a>
-<script src="../js/lanrenzhijia.js"></script>
+<script src="<%=basePath%>js/lanrenzhijia.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.8.2.min.js"></script>
 <style type="text/css">
 		*{font-style: normal;}
@@ -106,7 +106,7 @@ function GetAllOnlineProduct(typeid,page,pageSize){
 						tempbody +="<div class='col-md-6 goods_two'>";
 					}
 					tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
-							 +"<div class='good_name'><p>"+name+"</p><p class='artistname1'>"+authorname+"</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore read1' target='_blank'>详情</a></div></div>";
+							 +"<div class='good_name'><p>"+name+"</p><p class='artistname1'>"+authorname+"</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore read1' >详情</a></div></div>";
 					if(i%2==1){
 						tempbody +="</div>";
 					}
@@ -178,7 +178,7 @@ $(document).ready(function(){
 			<div class="header-bottom">
 				<div class="container">
 					<div class="logo">
-						<h1><a href="home.html">ArtCustomize</a></h1>
+						<h1><a href="home.jsp">ArtCustomize</a></h1>
 					</div>
 					<div class="top-nav-xs visible-md">
 						<div id="menu">
@@ -188,7 +188,7 @@ $(document).ready(function(){
 							<ul>
 								<li><a href="home.jsp">首页</a></li>
 								<li><a href="goodslist.jsp">成品</a></li>
-								<li><a href="home.html">DIY</a></li>
+								<li><a href="auctionList.jsp">拍卖</a></li>
 								<li><a href="artistlist.jsp">艺术家</a></li>
 								<li><a href="newslist.jsp">资讯中心</a></li>
 							</ul>
@@ -198,7 +198,7 @@ $(document).ready(function(){
 						<ul class="megamenu skyblue">
 							<li><a href="home.jsp">首页</a></li>
 							<li><a href="goodslist.jsp">成品</a></li>
-							<li><a href="home.html">DIY</a></li>
+							<li><a href="auctionList.jsp">拍卖</a></li>
 							<li><a href="artistlist.jsp">艺术家</a></li>
 							<li><a href="newslist.jsp">资讯中心</a></li>
 						</ul>
@@ -207,22 +207,22 @@ $(document).ready(function(){
 						<div class="row tag_up">
 							<div class="col-xs-3 tag0 tag01">
 								<div class="row col-xs-12 tag tag1">
-									<a href="home.html"><span class="glyphicon glyphicon-home pattern1" aria-hidden="true"></span></br>首页</a>
+									<a href="home.jsp"><span class="glyphicon glyphicon-home pattern1" aria-hidden="true"></span></br>首页</a>
 								</div>			
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag2">
-									<a href="goodslist.html"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
+									<a href="goodslist.jsp"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
 								</div>
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag3">
-									<a href="home.html"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
+									<a href="artistlist.jsp"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
 								</div>
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag4">
-									<a href="newslist.html"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
+									<a href="newslist.jsp"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
 								</div>	
 							</div>
 						</div>
@@ -283,7 +283,7 @@ $(document).ready(function(){
 
 				<!-- <div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/bg_login1.jpg" class="good_item"></a>
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/bg_login1.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>商品名称</p>
 							<p>艺术家</p>
@@ -292,48 +292,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>艺术家</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.jsp" class="readmore">详情</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 goods_two">
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>艺术家</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.jsp" class="readmore">详情</a>
-						</div>
-					</div>
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>艺术家</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.jsp" class="readmore">详情</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6 goods_two">
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/good.jpg" class="good_item"></a>
-						<div class="good_name">
-							<p>商品名称</p>
-							<p>艺术家</p>
-							<p class="price">￥99.0</p>
-							<a href="goodsdetail.jsp" class="readmore">详情</a>
-						</div>
-					</div>
-					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>商品名称</p>
 							<p>艺术家</p>
@@ -344,7 +303,7 @@ $(document).ready(function(){
 				</div>
 				<div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>商品名称</p>
 							<p>艺术家</p>
@@ -353,7 +312,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>商品名称</p>
 							<p>艺术家</p>
@@ -365,7 +324,7 @@ $(document).ready(function(){
 
 				<div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>商品名称</p>
 							<p>艺术家</p>
@@ -374,7 +333,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>商品名称</p>
 							<p>艺术家</p>
@@ -385,7 +344,7 @@ $(document).ready(function(){
 				</div>
 				<div class="col-md-6 goods_two">
 					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>商品名称</p>
 							<p>艺术家</p>
@@ -394,7 +353,48 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div class="col-xs-6 goods">
-						<a href="goodsdetail.jsp"><img src="../image/good.jpg" class="good_item"></a>
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
+						<div class="good_name">
+							<p>商品名称</p>
+							<p>艺术家</p>
+							<p class="price">￥99.0</p>
+							<a href="goodsdetail.jsp" class="readmore">详情</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6 goods_two">
+					<div class="col-xs-6 goods">
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
+						<div class="good_name">
+							<p>商品名称</p>
+							<p>艺术家</p>
+							<p class="price">￥99.0</p>
+							<a href="goodsdetail.jsp" class="readmore">详情</a>
+						</div>
+					</div>
+					<div class="col-xs-6 goods">
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
+						<div class="good_name">
+							<p>商品名称</p>
+							<p>艺术家</p>
+							<p class="price">￥99.0</p>
+							<a href="goodsdetail.jsp" class="readmore">详情</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 goods_two">
+					<div class="col-xs-6 goods">
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
+						<div class="good_name">
+							<p>商品名称</p>
+							<p>艺术家</p>
+							<p class="price">￥99.0</p>
+							<a href="goodsdetail.jsp" class="readmore">详情</a>
+						</div>
+					</div>
+					<div class="col-xs-6 goods">
+						<a href="goodsdetail.jsp"><img src="<%=basePath%>image/good.jpg" class="good_item"></a>
 						<div class="good_name">
 							<p>商品名称</p>
 							<p>艺术家</p>

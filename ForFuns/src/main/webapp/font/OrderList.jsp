@@ -54,12 +54,13 @@ function getUserOrder(customerUserid){
 					var imgurl = list[i].productimg;
 					var situation = "";
 					var link = "<%=basePath%>order.do?method=EnterOrderDetail&id="+id;
+					var artistid = list[i].artistid;
 					if(ispay==0){
 						situation ="未付款";
 					}else if(ispay==1){
 						situation = "已付款";
 					}
-					content += "<div class='row order_div'><div class='row order_artist'><a href='<%=basePath%>artistHome.jsp?id="+id+"'><p class='col-xs-9 artist_name'><span class='glyphicon glyphicon-link' aria-hidden='true'>"
+					content += "<div class='row order_div'><div class='row order_artist'><a href='<%=basePath%>font/artistHome.jsp?id="+artistid+"'><p class='col-xs-9 artist_name'><span class='glyphicon glyphicon-link' aria-hidden='true'>"
 						+"</span>&nbsp;&nbsp;"+artistname+"&nbsp;&nbsp;<span class='glyphicon glyphicon-menu-right partten1' aria-hidden='true'></span></p></a><p class='col-xs-3 order_statue'>"+situation+"</p></div>"
 						+"<a href='"+link+"'><div class='row order_info'><img class='col-xs-3 order_pic' src='"+imgurl+"'><div class='col-xs-9 row order_label'>"
 						+"<div class='row label1'><p class='col-xs-8 order_name'>"+productname+"</p><p class='col-xs-4 order_price'>￥"+money+"</p></div></div></div></a></div>";

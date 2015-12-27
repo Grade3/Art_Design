@@ -82,8 +82,8 @@ function GetAllOnlineProduct(typeid,page,pageSize){
 					if(i%2==0){
 						tempbody +="<div class='col-md-6 goods_two'>";
 					}
-					tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
-							 +"<div class='good_name'><p>"+name+"</p><p>"+authorname+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore'>详情</a></div></div>";
+					tempbody +="<div class='col-xs-6 goods'><a href='auctionDetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
+							 +"<div class='good_name'><p>"+name+"</p><p>"+authorname+"</p><a href='auctionDetail.jsp?productid="+id+"' class='readmore'>详情</a></div></div>";
 					if(i%2==1){
 						tempbody +="</div>";
 					}
@@ -161,15 +161,15 @@ $(document).ready(function(){
 						<li ><span ><i class="item_tel"> </i>156-9000-8000</span></li>			
 					</ul>
 					<ul class="support-right">
-						<li class="li1"><a href="Login.html" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
-						<li class="li2"><a href="Register.html" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>				
+						<li class="li1"><a href="Login.jsp" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;登陆</a></li>
+						<li class="li2"><a href="Register.jsp" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;&nbsp;注册账号</a></li>				
 					</ul>
 				</div>
 			</div>
 			<div class="header-bottom">
 				<div class="container">
 					<div class="logo">
-						<h1><a href="home.html">ArtCustomize</a></h1>
+						<h1><a href="home.jsp">ArtCustomize</a></h1>
 					</div>
 					<div class="top-nav-xs visible-md">
 						<div id="menu">
@@ -177,21 +177,21 @@ $(document).ready(function(){
 						</div>
 						<div id="menu-xs">
 							<ul>
-								<li><a href="home.html">首页</a></li>
-								<li><a href="home.html">成品</a></li>
-								<li><a href="home.html">DIY</a></li>
-								<li><a href="home.html">艺术家</a></li>
-								<li><a href="newslist.html">资讯中心</a></li>
+								<li><a href="home.jsp">首页</a></li>
+								<li><a href="goodslist.jsp">成品</a></li>
+								<li><a href="auctionList.jsp">拍卖</a></li>
+								<li><a href="artistlist.jsp">艺术家</a></li>
+								<li><a href="newslist.jsp">资讯中心</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="top-nav visible-lg">
 						<ul class="megamenu skyblue">
-							<li><a href="home.html">首页</a></li>
-							<li><a href="home.html">成品</a></li>
-							<li><a href="home.html">DIY</a></li>
-							<li><a href="home.html">艺术家</a></li>
-							<li><a href="newslist.html">资讯中心</a></li>
+							<li><a href="home.jsp">首页</a></li>
+								<li><a href="goodslist.jsp">成品</a></li>
+								<li><a href="auctionList.jsp">拍卖</a></li>
+								<li><a href="artistlist.jsp">艺术家</a></li>
+								<li><a href="newslist.jsp">资讯中心</a></li>
 						</ul>
 					</div>
 
@@ -199,22 +199,22 @@ $(document).ready(function(){
 						<div class="row tag_up">
 							<div class="col-xs-3 tag0 tag01">
 								<div class="row col-xs-12 tag tag1">
-									<a href="home.html"><span class="glyphicon glyphicon-home pattern1" aria-hidden="true"></span></br>首页</a>
+									<a href="home.jsp"><span class="glyphicon glyphicon-home pattern1" aria-hidden="true"></span></br>首页</a>
 								</div>			
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag2">
-									<a href="goodslist.html"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
+									<a href="goodslist.jsp"><span class="glyphicon glyphicon-tower pattern1" aria-hidden="true"></span></br>艺术品</a>
 								</div>
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag3">
-									<a href="home.html"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
+									<a href="artistlist.jsp"><span class="glyphicon glyphicon-camera pattern1" aria-hidden="true"></span></br>艺术家</a>
 								</div>
 							</div>
 							<div class="col-xs-3 tag0">
 								<div class="row col-xs-12 tag tag4">
-									<a href="newslist.html"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
+									<a href="newslist.jsp"><span class="glyphicon glyphicon-comment pattern1" aria-hidden="true"></span></br>资讯中心</a>
 								</div>	
 							</div>
 						</div>
@@ -224,7 +224,7 @@ $(document).ready(function(){
 		</div>
 
 	<div class="container">
-		<h6 class="location"><a href="home.html">首页</a> <i> </i> 艺术品列表 </h6>
+		<h6 class="location"><a href="home.jsp">首页</a> <i> </i> 艺术品列表 </h6>
 	</div>
 
 
@@ -237,7 +237,7 @@ $(document).ready(function(){
 		<div class="container">
 			<div class="col-lg-2 s_menu">
 				<div class="menu_box box_active">
-					<a href="goodslist.html" class="otherCategory">艺术成品</a>
+					<a href="goodslist.jsp" class="otherCategory">艺术成品</a>
 					<a class="thisCategory">拍卖品分类&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-down partten2" aria-hidden="true"></span></a>
 					<ul class="sub" id="typeul">
 						<li>分类1</li>

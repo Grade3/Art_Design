@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-12-27 16:39:32
+Date: 2015-12-28 05:15:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,13 +26,15 @@ CREATE TABLE `ad_address` (
   `receiver` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_91e4fevv0mvjenxivqj0jf218` (`telephone`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ad_address
 -- ----------------------------
-INSERT INTO `ad_address` VALUES ('1', 'hhhhhhhhhhh', '1', '12');
 INSERT INTO `ad_address` VALUES ('19', '2313', '142431', '214');
+INSERT INTO `ad_address` VALUES ('25', 'fdasfs', '123213', 'sdfgsa');
+INSERT INTO `ad_address` VALUES ('26', '孔昊', '12144', '孔昊');
+INSERT INTO `ad_address` VALUES ('27', '234', '12313123', '342');
 
 -- ----------------------------
 -- Table structure for `ai_artistinfo`
@@ -99,13 +101,15 @@ CREATE TABLE `ca_customeraddress` (
   KEY `FK_br5o5lrnj7lipy82cqw31q4iy` (`customerid`),
   CONSTRAINT `FK_br5o5lrnj7lipy82cqw31q4iy` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_h0pmehbqpyo6xx8502pxp5dtt` FOREIGN KEY (`addressid`) REFERENCES `ad_address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ca_customeraddress
 -- ----------------------------
-INSERT INTO `ca_customeraddress` VALUES ('1', '1', '1');
 INSERT INTO `ca_customeraddress` VALUES ('19', '1', '19');
+INSERT INTO `ca_customeraddress` VALUES ('25', '8', '25');
+INSERT INTO `ca_customeraddress` VALUES ('26', '8', '26');
+INSERT INTO `ca_customeraddress` VALUES ('27', '8', '27');
 
 -- ----------------------------
 -- Table structure for `c_customer`
@@ -121,17 +125,22 @@ CREATE TABLE `c_customer` (
   `realname` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   `avator` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `isartist` int(11) DEFAULT NULL,
+  `balance` double(255,0) unsigned DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `userid` (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of c_customer
 -- ----------------------------
-INSERT INTO `c_customer` VALUES ('1', 'gy', 'christy', '123456', '3506811111111', '11111', 'gy', '/forfun/avatorupload/1450781848430.jpg', '1');
-INSERT INTO `c_customer` VALUES ('2', '2', '1233', '12', '12', '12', '12', '/forfun/avatorupload/1450781848430.jpg', '0');
-INSERT INTO `c_customer` VALUES ('3', '12212', '12', '213', '213', '13', '131', '/forfun/avatorupload/1450781848430.jpg', '1');
-INSERT INTO `c_customer` VALUES ('4', 'mhzx20', 'kh', '123456', '32108819951117001X', '13666095971', 'kh', '/forfun/avatorupload/1450781848430.jpg', null);
+INSERT INTO `c_customer` VALUES ('1', 'gy', 'christy', '123456', '3506811111111', '11111', 'gy', '/forfun/avatorupload/1450781848430.jpg', '1', '12453');
+INSERT INTO `c_customer` VALUES ('2', '2', '1233', '12', '12', '12', '12', '/forfun/avatorupload/1450781848430.jpg', '1', '246');
+INSERT INTO `c_customer` VALUES ('3', '12212', '12', '213', '213', '13', '131', '/forfun/avatorupload/1450781848430.jpg', '1', '1');
+INSERT INTO `c_customer` VALUES ('4', 'admin', '系统管理员', 'admin', '350681199401061088', '110', '系统管理员', '/forfun/image/293.jpg', '0', '0');
+INSERT INTO `c_customer` VALUES ('5', 'mhzx20', 'kh', '123456', '32108819951117001X', '13666095971', 'kh', '/forfun/avatorupload/1450781848430.jpg', '1', '2');
+INSERT INTO `c_customer` VALUES ('6', 'slig', '孔锄地', '121', '354444444444444444', '11144447777', '你大爷', '/forfun/avatorupload/1451218628588.jpg', '1', '30000000000112220000000');
+INSERT INTO `c_customer` VALUES ('7', 'gy121', '12', '234', '350681199401061066', '123456789', '12', '/forfun/image/293.jpg', '1', '0');
+INSERT INTO `c_customer` VALUES ('8', 'tt', 'tttqq', '123', '350681199401061066', '123456789', 'tt', '/forfun/avatorupload/1451231781495.jpg', '1', '2667');
 
 -- ----------------------------
 -- Table structure for `ea_examineartist`
@@ -149,12 +158,14 @@ CREATE TABLE `ea_examineartist` (
   PRIMARY KEY (`id`),
   KEY `EXUSERID` (`userid`),
   CONSTRAINT `EXUSERID` FOREIGN KEY (`userid`) REFERENCES `c_customer` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ea_examineartist
 -- ----------------------------
 INSERT INTO `ea_examineartist` VALUES ('1', 'gy', '1', '1', '1', '1', '1', '1');
+INSERT INTO `ea_examineartist` VALUES ('2', '2', '12', '11111111111', '111111111111111111', 'adsfds', 'asdf', '1');
+INSERT INTO `ea_examineartist` VALUES ('3', 'tt', 'tt', '123456789', '350681199401061066', '464646546', '12313', '1');
 
 -- ----------------------------
 -- Table structure for `f_function`
@@ -208,6 +219,10 @@ CREATE TABLE `m_message` (
 -- ----------------------------
 -- Records of m_message
 -- ----------------------------
+INSERT INTO `m_message` VALUES ('1', '1', '8', '哈哈哈', '2015-12-27 23:30:18', '1');
+INSERT INTO `m_message` VALUES ('2', '1', '8', '66666666', '2015-12-27 23:31:09', '1');
+INSERT INTO `m_message` VALUES ('3', '2', '8', 'qqqq', '2015-12-27 23:31:32', '0');
+INSERT INTO `m_message` VALUES ('4', '3', '8', 'qwweeq', '2015-12-27 23:32:39', '0');
 INSERT INTO `m_message` VALUES ('25', '2', '1', '<img src=\"/forfun/newsupload/1450447015339.jpg\" alt=\"\" />哈哈哈', '2015-12-18 21:04:47', '1');
 INSERT INTO `m_message` VALUES ('26', '3', '1', 'ggg', '2015-12-18 21:52:53', '1');
 INSERT INTO `m_message` VALUES ('27', '1', '3', 'jhhh', '2015-12-18 21:53:31', '0');
@@ -238,7 +253,7 @@ CREATE TABLE `n_news` (
   KEY `NUSERID` (`userid`),
   KEY `FK_i1gms26iheicj5aollprcpag0` (`id`),
   CONSTRAINT `NUSERID` FOREIGN KEY (`userid`) REFERENCES `u_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of n_news
@@ -262,6 +277,8 @@ INSERT INTO `n_news` VALUES ('27', '1', '哈哈哈哈', '哈哈哈哈', '哈哈�
 INSERT INTO `n_news` VALUES ('28', '1', '12', '12', '12', '/forfun/newsupload/1448892823762.jpg', '2342424', '12', '0', '2015-11-10', '2015-11-27', '0', '', '0');
 INSERT INTO `n_news` VALUES ('29', '1', '121', '1231', '21313', '/forfun/newsupload/1449060110342.jpg', '13123', '1231321', '0', '2015-12-18', '2015-12-30', '0', '', '1');
 INSERT INTO `n_news` VALUES ('30', '1', '123', '3123', '123', '/forfun/newsupload/1450444697584.jpg', '313<img src=\"/forfun/newsupload/1450444695966.jpg\" alt=\"\" />', '123', '0', '2015-12-09', '2015-12-31', '0', '', '1');
+INSERT INTO `n_news` VALUES ('31', '1', '测试视频', '撒大大', 'gy', '/forfun/newsupload/1451235738403.jpg', '<img src=\"/forfun/newsupload/1451235708793.png\" alt=\"\" width=\"301\" height=\"500\" title=\"\" align=\"\" /><embed src=\"/forfun/newsupload/1451235734530.mp4\" type=\"video/x-ms-asf-plugin\" width=\"550\" height=\"400\" autostart=\"false\" loop=\"true\" />', '12431', '0', '2015-12-21', '2015-12-31', '1', '', '1');
+INSERT INTO `n_news` VALUES ('32', '1', '微软', '的飞洒', '124', '/forfun/newsupload/1451236073695.jpg', '4412421', '1243', '0', '2015-12-28', '2015-12-31', '1', '', '1');
 
 -- ----------------------------
 -- Table structure for `oa_orderaddress`
@@ -276,12 +293,11 @@ CREATE TABLE `oa_orderaddress` (
   KEY `FK_tl65kv2538dp3i5h8ehjmrm1w` (`orderid`),
   CONSTRAINT `FK_1bsx742l1k7a1qernbjlpvmpj` FOREIGN KEY (`addressid`) REFERENCES `ad_address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_tl65kv2538dp3i5h8ehjmrm1w` FOREIGN KEY (`orderid`) REFERENCES `o_order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of oa_orderaddress
 -- ----------------------------
-INSERT INTO `oa_orderaddress` VALUES ('1', '1', '1');
 
 -- ----------------------------
 -- Table structure for `o_order`
@@ -299,12 +315,12 @@ CREATE TABLE `o_order` (
   KEY `FK_t89xec3n0adjmtyfww6eow4wc` (`productid`),
   CONSTRAINT `FK_6k0uxsm9w1hjnp1muvkrkfef9` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_t89xec3n0adjmtyfww6eow4wc` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of o_order
 -- ----------------------------
-INSERT INTO `o_order` VALUES ('1', '1', '1', '2015-12-25 00:00:00', null, '0');
+INSERT INTO `o_order` VALUES ('280', '2', '8', '2015-12-28 05:12:28', '333', '1');
 
 -- ----------------------------
 -- Table structure for `pm_productmoney`
@@ -322,14 +338,15 @@ CREATE TABLE `pm_productmoney` (
   KEY `FK_ner8fgw1gx6osl7b6i6fxvxei` (`productid`),
   CONSTRAINT `FK_medowh6ptfyd3ag6j59viq9np` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_ner8fgw1gx6osl7b6i6fxvxei` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pm_productmoney
 -- ----------------------------
-INSERT INTO `pm_productmoney` VALUES ('4', '2', '1', '123', '2015-12-27 14:43:58', '0');
-INSERT INTO `pm_productmoney` VALUES ('5', '2', '1', '134', '2015-12-27 17:45:12', '0');
-INSERT INTO `pm_productmoney` VALUES ('6', '2', '2', '100', '2015-12-27 14:45:12', '0');
+INSERT INTO `pm_productmoney` VALUES ('4', '2', '1', '123', '2015-12-27 14:43:58', '1');
+INSERT INTO `pm_productmoney` VALUES ('5', '2', '1', '134', '2015-12-27 17:45:12', '1');
+INSERT INTO `pm_productmoney` VALUES ('6', '2', '2', '100', '2015-12-27 14:45:12', '1');
+INSERT INTO `pm_productmoney` VALUES ('7', '2', '8', '333', '2015-12-28 03:18:44', '1');
 
 -- ----------------------------
 -- Table structure for `ps_productsell`
@@ -344,7 +361,7 @@ CREATE TABLE `ps_productsell` (
   KEY `FK_em1wxfqchkn2yluip1xc4krfb` (`productid`),
   CONSTRAINT `FK_b767vrittw9fd943i9hig7yij` FOREIGN KEY (`sellmethodid`) REFERENCES `sm_sellmethod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_em1wxfqchkn2yluip1xc4krfb` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ps_productsell
@@ -354,6 +371,12 @@ INSERT INTO `ps_productsell` VALUES ('2', '2', '2');
 INSERT INTO `ps_productsell` VALUES ('3', '3', '1');
 INSERT INTO `ps_productsell` VALUES ('4', '4', '1');
 INSERT INTO `ps_productsell` VALUES ('6', '6', '1');
+INSERT INTO `ps_productsell` VALUES ('9', '7', '1');
+INSERT INTO `ps_productsell` VALUES ('10', '8', '1');
+INSERT INTO `ps_productsell` VALUES ('11', '9', '1');
+INSERT INTO `ps_productsell` VALUES ('12', '10', '1');
+INSERT INTO `ps_productsell` VALUES ('13', '11', '1');
+INSERT INTO `ps_productsell` VALUES ('14', '12', '1');
 
 -- ----------------------------
 -- Table structure for `pt_producttype`
@@ -380,7 +403,7 @@ CREATE TABLE `p_product` (
   `name` varchar(100) DEFAULT NULL,
   `imgurl` varchar(255) DEFAULT NULL,
   `artistid` int(11) NOT NULL,
-  `money` int(11) DEFAULT NULL,
+  `money` double(25,0) DEFAULT NULL,
   `timestart` date DEFAULT NULL,
   `timeout` date DEFAULT NULL,
   `typeid` int(11) DEFAULT NULL,
@@ -394,16 +417,22 @@ CREATE TABLE `p_product` (
   KEY `FK_b3oo9oqhednel04ew5ix08gxa` (`typeid`),
   CONSTRAINT `FK_3a2286hejr4r95bofseli5r42` FOREIGN KEY (`artistid`) REFERENCES `c_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_b3oo9oqhednel04ew5ix08gxa` FOREIGN KEY (`typeid`) REFERENCES `pt_producttype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of p_product
 -- ----------------------------
 INSERT INTO `p_product` VALUES ('1', 'kh', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-06', '2015-12-31', '1', '非卖品', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '3');
-INSERT INTO `p_product` VALUES ('2', 'lxn', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-05', '2015-12-25', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '3');
+INSERT INTO `p_product` VALUES ('2', 'lxn', '/forfun/newsupload/1449304402174.JPG', '1', '333', '2015-12-05', '2015-12-26', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '3');
 INSERT INTO `p_product` VALUES ('3', 'gy', '/forfun/newsupload/1449304402174.JPG', '2', '1', '2015-12-13', '2015-12-31', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '1');
 INSERT INTO `p_product` VALUES ('4', 'wlx', '/forfun/newsupload/1449304402174.JPG', '2', '1', '2015-12-07', '2015-12-31', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '1');
 INSERT INTO `p_product` VALUES ('6', '123', '/forfun/avatorupload/1450804600085.jpg', '2', '123', '2015-12-23', '2015-12-25', '1', '132141', '/forfun/avatorupload/1450804600085.jpg1450804600086.jpg', '/forfun/avatorupload/1450804600085.jpg1450804600086.jpg1450804600087.png', '/forfun/avatorupload/1450804600085.jpg1450804600086.jpg1450804600087.png1450804600087.png', '2');
+INSERT INTO `p_product` VALUES ('7', 'd', '/forfun/avatorupload/1451239766789.jpg', '1', '6546546546', '2015-12-25', '2015-12-31', '1', '<br />', '/forfun/avatorupload/1451239766789.jpg1451239766790.jpg', '/forfun/avatorupload/1451239766789.jpg1451239766790.jpg1451239766790.jpg', '/forfun/avatorupload/1451239766789.jpg1451239766790.jpg1451239766790.jpg1451239766791.jpg', '1');
+INSERT INTO `p_product` VALUES ('8', 'kj', '/forfun/avatorupload/1451240485880.jpg', '1', '243', '2015-12-28', '2017-12-28', '1', '商家并没有更多描述喵~', '/forfun/avatorupload/1451240485880.jpg1451240485881.jpg', '/forfun/avatorupload/1451240485880.jpg1451240485881.jpg1451240485881.jpg', '/forfun/avatorupload/1451240485880.jpg1451240485881.jpg1451240485881.jpg1451240485882.jpg', '1');
+INSERT INTO `p_product` VALUES ('9', '123', '/forfun/avatorupload/1451240637414.jpg', '1', '132', '2015-12-28', '2015-12-31', '1', '商家并没有更多描述喵~', '/forfun/avatorupload/1451240637414.jpg1451240637415.jpg', '/forfun/avatorupload/1451240637414.jpg1451240637415.jpg1451240637416.png', '/forfun/avatorupload/1451240637414.jpg1451240637415.jpg1451240637416.png1451240637416.png', '1');
+INSERT INTO `p_product` VALUES ('10', '231', '/forfun/avatorupload/1451241022572.png', '1', '1231', '2015-12-28', '2016-12-28', '1', '商家并没有更多描述喵~', '1451241022574.png', '1451241022574.jpg', '1451241022575.jpg', '1');
+INSERT INTO `p_product` VALUES ('11', '123', '/forfun/avatorupload/1451241088774.jpg', '1', '123', '2015-12-28', '2016-12-28', '1', '商家并没有更多描述喵~', '1451241088774.jpg', '1451241088775.jpg', '1451241088776.jpg', '1');
+INSERT INTO `p_product` VALUES ('12', '1213', '/forfun/avatorupload/1451241198679.jpg', '1', '123', '2015-12-28', '2016-12-28', '1', '商家并没有更多描述喵~', '/forfun/avatorupload/1451241198680.jpg', '/forfun/avatorupload/1451241198680.jpg1451241198680.jpg', '/forfun/avatorupload/1451241198682.jpg', '3');
 
 -- ----------------------------
 -- Table structure for `rf_rolefunction`
@@ -512,8 +541,9 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TimeOut`()
 BEGIN
 	update n_news set n_news.isonline = 0 where CURDATE() > n_news.timeout or CURDATE() < n_news.timestart;
-	update n_news set n_news.isonline = 1 where CURDATE() < n_news.timeout and CURDATE() > n_news.timestart;
+	update n_news set n_news.isonline = 1 where CURDATE() < n_news.timeout and CURDATE() >= n_news.timestart;
 	update p_product set p_product.situation = 2 where CURDATE() > p_product.timeout and p_product.situation = 1;
+	update p_product set p_product.situation = 1 where CURDATE() < p_product.timeout and CURDATE() >= p_product.timestart and p_product.situation = 0;
 END
 ;;
 DELIMITER ;
@@ -530,7 +560,7 @@ BEGIN
 	DECLARE temp2 INT(11);
 	DECLARE temp3 INT(11);
 	declare done int default -1;  -- 用于控制循环是否结束  
-	DECLARE cur CURSOR FOR select id,productid,customerid,money from pm_productmoney,(SELECT productid,max(money) as money from pm_productmoney where flag=0 and pm_productmoney.productid in(SELECT p_product.id FROM p_product  where p_product.timeout < NOW() )   GROUP BY productid )tmp WHERE pm_productmoney.productid = tmp.productid and pm_productmoney.money = tmp.money ;
+	DECLARE cur CURSOR FOR select id,pm_productmoney.productid,customerid,pm_productmoney.money from pm_productmoney,(SELECT pm_productmoney.productid,max(money) as money from pm_productmoney where flag=0 and pm_productmoney.productid in(SELECT p_product.id FROM p_product  where p_product.timeout < NOW() )   GROUP BY productid )tmp WHERE pm_productmoney.productid = tmp.productid and pm_productmoney.money = tmp.money;
 	declare continue handler for not found set done=1;  
 
 	/* 打开游标 */    
@@ -545,11 +575,13 @@ BEGIN
         end if;    
 				INSERT INTO o_order (productid,customerid,money,current,ispay)VALUES(temp1,temp2,temp3,NOW(),0);
 				update pm_productmoney pm set pm.flag = 1 where pm.productid = temp1;
-
+				delete from o_order  where temp1 = o_order.productid and o_order.money < temp3;
+				update p_product set p_product.money = temp3 where id = temp1;
 	end loop myLoop; 
 	/* 关闭游标 */    
+ 
   close cur;    
-
+	
 END
 ;;
 DELIMITER ;
@@ -562,10 +594,20 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` EVENT `TimeOutEvent` ON SCHEDULE EVERY 1 SECOND STARTS '2015-11-27 21:43:51' ON COMPLETION NOT PRESERVE ENABLE DO CALL TimeOut
 ;;
 DELIMITER ;
+
+-- ----------------------------
+-- Event structure for `UpdateAuction`
+-- ----------------------------
+DROP EVENT IF EXISTS `UpdateAuction`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` EVENT `UpdateAuction` ON SCHEDULE EVERY 1 SECOND STARTS '2015-12-28 03:22:29' ON COMPLETION NOT PRESERVE ENABLE DO call UpdateAuction
+;;
+DELIMITER ;
 DROP TRIGGER IF EXISTS `ALERTSTUATION`;
 DELIMITER ;;
 CREATE TRIGGER `ALERTSTUATION` AFTER INSERT ON `o_order` FOR EACH ROW begin
 update p_product pp set situation=3 where pp.id = new.productid;
+
 end
 ;;
 DELIMITER ;

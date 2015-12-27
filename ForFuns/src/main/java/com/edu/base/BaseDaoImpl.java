@@ -206,6 +206,21 @@ public class BaseDaoImpl<T> implements IBaseDao<T>{
 	}
 	
 	@Override
+	public List<T> getPageBeanFilterMoreTotal(Class clz,String selectname, String value,String Morename,String Morevalue) {
+		String hql ="";
+		List<T> list = null;
+		try {
+			hql = "from "+clz.newInstance().getClass().getName()+" where  "+Morename+" = ' "+Morevalue+"' and "+selectname+" like '%"+value+"%'";
+			System.out.println(hql);
+			Query query = getSession().createQuery(hql);
+			list = query.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
 	public List<T> getPageBeanFilterMore(Class clz, int page, int pageSize,
 			String selectname, String value,String Morename,String Morevalue) {
 		String hql ="";

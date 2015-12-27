@@ -39,11 +39,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						$('.modify').show();
 						$('.beartist').show();
 						$('.beartist').attr('href','<%=basePath%>product.do?method=EnterPublish');
-						
 					}else{
 						
-						$('.chat').show();
-						$('.chat').attr('href','<%=basePath%>font/chat.jsp?id='+artistid);
+						$('.beartist1').show();
+						$('.beartist1').attr('href','<%=basePath%>font/chat.jsp?id='+artistid);
 					}
 					$('#avator').attr('src',avator);
 					$('#artistname').html(name);
@@ -78,16 +77,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							var money = products[i].initmoney;
 							var authorname = products[i].authorname;
 							var situation = products[i].situation;
-							
+							var methodid= products[i].methodid;
+							var methodname = products[i].methodname;
 							if(i%2==0){
 								tempbody +="<div class='col-md-6 goods_two'>";
 							}
-							tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
-							 +"<div class='good_name'><p>"+name+"</p><p>";
-							if(situation==0)tempbody+="未上架";
-							if(situation==1)tempbody+="上架中";
-							if(situation==2)tempbody+="已下架";
-							if(situation==3)tempbody+="已出售";
+							if(methodid==1){
+								tempbody +="<div class='col-xs-6 goods'><a href='goodsdetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
+								 +"<div class='good_name'><p>"+name+"</p><p>";
+							}else if(methodid==2){
+								tempbody +="<div class='col-xs-6 goods'><a href='auctionDetail.jsp?productid="+id+"'><img src='"+imgurl+"' class='good_item'></a>"
+								 +"<div class='good_name'><p>"+name+"</p><p>";
+							}
+							
+							tempbody+=methodname;
+							if(situation==0)tempbody+="|未上架";
+							if(situation==1)tempbody+="|上架中";
+							if(situation==2)tempbody+="|已下架";
+							if(situation==3)tempbody+="|已出售";
 		
 							tempbody += "</p><p class='price'>￥"+money+"</p><a href='goodsdetail.jsp?productid="+id+"' class='readmore'>详情</a></div></div>";
 							if(i%2==1){
@@ -113,11 +120,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		};
 		$(document).ready(function(){
+			$('.back_btn').click(function(){
+				location.href="<%=basePath%>font/artistlist.jsp";
+			});
+			$('.modify').hide();
+			$('.beartist').hide();
+			$('.beartist1').hide();
 			$('#usernameaction').hide();
 			$('#loginoutaction').hide();
 			var id = getUrlParam("id");
 			var page = 1 ;
-			var pageSize = 2;
+			var pageSize = 8;
 			GetArtistInfo(id);
 			GetArtistProduct(page,pageSize,id);
 			CheckUser();
@@ -262,22 +275,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="row person_btn">
 				<div class="col-xs-offset-4 col-xs-4 visible-lg">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
+					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-5 modify">管理艺术品</a>
 					<a href="artistManage.html" target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 				<div class="col-xs-offset-3 col-xs-6 visible-md">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
+					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-5 modify">管理艺术品</a>
 					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 				<div class="col-xs-offset-2 col-xs-8 visible-sm">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-5 modify">管理艺术品</a>
+					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-5 modify">管理艺术品</a>
 					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 				<div class="col-xs-12 btn-artisthome visible-xs">
 					<a href="release.html" class="col-xs-6 beartist">发布艺术品<!--我的个人主页--></a>
-					<a href="artistManage.html" class="col-xs-6 modify">管理艺术品</a>
+					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-6 modify">管理艺术品</a>
 					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 			</div>

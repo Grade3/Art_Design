@@ -76,7 +76,7 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 	@Override
 	public int GetPageBeanFilterMoreTotal(Class clz, int page, int pageSize,
 			String selectname, String value,String Morename,String Morevalue) {
-		return baseDao.getPageBeanFilterMore(clz, page, pageSize, selectname, value, Morename, Morevalue).size();
+		return baseDao.getPageBeanFilterMoreTotal(clz, selectname, value, Morename, Morevalue).size();
 	}
 	
 	@SuppressWarnings("rawtypes")

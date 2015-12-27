@@ -43,6 +43,7 @@ import com.edu.proxy.ProductProxy;
 import com.edu.service.IArtistService;
 import com.edu.service.ICustomerService;
 import com.edu.service.IOrderService;
+import com.edu.service.IProductMoneyService;
 import com.edu.service.IProductService;
 import com.edu.service.IProductTypeService;
 import com.edu.service.ISellMethodService;
@@ -83,6 +84,8 @@ ServletContextAware {
 	@Autowired
 	private IProductTypeService productTypeService;
 	
+	@Autowired
+	private IProductMoneyService productMoneyService;
 	@Autowired
 	private IOrderService orderService;
 	@Autowired
@@ -232,8 +235,11 @@ ServletContextAware {
 		Map<String , Object> map = new HashMap<String, Object>();
 		ProductVO productVO = null;
 		Product productBean = productService.GetEntityById(Product.class, id);
-		if(null!=productBean)
+		if(null!=productBean){
 			productVO = new ProductVO(productBean);
+			productVO.setAddmoney(productMoneyService.getMaxMoney(productBean.getId()).getMoney());
+		}
+
 		map.put("product",productVO);
 		return map;
 	}
@@ -388,7 +394,7 @@ ServletContextAware {
 			@RequestParam(value = "imgtwo", required = true) MultipartFile imgtwo,@RequestParam(value = "imgthree", required = true) MultipartFile imgthree,
 			@RequestParam(value="productname")String productname,@RequestParam(name="money")Double money,@RequestParam(name="typeid")Integer typeid,
 			@RequestParam(value="sellid")Integer sellid,@RequestParam(value="starttime")String starttime,@RequestParam(value="endtime")String endtime,
-			@RequestParam(value="content")String content){
+			@RequestParam(value="content",required=false,defaultValue="商家并没有更多描述喵~")String content){
 		
 		Product productBean = new Product();
 		try {
@@ -443,6 +449,7 @@ ServletContextAware {
 		ext = imgone.getOriginalFilename().substring(imgone.getOriginalFilename().lastIndexOf("."));
 		newfilename = System.currentTimeMillis() + ext;
 		PathAndName = filePath + newfilename;
+		saveUrl = request.getContextPath() + "/avatorupload/";
 		saveUrl = saveUrl + newfilename;
 		resultFile = new File(PathAndName);
 		try{
@@ -455,6 +462,7 @@ ServletContextAware {
 		ext = imgtwo.getOriginalFilename().substring(imgtwo.getOriginalFilename().lastIndexOf("."));
 		newfilename = System.currentTimeMillis() + ext;
 		PathAndName = filePath + newfilename;
+		saveUrl = request.getContextPath() + "/avatorupload/";
 		saveUrl = saveUrl + newfilename;
 		resultFile = new File(PathAndName);
 		try{
@@ -468,6 +476,7 @@ ServletContextAware {
 		ext = imgthree.getOriginalFilename().substring(imgthree.getOriginalFilename().lastIndexOf("."));
 		newfilename = System.currentTimeMillis() + ext;
 		PathAndName = filePath + newfilename;
+		saveUrl = request.getContextPath() + "/avatorupload/";
 		saveUrl = saveUrl + newfilename;
 		resultFile = new File(PathAndName);
 		try{
@@ -481,6 +490,7 @@ ServletContextAware {
 		productSellBean.setSellMethodBean(sellMethodService.GetEntityById(SellMethod.class, sellid));
 		productSellBean.setProductBean(productBean);
 		productBean.setProductSellBean(productSellBean);
+		productBean.setSituation(0);
 		productService.AddBean(productBean);
 		return "redirect:/font/success.jsp?successid=2";
 		
