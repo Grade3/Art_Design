@@ -26,9 +26,10 @@ public class MessageController {
 	private IMessageService messageService;
 	@Autowired
 	private ICustomerService customerService;
+
 	/**
-	 * 获取用户未读消息
-	 * @param id
+	 * 根据userid获取用户未读信息
+	 * @param customerUserid
 	 * @return
 	 */
 	@ResponseBody

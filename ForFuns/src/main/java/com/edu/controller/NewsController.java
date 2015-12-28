@@ -46,9 +46,10 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	private INewsService newsService;
 	@Resource
 	private  IUserService userService;
-	
+
 	/**
 	 * 添加资讯
+	 * @param userid
 	 * @param title
 	 * @param content
 	 * @param author
@@ -121,9 +122,9 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		Map<String, Object> map = newsService.GetNewsBeanPageByUserid(userBean.getId()+"", page, pageSize, param);
 		return map;
 	}
+
 	/**
 	 * 获取全部分页资讯
-	 * @param userid
 	 * @param page
 	 * @param pageSize
 	 * @param selectname
@@ -147,7 +148,11 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	}
 	
 	
-	
+	/**
+	 * 删除资讯
+	 * @param ids
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=deletenews")
 	public String JsonDeleteNews(@RequestParam(value="ids")String ids){
@@ -169,6 +174,8 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	
 	/**
 	 * 通过id获取资讯
+	 * @param newsid
+	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(params="method=getnewsbyid")
@@ -179,10 +186,9 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		return map;
 	}
 	
-	
-	
 	/**
 	 * 修改资讯
+	 * @param newsid
 	 * @param title
 	 * @param content
 	 * @param author
@@ -244,6 +250,14 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 		}
 		return "1";
 	}
+	
+	/**
+	 * 修改资讯状态
+	 * @param newsid
+	 * @param situation
+	 * @param suggestion
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=alertsituation")
 	public String JsonAlertSituation(@RequestParam(value="newsid")Integer newsid,@RequestParam(value="situation")Integer situation,@RequestParam(value="suggestion")String suggestion){
@@ -271,9 +285,11 @@ public class NewsController implements ServletConfigAware,ServletContextAware{
 	public List<News> JsonGetHotNew(){
 		return newsService.GetHotNews();
 	}
-	
+
 	/**
 	 * 获取上线资讯
+	 * @param page
+	 * @param pageSize
 	 * @return
 	 */
 	@ResponseBody

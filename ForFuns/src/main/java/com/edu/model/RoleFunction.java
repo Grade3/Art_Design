@@ -13,6 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * 角色权限关联表
+ * @author Administrator
+ *
+ */
 @Entity
 @Table(name="rf_rolefunction")
 public class RoleFunction {

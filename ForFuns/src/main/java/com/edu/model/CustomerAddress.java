@@ -12,6 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * 用户与地址关联中间表
+ * @author Administrator
+ *
+ */
 @Entity
 @Table(name="ca_customeraddress")
 public class CustomerAddress {

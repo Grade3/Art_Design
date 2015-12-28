@@ -10,6 +10,11 @@ import com.edu.model.Product;
 
 public interface IArtistDao extends IBaseDao<Artist>
 {
+	/**
+	 * 判断用户账号密码是否与数据库相符
+	 * @param customer
+	 * @return
+	 */
 	public boolean isExist(Customer customer);
 	
 	public List<Artist> getAllEntity(Class clz);

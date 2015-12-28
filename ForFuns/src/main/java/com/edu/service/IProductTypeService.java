@@ -7,15 +7,15 @@ import com.edu.model.User;
 public interface IProductTypeService extends IBaseService<ProductType>
 {
 	/**
-	 * 判断用户是否存在
-	 * @param user
+	 * 判断商品信息是否与数据库匹配
+	 * @param productType
 	 * @return
 	 */
 	public boolean isExist(ProductType productType);
 	
 	/**
 	 * 保存实体
-	 * @param user
+	 * @param productType
 	 */
 	public void save(ProductType productType);
 }

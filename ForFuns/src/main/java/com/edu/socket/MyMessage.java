@@ -1,5 +1,10 @@
 package com.edu.socket;
 
+/**
+ * 我的消息
+ * @author Administrator
+ *
+ */
 public class MyMessage {
 	private String sendid;
 	private String receiverid;

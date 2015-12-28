@@ -34,8 +34,12 @@ public class UserRoleController {
 	@Resource
 	private IUserRoleService userRoleService;
 	
-	
-	
+	/**
+	 * 删除角色权限
+	 * @param userid
+	 * @param roleid
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=deleteUserRole")
 	public String JsonDeleteUserRole(@RequestParam(value="userid") String userid,@RequestParam(value="roleid") String roleid){
@@ -46,6 +50,12 @@ public class UserRoleController {
 		return ""+result;
 	}
 	
+	/**
+	 * 添加角色权限
+	 * @param userid
+	 * @param roleid
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=adduserrole")
 	public String JsonAddRolePower(@RequestParam(value="item") int userid,@RequestParam(value="value") int roleid){
@@ -53,6 +63,11 @@ public class UserRoleController {
 		return result+"";
 	}
 	
+	/**
+	 * 获取角色权限
+	 * @param userid
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=getuserfunction")
 	public Map<String, Object> JsonGetUserFunction(@RequestParam(value="userid")int userid){

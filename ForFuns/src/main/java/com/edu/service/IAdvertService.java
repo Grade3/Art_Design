@@ -20,9 +20,21 @@ public interface IAdvertService extends IBaseService<Advert>
 	 */
 	public Map<String, Object>  GetAdvertBeanPageByUserid(String userid, int page,int pageSize, Map<String, String> param);
 
+	/**
+	 * 获取第一条资讯
+	 * @return
+	 */
 	public List<Advert> GetFirstAdvert();
 	
+	/**
+	 * 获取第二条资讯
+	 * @return
+	 */
 	public List<Advert> GetSecondAdvert();
 	
+	/**
+	 * 获取第三条资讯
+	 * @return
+	 */
 	public List<Advert> GetThirdAdvert();
 }

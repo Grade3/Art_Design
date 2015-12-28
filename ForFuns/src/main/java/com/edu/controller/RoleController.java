@@ -30,6 +30,10 @@ public class RoleController {
 	@Autowired
 	private IRoleService roleService;
 	
+	/**
+	 * 获取所有角色权限
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=getallrole")
 	public Map<String, Object> GetAllRole(){
@@ -41,12 +45,12 @@ public class RoleController {
 		//return str;
 	}
 	
-	
 	/**
-	 * 获取分页列表
-	 * 
+	 * 获取角色权限分页
 	 * @param page
 	 * @param pageSize
+	 * @param selectname
+	 * @param value
 	 * @return
 	 */
 	@RequestMapping(params = "method=getRolebypage")
@@ -88,10 +92,9 @@ public class RoleController {
 		
 	}
 	
-	
 	/**
 	 * 添加角色
-	 * @param rowstr
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params="method=addRole")
@@ -113,10 +116,9 @@ public class RoleController {
 		
 	}
 	
-	
 	/**
 	 * 更新
-	 * @param rowstr
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params="method=updateRole")

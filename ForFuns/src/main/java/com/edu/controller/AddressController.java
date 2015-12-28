@@ -173,9 +173,9 @@ public class AddressController implements ServletConfigAware, ServletContextAwar
 		return "true";
 	}
 	
+	
 	/**
-	 * 获取树分页列表
-	 * 
+	 * 获取树分页实体
 	 * @param page
 	 * @param pageSize
 	 * @return

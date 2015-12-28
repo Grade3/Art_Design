@@ -13,6 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * 订单列表
+ * @author Administrator
+ *
+ */
 @Table(name="o_order")
 @Entity
 public class Order {

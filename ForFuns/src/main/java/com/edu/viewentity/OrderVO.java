@@ -10,6 +10,11 @@ import com.edu.model.CustomerAddress;
 import com.edu.model.Order;
 import com.edu.model.Product;
 
+/**
+ * 订单显示层
+ * @author Administrator
+ *
+ */
 public class OrderVO
 {
 	private Integer id;

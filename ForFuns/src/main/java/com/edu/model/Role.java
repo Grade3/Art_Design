@@ -19,7 +19,11 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-
+/**
+ * 角色表
+ * @author Administrator
+ *
+ */
 @Table(name="r_role")
 @Entity
 public class Role {

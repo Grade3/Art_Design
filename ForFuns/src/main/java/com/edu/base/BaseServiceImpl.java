@@ -40,6 +40,9 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 		return 1;
 	}
 
+	/**
+	 * 添加实体
+	 */
 	@Override
 	public int AddBean(Object object) {
 		baseDao.addEntity(object);
@@ -86,6 +89,9 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 		return baseDao.getPageBeanFilterTotal(clz, page, pageSize, selectname, value);
 	}
 
+	/**
+	 * 更新实体
+	 */
 	@Override
 	public int UpdataBean(Object object) {
 		baseDao.updateEntity(object);
@@ -105,6 +111,9 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 			}
 	}
 
+	/**
+	 * 根据ID获取实体
+	 */
 	@Override
 	public T GetEntityById(Class clz, Integer id) {
 		try {

@@ -6,7 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+/**
+ * 艺术家实体
+ * @author Administrator
+ *
+ */
 @Table(name="c_customer")
 @Entity
 public class Artist

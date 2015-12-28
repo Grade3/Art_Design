@@ -32,18 +32,25 @@ public interface IArtistService extends IBaseService<Artist>
 	
 	/**
 	 * 计算数量
-	 * @param ea
 	 * @return
 	 */
 	public int countEa();
 	
-	
+	/**
+	 * 获取所有艺术家
+	 */
 	@SuppressWarnings("rawtypes")
 	public List<Artist> GetAllBean(Class clz);
 	
+	/**
+	 * 获取艺术家分页
+	 */
 	@SuppressWarnings("rawtypes")
 	public List<Artist> GetPageBeanFilter(Class clz,int page,int pageSize,String selectname,String value);
 	
+	/**
+	 * 获取艺术家分页总数
+	 */
 	@SuppressWarnings("rawtypes")
 	public int GetPageBeanFilterTotal(Class clz, int page, int pageSize,
 			String selectname, String value);

@@ -24,6 +24,11 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+/**
+ * 用户实体
+ * @author Administrator
+ *
+ */
 @Table(name = "c_customer")
 @Entity
 public class Customer {

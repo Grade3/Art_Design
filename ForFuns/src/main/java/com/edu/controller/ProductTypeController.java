@@ -50,7 +50,7 @@ public class ProductTypeController
 	private IProductTypeService productTypeService;
 	
 	/**
-	 * Delete productType
+	 * 删除商品分类
 	 * @param ids
 	 * @return
 	 */
@@ -73,10 +73,9 @@ public class ProductTypeController
 		
 	}
 	
-	
 	/**
-	 * Add productType
-	 * @param rowstr
+	 * 增加商品分类
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params="method=addProductType")
@@ -104,8 +103,8 @@ public class ProductTypeController
 	}
 
 	/**
-	 * update
-	 * @param rowstr
+	 * 更新
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params="method=updateProductType")
@@ -133,7 +132,7 @@ public class ProductTypeController
 	}
 
 	/**
-	 * 获取所有的类型
+	 * 获取所有商品类型
 	 * @return
 	 */
 	@ResponseBody
@@ -146,10 +145,11 @@ public class ProductTypeController
 	}
 	
 	/**
-	 * 获取分页列表
-	 * 
+	 * 获取商品类型分页
 	 * @param page
 	 * @param pageSize
+	 * @param selectname
+	 * @param value
 	 * @return
 	 */
 	@RequestMapping(params = "method=getProductTypeByPage")

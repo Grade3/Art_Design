@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 权限列表
+ * @author Administrator
+ *
+ */
 @Entity
 @Table(name="f_function")
 public class Function {

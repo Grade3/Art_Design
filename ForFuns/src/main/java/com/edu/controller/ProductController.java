@@ -90,11 +90,13 @@ ServletContextAware {
 	private IOrderService orderService;
 	@Autowired
 	private IArtistService artistService;
+	
 	/**
 	 * 获取分页列表
-	 * 
 	 * @param page
 	 * @param pageSize
+	 * @param selectname
+	 * @param value
 	 * @return
 	 */
 	@RequestMapping(params = "method=getProductbypage")
@@ -146,6 +148,7 @@ ServletContextAware {
 			@RequestParam(value="timestart")Date timestart,@RequestParam(value="timeout")Date timeout){
 		return "";
 	}*/
+	
 	/**
 	 * 修改商品状态
 	 * @param data
@@ -183,9 +186,12 @@ ServletContextAware {
 		return "0";
 	}
 	
-	
 	/**
 	 * 获取上线对应分类商品
+	 * @param page
+	 * @param pageSize
+	 * @param typeid
+	 * @param methodid
 	 * @return
 	 */
 	@ResponseBody
@@ -201,9 +207,11 @@ ServletContextAware {
 		return map;
 	}
 	
-	
 	/**
 	 * 获取对应艺术家的所有商品
+	 * @param page
+	 * @param pageSize
+	 * @param artistid
 	 * @return
 	 */
 	@ResponseBody
@@ -243,9 +251,6 @@ ServletContextAware {
 		map.put("product",productVO);
 		return map;
 	}
-	
-	
-	
 	
 	/**
 	 * 通过口令判断是否是有订单
@@ -300,9 +305,11 @@ ServletContextAware {
 	}*/
 	
 	/**
-	 * 购买
-	 * @param id
+	 * 登陆后添加订单
 	 * @param useridtoken
+	 * @param id
+	 * @param addressid
+	 * @param addmoney
 	 * @return
 	 */
 	@RequestMapping(params="method=AddOrder")
@@ -333,10 +340,6 @@ ServletContextAware {
 		}
 		return respons;
 	}
-	
-	
-	
-	
 	
 	/**
 	 * 检测用户是否存在相应的订单。
@@ -372,6 +375,7 @@ ServletContextAware {
 		}
 		return "2";//订单与用户相符
 	}
+	
 	/**
 	 * 验证登录后进入发布页面 
 	 * @param useridtoken
@@ -381,11 +385,22 @@ ServletContextAware {
 	public String CheckLoginPublish(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
 		return "/font/Publish.jsp";
 	}
+	
 	/**
-	 * 
+	 * 登录后发布商品
 	 * @param useridtoken
 	 * @param request
 	 * @param file
+	 * @param imgone
+	 * @param imgtwo
+	 * @param imgthree
+	 * @param productname
+	 * @param money
+	 * @param typeid
+	 * @param sellid
+	 * @param starttime
+	 * @param endtime
+	 * @param content
 	 * @return
 	 */
 	@RequestMapping(params="method=PublishProduct")
@@ -495,6 +510,7 @@ ServletContextAware {
 		return "redirect:/font/success.jsp?successid=2";
 		
 	}
+	
 	/**
 	 * 检验权限后进入修改页面
 	 * @param useridtoken
@@ -506,11 +522,23 @@ ServletContextAware {
 			@RequestParam(value="id")Integer id){
 		return "redirect:/font/AlertProduct.jsp?id="+id;
 	}
+
 	/**
-	 * 修改商品详情
+	 * 登陆后修改商品详情
 	 * @param useridtoken
 	 * @param request
+	 * @param id
 	 * @param file
+	 * @param imgone
+	 * @param imgtwo
+	 * @param imgthree
+	 * @param productname
+	 * @param money
+	 * @param typeid
+	 * @param sellid
+	 * @param starttime
+	 * @param endtime
+	 * @param content
 	 * @return
 	 */
 	@RequestMapping(params="method=checkAlertProduct")

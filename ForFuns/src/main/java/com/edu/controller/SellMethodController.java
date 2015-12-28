@@ -19,6 +19,10 @@ public class SellMethodController {
 	@Autowired
 	private ISellMethodService sellMethodService;
 	
+	/**
+	 * 获取所有销售方式
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=GetAllSellMethod")
 	public List<SellMethod> JsonGetAllSellMethod(){

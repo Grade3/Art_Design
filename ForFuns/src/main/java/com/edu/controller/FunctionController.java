@@ -64,7 +64,12 @@ public class FunctionController {
 	}
 	
 	
-	
+	/**
+	 * 获取权限分页
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
 	@RequestMapping(params="method=getfunctionbypage")
 	@ResponseBody
 	public Map<String, Object> JsonGetPageFunction(@RequestParam(value="page") int page,
