@@ -34,6 +34,7 @@ public class ArtistDaoImpl extends BaseDaoImpl<Artist> implements IArtistDao {
 		}
 	}
 
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List<Artist> getAllEntity(Class clz) {

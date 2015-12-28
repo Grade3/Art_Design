@@ -11,6 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * 地址列表
+ * @author Administrator
+ *
+ */
 @Table(name="ad_address")
 @Entity
 public class Address

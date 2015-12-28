@@ -16,6 +16,7 @@ import com.edu.dao.IAdvertDao;
 @Repository("advertDao")
 public class AdvertDaoImpl extends BaseDaoImpl<Advert> implements IAdvertDao
 {
+	
 	@Override
 	public List<Advert> GetFirstAdvert()
 	{

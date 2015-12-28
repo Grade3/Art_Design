@@ -56,10 +56,9 @@ public class ExamineArtistController implements ServletConfigAware,ServletContex
 	@Autowired
 	private  IMessageService messageService;
 	
-	
+
 	/**
-	 * 获取全部分页资讯
-	 * @param userid
+	 * 获取艺术家审核表分页
 	 * @param page
 	 * @param pageSize
 	 * @param selectname

@@ -46,10 +46,11 @@ public class OrderController
 	private IProductService productService;
 	
 	/**
-	 * 获取分页列表
-	 * 
+	 * 获取订单分页列表
 	 * @param page
 	 * @param pageSize
+	 * @param selectname
+	 * @param value
 	 * @return
 	 */
 	@RequestMapping(params = "method=getOrderbypage")
@@ -93,11 +94,10 @@ public class OrderController
 			return "error";
 		}
 	}
-	
-	
+
 	/**
 	 * 添加订单
-	 * @param rowstr
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params="method=addOrder")
@@ -134,11 +134,11 @@ public class OrderController
 	}
 
 	/**
-	 * 更新
-	 * @param rowstr
+	 * 更新订单
+	 * @param data
 	 * @return
-	 * @throws ParseException 
-	 * @throws JSONException 
+	 * @throws JSONException
+	 * @throws ParseException
 	 */
 	@RequestMapping(params="method=updateOrder")
 	@ResponseBody
@@ -180,6 +180,7 @@ public class OrderController
 	 * 获取所有的订单
 	 * @return
 	 */
+	
 	@ResponseBody
 	@RequestMapping(params="method=getAllOrder")
 	public Map<String, Object> GetAllOrder(){
@@ -213,10 +214,10 @@ public class OrderController
 		return "font/OrderList.jsp";
 	}
 	
-
 	/**
 	 * 进入订单详情
 	 * @param useridtoken
+	 * @param id
 	 * @return
 	 */
 	@RequestMapping(params="method=EnterOrderDetail")
@@ -226,7 +227,7 @@ public class OrderController
 	
 	/**
 	 * 通过id获取订单
-	 * @param id 订单id
+	 * @param id
 	 * @return
 	 */
 	@ResponseBody
@@ -240,7 +241,8 @@ public class OrderController
 	
 	/**
 	 * 通过id删除订单
-	 * @param id 订单id
+	 * @param useridtoken
+	 * @param id
 	 * @return
 	 */
 	@RequestMapping(params="method=DeleteOrderByid")

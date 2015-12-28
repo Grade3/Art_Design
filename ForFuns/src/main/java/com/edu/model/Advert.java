@@ -32,6 +32,11 @@ import org.springframework.stereotype.Repository;
 
 import com.mysql.jdbc.Field;
 
+/**
+ * 广告实体
+ * @author Administrator
+ *
+ */
 @Entity
 @Table(name="a_advert")
 @DynamicInsert

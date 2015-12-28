@@ -32,6 +32,12 @@ public class PowerController {
 	@Resource
 	private IRoleFunctionService roleFunctionService;
 	
+	/**
+	 * 获取权限树
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=getpowertree")
 	public Map<String, Object> JsonGetPowerTree(@RequestParam(value="page") int page,
@@ -40,6 +46,12 @@ public class PowerController {
 		return map;
 	}
 	
+	/**
+	 * 添加角色权限
+	 * @param roleid
+	 * @param functionid
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=addrolepower")
 	public String JsonAddRolePower(@RequestParam(value="roleid") int roleid,@RequestParam(value="functionid") int functionid){
@@ -47,8 +59,11 @@ public class PowerController {
 		return result+"";
 	}
 	
-	/*
-	 * 删除权限
+	/**
+	 * 删除角色权限
+	 * @param roleid
+	 * @param functionid
+	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(params="method=deleterolepower")

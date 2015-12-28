@@ -45,10 +45,12 @@ public class UserController {
 	private IUserService userService;
 
 	/**
-	 * 登录功能
-	 * 
+	 * 登陆功能
 	 * @param username
 	 * @param password
+	 * @param request
+	 * @param response
+	 * @param token
 	 * @return
 	 */
 	@RequestMapping(params = "method=login")
@@ -91,13 +93,12 @@ public class UserController {
 		}
 	}
 
-
-
 	/**
 	 * 获取分页列表
-	 * 
 	 * @param page
 	 * @param pageSize
+	 * @param selectname
+	 * @param value
 	 * @return
 	 */
 	@RequestMapping(params = "method=getUserbypage")
@@ -139,10 +140,9 @@ public class UserController {
 		}
 	}
 	
-	
 	/**
-	 * 添加用户
-	 * @param rowstr
+	 * 删除用户
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params="method=addUser")
@@ -172,7 +172,7 @@ public class UserController {
 
 	/**
 	 * 更新
-	 * @param rowstr
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params="method=updateUser")
@@ -204,7 +204,6 @@ public class UserController {
 	
 	/**
 	 * 获取分页列表
-	 * 
 	 * @param page
 	 * @param pageSize
 	 * @return

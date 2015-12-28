@@ -53,7 +53,13 @@ public class ImageUploadController implements ServletConfigAware,ServletContextA
         this.servletConfig = arg0;  
     }
 	
-    
+    /**
+     * 图片上传
+     * @param request
+     * @param response
+     * @param file
+     * @return
+     */
     @ResponseBody
 	@RequestMapping(params="method=keuploadimg")
 	public String Jsonuploadimage(HttpServletRequest request, HttpServletResponse response,

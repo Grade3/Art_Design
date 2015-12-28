@@ -10,7 +10,7 @@ import com.edu.model.UserRole;
 
 public interface IUserRoleService extends IBaseService<UserRole>{
 	/**
-	 * 判断是否存在
+	 * 判断角色权限是否存在
 	 * @param userid
 	 * @param roleid
 	 * @return
@@ -18,7 +18,7 @@ public interface IUserRoleService extends IBaseService<UserRole>{
 	public int IsExitUserRole(int userid,int roleid);
 	
 	/**
-	 * 添加
+	 * 添加用户权限
 	 * @param userid
 	 * @param roleid
 	 * @return

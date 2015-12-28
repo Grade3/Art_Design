@@ -31,6 +31,11 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+/**
+ * 艺术家申请表
+ * @author Administrator
+ *
+ */
 @Table(name="ea_examineartist")
 @Entity
 public class ExamineArtist implements Comparable{

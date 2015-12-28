@@ -8,9 +8,13 @@ import com.edu.model.Order;
 public interface IOrderService extends IBaseService<Order>{
 	
 	/**
-	 * 验证后添加订单
+	 * 添加订单
+	 * @param productid
+	 * @param customerid
+	 * @param address
+	 * @param telephone
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public int AddOrder(Integer productid,Integer customerid,String address,String telephone) throws Exception;
 	

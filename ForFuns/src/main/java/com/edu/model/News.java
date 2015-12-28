@@ -33,7 +33,11 @@ import org.springframework.stereotype.Repository;
 import com.mysql.jdbc.Field;
 
 
-
+/**
+ * 资讯列表
+ * @author Administrator
+ *
+ */
 @Entity
 @Table(name="n_news")
 @DynamicInsert

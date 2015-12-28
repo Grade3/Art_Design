@@ -189,7 +189,11 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	}
 	
 	
-	
+	/**
+	 * 根据id删除广告
+	 * @param ids
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=DeleteAdvert")
 	public String JsonDeleteAdvert(@RequestParam(value="ids")String ids){
@@ -210,6 +214,8 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	
 	/**
 	 * 通过id获取广告
+	 * @param advertid
+	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(params="method=GetAdvertByid")
@@ -224,6 +230,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	
 	/**
 	 * 修改广告
+	 * @param advertid
 	 * @param title
 	 * @param content
 	 * @param author
@@ -231,7 +238,7 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 	 * @param timeout
 	 * @param summary
 	 * @param money
-	 * @param ishot
+	 * @param position
 	 * @param request
 	 * @param file
 	 * @return
@@ -286,6 +293,14 @@ public class AdvertController implements ServletConfigAware,ServletContextAware{
 		}
 		return "1";
 	}
+	
+	/**
+	 * 修改广告
+	 * @param advertid
+	 * @param situation
+	 * @param suggestion
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(params="method=AlertSituation")
 	public String JsonAlertSituation(@RequestParam(value="advertid")Integer advertid,@RequestParam(value="situation")Integer situation,@RequestParam(value="suggestion")String suggestion){

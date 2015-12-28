@@ -76,11 +76,14 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	@Resource
 	private ICustomerService customerService;
 
+	
 	/**
-	 * 登录功能
-	 * 
-	 * @param username
+	 * 用户登陆
+	 * @param userid
 	 * @param password
+	 * @param request
+	 * @param response
+	 * @param token
 	 * @return
 	 */
 	@RequestMapping(params = "method=login")
@@ -123,15 +126,16 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	}
 
 	/**
-	 * 注册功能
-	 * 
+	 * 用户注册
 	 * @param userid
-	 * @param password
-	 * @param confirm_password
 	 * @param username
 	 * @param realname
 	 * @param telphone
+	 * @param password
 	 * @param personnumber
+	 * @param request
+	 * @param response
+	 * @param token
 	 * @return
 	 */
 	@RequestMapping(params = "method=register")
@@ -200,15 +204,14 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	}
 
 	/**
-	 * 修改个人信息功能
-	 * 
-	 * @param userid
-	 * @param password
-	 * @param confirm_password
+	 * 修改个人信息
 	 * @param username
 	 * @param realname
 	 * @param telphone
 	 * @param personnumber
+	 * @param request
+	 * @param response
+	 * @param token
 	 * @return
 	 */
 	@RequestMapping(params = "method=modify")
@@ -268,14 +271,10 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	}
 
 	/**
-	 * 充值功能
-	 * 
-	 * @param userid
-	 * @param password
-	 * @param username
-	 * @param realname
-	 * @param telphone
-	 * @param personnumber
+	 * 充值
+	 * @param money
+	 * @param response
+	 * @param token
 	 * @return
 	 */
 	@RequestMapping(params = "method=addbalance")
@@ -317,8 +316,9 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 
 	/**
 	 * 修改个人头像
-	 * 
 	 * @param file
+	 * @param request
+	 * @param token
 	 * @return
 	 */
 	@RequestMapping(params = "method=alertAvator")
@@ -365,8 +365,8 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	}
 
 	/**
-	 * 功能
-	 * 
+	 * 根据userid判断用户是否已存在
+	 * @param userid
 	 * @return
 	 */
 	@RequestMapping(params = "method=checkUserid")
@@ -383,8 +383,7 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 
 	/**
 	 * 添加用户
-	 * 
-	 * @param rowstr
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params = "method=addCustomer")
@@ -415,9 +414,8 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	}
 
 	/**
-	 * 更新
-	 * 
-	 * @param rowstr
+	 * 更新用户
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params = "method=updateCustomer")
@@ -453,8 +451,7 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	}
 
 	/**
-	 * 获取所有的用户
-	 * 
+	 * 获取所有用户
 	 * @return
 	 */
 	@ResponseBody
@@ -467,9 +464,8 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	}
 
 	/**
-	 * 通过id获取customer
-	 * 
-	 * @param customer
+	 * 通过userid获取customer
+	 * @param customerid
 	 * @return
 	 */
 	@ResponseBody
@@ -485,8 +481,7 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 
 	/**
 	 * 通过id获取customer
-	 * 
-	 * @param customer
+	 * @param customerid
 	 * @return
 	 */
 	@ResponseBody
@@ -511,11 +506,11 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 		return customerService.GetBeanByCondition(Customer.class, CustomerTable.USERID, customerid, null).getUsername();
 	}
 
-	/**
-	 * 通过userid获取id
-	 * 
-	 * @return
-	 */
+    /**
+     * 通过userid获取id
+     * @param customerid
+     * @return
+     */
 	@ResponseBody
 	@RequestMapping(params = "method=GetCustomerid")
 	public Map<String, Object> JsonGetid(@RequestParam(value = "customerid") String customerid) {
@@ -526,10 +521,11 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	}
 
 	/**
-	 * 获取分页列表
-	 * 
+	 * 获取customer分页
 	 * @param page
 	 * @param pageSize
+	 * @param selectname
+	 * @param value
 	 * @return
 	 */
 	@RequestMapping(params = "method=getCustomerbypage")
@@ -548,7 +544,6 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 
 	/**
 	 * 退出登录
-	 * 
 	 * @param token
 	 * @param response
 	 * @return
@@ -565,13 +560,12 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 
 	/**
 	 * 修改用户
-	 * 
 	 * @param userid
 	 * @param username
 	 * @param personnumber
 	 * @param telphone
 	 * @param realname
-	 * @param avator
+	 * @param request
 	 * @return
 	 */
 	@RequestMapping(params = "method=alertcustomer")
@@ -597,7 +591,7 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 
 	/**
 	 * 检验登录后进入修改密码页面
-	 * 
+	 * @param useridtoken
 	 * @return
 	 */
 	@RequestMapping(params = "method=EnterPassword")
@@ -607,9 +601,12 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	}
 
 	/**
-	 * 修改密码功能
-	 * 
+	 * 修改密码
 	 * @param password
+	 * @param new_password
+	 * @param request
+	 * @param response
+	 * @param token
 	 * @return
 	 */
 	@RequestMapping(params = "method=changePassword")
@@ -657,9 +654,11 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	public String CheckLoginEnterAddress(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken){
 		return "font/balance.jsp";
 	}
+
 	/**
 	 * 进入聊天
 	 * @param useridtoken
+	 * @param toid
 	 * @return
 	 */
 	@RequestMapping(params="method=EnterChat")

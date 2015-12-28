@@ -52,11 +52,14 @@ public class ArtistController
 	@Autowired
 	private ICustomerService customerService;
 	
+	
 	/**
 	 * 登录功能
-	 * 
 	 * @param username
 	 * @param password
+	 * @param request
+	 * @param response
+	 * @param token
 	 * @return
 	 */
 	@RequestMapping(params = "method=login")
@@ -90,10 +93,16 @@ public class ArtistController
 	}
 
 	/**
-	 * 申请成为艺术家功能
-	 * 
-	 * @param username
-	 * @param password
+	 * 申请成为艺术家
+	 * @param userid
+	 * @param realname
+	 * @param telphone
+	 * @param personnumber
+	 * @param paymode
+	 * @param goodat
+	 * @param request
+	 * @param response
+	 * @param token
 	 * @return
 	 */
 	@RequestMapping(params = "method=apply")
@@ -151,10 +160,11 @@ public class ArtistController
 	}
 
 	/**
-	 * 获取分页列表
-	 * 
+	 * 获取艺术家分页
 	 * @param page
 	 * @param pageSize
+	 * @param selectname
+	 * @param value
 	 * @return
 	 */
 	@RequestMapping(params = "method=getArtistbypage")
@@ -175,7 +185,6 @@ public class ArtistController
 
 	/**
 	 * 删除用户
-	 * 
 	 * @param ids
 	 * @return
 	 */
@@ -207,9 +216,8 @@ public class ArtistController
 	}
 
 	/**
-	 * 添加用户
-	 * 
-	 * @param rowstr
+	 * 添加艺术家
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params = "method=addArtist")
@@ -238,10 +246,10 @@ public class ArtistController
 
 	}
 
+	
 	/**
-	 * 更新
-	 * 
-	 * @param rowstr
+	 * 更新艺术家
+	 * @param data
 	 * @return
 	 */
 	@RequestMapping(params = "method=updateArtist")
@@ -278,7 +286,6 @@ public class ArtistController
 
 	/**
 	 * 获取所有的用户
-	 * 
 	 * @return
 	 */
 	@ResponseBody
@@ -291,9 +298,11 @@ public class ArtistController
 		return map;
 	}
 
+	
 	/**
-	 * 获取艺术家分页列表
-	 * 
+	 * 获取艺术家分页
+	 * @param page
+	 * @param pageSize
 	 * @return
 	 */
 	@ResponseBody

@@ -16,8 +16,8 @@ public interface IMessageService extends IBaseService<Message>{
 	
 	/**
 	 * 获取当前用户未读信息
-	 * @param sendid
-	 * @param fromid
+	 * @param id
+	 * @param isread
 	 * @return
 	 */
 	public List<Message> getUserMessage(Integer id,Integer isread);

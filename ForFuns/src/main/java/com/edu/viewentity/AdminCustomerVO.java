@@ -5,7 +5,11 @@ import java.util.List;
 
 import com.edu.model.Artist;
 import com.edu.model.Customer;
-
+/**
+ * 管理员显示层
+ * @author Administrator
+ *
+ */
 public class AdminCustomerVO {
 	private Integer id;
 	private String userid;

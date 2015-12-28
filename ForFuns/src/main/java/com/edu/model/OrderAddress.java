@@ -14,6 +14,11 @@ import javax.persistence.Entity;
 
 import org.hibernate.annotations.Cascade;
 
+/**
+ * 订单地址关联表
+ * @author Administrator
+ *
+ */
 @Entity
 @Table(name="oa_orderaddress")
 public class OrderAddress {

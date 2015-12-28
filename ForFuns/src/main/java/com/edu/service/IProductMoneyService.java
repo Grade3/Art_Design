@@ -6,8 +6,8 @@ import com.edu.model.ProductMoney;
 public interface IProductMoneyService extends IBaseService<ProductMoney>{
 	
 	/**
-	 * 获取这个拍卖商品的最高价
-	 * @param id
+	 * 获取拍卖商品的最高价
+	 * @param productid
 	 * @return
 	 */
 	public ProductMoney getMaxMoney(Integer productid);

@@ -6,6 +6,11 @@ import java.util.List;
 
 import com.edu.model.Message;
 
+/**
+ * 消息显示层
+ * @author Administrator
+ *
+ */
 public class MessageVO {
 	private Integer id;
 	private String content;
