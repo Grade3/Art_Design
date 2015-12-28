@@ -42,6 +42,7 @@ $(function(){
 
 <script type="text/javascript">
 $(document).ready(function(){
+	
   $("#menu").click(function(){
   $("#menu-xs").toggle(300);
   });
@@ -73,6 +74,10 @@ function getProductById(id){
 			var timestart = myformatter(product.timestart);
 			var timeout = myformatter(product.timeout);
 			var addmoney = product.addmoney;
+			var authorid = product.authorid;
+			$('.back_btn').click(function(){
+				location.href="<%=basePath%>font/artistHome.jsp?id="+authorid;
+			});
 			if(methodid!=2)
 				location.href="<%=basePath%>font/404.jsp";
 			$('#productid').val(id);
@@ -316,7 +321,7 @@ $(document).ready(function(){
 			<button class="col-xs-offset-11 col-xs-1 new_submit1" onclick="submitNewOne()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 		</div>
 		<div class="row add_name">
-			<p>加价：</p>
+			<p>请输入您的价位：</p>
 			<input type="text" class="col-xs-12" id="addmoney" name ="addmoney" />
 		</div>
 		<div class="row add_name">

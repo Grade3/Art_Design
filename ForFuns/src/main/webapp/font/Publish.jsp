@@ -304,6 +304,7 @@ function timecompare(a, b) {
 }
 //验证
 function validate(){
+	$('.password_error').hide();
 	var productname = $('#productname').val();
 	if(""==productname){
 		$('#errorname').show();
@@ -363,9 +364,27 @@ function validate(){
 }
 $(document).ready(function()
 {
+	
+	$('.back_btn').click(function(){
+		location.href="<%=basePath%>font/personal.jsp";
+	});
 	customerUserid = getCookieUserid();
 	if(null==customerUserid)
 		location.href="<%=basePath%>font/Login.jsp";
+	$.ajax({
+		type:'post',
+		url:'<%=basePath%>customer.do?method=getCustomerByUserid',
+		data:{customerid:customerUserid},
+		success:function(json){
+			var customer = json.customer;
+			var isartist = customer.isartist;
+			if(isartist==0){
+				location.href="<%=basePath%>font/404.jsp";
+			}
+		},error:function(){
+			
+		}
+	});
 	GetAllType();
 	GetAllSell();
 	var photo_w = $("#preview").width();
@@ -409,6 +428,7 @@ $(document).ready(function()
 
 <body>
 <script type="text/javascript" src="<%=basePath%>js/date.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/iscroll.js" ></script>
 <script type="text/javascript">
 $(function(){
 	$('#beginTime').date();

@@ -38,6 +38,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(document).ready(function(){
 			var name = getUrlParam("name");
 			$('#toname').html(name);
+			var receiveid = getUrlParam("id");
+			$('.back_btn').click(function(){
+				location.href="<%=basePath%>font/artistHome.jsp?id="+receiveid;
+			});
 		});
 	  var userid = getUrlParam("fromid");
       var receiveid = getUrlParam("id");
@@ -93,19 +97,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       //将消息显示在网页上
       function setMessageInnerHTML(innerHTML){
     	  content = "<li class='chatleft'>"+innerHTML+"</li>";
-    	  $('#chatframge').append(content);
+    	  $('#chatframge').prepend(content);
       };
       
       //将消息显示在网页上
       function setMessageMine(innerHTML){
     	  content = "<li class='chatright'>"+innerHTML+"</li>";
-    	  $('#chatframge').append(content);
+    	  $('#chatframge').prepend(content);
       };
       
       //将消息显示在网页上
       function setMessageOther(json){
     	  content = "<li class='chatleft'>"+json.content+"</li>";
-    	  $('#chatframge').append(content);
+    	  $('#chatframge').prepend(content);
       };
        
        

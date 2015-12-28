@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="main_404">
 				<img src="<%=basePath%>image/success.png">
 				<p class="label_wrong">恭喜您！操作成功！</p>
-				<a href="home.jsp" class="readmore">返回首页</a>
+				<a href="home.jsp" class="readmore">返回</a>
 			</div>
 		</div>
 	</div>

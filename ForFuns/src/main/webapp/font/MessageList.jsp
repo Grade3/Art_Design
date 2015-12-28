@@ -60,7 +60,7 @@ function getUnReadMessage(){
 					var sendavator = unread[i].sendavator;
 					var sendname = unread[i].sendname;
 					var fromid = unread[i].fromid;
-					var link = "<%=basePath%>font/chat.jsp?id="+fromid;
+					var link = "<%=basePath%>customer.do?method=EnterChat&toid="+fromid;
 					unreadcontent += "<a href='"+link+"'><div class='row message_div'><img class='col-xs-3 message_photo' src='"+sendavator+"'>"
 						+"<div class='col-xs-9 row message_label'><div class='col-xs-12 row label1'><p class='col-xs-9 send_message'>"+sendname+"</p>"
 						+"<p class='col-xs-3 send_time'>"+time+"</p></div><div class='col-xs-12 row label1'><p class='col-xs-11 new_message'>"+content+"</p><div class='col-xs-1 num_message'><div class='circle_num'></div></div></div></div></div></a>";

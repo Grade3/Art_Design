@@ -24,11 +24,11 @@ public class ProductMoney{
 	private Integer id;
 	private Product productBean;
 	private Customer customerBean;
-	private Integer money;
+	private Double money;
 	private Date currenttime;
 	
 	public ProductMoney(Product productBean, Customer customerBean,
-			Integer money, Date currenttime) {
+			Double money, Date currenttime) {
 		super();
 		this.productBean = productBean;
 		this.customerBean = customerBean;
@@ -36,7 +36,7 @@ public class ProductMoney{
 		this.currenttime = currenttime;
 	}
 	public ProductMoney(Integer id, Product productBean,
-			Customer customerBean, Integer money, Date currenttime) {
+			Customer customerBean, Double money, Date currenttime) {
 		super();
 		this.id = id;
 		this.productBean = productBean;
@@ -70,10 +70,10 @@ public class ProductMoney{
 		this.customerBean = customerBean;
 	}
 	@Column(name="money")
-	public Integer getMoney() {
+	public Double getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
 	public ProductMoney() {

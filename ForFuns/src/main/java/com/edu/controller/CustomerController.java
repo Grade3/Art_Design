@@ -173,6 +173,7 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 			user.setTelphone(telphone);
 			user.setPassword(password);
 			user.setAvator("/forfun/image/293.jpg");
+			user.setIsartist(0);
 			System.out.println(user.toString());
 			user.setBalance(0.0);
 			customerService.AddBean(user);
@@ -479,7 +480,6 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customer", new CustomerVO(customerBean));
 		System.out.println(customerid);
-		
 		return map;
 	}
 
@@ -666,15 +666,17 @@ public class CustomerController implements ServletConfigAware, ServletContextAwa
 	public String CheckLoginEnterChat(@CookieValue(value = "useridtoken", required = false,defaultValue="") String useridtoken,@RequestParam(value="toid")Integer toid){
 		String customeruserid = CheckTokenTool.GetUserid(useridtoken);
 		Customer customer =null;
+		Customer toCustomer = null;
 		try {
 			customer = customerService.getCustomerByUserId(customeruserid);
+			toCustomer = customerService.GetEntityById(Customer.class, toid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(null==customer){
+		if(null==customer || null ==toCustomer){
 			return "redirect:/font/error.jsp";
 		}
-		String link = "redirect:/font/chat.jsp?id="+toid+"&fromid="+customer.getId()+"&name="+customer.getUsername();
+		String link = "redirect:/font/chat.jsp?id="+toid+"&fromid="+customer.getId()+"&name="+toCustomer.getUsername();
 		System.out.println(link);
 		return link;
 	}

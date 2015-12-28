@@ -43,7 +43,7 @@ public class AuctionStragegy implements ISellStrategy{
 			Double money, Map<String, Object> params) throws Exception {
 		ProductMoney productMoneyBean = productMoneyDao.GetBeanByCondition(ProductMoney.class, ProductMoneyTable.PRODUCTID, productBean.getId()+"", null);
 		ProductMoney maxProductMoneyBean  = null;
-		Integer addmony = Integer.parseInt(params.get("addmoney").toString());
+		Double addmony = Double.parseDouble(params.get("addmoney").toString());
 		if(!(null == productMoneyBean)){//如果有人竞拍,找出最高价
 			Integer id   = productMoneyDao.GetMaxMoneyid(productBean.getId());
 			maxProductMoneyBean = (ProductMoney) productMoneyDao.getEntitybyId(ProductMoney.class, id);
@@ -81,6 +81,8 @@ public class AuctionStragegy implements ISellStrategy{
 			newproductMoney.setMoney(addmony);
 			newproductMoney.setCurrenttime(new Date());
 			productMoneyDao.addEntity(newproductMoney);
+			productBean.setMoney(addmony);
+			productDao.updateEntity(productBean);
 			return "redirect:/font/success.jsp?successid=1";
 		}else{//如果存在，找出最高值
 			
@@ -93,6 +95,8 @@ public class AuctionStragegy implements ISellStrategy{
 				newproductMoney.setMoney(addmony);
 				newproductMoney.setCurrenttime(new Date());
 				productMoneyDao.addEntity(newproductMoney);
+				productBean.setMoney(addmony);
+				productDao.updateEntity(productBean);
 				return "redirect:/font/success.jsp?successid=4";
 			}
 		}

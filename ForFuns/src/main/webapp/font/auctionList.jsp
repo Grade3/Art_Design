@@ -86,6 +86,12 @@ function GetAllType(){
 					body+= "<li id='typeid_"+json[i].id+"'>"+json[i].name+"</li>";
 				}
 				$('#typeul').html(body);
+				$('#typeul').find('li').click(function(){
+					$('#goodlist').html("");
+					var id = $(this).attr('id');
+					typeid = id.substring(7,id.length);
+					GetAllOnlineProduct(typeid,page,pageSize);
+				});
 			}
 		},error:function(){
 		},
@@ -286,7 +292,7 @@ $(document).ready(function(){
 		<div class="container">
 			<div class="col-lg-2 s_menu">
 				<div class="menu_box box_active">
-					<a href="goodslist.jsp" class="otherCategory">艺术成品</a>
+					<a href="goodslist.jsp" class="otherCategory">艺术品</a>
 					<a class="thisCategory">拍卖品分类&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-down partten2" aria-hidden="true"></span></a>
 					<ul class="sub" id="typeul">
 						<li>分类1</li>

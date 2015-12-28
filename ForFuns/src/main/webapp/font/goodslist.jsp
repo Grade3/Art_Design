@@ -111,6 +111,14 @@ function GetAllType(){
 					body+= "<li id='typeid_"+json[i].id+"'>"+json[i].name+"</li>";
 				}
 				$('#typeul').html(body);
+				//切换分类  
+				$('#typeul').find('li').click(function(){
+					$('#goodlist').html("");
+					var id = $(this).attr('id');
+					typeid = id.substring(7,id.length);
+					GetAllOnlineProduct(typeid,page,pageSize);
+				});
+				
 			}
 		},error:function(){
 		},

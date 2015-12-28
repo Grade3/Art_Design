@@ -395,6 +395,9 @@ function getProductInfo(productid){
 }
 $(document).ready(function()
 {
+	$('.back_btn').click(function(){
+		location.href="<%=basePath%>font/personal.jsp";
+	});
 	customerUserid = getCookieUserid();
 	if(null==customerUserid)
 		location.href="<%=basePath%>font/Login.jsp";
@@ -459,7 +462,7 @@ $(function(){
 <div class="container-fluid header">
 	<div class="title_bar">
 		<p class="back_btn"><span class="glyphicon glyphicon-menu-left partten" aria-hidden="true"></span></p>
-		<p><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>&nbsp;&nbsp;发布艺术品</p>
+		<p><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>&nbsp;&nbsp;修改艺术品</p>
 	</div>
 </div>
 

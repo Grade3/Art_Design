@@ -46,6 +46,9 @@ function GetAllMyProduct(page,pageSize){
 		url:'<%=basePath%>product.do?method=GetArtistProducts',
 		data:{page:page,pageSize:pageSize},
 		success:function(json){
+			$('.back_btn').click(function(){
+				location.href="<%=basePath%>font/personal.jsp";
+			});
 			var products = json.list;
 			var total = json.total;
 			globaltotal = total;
@@ -53,6 +56,10 @@ function GetAllMyProduct(page,pageSize){
 				var body = "";
 				var tempbody ="";
 				for(var i=0;i<products.length;i++){
+					var authorid= products[i].authorid;
+					$('.back_btn').click(function(){
+						location.href="<%=basePath%>font/artistHome.jsp?id="+authorid;
+					});
 					var id = products[i].id;
 					var imgurl = products[i].imgurl;
 					var name = products[i].name;
@@ -86,7 +93,7 @@ function GetAllMyProduct(page,pageSize){
 					+"<p class='other'>下架时间："+endtime+"</p>"
 					+"<p class='other'>"+methodname+" - "+situation+"</p>"
 					+"<p class='price'>当前价格：￥"+money+"</p>"
-					+"<a href='"+link+"' class='col-xs-12 readmore operation oper1' target='_blank'>修改</a>"
+					+"<a href='"+link+"' class='col-xs-12 readmore operation oper1'>修改</a>"
 					+"</div>"
 					+"</div>"
 					+"</div>";
