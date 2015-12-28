@@ -17,7 +17,7 @@
 	    <frame src="<%=basePath%>admin/top.jsp" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />
 	    <frameset cols="242,*" frameborder="no" border="0" framespacing="0">
 	    	<frame src="<%=basePath%>admin/left.jsp" name="leftFrame" scrolling="No" noresize="noresize" id="leftFrame" title="leftFrame" />
-	    	<frame src="<%=basePath%>admin/ManageUser.jsp" name="rightFrame" id="rightFrame" title="rightFrame" />
+	    	<frame src="<%=basePath%>admin/myinfo.jsp" name="rightFrame" id="rightFrame" title="rightFrame" />
 	  	</frameset>
 	</frameset>
 <noframes>
