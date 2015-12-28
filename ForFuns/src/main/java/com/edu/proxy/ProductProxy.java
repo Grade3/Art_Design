@@ -37,8 +37,6 @@ public class ProductProxy {
 		this.productBean = productBean;
 		int methodid = productBean.getProductSellBean().getSellMethodBean().getId();
 		try {
-			//this.sellStrategy = (ISellStrategy) Class.forName(GetConfigData.getDatabyKey(methodid+"")).newInstance();
-			//this.sellStrategy.Init(productDao, productMoneyDao);
 			this.sellStrategy = (ISellStrategy) SpringContextUtil.getBean(GetConfigData.getDatabyKey(methodid+""));
 		} catch(Exception e){
 			e.printStackTrace();
@@ -52,22 +50,24 @@ public class ProductProxy {
 		return sellStrategy.SellProduct(productBean,customerbean,money,params)+"";
 	}
 
-	/*public ProductProxy(Product productBean) {
-		super();
-		this.productBean = productBean;
-		int methodid = productBean.getProductSellBean().getSellMethodBean().getId();
-		try {
-			//this.sellStrategy = (ISellStrategy) Class.forName(GetConfigData.getDatabyKey(methodid+"")).newInstance();
-			//this.sellStrategy.Init(productDao, productMoneyDao);
-			//让spring通过类名生成对应的策略实体
-			this.sellStrategy = (ISellStrategy) SpringContextUtil.getBean(GetConfigData.getDatabyKey(methodid+""));
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-	}*/
 
 	public ProductProxy() {
 		super();
 	}
 	
+	
+	/*public ProductProxy(Product productBean) {
+	super();
+	this.productBean = productBean;
+	int methodid = productBean.getProductSellBean().getSellMethodBean().getId();
+	try {
+		//this.sellStrategy = (ISellStrategy) Class.forName(GetConfigData.getDatabyKey(methodid+"")).newInstance();
+		//this.sellStrategy.Init(productDao, productMoneyDao);
+		//让spring通过类名生成对应的策略实体
+		this.sellStrategy = (ISellStrategy) SpringContextUtil.getBean(GetConfigData.getDatabyKey(methodid+""));
+	} catch(Exception e){
+		e.printStackTrace();
+	}
+}*/
+
 }

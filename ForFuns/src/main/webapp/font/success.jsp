@@ -20,13 +20,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var successid = getUrlParam('successid');
 			if(null==successid){
 			}else if(successid==1){
-				$('.label_wrong').html('返回订单页面');
+				$('.label_wrong').html('操作成功，返回订单页面');
 				$('.readmore').attr('href',"<%=basePath%>order.do?method=EnterMyOrder");
 			}else if(successid==2){
-				$('.label_wrong').html('返回个人信息页面 ');
+				$('.label_wrong').html('操作成功，返回个人信息页面 ');
 				$('.readmore').attr('href',"<%=basePath%>font/personal.jsp");
 			}else if(successid==3){
-				$('.label_wrong').html('返回商品列表页面');
+				$('.label_wrong').html('操作成功，返回商品列表页面');
 				$('.readmore').attr('href',"<%=basePath%>font/goodslist.jsp");
 			}
 			
