@@ -81,6 +81,7 @@ function CheckUser(){
 			$('#loginaction').hide();
 			$('#usernameaction').show();
 			$('#usernameaction').css("display","inline-block");
+			$('#loginoutaction').css("display","inline-block");
 			$('#loginoutaction').show();
 			$('#username').html("<span class='glyphicon glyphicon-user' aria-hidden='true'></span>&nbsp;&nbsp;"+json);
 		},error:function(){

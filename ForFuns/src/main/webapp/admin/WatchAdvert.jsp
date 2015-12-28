@@ -205,7 +205,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						{
 							ids[i] = rows[i].id;
 						}						
-					$.post("<%=basePath%>news.do?method=deletenews", {ids: ids.toString()},
+					$.post("<%=basePath%>advert.do?method=DeleteAdvert", {ids: ids.toString()},
 						function (data, textStatus){
 						
 						if(data == 'true'){

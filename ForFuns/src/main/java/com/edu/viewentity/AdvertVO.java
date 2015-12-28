@@ -17,7 +17,10 @@ public class AdvertVO
 	private String imgurl;
 	private String summary;
 	private Integer isonline;
-	
+	private String author;
+	private Integer situation;
+	private String suggestion;
+	private Integer position;
 	public Integer getId()
 	{
 		return id;
@@ -105,6 +108,10 @@ public class AdvertVO
 		this.imgurl = advertBean.getImgurl();
 		this.summary = advertBean.getSummary();
 		this.isonline = advertBean.getIsonline();
+		this.author = advertBean.getAuthor();
+		this.situation = advertBean.getSituation();
+		this.suggestion = advertBean.getSuggestion();
+		this.position = advertBean.getPosition();
 	}
 
 	/**
@@ -119,5 +126,53 @@ public class AdvertVO
 			results.add(new AdvertVO(advertBean));
 		}
 		return results;
+	}
+
+
+
+	public String getAuthor() {
+		return author;
+	}
+
+
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+
+
+	public Integer getSituation() {
+		return situation;
+	}
+
+
+
+	public void setSituation(Integer situation) {
+		this.situation = situation;
+	}
+
+
+
+	public String getSuggestion() {
+		return suggestion;
+	}
+
+
+
+	public void setSuggestion(String suggestion) {
+		this.suggestion = suggestion;
+	}
+
+
+
+	public Integer getPosition() {
+		return position;
+	}
+
+
+
+	public void setPosition(Integer position) {
+		this.position = position;
 	}
 }

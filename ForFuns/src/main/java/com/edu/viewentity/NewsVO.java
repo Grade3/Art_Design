@@ -16,6 +16,9 @@ public class NewsVO {
 	private String imgurl;
 	private String summary;
 	private Integer isonline;
+	private String author;
+	private Integer situation;
+	private String suggestion;
 	public NewsVO() {
 		super();
 	}
@@ -56,6 +59,9 @@ public class NewsVO {
 		this.imgurl = newsBean.getImgurl();
 		this.summary = newsBean.getSummary();
 		this.isonline = newsBean.getIsonline();
+		this.author = newsBean.getAuthor();
+		this.situation = newsBean.getSituation();
+		this.suggestion = newsBean.getSuggestion();
 	}
 	public NewsVO(Integer id, String title, String imgurl, String summary,
 			Integer isonline) {
@@ -77,5 +83,23 @@ public class NewsVO {
 			results.add(new NewsVO(newsBean));
 		}
 		return results;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public Integer getSituation() {
+		return situation;
+	}
+	public void setSituation(Integer situation) {
+		this.situation = situation;
+	}
+	public String getSuggestion() {
+		return suggestion;
+	}
+	public void setSuggestion(String suggestion) {
+		this.suggestion = suggestion;
 	}
 }
