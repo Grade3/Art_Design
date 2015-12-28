@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$('#toname').html(name);
 			var receiveid = getUrlParam("id");
 			$('.back_btn').click(function(){
-				location.href="<%=basePath%>font/artistHome.jsp?id="+receiveid;
+				location.href="<%=basePath%>message.do?method=entermymessage";
 			});
 		});
 	  var userid = getUrlParam("fromid");

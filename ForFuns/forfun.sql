@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2015-12-28 05:15:42
+Date: 2015-12-28 19:32:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `ad_address` (
   `receiver` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_91e4fevv0mvjenxivqj0jf218` (`telephone`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ad_address
@@ -35,6 +35,9 @@ INSERT INTO `ad_address` VALUES ('19', '2313', '142431', '214');
 INSERT INTO `ad_address` VALUES ('25', 'fdasfs', '123213', 'sdfgsa');
 INSERT INTO `ad_address` VALUES ('26', '孔昊', '12144', '孔昊');
 INSERT INTO `ad_address` VALUES ('27', '234', '12313123', '342');
+INSERT INTO `ad_address` VALUES ('29', '24534674', '1346', 'Adg');
+INSERT INTO `ad_address` VALUES ('30', 'weqwe', '123123', 'eqwe');
+INSERT INTO `ad_address` VALUES ('31', '324', '23', '34');
 
 -- ----------------------------
 -- Table structure for `ai_artistinfo`
@@ -101,7 +104,7 @@ CREATE TABLE `ca_customeraddress` (
   KEY `FK_br5o5lrnj7lipy82cqw31q4iy` (`customerid`),
   CONSTRAINT `FK_br5o5lrnj7lipy82cqw31q4iy` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_h0pmehbqpyo6xx8502pxp5dtt` FOREIGN KEY (`addressid`) REFERENCES `ad_address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ca_customeraddress
@@ -110,6 +113,9 @@ INSERT INTO `ca_customeraddress` VALUES ('19', '1', '19');
 INSERT INTO `ca_customeraddress` VALUES ('25', '8', '25');
 INSERT INTO `ca_customeraddress` VALUES ('26', '8', '26');
 INSERT INTO `ca_customeraddress` VALUES ('27', '8', '27');
+INSERT INTO `ca_customeraddress` VALUES ('29', '13', '29');
+INSERT INTO `ca_customeraddress` VALUES ('30', '12', '30');
+INSERT INTO `ca_customeraddress` VALUES ('31', '12', '31');
 
 -- ----------------------------
 -- Table structure for `c_customer`
@@ -128,7 +134,7 @@ CREATE TABLE `c_customer` (
   `balance` double(255,0) unsigned DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `userid` (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of c_customer
@@ -136,11 +142,16 @@ CREATE TABLE `c_customer` (
 INSERT INTO `c_customer` VALUES ('1', 'gy', 'christy', '123456', '3506811111111', '11111', 'gy', '/forfun/avatorupload/1450781848430.jpg', '1', '12453');
 INSERT INTO `c_customer` VALUES ('2', '2', '1233', '12', '12', '12', '12', '/forfun/avatorupload/1450781848430.jpg', '1', '246');
 INSERT INTO `c_customer` VALUES ('3', '12212', '12', '213', '213', '13', '131', '/forfun/avatorupload/1450781848430.jpg', '1', '1');
-INSERT INTO `c_customer` VALUES ('4', 'admin', '系统管理员', 'admin', '350681199401061088', '110', '系统管理员', '/forfun/image/293.jpg', '0', '0');
-INSERT INTO `c_customer` VALUES ('5', 'mhzx20', 'kh', '123456', '32108819951117001X', '13666095971', 'kh', '/forfun/avatorupload/1450781848430.jpg', '1', '2');
+INSERT INTO `c_customer` VALUES ('4', 'admin', 'admin', 'admin', '350681199401061088', '110', '系统管理员', '/forfun/image/293.jpg', '0', '423');
+INSERT INTO `c_customer` VALUES ('5', 'mhzx20', 'kh', '6550996', '32108819951117001X', '13666095971', 'kh', '/forfun/avatorupload/1450781848430.jpg', '1', '99999');
 INSERT INTO `c_customer` VALUES ('6', 'slig', '孔锄地', '121', '354444444444444444', '11144447777', '你大爷', '/forfun/avatorupload/1451218628588.jpg', '1', '30000000000112220000000');
 INSERT INTO `c_customer` VALUES ('7', 'gy121', '12', '234', '350681199401061066', '123456789', '12', '/forfun/image/293.jpg', '1', '0');
 INSERT INTO `c_customer` VALUES ('8', 'tt', 'tttqq', '123', '350681199401061066', '123456789', 'tt', '/forfun/avatorupload/1451231781495.jpg', '1', '2667');
+INSERT INTO `c_customer` VALUES ('9', 'aaa12123', '222', '123', '123123122222222232', '12323231234', '122', '/forfun/image/293.jpg', '0', '0');
+INSERT INTO `c_customer` VALUES ('10', 'aawe', 'a22', '123', '123123123123231231', '12312331222', '31dd', '/forfun/image/293.jpg', '0', '0');
+INSERT INTO `c_customer` VALUES ('11', 'aaa', 'a', 'aaa', '123123122222222232', '12312331222', 'ww', '/forfun/image/293.jpg', '0', '0');
+INSERT INTO `c_customer` VALUES ('12', 'xiangning', 'lxn', '123', '123123234523231234', '12345674567', 'lxnlll', '/forfun/image/293.jpg', '1', '0');
+INSERT INTO `c_customer` VALUES ('13', 'Xnnnn', '你猜', '123', '232243255218587458', '12356457885', '美少女', '/forfun/avatorupload/1451294409600.jpg', '1', '100');
 
 -- ----------------------------
 -- Table structure for `ea_examineartist`
@@ -158,7 +169,7 @@ CREATE TABLE `ea_examineartist` (
   PRIMARY KEY (`id`),
   KEY `EXUSERID` (`userid`),
   CONSTRAINT `EXUSERID` FOREIGN KEY (`userid`) REFERENCES `c_customer` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ea_examineartist
@@ -166,6 +177,8 @@ CREATE TABLE `ea_examineartist` (
 INSERT INTO `ea_examineartist` VALUES ('1', 'gy', '1', '1', '1', '1', '1', '1');
 INSERT INTO `ea_examineartist` VALUES ('2', '2', '12', '11111111111', '111111111111111111', 'adsfds', 'asdf', '1');
 INSERT INTO `ea_examineartist` VALUES ('3', 'tt', 'tt', '123456789', '350681199401061066', '464646546', '12313', '1');
+INSERT INTO `ea_examineartist` VALUES ('4', 'xiangning', 'lxnlll', '12345674567', '123123234523231234', '12312331233', '232', '1');
+INSERT INTO `ea_examineartist` VALUES ('5', 'Xnnnn', '美少女', '12356457885', '232243255218587458', '12464436654', '记笔记了', '1');
 
 -- ----------------------------
 -- Table structure for `f_function`
@@ -178,7 +191,7 @@ CREATE TABLE `f_function` (
   `istopmenu` int(11) DEFAULT NULL,
   `topmenu` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of f_function
@@ -190,13 +203,24 @@ INSERT INTO `f_function` VALUES ('4', '用户角色管理', './ManageUserRole.js
 INSERT INTO `f_function` VALUES ('5', '菜单管理', './ManageFunction.jsp', '0', '1');
 INSERT INTO `f_function` VALUES ('6', '权限管理', './ManagePower.jsp', '0', '1');
 INSERT INTO `f_function` VALUES ('7', '客户管理', null, '1', null);
-INSERT INTO `f_function` VALUES ('8', '客户管理', './ManageCustomer.jsp', '0', '5');
-INSERT INTO `f_function` VALUES ('9', '艺术家管理', './ManageArtist.jsp', '0', '5');
-INSERT INTO `f_function` VALUES ('10', '资讯发布管理', null, '1', null);
-INSERT INTO `f_function` VALUES ('11', '发布资讯', './AddNews.jsp', '0', '8');
-INSERT INTO `f_function` VALUES ('12', '查看资讯', './WatchNews.jsp', '0', '8');
-INSERT INTO `f_function` VALUES ('13', '资讯管理', '', '1', null);
-INSERT INTO `f_function` VALUES ('14', '审核资讯', './ManageNews.jsp', '0', '11');
+INSERT INTO `f_function` VALUES ('8', '客户管理', './ManageCustomer.jsp', '0', '7');
+INSERT INTO `f_function` VALUES ('9', '客户地址管理', './ManageAddress.jsp', '0', '7');
+INSERT INTO `f_function` VALUES ('10', '艺术家管理', './ManageArtist.jsp', '0', '7');
+INSERT INTO `f_function` VALUES ('11', '艺术家审核', './ManageExamineArtist.jsp', '0', '7');
+INSERT INTO `f_function` VALUES ('12', '资讯发布', null, '1', null);
+INSERT INTO `f_function` VALUES ('13', '发布资讯', './AddNews.jsp', '0', '12');
+INSERT INTO `f_function` VALUES ('14', '查看资讯', './WatchNews.jsp', '0', '12');
+INSERT INTO `f_function` VALUES ('15', '资讯管理', null, '1', null);
+INSERT INTO `f_function` VALUES ('16', '审核资讯', './ManageNews.jsp', '0', '15');
+INSERT INTO `f_function` VALUES ('17', '广告发布', null, '1', null);
+INSERT INTO `f_function` VALUES ('18', '发布广告', './AddAdvert.jsp', '0', '17');
+INSERT INTO `f_function` VALUES ('19', '查看广告', './WatchAdvert.jsp', '0', '17');
+INSERT INTO `f_function` VALUES ('20', '广告管理', './ManageAdvert.jsp', '1', null);
+INSERT INTO `f_function` VALUES ('21', '审核广告', '\"./ManageAdvert.jsp\"', '0', '20');
+INSERT INTO `f_function` VALUES ('22', '商品管理', null, '1', null);
+INSERT INTO `f_function` VALUES ('23', '商品管理', './ManageProduct.jsp', '0', '22');
+INSERT INTO `f_function` VALUES ('24', '商品类别管理', './ManageProductType.jsp', '0', '22');
+INSERT INTO `f_function` VALUES ('25', '订单管理', './ManageOrder.jsp', '0', '22');
 
 -- ----------------------------
 -- Table structure for `m_message`
@@ -214,7 +238,7 @@ CREATE TABLE `m_message` (
   KEY `FK_e355tkrguo7feiycq7xognthk` (`toid`),
   CONSTRAINT `FK_e355tkrguo7feiycq7xognthk` FOREIGN KEY (`toid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_fdblrv579vjxw47ivyxi57orl` FOREIGN KEY (`fromid`) REFERENCES `c_customer` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of m_message
@@ -229,6 +253,23 @@ INSERT INTO `m_message` VALUES ('27', '1', '3', 'jhhh', '2015-12-18 21:53:31', '
 INSERT INTO `m_message` VALUES ('28', '1', '3', '<img src=\"/forfun/newsupload/1450447015339.jpg\" alt=\"\" />哈哈哈', '2015-12-18 21:56:59', '0');
 INSERT INTO `m_message` VALUES ('29', '1', '2', 'asd', '2015-12-22 21:25:02', '1');
 INSERT INTO `m_message` VALUES ('30', '1', '2', '护手霜', '2015-12-24 22:02:47', '1');
+INSERT INTO `m_message` VALUES ('35', '8', '1', 'fasdad', '2015-12-28 05:51:21', '0');
+INSERT INTO `m_message` VALUES ('36', '8', '1', 'sdada', '2015-12-28 05:51:25', '0');
+INSERT INTO `m_message` VALUES ('37', '4', '12', '尊敬的lxn，您好，非常感谢您申请成为本站的艺术家，您的申请信息非常具有竞争力，我站决定录用您成为本站的艺术合作伙伴，请尽快完善您的艺术家主页，以便向客户展示您的作品并获得收益。再次感谢您对我公司的信任，祝您未来一切顺利！', '2015-12-28 07:50:46', '1');
+INSERT INTO `m_message` VALUES ('38', '12', '1', '十大', '2015-12-28 16:35:16', '1');
+INSERT INTO `m_message` VALUES ('39', '12', '1', '打死打死', '2015-12-28 16:35:18', '1');
+INSERT INTO `m_message` VALUES ('40', '12', '1', '123123', '2015-12-28 16:38:09', '1');
+INSERT INTO `m_message` VALUES ('41', '12', '1', '嗯嗯嗯<img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/31.gif\" border=\"0\" alt=\"\" />', '2015-12-28 16:38:14', '1');
+INSERT INTO `m_message` VALUES ('42', '1', '12', '哈哈哈哈哈', '2015-12-28 16:42:09', '1');
+INSERT INTO `m_message` VALUES ('43', '1', '12', '<img src=\"http://59.77.13.250:8080/forfun/kindeditor/plugins/emoticons/images/11.gif\" border=\"0\" alt=\"\" />', '2015-12-28 16:42:39', '1');
+INSERT INTO `m_message` VALUES ('44', '12', '1', '<img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/43.gif\" border=\"0\" alt=\"\" />', '2015-12-28 16:42:42', '1');
+INSERT INTO `m_message` VALUES ('45', '1', '12', '<p>\n	hhhh\n</p>\n<p>\n	<br />\n</p>', '2015-12-28 16:43:57', '1');
+INSERT INTO `m_message` VALUES ('46', '12', '1', '<img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/39.gif\" border=\"0\" alt=\"\" />', '2015-12-28 16:44:01', '1');
+INSERT INTO `m_message` VALUES ('47', '1', '12', '<img src=\"http://59.77.13.250:8080/forfun/kindeditor/plugins/emoticons/images/18.gif\" border=\"0\" alt=\"\" />', '2015-12-28 16:44:14', '1');
+INSERT INTO `m_message` VALUES ('48', '1', '12', '你好', '2015-12-28 16:44:41', '1');
+INSERT INTO `m_message` VALUES ('49', '4', '13', '尊敬的你猜，您好，非常感谢您申请成为本站的艺术家，您的申请信息非常具有竞争力，我站决定录用您成为本站的艺术合作伙伴，请尽快完善您的艺术家主页，以便向客户展示您的作品并获得收益。再次感谢您对我公司的信任，祝您未来一切顺利！', '2015-12-28 17:26:33', '1');
+INSERT INTO `m_message` VALUES ('50', '5', '13', '<img src=\"http://59.77.13.250:8080/forfun/kindeditor/plugins/emoticons/images/0.gif\" border=\"0\" alt=\"\" />', '2015-12-28 17:53:22', '1');
+INSERT INTO `m_message` VALUES ('51', '13', '5', '<img src=\"http://59.77.13.250:8080/forfun/kindeditor/plugins/emoticons/images/39.gif\" border=\"0\" alt=\"\" />', '2015-12-28 17:53:42', '1');
 
 -- ----------------------------
 -- Table structure for `n_news`
@@ -293,7 +334,7 @@ CREATE TABLE `oa_orderaddress` (
   KEY `FK_tl65kv2538dp3i5h8ehjmrm1w` (`orderid`),
   CONSTRAINT `FK_1bsx742l1k7a1qernbjlpvmpj` FOREIGN KEY (`addressid`) REFERENCES `ad_address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_tl65kv2538dp3i5h8ehjmrm1w` FOREIGN KEY (`orderid`) REFERENCES `o_order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of oa_orderaddress
@@ -315,12 +356,12 @@ CREATE TABLE `o_order` (
   KEY `FK_t89xec3n0adjmtyfww6eow4wc` (`productid`),
   CONSTRAINT `FK_6k0uxsm9w1hjnp1muvkrkfef9` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`),
   CONSTRAINT `FK_t89xec3n0adjmtyfww6eow4wc` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=512 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of o_order
 -- ----------------------------
-INSERT INTO `o_order` VALUES ('280', '2', '8', '2015-12-28 05:12:28', '333', '1');
+INSERT INTO `o_order` VALUES ('511', '2', '8', '2015-12-28 18:25:37', '333', '0');
 
 -- ----------------------------
 -- Table structure for `pm_productmoney`
@@ -338,7 +379,7 @@ CREATE TABLE `pm_productmoney` (
   KEY `FK_ner8fgw1gx6osl7b6i6fxvxei` (`productid`),
   CONSTRAINT `FK_medowh6ptfyd3ag6j59viq9np` FOREIGN KEY (`customerid`) REFERENCES `c_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_ner8fgw1gx6osl7b6i6fxvxei` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pm_productmoney
@@ -347,6 +388,8 @@ INSERT INTO `pm_productmoney` VALUES ('4', '2', '1', '123', '2015-12-27 14:43:58
 INSERT INTO `pm_productmoney` VALUES ('5', '2', '1', '134', '2015-12-27 17:45:12', '1');
 INSERT INTO `pm_productmoney` VALUES ('6', '2', '2', '100', '2015-12-27 14:45:12', '1');
 INSERT INTO `pm_productmoney` VALUES ('7', '2', '8', '333', '2015-12-28 03:18:44', '1');
+INSERT INTO `pm_productmoney` VALUES ('8', '16', '5', '100', '2015-12-28 17:27:34', '0');
+INSERT INTO `pm_productmoney` VALUES ('10', '16', '5', '500', '2015-12-28 17:41:21', '0');
 
 -- ----------------------------
 -- Table structure for `ps_productsell`
@@ -361,7 +404,7 @@ CREATE TABLE `ps_productsell` (
   KEY `FK_em1wxfqchkn2yluip1xc4krfb` (`productid`),
   CONSTRAINT `FK_b767vrittw9fd943i9hig7yij` FOREIGN KEY (`sellmethodid`) REFERENCES `sm_sellmethod` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_em1wxfqchkn2yluip1xc4krfb` FOREIGN KEY (`productid`) REFERENCES `p_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ps_productsell
@@ -377,6 +420,11 @@ INSERT INTO `ps_productsell` VALUES ('11', '9', '1');
 INSERT INTO `ps_productsell` VALUES ('12', '10', '1');
 INSERT INTO `ps_productsell` VALUES ('13', '11', '1');
 INSERT INTO `ps_productsell` VALUES ('14', '12', '1');
+INSERT INTO `ps_productsell` VALUES ('15', '13', '1');
+INSERT INTO `ps_productsell` VALUES ('16', '14', '1');
+INSERT INTO `ps_productsell` VALUES ('17', '15', '1');
+INSERT INTO `ps_productsell` VALUES ('18', '16', '2');
+INSERT INTO `ps_productsell` VALUES ('19', '17', '1');
 
 -- ----------------------------
 -- Table structure for `pt_producttype`
@@ -417,14 +465,14 @@ CREATE TABLE `p_product` (
   KEY `FK_b3oo9oqhednel04ew5ix08gxa` (`typeid`),
   CONSTRAINT `FK_3a2286hejr4r95bofseli5r42` FOREIGN KEY (`artistid`) REFERENCES `c_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_b3oo9oqhednel04ew5ix08gxa` FOREIGN KEY (`typeid`) REFERENCES `pt_producttype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of p_product
 -- ----------------------------
 INSERT INTO `p_product` VALUES ('1', 'kh', '/forfun/newsupload/1449304402174.JPG', '1', '1', '2015-12-06', '2015-12-31', '1', '非卖品', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '3');
 INSERT INTO `p_product` VALUES ('2', 'lxn', '/forfun/newsupload/1449304402174.JPG', '1', '333', '2015-12-05', '2015-12-26', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '3');
-INSERT INTO `p_product` VALUES ('3', 'gy', '/forfun/newsupload/1449304402174.JPG', '2', '1', '2015-12-13', '2015-12-31', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '1');
+INSERT INTO `p_product` VALUES ('3', 'gy', '/forfun/newsupload/1449304402174.JPG', '2', '1', '2015-12-13', '2015-12-31', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '3');
 INSERT INTO `p_product` VALUES ('4', 'wlx', '/forfun/newsupload/1449304402174.JPG', '2', '1', '2015-12-07', '2015-12-31', '1', '1', '/forfun/newsupload/IMG_0269.JPG', '/forfun/newsupload/IMG_0271.JPG', '/forfun/newsupload/IMG_0272.JPG', '1');
 INSERT INTO `p_product` VALUES ('6', '123', '/forfun/avatorupload/1450804600085.jpg', '2', '123', '2015-12-23', '2015-12-25', '1', '132141', '/forfun/avatorupload/1450804600085.jpg1450804600086.jpg', '/forfun/avatorupload/1450804600085.jpg1450804600086.jpg1450804600087.png', '/forfun/avatorupload/1450804600085.jpg1450804600086.jpg1450804600087.png1450804600087.png', '2');
 INSERT INTO `p_product` VALUES ('7', 'd', '/forfun/avatorupload/1451239766789.jpg', '1', '6546546546', '2015-12-25', '2015-12-31', '1', '<br />', '/forfun/avatorupload/1451239766789.jpg1451239766790.jpg', '/forfun/avatorupload/1451239766789.jpg1451239766790.jpg1451239766790.jpg', '/forfun/avatorupload/1451239766789.jpg1451239766790.jpg1451239766790.jpg1451239766791.jpg', '1');
@@ -433,6 +481,11 @@ INSERT INTO `p_product` VALUES ('9', '123', '/forfun/avatorupload/1451240637414.
 INSERT INTO `p_product` VALUES ('10', '231', '/forfun/avatorupload/1451241022572.png', '1', '1231', '2015-12-28', '2016-12-28', '1', '商家并没有更多描述喵~', '1451241022574.png', '1451241022574.jpg', '1451241022575.jpg', '1');
 INSERT INTO `p_product` VALUES ('11', '123', '/forfun/avatorupload/1451241088774.jpg', '1', '123', '2015-12-28', '2016-12-28', '1', '商家并没有更多描述喵~', '1451241088774.jpg', '1451241088775.jpg', '1451241088776.jpg', '1');
 INSERT INTO `p_product` VALUES ('12', '1213', '/forfun/avatorupload/1451241198679.jpg', '1', '123', '2015-12-28', '2016-12-28', '1', '商家并没有更多描述喵~', '/forfun/avatorupload/1451241198680.jpg', '/forfun/avatorupload/1451241198680.jpg1451241198680.jpg', '/forfun/avatorupload/1451241198682.jpg', '3');
+INSERT INTO `p_product` VALUES ('13', 'xn122', '/forfun/avatorupload/1451291238917.jpg', '12', '120', '2015-12-27', '2016-01-30', '1', '局忽视的哈呼 大多数<img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" />', '/forfun/avatorupload/1451291623466.png', '/forfun/avatorupload/1451291238918.jpg', '/forfun/avatorupload/1451291238920.png', '1');
+INSERT INTO `p_product` VALUES ('14', 'xn1', '/forfun/avatorupload/1451291258291.jpg', '12', '100', '2015-12-27', '2016-01-30', '1', 'lalal哈哈哈aa<img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/11.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/13.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/24.gif\" border=\"0\" alt=\"\" /><img src=\"http://localhost:8080/forfun/kindeditor/plugins/emoticons/images/32.gif\" border=\"0\" alt=\"\" />', '/forfun/avatorupload/1451291258292.jpg', '/forfun/avatorupload/1451291258292.jpg', '/forfun/avatorupload/1451291258293.png', '1');
+INSERT INTO `p_product` VALUES ('15', 'xn1', '/forfun/avatorupload/1451291287832.jpg', '12', '100', '2015-12-27', '2016-01-30', '2', '皮哈哈好啊', '/forfun/avatorupload/1451291287832.jpg', '/forfun/avatorupload/1451291287833.jpg', '/forfun/avatorupload/1451291287833.png', '1');
+INSERT INTO `p_product` VALUES ('16', 'Lxm', '/forfun/avatorupload/1451294801299.jpg', '5', '500', '2015-12-28', '2016-12-10', '2', '大叔经常', '/forfun/avatorupload/1451294801299.jpeg', '/forfun/avatorupload/1451294801300.jpg', '/forfun/avatorupload/1451294801300.jpeg', '1');
+INSERT INTO `p_product` VALUES ('17', '好吃的', '/forfun/avatorupload/1451296235846.jpg', '13', '105', '2015-12-27', '2016-12-14', '2', '这是圣诞节我们去吃的好吃的<img src=\"http://59.77.13.250:8080/forfun/kindeditor/plugins/emoticons/images/12.gif\" border=\"0\" alt=\"\" />', '/forfun/avatorupload/1451296235847.jpg', '/forfun/avatorupload/1451296235848.jpg', '/forfun/avatorupload/1451296235989.jpg', '1');
 
 -- ----------------------------
 -- Table structure for `rf_rolefunction`
@@ -447,7 +500,7 @@ CREATE TABLE `rf_rolefunction` (
   KEY `FK_p9xah9wl9em3wwf71owqbho0l` (`roleid`),
   CONSTRAINT `FK_fcte0m778hpeai9fj8ej6elp3` FOREIGN KEY (`functionid`) REFERENCES `f_function` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_p9xah9wl9em3wwf71owqbho0l` FOREIGN KEY (`roleid`) REFERENCES `r_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rf_rolefunction
@@ -458,6 +511,25 @@ INSERT INTO `rf_rolefunction` VALUES ('3', '3', '1');
 INSERT INTO `rf_rolefunction` VALUES ('4', '4', '1');
 INSERT INTO `rf_rolefunction` VALUES ('5', '5', '1');
 INSERT INTO `rf_rolefunction` VALUES ('6', '6', '1');
+INSERT INTO `rf_rolefunction` VALUES ('7', '8', '1');
+INSERT INTO `rf_rolefunction` VALUES ('8', '9', '1');
+INSERT INTO `rf_rolefunction` VALUES ('9', '10', '1');
+INSERT INTO `rf_rolefunction` VALUES ('10', '11', '1');
+INSERT INTO `rf_rolefunction` VALUES ('11', '13', '1');
+INSERT INTO `rf_rolefunction` VALUES ('12', '14', '1');
+INSERT INTO `rf_rolefunction` VALUES ('13', '16', '1');
+INSERT INTO `rf_rolefunction` VALUES ('14', '18', '1');
+INSERT INTO `rf_rolefunction` VALUES ('15', '19', '1');
+INSERT INTO `rf_rolefunction` VALUES ('16', '21', '1');
+INSERT INTO `rf_rolefunction` VALUES ('17', '23', '1');
+INSERT INTO `rf_rolefunction` VALUES ('18', '24', '1');
+INSERT INTO `rf_rolefunction` VALUES ('19', '25', '1');
+INSERT INTO `rf_rolefunction` VALUES ('20', '13', '3');
+INSERT INTO `rf_rolefunction` VALUES ('21', '14', '3');
+INSERT INTO `rf_rolefunction` VALUES ('22', '16', '4');
+INSERT INTO `rf_rolefunction` VALUES ('23', '18', '5');
+INSERT INTO `rf_rolefunction` VALUES ('24', '19', '5');
+INSERT INTO `rf_rolefunction` VALUES ('25', '21', '6');
 
 -- ----------------------------
 -- Table structure for `r_role`
@@ -467,13 +539,17 @@ CREATE TABLE `r_role` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `rolename` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of r_role
 -- ----------------------------
 INSERT INTO `r_role` VALUES ('1', 'admin');
 INSERT INTO `r_role` VALUES ('2', 'Christy');
+INSERT INTO `r_role` VALUES ('3', 'editor');
+INSERT INTO `r_role` VALUES ('4', 'chiefeditor');
+INSERT INTO `r_role` VALUES ('5', 'adeditor');
+INSERT INTO `r_role` VALUES ('6', 'adchiefeditor');
 
 -- ----------------------------
 -- Table structure for `sm_sellmethod`
@@ -504,12 +580,16 @@ CREATE TABLE `ur_userrole` (
   KEY `ROLEID` (`roleid`),
   CONSTRAINT `ROLEID` FOREIGN KEY (`roleid`) REFERENCES `r_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `USERID` FOREIGN KEY (`userid`) REFERENCES `u_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ur_userrole
 -- ----------------------------
-INSERT INTO `ur_userrole` VALUES ('3', '1', '2');
+INSERT INTO `ur_userrole` VALUES ('3', '1', '1');
+INSERT INTO `ur_userrole` VALUES ('4', '57', '3');
+INSERT INTO `ur_userrole` VALUES ('5', '58', '4');
+INSERT INTO `ur_userrole` VALUES ('6', '59', '5');
+INSERT INTO `ur_userrole` VALUES ('7', '60', '6');
 
 -- ----------------------------
 -- Table structure for `u_user`
@@ -520,18 +600,16 @@ CREATE TABLE `u_user` (
   `username` varchar(30) DEFAULT NULL,
   `password` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of u_user
 -- ----------------------------
 INSERT INTO `u_user` VALUES ('1', 'admin', 'admin');
-INSERT INTO `u_user` VALUES ('2', '428', null);
-INSERT INTO `u_user` VALUES ('3', '222', '22');
-INSERT INTO `u_user` VALUES ('4', '111', '111');
-INSERT INTO `u_user` VALUES ('5', '21', '21');
-INSERT INTO `u_user` VALUES ('55', '1231', '23424');
-INSERT INTO `u_user` VALUES ('56', '1231', '123131');
+INSERT INTO `u_user` VALUES ('57', 'editor', 'editor');
+INSERT INTO `u_user` VALUES ('58', 'chiefeditor', 'chiefeditor');
+INSERT INTO `u_user` VALUES ('59', 'adeditor', 'adeditor');
+INSERT INTO `u_user` VALUES ('60', 'adchiefeditor', 'adchiefeditor');
 
 -- ----------------------------
 -- Procedure structure for `TimeOut`
@@ -559,8 +637,9 @@ BEGIN
 	DECLARE temp1 INT(11);
 	DECLARE temp2 INT(11);
 	DECLARE temp3 INT(11);
+	
 	declare done int default -1;  -- 用于控制循环是否结束  
-	DECLARE cur CURSOR FOR select id,pm_productmoney.productid,customerid,pm_productmoney.money from pm_productmoney,(SELECT pm_productmoney.productid,max(money) as money from pm_productmoney where flag=0 and pm_productmoney.productid in(SELECT p_product.id FROM p_product  where p_product.timeout < NOW() )   GROUP BY productid )tmp WHERE pm_productmoney.productid = tmp.productid and pm_productmoney.money = tmp.money;
+	DECLARE cur CURSOR FOR select pm_productmoney.id,pm_productmoney.productid,customerid,pm_productmoney.money from pm_productmoney,(SELECT pm_productmoney.productid, max(money) as money from pm_productmoney where flag=0 and  pm_productmoney.productid in(SELECT p_product.id FROM p_product  where p_product.timeout < NOW() )   GROUP BY productid )tmp WHERE pm_productmoney.productid = tmp.productid  and pm_productmoney.money = tmp.money ;
 	declare continue handler for not found set done=1;  
 
 	/* 打开游标 */    
@@ -568,20 +647,30 @@ BEGIN
 	/* 循环开始 */    
   myLoop: LOOP 
 		/* 移动游标并赋值 */    
-     fetch cur into temp0,temp1,temp2,temp3;
+     fetch cur into temp0,temp1,temp2,temp3 ;
 		-- 游标到达尾部,退出循环  
         if done = 1 then     
         leave myLoop;    
         end if;    
-				INSERT INTO o_order (productid,customerid,money,current,ispay)VALUES(temp1,temp2,temp3,NOW(),0);
-				update pm_productmoney pm set pm.flag = 1 where pm.productid = temp1;
-				delete from o_order  where temp1 = o_order.productid and o_order.money < temp3;
-				update p_product set p_product.money = temp3 where id = temp1;
+				INSERT INTO o_order 
+
+(productid,customerid,money,current,ispay)VALUES
+
+(temp1,temp2,temp3,NOW(),0);
+				update pm_productmoney pm set 
+
+pm.flag = 1 where pm.productid = temp1;
+				delete from o_order  where 
+
+temp1 = o_order.productid and o_order.money < temp3;
+update p_product set p_product.money = temp3 where id = temp1;
+
 	end loop myLoop; 
 	/* 关闭游标 */    
  
   close cur;    
 	
+				
 END
 ;;
 DELIMITER ;

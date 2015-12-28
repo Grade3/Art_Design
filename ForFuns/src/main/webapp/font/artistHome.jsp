@@ -276,22 +276,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-xs-offset-4 col-xs-4 visible-lg">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
 					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-5 modify">管理艺术品</a>
-					<a href="artistManage.html" target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
+					<a href="artistManage.html"  class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 				<div class="col-xs-offset-3 col-xs-6 visible-md">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
 					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-5 modify">管理艺术品</a>
-					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
+					<a href="artistManage.html"   class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 				<div class="col-xs-offset-2 col-xs-8 visible-sm">
 					<a href="release.html" class="col-xs-5 beartist">发布艺术品<!--我的个人主页--></a>
 					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-5 modify">管理艺术品</a>
-					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
+					<a href="artistManage.html"   class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 				<div class="col-xs-12 btn-artisthome visible-xs">
 					<a href="release.html" class="col-xs-6 beartist">发布艺术品<!--我的个人主页--></a>
 					<a href="<%=basePath%>font/artistManage.jsp" class="col-xs-6 modify">管理艺术品</a>
-					<a href="artistManage.html"  target="_blank" class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
+					<a href="artistManage.html"   class="col-xs-offset-3 col-xs-6 chat beartist1">联系艺术家</a>
 				</div>
 			</div>
 
