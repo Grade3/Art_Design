@@ -78,8 +78,8 @@
         		  var username = getCookie("token");
         		  var index = username.indexOf("&");
         		  username = username.substring(0,index);
-        		  //GetTopMenu();
-        		  //GetUserPower(username);
+        		  GetTopMenu();
+        		  GetUserPower(username);
         		  $('.subul').find('li').find('a').click(function(){
         				$(this).parent().siblings().removeClass('current');
         				$(this).parent().addClass('current');

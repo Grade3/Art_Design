@@ -70,9 +70,9 @@
             <div class="left">
                 <a href="#" class="button profile"><img src="<%=basePath%>admin/img/icons/top/huser.png" alt="" /></a>
                 Hi, 
-                <a href="#">John Doe</a>
+                <a href="#"></a>
                 |
-                <a href="#">Logout</a>
+                <a href="#" onclick="top.location='<%=basePath%>admin/Admin_login.jsp'" >Logout</a>
             </div>
             <div class="right">
                 <form action="#" id="search" class="search placeholder">
